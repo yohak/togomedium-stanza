@@ -1,15 +1,84 @@
 // Load the repository-wide global style here. The actual file is located at ../common.scss for details.
 @use '@/common.scss';
 
-// The following is just an example. Feel free to modify it.
-// --greeting-color and --greeting-align are style variables, which are defined in metadata.json.
-main {
-  padding: 1rem 2rem;
+
+
+.wrapper {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-p.greeting {
-  margin: 0;
+.wrapper[data-is-loading]:after {
+  content: "loading...";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+table {
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 16px;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 6px 8px;
+  border-bottom: 1px solid #CCC;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+
+table tr:nth-child(2n) {
+  background-color: #f6f6f6;
+}
+
+a {
+  color: var(--link-color);
+}
+
+header h2 {
   font-size: 24px;
-  color: var(--greeting-color);
-  text-align: var(--greeting-align);
+  font-weight: 600;
+  margin-bottom: 8px;
+  padding-left: 8px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+footer .info {
+  font-size: 14px;
+  padding-right: 8px;
+}
+
+.error {
+  background-color: #FFFFFF;
+  padding: 16px;
+  border-radius: 5px;
+  color: #990000;
 }

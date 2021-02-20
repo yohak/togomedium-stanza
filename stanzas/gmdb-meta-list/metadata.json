@@ -16,30 +16,37 @@
   "stanza:updated": "2021-02-19",
   "stanza:parameter": [
     {
-      "stanza:key": "say-to",
-      "stanza:example": "world",
-      "stanza:description": "who to say hello to",
+      "stanza:key": "api_url",
+      "stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=AGAR",
+      "stanza:description": "URL of the SPARQList API with queries",
+      "stanza:required": true
+    },
+    {
+      "stanza:key": "limit",
+      "stanza:example": "10",
+      "stanza:description": "limit",
+      "stanza:required": true
+    },
+    {
+      "stanza:key": "title",
+      "stanza:example": "Similar Growth Media of JCM M25",
+      "stanza:description": "title",
       "stanza:required": false
+    },
+    {
+      "stanza:key": "column_names",
+      "stanza:example": "true",
+      "stanza:description": "whether display column names",
+      "stanza:required": true
     }
   ],
   "stanza:about-link-placement": "bottom-right",
   "stanza:style": [
     {
-      "stanza:key": "--greeting-color",
+      "stanza:key": "--link-color",
       "stanza:type": "color",
-      "stanza:default": "#eb7900",
+      "stanza:default": "#6FA80C",
       "stanza:description": "text color of greeting"
-    },
-    {
-      "stanza:key": "--greeting-align",
-      "stanza:type": "single-choice",
-      "stanza:choice": [
-        "left",
-        "center",
-        "right"
-      ],
-      "stanza:default": "center",
-      "stanza:description": "text align of greeting"
     }
   ]
 }
