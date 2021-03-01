@@ -1,4 +1,3 @@
-import { StanzaInstance } from "togostanza";
 import * as d3 from "d3";
 
 type D3Selection = d3.Selection<any, any, any, any>;

@@ -17,7 +17,8 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   },
-  "compileOnSave": false
+  "compileOnSave": false,
+  "exclude": ["node_modules", "./**/*.spec.ts"]
 }

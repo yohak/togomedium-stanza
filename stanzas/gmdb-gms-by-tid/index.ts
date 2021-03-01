@@ -1,4 +1,3 @@
-import { StanzaInstance } from "togostanza";
 import { API_DBCLS, getData } from "../../utils/get-data";
 import * as d3 from "d3";
 import { addClass } from "../../utils/dom";

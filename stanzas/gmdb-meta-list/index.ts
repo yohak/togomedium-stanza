@@ -1,4 +1,3 @@
-import { StanzaInstance } from "togostanza";
 import { makeFormBody } from "../../utils/get-data";
 
 export default async function metaList(
