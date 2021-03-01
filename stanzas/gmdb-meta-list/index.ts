@@ -1,4 +1,5 @@
 import { StanzaInstance } from "togostanza";
+import { makeFormBody } from "../../utils/get-data";
 
 export default async function metaList(
   stanza: StanzaInstance,
@@ -54,7 +55,7 @@ const movePage = async (
 };
 
 const processData = (
-  response: APIResponse,
+  response: ApiResponse<ApiBody>,
   offset: number,
   stanzaParams: StanzaParameters
 ): TemplateParameters => {
@@ -67,7 +68,7 @@ const processData = (
 };
 
 const makeSuccessData = (
-  response: APIResponse,
+  response: ApiResponse<ApiBody>,
   offset: number,
   stanzaParams: StanzaParameters
 ): TemplateParameters => {
@@ -124,7 +125,7 @@ const makeSuccessData = (
 };
 
 const makeFailParams = (
-  response: APIResponse,
+  response: ApiResponse<ApiBody>,
   stanzaParams: StanzaParameters
 ): TemplateParameters => {
   return {
@@ -145,7 +146,7 @@ const fetchData = async (
   url: string,
   offset: number,
   limit: number
-): Promise<APIResponse> => {
+): Promise<ApiResponse<ApiBody>> => {
   // return fetchDummy(query, offset, limit);
   return fetchLive(url, offset, limit);
 };
@@ -154,7 +155,7 @@ const fetchLive = async (
   url: string,
   offset: number,
   limit: number
-): Promise<APIResponse> => {
+): Promise<ApiResponse<ApiBody>> => {
   const [uri, query]: [string, string] = separateURL(url);
   const response = await fetch(uri, makeOptions({ offset, limit }, query));
   if (response.status !== 200) {
@@ -183,13 +184,6 @@ const makeOptions = (params: SimpleObject, query: string): RequestInit => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   };
-};
-
-const makeFormBody = (params: SimpleObject) => {
-  const formBody = Object.entries(params).map(
-    ([key, value]) => `${key}=${encodeURIComponent(value)}`
-  );
-  return formBody.join("&");
 };
 
 const filterQuery = (query: string): string => {
@@ -243,8 +237,6 @@ enum DIRECTION {
 
 type Item = StringItem | LinkItem;
 
-type SimpleObject = { [key: string]: string | number };
-
 type StanzaParameters = {
   api_url: string;
   limit: string;
@@ -266,15 +258,11 @@ type TemplateParameters = {
   statusText: string;
 };
 
-type APIResponse = {
-  status: number;
-  message?: string;
-  body: {
-    total: number;
-    offset: number;
-    contents: Content[];
-    columns: Column[];
-  };
+type ApiBody = {
+  total: number;
+  offset: number;
+  contents: Content[];
+  columns: Column[];
 };
 
 type Content = {
