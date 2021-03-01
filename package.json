@@ -16,7 +16,8 @@
     "stanza:generate": "npx togostanza g stanza",
     "tsc": "./node_modules/typescript/bin/tsc",
     "tsc-watch": "npx tsc-watch",
-    "start": "npm run tsc && concurrently \"npm:tsc-watch\" \"npm:stanza:server\""
+    "start": "npm run tsc && concurrently \"npm:tsc-watch\" \"npm:stanza:server\"",
+    "build": "npm run tsc && npx togostanza build"
   },
   "engines": {
     "node": ">=14"
