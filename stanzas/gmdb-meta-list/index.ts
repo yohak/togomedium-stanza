@@ -29,7 +29,7 @@ const render = (
     parameters,
   });
   stanza.importWebFontCSS(
-    "https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;600&display=swap"
+    "https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400&display=swap"
   );
   stanza.root.querySelector("#btnPrev")?.addEventListener("click", async () => {
     await movePage(stanza, parameters, stanzaParams, limit, DIRECTION.PREV);
