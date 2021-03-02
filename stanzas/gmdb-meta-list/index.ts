@@ -71,6 +71,9 @@ const makeSuccessData = (
   offset: number,
   stanzaParams: StanzaParameters
 ): TemplateParameters => {
+  if (response.body.contents.length === 0) {
+    return makeNotFoundParams(stanzaParams);
+  }
   const columnLabels: string[] = response.body.columns.map(
     (item) => item.label
   );
@@ -123,6 +126,23 @@ const makeSuccessData = (
   };
 };
 
+const makeNotFoundParams = (
+  stanzaParams: StanzaParameters
+): TemplateParameters => {
+  return {
+    title: stanzaParams.title,
+    offset: 0,
+    columnLabels: null,
+    data: null,
+    hasNext: false,
+    hasPrev: false,
+    info: null,
+    showColumnNames: false,
+    status: null,
+    statusText: "NO RESULT FOUND",
+  };
+};
+
 const makeFailParams = (
   response: ApiResponse<ApiBody>,
   stanzaParams: StanzaParameters
@@ -137,7 +157,7 @@ const makeFailParams = (
     info: null,
     showColumnNames: false,
     status: response.status,
-    statusText: response.message,
+    statusText: response.status ? response.message : "UNKNOWN ERROR",
   };
 };
 

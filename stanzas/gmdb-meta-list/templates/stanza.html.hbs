@@ -1,9 +1,9 @@
+{{#if title}}
+  <header>
+    <h2>{{title}}</h2>
+  </header>
+{{/if}}
 {{#if info}}
-  {{#if title}}
-    <header>
-      <h2>{{title}}</h2>
-    </header>
-  {{/if}}
   <div class="wrapper" {{#if isLoading}} data-is-loading{{/if}}>
     {{#if data}}
       <table>
@@ -52,10 +52,7 @@
   <div class="error">
     {{#if status}}
       ERROR {{status}}<br>
-      {{statusText}}
     {{/if}}
-    {{#unless status}}
-      UNKNOWN ERROR
-    {{/unless}}
+    {{statusText}}
   </div>
 {{/unless}}

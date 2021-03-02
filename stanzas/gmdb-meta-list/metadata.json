@@ -17,7 +17,7 @@
   "stanza:parameter": [
     {
       "stanza:key": "api_url",
-      "stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=AGAR",
+      "stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_organisms_by_gmid?gm_id=HM_D00756b",
       "stanza:description": "URL of the SPARQList API with queries",
       "stanza:required": true
     },
