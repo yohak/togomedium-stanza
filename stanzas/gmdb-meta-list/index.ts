@@ -5,6 +5,9 @@ export default async function metaList(
   stanza: StanzaInstance,
   stanzaParams: StanzaParameters
 ) {
+  if (!stanzaParams.api_url) {
+    return;
+  }
   const offset: number = 0;
   const data = await fetchData(
     stanzaParams.api_url,
