@@ -1,4 +1,5 @@
 import { makeFormBody } from "../../utils/get-data";
+import { TemplateBase } from "../../utils/types";
 
 export default async function metaList(
   stanza: StanzaInstance,
@@ -272,10 +273,7 @@ type TemplateParameters = {
   hasPrev: boolean;
   info: string;
   showColumnNames: boolean;
-  isLoading?: boolean;
-  status: number;
-  statusText: string;
-};
+} & TemplateBase;
 
 type ApiBody = {
   total: number;
