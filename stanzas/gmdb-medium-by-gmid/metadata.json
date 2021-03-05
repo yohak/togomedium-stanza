@@ -17,7 +17,7 @@
   "stanza:parameter": [
     {
       "stanza:key": "gm_id",
-      "stanza:example": "166393",
+      "stanza:example": "JCM_M13",
       "stanza:description": "",
       "stanza:required": true
     }

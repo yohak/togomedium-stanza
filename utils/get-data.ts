@@ -34,6 +34,7 @@ const makeOptions = (params: SimpleObject): RequestInit => {
     body,
     headers: {
       Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   };
 };
