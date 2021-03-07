@@ -1,6 +1,6 @@
 import { getData } from "../../utils/get-data";
 import { API_DBCLS } from "../../utils/variables";
-import { importWebFontForGrowthMedium } from "../../utils/stanza";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { unescapeJsonString } from "../../utils/string";
 import { TemplateBase } from "../../utils/types";
 
@@ -20,7 +20,7 @@ export default async function gmdbOrganismByTaxid(
     template: "stanza.html.hbs",
     parameters: data,
   });
-  importWebFontForGrowthMedium(stanza);
+  importWebFontForTogoMedium(stanza);
 }
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {

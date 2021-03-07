@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <p class="tax-id">
+    <span class="key">Taxonomy ID: </span>
+    <span class="value">{{taxid}}</span>
+    <span class="links">
+      <a class="link-btn" target="_blank" href="{{ncbiUrl}}">NCBI</a>
+      <a class="link-btn" target="_blank" href="{{togoGenomeUrl}}">TogoGenome</a>
+    </span>
+  </p>
+  <p class="name">{{scientific_name}}</p>
+  <h3>Lineage</h3>
+  <table class="lineage-table">
+    {{#each lineage}}
+      <tr>
+        <th>{{rank}}</th>
+        <td><a href="/taxon/{{taxid}}">{{label}}</a></td>
+        <td>
+          <a class="link-btn" target="_blank" href="{{ncbiUrl}}">NCBI</a>
+          <a class="link-btn" target="_blank" href="{{togoGenomeUrl}}">TogoGenome</a>
+        </td>
+      </tr>
+    {{/each}}
+  </table>
+</div>

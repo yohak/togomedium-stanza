@@ -1,7 +1,7 @@
 import { getData } from "../../utils/get-data";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import { TemplateBase } from "../../utils/types";
-import { importWebFontForGrowthMedium } from "../../utils/stanza";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
 
 export default async function gmdbMediumByGmid(
   stanza: StanzaInstance,
@@ -17,7 +17,7 @@ export default async function gmdbMediumByGmid(
     template: "stanza.html.hbs",
     parameters: data,
   });
-  importWebFontForGrowthMedium(stanza);
+  importWebFontForTogoMedium(stanza);
 }
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {

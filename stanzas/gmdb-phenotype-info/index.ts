@@ -1,5 +1,5 @@
 import { TemplateBase } from "../../utils/types";
-import { importWebFontForGrowthMedium } from "../../utils/stanza";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
 
 export default async function gmdbPhenotypeInfo(
   stanza: StanzaInstance,
@@ -9,7 +9,7 @@ export default async function gmdbPhenotypeInfo(
     template: "stanza.html.hbs",
     parameters: null,
   });
-  importWebFontForGrowthMedium(stanza);
+  importWebFontForTogoMedium(stanza);
 }
 
 type StanzaParameters = {
