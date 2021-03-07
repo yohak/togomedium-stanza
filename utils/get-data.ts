@@ -1,5 +1,3 @@
-export const API_DBCLS: string = "http://ep.dbcls.jp/sparqlist/api/";
-
 export const getData = async <T>(
   url: string,
   params: SimpleObject

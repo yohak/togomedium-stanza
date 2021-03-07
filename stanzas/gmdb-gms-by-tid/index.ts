@@ -1,6 +1,7 @@
-import { API_DBCLS, getData } from "../../utils/get-data";
+import { getData } from "../../utils/get-data";
 import * as d3 from "d3";
 import { addClass } from "../../utils/dom";
+import { API_DBCLS } from "../../utils/variables";
 type D3Selection = d3.Selection<any, any, any, any>;
 
 let mouseX = 0;

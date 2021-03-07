@@ -1,13 +1,14 @@
 import { getData } from "../../utils/get-data";
-import { API_BASE } from "../../utils/variables";
+import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import { TemplateBase } from "../../utils/types";
+import { importWebFontForGrowthMedium } from "../../utils/stanza";
 
 export default async function gmdbMediumByGmid(
   stanza: StanzaInstance,
   params: StanzaParameters
 ) {
   const apiName = "gmdb_medium_by_gmid";
-  const result = await getData<ApiBody>(`${API_BASE}${apiName}`, {
+  const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
     gm_id: params.gm_id,
   });
   const data = parseData(result);
@@ -16,9 +17,7 @@ export default async function gmdbMediumByGmid(
     template: "stanza.html.hbs",
     parameters: data,
   });
-  stanza.importWebFontCSS(
-    "https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400&display=swap"
-  );
+  importWebFontForGrowthMedium(stanza);
 }
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
