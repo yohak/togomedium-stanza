@@ -8,12 +8,13 @@
     </span>
   </p>
   <p class="name">{{scientific_name}}</p>
+  <p class="authority-name">{{#if authority_name}} <span>Authority name</span>: {{authority_name}} {{/if}}</p>
   <h3>Lineage</h3>
   <table class="lineage-table">
     {{#each lineage}}
-      <tr>
+      <tr {{#if current}}data-current{{/if}}>
         <th>{{rank}}</th>
-        <td><a href="/taxon/{{taxid}}">{{label}}</a></td>
+        <td><a href={{link}}>{{label}}</a></td>
         <td>
           <a class="link-btn" target="_blank" href="{{ncbiUrl}}">NCBI</a>
           <a class="link-btn" target="_blank" href="{{togoGenomeUrl}}">TogoGenome</a>

@@ -11,7 +11,7 @@
   border-radius: 5px;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
   font-smoothing: antialiased;
   color: #333;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -50,6 +50,10 @@ a {
   font-size: 40px;
 }
 
+.authority-name{
+  margin-top: -16px;
+}
+
 h3 {
   font-weight: 600;
   margin-top: 24px;
@@ -67,7 +71,7 @@ h3 {
     text-align: left;
     font-weight: 300;
   }
-  tr:last-child{
+  tr[data-current]{
     background-color: #efefef;
     th,td{
       font-weight: bold;

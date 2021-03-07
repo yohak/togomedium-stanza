@@ -5,7 +5,9 @@ import {
   capitalizeFirstLetter,
   makeNcbiOrganismLink,
   makeTogoGenomeOrganismLink,
+  unescapeJsonString,
 } from "../../utils/string";
+import { getNextTaxon, TAXON_RANK } from "../../utils/taxon";
 
 export default async function gmdbTaxonByTaxid(
   stanza: StanzaInstance,
@@ -15,17 +17,47 @@ export default async function gmdbTaxonByTaxid(
   const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
     tax_id: params.tax_id,
   });
-  console.log(result.body);
+  // console.log(result.body);
 
   const data = parseData(result);
-  console.log(data);
+  const dataWithRankChildren = await addRankChildren(data);
 
   stanza.render<TemplateParameters>({
     template: "stanza.html.hbs",
-    parameters: data,
+    parameters: dataWithRankChildren,
   });
   importWebFontForTogoMedium(stanza);
 }
+
+const addRankChildren = async (
+  data: TemplateParameters
+): Promise<TemplateParameters> => {
+  if (!data.rank) {
+    return data;
+  }
+  const rank: TAXON_RANK =
+    data.rank === "Superkingdom"
+      ? TAXON_RANK._0_KINGDOM
+      : (data.rank as TAXON_RANK);
+  const nextRank = getNextTaxon(rank);
+  const response = await getData<SubRankApiBody>(
+    `${API_GROWTH_MEDIUM}list_taxons_by_rank`,
+    {
+      tax_id: data.taxid,
+      rank: nextRank,
+    }
+  );
+  const getId = (str: string) => str.split("/").pop();
+
+  const subClasses: LineageParameter[] = response.body.map((item) => ({
+    label: item.name,
+    link: makeLineageLink(getId(item.id), nextRank),
+    rank: nextRank,
+    togoGenomeUrl: makeTogoGenomeOrganismLink(getId(item.id)),
+    ncbiUrl: makeNcbiOrganismLink(getId(item.id)),
+  }));
+  return { ...data, lineage: [...data.lineage, ...subClasses] };
+};
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
   return makeSuccessData(data.body);
@@ -37,29 +69,33 @@ const makeSuccessData = (body: ApiBody): TemplateParameters => {
     togoGenomeUrl: makeTogoGenomeOrganismLink(body.taxid),
     ncbiUrl: makeNcbiOrganismLink(body.taxid),
     rank: parseRank(body.rank),
-    authority_name: body.authority_name,
+    authority_name: unescapeJsonString(body.authority_name),
     lineage: [
       ...body.lineage
         .filter((item) => item.taxid !== "NA")
         .map((item) => ({
-          taxid: item.taxid,
+          link: makeLineageLink(item.taxid, item.rank as TAXON_RANK),
           rank: capitalizeFirstLetter(item.rank),
           label: item.label,
           togoGenomeUrl: makeTogoGenomeOrganismLink(item.taxid),
           ncbiUrl: makeNcbiOrganismLink(item.taxid),
         })),
       {
-        taxid: body.taxid,
+        link: makeLineageLink(body.taxid, body.rank as TAXON_RANK),
         rank: parseRank(body.rank),
         label: body.scientific_name,
         togoGenomeUrl: makeTogoGenomeOrganismLink(body.taxid),
         ncbiUrl: makeNcbiOrganismLink(body.taxid),
+        current: true,
       },
     ],
   };
 };
 
-export const parseRank = (str: string): string => str?.split("/").pop();
+const parseRank = (str: string): string => str?.split("/").pop();
+
+const makeLineageLink = (id: string, rank: TAXON_RANK): string =>
+  rank === TAXON_RANK._9_SPECIES ? `/organism/${id}` : `/taxon/${id}`;
 
 type StanzaParameters = {
   tax_id: string;
@@ -76,11 +112,12 @@ type TemplateParameters = {
 };
 
 type LineageParameter = {
-  taxid: string;
+  link: string;
   rank: string;
   label: string;
   ncbiUrl: string;
   togoGenomeUrl: string;
+  current?: boolean;
 };
 
 type ApiBody = {
@@ -97,3 +134,5 @@ type Lineage = {
   uri: string;
   taxid: string;
 };
+
+type SubRankApiBody = { id: string; name: string }[];
