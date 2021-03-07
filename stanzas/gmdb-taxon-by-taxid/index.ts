@@ -52,13 +52,25 @@ const addRankChildren = async (
   );
   const getId = (str: string) => str.split("/").pop();
 
-  const subClasses: LineageParameter[] = response.body.map((item) => ({
-    label: item.name,
-    link: makeLineageLink(getId(item.id), nextRank),
-    rank: nextRank,
-    togoGenomeUrl: makeTogoGenomeOrganismLink(getId(item.id)),
-    ncbiUrl: makeNcbiOrganismLink(getId(item.id)),
-  }));
+  const subClasses: LineageParameter[] = response.body
+    .sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    })
+    .map((item) => ({
+      label: item.name,
+      link: makeLineageLink(getId(item.id), nextRank),
+      rank: nextRank,
+      togoGenomeUrl: makeTogoGenomeOrganismLink(getId(item.id)),
+      ncbiUrl: makeNcbiOrganismLink(getId(item.id)),
+    }));
   return { ...data, lineage: [...data.lineage, ...subClasses] };
 };
 
