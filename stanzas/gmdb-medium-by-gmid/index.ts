@@ -7,6 +7,9 @@ export default async function gmdbMediumByGmid(
   stanza: StanzaInstance,
   params: StanzaParameters
 ) {
+  if (!params.gm_id) {
+    return;
+  }
   const apiName = "gmdb_medium_by_gmid";
   const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
     gm_id: params.gm_id,

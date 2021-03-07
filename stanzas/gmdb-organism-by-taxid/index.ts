@@ -8,6 +8,9 @@ export default async function gmdbOrganismByTaxid(
   stanza: StanzaInstance,
   params: StanzaParameters
 ) {
+  if (!params.tax_id) {
+    return;
+  }
   const apiName = "gmdb_organism_by_taxid";
   const result = await getData<ApiBody>(`${API_DBCLS}${apiName}`, {
     tax_id: params.tax_id,

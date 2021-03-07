@@ -6,6 +6,9 @@ export default async function gmdbComponentByGmoid(
   stanza: StanzaInstance,
   params: StanzaParameter
 ) {
+  if (!params.gmo_id) {
+    return;
+  }
   const apiName = "gmdb_component_by_gmoid";
   const result = await getData<ApiBody>(`${API_DBCLS}${apiName}`, {
     gmo_id: params.gmo_id,

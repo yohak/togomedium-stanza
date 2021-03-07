@@ -5,6 +5,9 @@ export default async function gmdbPhenotypeInfo(
   stanza: StanzaInstance,
   params: StanzaParameters
 ) {
+  if (!params.tax_id) {
+    return;
+  }
   stanza.render<TemplateParameters>({
     template: "stanza.html.hbs",
     parameters: null,

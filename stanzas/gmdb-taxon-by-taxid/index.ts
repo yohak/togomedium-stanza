@@ -13,6 +13,9 @@ export default async function gmdbTaxonByTaxid(
   stanza: StanzaInstance,
   params: StanzaParameters
 ) {
+  if (!params.tax_id) {
+    return;
+  }
   const apiName = "gmdb_taxonomic_rank_by_taxid";
   const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
     tax_id: params.tax_id,
