@@ -31,7 +31,7 @@ const makeSuccessData = (body: ApiBody): TemplateParameter => {
     alt_labels: body.alt_labels_en,
     properties: body.properties,
     roles: body.roles,
-    super_classes: body.sub_classes,
+    super_classes: body.super_classes,
     sub_classes: body.sub_classes,
     links: body.links
       .map((str) => ({

@@ -17,7 +17,7 @@
   "stanza:parameter": [
     {
       "stanza:key": "gmo_id",
-      "stanza:example": "GMO_001004",
+      "stanza:example": "GMO_001005",
       "stanza:description": "",
       "stanza:required": true
     }
