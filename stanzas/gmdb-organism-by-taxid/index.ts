@@ -2,6 +2,7 @@ import { getData } from "../../utils/get-data";
 import { API_DBCLS } from "../../utils/variables";
 import { importWebFontForGrowthMedium } from "../../utils/stanza";
 import { unescapeJsonString } from "../../utils/string";
+import { TemplateBase } from "../../utils/types";
 
 export default async function gmdbOrganismByTaxid(
   stanza: StanzaInstance,
@@ -65,7 +66,7 @@ type TemplateParameters = {
   lineage: Lineage[];
   type_material: TypeMaterial[];
   other_type_material: { key: string; labels: string[] }[];
-};
+} & TemplateBase;
 
 type OtherMaterialParameter = {
   key: string;
