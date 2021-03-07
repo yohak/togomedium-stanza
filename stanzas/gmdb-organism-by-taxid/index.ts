@@ -12,10 +12,10 @@ export default async function gmdbOrganismByTaxid(
   const result = await getData<ApiBody>(`${API_DBCLS}${apiName}`, {
     tax_id: params.tax_id,
   });
-  console.log(JSON.parse(JSON.stringify(result)));
+  // console.log(JSON.parse(JSON.stringify(result)));
 
   const data = parseData(result);
-  console.log(data);
+  // console.log(data);
   stanza.render<TemplateParameters>({
     template: "stanza.html.hbs",
     parameters: data,
