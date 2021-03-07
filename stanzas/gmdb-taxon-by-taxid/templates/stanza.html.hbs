@@ -14,7 +14,14 @@
     {{#each lineage}}
       <tr {{#if current}}data-current{{/if}}>
         <th>{{rank}}</th>
-        <td><a href={{link}}>{{label}}</a></td>
+        <td>
+          {{#if current}}
+            <span>{{label}}</span>
+          {{/if}}
+          {{#unless current}}
+            <a href={{link}}>{{label}}</a>
+          {{/unless}}
+        </td>
         <td>
           <a class="link-btn" target="_blank" href="{{ncbiUrl}}">NCBI</a>
           <a class="link-btn" target="_blank" href="{{togoGenomeUrl}}">TogoGenome</a>
