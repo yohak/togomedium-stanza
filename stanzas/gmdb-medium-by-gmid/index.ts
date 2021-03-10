@@ -15,6 +15,7 @@ export default async function gmdbMediumByGmid(
     gm_id: params.gm_id,
   });
   const data = parseData(result);
+  console.log(data);
 
   stanza.render<TemplateParameters>({
     template: "stanza.html.hbs",
@@ -28,21 +29,14 @@ const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
 };
 
 const makeSuccessData = (body: ApiBody): TemplateParameters => {
-  const id = body.gm.split("/").pop();
-  const name = body.name;
-  const src_label = getSrcLabel(body.src_url);
-  const src_url = body.src_url;
-  const components: TemplateComponent[] = body.components.map((item) => ({
-    gmo_id: item.gmo_id,
-    label_en: item.label_en,
-    can_wrap: item.label_en.length >= 20,
-    properties: item.properties?.map((prop) => ({
-      short_label: getShortPropertyLabel(prop.label_en),
-    })),
-    roles: item.roles?.map((role) => ({
-      label_en: role.label_en,
-    })),
-  }));
+  const id = body.meta.gm.split("/").pop();
+  const name = body.meta.name;
+  const src_label = getSrcLabel(body.meta.src_url);
+  const src_url = body.meta.src_url;
+  const components: RecipeItem[] = [
+    ...processComponentTables(body.components),
+    ...processComponentComments(body.comments),
+  ].sort((a, b) => a.paragraph_index - b.paragraph_index);
   return {
     id,
     name,
@@ -50,6 +44,29 @@ const makeSuccessData = (body: ApiBody): TemplateParameters => {
     src_url,
     components,
   };
+};
+
+const processComponentTables = (tables: ComponentTable[]): ComponentTable[] => {
+  return tables.map((table) => ({
+    ...table,
+    items: table.items.map((item) => ({
+      ...item,
+      can_wrap_label: item.label?.length >= 20,
+      can_wrap_name: item.component_name?.length >= 20,
+      properties: item.properties.map((property) => ({
+        ...property,
+        displayLabel: getShortPropertyLabel(property.label),
+      })),
+    })),
+  }));
+};
+const processComponentComments = (
+  comments: ComponentComment[]
+): ComponentComment[] => {
+  return comments.map((item) => ({
+    ...item,
+    comment: item.comment ? item.comment : "&nbsp;",
+  }));
 };
 
 function getShortPropertyLabel(str: string): string {
@@ -62,6 +79,9 @@ function getShortPropertyLabel(str: string): string {
     "Organic compound": "Organic",
     Solution: "Solution",
   };
+  if (!dic[str]) {
+    console.warn("no short property label found:", str);
+  }
   return dic[str] ? dic[str] : "ERR";
 }
 
@@ -88,44 +108,52 @@ type TemplateParameters = {
   src_url: string;
   src_label: string;
   name: string;
-  components: TemplateComponent[];
+  components: RecipeItem[];
 } & TemplateBase;
 
-type TemplateComponent = {
-  gmo_id: string;
-  can_wrap: boolean;
-  label_en: string;
-  properties: {
-    short_label: string;
-  }[];
-  roles: {
-    label_en: string;
-  }[];
+type ApiBody = {
+  meta: Meta;
+  components: ComponentTable[];
+  comments: ComponentComment[];
 };
-
-interface ApiBody {
+type Meta = {
   gm: string;
   name: string;
   src_url: string;
-  components: Component[];
-}
+};
+type ComponentTable = {
+  subcomponent_name: string;
+  items: Component[];
+} & RecipeItem;
 
-interface Component {
+type Component = {
+  component_name: string;
+  volume: number;
+  unit: string;
+  gmo: string;
   gmo_id: string;
-  label_en: string;
-  url: string;
-  properties: ComponentProperty[];
-  roles: ComponentRole[];
-}
+  label: string;
+  properties: Property[];
+  roles: Role[];
+  can_wrap_name?: boolean;
+  can_wrap_label?: boolean;
+};
 
-interface ComponentProperty {
-  gmo_id: string;
-  label_en: string;
+type Property = {} & ComponentFunction;
+
+type Role = {} & ComponentFunction;
+
+type ComponentFunction = {
+  label: string;
   uri: string;
-}
+  id: string;
+  displayLabel?: string;
+};
 
-interface ComponentRole {
-  gmo_id: string;
-  label_en: string;
-  uri: string;
-}
+type ComponentComment = {
+  comment: string;
+} & RecipeItem;
+
+type RecipeItem = {
+  paragraph_index: number;
+};
