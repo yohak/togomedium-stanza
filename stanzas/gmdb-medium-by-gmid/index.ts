@@ -87,9 +87,9 @@ function getShortPropertyLabel(str: string): string {
 
 const getSrcLabel = (str: string): string => {
   switch (true) {
-    case str.match(/jcm\.riken/) !== null:
+    case str.match(/jcm.*riken/) !== null:
       return "JCM";
-    case str.match(/nbrc\.nite/) !== null:
+    case str.match(/nite.*nbrc/) !== null:
       return "NBRC";
     case str.match(/dsmz\.de/) !== null:
       return "DSMZ";
@@ -99,6 +99,8 @@ const getSrcLabel = (str: string): string => {
       return "SRC";
   }
 };
+
+export const __TEST__ = { getSrcLabel };
 
 type StanzaParameters = {
   gm_id: string;
