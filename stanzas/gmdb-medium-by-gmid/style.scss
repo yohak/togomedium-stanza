@@ -71,36 +71,50 @@ h3 {
   margin-top: 8px;
   border: 1px solid #ddd;
   width: 100%;
+
+  th{
+    font-weight: 600;
+    text-align: left;
+  }
+  th,td{
+    border: 1px solid #ddd;
+    padding: 8px 8px;
+    box-sizing:border-box;
+  }
+
+  .name, .component{
+    width: 25%;
+  }
+  .properties {
+    width: 18%;
+  }
+  .functions {
+    width: 12%;
+  }
+  .id{
+    width: 12%;
+  }
+  .volume{
+    width: 8%;
+  }
+
+  .properties span {
+    border: 1px solid #6FA80C;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 3px;
+  }
+  .functions span{
+    font-size: 13px;
+    font-weight: 600;
+  }
 }
 
-.component-table th {
-  font-weight: 600;
-  text-align: left;
-}
-
-.component-table td, th {
-  border: 1px solid #ddd;
-  padding: 8px 8px;
-}
-
-.properties span {
-  border: 1px solid #6FA80C;
-  border-radius: 3px;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 3px;
-}
-
-.functions span{
-  font-size: 13px;
-  font-weight: 600;
-}
 
 
-.component-table span {
-  white-space: nowrap;
-}
 
-.component-table span.can-wrap {
-  white-space: normal;
-}
+
+
+
+
