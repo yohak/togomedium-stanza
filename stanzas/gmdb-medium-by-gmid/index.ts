@@ -15,7 +15,6 @@ export default async function gmdbMediumByGmid(
     gm_id: params.gm_id,
   });
   const data = parseData(result);
-  console.log(data);
 
   stanza.render<TemplateParameters>({
     template: "stanza.html.hbs",
@@ -29,20 +28,16 @@ const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
 };
 
 const makeSuccessData = (body: ApiBody): TemplateParameters => {
-  const id = body.meta.gm.split("/").pop();
-  const name = body.meta.name;
-  const src_label = getSrcLabel(body.meta.src_url);
-  const src_url = body.meta.src_url;
-  const components: RecipeItem[] = [
-    ...processComponentTables(body.components),
-    ...processComponentComments(body.comments),
-  ].sort((a, b) => a.paragraph_index - b.paragraph_index);
   return {
-    id,
-    name,
-    src_label,
-    src_url,
-    components,
+    id: body.meta.gm.split("/").pop(),
+    name: body.meta.name,
+    src_label: getSrcLabel(body.meta.src_url),
+    src_url: body.meta.src_url,
+    ph: body.meta.ph,
+    components: [
+      ...processComponentTables(body.components),
+      ...processComponentComments(body.comments),
+    ].sort((a, b) => a.paragraph_index - b.paragraph_index),
   };
 };
 
@@ -110,6 +105,7 @@ type TemplateParameters = {
   src_url: string;
   src_label: string;
   name: string;
+  ph: number;
   components: RecipeItem[];
 } & TemplateBase;
 
@@ -122,6 +118,7 @@ type Meta = {
   gm: string;
   name: string;
   src_url: string;
+  ph: number;
 };
 type ComponentTable = {
   subcomponent_name: string;
