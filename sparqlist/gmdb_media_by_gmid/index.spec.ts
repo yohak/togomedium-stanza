@@ -1,4 +1,4 @@
-import { data } from "./data";
+import { data, emptyData } from "./data";
 import { json } from "./index";
 
 describe("media-by-gmid", () => {
@@ -18,5 +18,16 @@ describe("media-by-gmid", () => {
     expect(result.comments[result.comments.length - 1].paragraph_index).toBe(
       19
     );
+  });
+  it("should work with empty data", () => {
+    const result = json(
+      emptyData.metadata,
+      emptyData.component_table,
+      emptyData.comment_list
+    );
+    console.log(result);
+    expect(result.meta).toBe(null);
+    expect(result.comments).toEqual([]);
+    expect(result.components).toEqual([]);
   });
 });

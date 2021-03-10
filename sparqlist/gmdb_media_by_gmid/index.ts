@@ -5,19 +5,21 @@ export const json = (
 ): any => {
   const parseSparqlObject = (obj: any) => {
     const result: any = {};
-    Object.entries(obj).forEach(([key, item]: [string, any]) => {
-      switch (item.datatype) {
-        case "http://www.w3.org/2001/XMLSchema#decimal":
-          result[key] = parseFloat(item["value"]);
-          break;
-        case "http://www.w3.org/2001/XMLSchema#integer":
-          result[key] = parseInt(item["value"], 10);
-          break;
-        default:
-          result[key] = item["value"];
-      }
-    });
-    return result;
+    try {
+      Object.entries(obj).forEach(([key, item]: [string, any]) => {
+        switch (item.datatype) {
+          case "http://www.w3.org/2001/XMLSchema#decimal":
+            result[key] = parseFloat(item["value"]);
+            break;
+          case "http://www.w3.org/2001/XMLSchema#integer":
+            result[key] = parseInt(item["value"], 10);
+            break;
+          default:
+            result[key] = item["value"];
+        }
+      });
+    } catch (e) {}
+    return Object.entries(result).length ? result : null;
   };
 
   const reduceComponentParagraphs = (accum: any[], current: any): any[] => {

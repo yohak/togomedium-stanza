@@ -7446,3 +7446,54 @@ export const data: any = {
     },
   },
 };
+
+export const emptyData: any = {
+  metadata: {
+    head: {
+      link: [],
+      vars: ["gm", "name", "src_url", "ph"],
+    },
+    results: {
+      distinct: false,
+      ordered: true,
+      bindings: [],
+    },
+  },
+  component_table: {
+    head: {
+      link: [],
+      vars: [
+        "paragraph_index",
+        "subcomponent_name",
+        "component_name",
+        "volume",
+        "unit",
+        "gmo",
+        "gmo_id",
+        "label",
+        "property_id",
+        "property",
+        "property_label",
+        "role_id",
+        "role",
+        "role_label",
+      ],
+    },
+    results: {
+      distinct: false,
+      ordered: true,
+      bindings: [],
+    },
+  },
+  comment_list: {
+    head: {
+      link: [],
+      vars: ["paragraph_index", "comment"],
+    },
+    results: {
+      distinct: false,
+      ordered: true,
+      bindings: [],
+    },
+  },
+};

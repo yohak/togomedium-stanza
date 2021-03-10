@@ -14,7 +14,7 @@ export default async function gmdbMediumByGmid(
   const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
     gm_id: params.gm_id,
   });
-  const data = parseData(result);
+  const data = parseData(result, params);
 
   stanza.render<TemplateParameters>({
     template: "stanza.html.hbs",
@@ -23,8 +23,33 @@ export default async function gmdbMediumByGmid(
   importWebFontForTogoMedium(stanza);
 }
 
-const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
-  return makeSuccessData(data.body);
+const parseData = (
+  data: ApiResponse<ApiBody>,
+  params: StanzaParameters
+): TemplateParameters => {
+  switch (true) {
+    case data.status !== 200:
+      return makeErrorData(`Error ${data.status}<br />${data.message}`);
+    case data.body.meta === null:
+      return makeErrorData(
+        `Error 404<br />No Media Found with ${params.gm_id}`
+      );
+    default:
+      return makeSuccessData(data.body);
+  }
+};
+
+const makeErrorData = (msg: string): TemplateParameters => {
+  return {
+    id: null,
+    name: null,
+    src_url: null,
+    src_label: null,
+    ph: null,
+    components: [],
+    error: true,
+    statusText: msg,
+  };
 };
 
 const makeSuccessData = (body: ApiBody): TemplateParameters => {
