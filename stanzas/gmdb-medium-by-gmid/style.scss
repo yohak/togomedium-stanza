@@ -93,11 +93,14 @@ h3 {
     box-sizing:border-box;
   }
 
-  .name, .component{
+  .component{
     width: 25%;
   }
+  .name{
+    width: 23%;
+  }
   .properties {
-    width: 18%;
+    width: 20%;
   }
   .functions {
     width: 12%;
