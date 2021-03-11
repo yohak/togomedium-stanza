@@ -31,9 +31,7 @@ const parseData = (
     case data.status !== 200:
       return makeErrorData(`Error ${data.status}<br />${data.message}`);
     case data.body.meta === null:
-      return makeErrorData(
-        `Error 404<br />No Media Found with ${params.gm_id}`
-      );
+      return makeErrorData(`No Medium Found with ${params.gm_id}`);
     default:
       return makeSuccessData(data.body);
   }
