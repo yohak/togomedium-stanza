@@ -8,6 +8,7 @@ import {
   unescapeJsonString,
 } from "../../utils/string";
 import { getNextTaxon, TAXON_RANK } from "../../utils/taxon";
+import pluralize = require("pluralize");
 
 export default async function gmdbTaxonByTaxid(
   stanza: StanzaInstance,
@@ -68,10 +69,17 @@ const addRankChildren = async (
       label: item.name,
       link: makeLineageLink(getId(item.id), nextRank),
       rank: nextRank,
-      togoGenomeUrl: makeTogoGenomeOrganismLink(getId(item.id)),
-      ncbiUrl: makeNcbiOrganismLink(getId(item.id)),
     }));
-  return { ...data, lineage: [...data.lineage, ...subClasses] };
+  return {
+    ...data,
+    subClass: {
+      label: pluralize(nextRank),
+      items: subClasses.map((item) => ({
+        label: item.label,
+        link: item.link,
+      })),
+    },
+  };
 };
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
@@ -79,6 +87,7 @@ const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
 };
 const makeSuccessData = (body: ApiBody): TemplateParameters => {
   return {
+    subClass: null,
     scientific_name: body.scientific_name,
     taxid: body.taxid,
     togoGenomeUrl: makeTogoGenomeOrganismLink(body.taxid),
@@ -99,8 +108,6 @@ const makeSuccessData = (body: ApiBody): TemplateParameters => {
         link: makeLineageLink(body.taxid, body.rank as TAXON_RANK),
         rank: parseRank(body.rank),
         label: body.scientific_name,
-        togoGenomeUrl: makeTogoGenomeOrganismLink(body.taxid),
-        ncbiUrl: makeNcbiOrganismLink(body.taxid),
         current: true,
       },
     ],
@@ -124,14 +131,19 @@ type TemplateParameters = {
   rank: string;
   authority_name: string;
   lineage: LineageParameter[];
+  subClass: {
+    label: string;
+    items: {
+      label: string;
+      link: string;
+    }[];
+  };
 };
 
 type LineageParameter = {
   link: string;
   rank: string;
   label: string;
-  ncbiUrl: string;
-  togoGenomeUrl: string;
   current?: boolean;
 };
 

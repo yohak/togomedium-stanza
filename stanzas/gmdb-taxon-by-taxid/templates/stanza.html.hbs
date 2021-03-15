@@ -22,11 +22,12 @@
             <a href={{link}}>{{label}}</a>
           {{/unless}}
         </td>
-        <td>
-          <a class="link-btn" target="_blank" href="{{ncbiUrl}}">NCBI</a>
-          <a class="link-btn" target="_blank" href="{{togoGenomeUrl}}">TogoGenome</a>
-        </td>
       </tr>
     {{/each}}
   </table>
+  <h3>{{subClass.label}}</h3>
+  {{#each subClass.items}}
+    <a href="{{link}}">{{label}}</a>
+  {{/each}}
+
 </div>
