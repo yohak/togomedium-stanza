@@ -3,6 +3,7 @@ export const getData = async <T>(
   params: SimpleObject
 ): Promise<ApiResponse<T>> => {
   const response = await fetch(url, makeOptions(params));
+
   if (response.status !== 200) {
     return {
       status: response.status,

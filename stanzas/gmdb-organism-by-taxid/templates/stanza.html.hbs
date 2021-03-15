@@ -13,7 +13,6 @@
         <a class="link-btn" target="_blank" href="http://togogenome.org/organism/{{taxid}}">TogoGenome</a>
       </span>
 
-
     </p>
     <p class="name">
       <span class="value">{{scientific_name}}</span>
@@ -25,9 +24,8 @@
       {{#each lineage}}
         <li class="list-group-item">
           <span class="rank">{{rank}}</span>
-          <span class="label">{{label}}
-            <a class="link-btn" target="_blank"
-               href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">NCBI</a>
+          <span class="label">
+            <a href="/taxon/{{taxid}}">{{label}}</a>
           </span>
         </li>
       {{/each}}
