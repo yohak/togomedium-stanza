@@ -1,7 +1,8 @@
 import { getData } from "../../utils/get-data";
 import * as d3 from "d3";
 import { addClass } from "../../utils/dom";
-import { API_DBCLS } from "../../utils/variables";
+import { API_GROWTH_MEDIUM } from "../../utils/variables";
+
 type D3Selection = d3.Selection<any, any, any, any>;
 
 let mouseX = 0;
@@ -17,7 +18,7 @@ export default async function gmdbGmsByTid(
   params: StanzaParameters
 ) {
   const apiName = "gms_by_kegg_tids_3";
-  const result = await getData<ApiBody>(`${API_DBCLS}${apiName}`, {
+  const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
     t_id: params.t_id,
   });
 

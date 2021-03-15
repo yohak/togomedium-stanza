@@ -1,5 +1,5 @@
 import { getData } from "../../utils/get-data";
-import { API_DBCLS } from "../../utils/variables";
+import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 
 export default async function gmdbComponentByGmoid(
@@ -10,7 +10,7 @@ export default async function gmdbComponentByGmoid(
     return;
   }
   const apiName = "gmdb_component_by_gmoid";
-  const result = await getData<ApiBody>(`${API_DBCLS}${apiName}`, {
+  const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
     gmo_id: params.gmo_id,
   });
 
