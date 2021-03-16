@@ -1,74 +1,33 @@
-// Load the repository-wide global style here. The actual file is located at ../common.scss for details.
-@use '@/common.scss';
+@use '../../styles/common';
+@use '../../styles/mixins' as m;
+@use '../../styles/variables' as v;
 
-// The following is just an example. Feel free to modify it.
-// --greeting-color and --greeting-align are style variables, which are defined in metadata.json.
-.wrapper {
-  font-size: 16px;
-  font-family: 'Fira Sans Condensed', sans-serif;
-  padding: 16px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  color: #333;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-a {
-  color: #6FA80C;
-  text-decoration: underline;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-p.simple-iteration span {
-  margin-right: 8px;
-}
-
-.link-btn {
-  background-color: #8FC31F;
-  color: #FFF;
-  padding: 4px 8px 2px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  display: inline-block;
-  line-height: 1;
-}
+@include m.wrapper();
 
 .name {
-  margin: 24px 0 16px;
-}
-
-
-.name .value {
-  font-size: 40px;
+  @include m.title();
 }
 
 h3 {
-  font-weight: 600;
-  margin-top: 24px;
-  margin-bottom: 8px;
-  font-size: 20px;
+  @include m.heading();
+}
+
+a.link-btn{
+  @include m.color-btn();
 }
 
 .id-list {
   line-height: 1.2;
   margin-top: 8px;
+  li{
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  span:first-child{
+    margin-right: 10px;
+  }
 }
 
-.id-list li {
-  margin-top: 5px;
-  display: flex;
-  flex-wrap: wrap;
-}
 
-.id-list span:first-child{
-  margin-right: 10px;
-}
+

@@ -1,0 +1,138 @@
+@use './variables' as v;
+
+@mixin wrapper($web-font:'Fira Sans Condensed', $link-color:v.$color-dark-green){
+  .wrapper{
+    font-size: 16px;
+    font-family: $web-font, sans-serif;
+    padding: 16px;
+    background-color: v.$color-white;
+    border-radius: 5px;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: v.$color-text;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  header h2 {
+    font-family: $web-font, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-left: 8px;
+  }
+
+
+  a{
+    color: $link-color;
+    text-decoration: underline;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+
+  .error{
+    color: v.$color-red;
+  }
+}
+
+@mixin id-info(){
+  .value{
+    margin: 0 16px 0 4px;
+    line-height: 1.5;
+  }
+
+  .links{
+    a{
+      @include color-btn();
+    }
+    position: relative;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+}
+
+@mixin color-btn(){
+    background-color: v.$color-green;
+    color: v.$color-white;
+    padding: 4px 8px 2px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    line-height: 1;
+}
+
+@mixin tag(){
+  border: 1px solid v.$color-dark-green;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 3px;
+  display: inline-block;
+}
+
+@mixin simple-iteration(){
+  p.simple-iteration span {
+    margin-right: 8px;
+  }
+}
+
+@mixin title(){
+  font-size: 40px;
+  margin: 24px 0 16px;
+}
+
+@mixin heading() {
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+@mixin lineage-list{
+  display: flex;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  margin-bottom: -8px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 16px;
+    margin-bottom: 8px;
+    border: v.$border-thin;
+    border-radius: 5px;
+
+    &.current{
+      background-color: v.$color-gray-light;
+      font-weight: 600;
+    }
+  }
+  .rank {
+    border-bottom: v.$border-thin;
+    padding: 4px 8px;
+  }
+  .label {
+    padding: 4px 8px;
+  }
+
+}
+
+@mixin capsule-list{
+  margin-top: 8px;
+  margin-bottom: -8px;
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    border: 1px solid v.$color-dark-green;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+}

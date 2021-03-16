@@ -1,113 +1,31 @@
-// Load the repository-wide global style here. The actual file is located at ../common.scss for details.
-@use '@/common.scss';
+@use '../../styles/common';
+@use '../../styles/mixins' as m;
 
-// The following is just an example. Feel free to modify it.
-// --greeting-color and --greeting-align are style variables, which are defined in metadata.json.
-.wrapper {
-  font-size: 16px;
-  font-family: 'Fira Sans Condensed', sans-serif;
-  padding: 16px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  color: #333;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+@include m.wrapper();
+
+.tax-id {
+  @include m.id-info();
 }
-
-a {
-  color: #6FA80C;
-}
-
-.link-btn {
-  background-color: #8FC31F;
-  color: #FFF;
-  padding: 4px 8px 2px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  display: inline-block;
-  line-height: 1;
-}
-
-
-.tax-id .value {
-  margin: 0 16px 0 4px;
-  line-height: 1.5;
-}
-
-.tax-id .links {
-  position: relative;
-  top: -2px;
-  margin-top: 4px;
-  white-space: nowrap;
-}
-
 
 .name {
-  margin: 24px 0 16px;
-}
-
-
-.name .value {
-  font-size: 40px;
+  @include m.title();
 }
 
 h3 {
-  font-weight: 600;
-  margin-top: 24px;
-  font-size: 20px;
+  @include m.heading();
 }
 
-.simple-list {
-  line-height: 1.2;
-  margin-top: 8px;
-}
 
 .lineage-list {
-  display: flex;
-  margin-top: 8px;
-  flex-wrap: wrap;
-  margin-bottom: -8px;
+  @include m.lineage-list();
 }
 
-.lineage-list li {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-right: 16px;
-  margin-bottom: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.lineage-list .rank {
-  border-bottom: 1px solid #ddd;
-  padding: 4px 8px;
-}
-
-.lineage-list .label {
-  padding: 4px 8px;
-}
 
 .capsule-list {
-  margin-top: 8px;
-  margin-bottom: -8px;
-  display: flex;
-  flex-wrap: wrap;
+  @include m.capsule-list();
 }
 
-.capsule-list li {
-  border: 1px solid #6FA80C;
-  padding: 5px 10px;
-  border-radius: 20px;
-  margin-right: 8px;
-  margin-bottom: 8px;
-}
-.synonyms{
+.synonyms {
   margin-left: 20px;
   margin-top: 8px;
 }

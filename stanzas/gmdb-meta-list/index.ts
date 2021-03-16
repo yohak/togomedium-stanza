@@ -1,5 +1,6 @@
 import { makeFormBody } from "../../utils/get-data";
 import { TemplateBase } from "../../utils/types";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
 
 export default async function metaList(
   stanza: StanzaInstance,
@@ -32,9 +33,7 @@ const render = (
     template: "stanza.html.hbs",
     parameters,
   });
-  stanza.importWebFontCSS(
-    "https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400&display=swap"
-  );
+  importWebFontForTogoMedium(stanza, stanzaParams.web_font);
   stanza.root.querySelector("#btnPrev")?.addEventListener("click", async () => {
     await movePage(stanza, parameters, stanzaParams, limit, DIRECTION.PREV);
   });
@@ -265,6 +264,7 @@ type StanzaParameters = {
   limit: string;
   title: string;
   column_names: string;
+  web_font?: string;
 };
 
 type TemplateParameters = {

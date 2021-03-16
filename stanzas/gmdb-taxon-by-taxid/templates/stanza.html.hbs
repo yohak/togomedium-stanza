@@ -10,21 +10,17 @@
   <p class="name">{{scientific_name}}</p>
   <p class="authority-name">{{#if authority_name}} <span>Authority name</span>: {{authority_name}} {{/if}}</p>
   <h3>Lineage</h3>
-  <table class="lineage-table">
+  <ul class="lineage-list">
     {{#each lineage}}
-      <tr {{#if current}}data-current{{/if}}>
-        <th>{{rank}}</th>
-        <td>
-          {{#if current}}
-            <span>{{label}}</span>
-          {{/if}}
-          {{#unless current}}
-            <a href={{link}}>{{label}}</a>
-          {{/unless}}
-        </td>
-      </tr>
+      <li class="list-group-item  {{#if @last}}current{{/if}}">
+        <span class="rank">{{rank}}</span>
+        <span class="label">
+          {{#unless @last}}<a href="{{link}}">{{label}}</a>{{/unless}}
+          {{#if @last}}{{label}}{{/if}}
+          </span>
+      </li>
     {{/each}}
-  </table>
+  </ul>
   <h3>{{subClass.label}}</h3>
   {{#each subClass.items}}
     <a href="{{link}}">{{label}}</a>

@@ -17,7 +17,7 @@
   "stanza:parameter": [
     {
       "stanza:key": "api_url",
-      "stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_organisms_by_gmid?gm_id=HM_D00756b",
+      "stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=MEDIUM",
       "stanza:description": "URL of the SPARQList API with queries",
       "stanza:required": true
     },
@@ -29,7 +29,7 @@
     },
     {
       "stanza:key": "title",
-      "stanza:example": "Similar Growth Media of JCM M25",
+      "stanza:example": "Media of Glucose",
       "stanza:description": "title",
       "stanza:required": false
     },
@@ -38,6 +38,12 @@
       "stanza:example": "true",
       "stanza:description": "whether display column names",
       "stanza:required": true
+    },
+    {
+      "stanza:key": "web_font",
+      "stanza:example": "Fira Sans Condensed",
+      "stanza:description": "google font name",
+      "stanza:required": false
     }
   ],
   "stanza:about-link-placement": "bottom-right",
@@ -47,6 +53,12 @@
       "stanza:type": "color",
       "stanza:default": "#6FA80C",
       "stanza:description": "text color of greeting"
+    },
+    {
+      "stanza:key": "--web-font",
+      "stanza:type": "string",
+      "stanza:default": "Fira Sans Condensed",
+      "stanza:description": "google font name"
     }
   ]
 }
