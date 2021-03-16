@@ -5,12 +5,13 @@
 
 @include m.wrapper();
 
-.gm-id{
+.gm-id {
   @include m.id-info();
 }
 
 p.title {
   @include m.title();
+
   .ph {
     font-size: 24px;
   }
@@ -21,13 +22,13 @@ h3 {
   @include m.heading();
 }
 
-.recipe{
-  h4{
+.recipe {
+  h4 {
     font-size: 16px;
     margin-top: 8px;
   }
 
-  p{
+  p {
     margin: 4px 0;
     line-height: 1.2;
   }
@@ -38,39 +39,49 @@ h3 {
   border: 1px solid #ddd;
   width: 100%;
 
-  th{
+  th {
     font-weight: 600;
     text-align: left;
   }
-  th,td{
+
+  th, td {
     border: 1px solid #ddd;
     padding: 8px 8px;
-    box-sizing:border-box;
+    box-sizing: border-box;
   }
 
-  .component{
-    width: 25%;
+  .name {
+    width: 35%;
   }
-  .name{
-    width: 23%;
+
+  .id {
+    width: 10%;
+    white-space: nowrap;
   }
-  .properties {
-    width: 20%;
-  }
-  .functions {
-    width: 12%;
-  }
-  .id{
-    width: 12%;
-  }
-  .volume{
-    width: 8%;
+
+  .volume {
+    width: 10%;
+    span{
+      &:first-child{
+        display: inline-block;
+        width: 60%;
+        text-align: right;
+        box-sizing: border-box;
+        padding-right: 4px;
+      }
+      &:last-child{
+        display: inline-block;
+        width: 40%;
+        text-align: left;
+      }
+    }
   }
 
   .properties span {
     @include m.tag();
   }
-  .functions span{
+
+  .functions span {
     font-size: 13px;
     font-weight: 600;
   }

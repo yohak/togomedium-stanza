@@ -155,6 +155,8 @@ type Component = {
   gmo: string;
   gmo_id: string;
   label: string;
+  conc_value?: number;
+  conc_unit?: string;
   properties: Property[];
   roles: Role[];
   can_wrap_name?: boolean;
