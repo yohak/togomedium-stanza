@@ -99,7 +99,7 @@ export const json = (
   };
 
   const meta: any = parseSparqlObject(metadata.results.bindings[0]);
-  const components: any = component_table.results.bindings
+  const components: any[] = component_table.results.bindings
     .map((obj: any) => parseSparqlObject(obj))
     .reduce(
       (accum: any[], current: any) => reduceComponentParagraphs(accum, current),

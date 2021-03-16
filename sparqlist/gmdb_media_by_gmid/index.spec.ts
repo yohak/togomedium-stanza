@@ -18,6 +18,10 @@ describe("media-by-gmid", () => {
     expect(result.comments[result.comments.length - 1].paragraph_index).toBe(
       19
     );
+    const items = result.components.reduce((a: any, b: any) => {
+      return [...a, ...b.items];
+    }, []);
+    expect(items.find((item: any) => !!item.conc_value)).toBeTruthy();
   });
   it("should work with empty data", () => {
     const result = json(
