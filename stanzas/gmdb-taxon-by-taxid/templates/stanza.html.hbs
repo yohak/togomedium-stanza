@@ -20,10 +20,13 @@
           </span>
       </li>
     {{/each}}
+
   </ul>
   <h3>{{subClass.label}}</h3>
-  {{#each subClass.items}}
-    <a href="{{link}}">{{label}}</a>
-  {{/each}}
+  <div class="sub-classes">
+    {{#each subClass.items}}
+      <a href="{{link}}">{{label}}</a>
+    {{/each}}
+  </div>
 
 </div>

@@ -110,11 +110,15 @@
     &.current{
       background-color: v.$color-gray-light;
       font-weight: 600;
+      .rank{
+        font-weight: 600;
+      }
     }
   }
   .rank {
     border-bottom: v.$border-thin;
     padding: 4px 8px;
+    font-weight: 400;
   }
   .label {
     padding: 4px 8px;

@@ -9,7 +9,8 @@
       <span class="key">Taxonomy ID: </span>
       <span class="value">{{taxid}}</span>
       <span class="links">
-        <a class="link-btn" target="_blank" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">NCBI</a>
+        <a class="link-btn" target="_blank"
+           href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">NCBI</a>
         <a class="link-btn" target="_blank" href="http://togogenome.org/organism/{{taxid}}">TogoGenome</a>
       </span>
 
@@ -17,7 +18,10 @@
     <p class="name">
       <span class="value">{{scientific_name}}</span>
     </p>
-    {{#if authority_name}} Authority name:<br>{{authority_name}} {{/if}}
+
+    {{#if authority_name}}
+      <p class="authority-name">Authority name:<br>{{authority_name}}</p>
+    {{/if}}
 
     <h3>Lineage</h3>
     <ul class="lineage-list">

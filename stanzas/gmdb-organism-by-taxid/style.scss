@@ -11,6 +11,10 @@
   @include m.title();
 }
 
+.authority-name{
+  margin-top: -8px;
+}
+
 h3 {
   @include m.heading();
 }

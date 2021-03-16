@@ -1,7 +1,7 @@
 import { getData } from "../../utils/get-data";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
-import { unescapeJsonString } from "../../utils/string";
+import { capitalizeFirstLetter, unescapeJsonString } from "../../utils/string";
 import { TemplateBase } from "../../utils/types";
 
 export default async function gmdbOrganismByTaxid(
@@ -34,10 +34,17 @@ const makeSuccessData = (body: ApiBody): TemplateParameters => ({
   taxid: body.taxid,
   scientific_name: body.scientific_name,
   authority_name: unescapeJsonString(body.authority_name),
-  lineage: body.lineage,
+  lineage: parseLineage(body.lineage),
   type_material: body.type_material,
   other_type_material: parseOtherTypeMaterial(body.other_type_material),
 });
+
+const parseLineage = (lineages: Lineage[]): Lineage[] => {
+  return lineages.map((item) => ({
+    ...item,
+    rank: capitalizeFirstLetter(item.rank),
+  }));
+};
 
 const parseOtherTypeMaterial = (
   data: TypeMaterial[]
