@@ -69,6 +69,7 @@ const processComponentTables = (tables: ComponentTable[]): ComponentTable[] => {
     ...table,
     items: table.items.map((item) => ({
       ...item,
+      // component_name: "MgCl<sup>2</sup>&middot;6H<sub>2</sub>O",
       can_wrap_label: item.label?.length >= 20,
       can_wrap_name: item.component_name?.length >= 20,
       properties: item.properties.map((property) => ({
