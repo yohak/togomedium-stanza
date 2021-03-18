@@ -304,3 +304,7 @@ type Column = {
   label: string;
   nowrap?: boolean;
 };
+
+export type ListApiBody = ApiBody;
+export type ListContent = Content;
+export type ListColumn = Column;
