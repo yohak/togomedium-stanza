@@ -2,6 +2,7 @@
 
 @mixin wrapper($web-font:'Fira Sans Condensed', $link-color:v.$color-dark-green){
   .wrapper{
+    position: relative;
     font-size: 16px;
     font-family: $web-font, sans-serif;
     padding: 16px;
