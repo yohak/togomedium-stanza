@@ -6,10 +6,10 @@
 {{#if info}}
   <div class="wrapper" {{#if isLoading}} data-is-loading{{/if}}>
     {{#if data}}
-      <table>
+      <table {{#if isFixedTable}} style="table-layout: fixed;" {{/if}}>
         {{#if showColumnNames}}
           <tr>
-            {{#each columnLabels}}
+            {{#each columns}}
               <th {{#if size}} style="width:{{size}}%" {{/if}} >{{label}}</th>
             {{/each}}
           </tr>

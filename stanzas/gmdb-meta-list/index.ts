@@ -77,7 +77,7 @@ const makeSuccessData = (
   if (response.body.contents.length === 0) {
     return makeNotFoundParams(stanzaParams);
   }
-  const columnLabels: {
+  const columns: {
     label: string;
     size: number;
   }[] = response.body.columns.map((item) => ({
@@ -118,16 +118,18 @@ const makeSuccessData = (
     _columns.toLocaleLowerCase() === "false"
       ? false
       : Boolean(stanzaParams.column_names);
+  const isFixedTable: boolean = !!columns.find((item) => !!item.size);
 
   return {
     title,
     offset,
-    columnLabels,
+    columns,
     data,
     hasNext,
     hasPrev,
     info,
     showColumnNames,
+    isFixedTable,
     status: 200,
     statusText: "",
   };
@@ -139,12 +141,13 @@ const makeNotFoundParams = (
   return {
     title: stanzaParams.title,
     offset: 0,
-    columnLabels: null,
+    columns: null,
     data: null,
     hasNext: false,
     hasPrev: false,
     info: null,
     showColumnNames: false,
+    isFixedTable: false,
     status: null,
     statusText: "NO RESULT FOUND",
   };
@@ -157,12 +160,13 @@ const makeFailParams = (
   return {
     title: stanzaParams.title,
     offset: 0,
-    columnLabels: null,
+    columns: null,
     data: null,
     hasNext: false,
     hasPrev: false,
     info: null,
     showColumnNames: false,
+    isFixedTable: false,
     status: response.status,
     statusText: response.status ? response.message : "UNKNOWN ERROR",
   };
@@ -272,7 +276,7 @@ type StanzaParameters = {
 };
 
 type TemplateParameters = {
-  columnLabels: { label: string; size: number }[];
+  columns: { label: string; size: number }[];
   data: Item[][];
   offset: number;
   title: string;
@@ -280,6 +284,7 @@ type TemplateParameters = {
   hasPrev: boolean;
   info: string;
   showColumnNames: boolean;
+  isFixedTable: boolean;
 } & TemplateBase;
 
 type ApiBody = {
