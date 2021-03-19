@@ -281,6 +281,7 @@ type TemplateParameters = {
 type ApiBody = {
   total: number;
   offset: number;
+  limit: number;
   contents: Content[];
   columns: Column[];
 };

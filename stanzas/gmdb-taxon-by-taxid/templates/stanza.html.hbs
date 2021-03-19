@@ -7,8 +7,10 @@
       <a class="link-btn" target="_blank" href="{{togoGenomeUrl}}">TogoGenome</a>
     </span>
   </p>
+
   <p class="name">{{scientific_name}}</p>
-  <p class="authority-name">{{#if authority_name}} <span>Authority name</span>: {{authority_name}} {{/if}}</p>
+  <p>Rank: {{rank}}</p>
+  <p class="authority-name">{{#if authority_name}} <span>Authority name</span>:<br> {{authority_name}} {{/if}}</p>
   <h3>Lineage</h3>
   <ul class="lineage-list">
     {{#each lineage}}

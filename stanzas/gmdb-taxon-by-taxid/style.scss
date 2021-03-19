@@ -12,8 +12,11 @@
   @include m.title();
 }
 
-.authority-name{
+.name + .rank{
   margin-top: -8px;
+}
+.authority-name {
+  margin-top: 8px;
 }
 
 h3 {
