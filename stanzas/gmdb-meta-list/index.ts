@@ -77,9 +77,13 @@ const makeSuccessData = (
   if (response.body.contents.length === 0) {
     return makeNotFoundParams(stanzaParams);
   }
-  const columnLabels: string[] = response.body.columns.map(
-    (item) => item.label
-  );
+  const columnLabels: {
+    label: string;
+    size: number;
+  }[] = response.body.columns.map((item) => ({
+    label: item.label,
+    size: item.size,
+  }));
   const keys: string[] = response.body.columns.map((item) => item.key);
   const noWraps: { [key: string]: boolean } = {};
   response.body.columns.forEach((item) => (noWraps[item.key] = item.nowrap));
@@ -268,7 +272,7 @@ type StanzaParameters = {
 };
 
 type TemplateParameters = {
-  columnLabels: string[];
+  columnLabels: { label: string; size: number }[];
   data: Item[][];
   offset: number;
   title: string;
@@ -304,6 +308,7 @@ type Column = {
   key: string;
   label: string;
   nowrap?: boolean;
+  size?: number;
 };
 
 export type ListApiBody = ApiBody;

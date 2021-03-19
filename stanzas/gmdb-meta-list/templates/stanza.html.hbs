@@ -10,7 +10,7 @@
         {{#if showColumnNames}}
           <tr>
             {{#each columnLabels}}
-              <th>{{this}}</th>
+              <th {{#if size}} style="width:{{size}}%" {{/if}} >{{label}}</th>
             {{/each}}
           </tr>
         {{/if}}
