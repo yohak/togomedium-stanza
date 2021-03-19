@@ -15,7 +15,6 @@ export default async function gmdbRoundtree(
   const [newicText, codeList] = await downloadData(params.newick, TID_API);
   const newicTree = parseNewic(newicText);
   const leafList = createLeafList(newicTree, codeList);
-  console.log(leafList);
 
   stanza.render({
     template: "stanza.html.hbs",
@@ -159,10 +158,12 @@ const renderD3 = (
     });
 
   const onClickItem = (d: any) => {
-    const taxIds: string[] = getChildrenIDs(d, false).map(
-      (str) => leafList[str]
-    );
-    console.log(taxIds);
+    // console.log(d);
+    const taxIds: string[] = (d.children
+      ? getChildrenIDs(d, false)
+      : [d.data.name]
+    ).map((str) => leafList[str]);
+    // console.log(taxIds);
     stanza.root.dispatchEvent(
       new CustomEvent("STANZA_ROUND_TREE_CLICK", {
         bubbles: true,
