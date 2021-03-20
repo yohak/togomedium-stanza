@@ -77,12 +77,16 @@ const makeSuccessData = (
   if (response.body.contents.length === 0) {
     return makeNotFoundParams(stanzaParams);
   }
+
+  const column_sizes: number[] = stanzaParams.column_sizes
+    ?.split(",")
+    .map((str) => parseInt(str));
   const columns: {
     label: string;
     size: number;
-  }[] = response.body.columns.map((item) => ({
+  }[] = response.body.columns.map((item, i) => ({
     label: item.label,
-    size: item.size,
+    size: column_sizes ? column_sizes[i] : null,
   }));
   const keys: string[] = response.body.columns.map((item) => item.key);
   const noWraps: { [key: string]: boolean } = {};
@@ -273,6 +277,7 @@ type StanzaParameters = {
   title: string;
   column_names: string;
   web_font?: string;
+  column_sizes?: string;
 };
 
 type TemplateParameters = {
