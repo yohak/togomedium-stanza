@@ -27,3 +27,12 @@ type ApiResponse<T> = {
   message?: string;
   body: T;
 };
+
+type SPARQLResponse = {
+  head: any;
+  results: {
+    distinct: boolean;
+    ordered: boolean;
+    bindings: any[];
+  };
+};
