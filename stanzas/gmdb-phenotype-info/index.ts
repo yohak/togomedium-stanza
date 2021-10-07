@@ -1,18 +1,17 @@
 import { TemplateBase } from "../../utils/types";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
+import Stanza from "togostanza/stanza";
 
-export default async function gmdbPhenotypeInfo(
-  stanza: StanzaInstance,
-  params: StanzaParameters
-) {
-  if (!params.tax_id) {
-    return;
+export default class GmdbPhenotypeInfo extends Stanza<StanzaParameters> {
+  async render() {
+    const params = this.params;
+    if (!params.tax_id) {
+      return;
+    }
+    const template = "stanza.html.hbs";
+    this.renderTemplate<TemplateParameters>({ template });
+    importWebFontForTogoMedium(this);
   }
-  stanza.render<TemplateParameters>({
-    template: "stanza.html.hbs",
-    parameters: null,
-  });
-  importWebFontForTogoMedium(stanza);
 }
 
 type StanzaParameters = {

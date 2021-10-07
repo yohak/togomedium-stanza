@@ -2,28 +2,26 @@ import { getData } from "../../utils/get-data";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { capitalizeFirstLetter, unescapeJsonString } from "../../utils/string";
-import { TemplateBase } from "../../utils/types";
+import { ApiResponse, TemplateBase } from "../../utils/types";
+import Stanza from "togostanza/stanza";
 
-export default async function gmdbOrganismByTaxid(
-  stanza: StanzaInstance,
-  params: StanzaParameters
-) {
-  if (!params.tax_id) {
-    return;
+export default class GmdbOrganismByTaxid extends Stanza<StanzaParameters> {
+  async render() {
+    const params = this.params;
+    if (!params.tax_id) {
+      return;
+    }
+    const apiName = "gmdb_organism_by_taxid";
+    const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
+      tax_id: params.tax_id,
+    });
+    // console.log(JSON.parse(JSON.stringify(result)));
+
+    const parameters = parseData(result);
+    const template = "stanza.html.hbs";
+    this.renderTemplate<TemplateParameters>({ template, parameters });
+    importWebFontForTogoMedium(this);
   }
-  const apiName = "gmdb_organism_by_taxid";
-  const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
-    tax_id: params.tax_id,
-  });
-  // console.log(JSON.parse(JSON.stringify(result)));
-
-  const data = parseData(result);
-  // console.log(data);
-  stanza.render<TemplateParameters>({
-    template: "stanza.html.hbs",
-    parameters: data,
-  });
-  importWebFontForTogoMedium(stanza);
 }
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
@@ -46,9 +44,7 @@ const parseLineage = (lineages: Lineage[]): Lineage[] => {
   }));
 };
 
-const parseOtherTypeMaterial = (
-  data: TypeMaterial[]
-): OtherMaterialParameter[] => {
+const parseOtherTypeMaterial = (data: TypeMaterial[]): OtherMaterialParameter[] => {
   return data
     .map((obj) => obj.name)
     .reduce((a: string[], b: string) => {

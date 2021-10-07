@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
+import Stanza from "togostanza/stanza";
 
 type D3Selection = d3.Selection<any, any, any, any>;
 
@@ -8,28 +9,25 @@ type D3Selection = d3.Selection<any, any, any, any>;
 //  今はSPARQL endpointに不具合あり。遅い。
 const TID_API: string = `${API_GROWTH_MEDIUM}gms_kegg_code_tid`;
 
-export default async function gmdbRoundtree(
-  stanza: StanzaInstance,
-  params: StanzaParameters
-) {
-  const [newicText, codeList] = await downloadData(params.newick, TID_API);
-  const newicTree = parseNewic(newicText);
-  const leafList = createLeafList(newicTree, codeList);
+export default class GmdbRoundtree extends Stanza<StanzaParameters> {
+  async render() {
+    const params = this.params;
+    const [newicText, codeList] = await downloadData(params.newick, TID_API);
+    const newicTree = parseNewic(newicText);
+    const leafList = createLeafList(newicTree, codeList);
 
-  stanza.render({
-    template: "stanza.html.hbs",
-    parameters: {
-      greeting: `Hello, ${params.newick}!`,
-    },
-  });
+    this.renderTemplate({
+      template: "stanza.html.hbs",
+      parameters: {
+        greeting: `Hello, ${params.newick}!`,
+      },
+    });
 
-  renderD3(stanza, newicTree, codeList, leafList);
+    renderD3(this, newicTree, codeList, leafList);
+  }
 }
 
-const downloadData = async (
-  newicUrl: string,
-  tidApi: string
-): Promise<[string, any]> => {
+const downloadData = async (newicUrl: string, tidApi: string): Promise<[string, any]> => {
   return Promise.all([
     fetch(newicUrl, { method: "get", mode: "cors" }).then((res) => res.text()),
     fetch(tidApi, {
@@ -102,10 +100,7 @@ const parseNewic = (rawText: string): NewicObj => {
 
   return { name: "root", children: root };
 };
-const createLeafList = (
-  newicObj: NewicObj,
-  codeList: any
-): { [key: string]: string } => {
+const createLeafList = (newicObj: NewicObj, codeList: any): { [key: string]: string } => {
   const result: { [key: string]: string } = {};
   const process = (obj: NewicObj | NewicLeaf | NewicBranch) => {
     if ("children" in obj) {
@@ -141,7 +136,7 @@ const getChildrenIDs = (d: any, includeBranches: boolean = true): string[] => {
   return arr;
 };
 const renderD3 = (
-  stanza: StanzaInstance,
+  stanza: Stanza,
   newicTree: NewicObj,
   codeList: any,
   leafList: { [key: string]: string }
@@ -159,10 +154,9 @@ const renderD3 = (
 
   const onClickItem = (d: any) => {
     // console.log(d);
-    const taxIds: string[] = (d.children
-      ? getChildrenIDs(d, false)
-      : [d.data.name]
-    ).map((str) => leafList[str]);
+    const taxIds: string[] = (d.children ? getChildrenIDs(d, false) : [d.data.name]).map(
+      (str) => leafList[str]
+    );
     // console.log(taxIds);
     stanza.root.dispatchEvent(
       new CustomEvent("STANZA_ROUND_TREE_CLICK", {
@@ -199,9 +193,7 @@ const renderD3 = (
       .style("background-color", "rgba(255,255,255,0.75)")
       .style("border", "solid 2px #888888")
       .style("max-width", "300px");
-    const g = svg
-      .append("g")
-      .attr("transform", "translate(" + radius + "," + radius + ")");
+    const g = svg.append("g").attr("transform", "translate(" + radius + "," + radius + ")");
 
     let hierarchyNode = d3.hierarchy(newicTree);
     const cluster = d3.cluster().size([360, radius - 80]); // cluster type
@@ -286,9 +278,7 @@ const renderD3 = (
         return d.x < 90 || d.x > 270 ? "start" : "end";
       })
       .attr("transform", (d: any) => {
-        return d.x < 90 || d.x > 270
-          ? "translate(8)"
-          : "rotate(180)translate(-8)";
+        return d.x < 90 || d.x > 270 ? "translate(8)" : "rotate(180)translate(-8)";
       })
       .text((d: any) => {
         return d.data.name;
@@ -310,10 +300,7 @@ const renderD3 = (
       .selectAll(".branchNode")
       .on("click", (e, d: any) => {
         onClickItem(d);
-        svg
-          .selectAll(".branchNode, .leafNode")
-          .selectAll("circle")
-          .classed("active", false);
+        svg.selectAll(".branchNode, .leafNode").selectAll("circle").classed("active", false);
         const activeIDs = getChildrenIDs(d);
         activeIDs.push(d.data.name);
         activeIDs.forEach((str) => {
@@ -333,10 +320,7 @@ const renderD3 = (
       .selectAll(".leafNode")
       .on("click", (e, d: any) => {
         onClickItem(d);
-        svg
-          .selectAll(".branchNode, .leafNode")
-          .selectAll("circle")
-          .classed("active", false);
+        svg.selectAll(".branchNode, .leafNode").selectAll("circle").classed("active", false);
         svg.select(`#${d.data.name}`).classed("active", true);
         //
       })
@@ -348,10 +332,7 @@ const renderD3 = (
       });
   };
   const appendBtn = (rePlot: () => void) => {
-    let dlButtonDiv = d3Canvas
-      .append("div")
-      .attr("id", "dl_button")
-      .style("text-align", "right");
+    let dlButtonDiv = d3Canvas.append("div").attr("id", "dl_button").style("text-align", "right");
 
     dlButtonDiv
       .append("input")
@@ -383,16 +364,11 @@ const renderD3 = (
   const downloadImg = (format: string) => {
     let filename = "tree";
     const pngZoom = 2; // png resolution rate
-    let url: string,
-      img: HTMLImageElement,
-      canvas: D3Selection,
-      context: CanvasRenderingContext2D;
+    let url: string, img: HTMLImageElement, canvas: D3Selection, context: CanvasRenderingContext2D;
 
     const treeHTML = div.querySelector("#roundtree");
 
-    const styleString = div.parentElement
-      .querySelector("style")
-      .outerHTML.replace(/[\r\n]/g, "");
+    const styleString = div.parentElement.querySelector("style").outerHTML.replace(/[\r\n]/g, "");
     const tmp = treeHTML.outerHTML.match(/^([^\>]+\>)(.+)$/);
     const sourceString = tmp[1] + styleString + tmp[2];
     const w = parseInt(d3.select(treeHTML).style("width"));

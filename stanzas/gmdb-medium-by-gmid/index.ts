@@ -1,32 +1,27 @@
 import { getData } from "../../utils/get-data";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
-import { TemplateBase } from "../../utils/types";
+import { ApiResponse, TemplateBase } from "../../utils/types";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
+import Stanza from "togostanza/stanza";
 
-export default async function gmdbMediumByGmid(
-  stanza: StanzaInstance,
-  params: StanzaParameters
-) {
-  if (!params.gm_id) {
-    return;
+export default class GmdbMediumByGmid extends Stanza<StanzaParameters> {
+  async render() {
+    const params = this.params;
+    if (!params.gm_id) {
+      return;
+    }
+    const apiName = "gmdb_medium_by_gmid";
+    const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
+      gm_id: params.gm_id,
+    });
+    const parameters = parseData(result, params);
+    const template = "stanza.html.hbs";
+    this.renderTemplate<TemplateParameters>({ template, parameters });
+    importWebFontForTogoMedium(this);
   }
-  const apiName = "gmdb_medium_by_gmid";
-  const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
-    gm_id: params.gm_id,
-  });
-  const data = parseData(result, params);
-
-  stanza.render<TemplateParameters>({
-    template: "stanza.html.hbs",
-    parameters: data,
-  });
-  importWebFontForTogoMedium(stanza);
 }
 
-const parseData = (
-  data: ApiResponse<ApiBody>,
-  params: StanzaParameters
-): TemplateParameters => {
+const parseData = (data: ApiResponse<ApiBody>, params: StanzaParameters): TemplateParameters => {
   switch (true) {
     case data.status !== 200:
       return makeErrorData(`Error ${data.status}<br />${data.message}`);
@@ -79,9 +74,7 @@ const processComponentTables = (tables: ComponentTable[]): ComponentTable[] => {
     })),
   }));
 };
-const processComponentComments = (
-  comments: ComponentComment[]
-): ComponentComment[] => {
+const processComponentComments = (comments: ComponentComment[]): ComponentComment[] => {
   return comments.map((item) => ({
     ...item,
     comment: item.comment ? item.comment : "&nbsp;",

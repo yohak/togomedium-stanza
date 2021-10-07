@@ -17,7 +17,13 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "togostanza/stanza": [
+        "definitions/togostanza/stanza/index.d.ts"
+      ]
+    }
   },
   "compileOnSave": false,
   "exclude": ["node_modules", "./**/*.spec.ts"]

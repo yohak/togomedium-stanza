@@ -1,35 +1,24 @@
 import { makeFormBody } from "../../utils/get-data";
-import { TemplateBase } from "../../utils/types";
+import { ApiResponse, SimpleObject, TemplateBase } from "../../utils/types";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
+import Stanza from "togostanza/stanza";
 
-export default async function metaList(
-  stanza: StanzaInstance,
-  stanzaParams: StanzaParameters
-) {
-  if (!stanzaParams.api_url) {
-    return;
+export default class GmdbMetaList extends Stanza<StanzaParameters> {
+  async render() {
+    const params = this.params;
+    if (!params.api_url) {
+      return;
+    }
+    const offset: number = 0;
+    const data = await fetchData(params.api_url, offset, parseInt(params.limit, 10));
+    const templateParams: TemplateParameters = processData(data, offset, params);
+    render(this, templateParams, params);
   }
-  const offset: number = 0;
-  const data = await fetchData(
-    stanzaParams.api_url,
-    offset,
-    parseInt(stanzaParams.limit, 10)
-  );
-  const templateParams: TemplateParameters = processData(
-    data,
-    offset,
-    stanzaParams
-  );
-  render(stanza, templateParams, stanzaParams);
 }
 
-const render = (
-  stanza: StanzaInstance,
-  parameters: TemplateParameters,
-  stanzaParams: StanzaParameters
-) => {
+const render = (stanza: Stanza, parameters: TemplateParameters, stanzaParams: StanzaParameters) => {
   const limit: number = parseInt(stanzaParams.limit, 10);
-  stanza.render<TemplateParameters>({
+  stanza.renderTemplate<TemplateParameters>({
     template: "stanza.html.hbs",
     parameters,
   });
@@ -43,7 +32,7 @@ const render = (
 };
 
 const movePage = async (
-  stanza: StanzaInstance,
+  stanza: Stanza,
   templateParams: TemplateParameters,
   stanzaParams: StanzaParameters,
   limit: number,
@@ -78,9 +67,7 @@ const makeSuccessData = (
     return makeNotFoundParams(stanzaParams);
   }
 
-  const column_sizes: number[] = stanzaParams.column_sizes
-    ?.split(",")
-    .map((str) => parseInt(str));
+  const column_sizes: number[] = stanzaParams.column_sizes?.split(",").map((str) => parseInt(str));
   const columns: {
     label: string;
     size: number;
@@ -119,9 +106,7 @@ const makeSuccessData = (
       : `total ${total} items`;
   const _columns: string = stanzaParams.column_names;
   const showColumnNames: boolean =
-    _columns.toLocaleLowerCase() === "false"
-      ? false
-      : Boolean(stanzaParams.column_names);
+    _columns.toLocaleLowerCase() === "false" ? false : Boolean(stanzaParams.column_names);
   const isFixedTable: boolean = !!columns.find((item) => !!item.size);
 
   return {
@@ -139,9 +124,7 @@ const makeSuccessData = (
   };
 };
 
-const makeNotFoundParams = (
-  stanzaParams: StanzaParameters
-): TemplateParameters => {
+const makeNotFoundParams = (stanzaParams: StanzaParameters): TemplateParameters => {
   return {
     title: stanzaParams.title,
     offset: 0,
@@ -241,9 +224,7 @@ const filterQuery = (query: string): string => {
     })
     .join("&");
   if (isOmitted) {
-    console.warn(
-      "limit and offset on API_URL have been omitted as they are set from the Stanza"
-    );
+    console.warn("limit and offset on API_URL have been omitted as they are set from the Stanza");
   }
   // console.log(result);
   return result;

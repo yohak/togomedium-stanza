@@ -1,5 +1,7 @@
+import Stanza from "togostanza/stanza";
+
 export const importWebFontForTogoMedium = (
-  stanza: StanzaInstance,
+  stanza: Stanza,
   name: string = "Fira Sans Condensed"
 ) => {
   name = name.replace(/\ /gi, "+");

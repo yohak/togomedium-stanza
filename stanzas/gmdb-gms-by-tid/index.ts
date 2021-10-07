@@ -2,6 +2,7 @@ import { getData } from "../../utils/get-data";
 import * as d3 from "d3";
 import { addClass } from "../../utils/dom";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
+import Stanza from "togostanza/stanza";
 
 type D3Selection = d3.Selection<any, any, any, any>;
 
@@ -13,27 +14,19 @@ document.body.addEventListener("mousemove", function (e) {
   mouseY = e.clientY;
 });
 
-export default async function gmdbGmsByTid(
-  stanza: StanzaInstance,
-  params: StanzaParameters
-) {
-  const apiName = "gms_by_kegg_tids_3";
-  const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
-    t_id: params.t_id,
-  });
+export default class GmdbGmsByTid extends Stanza<StanzaParameters> {
+  async render() {
+    const params = this.params;
+    const apiName = "gms_by_kegg_tids_3";
+    const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
+      t_id: params.t_id,
+    });
 
-  const { sorted_groups } = processData(result.body);
+    const { sorted_groups } = processData(result.body);
+    this.renderTemplate<TemplateParameters>({ template: "stanza.html.hbs", parameters: {} });
 
-  stanza.render({
-    template: "stanza.html.hbs",
-    parameters: {},
-  });
-
-  makeTable(
-    stanza.root.querySelector("#table_area"),
-    result.body,
-    sorted_groups
-  );
+    makeTable(this.root.querySelector("#table_area"), result.body, sorted_groups);
+  }
 }
 
 const processData = (json: any) => {
@@ -100,10 +93,7 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
   let tr: D3Selection = thead.append("tr");
   tr.append("th").attr("class", "header").text("Medium");
   tr.append("th").attr("class", "header").text("Organisms");
-  tr.append("th")
-    .attr("class", "header")
-    .attr("colspan", sorted_groups.length)
-    .text("Components");
+  tr.append("th").attr("class", "header").attr("colspan", sorted_groups.length).text("Components");
   tr = thead.append("tr");
   tr.append("th");
   tr.append("th");
@@ -194,10 +184,7 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
     .append("a")
     .attr("class", "medium_list")
     .attr("href", function (d: any) {
-      return (
-        "/component/" +
-        d.component.uri.replace("http://purl.jp/bio/10/gmo/", "")
-      );
+      return "/component/" + d.component.uri.replace("http://purl.jp/bio/10/gmo/", "");
     })
     .append("div")
     .attr("class", "entypo-db-shape component_style")
@@ -316,11 +303,8 @@ const fitSubTableHeight = (main: HTMLElement, sub: HTMLElement) => {
   sub.querySelector<HTMLTableHeaderCellElement>(
     "thead tr:nth-child(2) th"
   ).style.height = `${header2Height}px`;
-  const footerHeight = main.querySelector("tfoot td").getBoundingClientRect()
-    .height;
-  sub.querySelector<HTMLTableDataCellElement>(
-    "tfoot td"
-  ).style.height = `${footerHeight}px`;
+  const footerHeight = main.querySelector("tfoot td").getBoundingClientRect().height;
+  sub.querySelector<HTMLTableDataCellElement>("tfoot td").style.height = `${footerHeight}px`;
   const mainBodyRows = main.querySelectorAll<HTMLTableRowElement>("tbody tr");
   const subBodyRows = sub.querySelectorAll<HTMLTableRowElement>("tbody tr");
   mainBodyRows.forEach((elm, i) => {
@@ -330,11 +314,7 @@ const fitSubTableHeight = (main: HTMLElement, sub: HTMLElement) => {
   });
 };
 
-const makeScrollable = (
-  wrapper: HTMLElement,
-  main: HTMLElement,
-  sub: HTMLElement
-) => {
+const makeScrollable = (wrapper: HTMLElement, main: HTMLElement, sub: HTMLElement) => {
   const scroller = document.createElement("div");
   scroller.classList.add("scroller");
   wrapper.prepend(scroller);

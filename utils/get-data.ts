@@ -1,7 +1,6 @@
-export const getData = async <T>(
-  url: string,
-  params: SimpleObject
-): Promise<ApiResponse<T>> => {
+import { ApiResponse, SimpleObject } from "./types";
+
+export const getData = async <T>(url: string, params: SimpleObject): Promise<ApiResponse<T>> => {
   const response = await fetch(url, makeOptions(params));
 
   if (response.status !== 200) {

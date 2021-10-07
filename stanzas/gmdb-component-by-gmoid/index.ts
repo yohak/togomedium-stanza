@@ -1,33 +1,32 @@
 import { getData } from "../../utils/get-data";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
+import { ApiResponse } from "../../utils/types";
+import Stanza from "togostanza/stanza";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 
-export default async function gmdbComponentByGmoid(
-  stanza: StanzaInstance,
-  params: StanzaParameter
-) {
-  if (!params.gmo_id) {
-    return;
+export default class GmdbComponentByGmoid extends Stanza<StanzaParameters> {
+  async render() {
+    const params = this.params;
+    if (!params.gmo_id) {
+      return;
+    }
+    const apiName = "gmdb_component_by_gmoid";
+    const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
+      gmo_id: params.gmo_id,
+    });
+
+    const parameters = parseData(result);
+    const template = "stanza.html.hbs";
+    this.renderTemplate<TemplateParameters>({ template, parameters });
+    importWebFontForTogoMedium(this);
   }
-  const apiName = "gmdb_component_by_gmoid";
-  const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
-    gmo_id: params.gmo_id,
-  });
-
-  const data = parseData(result);
-
-  stanza.render<TemplateParameter>({
-    template: "stanza.html.hbs",
-    parameters: data,
-  });
-  importWebFontForTogoMedium(stanza);
 }
 
-const parseData = (data: ApiResponse<ApiBody>): TemplateParameter => {
+const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
   return makeSuccessData(data.body);
 };
 
-const makeSuccessData = (body: ApiBody): TemplateParameter => {
+const makeSuccessData = (body: ApiBody): TemplateParameters => {
   return {
     pref_label: body.pref_label,
     gmo_id: body.id,
@@ -62,11 +61,11 @@ const getLinkLabel = (link: string) => {
   }
 };
 
-type StanzaParameter = {
+type StanzaParameters = {
   gmo_id: string;
 };
 
-type TemplateParameter = {
+type TemplateParameters = {
   pref_label: string;
   gmo_id: string;
   alt_labels: string[];
