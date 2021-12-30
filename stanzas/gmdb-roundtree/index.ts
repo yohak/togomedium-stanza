@@ -141,7 +141,7 @@ const renderD3 = (
   codeList: any,
   leafList: { [key: string]: string }
 ) => {
-  const div: HTMLDivElement = stanza.root.querySelector("#renderDiv");
+  const div = stanza.root.querySelector<HTMLDivElement>("#renderDiv")!;
   const d3Canvas = d3.select(div);
   const linkGenerator: any = d3
     .linkRadial()
@@ -366,11 +366,11 @@ const renderD3 = (
     const pngZoom = 2; // png resolution rate
     let url: string, img: HTMLImageElement, canvas: D3Selection, context: CanvasRenderingContext2D;
 
-    const treeHTML = div.querySelector("#roundtree");
+    const treeHTML = div.querySelector("#roundtree")!;
 
-    const styleString = div.parentElement.querySelector("style").outerHTML.replace(/[\r\n]/g, "");
+    const styleString = div.parentElement!.querySelector("style")!.outerHTML.replace(/[\r\n]/g, "");
     const tmp = treeHTML.outerHTML.match(/^([^\>]+\>)(.+)$/);
-    const sourceString = tmp[1] + styleString + tmp[2];
+    const sourceString = tmp![1] + styleString + tmp![2];
     const w = parseInt(d3.select(treeHTML).style("width"));
     const h = parseInt(d3.select(treeHTML).style("height"));
 
@@ -388,7 +388,7 @@ const renderD3 = (
         .text("test")
         .style("display", "none");
 
-      a.node().click();
+      a.node()!.click();
 
       setTimeout(() => {
         window.URL.revokeObjectURL(url);

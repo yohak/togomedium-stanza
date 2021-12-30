@@ -38,15 +38,15 @@ const addRankChildren = async (data: TemplateParameters): Promise<TemplateParame
   }
   const rank: TAXON_RANK =
     data.rank === "Superkingdom" ? TAXON_RANK._0_KINGDOM : (data.rank as TAXON_RANK);
-  const nextRank = getNextTaxon(rank);
+  const nextRank = getNextTaxon(rank)!;
   const response = await getData<SubRankApiBody>(`${API_GROWTH_MEDIUM}list_taxons_by_rank`, {
     tax_id: data.taxid,
     rank: nextRank,
   });
   const getId = (str: string) => str.split("/").pop();
 
-  const subClasses: LineageParameter[] = response.body
-    .sort((a, b) => {
+  const subClasses: LineageParameter[] = response
+    .body!.sort((a, b) => {
       const nameA = a.name.toLowerCase();
       const nameB = b.name.toLowerCase();
       if (nameA < nameB) {
@@ -59,7 +59,7 @@ const addRankChildren = async (data: TemplateParameters): Promise<TemplateParame
     })
     .map((item) => ({
       label: item.name,
-      link: makeLineageLink(getId(item.id), nextRank),
+      link: makeLineageLink(getId(item.id)!, nextRank),
       rank: nextRank,
     }));
   return {
@@ -75,11 +75,11 @@ const addRankChildren = async (data: TemplateParameters): Promise<TemplateParame
 };
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
-  return makeSuccessData(data.body);
+  return makeSuccessData(data.body!);
 };
 const makeSuccessData = (body: ApiBody): TemplateParameters => {
   return {
-    subClass: null,
+    subClass: undefined,
     scientific_name: body.scientific_name,
     taxid: body.taxid,
     togoGenomeUrl: makeTogoGenomeOrganismLink(body.taxid),
@@ -106,7 +106,7 @@ const makeSuccessData = (body: ApiBody): TemplateParameters => {
   };
 };
 
-const parseRank = (str: string): string => str?.split("/").pop();
+const parseRank = (str: string): string => str?.split("/").pop()!;
 
 const makeLineageLink = (id: string, rank: TAXON_RANK): string =>
   rank === TAXON_RANK._9_SPECIES ? `/organism/${id}` : `/taxon/${id}`;
@@ -123,13 +123,15 @@ type TemplateParameters = {
   rank: string;
   authority_name: string;
   lineage: LineageParameter[];
-  subClass: {
-    label: string;
-    items: {
-      label: string;
-      link: string;
-    }[];
-  };
+  subClass:
+    | {
+        label: string;
+        items: {
+          label: string;
+          link: string;
+        }[];
+      }
+    | undefined;
 };
 
 type LineageParameter = {

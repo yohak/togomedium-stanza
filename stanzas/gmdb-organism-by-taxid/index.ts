@@ -25,7 +25,7 @@ export default class GmdbOrganismByTaxid extends Stanza<StanzaParameters> {
 }
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
-  return makeSuccessData(data.body);
+  return makeSuccessData(data.body!);
 };
 
 const makeSuccessData = (body: ApiBody): TemplateParameters => ({
@@ -46,13 +46,13 @@ const parseLineage = (lineages: Lineage[]): Lineage[] => {
 
 const parseOtherTypeMaterial = (data: TypeMaterial[]): OtherMaterialParameter[] => {
   return data
-    .map((obj) => obj.name)
-    .reduce((a: string[], b: string) => {
+    .map((obj) => obj.name!)
+    .reduce<string[]>((a: string[], b: string) => {
       if (a.indexOf(b) < 0) {
         a.push(b);
       }
       return a;
-    }, [])
+    }, [])!
     .map((key) => ({
       key,
       labels: data.filter((item) => item.name === key).map((elm) => elm.label),

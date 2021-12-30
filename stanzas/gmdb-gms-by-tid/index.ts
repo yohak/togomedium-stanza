@@ -24,8 +24,11 @@ export default class GmdbGmsByTid extends Stanza<StanzaParameters> {
 
     const { sorted_groups } = processData(result.body);
     this.renderTemplate<TemplateParameters>({ template: "stanza.html.hbs", parameters: {} });
+    const wrapper = this.root.querySelector<HTMLElement>("#table_area");
 
-    makeTable(this.root.querySelector("#table_area"), result.body, sorted_groups);
+    if (wrapper) {
+      makeTable(wrapper, result.body!, sorted_groups);
+    }
   }
 }
 
@@ -216,8 +219,8 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
     });
 
   const subTable = makeSubTable(renderDiv, data);
-  fitSubTableHeight(mainTable.node(), subTable.node());
-  makeScrollable(renderDiv.node(), mainTable.node(), subTable.node());
+  fitSubTableHeight(mainTable.node(), subTable.node()!);
+  makeScrollable(renderDiv.node(), mainTable.node(), subTable.node()!);
 };
 
 const _makeSubTable = (data: ApiBody) => {
@@ -298,13 +301,13 @@ const makeSubTable = (renderDiv: D3Selection, data: ApiBody) => {
 
 const fitSubTableHeight = (main: HTMLElement, sub: HTMLElement) => {
   const header2Height = main
-    .querySelector("thead tr:nth-child(2) th")
+    .querySelector("thead tr:nth-child(2) th")!
     .getBoundingClientRect().height;
   sub.querySelector<HTMLTableHeaderCellElement>(
     "thead tr:nth-child(2) th"
-  ).style.height = `${header2Height}px`;
-  const footerHeight = main.querySelector("tfoot td").getBoundingClientRect().height;
-  sub.querySelector<HTMLTableDataCellElement>("tfoot td").style.height = `${footerHeight}px`;
+  )!.style.height = `${header2Height}px`;
+  const footerHeight = main.querySelector("tfoot td")!.getBoundingClientRect().height;
+  sub.querySelector<HTMLTableDataCellElement>("tfoot td")!.style.height = `${footerHeight}px`;
   const mainBodyRows = main.querySelectorAll<HTMLTableRowElement>("tbody tr");
   const subBodyRows = sub.querySelectorAll<HTMLTableRowElement>("tbody tr");
   mainBodyRows.forEach((elm, i) => {

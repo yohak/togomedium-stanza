@@ -8,7 +8,7 @@ export const capitalizeFirstLetter = (str: string): string => {
   }
   const reg = /^(.)(.*)$/.exec(str);
   // console.log(reg);
-  return `${reg[1].toUpperCase()}${reg[2]}`;
+  return `${reg![1].toUpperCase()}${reg![2]}`;
 };
 
 export const makeTogoGenomeOrganismLink = (taxid: string): string => {

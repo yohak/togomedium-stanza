@@ -27,7 +27,7 @@ export const getRankLevel = (rank: TAXON_RANK): number => {
   return availableRanks.indexOf(rank);
 };
 
-export const getNextTaxon = (rank: TAXON_RANK): TAXON_RANK => {
+export const getNextTaxon = (rank: TAXON_RANK): TAXON_RANK | undefined => {
   const rankLevel = getRankLevel(rank);
   if (rankLevel === -1) {
     return undefined;

@@ -63,22 +63,24 @@ const makeSuccessData = (
   offset: number,
   stanzaParams: StanzaParameters
 ): TemplateParameters => {
-  if (response.body.contents.length === 0) {
+  if (response.body!.contents.length === 0) {
     return makeNotFoundParams(stanzaParams);
   }
 
-  const column_sizes: number[] = stanzaParams.column_sizes?.split(",").map((str) => parseInt(str));
+  const column_sizes: number[] | undefined = stanzaParams.column_sizes
+    ?.split(",")
+    .map((str) => parseInt(str));
   const columns: {
     label: string;
-    size: number;
-  }[] = response.body.columns.map((item, i) => ({
+    size: number | undefined;
+  }[] = response.body!.columns.map((item, i) => ({
     label: item.label,
-    size: column_sizes ? column_sizes[i] : null,
+    size: column_sizes ? column_sizes[i] : undefined,
   }));
-  const keys: string[] = response.body.columns.map((item) => item.key);
-  const noWraps: { [key: string]: boolean } = {};
-  response.body.columns.forEach((item) => (noWraps[item.key] = item.nowrap));
-  const data: Item[][] = response.body.contents.map((item) => {
+  const keys: string[] = response.body!.columns.map((item) => item.key);
+  const noWraps: { [key: string]: boolean | undefined } = {};
+  response.body!.columns.forEach((item) => (noWraps[item.key] = item.nowrap));
+  const data: Item[][] = response.body!.contents.map((item) => {
     const result: Item[] = [];
     keys.forEach((key) => {
       let value: StringItem;
@@ -94,7 +96,7 @@ const makeSuccessData = (
     });
     return result;
   });
-  const total: number = response.body.total;
+  const total: number = response.body!.total;
   const _end: number = parseInt(stanzaParams.limit, 10) + offset;
   const end: number = _end <= total ? _end : total;
   const hasPrev: boolean = offset !== 0;
@@ -128,14 +130,14 @@ const makeNotFoundParams = (stanzaParams: StanzaParameters): TemplateParameters 
   return {
     title: stanzaParams.title,
     offset: 0,
-    columns: null,
-    data: null,
+    columns: undefined,
+    data: undefined,
     hasNext: false,
     hasPrev: false,
-    info: null,
+    info: undefined,
     showColumnNames: false,
     isFixedTable: false,
-    status: null,
+    status: undefined,
     statusText: "NO RESULT FOUND",
   };
 };
@@ -147,11 +149,11 @@ const makeFailParams = (
   return {
     title: stanzaParams.title,
     offset: 0,
-    columns: null,
-    data: null,
+    columns: undefined,
+    data: undefined,
     hasNext: false,
     hasPrev: false,
-    info: null,
+    info: undefined,
     showColumnNames: false,
     isFixedTable: false,
     status: response.status,
@@ -179,7 +181,7 @@ const fetchLive = async (
     return {
       status: response.status,
       message: response.statusText,
-      body: null,
+      body: undefined,
     };
   }
   const body: any = await response.json();
@@ -212,7 +214,7 @@ const filterQuery = (query: string): string => {
     .split("&")
     .filter((str) => {
       const reg = /(.*)=(.*)/.exec(str);
-      const [key, value]: [string, string] = [reg[1], reg[2]];
+      const [key, value]: [string, string] = [reg![1], reg![2]];
       switch (key) {
         case "limit":
         case "offset":
@@ -262,13 +264,13 @@ type StanzaParameters = {
 };
 
 type TemplateParameters = {
-  columns: { label: string; size: number }[];
-  data: Item[][];
+  columns: { label: string; size: number | undefined }[] | undefined;
+  data: Item[][] | undefined;
   offset: number;
   title: string;
   hasNext: boolean;
   hasPrev: boolean;
-  info: string;
+  info: string | undefined;
   showColumnNames: boolean;
   isFixedTable: boolean;
 } & TemplateBase;

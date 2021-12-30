@@ -25,20 +25,20 @@ const parseData = (data: ApiResponse<ApiBody>, params: StanzaParameters): Templa
   switch (true) {
     case data.status !== 200:
       return makeErrorData(`Error ${data.status}<br />${data.message}`);
-    case data.body.meta === null:
+    case !data?.body?.meta:
       return makeErrorData(`No Medium Found with ${params.gm_id}`);
     default:
-      return makeSuccessData(data.body);
+      return makeSuccessData(data.body!);
   }
 };
 
 const makeErrorData = (msg: string): TemplateParameters => {
   return {
-    id: null,
-    name: null,
-    src_url: null,
-    src_label: null,
-    ph: null,
+    id: undefined,
+    name: undefined,
+    src_url: undefined,
+    src_label: undefined,
+    ph: undefined,
     components: [],
     error: true,
     statusText: msg,
@@ -118,11 +118,11 @@ type StanzaParameters = {
   gm_id: string;
 };
 type TemplateParameters = {
-  id: string;
-  src_url: string;
-  src_label: string;
-  name: string;
-  ph: number;
+  id: string | undefined;
+  src_url: string | undefined;
+  src_label: string | undefined;
+  name: string | undefined;
+  ph: number | undefined;
   components: RecipeItem[];
 } & TemplateBase;
 

@@ -23,7 +23,7 @@ export default class GmdbComponentByGmoid extends Stanza<StanzaParameters> {
 }
 
 const parseData = (data: ApiResponse<ApiBody>): TemplateParameters => {
-  return makeSuccessData(data.body);
+  return makeSuccessData(data.body!);
 };
 
 const makeSuccessData = (body: ApiBody): TemplateParameters => {

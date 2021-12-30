@@ -20,7 +20,8 @@
     "baseUrl": ".",
     "paths": {
       "togostanza/stanza": ["definitions/togostanza/stanza/index.d.ts"]
-    }
+    },
+    "strict": true
   },
   "compileOnSave": false,
   "exclude": ["node_modules", "./**/*.spec.ts"]

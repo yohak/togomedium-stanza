@@ -7,7 +7,7 @@ export const getData = async <T>(url: string, params: SimpleObject): Promise<Api
     return {
       status: response.status,
       message: response.statusText,
-      body: null,
+      body: undefined,
     };
   }
   const body: T = await response.json();
