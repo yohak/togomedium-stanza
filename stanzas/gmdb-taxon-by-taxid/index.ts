@@ -8,7 +8,7 @@ import {
   unescapeJsonString,
 } from "../../utils/string";
 import { getNextTaxon, TAXON_RANK } from "../../utils/taxon";
-import pluralize = require("pluralize");
+import pluralize from "pluralize";
 import Stanza from "togostanza/stanza";
 import { ApiResponse } from "../../utils/types";
 

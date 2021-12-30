@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
+    "target": "esnext",
     "declaration": false,
     "removeComments": true,
     "noLib": false,
@@ -20,9 +19,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "togostanza/stanza": [
-        "definitions/togostanza/stanza/index.d.ts"
-      ]
+      "togostanza/stanza": ["definitions/togostanza/stanza/index.d.ts"]
     }
   },
   "compileOnSave": false,
