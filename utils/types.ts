@@ -1,3 +1,5 @@
+import { Optional } from "yohak-tools";
+
 export type TemplateBase = {
   isLoading?: boolean;
   error?: boolean;
@@ -10,5 +12,5 @@ export type SimpleObject = { [key: string]: string | number };
 export type ApiResponse<T> = {
   status: number;
   message?: string;
-  body: T | undefined;
+  body: Optional<T>;
 };
