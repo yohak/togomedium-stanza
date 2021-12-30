@@ -1,8 +1,8 @@
+import { ApiResponse } from "../../utils/types";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { getData } from "../../utils/get-data";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";
-import { ApiResponse } from "../../utils/types";
 import Stanza from "togostanza/stanza";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
 
 export default class GmdbComponentByGmoid extends Stanza<StanzaParameters> {
   async render() {

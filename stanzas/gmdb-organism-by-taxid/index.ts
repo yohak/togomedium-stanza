@@ -1,9 +1,9 @@
+import Stanza from "togostanza/stanza";
 import { getData } from "../../utils/get-data";
-import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { capitalizeFirstLetter, unescapeJsonString } from "../../utils/string";
 import { ApiResponse, TemplateBase } from "../../utils/types";
-import Stanza from "togostanza/stanza";
+import { API_GROWTH_MEDIUM } from "../../utils/variables";
 
 export default class GmdbOrganismByTaxid extends Stanza<StanzaParameters> {
   async render() {

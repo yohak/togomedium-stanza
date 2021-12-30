@@ -1,7 +1,7 @@
-import { makeFormBody } from "../../utils/get-data";
-import { ApiResponse, SimpleObject, TemplateBase } from "../../utils/types";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
 import Stanza from "togostanza/stanza";
+import { makeFormBody } from "../../utils/get-data";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
+import { ApiResponse, SimpleObject, TemplateBase } from "../../utils/types";
 
 export default class GmdbMetaList extends Stanza<StanzaParameters> {
   async render() {

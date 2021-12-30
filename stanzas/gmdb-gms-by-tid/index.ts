@@ -33,11 +33,11 @@ export default class GmdbGmsByTid extends Stanza<StanzaParameters> {
 }
 
 const processData = (json: any) => {
-  let group_count: any = {};
-  let group_label: any = {};
-  for (let gm of json.growth_media) {
-    let groups = Object.keys(gm.components_group);
-    for (let group of groups) {
+  const group_count: any = {};
+  const group_label: any = {};
+  for (const gm of json.growth_media) {
+    const groups = Object.keys(gm.components_group);
+    for (const group of groups) {
       if (!group_count[group]) {
         group_count[group] = 0;
         group_label[group] = gm.components_group[group].label;
@@ -47,10 +47,10 @@ const processData = (json: any) => {
   }
 
   // sort component_group by component count
-  let groups = Object.keys(group_count).map(function (group) {
+  const groups = Object.keys(group_count).map(function (group) {
     return { uri: group, count: group_count[group], label: group_label[group] };
   });
-  let sorted_groups = groups.sort(function (a, b) {
+  const sorted_groups = groups.sort(function (a, b) {
     if (a.count > b.count) {
       return -1;
     }
@@ -61,9 +61,9 @@ const processData = (json: any) => {
   });
 
   // hash to list 'components_group'
-  for (let gm of json.growth_media) {
+  for (const gm of json.growth_media) {
     gm.components_group_list = [];
-    for (let group of sorted_groups) {
+    for (const group of sorted_groups) {
       if (gm.components_group[group.uri]) {
         gm.components_group_list.push({
           elements: gm.components_group[group.uri].elements,
@@ -78,9 +78,9 @@ const processData = (json: any) => {
 };
 
 const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
-  let renderDiv: D3Selection = d3.select(div);
-  let mainTable: D3Selection = renderDiv.append("table");
-  let popup: D3Selection = renderDiv
+  const renderDiv: D3Selection = d3.select(div);
+  const mainTable: D3Selection = renderDiv.append("table");
+  const popup: D3Selection = renderDiv
     .append("div")
     .attr("id", "popup")
     .style("display", "none")
@@ -92,7 +92,7 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
     .style("z-index", 10);
 
   // thead
-  let thead: D3Selection = mainTable.append("thead");
+  const thead: D3Selection = mainTable.append("thead");
   let tr: D3Selection = thead.append("tr");
   tr.append("th").attr("class", "header").text("Medium");
   tr.append("th").attr("class", "header").text("Organisms");
@@ -124,7 +124,7 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
     });
 
   // tbody
-  let tbody = mainTable.append("tbody");
+  const tbody = mainTable.append("tbody");
   tr = tbody
     .selectAll(".organism_line")
     .data(data.growth_media)
@@ -168,7 +168,7 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
       renderDiv.select("#popup").style("display", "none");
     });
 
-  let td = tr
+  const td = tr
     .selectAll(".component")
     .data(function (d: any) {
       return d.components_group_list;
@@ -204,7 +204,7 @@ const makeTable = (div: HTMLElement, data: ApiBody, sorted_groups: any) => {
     });
 
   // tfoot
-  let tfoot = mainTable.append("tfoot");
+  const tfoot = mainTable.append("tfoot");
   tr = tfoot.append("tr");
   tr.append("td");
   tr.append("td");
@@ -238,7 +238,7 @@ const makeSubTable = (renderDiv: D3Selection, data: ApiBody) => {
   const subTable = renderDiv.append("table");
   subTable.classed("sub-table", true);
 
-  let thead = subTable.append("thead");
+  const thead = subTable.append("thead");
   let tr = thead.append("tr");
   tr.append("th").attr("class", "header").text("Medium");
   tr.append("th").attr("class", "header").text("Organisms");
@@ -247,7 +247,7 @@ const makeSubTable = (renderDiv: D3Selection, data: ApiBody) => {
   tr.append("th");
 
   // tbody
-  let tbody = subTable.append("tbody");
+  const tbody = subTable.append("tbody");
   tr = tbody
     .selectAll(".organism_line")
     .data(data.growth_media)
@@ -291,7 +291,7 @@ const makeSubTable = (renderDiv: D3Selection, data: ApiBody) => {
       renderDiv.select("#popup").style("display", "none");
     });
 
-  let tfoot = subTable.append("tfoot");
+  const tfoot = subTable.append("tfoot");
   tr = tfoot.append("tr");
   tr.append("td");
   tr.append("td");

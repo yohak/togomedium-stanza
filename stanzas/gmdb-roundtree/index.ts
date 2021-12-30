@@ -1,6 +1,6 @@
 import * as d3 from "d3";
-import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import Stanza from "togostanza/stanza";
+import { API_GROWTH_MEDIUM } from "../../utils/variables";
 
 type D3Selection = d3.Selection<any, any, any, any>;
 
@@ -44,7 +44,7 @@ const downloadData = async (newicUrl: string, tidApi: string): Promise<[string, 
 const parseNewic = (rawText: string): NewicObj => {
   let newick = rawText.replace(/\n/g, "");
   if (newick.match(/\):/)) {
-    let array = newick.split(/\)/);
+    const array = newick.split(/\)/);
     let count = 1;
     for (let i = 0; i < array.length; i++) {
       if (array[i].match(/^:/)) {
@@ -57,12 +57,12 @@ const parseNewic = (rawText: string): NewicObj => {
   if (newick.match(/\);$/)) {
     newick = newick.replace(/^\(/, "").replace(/\);$/, "");
   }
-  let stack = [];
+  const stack = [];
   let child: any;
-  let root: any = [];
+  const root: any = [];
   let nodeObj = root;
 
-  let array = newick.split("").reverse();
+  const array = newick.split("").reverse();
   for (let i = 0; i < array.length; i++) {
     if (array[i] === ")") {
       stack.push(nodeObj);
@@ -76,7 +76,7 @@ const parseNewic = (rawText: string): NewicObj => {
       for (let j = i; j < array.length; j++) {
         if (array[j] === "(" || array[j] === ")" || array[j] === ",") {
           i = j - 1;
-          let element = string.split(":");
+          const element = string.split(":");
           let obj: any = {
             name: element[0],
             distance: element[1],
@@ -205,7 +205,7 @@ const renderD3 = (
       }); // tree type
     cluster(hierarchyNode);
 
-    let link = g
+    const link = g
       .selectAll(".edge")
       .data(hierarchyNode.links())
       .enter()
@@ -217,7 +217,7 @@ const renderD3 = (
       .attr("opacity", "0.6")
       .attr("d", linkGenerator);
 
-    let node = g
+    const node = g
       .selectAll(".node")
       .data(hierarchyNode.descendants())
       .enter()
@@ -332,7 +332,7 @@ const renderD3 = (
       });
   };
   const appendBtn = (rePlot: () => void) => {
-    let dlButtonDiv = d3Canvas.append("div").attr("id", "dl_button").style("text-align", "right");
+    const dlButtonDiv = d3Canvas.append("div").attr("id", "dl_button").style("text-align", "right");
 
     dlButtonDiv
       .append("input")
@@ -369,7 +369,7 @@ const renderD3 = (
     const treeHTML = div.querySelector("#roundtree")!;
 
     const styleString = div.parentElement!.querySelector("style")!.outerHTML.replace(/[\r\n]/g, "");
-    const tmp = treeHTML.outerHTML.match(/^([^\>]+\>)(.+)$/);
+    const tmp = treeHTML.outerHTML.match(/^([^>]+>)(.+)$/);
     const sourceString = tmp![1] + styleString + tmp![2];
     const w = parseInt(d3.select(treeHTML).style("width"));
     const h = parseInt(d3.select(treeHTML).style("height"));
@@ -402,7 +402,7 @@ const renderD3 = (
     if (format === "svg") {
       // SVG
       filename += ".svg";
-      let blobObject = new Blob([sourceString], {
+      const blobObject = new Blob([sourceString], {
         type: "data:image/svg+xml;base64",
       });
       url = window.URL.createObjectURL(blobObject);

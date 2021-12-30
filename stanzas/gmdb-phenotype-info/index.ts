@@ -1,6 +1,6 @@
-import { TemplateBase } from "../../utils/types";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
 import Stanza from "togostanza/stanza";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
+import { TemplateBase } from "../../utils/types";
 
 export default class GmdbPhenotypeInfo extends Stanza<StanzaParameters> {
   async render() {

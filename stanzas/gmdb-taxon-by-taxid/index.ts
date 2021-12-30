@@ -1,5 +1,6 @@
+import pluralize from "pluralize";
+import Stanza from "togostanza/stanza";
 import { getData } from "../../utils/get-data";
-import { API_GROWTH_MEDIUM } from "../../utils/variables";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import {
   capitalizeFirstLetter,
@@ -8,9 +9,8 @@ import {
   unescapeJsonString,
 } from "../../utils/string";
 import { getNextTaxon, TAXON_RANK } from "../../utils/taxon";
-import pluralize from "pluralize";
-import Stanza from "togostanza/stanza";
 import { ApiResponse } from "../../utils/types";
+import { API_GROWTH_MEDIUM } from "../../utils/variables";
 
 export default class gmdbTaxonByTaxid extends Stanza<StanzaParameters> {
   async render() {
@@ -106,7 +106,7 @@ const makeSuccessData = (body: ApiBody): TemplateParameters => {
   };
 };
 
-const parseRank = (str: string): string => str?.split("/").pop()!;
+const parseRank = (str: string): string => str!.split("/").pop()!;
 
 const makeLineageLink = (id: string, rank: TAXON_RANK): string =>
   rank === TAXON_RANK._9_SPECIES ? `/organism/${id}` : `/taxon/${id}`;
