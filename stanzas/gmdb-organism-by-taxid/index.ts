@@ -1,4 +1,5 @@
 import Stanza from "togostanza/stanza";
+import { Optional } from "yohak-tools";
 import { getData } from "../../utils/get-data";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { capitalizeFirstLetter, unescapeJsonString } from "../../utils/string";
@@ -68,7 +69,7 @@ type StanzaParameters = {
 type TemplateParameters = {
   taxid: string;
   scientific_name: string;
-  authority_name: string;
+  authority_name: Optional<string>;
   lineage: Lineage[];
   type_material: TypeMaterial[];
   other_type_material: { key: string; labels: string[] }[];
@@ -89,7 +90,7 @@ type ApiBody = {
 };
 
 type Lineage = {
-  rank: string;
+  rank: Optional<string>;
   label: string;
   uri: string;
   taxid: string;

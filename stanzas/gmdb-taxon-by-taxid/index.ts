@@ -1,5 +1,6 @@
 import pluralize from "pluralize";
 import Stanza from "togostanza/stanza";
+import { Optional } from "yohak-tools";
 import { getData } from "../../utils/get-data";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import {
@@ -116,12 +117,12 @@ type StanzaParameters = {
 };
 
 type TemplateParameters = {
-  ncbiUrl: string;
-  togoGenomeUrl: string;
+  ncbiUrl: Optional<string>;
+  togoGenomeUrl: Optional<string>;
   scientific_name: string;
   taxid: string;
   rank: string;
-  authority_name: string;
+  authority_name: Optional<string>;
   lineage: LineageParameter[];
   subClass:
     | {
@@ -136,7 +137,7 @@ type TemplateParameters = {
 
 type LineageParameter = {
   link: string;
-  rank: string;
+  rank: Optional<string>;
   label: string;
   current?: boolean;
 };
