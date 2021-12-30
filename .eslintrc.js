@@ -1,43 +1,44 @@
-{
-  "extends": [
+module.exports = {
+  extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
+    "plugin:storybook/recommended",
   ],
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "@emotion", "import"],
-  "parser": "@typescript-eslint/parser",
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true
+  plugins: ["@typescript-eslint", "react", "react-hooks", "@emotion", "import"],
+  parser: "@typescript-eslint/parser",
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
   },
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+  parserOptions: {
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  "rules": {
+  rules: {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": [
       "warn",
       {
-        "additionalHooks": "useRecoilCallback"
-      }
+        additionalHooks: "useRecoilCallback",
+      },
     ],
     "@typescript-eslint/ban-types": [
       "error",
       {
-        "types": {
-          "{}": false
+        types: {
+          "{}": false,
         },
-        "extendDefaults": true
-      }
+        extendDefaults: true,
+      },
     ],
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-empty-function": "off",
@@ -49,22 +50,13 @@
     "import/order": [
       "error",
       {
-        "groups": [
-          "internal",
-          "external",
-          "index",
-          "sibling",
-          "parent",
-          "builtin",
-          "object",
-          "type"
-        ],
+        groups: ["internal", "external", "index", "sibling", "parent", "builtin", "object", "type"],
         "newlines-between": "never",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ]
-  }
-}
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+      },
+    ],
+  },
+};
