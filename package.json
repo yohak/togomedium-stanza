@@ -32,6 +32,8 @@
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.16.5",
+    "@emotion/babel-plugin": "^11.7.2",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/eslint-plugin": "^11.7.0",
     "@storybook/addon-actions": "^6.4.9",
     "@storybook/addon-essentials": "^6.4.9",
