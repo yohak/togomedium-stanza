@@ -10,6 +10,7 @@
     "@mui/material": "^5.2.6",
     "@rollup/plugin-typescript": "^8.2.0",
     "d3": "^6.5.0",
+    "msw": "^0.36.3",
     "pluralize": "^8.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -22,7 +23,7 @@
     "stanza:server": "npx togostanza s",
     "stanza:build": "npx togostanza build",
     "stanza:generate": "npx togostanza g stanza",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook"
   },
   "engines": {
@@ -53,10 +54,14 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.5.5",
     "jest": "^26.6.3",
+    "msw-storybook-addon": "^1.5.0",
     "prettier": "^2.2.1",
     "rollup-plugin-typescript2": "^0.31.1",
     "ts-jest": "^26.5.1",
     "tsc-watch": "^4.2.9",
     "typescript": "^4.2.2"
+  },
+  "msw": {
+    "workerDirectory": "stanzas"
   }
 }

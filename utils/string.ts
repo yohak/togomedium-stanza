@@ -26,3 +26,7 @@ export const makeNcbiOrganismLink = (taxid: Optional<string>): Optional<string> 
   }
   return `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=${taxid}`;
 };
+
+export const stringToArray = (str: string): string[] => {
+  return str.split(",").map((str) => str.trim());
+};
