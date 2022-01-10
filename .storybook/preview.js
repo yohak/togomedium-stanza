@@ -1,4 +1,5 @@
 import { initialize, mswDecorator } from "msw-storybook-addon";
+import { RecoilRoot } from "recoil";
 
 initialize();
 export const decorators = [mswDecorator];

@@ -1,5 +1,6 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
+import { RecoilRoot } from "recoil";
 import Stanza from "togostanza/stanza";
 import App from "./App";
 import { EmotionCacheProvider } from "../../components/EmotionCacheProvider";
@@ -19,9 +20,11 @@ export default class HelloReact extends Stanza<StanzaParameters> {
     const gmids = stringToArray(this.params.gm_ids);
     ReactDOM.render(
       <StrictMode>
-        <EmotionCacheProvider>
-          <App {...{ gmids }} />
-        </EmotionCacheProvider>
+        <RecoilRoot>
+          <EmotionCacheProvider>
+            <App {...{ gmids }} />
+          </EmotionCacheProvider>
+        </RecoilRoot>
       </StrictMode>,
       main
     );
