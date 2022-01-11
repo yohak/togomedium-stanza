@@ -2,7 +2,14 @@ import { initialize, mswDecorator } from "msw-storybook-addon";
 import { RecoilRoot } from "recoil";
 
 initialize();
-export const decorators = [mswDecorator];
+export const decorators = [
+  mswDecorator,
+  (Story) => (
+    <RecoilRoot>
+      <Story />
+    </RecoilRoot>
+  ),
+];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

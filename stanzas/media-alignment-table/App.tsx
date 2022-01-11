@@ -6,17 +6,12 @@ export type AppProps = {
 };
 
 const App = ({ gmids }: AppProps) => {
-  const aaaa = useIsMediaExpendedState();
   useEffect(() => {
     fetch("http://growthmedium.org/sparqlist/api/gmdb_media_alignment_by_gmids", {
       method: "POST",
     }).then((r) => r.json().then((r) => console.log(r)));
   }, [gmids]);
-  return (
-    <div>
-      {gmids.map((str) => str)} {aaaa ? "true" : "false"}
-    </div>
-  );
+  return <div>{gmids.map((str) => str)}</div>;
 };
 
 export default App;

@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { AlignmentCell } from "../../../stanzas/media-alignment-table/components/AlignmentCell";
+import { AlignmentCell } from "./AlignmentCell";
 
 export default {
   title: "AlignmentCell",

@@ -1,9 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { rest } from "msw";
-import { FC, useEffect } from "react";
-import { RecoilRoot } from "recoil";
-import App from "../../../stanzas/media-alignment-table/App";
-import { useIsMediaExpandedMutators } from "../../../stanzas/media-alignment-table/states/isMediaExpanded";
+import App from "./App";
 
 export default {
   title: "Media AlignmentTable",
@@ -31,19 +28,19 @@ Result1.parameters = {
   },
 };
 
-Result1.decorators = [
-  (Story) => (
-    <RecoilRoot>
-      <Story />
-      <RecoilMutators isMediaExpanded={false} />
-    </RecoilRoot>
-  ),
-];
-
-const RecoilMutators: FC<{ isMediaExpanded: boolean }> = ({ isMediaExpanded }) => {
-  const { setIsMediaExpanded } = useIsMediaExpandedMutators();
-  useEffect(() => {
-    setIsMediaExpanded(isMediaExpanded);
-  }, []);
-  return <div />;
-};
+// Result1.decorators = [
+//   (Story) => (
+//     <RecoilRoot>
+//       <Story />
+//       <RecoilMutators isMediaExpanded={false} />
+//     </RecoilRoot>
+//   ),
+// ];
+//
+// const RecoilMutators: FC<{ isMediaExpanded: boolean }> = ({ isMediaExpanded }) => {
+//   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
+//   useEffect(() => {
+//     setIsMediaExpanded(isMediaExpanded);
+//   }, []);
+//   return <div />;
+// };

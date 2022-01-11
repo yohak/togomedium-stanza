@@ -13,29 +13,38 @@ export const InfoCell: FC<Props> = (props) => {
   return props.expanded ? <Expanded {...props} /> : <Compact {...props} />;
 };
 
-const Compact: FC<Props> = ({ info }) => {
+const Compact: FC<Props> = ({ info, linkBase }) => {
   return (
-    <div css={[wrapper, { width: 120 }]}>
-      {info.map((r) => (
-        <div key={r.id}>
-          <Tooltip title={r.label} placement={"top"} arrow>
-            <a href="">{r.id}</a>
-          </Tooltip>
-        </div>
-      ))}
+    <div css={wrapper} className="compact">
+      <div className="inner">
+        {info.map((item, index) => (
+          <div key={item.id} className="text">
+            <Tooltip title={item.label} placement={"top"} arrow>
+              <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
+                {item.id}
+              </a>
+            </Tooltip>
+            {index < info.length - 1 && ","}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-const Expanded: FC<Props> = ({ info }) => {
+const Expanded: FC<Props> = ({ info, linkBase }) => {
   return (
-    <div css={[wrapper, { width: 240 }]}>
-      {info.map((r) => (
-        <div key={r.id}>
-          <a href="">{r.id}</a>
-          <span>{r.label}</span>
-        </div>
-      ))}
+    <div css={wrapper} className="expanded">
+      <div className="inner">
+        {info.map((item) => (
+          <div key={item.id} className="text">
+            <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
+              {item.id}
+            </a>
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -46,15 +55,28 @@ const wrapper = css`
   background-color: ${COLOR_WHITE};
   box-sizing: border-box;
   padding: ${SIZE1}px;
+  display: table-cell;
+  max-width: 200px;
+  min-width: 120px;
   a {
     color: ${COLOR_PRIMARY};
     text-decoration: none;
   }
-  & > div {
-    display: flex;
-    flex-direction: column;
-    + div {
-      margin-top: ${SIZE1}px;
+  &.compact {
+    .inner {
+      display: flex;
+    }
+    .text {
+      margin-right: ${SIZE1}px;
+    }
+  }
+  &.expanded {
+    .text {
+      display: flex;
+      flex-direction: column;
+      + .text {
+        margin-top: ${SIZE1}px;
+      }
     }
   }
 `;
