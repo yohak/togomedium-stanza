@@ -27,10 +27,10 @@ const wrapper = css`
   box-sizing: border-box;
   background-color: ${COLOR_WHITE};
   padding: ${SIZE1}px;
-  display: table-cell;
+  display: flex;
   width: fit-content;
-  vertical-align: middle;
-  flex-grow: 1;
+  align-items: center;
+  flex-grow: 0;
   .icon {
     display: flex;
     width: 24px;

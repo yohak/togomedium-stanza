@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { Slider, Tooltip } from "@mui/material";
 import React, { FC } from "react";
 import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN, SIZE1 } from "../../../components/styles";
+import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 
 type Props = {
   info: { id: string; label: string }[];
@@ -55,9 +56,8 @@ const wrapper = css`
   background-color: ${COLOR_WHITE};
   box-sizing: border-box;
   padding: ${SIZE1}px;
-  display: table-cell;
-  max-width: 200px;
-  min-width: 120px;
+  display: block;
+  min-height: 40px;
   .inner {
     padding-top: 4px;
   }
@@ -66,6 +66,7 @@ const wrapper = css`
     text-decoration: none;
   }
   &.compact {
+    width: ${WIDTH_COMPACT};
     .inner {
       display: flex;
     }
@@ -74,7 +75,7 @@ const wrapper = css`
     }
   }
   &.expanded {
-    min-width: 180px;
+    width: ${WIDTH_EXPANDED};
     .text {
       display: flex;
       flex-direction: column;

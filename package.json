@@ -7,6 +7,7 @@
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.6",
     "@rollup/plugin-typescript": "^8.2.0",
     "d3": "^6.5.0",

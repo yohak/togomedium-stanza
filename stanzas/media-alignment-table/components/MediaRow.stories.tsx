@@ -22,8 +22,7 @@ export default {
 } as ComponentMeta<typeof MediaRow>;
 
 const Template: ComponentStory<typeof MediaRow> = (args) => (
-  <div style={{ display: "table", borderSpacing: 1, backgroundColor: "black" }}>
-    <MediaRow {...args} />
+  <div style={{ display: "flex", backgroundColor: "black", flexDirection: "column", gap: 1 }}>
     <MediaRow {...args} />
   </div>
 );

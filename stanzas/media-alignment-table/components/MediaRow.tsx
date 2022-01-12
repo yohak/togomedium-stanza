@@ -34,12 +34,11 @@ export const MediaRow: FC<Props> = ({
 };
 
 const wrapper = css`
-  display: table-row;
+  display: flex;
   gap: 1px;
 `;
 
 const spacer = css`
-  display: table-cell;
   background-color: ${COLOR_WHITE};
-  width: 100%;
+  flex-grow: 1;
 `;
