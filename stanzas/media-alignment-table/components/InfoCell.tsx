@@ -55,7 +55,7 @@ const wrapper = css`
   font-size: 14px;
   background-color: ${COLOR_WHITE};
   box-sizing: border-box;
-  padding: ${SIZE1}px;
+  padding: ${SIZE1};
   display: block;
   min-height: 40px;
   .inner {
@@ -71,7 +71,7 @@ const wrapper = css`
       display: flex;
     }
     .text {
-      margin-right: ${SIZE1}px;
+      margin-right: ${SIZE1};
     }
   }
   &.expanded {
@@ -80,7 +80,7 @@ const wrapper = css`
       display: flex;
       flex-direction: column;
       + .text {
-        margin-top: ${SIZE1}px;
+        margin-top: ${SIZE1};
       }
     }
   }

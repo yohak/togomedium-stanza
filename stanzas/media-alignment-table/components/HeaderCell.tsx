@@ -1,13 +1,7 @@
 import { css } from "@emotion/react";
-import { AddBoxOutlined, IndeterminateCheckBoxOutlined } from "@mui/icons-material";
 import React, { FC } from "react";
-import {
-  COLOR_GRAY700,
-  COLOR_WHITE,
-  FONT_DEFAULT,
-  FONT_EN,
-  SIZE1,
-} from "../../../components/styles";
+import { IconCompact, IconExpand } from "../../../components/icons";
+import { COLOR_GRAY700, COLOR_WHITE, FONT_DEFAULT, SIZE1 } from "../../../components/styles";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 
 type Props = {
@@ -21,9 +15,9 @@ export const HeaderCell: FC<Props> = ({ label, onClickIcon, isExpanded }) => {
     <div css={wrapper} className={isExpanded ? "expanded" : "compact"}>
       <span>{label}</span>
       {isExpanded ? (
-        <IndeterminateCheckBoxOutlined css={icon} onClick={onClickIcon} />
+        <IconExpand css={icon} onClick={onClickIcon} />
       ) : (
-        <AddBoxOutlined css={icon} onClick={onClickIcon} />
+        <IconCompact css={icon} onClick={onClickIcon} />
       )}
     </div>
   );
@@ -35,7 +29,7 @@ const wrapper = css`
   background-color: ${COLOR_WHITE};
   align-items: center;
   justify-content: space-between;
-  padding: ${SIZE1}px;
+  padding: ${SIZE1};
   box-sizing: border-box;
   &.expanded {
     width: ${WIDTH_EXPANDED}px;

@@ -26,7 +26,7 @@ export const AlignmentCell: FC<Props> = ({ state, label }) => {
 const wrapper = css`
   box-sizing: border-box;
   background-color: ${COLOR_WHITE};
-  padding: ${SIZE1}px;
+  padding: ${SIZE1};
   display: flex;
   width: fit-content;
   align-items: center;

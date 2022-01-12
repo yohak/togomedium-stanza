@@ -47,6 +47,6 @@ const components = css`
   background-color: ${COLOR_WHITE};
   display: flex;
   align-items: center;
-  padding: ${SIZE1}px;
+  padding: ${SIZE1};
   flex-grow: 1;
 `;
