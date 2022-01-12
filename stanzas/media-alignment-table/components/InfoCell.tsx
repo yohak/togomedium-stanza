@@ -66,7 +66,7 @@ const wrapper = css`
     text-decoration: none;
   }
   &.compact {
-    width: ${WIDTH_COMPACT};
+    width: ${WIDTH_COMPACT}px;
     .inner {
       display: flex;
     }
@@ -75,7 +75,7 @@ const wrapper = css`
     }
   }
   &.expanded {
-    width: ${WIDTH_EXPANDED};
+    width: ${WIDTH_EXPANDED}px;
     .text {
       display: flex;
       flex-direction: column;

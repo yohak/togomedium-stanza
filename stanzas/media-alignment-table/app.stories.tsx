@@ -3,7 +3,7 @@ import { rest } from "msw";
 import App from "./App";
 
 export default {
-  title: "Media AlignmentTable",
+  title: "Stanza",
   component: App,
   argTypes: { gmids: ["aaa"] },
 } as ComponentMeta<typeof App>;

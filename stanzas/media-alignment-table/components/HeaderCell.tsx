@@ -36,6 +36,7 @@ const wrapper = css`
   align-items: center;
   justify-content: space-between;
   padding: ${SIZE1}px;
+  box-sizing: border-box;
   &.expanded {
     width: ${WIDTH_EXPANDED}px;
   }
