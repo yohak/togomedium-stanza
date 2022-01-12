@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
+import { FooterRow } from "./FooterRow";
 import { HeaderRow } from "./HeaderRow";
 import { MediaRow } from "./MediaRow";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
@@ -10,10 +11,45 @@ type Props = {};
 export const AlignmentTable: FC<Props> = () => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
+  const onClickFooterItem = (id: string) => {
+    console.log(id);
+  };
   return (
     <div css={wrapper}>
       <HeaderRow />
       <MediaRow {...{ ...rowProps, isMediaExpanded, isOrganismsExpanded }} />
+      <FooterRow
+        {...{
+          components: [
+            {
+              onClickFooterItem,
+              label: "DistilledWater",
+              id: "this is id 1",
+              isOpen: false,
+              level: 0,
+              hasChildren: false,
+            },
+            {
+              onClickFooterItem,
+              label: "Ager",
+              id: "this is id 2",
+              isOpen: false,
+              level: 0,
+              hasChildren: false,
+            },
+            {
+              onClickFooterItem,
+              label: "Extract",
+              id: "this is id 3",
+              isOpen: false,
+              level: 0,
+              hasChildren: false,
+            },
+          ],
+          isMediaExpanded,
+          isOrganismsExpanded,
+        }}
+      />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { IconCompact, IconExpand } from "../../../components/icons";
-import { COLOR_WHITE, FONT_DEFAULT, SIZE1, SIZE2 } from "../../../components/styles";
+import { COLOR_WHITE, FONT_DEFAULT, SIZE1, SIZE2, SIZE4 } from "../../../components/styles";
 import { WIDTH_ALIGNMENT_CELL } from "../consts";
 
 type Props = {
@@ -9,10 +9,23 @@ type Props = {
   level: number;
   hasChildren: boolean;
   isOpen: boolean;
+  id: string;
+  onClickFooterItem: (id: string) => void;
 };
 
-export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen }) => {
-  const Icon = isOpen ? <IconCompact css={icon} /> : <IconExpand css={icon} />;
+export const FooterCell: FC<Props> = ({
+  label,
+  level,
+  hasChildren,
+  isOpen,
+  id,
+  onClickFooterItem,
+}) => {
+  const Icon = isOpen ? (
+    <IconCompact css={icon} onClick={() => onClickFooterItem(id)} />
+  ) : (
+    <IconExpand css={icon} onClick={() => onClickFooterItem(id)} />
+  );
 
   return (
     <div css={wrapper}>
@@ -35,6 +48,7 @@ const wrapper = css`
   flex-direction: column;
   align-items: center;
   padding: ${SIZE1};
+  padding-bottom: ${SIZE4};
   & > .text {
     writing-mode: vertical-rl;
   }
@@ -48,4 +62,5 @@ const wrapper = css`
 
 const icon = css`
   margin-top: ${SIZE1};
+  cursor: pointer;
 `;

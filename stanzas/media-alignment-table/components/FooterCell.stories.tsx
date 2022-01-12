@@ -14,6 +14,8 @@ Level0.args = {
   level: 0,
   hasChildren: false,
   isOpen: false,
+  id: "id",
+  onClickFooterItem: () => null,
 };
 
 export const Level1 = Template.bind({});
@@ -22,4 +24,6 @@ Level1.args = {
   level: 1,
   hasChildren: true,
   isOpen: true,
+  id: "id",
+  onClickFooterItem: () => null,
 };

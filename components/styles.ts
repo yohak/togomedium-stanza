@@ -8,6 +8,9 @@ export const COLOR_GRAY700 = "#374151";
 export const SIZE_BASE = 8;
 export const SIZE1 = `${SIZE_BASE}px`;
 export const SIZE2 = `${SIZE_BASE * 2}px`;
+export const SIZE3 = `${SIZE_BASE * 3}px`;
+export const SIZE4 = `${SIZE_BASE * 4}px`;
+export const SIZE5 = `${SIZE_BASE * 5}px`;
 
 export const FONT_DEFAULT = css`
   font-family: ${FONT_EN};

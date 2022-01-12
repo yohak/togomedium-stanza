@@ -15,9 +15,9 @@ export const HeaderCell: FC<Props> = ({ label, onClickIcon, isExpanded }) => {
     <div css={wrapper} className={isExpanded ? "expanded" : "compact"}>
       <span>{label}</span>
       {isExpanded ? (
-        <IconExpand css={icon} onClick={onClickIcon} />
-      ) : (
         <IconCompact css={icon} onClick={onClickIcon} />
+      ) : (
+        <IconExpand css={icon} onClick={onClickIcon} />
       )}
     </div>
   );
@@ -32,10 +32,10 @@ const wrapper = css`
   padding: ${SIZE1};
   box-sizing: border-box;
   &.expanded {
-    width: ${WIDTH_EXPANDED}px;
+    width: ${WIDTH_EXPANDED};
   }
   &.compact {
-    width: ${WIDTH_COMPACT}px;
+    width: ${WIDTH_COMPACT};
   }
 `;
 
