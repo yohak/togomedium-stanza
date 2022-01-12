@@ -2,7 +2,7 @@
 
 /dist/
 /node_modules/
-/public/
+/build/
 
 stanzas/**/*.js
 stanzas/**/*.js.map

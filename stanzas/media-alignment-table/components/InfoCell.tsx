@@ -58,6 +58,9 @@ const wrapper = css`
   display: table-cell;
   max-width: 200px;
   min-width: 120px;
+  .inner {
+    padding-top: 4px;
+  }
   a {
     color: ${COLOR_PRIMARY};
     text-decoration: none;
@@ -71,6 +74,7 @@ const wrapper = css`
     }
   }
   &.expanded {
+    min-width: 180px;
     .text {
       display: flex;
       flex-direction: column;

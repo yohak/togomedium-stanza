@@ -22,7 +22,8 @@ export default {
 } as ComponentMeta<typeof MediaRow>;
 
 const Template: ComponentStory<typeof MediaRow> = (args) => (
-  <div style={{ display: "table", borderSpacing: 1 }}>
+  <div style={{ display: "table", borderSpacing: 1, backgroundColor: "black" }}>
+    <MediaRow {...args} />
     <MediaRow {...args} />
   </div>
 );
@@ -36,5 +37,21 @@ Type1.args = {
     { id: "384676", label: "Pseudomonas entomophila L48" },
     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
   ],
-  components: [],
+  components: [
+    {
+      state: "available",
+      id: "aaa",
+      label: "hogehoge",
+    },
+    {
+      state: "grouped",
+      id: "bbb",
+      label: "hogehoge",
+    },
+    {
+      state: "none",
+      id: "ccc",
+      label: "hogehoge",
+    },
+  ],
 };

@@ -25,7 +25,7 @@
     "stanza:build": "npx togostanza build",
     "stanza:generate": "npx togostanza g stanza",
     "storybook": "npx msw init public/ --save && start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -o public && npx msw init public/ --save"
+    "build-storybook": "build-storybook -o build && npx msw init build/ --save"
   },
   "engines": {
     "node": ">=14"

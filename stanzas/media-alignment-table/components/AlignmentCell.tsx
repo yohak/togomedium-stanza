@@ -3,9 +3,12 @@ import { Tooltip } from "@mui/material";
 import React, { FC } from "react";
 import { COLOR_GRAY, COLOR_PRIMARY, COLOR_WHITE, SIZE1 } from "../../../components/styles";
 
+export type AlignmentCellState = "grouped" | "available" | "none";
+
 type Props = {
-  state: "grouped" | "available" | "none";
+  state: AlignmentCellState;
   label: string;
+  id: string;
 };
 
 export const AlignmentCell: FC<Props> = ({ state, label }) => {
@@ -24,10 +27,9 @@ const wrapper = css`
   box-sizing: border-box;
   background-color: ${COLOR_WHITE};
   padding: ${SIZE1}px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: table-cell;
   width: fit-content;
+  vertical-align: middle;
   flex-grow: 1;
   .icon {
     display: flex;
