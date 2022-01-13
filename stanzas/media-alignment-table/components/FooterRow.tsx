@@ -24,9 +24,13 @@ export const FooterRow: FC<Props> = ({ components, isMediaExpanded, isOrganismsE
 };
 
 const wrapper = css`
-  width: 100%;
   display: flex;
   gap: 1px;
+  width: 100%;
+  & > * {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 `;
 
 const infoSpacer = css`
@@ -41,5 +45,5 @@ const infoSpacer = css`
 
 const componentSpacer = css`
   background-color: ${COLOR_WHITE};
-  flex-grow: 1;
+  flex-grow: 1 !important;
 `;

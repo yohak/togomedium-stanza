@@ -36,9 +36,14 @@ export const MediaRow: FC<Props> = ({
 const wrapper = css`
   display: flex;
   gap: 1px;
+  width: 100%;
+  & > * {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 `;
 
 const spacer = css`
   background-color: ${COLOR_WHITE};
-  flex-grow: 1;
+  flex-grow: 1 !important;
 `;

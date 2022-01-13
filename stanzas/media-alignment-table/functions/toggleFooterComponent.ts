@@ -1,6 +1,6 @@
 import { findBranchFromTree } from "./findBranchFromTree";
 import { ComponentTree } from "../types";
-const clone = require("rfdc")();
+
 export const toggleFooterComponent = (
   id: string,
   data: ComponentTree
@@ -13,4 +13,8 @@ export const toggleFooterComponent = (
   } else {
     return undefined;
   }
+};
+
+const clone = <T>(obj: T): T => {
+  return JSON.parse(JSON.stringify(obj));
 };

@@ -4,6 +4,7 @@ import { FooterRow } from "./FooterRow";
 import { HeaderRow } from "./HeaderRow";
 import { MediaRow } from "./MediaRow";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
+import { COLOR_GRAY_LINE } from "../../../components/styles";
 import { makeComponentTree } from "../functions/makeComponentBranch";
 import { makerFooterData } from "../functions/makerFooterData";
 import { toggleFooterComponent } from "../functions/toggleFooterComponent";
@@ -55,4 +56,6 @@ const wrapper = css`
   display: flex;
   gap: 1px;
   flex-direction: column;
+  background-color: ${COLOR_GRAY_LINE};
+  padding: 1px;
 `;

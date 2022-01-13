@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { rest } from "msw";
 import App from "./App";
+import { mediaAlignmentTableResponse1 } from "../../api/media-alignment-table/response1";
 
 export default {
   title: "Stanza",
@@ -21,7 +22,7 @@ Result1.parameters = {
       rest.post(
         "http://growthmedium.org/sparqlist/api/gmdb_media_alignment_by_gmids",
         (req, res, ctx) => {
-          return res(ctx.status(200), ctx.json({ foo: {} }));
+          return res(ctx.status(200), ctx.json(mediaAlignmentTableResponse1));
         }
       ),
     ],

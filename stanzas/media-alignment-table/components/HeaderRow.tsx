@@ -42,6 +42,10 @@ const wrapper = css`
   display: flex;
   gap: 1px;
   width: 100%;
+  & > * {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 `;
 
 const components = css`
@@ -50,5 +54,5 @@ const components = css`
   display: flex;
   align-items: center;
   padding: ${SIZE1};
-  flex-grow: 1;
+  flex-grow: 1 !important;
 `;
