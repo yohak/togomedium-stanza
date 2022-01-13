@@ -60,9 +60,21 @@ export const mediaAlignmentTableResponse1: MediaAlignmentTableResponse = {
       function: "Solidifying component",
     },
     {
+      gmoid: "GMO_000011",
+      name: "Extract",
+      parent: null,
+      function: null,
+    },
+    {
       gmoid: "GMO_001074",
       name: "Meat extract",
-      parent: null,
+      parent: "GMO_000011",
+      function: null,
+    },
+    {
+      gmoid: "GMO_001830",
+      name: "Liver extract",
+      parent: "GMO_001074",
       function: null,
     },
     {
@@ -74,7 +86,7 @@ export const mediaAlignmentTableResponse1: MediaAlignmentTableResponse = {
     {
       gmoid: "GMO_001003",
       name: "Yeast extract",
-      parent: null,
+      parent: "GMO_000011",
       function: "Nutrient source",
     },
     {
@@ -86,7 +98,7 @@ export const mediaAlignmentTableResponse1: MediaAlignmentTableResponse = {
     {
       gmoid: "GMO_001059",
       name: "Malt extract",
-      parent: null,
+      parent: "GMO_000011",
       function: null,
     },
     {
