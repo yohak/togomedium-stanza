@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AlignmentTable } from "./AlignmentTable";
+import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
 
 export default {
   title: "AlignmentTable",
@@ -9,4 +10,6 @@ export default {
 const Template: ComponentStory<typeof AlignmentTable> = (args) => <AlignmentTable {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  data: mediaAlignmentTableResponse1,
+};

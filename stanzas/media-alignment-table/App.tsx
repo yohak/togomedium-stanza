@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useIsMediaExpendedState } from "./states/isMediaExpanded";
 
 export type AppProps = {
   gmids: string[];

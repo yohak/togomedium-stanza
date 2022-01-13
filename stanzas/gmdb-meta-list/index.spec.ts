@@ -13,9 +13,7 @@ describe("separateURL", () => {
     ]);
   });
   test("it should work even if no query found", () => {
-    const result = separateURL(
-      "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword"
-    );
+    const result = separateURL("http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword");
     expect(result).toEqual([
       "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword",
       "",

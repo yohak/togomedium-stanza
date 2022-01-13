@@ -1,11 +1,10 @@
 import { __TEST__ } from "./index";
+
 const getSrcLabel = __TEST__.getSrcLabel;
 
 describe("getSrcLabel", () => {
   it("should work with JCM", () => {
-    const result = getSrcLabel(
-      "https://www.jcm.riken.jp/cgi-bin/jcm/jcm_grmd?GRMD=15"
-    );
+    const result = getSrcLabel("https://www.jcm.riken.jp/cgi-bin/jcm/jcm_grmd?GRMD=15");
     expect(result).toBe("JCM");
   });
   it("should work with NBRC", () => {
@@ -15,9 +14,7 @@ describe("getSrcLabel", () => {
     expect(result).toBe("NBRC");
   });
   it("should work with DSMZ", () => {
-    const result = getSrcLabel(
-      "https://www.dsmz.de/microorganisms/medium/pdf/DSMZ_Medium756a.pdf"
-    );
+    const result = getSrcLabel("https://www.dsmz.de/microorganisms/medium/pdf/DSMZ_Medium756a.pdf");
     expect(result).toBe("DSMZ");
   });
   it("should work with ATCC", () => {

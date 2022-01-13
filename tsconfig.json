@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es6",
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "declaration": false,
@@ -24,8 +24,8 @@
       "togostanza/stanza": ["definitions/togostanza/stanza/index.d.ts"]
     },
     "strict": true,
-    "types": ["@emotion/react"]
+    "types": ["@emotion/react","jest"]
   },
   "compileOnSave": false,
-  "exclude": ["node_modules", "./**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

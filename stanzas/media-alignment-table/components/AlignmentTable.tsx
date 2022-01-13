@@ -1,23 +1,37 @@
 import { css } from "@emotion/react";
-import React, { ComponentProps, FC } from "react";
+import React, { ComponentProps, FC, useEffect, useState } from "react";
 import { FooterRow } from "./FooterRow";
 import { HeaderRow } from "./HeaderRow";
 import { MediaRow } from "./MediaRow";
+import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
+import { makeComponentTree } from "../functions/makeComponentBranch.spec";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
+import { ComponentBranch, ComponentTree } from "../types";
 
-type Props = {};
+type Props = { data: MediaAlignmentTableResponse };
 
-export const AlignmentTable: FC<Props> = () => {
+export const AlignmentTable: FC<Props> = ({ data }) => {
+  const [rowProps, setRowProps] = useState<
+    Omit<ComponentProps<typeof MediaRow>, "isOrganismsExpanded" | "isMediaExpanded">[]
+  >([]);
+  const [componentTree, setComponentTree] = useState<ComponentTree>([]);
+  const [components, setComponents] = useState([]);
+
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   const onClickFooterItem = (id: string) => {
     console.log(id);
   };
+  useEffect(() => {
+    setComponentTree(makeComponentTree(data));
+  }, [data]);
   return (
     <div css={wrapper}>
-      <HeaderRow />
-      <MediaRow {...{ ...rowProps, isMediaExpanded, isOrganismsExpanded }} />
+      <HeaderRow {...{ isMediaExpanded, isOrganismsExpanded }} />
+      {rowProps.map((props) => (
+        <MediaRow {...{ ...props, isMediaExpanded, isOrganismsExpanded }} key={props.media.id} />
+      ))}
       <FooterRow
         {...{
           components: [
@@ -60,29 +74,29 @@ const wrapper = css`
   flex-direction: column;
 `;
 
-const rowProps: ComponentProps<typeof MediaRow> = {
-  isMediaExpanded: false,
-  isOrganismsExpanded: false,
-  media: { id: "HM_D00001a", label: "REACTIVATION WITH LIQUID MEDIUM 1" },
-  organisms: [
-    { id: "384676", label: "Pseudomonas entomophila L48" },
-    { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
-  ],
-  components: [
-    {
-      state: "available",
-      id: "aaa",
-      label: "hogehoge",
-    },
-    {
-      state: "grouped",
-      id: "bbb",
-      label: "hogehoge",
-    },
-    {
-      state: "none",
-      id: "ccc",
-      label: "hogehoge",
-    },
-  ],
-};
+// const rowProps: ComponentProps<typeof MediaRow> = {
+//   isMediaExpanded: false,
+//   isOrganismsExpanded: false,
+//   media: { id: "HM_D00001a", label: "REACTIVATION WITH LIQUID MEDIUM 1" },
+//   organisms: [
+//     { id: "384676", label: "Pseudomonas entomophila L48" },
+//     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
+//   ],
+//   components: [
+//     {
+//       state: "available",
+//       id: "aaa",
+//       label: "hogehoge",
+//     },
+//     {
+//       state: "grouped",
+//       id: "bbb",
+//       label: "hogehoge",
+//     },
+//     {
+//       state: "none",
+//       id: "ccc",
+//       label: "hogehoge",
+//     },
+//   ],
+// };

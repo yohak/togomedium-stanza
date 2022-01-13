@@ -205,7 +205,7 @@ const makeOptions = (params: SimpleObject, query: string): RequestInit => {
   };
 };
 
-const filterQuery = (query: string): string => {
+const filterQuery = (query: string | null): string => {
   if (!query) {
     return "";
   }

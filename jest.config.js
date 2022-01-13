@@ -1,17 +1,15 @@
 module.exports = {
-  moduleFileExtensions: [
-    "ts",
-    "js"
-  ],
+  moduleFileExtensions: ["ts", "js"],
   transform: {
-    "^.+\\.ts$": "ts-jest"
+    "^.+\\.ts$": "ts-jest",
   },
+  preset: "ts-jest/presets/default-esm",
   globals: {
     "ts-jest": {
-      tsconfig: "tsconfig.json"
-    }
+      useESM: true,
+      tsconfig: "tsconfig.spec.json",
+    },
   },
-  testMatch: [
-    "**/**/*.spec.ts"
-  ]
-}
+  transformIgnorePatterns: ["/node_modules/(?!togostanza/stanza)"],
+  testMatch: ["**/**/*.spec.ts"],
+};

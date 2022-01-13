@@ -2,34 +2,36 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { HeaderCell } from "./HeaderCell";
 import { COLOR_WHITE, FONT_DEFAULT, SIZE1 } from "../../../components/styles";
-import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
-import {
-  useIsOrganismsExpandedMutators,
-  useIsOrganismsExpendedState,
-} from "../states/isOrganismsExpanded";
+import { useIsMediaExpandedMutators } from "../states/isMediaExpanded";
+import { useIsOrganismsExpandedMutators } from "../states/isOrganismsExpanded";
 
-type Props = {};
+type Props = {
+  isMediaExpanded: boolean;
+  isOrganismsExpanded: boolean;
+};
 
-export const HeaderRow: FC<Props> = () => {
+export const HeaderRow: FC<Props> = ({ isMediaExpanded, isOrganismsExpanded }) => {
   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
   const { setIsOrganismsExpanded } = useIsOrganismsExpandedMutators();
-  const isMediaExpanded = useIsMediaExpendedState();
-  const isOrganismsExpanded = useIsOrganismsExpendedState();
 
-  const onClickMediaExpand = () => {
+  const onClickMediaExpandIcon = () => {
     setIsMediaExpanded(!isMediaExpanded);
   };
-  const onClickOrganismExpand = () => {
+  const onClickOrganismExpandIcon = () => {
     setIsOrganismsExpanded(!isOrganismsExpanded);
   };
 
   return (
     <div css={wrapper}>
-      <HeaderCell label={"Media"} isExpanded={isMediaExpanded} onClickIcon={onClickMediaExpand} />
+      <HeaderCell
+        label={"Media"}
+        isExpanded={isMediaExpanded}
+        onClickIcon={onClickMediaExpandIcon}
+      />
       <HeaderCell
         label={"Organisms"}
         isExpanded={isOrganismsExpanded}
-        onClickIcon={onClickOrganismExpand}
+        onClickIcon={onClickOrganismExpandIcon}
       />
       <div css={components}>Components</div>
     </div>

@@ -9,4 +9,7 @@ export default {
 const Template: ComponentStory<typeof HeaderRow> = (args) => <HeaderRow {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  isMediaExpanded: false,
+  isOrganismsExpanded: false,
+};
