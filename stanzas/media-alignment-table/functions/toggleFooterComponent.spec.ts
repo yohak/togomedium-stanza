@@ -1,6 +1,6 @@
 import { makeComponentTree } from "./makeComponentBranch";
-import { makeRawComponent } from "./makeComponentBranch.spec";
 import { toggleFooterComponent } from "./toggleFooterComponent";
+import { makeRawComponent } from "../../../utils/testing";
 import { ComponentTree } from "../types";
 
 describe("toggleFooterComponent", () => {

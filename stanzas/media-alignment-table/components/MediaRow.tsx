@@ -9,17 +9,17 @@ import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
 import { LabelInfo } from "../types";
 
 type Props = {
-  media: LabelInfo;
+  medium: LabelInfo;
   organisms: LabelInfo[];
   components: ComponentProps<typeof AlignmentCell>[];
 };
 
-export const MediaRow: FC<Props> = ({ media, organisms, components }) => {
+export const MediaRow: FC<Props> = ({ medium, organisms, components }) => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   return (
     <div css={wrapper}>
-      <InfoCell info={[media]} expanded={isMediaExpanded} linkBase={PATH_MEDIUM} />
+      <InfoCell info={[medium]} expanded={isMediaExpanded} linkBase={PATH_MEDIUM} />
       <InfoCell info={organisms} expanded={isOrganismsExpanded} linkBase={PATH_ORGANISM} />
       {components.map((component) => (
         <AlignmentCell {...component} key={component.id} />

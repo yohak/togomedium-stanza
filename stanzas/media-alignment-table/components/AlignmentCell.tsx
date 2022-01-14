@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import React, { FC } from "react";
+import { PATH_COMPONENT } from "../../../components/consts";
 import { COLOR_GRAY, COLOR_PRIMARY, COLOR_WHITE, SIZE1 } from "../../../components/styles";
 
 export type AlignmentCellState = "grouped" | "available" | "none";
@@ -11,13 +12,18 @@ type Props = {
   id: string;
 };
 
-export const AlignmentCell: FC<Props> = ({ state, label }) => {
+export const AlignmentCell: FC<Props> = ({ state, label, id }) => {
   return (
     <div css={wrapper}>
       <Tooltip title={label} placement={"top"} arrow>
-        <span className={`icon-${state} icon`}>
+        <a
+          href={`${PATH_COMPONENT}${id}`}
+          target="_blank"
+          className={`icon-${state} icon`}
+          rel="noreferrer"
+        >
           <span />
-        </span>
+        </a>
       </Tooltip>
     </div>
   );

@@ -3,9 +3,10 @@ import { Slider, Tooltip } from "@mui/material";
 import React, { FC } from "react";
 import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN, SIZE1 } from "../../../components/styles";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
+import { LabelInfo } from "../types";
 
 type Props = {
-  info: { id: string; label: string }[];
+  info: LabelInfo[];
   linkBase: string;
   expanded: boolean;
 };

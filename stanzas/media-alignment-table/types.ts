@@ -16,3 +16,5 @@ export type ComponentBranch = {
   func: string | null;
 };
 export type RawComponent = MediaAlignmentTableResponse["components"][0];
+export type RawMedium = MediaAlignmentTableResponse["media"][0];
+export type RawOrganism = MediaAlignmentTableResponse["organisms"][0];

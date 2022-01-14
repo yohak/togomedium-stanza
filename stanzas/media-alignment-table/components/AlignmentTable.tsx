@@ -5,32 +5,35 @@ import { HeaderRow } from "./HeaderRow";
 import { MediaRow } from "./MediaRow";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
 import { COLOR_GRAY_LINE } from "../../../components/styles";
+import { makeAlignmentData } from "../functions/makeAlignmentData";
 import { makeComponentTree } from "../functions/makeComponentBranch";
-import { makeFooterData } from "../functions/makeFooterData";
+import { makeFooterComponents } from "../functions/makeFooterComponents";
 import { useComponentTreeMutators, useComponentTreeState } from "../states/componentTree";
 
 type Props = { data: MediaAlignmentTableResponse };
-type RowProps = Omit<ComponentProps<typeof MediaRow>, "isOrganismsExpanded" | "isMediaExpanded">[];
-type FooterProps = ComponentProps<typeof FooterRow>["components"];
+type RowProps = ComponentProps<typeof MediaRow>[];
+type FooterProps = ComponentProps<typeof FooterRow>;
 
 export const AlignmentTable: FC<Props> = ({ data }) => {
   const [rowProps, setRowProps] = useState<RowProps>([]);
   const componentTree = useComponentTreeState();
   const { setComponentTree } = useComponentTreeMutators();
-  const [components, setComponents] = useState<FooterProps>([]);
+  const [footerProps, setFooterProps] = useState<FooterProps>({ components: [] });
   useEffect(() => {
     setComponentTree(makeComponentTree(data.components));
   }, [data]);
   useEffect(() => {
-    setComponents(makeFooterData(componentTree).map((item) => ({ ...item })));
+    const components = makeFooterComponents(componentTree);
+    setFooterProps({ components });
+    setRowProps(makeAlignmentData(data, components));
   }, [componentTree]);
   return (
     <div css={wrapper}>
       <HeaderRow />
       {rowProps.map((props) => (
-        <MediaRow {...{ ...props }} key={props.media.id} />
+        <MediaRow {...props} key={props.medium.id} />
       ))}
-      <FooterRow {...{ components }} />
+      <FooterRow {...footerProps} />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { makeComponentTree } from "./makeComponentBranch";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
+import { makeRawComponent } from "../../../utils/testing";
 import { RawComponent } from "../types";
 
 describe("makeComponentTree", () => {
@@ -65,13 +66,4 @@ const dataTemplate: MediaAlignmentTableResponse = {
   media: [],
   organisms: [],
   components: [],
-};
-
-export const makeRawComponent = (id: string, parent: string | null = null): RawComponent => {
-  return {
-    gmoid: id,
-    name: id,
-    parent,
-    function: null,
-  };
 };

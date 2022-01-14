@@ -1,6 +1,6 @@
 import { findBranchFromTree } from "./findBranchFromTree";
 import { makeComponentTree } from "./makeComponentBranch";
-import { makeRawComponent } from "./makeComponentBranch.spec";
+import { makeRawComponent } from "../../../utils/testing";
 import { ComponentTree } from "../types";
 
 describe("findBranchFromTree", () => {

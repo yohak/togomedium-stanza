@@ -35,7 +35,7 @@ export const Type1 = Template.bind({});
 Type1.args = {
   isMediaExpanded: false,
   isOrganismsExpanded: false,
-  media: { id: "HM_D00001a", label: "REACTIVATION WITH LIQUID MEDIUM 1" },
+  medium: { id: "HM_D00001a", label: "REACTIVATION WITH LIQUID MEDIUM 1" },
   organisms: [
     { id: "384676", label: "Pseudomonas entomophila L48" },
     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },

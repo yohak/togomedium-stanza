@@ -4,7 +4,7 @@ import { ComponentBranch, ComponentTree } from "../types";
 
 type Props = ComponentProps<typeof FooterCell>;
 
-export const makeFooterData = (data: ComponentTree): Props[] => {
+export const makeFooterComponents = (data: ComponentTree): Props[] => {
   const result: Props[] = [];
   data.forEach((item) => {
     addToCollection(item, result);
