@@ -8,6 +8,7 @@ import { COLOR_GRAY_LINE } from "../../../components/styles";
 import { makeComponentTree } from "../functions/makeComponentBranch";
 import { makerFooterData } from "../functions/makerFooterData";
 import { toggleFooterComponent } from "../functions/toggleFooterComponent";
+import { useComponentTreeMutators, useComponentTreeState } from "../states/componentTree";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
 import { ComponentBranch, ComponentTree } from "../types";
@@ -18,22 +19,16 @@ type FooterProps = ComponentProps<typeof FooterRow>["components"];
 
 export const AlignmentTable: FC<Props> = ({ data }) => {
   const [rowProps, setRowProps] = useState<RowProps>([]);
-  const [componentTree, setComponentTree] = useState<ComponentTree>([]);
+  const componentTree = useComponentTreeState();
+  const { setComponentTree } = useComponentTreeMutators();
   const [components, setComponents] = useState<FooterProps>([]);
-
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
-  const onClickFooterItem = (id: string) => {
-    const toggled = toggleFooterComponent(id, componentTree);
-    if (toggled) {
-      setComponentTree(toggled);
-    }
-  };
   useEffect(() => {
     setComponentTree(makeComponentTree(data.components));
   }, [data]);
   useEffect(() => {
-    setComponents(makerFooterData(componentTree).map((item) => ({ ...item, onClickFooterItem })));
+    setComponents(makerFooterData(componentTree).map((item) => ({ ...item })));
   }, [componentTree]);
   return (
     <div css={wrapper}>

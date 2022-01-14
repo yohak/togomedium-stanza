@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { IconCompact, IconExpand } from "../../../components/icons";
 import { COLOR_WHITE, FONT_DEFAULT, SIZE1, SIZE2, SIZE4 } from "../../../components/styles";
 import { WIDTH_ALIGNMENT_CELL } from "../consts";
+import { useComponentTreeMutators } from "../states/componentTree";
 
 type Props = {
   label: string;
@@ -10,17 +11,12 @@ type Props = {
   hasChildren: boolean;
   isOpen: boolean;
   id: string;
-  onClickFooterItem: (id: string) => void;
 };
 
-export const FooterCell: FC<Props> = ({
-  label,
-  level,
-  hasChildren,
-  isOpen,
-  id,
-  onClickFooterItem,
-}) => {
+export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id }) => {
+  const { toggleComponent } = useComponentTreeMutators();
+  const onClickFooterItem = (id: string) => toggleComponent(id);
+
   const Icon = isOpen ? (
     <IconCompact css={icon} onClick={() => onClickFooterItem(id)} />
   ) : (

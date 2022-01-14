@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 import { FooterCell } from "../components/FooterCell";
 import { ComponentBranch, ComponentTree } from "../types";
 
-type Props = Omit<ComponentProps<typeof FooterCell>, "onClickFooterItem">;
+type Props = ComponentProps<typeof FooterCell>;
 
 export const makerFooterData = (data: ComponentTree): Props[] => {
   const result: Props[] = [];
