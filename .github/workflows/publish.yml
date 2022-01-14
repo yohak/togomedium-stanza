@@ -3,7 +3,7 @@ name: Publish GitHub Pages
 on:
   push:
     branches:
-      - main
+      - staging
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
           node-version: '14'
 
       - run: npm ci
-      - run: npm run build
+      - run: npm run stanza:build
 
       - uses: peaceiris/actions-gh-pages@v3
         with:
