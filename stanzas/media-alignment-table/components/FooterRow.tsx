@@ -3,14 +3,16 @@ import React, { ComponentProps, FC } from "react";
 import { FooterCell } from "./FooterCell";
 import { COLOR_WHITE } from "../../../components/styles";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
+import { useIsMediaExpendedState } from "../states/isMediaExpanded";
+import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
 
 type Props = {
-  isMediaExpanded: boolean;
-  isOrganismsExpanded: boolean;
   components: ComponentProps<typeof FooterCell>[];
 };
 
-export const FooterRow: FC<Props> = ({ components, isMediaExpanded, isOrganismsExpanded }) => {
+export const FooterRow: FC<Props> = ({ components }) => {
+  const isMediaExpanded = useIsMediaExpendedState();
+  const isOrganismsExpanded = useIsOrganismsExpendedState();
   return (
     <div css={wrapper}>
       <div css={infoSpacer} className={isMediaExpanded ? "expand" : "compact"} />

@@ -1,12 +1,31 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ComponentProps, FC, useEffect } from "react";
 import { FooterRow } from "./FooterRow";
+import { useIsMediaExpandedMutators } from "../states/isMediaExpanded";
+import { useIsOrganismsExpandedMutators } from "../states/isOrganismsExpanded";
+
+type WrapperProps = {
+  isMediaExpanded: boolean;
+  isOrganismsExpanded: boolean;
+} & ComponentProps<typeof FooterRow>;
+const Wrapper: FC<WrapperProps> = (args) => {
+  const { setIsMediaExpanded } = useIsMediaExpandedMutators();
+  const { setIsOrganismsExpanded } = useIsOrganismsExpandedMutators();
+  useEffect(() => {
+    setIsMediaExpanded(args.isMediaExpanded);
+  }, [args.isMediaExpanded]);
+  useEffect(() => {
+    setIsOrganismsExpanded(args.isOrganismsExpanded);
+  }, [args.isOrganismsExpanded]);
+  return <FooterRow {...args} />;
+};
 
 export default {
   title: "FooterRow",
-  component: FooterRow,
-} as ComponentMeta<typeof FooterRow>;
+  component: Wrapper,
+} as ComponentMeta<typeof Wrapper>;
 
-const Template: ComponentStory<typeof FooterRow> = (args) => <FooterRow {...args} />;
+const Template: ComponentStory<typeof Wrapper> = (args) => <Wrapper {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
@@ -19,7 +38,6 @@ Primary.args = {
       label: "Distilled Water",
       hasChildren: false,
       isOpen: false,
-      onClickFooterItem: (id) => console.log(id),
     },
     {
       id: "ID of Ager",
@@ -27,7 +45,6 @@ Primary.args = {
       label: "Ager",
       hasChildren: true,
       isOpen: false,
-      onClickFooterItem: (id) => console.log(id),
     },
   ],
 };

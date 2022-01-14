@@ -1,12 +1,31 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ComponentProps, FC, useEffect } from "react";
 import { HeaderRow } from "./HeaderRow";
+import { useIsMediaExpandedMutators } from "../states/isMediaExpanded";
+import { useIsOrganismsExpandedMutators } from "../states/isOrganismsExpanded";
+
+type WrapperProps = {
+  isMediaExpanded: boolean;
+  isOrganismsExpanded: boolean;
+} & ComponentProps<typeof HeaderRow>;
+const Wrapper: FC<WrapperProps> = (args) => {
+  const { setIsMediaExpanded } = useIsMediaExpandedMutators();
+  const { setIsOrganismsExpanded } = useIsOrganismsExpandedMutators();
+  useEffect(() => {
+    setIsMediaExpanded(args.isMediaExpanded);
+  }, [args.isMediaExpanded]);
+  useEffect(() => {
+    setIsOrganismsExpanded(args.isOrganismsExpanded);
+  }, [args.isOrganismsExpanded]);
+  return <HeaderRow {...args} />;
+};
 
 export default {
   title: "HeaderRow",
-  component: HeaderRow,
-} as ComponentMeta<typeof HeaderRow>;
+  component: Wrapper,
+} as ComponentMeta<typeof Wrapper>;
 
-const Template: ComponentStory<typeof HeaderRow> = (args) => <HeaderRow {...args} />;
+const Template: ComponentStory<typeof Wrapper> = (args) => <Wrapper {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

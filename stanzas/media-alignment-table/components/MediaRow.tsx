@@ -4,23 +4,19 @@ import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
 import { PATH_MEDIUM, PATH_ORGANISM } from "../../../components/consts";
 import { COLOR_WHITE } from "../../../components/styles";
+import { useIsMediaExpendedState } from "../states/isMediaExpanded";
+import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
 import { LabelInfo } from "../types";
 
 type Props = {
   media: LabelInfo;
   organisms: LabelInfo[];
   components: ComponentProps<typeof AlignmentCell>[];
-  isMediaExpanded: boolean;
-  isOrganismsExpanded: boolean;
 };
 
-export const MediaRow: FC<Props> = ({
-  media,
-  organisms,
-  components,
-  isMediaExpanded,
-  isOrganismsExpanded,
-}) => {
+export const MediaRow: FC<Props> = ({ media, organisms, components }) => {
+  const isMediaExpanded = useIsMediaExpendedState();
+  const isOrganismsExpanded = useIsOrganismsExpendedState();
   return (
     <div css={wrapper}>
       <InfoCell info={[media]} expanded={isMediaExpanded} linkBase={PATH_MEDIUM} />

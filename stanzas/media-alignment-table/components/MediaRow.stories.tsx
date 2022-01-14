@@ -1,29 +1,33 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useEffect } from "react";
 import { MediaRow } from "./MediaRow";
 import { useIsMediaExpandedMutators } from "../states/isMediaExpanded";
 import { useIsOrganismsExpandedMutators } from "../states/isOrganismsExpanded";
 
-type WrapperType = {
+type WrapperProps = {
   isMediaExpanded: boolean;
   isOrganismsExpanded: boolean;
 } & ComponentProps<typeof MediaRow>;
-const MediaRowWrapper: FC<WrapperType> = (props) => {
+const Wrapper: FC<WrapperProps> = (args) => {
   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
   const { setIsOrganismsExpanded } = useIsOrganismsExpandedMutators();
-  setIsMediaExpanded(props.isMediaExpanded);
-  setIsOrganismsExpanded(props.isOrganismsExpanded);
-  return <MediaRow {...props} />;
+  useEffect(() => {
+    setIsMediaExpanded(args.isMediaExpanded);
+  }, [args.isMediaExpanded]);
+  useEffect(() => {
+    setIsOrganismsExpanded(args.isOrganismsExpanded);
+  }, [args.isOrganismsExpanded]);
+  return <MediaRow {...args} />;
 };
 
 export default {
   title: "MediaRow",
-  component: MediaRow,
-} as ComponentMeta<typeof MediaRow>;
+  component: Wrapper,
+} as ComponentMeta<typeof Wrapper>;
 
-const Template: ComponentStory<typeof MediaRow> = (args) => (
+const Template: ComponentStory<typeof Wrapper> = (args) => (
   <div style={{ display: "flex", backgroundColor: "black", flexDirection: "column", gap: 1 }}>
-    <MediaRow {...args} />
+    <Wrapper {...args} />
   </div>
 );
 
