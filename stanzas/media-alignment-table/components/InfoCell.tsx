@@ -21,7 +21,12 @@ const Compact: FC<Props> = ({ info, linkBase }) => {
       <div className="inner">
         {info.map((item, index) => (
           <div key={item.id} className="text">
-            <Tooltip title={item.label} placement={"top"} arrow>
+            <Tooltip
+              title={item.label}
+              placement={"top"}
+              PopperProps={{ disablePortal: true }}
+              arrow
+            >
               <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
                 {item.id}
               </a>

@@ -15,7 +15,7 @@ type Props = {
 export const AlignmentCell: FC<Props> = ({ state, label, id }) => {
   return (
     <div css={wrapper}>
-      <Tooltip title={label} placement={"top"} arrow>
+      <Tooltip title={label} placement={"top"} PopperProps={{ disablePortal: true }} arrow>
         <a
           href={`${PATH_COMPONENT}${id}`}
           target="_blank"
