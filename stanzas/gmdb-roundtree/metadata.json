@@ -1,0 +1,41 @@
+{
+  "@context": {
+    "stanza": "http://togostanza.org/resource/stanza#"
+  },
+  "@id": "gmdb-roundtree",
+  "stanza:label": "Gmdb roundtree",
+  "stanza:definition": "",
+  "stanza:type": "Stanza",
+  "stanza:display": "Graph",
+  "stanza:provider": "",
+  "stanza:license": "MIT",
+  "stanza:author": "Satoshi Onoda",
+  "stanza:address": "satoshionoda@gmail.com",
+  "stanza:contributor": [],
+  "stanza:created": "2021-02-20",
+  "stanza:updated": "2021-02-20",
+  "stanza:parameter": [
+    {
+      "stanza:key": "newick",
+      "stanza:example": "http://keggoc-rdf.dbcls.jp/tmp/phylo2.newick",
+      "stanza:description": "newick tree format",
+      "stanza:required": true
+    }
+  ],
+  "stanza:about-link-placement": "bottom-right",
+  "stanza:style": [
+    {
+      "stanza:key": "--greeting-color",
+      "stanza:type": "color",
+      "stanza:default": "#eb7900",
+      "stanza:description": "text color of greeting"
+    },
+    {
+      "stanza:key": "--greeting-align",
+      "stanza:type": "single-choice",
+      "stanza:choice": ["left", "center", "right"],
+      "stanza:default": "center",
+      "stanza:description": "text align of greeting"
+    }
+  ]
+}

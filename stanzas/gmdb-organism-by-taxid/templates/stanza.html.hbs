@@ -1,0 +1,62 @@
+<div class="wrapper">
+
+  {{#if error}}
+    <p>{{msg}}</p>
+  {{/if}}
+
+  {{#unless error}}
+    <p class="tax-id">
+      <span class="key">Taxonomy ID: </span>
+      <span class="value">{{taxid}}</span>
+      <span class="links">
+        <a class="link-btn" target="_blank"
+           href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">NCBI</a>
+        <a class="link-btn" target="_blank" href="http://togogenome.org/organism/{{taxid}}">TogoGenome</a>
+      </span>
+
+    </p>
+    <p class="name">
+      <span class="value">{{scientific_name}}</span>
+    </p>
+
+    {{#if authority_name}}
+      <p class="authority-name">Authority name:<br>{{authority_name}}</p>
+    {{/if}}
+
+    <h3>Lineage</h3>
+    <ul class="lineage-list">
+      {{#each lineage}}
+        <li class="list-group-item">
+          <span class="rank">{{rank}}</span>
+          <span class="label">
+            <a href="/taxon/{{taxid}}">{{label}}</a>
+          </span>
+        </li>
+      {{/each}}
+    </ul>
+
+    {{#if type_material}}
+      <h3>Type strains</h3>
+      <ul class="capsule-list">
+        {{#each type_material}}
+          <li>{{label}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+
+    {{#if other_type_material}}
+      {{#each other_type_material}}
+        <h3>Heterotypic synonyms: {{key}}</h3>
+        <div class="synonyms">
+          <h4>Type strains</h4>
+          <ul class="capsule-list">
+            {{#each labels}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/each}}
+    {{/if}}
+
+  {{/unless}}
+</div>
