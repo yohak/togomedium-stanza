@@ -55,11 +55,12 @@ const wrapper = css`
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    border: 2px solid ${COLOR_PRIMARY};
+    //border: 2px solid ${COLOR_PRIMARY};
+    background-color: ${COLOR_PRIMARY};
   }
 
   .icon-none > span {
-    display: block;
+    display: none;
     box-sizing: border-box;
     width: 100%;
     height: 4px;

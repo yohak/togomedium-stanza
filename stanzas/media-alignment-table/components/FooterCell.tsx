@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { IconCompact, IconExpand } from "../../../components/icons";
-import { COLOR_WHITE, FONT_DEFAULT, SIZE1, SIZE2, SIZE4 } from "../../../components/styles";
+import { COLOR_WHITE, FONT_DEFAULT, SIZE1, SIZE2, SIZE3, SIZE4 } from "../../../components/styles";
 import { WIDTH_ALIGNMENT_CELL } from "../consts";
 import { useComponentTreeMutators } from "../states/componentTree";
 
@@ -50,7 +50,7 @@ const wrapper = css`
   }
   & > .spacer {
     display: block;
-    height: ${SIZE2};
+    height: ${SIZE3};
     flex-grow: 0;
     flex-shrink: 0;
   }
