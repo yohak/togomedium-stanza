@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AlignmentTable } from "./components/AlignmentTable";
+import { ScrollableTable } from "./components/ScrollableTable";
 import { mediaAlignmentTableResponse1 } from "../../api/media-alignment-table/response1";
 import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
 
@@ -17,7 +17,7 @@ const App = ({ gmids }: AppProps) => {
   useEffect(() => {
     setData(mediaAlignmentTableResponse1);
   }, []);
-  return <>{data && <AlignmentTable data={data} />}</>;
+  return <>{data && <ScrollableTable data={data} />}</>;
 };
 
 export default App;
