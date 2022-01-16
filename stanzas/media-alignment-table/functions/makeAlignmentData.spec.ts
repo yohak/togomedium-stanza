@@ -10,13 +10,24 @@ describe("makeAlignmentData", () => {
   it("should work", () => {
     const result = makeResult(mediaAlignmentTableResponse1);
     expect(result.length).toBe(2);
+    expect(result[0].components.length).toBe(6);
+    expect(result[0].components[0].state).toBe("available");
+  });
+  fit("should work", () => {
+    const result = makeResult(mediaAlignmentTableResponse1, (tree) => {
+      tree[0].isOpen = true;
+    });
+    expect(result.length).toBe(2);
+    expect(result[0].components.length).toBe(7);
     expect(result[0].components[0].state).toBe("grouped");
+    expect(result[0].components[1].state).toBe("available");
   });
 });
 
-const makeResult = (data: MediaAlignmentTableResponse, modTree?: (tree: ComponentTree) => {}) => {
+const makeResult = (data: MediaAlignmentTableResponse, modTree?: (tree: ComponentTree) => void) => {
   const tree = makeComponentTree(data.components);
   modTree ? modTree(tree) : "";
+  console.log(tree[0].isOpen);
   const footerProps = makeFooterComponents(tree);
   return makeAlignmentData(data, footerProps);
 };

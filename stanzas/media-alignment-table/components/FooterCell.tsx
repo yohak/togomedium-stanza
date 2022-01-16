@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
-import { IconCompact, IconExpand } from "../../../components/icons";
+import { IconBlank, IconCompact, IconExpand } from "../../../components/icons";
 import { COLOR_WHITE, FONT_DEFAULT, SIZE1, SIZE2, SIZE3, SIZE4 } from "../../../components/styles";
 import { WIDTH_ALIGNMENT_CELL } from "../consts";
 import { useComponentTreeMutators } from "../states/componentTree";
@@ -17,10 +17,14 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
   const { toggleComponent } = useComponentTreeMutators();
   const onClickFooterItem = (id: string) => toggleComponent(id);
 
-  const Icon = isOpen ? (
-    <IconCompact css={icon} onClick={() => onClickFooterItem(id)} />
+  const Icon = hasChildren ? (
+    isOpen ? (
+      <IconCompact css={icon} onClick={() => onClickFooterItem(id)} />
+    ) : (
+      <IconExpand css={icon} onClick={() => onClickFooterItem(id)} />
+    )
   ) : (
-    <IconExpand css={icon} onClick={() => onClickFooterItem(id)} />
+    <IconBlank css={icon} />
   );
 
   return (
@@ -28,8 +32,8 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
       {new Array(level).fill(null).map((r, index) => (
         <span key={index} className="spacer" />
       ))}
+      {Icon}
       <span className={"text"}>{label}</span>
-      {hasChildren && Icon}
     </div>
   );
 };
@@ -56,7 +60,10 @@ const wrapper = css`
   }
 `;
 
+const iconBlank = css`
+  margin-bottom: ${SIZE1};
+`;
 const icon = css`
-  margin-top: ${SIZE1};
+  ${iconBlank};
   cursor: pointer;
 `;

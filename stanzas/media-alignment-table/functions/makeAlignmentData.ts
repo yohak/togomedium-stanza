@@ -37,7 +37,7 @@ const makeMediaRowProp = (
     return {
       id: data.id,
       label: data.label,
-      state: findComponentState(data.id, mediumData.components, componentsData),
+      state: findComponentState(data.id, mediumData.components, componentsData, footerList),
     };
   });
   return {
@@ -50,18 +50,19 @@ const makeMediaRowProp = (
 const findComponentState = (
   id: string,
   mediumComponents: string[],
-  allComponents: RawComponent[]
+  allComponents: RawComponent[],
+  footerList: ComponentInfo[]
 ): AlignmentCellState => {
   if (mediumComponents.find((candidate) => candidate === id)) {
     return "available";
   }
 
-  if (
-    listChildComponents(id, allComponents).find((child) =>
-      mediumComponents.find((candidate) => candidate === child)
-    )
-  ) {
-    return "grouped";
+  const groupedId = listChildComponents(id, allComponents).find((child) =>
+    mediumComponents.find((candidate) => candidate === child)
+  );
+  if (groupedId) {
+    const isOpen = footerList.find((item) => item.id === id)?.isOpen === true;
+    return isOpen ? "grouped" : "available";
   }
   return "none";
 };
