@@ -3,7 +3,7 @@ import { AlignmentTable } from "./AlignmentTable";
 import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
 
 export default {
-  title: "AlignmentTable",
+  title: "Components/MediaAlignmentTable/AlignmentTable",
   component: AlignmentTable,
 } as ComponentMeta<typeof AlignmentTable>;
 

@@ -3,7 +3,7 @@ import { InfoCell } from "./InfoCell";
 import { PATH_MEDIUM, PATH_ORGANISM } from "../../../components/consts";
 
 export default {
-  title: "InfoCell",
+  title: "Components/MediaAlignmentTable/InfoCell",
   component: InfoCell,
 } as ComponentMeta<typeof InfoCell>;
 

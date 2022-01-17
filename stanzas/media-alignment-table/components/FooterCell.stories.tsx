@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { FooterCell } from "./FooterCell";
 
 export default {
-  title: "FooterCell",
+  title: "Components/MediaAlignmentTable/FooterCell",
   component: FooterCell,
 } as ComponentMeta<typeof FooterCell>;
 
@@ -15,7 +15,6 @@ Level0.args = {
   hasChildren: false,
   isOpen: false,
   id: "id",
-  onClickFooterItem: () => null,
 };
 
 export const Level1 = Template.bind({});
@@ -25,5 +24,4 @@ Level1.args = {
   hasChildren: true,
   isOpen: true,
   id: "id",
-  onClickFooterItem: () => null,
 };

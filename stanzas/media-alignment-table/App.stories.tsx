@@ -4,7 +4,7 @@ import App from "./App";
 import { mediaAlignmentTableResponse1 } from "../../api/media-alignment-table/response1";
 
 export default {
-  title: "Stanza",
+  title: "Stanzas/MediaAlignmentTable",
   component: App,
   argTypes: { gmids: ["aaa"] },
 } as ComponentMeta<typeof App>;

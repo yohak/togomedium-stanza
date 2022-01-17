@@ -21,7 +21,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: "HeaderRow",
+  title: "Components/MediaAlignmentTable/HeaderRow",
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 

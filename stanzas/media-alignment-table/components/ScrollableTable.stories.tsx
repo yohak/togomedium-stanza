@@ -3,7 +3,7 @@ import { ScrollableTable } from "./ScrollableTable";
 import { mediaAlignmentTableResponse2 } from "../../../api/media-alignment-table/response2";
 
 export default {
-  title: "ScrollableTable",
+  title: "Components/MediaAlignmentTable/ScrollableTable",
   component: ScrollableTable,
 } as ComponentMeta<typeof ScrollableTable>;
 

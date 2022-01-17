@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AlignmentCell } from "./AlignmentCell";
 
 export default {
-  title: "AlignmentCell",
+  title: "Components/MediaAlignmentTable/AlignmentCell",
   component: AlignmentCell,
 } as ComponentMeta<typeof AlignmentCell>;
 

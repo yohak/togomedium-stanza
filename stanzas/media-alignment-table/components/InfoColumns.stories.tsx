@@ -3,7 +3,7 @@ import { InfoColumns } from "./InfoColumns";
 import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
 
 export default {
-  title: "InfoColumns",
+  title: "Components/MediaAlignmentTable/InfoColumns",
   component: InfoColumns,
 } as ComponentMeta<typeof InfoColumns>;
 

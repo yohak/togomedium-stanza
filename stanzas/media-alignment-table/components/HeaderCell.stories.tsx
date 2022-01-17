@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { HeaderCell } from "./HeaderCell";
 
 export default {
-  title: "HeaderCell",
+  title: "Components/MediaAlignmentTable/HeaderCell",
   component: HeaderCell,
 } as ComponentMeta<typeof HeaderCell>;
 
