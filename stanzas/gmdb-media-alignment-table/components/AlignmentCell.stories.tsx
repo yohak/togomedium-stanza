@@ -1,8 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AlignmentCell } from "./AlignmentCell";
+import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: "Components/MediaAlignmentTable/AlignmentCell",
+  title: makeComponentStoryTitle("AlignmentCell", "MediaAlignmentTable"),
   component: AlignmentCell,
 } as ComponentMeta<typeof AlignmentCell>;
 

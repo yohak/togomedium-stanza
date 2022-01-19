@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import { Slider, Tooltip } from "@mui/material";
 import React, { FC } from "react";
 import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN, SIZE1 } from "../../../components/styles";
+import { LabelInfo } from "../../../components/types";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
-import { LabelInfo } from "../types";
 
 type Props = {
   info: LabelInfo[];

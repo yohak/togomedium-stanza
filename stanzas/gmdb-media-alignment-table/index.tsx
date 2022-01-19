@@ -4,11 +4,13 @@ import { RecoilRoot } from "recoil";
 import Stanza from "togostanza/stanza";
 import App from "./App";
 import { EmotionCacheProvider } from "../../components/EmotionCacheProvider";
+import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { stringToArray } from "../../utils/string";
 
 export default class HelloReact extends Stanza<StanzaParameters> {
   async render() {
     this._render();
+    importWebFontForTogoMedium(this);
   }
 
   handleAttributeChange() {

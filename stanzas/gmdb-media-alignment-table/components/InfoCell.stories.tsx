@@ -1,9 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { InfoCell } from "./InfoCell";
 import { PATH_MEDIUM, PATH_ORGANISM } from "../../../components/consts";
+import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: "Components/MediaAlignmentTable/InfoCell",
+  title: makeComponentStoryTitle("InfoCell", "MediaAlignmentTable"),
   component: InfoCell,
 } as ComponentMeta<typeof InfoCell>;
 

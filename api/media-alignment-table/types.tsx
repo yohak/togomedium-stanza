@@ -1,3 +1,5 @@
+import { Nullable } from "yohak-tools";
+
 export type MediaAlignmentTableResponse = {
   media: {
     gmid: string;
@@ -12,7 +14,7 @@ export type MediaAlignmentTableResponse = {
   components: {
     gmoid: string;
     name: string;
-    parent: string | null;
-    function: string | null;
+    parent: Nullable<string>;
+    function: Nullable<string>;
   }[];
 };

@@ -1,8 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { FooterCell } from "./FooterCell";
+import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: "Components/MediaAlignmentTable/FooterCell",
+  title: makeComponentStoryTitle("FooterCell", "MediaAlignmentTable"),
   component: FooterCell,
 } as ComponentMeta<typeof FooterCell>;
 

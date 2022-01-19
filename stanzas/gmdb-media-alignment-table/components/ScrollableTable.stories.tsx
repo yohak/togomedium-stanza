@@ -1,9 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ScrollableTable } from "./ScrollableTable";
 import { mediaAlignmentTableResponse2 } from "../../../api/media-alignment-table/response2";
+import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: "Components/MediaAlignmentTable/ScrollableTable",
+  title: makeComponentStoryTitle("ScrollableTable", "MediaAlignmentTable"),
   component: ScrollableTable,
 } as ComponentMeta<typeof ScrollableTable>;
 

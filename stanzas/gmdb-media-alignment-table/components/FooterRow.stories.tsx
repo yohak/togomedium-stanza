@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { FooterRow } from "./FooterRow";
+import { makeComponentStoryTitle } from "../../../utils/storybook";
 import { useIsMediaExpandedMutators } from "../states/isMediaExpanded";
 import { useIsOrganismsExpandedMutators } from "../states/isOrganismsExpanded";
 
@@ -21,7 +22,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: "Components/MediaAlignmentTable/FooterRow",
+  title: makeComponentStoryTitle("FooterRow", "MediaAlignmentTable"),
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 

@@ -1,9 +1,10 @@
 import { ComponentProps } from "react";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
+import { LabelInfo } from "../../../components/types";
 import { AlignmentCellState } from "../components/AlignmentCell";
 import { FooterCell } from "../components/FooterCell";
 import { MediaRow } from "../components/MediaRow";
-import { LabelInfo, RawComponent, RawMedium, RawOrganism } from "../types";
+import { RawComponent, RawMedium, RawOrganism } from "../types";
 
 type ComponentInfo = ComponentProps<typeof FooterCell>;
 type CellProps = ComponentProps<typeof MediaRow>["components"][0];

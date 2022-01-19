@@ -13,7 +13,7 @@ describe("makeAlignmentData", () => {
     expect(result[0].components.length).toBe(6);
     expect(result[0].components[0].state).toBe("available");
   });
-  fit("should work", () => {
+  it("should work", () => {
     const result = makeResult(mediaAlignmentTableResponse1, (tree) => {
       tree[0].isOpen = true;
     });
