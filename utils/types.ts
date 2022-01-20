@@ -1,8 +1,9 @@
 import { SerializedStyles } from "@emotion/serialize";
 import { Optional } from "yohak-tools";
 
-export type Layout = {
-  extraCSS?: SerializedStyles;
+export type AcceptsEmotion = {
+  css?: SerializedStyles;
+  className?: string;
 };
 
 export type TemplateBase = {

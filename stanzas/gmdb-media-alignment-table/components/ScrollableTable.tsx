@@ -11,8 +11,8 @@ type Props = { data: MediaAlignmentTableResponse };
 export const ScrollableTable: FC<Props> = ({ data }) => {
   return (
     <div css={wrapper}>
-      <HeaderRow extraCSS={header} />
-      <InfoColumns data={data} extraCSS={infoColumns} />
+      <HeaderRow css={header} />
+      <InfoColumns data={data} css={infoColumns} />
       <div className="inner">
         <AlignmentTable data={data} />
       </div>

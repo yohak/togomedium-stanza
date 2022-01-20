@@ -13,7 +13,7 @@ export const AppContainer: FC<Props> = ({}) => {
         <div>AA</div>
       </div>
       <div>
-        <MediaSelectPane extraCSS={mediaQueryPane} />
+        <MediaSelectPane css={mediaQueryPane} />
         <ActionPane actionLabel={"COMPARE"} />
       </div>
     </div>

@@ -2,16 +2,16 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { HeaderCell } from "./HeaderCell";
 import { COLOR_WHITE, SIZE1 } from "../../../components/styles";
-import { Layout } from "../../../utils/types";
+import { AcceptsEmotion } from "../../../utils/types";
 import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
 import {
   useIsOrganismsExpandedMutators,
   useIsOrganismsExpendedState,
 } from "../states/isOrganismsExpanded";
 
-type Props = {} & Layout;
+type Props = {} & AcceptsEmotion;
 
-export const HeaderRow: FC<Props> = ({ extraCSS }) => {
+export const HeaderRow: FC<Props> = ({ css, className }) => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -25,7 +25,7 @@ export const HeaderRow: FC<Props> = ({ extraCSS }) => {
   };
 
   return (
-    <div css={[wrapper, extraCSS]}>
+    <div css={[wrapper, css]} className={className}>
       <HeaderCell
         label={"Media"}
         isExpanded={isMediaExpanded}

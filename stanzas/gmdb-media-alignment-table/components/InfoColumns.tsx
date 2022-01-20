@@ -4,7 +4,7 @@ import { HeaderCell } from "./HeaderCell";
 import { MediaRow } from "./MediaRow";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
 import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../components/styles";
-import { Layout } from "../../../utils/types";
+import { AcceptsEmotion } from "../../../utils/types";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
 import {
@@ -12,9 +12,9 @@ import {
   useIsOrganismsExpendedState,
 } from "../states/isOrganismsExpanded";
 
-type Props = { data: MediaAlignmentTableResponse } & Layout;
+type Props = { data: MediaAlignmentTableResponse } & AcceptsEmotion;
 
-export const InfoColumns: FC<Props> = ({ data, extraCSS }) => {
+export const InfoColumns: FC<Props> = ({ data, css, className }) => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -27,7 +27,7 @@ export const InfoColumns: FC<Props> = ({ data, extraCSS }) => {
     setIsOrganismsExpanded(!isOrganismsExpanded);
   };
   return (
-    <div css={[wrapper, extraCSS]}>
+    <div css={[wrapper, css]} className={className}>
       <div css={header}>
         <HeaderCell
           label={"Media"}

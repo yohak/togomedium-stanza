@@ -10,18 +10,18 @@ import {
   SIZE2,
   SIZE4,
 } from "../../../components/styles";
-import { Layout } from "../../../utils/types";
+import { AcceptsEmotion } from "../../../utils/types";
 import { useFoundMediaState } from "../states/foundMedia";
 
-type Props = {} & Layout;
+type Props = {} & AcceptsEmotion;
 
-export const MediaSelectPane: FC<Props> = ({ extraCSS }) => {
+export const MediaSelectPane: FC<Props> = ({ css, className }) => {
   const foundMedia = useFoundMediaState();
   return (
-    <div css={[wrapper, extraCSS]}>
+    <div css={[wrapper, css]} className={className}>
       <QueryInfo />
       <p css={infoText}>{getInfoText(foundMedia.length)}</p>
-      <MediaList extraCSS={list} />
+      <MediaList css={list} />
     </div>
   );
 };

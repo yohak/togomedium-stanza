@@ -11,4 +11,9 @@ export const muiTheme = createTheme({
   typography: {
     fontFamily: FONT_EN,
   },
+  components: {
+    MuiTab: {
+      styleOverrides: {},
+    },
+  },
 });

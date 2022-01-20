@@ -23,7 +23,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
   }, [args.foundMedia]);
   return (
     <div css={wrapperCSS}>
-      <MediaSelectPane extraCSS={extraCSS} {...args} />
+      <MediaSelectPane css={extraCSS} {...args} />
     </div>
   );
 };

@@ -1,18 +1,18 @@
 import { css } from "@emotion/react";
 import React, { ComponentProps, FC, useEffect, useState } from "react";
 import { MediaListItem } from "./MediaListItem";
-import { Layout } from "../../../utils/types";
+import { AcceptsEmotion } from "../../../utils/types";
 import { useFoundMediaState } from "../states/foundMedia";
 import { useSelectedMediaMutators, useSelectedMediaState } from "../states/selectedMedia";
 
-type Props = {} & Layout;
+type Props = {} & AcceptsEmotion;
 
 type MediaListInfo = Omit<ComponentProps<typeof MediaListItem>, "onClick">;
 
-export const MediaList: FC<Props> = ({ extraCSS }) => {
+export const MediaList: FC<Props> = ({ css, className }) => {
   const { data, toggleChecked } = useMediaList();
   return (
-    <div css={[wrapper, extraCSS]}>
+    <div css={[wrapper, css]} className={className}>
       {data.map((item) => (
         <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
       ))}

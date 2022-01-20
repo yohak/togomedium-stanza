@@ -2,10 +2,10 @@ import React, { FC } from "react";
 
 type Props = {};
 
-export const TaxonomicTreeTab: FC<Props> = ({}) => {
+export const PhenotypeSection: FC<Props> = ({}) => {
   return (
     <div>
-      <div>TaxonomicTreeTab</div>
+      <div>PhenotypeTab</div>
     </div>
   );
 };
