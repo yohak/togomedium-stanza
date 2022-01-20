@@ -1,8 +1,8 @@
 import { g as getAugmentedNamespace, S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { _ as _extends, c as capitalize, s as setRef, u as useEnhancedEffect, a as useEventCallback, b as useForkRef, d as useIsFocusVisible, C as ClassNameGenerator, j as jsxRuntime, n as newStyled, e as css, f as COLOR_WHITE, S as SIZE1, g as SIZE4, h as SIZE3, i as jsx, k as jsxs, l as jsx$1, m as COLOR_GRAY700, o as generateUtilityClass, p as generateUtilityClasses, q as styled, r as alpha, t as react, v as useThemeProps, w as _objectWithoutPropertiesLoose, x as clsx, y as composeClasses, z as COLOR_PRIMARY, A as COLOR_GRAY, F as FONT_EN, B as COLOR_GRAY_LINE, D as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-4fc875cb.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, c as Recoil_index_4 } from './recoil-e1306a73.js';
-import { i as isHostComponent, c as createChainedFunction, a as createSvgIcon$1, d as debounce, b as isMuiElement, o as ownerDocument, e as ownerWindow, u as useId, f as useControlled, P as Popper, g as useTheme, G as Grow } from './Grow-e65e436d.js';
-import { i as importWebFontForTogoMedium } from './stanza-41dd841d.js';
+import { _ as _extends, c as capitalize, s as setRef, u as useEnhancedEffect, a as useEventCallback, b as useForkRef, d as useIsFocusVisible, C as ClassNameGenerator, j as jsxRuntime, n as newStyled, e as css, f as COLOR_WHITE, S as SIZE1, g as SIZE4, h as SIZE3, i as jsx, k as jsxs, l as jsx$1, m as COLOR_GRAY700, o as generateUtilityClass, p as generateUtilityClasses, q as styled, r as alpha, t as react, v as useThemeProps, w as _objectWithoutPropertiesLoose, x as clsx, y as composeClasses, z as COLOR_PRIMARY, A as COLOR_GRAY, F as FONT_EN, B as COLOR_GRAY_LINE, D as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-514a31e5.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, c as Recoil_index_4 } from './recoil-d3a049b1.js';
+import { i as isHostComponent, c as createChainedFunction, a as createSvgIcon$1, d as debounce, b as isMuiElement, o as ownerDocument, e as ownerWindow, u as useId, f as useControlled, P as Popper, g as useTheme, G as Grow } from './Grow-b0e272fa.js';
+import { i as importWebFontForTogoMedium } from './stanza-488096af.js';
 import { s as stringToArray } from './string-ad764b4c.js';
 
 var AddBoxOutlined = {};
@@ -303,7 +303,7 @@ const icon = css `
   cursor: pointer;
 `;
 
-const HeaderRow = ({ extraCSS }) => {
+const HeaderRow = ({ css, className }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
     const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -314,7 +314,7 @@ const HeaderRow = ({ extraCSS }) => {
     const onClickOrganismExpandIcon = () => {
         setIsOrganismsExpanded(!isOrganismsExpanded);
     };
-    return (jsxs("div", Object.assign({ css: [wrapper$6, extraCSS] }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }, void 0), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }, void 0), jsx("div", Object.assign({ css: components }, { children: "Components" }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: [wrapper$6, css], className: className }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }, void 0), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }, void 0), jsx("div", Object.assign({ css: components }, { children: "Components" }), void 0)] }), void 0));
 };
 const wrapper$6 = css `
   display: flex;
@@ -1150,7 +1150,7 @@ const wrapper$2 = css `
   padding: 1px;
 `;
 
-const InfoColumns = ({ data, extraCSS }) => {
+const InfoColumns = ({ data, css, className }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
     const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -1161,7 +1161,7 @@ const InfoColumns = ({ data, extraCSS }) => {
     const onClickOrganismExpandIcon = () => {
         setIsOrganismsExpanded(!isOrganismsExpanded);
     };
-    return (jsxs("div", Object.assign({ css: [wrapper$1, extraCSS] }, { children: [jsxs("div", Object.assign({ css: header$1 }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }, void 0), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }, void 0)] }), void 0), data.media.map((m) => {
+    return (jsxs("div", Object.assign({ css: [wrapper$1, css], className: className }, { children: [jsxs("div", Object.assign({ css: header$1 }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }, void 0), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }, void 0)] }), void 0), data.media.map((m) => {
                 const organisms = m.organisms.map((taxid) => {
                     const organism = data.organisms.find((o) => o.taxid === taxid);
                     const id = organism ? organism.taxid : "";
@@ -1203,7 +1203,7 @@ const spacer = css `
 `;
 
 const ScrollableTable = ({ data }) => {
-    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx(HeaderRow, { extraCSS: header }, void 0), jsx(InfoColumns, { data: data, extraCSS: infoColumns }, void 0), jsx("div", Object.assign({ className: "inner" }, { children: jsx(AlignmentTable, { data: data }, void 0) }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx(HeaderRow, { css: header }, void 0), jsx(InfoColumns, { data: data, css: infoColumns }, void 0), jsx("div", Object.assign({ className: "inner" }, { children: jsx(AlignmentTable, { data: data }, void 0) }), void 0)] }), void 0));
 };
 const wrapper = css `
   position: relative;

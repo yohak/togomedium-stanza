@@ -1,6 +1,6 @@
 import { e as commonjsRequire, c as commonjsGlobal, S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
 import { g as getData } from './get-data-8c61e123.js';
-import { i as importWebFontForTogoMedium } from './stanza-41dd841d.js';
+import { i as importWebFontForTogoMedium } from './stanza-488096af.js';
 import { m as makeTogoGenomeOrganismLink, a as makeNcbiOrganismLink, u as unescapeJsonString, c as capitalizeFirstLetter } from './string-ad764b4c.js';
 import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
 

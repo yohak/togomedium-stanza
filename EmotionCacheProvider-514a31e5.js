@@ -5024,6 +5024,15 @@ const FONT_DEFAULT = css `
   font-family: ${FONT_EN};
   font-size: 14px;
 `;
+css `
+  font-weight: 700;
+`;
+const FONT_WEIGHT_MEDIUM = css `
+  font-weight: 500;
+`;
+const FONT_WEIGHT_REGULAR = css `
+  font-weight: 400;
+`;
 const ROUNDED_CORNER = css `
   border-radius: 5px;
 `;
@@ -5051,6 +5060,7 @@ const EmotionGlobalStyles = () => {
 const styles = css `
   * {
     ${FONT_DEFAULT};
+    ${FONT_WEIGHT_REGULAR};
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -5068,5 +5078,5 @@ const EmotionCacheProvider = ({ children }) => {
     return (jsxs(CacheProvider, Object.assign({ value: myCache }, { children: [jsx$1(EmotionGlobalStyles, {}, void 0), jsx$1("div", Object.assign({ ref: containerRef }, { children: children }), void 0)] }), void 0));
 };
 
-export { duration as $, COLOR_GRAY as A, COLOR_GRAY_LINE as B, ClassNameGenerator$1 as C, Fragment as D, EmotionCacheProvider as E, FONT_EN as F, React as G, reactDom as H, useTheme as I, defaultTheme$1 as J, _inheritsLoose as K, useTheme$1 as L, useTheme$2 as M, ThemeContext$1 as N, ThemeContext$2 as O, rootShouldForwardProp as P, resolveProps as Q, ReactDOM as R, SIZE1 as S, TransitionGroupContext as T, ROUNDED_CORNER as U, SIZE2 as V, SIZE05 as W, createTheme as X, keyframes as Y, Global as Z, _extends as _, useEventCallback as a, formatMuiErrorMessage as a0, deepmerge as a1, slotShouldForwardProp as a2, lighten as a3, darken as a4, useForkRef as b, capitalize as c, useIsFocusVisible as d, css as e, COLOR_WHITE as f, SIZE4 as g, SIZE3 as h, jsx$1 as i, jsxRuntime as j, jsxs as k, jsx as l, COLOR_GRAY700 as m, newStyled as n, generateUtilityClass as o, generateUtilityClasses as p, styled$1 as q, alpha as r, setRef as s, react as t, useEnhancedEffect$1 as u, useThemeProps as v, _objectWithoutPropertiesLoose as w, clsx as x, composeClasses as y, COLOR_PRIMARY as z };
-//# sourceMappingURL=EmotionCacheProvider-4fc875cb.js.map
+export { Global as $, COLOR_GRAY as A, COLOR_GRAY_LINE as B, ClassNameGenerator$1 as C, Fragment as D, EmotionCacheProvider as E, FONT_EN as F, React as G, reactDom as H, useTheme as I, defaultTheme$1 as J, _inheritsLoose as K, useTheme$1 as L, useTheme$2 as M, ThemeContext$1 as N, ThemeContext$2 as O, rootShouldForwardProp as P, resolveProps as Q, ReactDOM as R, SIZE1 as S, TransitionGroupContext as T, ROUNDED_CORNER as U, SIZE2 as V, SIZE05 as W, FONT_WEIGHT_MEDIUM as X, createTheme as Y, keyframes as Z, _extends as _, useEventCallback as a, duration as a0, formatMuiErrorMessage as a1, deepmerge as a2, slotShouldForwardProp as a3, lighten as a4, darken as a5, useForkRef as b, capitalize as c, useIsFocusVisible as d, css as e, COLOR_WHITE as f, SIZE4 as g, SIZE3 as h, jsx$1 as i, jsxRuntime as j, jsxs as k, jsx as l, COLOR_GRAY700 as m, newStyled as n, generateUtilityClass as o, generateUtilityClasses as p, styled$1 as q, alpha as r, setRef as s, react as t, useEnhancedEffect$1 as u, useThemeProps as v, _objectWithoutPropertiesLoose as w, clsx as x, composeClasses as y, COLOR_PRIMARY as z };
+//# sourceMappingURL=EmotionCacheProvider-514a31e5.js.map

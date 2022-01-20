@@ -1,8 +1,8 @@
 import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { M as useTheme, t as react, j as jsxRuntime, N as ThemeContext, _ as _extends, I as useTheme$1, O as ThemeContext$1, p as generateUtilityClasses, o as generateUtilityClass, q as styled, P as rootShouldForwardProp, c as capitalize, r as alpha, Q as resolveProps, v as useThemeProps, w as _objectWithoutPropertiesLoose, x as clsx, y as composeClasses, e as css, U as ROUNDED_CORNER, f as COLOR_WHITE, S as SIZE1, V as SIZE2, W as SIZE05, k as jsxs, i as jsx, X as createTheme, z as COLOR_PRIMARY, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-4fc875cb.js';
-import { R as Recoil_index_6, a as Recoil_index_18, c as Recoil_index_4 } from './recoil-e1306a73.js';
-import { B as ButtonBase } from './ButtonBase-de538fa1.js';
-import { i as importWebFontForTogoMedium } from './stanza-41dd841d.js';
+import { M as useTheme, t as react, j as jsxRuntime, N as ThemeContext, _ as _extends, I as useTheme$1, O as ThemeContext$1, p as generateUtilityClasses, o as generateUtilityClass, q as styled, P as rootShouldForwardProp, c as capitalize, r as alpha, Q as resolveProps, v as useThemeProps, w as _objectWithoutPropertiesLoose, x as clsx, y as composeClasses, e as css, U as ROUNDED_CORNER, f as COLOR_WHITE, S as SIZE1, V as SIZE2, W as SIZE05, X as FONT_WEIGHT_MEDIUM, k as jsxs, i as jsx, Y as createTheme, z as COLOR_PRIMARY, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-514a31e5.js';
+import { R as Recoil_index_6, a as Recoil_index_18, c as Recoil_index_4 } from './recoil-d3a049b1.js';
+import { B as ButtonBase } from './ButtonBase-7c327edb.js';
+import { i as importWebFontForTogoMedium } from './stanza-488096af.js';
 
 const hasSymbol = typeof Symbol === 'function' && Symbol.for;
 var nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
@@ -359,11 +359,7 @@ const useSelectedMediaState = () => {
 
 const ActionPane = ({ actionLabel }) => {
     const selectedMedia = useSelectedMediaState();
-    const [infoText, setInfoText] = react.exports.useState("");
-    react.exports.useEffect(() => {
-        setInfoText(getInfoText(selectedMedia.length));
-    }, [selectedMedia]);
-    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx("p", Object.assign({ className: "info" }, { children: infoText }), void 0), jsxs("div", Object.assign({ css: buttonWrapper }, { children: [jsx(Button$1, Object.assign({ variant: "contained", disableElevation: true, disabled: selectedMedia.length === 0 }, { children: actionLabel.toUpperCase() }), void 0), jsx(Button$1, Object.assign({ variant: "outlined" }, { children: "CLEAR SELECTION" }), void 0)] }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx("p", Object.assign({ className: "info" }, { children: getInfoText(selectedMedia.length) }), void 0), jsxs("div", Object.assign({ css: buttonWrapper }, { children: [jsx(Button$1, Object.assign({ variant: "contained", disableElevation: true, disabled: selectedMedia.length === 0 }, { children: actionLabel.toUpperCase() }), void 0), jsx(Button$1, Object.assign({ variant: "outlined" }, { children: "CLEAR SELECTION" }), void 0)] }), void 0)] }), void 0));
 };
 const getInfoText = (mediaLength) => {
     if (mediaLength === 0) {
@@ -382,8 +378,8 @@ const wrapper = css `
   padding: ${SIZE1} ${SIZE2};
   p.info {
     margin-bottom: ${SIZE05};
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    ${FONT_WEIGHT_MEDIUM};
   }
 `;
 const buttonWrapper = css `
@@ -408,6 +404,11 @@ const muiTheme = createTheme({
     },
     typography: {
         fontFamily: FONT_EN,
+    },
+    components: {
+        MuiTab: {
+            styleOverrides: {},
+        },
     },
 });
 
