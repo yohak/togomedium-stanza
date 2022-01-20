@@ -1,10 +1,10 @@
 import React from "react";
-import { ActionPane } from "./components/ActionPane";
+import { AppContainer } from "./components/AppContainer";
 
 type Props = {};
 
 const App = () => {
-  return <ActionPane actionLabel={"do something"} />;
+  return <AppContainer />;
 };
 
 export default App;

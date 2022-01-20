@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { ActionPane } from "./ActionPane";
 import { MediaSelectPane } from "./MediaSelectPane";
+import { QueryPane } from "./QueryPane";
 import { COLOR_GRAY, COLOR_GRAY_BG, COLOR_WHITE, SIZE1 } from "../../../components/styles";
 
 type Props = {};
@@ -10,7 +11,7 @@ export const AppContainer: FC<Props> = ({}) => {
   return (
     <div css={wrapper}>
       <div>
-        <div>AA</div>
+        <QueryPane css={queryPane} />
       </div>
       <div>
         <MediaSelectPane css={mediaQueryPane} />
@@ -39,6 +40,11 @@ const wrapper = css`
       min-width: 300px;
     }
   }
+`;
+
+const queryPane = css`
+  flex-grow: 1;
+  min-width: 700px;
 `;
 
 const mediaQueryPane = css`
