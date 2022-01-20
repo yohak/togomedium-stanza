@@ -1,14 +1,7 @@
 import { css } from "@emotion/react";
 import Button from "@mui/material/Button";
 import React, { FC, useEffect, useState } from "react";
-import {
-  COLOR_WHITE,
-  FONT_DEFAULT,
-  ROUNDED_CORNER,
-  SIZE05,
-  SIZE1,
-  SIZE2,
-} from "../../../components/styles";
+import { COLOR_WHITE, ROUNDED_CORNER, SIZE05, SIZE1, SIZE2 } from "../../../components/styles";
 import { useSelectedMediaState } from "../states/selectedMedia";
 
 type Props = { actionLabel: string };
@@ -35,16 +28,15 @@ export const ActionPane: FC<Props> = ({ actionLabel }) => {
 
 const getInfoText = (mediaLength: number): string => {
   if (mediaLength === 0) {
-    return "No Media Selected";
+    return "No media selected";
   } else if (mediaLength === 1) {
     return "1 medium selected";
   } else {
-    return `${mediaLength} Media Selected`;
+    return `${mediaLength} media selected`;
   }
 };
 
 const wrapper = css`
-  ${FONT_DEFAULT};
   ${ROUNDED_CORNER};
   background-color: ${COLOR_WHITE};
   padding: ${SIZE1} ${SIZE2};

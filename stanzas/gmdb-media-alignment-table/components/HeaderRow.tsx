@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { HeaderCell } from "./HeaderCell";
-import { COLOR_WHITE, FONT_DEFAULT, SIZE1 } from "../../../components/styles";
+import { COLOR_WHITE, SIZE1 } from "../../../components/styles";
 import { Layout } from "../../../utils/types";
 import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
 import {
@@ -52,7 +52,6 @@ const wrapper = css`
 `;
 
 const components = css`
-  ${FONT_DEFAULT};
   background-color: ${COLOR_WHITE};
   display: flex;
   align-items: center;

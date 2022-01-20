@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { IconCompact, IconExpand } from "../../../components/icons";
-import { COLOR_GRAY700, COLOR_WHITE, FONT_DEFAULT, SIZE1 } from "../../../components/styles";
+import { COLOR_GRAY700, COLOR_WHITE, SIZE1 } from "../../../components/styles";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 
 type Props = {
@@ -24,16 +24,17 @@ export const HeaderCell: FC<Props> = ({ label, onClickIcon, isExpanded }) => {
 };
 
 const wrapper = css`
-  ${FONT_DEFAULT};
   display: flex;
   background-color: ${COLOR_WHITE};
   align-items: center;
   justify-content: space-between;
   padding: ${SIZE1};
   box-sizing: border-box;
+
   &.expanded {
     width: ${WIDTH_EXPANDED};
   }
+
   &.compact {
     width: ${WIDTH_COMPACT};
   }

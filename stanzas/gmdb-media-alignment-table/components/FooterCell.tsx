@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { IconBlank, IconCompact, IconExpand } from "../../../components/icons";
-import { COLOR_WHITE, FONT_DEFAULT, SIZE1, SIZE2, SIZE3, SIZE4 } from "../../../components/styles";
+import { COLOR_WHITE, SIZE1, SIZE3, SIZE4 } from "../../../components/styles";
 import { WIDTH_ALIGNMENT_CELL } from "../consts";
 import { useComponentTreeMutators } from "../states/componentTree";
 
@@ -39,7 +39,6 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
 };
 
 const wrapper = css`
-  ${FONT_DEFAULT};
   box-sizing: border-box;
   width: ${WIDTH_ALIGNMENT_CELL}px;
   background-color: ${COLOR_WHITE};
