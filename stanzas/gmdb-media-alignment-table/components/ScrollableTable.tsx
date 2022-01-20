@@ -24,8 +24,8 @@ const wrapper = css`
   position: relative;
   overflow: hidden;
   background-color: ${COLOR_GRAY_LINE};
-  .inner {
-    overflow-x: scroll;
+  & > .inner {
+    overflow-x: auto;
   }
 `;
 const header = css`
