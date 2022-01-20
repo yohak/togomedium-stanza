@@ -1,9 +1,8 @@
 import { css } from "@emotion/react";
-import { SerializedStyles } from "@emotion/serialize";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import React, { FC } from "react";
-import { COLOR_GRAY_LINE, SIZE4, SIZE5 } from "../../../components/styles";
+import { COLOR_GRAY_LINE, SIZE4 } from "../../../components/styles";
 import { AcceptsEmotion } from "../../../utils/types";
 import { QueryMethod, useQueryMethodMutators, useQueryMethodState } from "../states/queryMethod";
 
@@ -18,7 +17,6 @@ export const QueryMethodTab: FC<Props> = ({ css, className }) => {
     setQueryMethod(newValue);
   };
   //
-  console.log(css);
   return (
     <div css={[wrapper, css]} className={className}>
       <Tabs value={queryMethod} onChange={handleChange}>

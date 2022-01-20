@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
-import { ExpandOutlined } from "@mui/icons-material";
 
-export const FONT_EN = "'Fira Sans', sans-serif";
+export const FONT_EN = "'Fira Sans Condensed', sans-serif";
 export const COLOR_WHITE = "#FFFFFF";
 export const COLOR_PRIMARY = "#8FC31F";
 export const COLOR_GRAY = "#CCCCCC";

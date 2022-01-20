@@ -1,38 +1,15 @@
-import { Autocomplete, FormControl, InputLabel, Select, TextField } from "@mui/material";
 import React, { FC } from "react";
-import { LabelInfo } from "../../../components/types";
+import { ComponentSelect } from "./ComponentSelect";
 
 type Props = {};
 
-const components: LabelInfo[] = [
-  {
-    id: "a",
-    label: "aaaaaa",
-  },
-  {
-    id: "b",
-    label: "bbbbb",
-  },
-  {
-    id: "c",
-    label: "ccccc",
-  },
-  {
-    id: "d",
-    label: "ddddd",
-  },
-];
-
 export const AttributesSection: FC<Props> = () => {
+  const onChangeSelection = (ids: string[]) => {
+    console.log(ids);
+  };
   return (
     <div>
-      <Autocomplete
-        multiple
-        disablePortal={true}
-        options={components}
-        getOptionLabel={(option) => option.label}
-        renderInput={(params) => <TextField {...params} label="Components" />}
-      />
+      <ComponentSelect onChangeSelection={onChangeSelection} />
     </div>
   );
 };

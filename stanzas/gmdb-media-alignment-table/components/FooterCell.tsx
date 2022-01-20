@@ -50,6 +50,7 @@ const wrapper = css`
   padding-bottom: ${SIZE4};
   & > .text {
     writing-mode: vertical-rl;
+    transform: translateX(-1px);
   }
   & > .spacer {
     display: block;
@@ -64,5 +65,7 @@ const iconBlank = css`
 `;
 const icon = css`
   ${iconBlank};
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 `;
