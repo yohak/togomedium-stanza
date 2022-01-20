@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { ActionPane } from "./ActionPane";
-import { MediaQueryPane } from "./MediaQueryPane";
+import { MediaSelectPane } from "./MediaSelectPane";
 import { COLOR_GRAY, COLOR_GRAY_BG, COLOR_WHITE, SIZE1 } from "../../../components/styles";
 
 type Props = {};
@@ -13,7 +13,7 @@ export const AppContainer: FC<Props> = ({}) => {
         <div>AA</div>
       </div>
       <div>
-        <MediaQueryPane />
+        <MediaSelectPane extraCSS={mediaQueryPane} />
         <ActionPane actionLabel={"COMPARE"} />
       </div>
     </div>
@@ -35,8 +35,12 @@ const wrapper = css`
     flex-direction: column;
     gap: ${SIZE1};
     &:nth-of-type(2) {
-      max-width: 400px;
+      max-width: 360px;
       min-width: 300px;
     }
   }
+`;
+
+const mediaQueryPane = css`
+  flex-grow: 1;
 `;

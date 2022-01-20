@@ -1,13 +1,30 @@
+import { css } from "@emotion/react";
 import React, { ComponentProps, FC, useEffect, useState } from "react";
 import { MediaListItem } from "./MediaListItem";
+import { Layout } from "../../../utils/types";
 import { useFoundMediaState } from "../states/foundMedia";
 import { useSelectedMediaMutators, useSelectedMediaState } from "../states/selectedMedia";
 
-type Props = {};
+type Props = {} & Layout;
 
 type MediaListInfo = Omit<ComponentProps<typeof MediaListItem>, "onClick">;
 
-export const MediaList: FC<Props> = () => {
+export const MediaList: FC<Props> = ({ extraCSS }) => {
+  const { data, toggleChecked } = useMediaList();
+  return (
+    <div css={[wrapper, extraCSS]}>
+      {data.map((item) => (
+        <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
+      ))}
+    </div>
+  );
+};
+
+const wrapper = css`
+  overflow-y: auto;
+`;
+
+const useMediaList = () => {
   const [data, setData] = useState<MediaListInfo[]>([]);
   const foundMedia = useFoundMediaState();
   const selectedMedia = useSelectedMediaState();
@@ -26,11 +43,5 @@ export const MediaList: FC<Props> = () => {
     setData(result);
   }, [foundMedia, selectedMedia]);
 
-  return (
-    <div>
-      {data.map((item) => (
-        <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
-      ))}
-    </div>
-  );
+  return { data, toggleChecked };
 };

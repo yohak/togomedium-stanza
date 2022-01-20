@@ -1,21 +1,24 @@
 import { css } from "@emotion/react";
 import Button from "@mui/material/Button";
-import React, { FC, useEffect, useState } from "react";
-import { COLOR_WHITE, ROUNDED_CORNER, SIZE05, SIZE1, SIZE2 } from "../../../components/styles";
+import React, { FC } from "react";
+import {
+  COLOR_WHITE,
+  FONT_WEIGHT_MEDIUM,
+  ROUNDED_CORNER,
+  SIZE05,
+  SIZE1,
+  SIZE2,
+} from "../../../components/styles";
 import { useSelectedMediaState } from "../states/selectedMedia";
 
 type Props = { actionLabel: string };
 
 export const ActionPane: FC<Props> = ({ actionLabel }) => {
   const selectedMedia = useSelectedMediaState();
-  const [infoText, setInfoText] = useState<string>("");
-  useEffect(() => {
-    setInfoText(getInfoText(selectedMedia.length));
-  }, [selectedMedia]);
 
   return (
     <div css={wrapper}>
-      <p className={"info"}>{infoText}</p>
+      <p className={"info"}>{getInfoText(selectedMedia.length)}</p>
       <div css={buttonWrapper}>
         <Button variant="contained" disableElevation={true} disabled={selectedMedia.length === 0}>
           {actionLabel.toUpperCase()}
@@ -42,8 +45,8 @@ const wrapper = css`
   padding: ${SIZE1} ${SIZE2};
   p.info {
     margin-bottom: ${SIZE05};
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    ${FONT_WEIGHT_MEDIUM};
   }
 `;
 

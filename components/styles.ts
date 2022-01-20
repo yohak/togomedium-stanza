@@ -21,6 +21,17 @@ export const FONT_DEFAULT = css`
   font-size: 14px;
 `;
 
+export const FONT_WEIGHT_BOLD = css`
+  font-weight: 700;
+`;
+export const FONT_WEIGHT_MEDIUM = css`
+  font-weight: 500;
+`;
+
+export const FONT_WEIGHT_REGULAR = css`
+  font-weight: 400;
+`;
+
 export const ROUNDED_CORNER = css`
   border-radius: 5px;
 `;
