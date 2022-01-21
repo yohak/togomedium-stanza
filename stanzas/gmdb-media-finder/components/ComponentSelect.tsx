@@ -2,7 +2,7 @@ import { Autocomplete, Chip, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, SyntheticEvent, useState } from "react";
 import { AllComponentsResponse } from "../../../api/all-components/types";
-import { PATH_ALL_COMPONENTS } from "../../../api/paths";
+import { API_ALL_COMPONENTS } from "../../../api/paths";
 import { LabelInfo } from "../../../components/types";
 import { getData } from "../../../utils/getData";
 
@@ -16,7 +16,7 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
     if (components.length) return;
     setLoading(true);
     (async () => {
-      const response = await getData<AllComponentsResponse>(PATH_ALL_COMPONENTS, {});
+      const response = await getData<AllComponentsResponse>(API_ALL_COMPONENTS, {});
       if (response.body) {
         setComponents(
           response.body.map<LabelInfo>((item) => ({

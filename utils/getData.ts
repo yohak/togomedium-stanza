@@ -1,6 +1,10 @@
+import { isArray } from "yohak-tools/";
 import { ApiResponse, SimpleObject } from "./types";
 
-export const getData = async <T>(url: string, params: SimpleObject): Promise<ApiResponse<T>> => {
+export const getData = async <ResponseBody, Params extends SimpleObject = SimpleObject>(
+  url: string,
+  params: Params
+): Promise<ApiResponse<ResponseBody>> => {
   const response = await fetch(url, makeOptions(params));
 
   if (response.status !== 200) {
@@ -10,7 +14,7 @@ export const getData = async <T>(url: string, params: SimpleObject): Promise<Api
       body: undefined,
     };
   }
-  const body: T = await response.json();
+  const body: ResponseBody = await response.json();
   return {
     status: 200,
     body,
@@ -19,7 +23,7 @@ export const getData = async <T>(url: string, params: SimpleObject): Promise<Api
 
 export const makeFormBody = (params: SimpleObject) => {
   const formBody = Object.entries(params).map(
-    ([key, value]) => `${key}=${encodeURIComponent(value)}`
+    ([key, value]) => `${key}=${encodeURIComponent(isArray(value) ? value.join(",") : value)}`
   );
   return formBody.join("&");
 };

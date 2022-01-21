@@ -11,7 +11,7 @@ describe("queryDataToInfoText", () => {
       "tax-id": ["abc", "cdf", "aaa"],
     };
     const result = queryDataToInfoText(data);
-    expect(result).toBe("tax-id:abc,cdf,aaa");
+    expect(result).toBe("tax-id:abc, cdf, aaa");
   });
   it("should work", () => {
     const data: QueryData = {
@@ -20,6 +20,6 @@ describe("queryDataToInfoText", () => {
       "pid-500": null,
     };
     const result = queryDataToInfoText(data);
-    expect(result).toBe("tax-id:abc,cdf,aaa / gmo-id:aa / pid-500");
+    expect(result).toBe("tax-id:abc, cdf, aaa / gmo-id:aa / pid-500");
   });
 });

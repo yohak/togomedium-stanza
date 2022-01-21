@@ -13,7 +13,7 @@ export type TemplateBase = {
   statusText?: string;
 };
 
-export type SimpleObject = { [key: string]: string | number };
+export type SimpleObject = { [key: string]: string | number | string[] | number[] };
 
 export type ApiResponse<T> = {
   status: number;

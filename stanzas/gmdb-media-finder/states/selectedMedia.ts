@@ -19,5 +19,8 @@ export const useSelectedMediaMutators = () => {
       return result;
     });
   };
-  return { setSelectedMedia, toggleMediumSelection };
+  const clearSelectedMedia = () => {
+    setSelectedMedia([]);
+  };
+  return { setSelectedMedia, toggleMediumSelection, clearSelectedMedia };
 };

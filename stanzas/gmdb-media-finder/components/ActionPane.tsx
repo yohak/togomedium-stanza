@@ -9,12 +9,13 @@ import {
   SIZE1,
   SIZE2,
 } from "../../../components/styles";
-import { useSelectedMediaState } from "../states/selectedMedia";
+import { useSelectedMediaMutators, useSelectedMediaState } from "../states/selectedMedia";
 
 type Props = { actionLabel: string };
 
 export const ActionPane: FC<Props> = ({ actionLabel }) => {
   const selectedMedia = useSelectedMediaState();
+  const { clearSelectedMedia } = useSelectedMediaMutators();
 
   return (
     <div css={wrapper}>
@@ -23,7 +24,9 @@ export const ActionPane: FC<Props> = ({ actionLabel }) => {
         <Button variant="contained" disableElevation={true} disabled={selectedMedia.length === 0}>
           {actionLabel.toUpperCase()}
         </Button>
-        <Button variant="outlined">CLEAR SELECTION</Button>
+        <Button variant="outlined" onClick={clearSelectedMedia}>
+          CLEAR SELECTION
+        </Button>
       </div>
     </div>
   );

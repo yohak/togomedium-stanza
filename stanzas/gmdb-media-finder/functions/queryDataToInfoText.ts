@@ -6,7 +6,7 @@ export const queryDataToInfoText = (data: QueryData): string => {
     .map(([key, value]) => {
       let valueText: string;
       if (isArray(value)) {
-        valueText = value.join(",");
+        valueText = value.join(", ");
       } else {
         valueText = value ?? "";
       }

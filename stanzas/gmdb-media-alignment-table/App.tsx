@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollableTable } from "./components/ScrollableTable";
 import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
-import { PATH_MEDIA_ALIMENT } from "../../api/paths";
+import { API_MEDIA_ALIMENT } from "../../api/paths";
 import { getData } from "../../utils/getData";
 
 export type AppProps = {
@@ -12,7 +12,7 @@ const App = ({ gm_ids }: AppProps) => {
   const [data, setData] = useState<MediaAlignmentTableResponse>();
   useEffect(() => {
     (async () => {
-      const response = await getData<MediaAlignmentTableResponse>(PATH_MEDIA_ALIMENT, {});
+      const response = await getData<MediaAlignmentTableResponse>(API_MEDIA_ALIMENT, {});
       setData(response.body);
     })();
   }, [gm_ids]);
