@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AttributesSection } from "./AttributesSection";
+import { allComponentsMocks } from "../../../api/all-components/msw";
 import { COLOR_WHITE, SIZE2 } from "../../../components/styles";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle, makeMswParameter } from "../../../utils/storybook";
 
 export default {
   title: makeComponentStoryTitle("AttributesSection", "MediaFinder"),
@@ -16,6 +17,9 @@ const Template: ComponentStory<typeof AttributesSection> = (args) => (
 );
 
 export const Primary = Template.bind({});
+Primary.parameters = {
+  msw: makeMswParameter(allComponentsMocks),
+};
 Primary.args = {};
 
 const wrapper = css`

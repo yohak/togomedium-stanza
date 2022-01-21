@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentSelect } from "./ComponentSelect";
+import { allComponentsMocks } from "../../../api/all-components/msw";
 import { COLOR_WHITE, SIZE2 } from "../../../components/styles";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle, makeMswParameter } from "../../../utils/storybook";
 
 export default {
   title: makeComponentStoryTitle("ComponentSelect", "MediaFinder"),
@@ -16,6 +17,9 @@ const Template: ComponentStory<typeof ComponentSelect> = (args) => (
 );
 
 export const Primary = Template.bind({});
+Primary.parameters = {
+  msw: makeMswParameter(allComponentsMocks),
+};
 Primary.args = {
   onChangeSelection: (ids) => {
     console.log(ids);

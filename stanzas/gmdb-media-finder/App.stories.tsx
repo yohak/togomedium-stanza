@@ -1,5 +1,8 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import App from "./App";
+import { Primary } from "./components/AppContainer.stories";
+import { allComponentsMocks } from "../../api/all-components/msw";
+import { makeMswParameter } from "../../utils/storybook";
 
 export default {
   title: "Stanzas/MediaFinder",
@@ -14,7 +17,5 @@ Result1.args = {
 };
 
 Result1.parameters = {
-  msw: {
-    handlers: [],
-  },
+  msw: makeMswParameter(allComponentsMocks),
 };

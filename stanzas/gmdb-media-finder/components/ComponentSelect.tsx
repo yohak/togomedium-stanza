@@ -1,9 +1,10 @@
 import { Autocomplete, Chip, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import React, { FC, SyntheticEvent, useEffect, useState } from "react";
-import { allComponentsResponse } from "../../../api/all-components/response";
+import React, { FC, SyntheticEvent, useState } from "react";
+import { AllComponentsResponse } from "../../../api/all-components/types";
+import { PATH_ALL_COMPONENTS } from "../../../api/paths";
 import { LabelInfo } from "../../../components/types";
-import { sleep } from "../../../utils/promise";
+import { getData } from "../../../utils/getData";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;
@@ -15,8 +16,15 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
     if (components.length) return;
     setLoading(true);
     (async () => {
-      await sleep(1e3);
-      setComponents(allComponentsResponse.map((r) => ({ label: r.name, id: r.gmo_id })));
+      const response = await getData<AllComponentsResponse>(PATH_ALL_COMPONENTS, {});
+      if (response.body) {
+        setComponents(
+          response.body.map<LabelInfo>((item) => ({
+            id: item.gmo_id,
+            label: item.name,
+          }))
+        );
+      }
       setLoading(false);
     })();
   };
