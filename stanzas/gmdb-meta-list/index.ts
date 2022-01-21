@@ -1,5 +1,5 @@
 import Stanza from "togostanza/stanza";
-import { makeFormBody } from "../../utils/get-data";
+import { makeFormBody } from "../../utils/getData";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { ApiResponse, SimpleObject, TemplateBase } from "../../utils/types";
 

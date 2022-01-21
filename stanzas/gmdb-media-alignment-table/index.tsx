@@ -19,12 +19,12 @@ export default class HelloReact extends Stanza<StanzaParameters> {
 
   _render() {
     const main = this.root.querySelector("main");
-    const gmids = stringToArray(this.params.gm_ids);
+    const gm_ids = stringToArray(this.params.gm_ids);
     ReactDOM.render(
       <StrictMode>
         <RecoilRoot>
           <EmotionCacheProvider>
-            <App {...{ gmids }} />
+            <App {...{ gm_ids }} />
           </EmotionCacheProvider>
         </RecoilRoot>
       </StrictMode>,

@@ -1,5 +1,5 @@
 import Stanza from "togostanza/stanza";
-import { getData } from "../../utils/get-data";
+import { getData } from "../../utils/getData";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import { ApiResponse, TemplateBase } from "../../utils/types";
 import { API_GROWTH_MEDIUM } from "../../utils/variables";

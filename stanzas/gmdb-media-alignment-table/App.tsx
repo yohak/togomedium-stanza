@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { ScrollableTable } from "./components/ScrollableTable";
-import { mediaAlignmentTableResponse1 } from "../../api/media-alignment-table/response1";
 import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
+import { PATH_MEDIA_ALIMENT } from "../../api/paths";
+import { getData } from "../../utils/getData";
 
 export type AppProps = {
-  gmids: string[];
+  gm_ids: string[];
 };
 
-const App = ({ gmids }: AppProps) => {
+const App = ({ gm_ids }: AppProps) => {
   const [data, setData] = useState<MediaAlignmentTableResponse>();
   useEffect(() => {
-    fetch("http://growthmedium.org/sparqlist/api/gmdb_media_alignment_by_gmids", {
-      method: "POST",
-    }).then((r) => r.json().then((r) => setData(r)));
-  }, [gmids]);
-  // useEffect(() => {
-  //   setData(mediaAlignmentTableResponse1);
-  // }, []);
+    (async () => {
+      const response = await getData<MediaAlignmentTableResponse>(PATH_MEDIA_ALIMENT, {});
+      setData(response.body);
+    })();
+  }, [gm_ids]);
   return <>{data && <ScrollableTable data={data} />}</>;
 };
 

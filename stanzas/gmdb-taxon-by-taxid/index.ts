@@ -1,7 +1,7 @@
 import pluralize from "pluralize";
 import Stanza from "togostanza/stanza";
 import { Optional } from "yohak-tools";
-import { getData } from "../../utils/get-data";
+import { getData } from "../../utils/getData";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
 import {
   capitalizeFirstLetter,
