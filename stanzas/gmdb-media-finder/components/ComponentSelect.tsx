@@ -16,7 +16,7 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
     setLoading(true);
     (async () => {
       await sleep(1e3);
-      setComponents(allComponentsResponse.map((r) => ({ label: r.name, id: r.gmoid })));
+      setComponents(allComponentsResponse.map((r) => ({ label: r.name, id: r.gmo_id })));
       setLoading(false);
     })();
   };

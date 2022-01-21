@@ -28,20 +28,3 @@ Result1.parameters = {
     ],
   },
 };
-
-// Result1.decorators = [
-//   (Story) => (
-//     <RecoilRoot>
-//       <Story />
-//       <RecoilMutators isMediaExpanded={false} />
-//     </RecoilRoot>
-//   ),
-// ];
-//
-// const RecoilMutators: FC<{ isMediaExpanded: boolean }> = ({ isMediaExpanded }) => {
-//   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
-//   useEffect(() => {
-//     setIsMediaExpanded(isMediaExpanded);
-//   }, []);
-//   return <div />;
-// };

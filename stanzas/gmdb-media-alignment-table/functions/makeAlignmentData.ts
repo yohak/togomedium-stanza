@@ -25,14 +25,14 @@ const makeMediaRowProp = (
   footerList: ComponentInfo[]
 ): ComponentProps<typeof MediaRow> => {
   const medium: LabelInfo = {
-    id: mediumData.gmid,
+    id: mediumData.gm_id,
     label: mediumData.name,
   };
   const organisms: LabelInfo[] = mediumData.organisms.map(
     (taxid) =>
       organismsData
-        .filter((organism) => organism.taxid === taxid)
-        .map((organism) => ({ id: organism.taxid, label: organism.name }))[0]
+        .filter((organism) => organism.tax_id === taxid)
+        .map((organism) => ({ id: organism.tax_id, label: organism.name }))[0]
   );
   const components: CellProps[] = footerList.map((data) => {
     return {
@@ -71,7 +71,7 @@ const findComponentState = (
 const listChildComponents = (id: string, components: RawComponent[]): string[] => {
   const result: string[] = [];
   const addItem = (parentId: string) => {
-    const children = components.filter((c) => c.parent === parentId).map((c) => c.gmoid);
+    const children = components.filter((c) => c.parent === parentId).map((c) => c.gmo_id);
     result.push(...children);
     children.forEach((c) => addItem(c));
   };

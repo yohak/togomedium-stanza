@@ -2,17 +2,17 @@ import { Nullable } from "yohak-tools";
 
 export type MediaAlignmentTableResponse = {
   media: {
-    gmid: string;
+    gm_id: string;
     name: string;
     components: string[];
     organisms: string[];
   }[];
   organisms: {
-    taxid: string;
+    tax_id: string;
     name: string;
   }[];
   components: {
-    gmoid: string;
+    gmo_id: string;
     name: string;
     parent: Nullable<string>;
     function: Nullable<string>;

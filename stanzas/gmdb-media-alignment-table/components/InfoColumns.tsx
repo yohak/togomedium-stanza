@@ -42,15 +42,15 @@ export const InfoColumns: FC<Props> = ({ data, css, className }) => {
       </div>
       {data.media.map((m) => {
         const organisms = m.organisms.map((taxid) => {
-          const organism = data.organisms.find((o) => o.taxid === taxid);
-          const id: string = organism ? organism.taxid : "";
+          const organism = data.organisms.find((o) => o.tax_id === taxid);
+          const id: string = organism ? organism.tax_id : "";
           const label: string = organism ? organism.name : "";
           return { id, label };
         });
         return (
           <MediaRow
-            key={m.gmid}
-            medium={{ id: m.gmid, label: m.name }}
+            key={m.gm_id}
+            medium={{ id: m.gm_id, label: m.name }}
             organisms={organisms}
             components={[]}
           />

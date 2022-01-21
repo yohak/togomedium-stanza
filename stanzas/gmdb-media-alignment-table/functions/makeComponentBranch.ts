@@ -4,7 +4,7 @@ import { ComponentBranch, ComponentTree, RawComponent } from "../types";
 export const makeComponentTree = (components: RawComponent[]): ComponentTree => {
   const items: ComponentTree = components.map((item) => ({
     name: item.name,
-    id: item.gmoid,
+    id: item.gmo_id,
     level: 0,
     parent: item.parent,
     children: [],
