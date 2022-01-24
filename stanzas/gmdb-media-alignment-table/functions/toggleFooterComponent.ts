@@ -1,5 +1,6 @@
 import { Optional } from "yohak-tools";
 import { findBranchFromTree } from "./findBranchFromTree";
+import { clone } from "../../../utils/clone";
 import { ComponentTree } from "../types";
 
 export const toggleFooterComponent = (id: string, data: ComponentTree): Optional<ComponentTree> => {
@@ -11,8 +12,4 @@ export const toggleFooterComponent = (id: string, data: ComponentTree): Optional
   } else {
     return undefined;
   }
-};
-
-const clone = <T>(obj: T): T => {
-  return JSON.parse(JSON.stringify(obj));
 };

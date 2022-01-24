@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
-import React, { ComponentProps, FC, useEffect, useState } from "react";
+import React, { ComponentProps, FC, RefObject, useEffect, useRef, useState } from "react";
 import { MediaListItem } from "./MediaListItem";
 import { COLOR_GRAY700, COLOR_GRAY_BG } from "../../../components/styles";
+import { deepEqual } from "../../../utils/deepEqual";
 import { AcceptsEmotion } from "../../../utils/types";
 import { useFoundMediaState } from "../states/foundMedia";
 import { useIsMediaLoading } from "../states/mediaLoadAbort";
@@ -13,8 +14,11 @@ type Props = {} & AcceptsEmotion;
 type MediaListInfo = Omit<ComponentProps<typeof MediaListItem>, "onClick">;
 
 export const MediaList: FC<Props> = ({ css, className }) => {
-  const { data, toggleChecked } = useMediaList();
   const isMediaLoading = useIsMediaLoading();
+  const scrollInnerRef = useRef<HTMLDivElement>(null);
+  const { data, toggleChecked } = useMediaList();
+  useResetMediaScroll(scrollInnerRef, data);
+
   return (
     <div css={[wrapper, css]} className={className}>
       {isMediaLoading && (
@@ -22,16 +26,23 @@ export const MediaList: FC<Props> = ({ css, className }) => {
           <CircularProgress color="inherit" size={40} />
         </div>
       )}
-      {data.map((item) => (
-        <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
-      ))}
+      <div css={inner} ref={scrollInnerRef}>
+        {data.map((item) => (
+          <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
+        ))}
+      </div>
     </div>
   );
 };
 
 const wrapper = css`
-  overflow-y: auto;
+  overflow: hidden;
   position: relative;
+`;
+
+const inner = css`
+  max-height: 100%;
+  overflow-y: auto;
 `;
 
 const loadingIndicator = css`
@@ -51,7 +62,7 @@ const useMediaList = () => {
   const [data, setData] = useState<MediaListInfo[]>([]);
   const foundMedia = useFoundMediaState();
   const selectedMedia = useSelectedMediaState();
-  const { toggleMediumSelection } = useSelectedMediaMutators();
+  const { toggleMediumSelection, setSelectedMedia } = useSelectedMediaMutators();
   const toggleChecked = (id: string) => {
     toggleMediumSelection(id);
   };
@@ -64,7 +75,18 @@ const useMediaList = () => {
       };
     });
     setData(result);
+    const updatedSelection = selectedMedia.filter((id) => result.find((info) => info.id === id));
+    if (!deepEqual(updatedSelection, selectedMedia)) {
+      setSelectedMedia(updatedSelection);
+    }
   }, [foundMedia, selectedMedia]);
 
   return { data, toggleChecked };
+};
+
+const useResetMediaScroll = (scrollInner: RefObject<HTMLDivElement>, data: MediaListInfo[]) => {
+  useEffect(() => {
+    if (!scrollInner.current) return;
+    scrollInner.current.scrollTop = 0;
+  }, [data]);
 };

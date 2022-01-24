@@ -6,6 +6,14 @@ export const mediaByAttributesResponse2: MediaByAttributesResponse = [
     name: "PYROBACULUM MEDIUM",
   },
   {
+    gm_id: "SY24",
+    name: "BG11 medium",
+  },
+  {
+    gm_id: "SY25",
+    name: "DEFERRIBACTER DESULFURICANS MEDIUM",
+  },
+  {
     gm_id: "SY78a",
     name: "METHANOBACTERIUM MEDIUM",
   },

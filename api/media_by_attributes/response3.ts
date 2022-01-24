@@ -2,6 +2,18 @@ import { MediaByAttributesResponse } from "./types";
 
 export const mediaByAttributesResponse3: MediaByAttributesResponse = [
   {
+    gm_id: "SY23",
+    name: "PYROBACULUM MEDIUM",
+  },
+  {
+    gm_id: "SY24",
+    name: "BG11 medium",
+  },
+  {
+    gm_id: "SY25",
+    name: "DEFERRIBACTER DESULFURICANS MEDIUM",
+  },
+  {
     gm_id: "JCM_M1",
     name: "MRS MEDIUM",
   },
