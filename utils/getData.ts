@@ -1,11 +1,16 @@
+import { Nullable } from "yohak-tools";
 import { isArray } from "yohak-tools/";
 import { ApiResponse, SimpleObject } from "./types";
 
 export const getData = async <ResponseBody, Params extends SimpleObject = SimpleObject>(
   url: string,
-  params: Params
+  params: Params,
+  abortController?: AbortController
 ): Promise<ApiResponse<ResponseBody>> => {
-  const response = await fetch(url, makeOptions(params));
+  const response = await fetch(
+    url,
+    makeOptions(params, abortController ? abortController.signal : null)
+  );
 
   if (response.status !== 200) {
     return {
@@ -28,7 +33,7 @@ export const makeFormBody = (params: SimpleObject) => {
   return formBody.join("&");
 };
 
-const makeOptions = (params: SimpleObject): RequestInit => {
+const makeOptions = (params: SimpleObject, signal: Nullable<AbortSignal> = null): RequestInit => {
   const body = makeFormBody(params);
   return {
     method: "POST",
@@ -38,5 +43,6 @@ const makeOptions = (params: SimpleObject): RequestInit => {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
     },
+    signal,
   };
 };

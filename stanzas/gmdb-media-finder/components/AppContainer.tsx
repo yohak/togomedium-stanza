@@ -37,7 +37,7 @@ const wrapper = css`
     gap: ${SIZE1};
     &:nth-of-type(2) {
       max-width: 360px;
-      min-width: 300px;
+      min-width: 360px;
     }
   }
 `;
