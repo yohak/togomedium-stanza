@@ -1,8 +1,9 @@
 import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { g as getData } from './get-data-8c61e123.js';
-import { i as importWebFontForTogoMedium } from './stanza-488096af.js';
+import { g as getData } from './getData-f9032f11.js';
+import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 import { u as unescapeJsonString, c as capitalizeFirstLetter } from './string-ad764b4c.js';
 import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
+import './index-d49f0e1c.js';
 
 class GmdbOrganismByTaxid extends Stanza {
     render() {

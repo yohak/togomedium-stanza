@@ -1,7 +1,8 @@
 import { _ as __awaiter } from './stanza-f44e302d.js';
+import { d as dist } from './index-d49f0e1c.js';
 
-const getData = (url, params) => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield fetch(url, makeOptions(params));
+const getData = (url, params, abortController) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch(url, makeOptions(params, abortController ? abortController.signal : null));
     if (response.status !== 200) {
         return {
             status: response.status,
@@ -16,10 +17,10 @@ const getData = (url, params) => __awaiter(void 0, void 0, void 0, function* () 
     };
 });
 const makeFormBody = (params) => {
-    const formBody = Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+    const formBody = Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(dist.isArray(value) ? value.join(",") : value)}`);
     return formBody.join("&");
 };
-const makeOptions = (params) => {
+const makeOptions = (params, signal = null) => {
     const body = makeFormBody(params);
     return {
         method: "POST",
@@ -29,8 +30,9 @@ const makeOptions = (params) => {
             Accept: "application/json",
             "Content-Type": "application/x-www-form-urlencoded",
         },
+        signal,
     };
 };
 
 export { getData as g, makeFormBody as m };
-//# sourceMappingURL=get-data-8c61e123.js.map
+//# sourceMappingURL=getData-f9032f11.js.map

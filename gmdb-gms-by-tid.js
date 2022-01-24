@@ -1,7 +1,7 @@
 import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
 import { s as select } from './index-7ac31beb.js';
 import './index-d49f0e1c.js';
-import { g as getData } from './get-data-8c61e123.js';
+import { g as getData } from './getData-f9032f11.js';
 import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
 
 let mouseX = 0;

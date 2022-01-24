@@ -1,9 +1,10 @@
-import { g as getAugmentedNamespace, S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { _ as _extends, c as capitalize, s as setRef, u as useEnhancedEffect, a as useEventCallback, b as useForkRef, d as useIsFocusVisible, C as ClassNameGenerator, j as jsxRuntime, n as newStyled, e as css, f as COLOR_WHITE, S as SIZE1, g as SIZE4, h as SIZE3, i as jsx, k as jsxs, l as jsx$1, m as COLOR_GRAY700, o as generateUtilityClass, p as generateUtilityClasses, q as styled, r as alpha, t as react, v as useThemeProps, w as _objectWithoutPropertiesLoose, x as clsx, y as composeClasses, z as COLOR_PRIMARY, A as COLOR_GRAY, F as FONT_EN, B as COLOR_GRAY_LINE, D as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-514a31e5.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, c as Recoil_index_4 } from './recoil-d3a049b1.js';
-import { i as isHostComponent, c as createChainedFunction, a as createSvgIcon$1, d as debounce, b as isMuiElement, o as ownerDocument, e as ownerWindow, u as useId, f as useControlled, P as Popper, g as useTheme, G as Grow } from './Grow-b0e272fa.js';
-import { i as importWebFontForTogoMedium } from './stanza-488096af.js';
+import { g as getAugmentedNamespace, _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
+import { i as isHostComponent, _ as _extends, c as capitalize, a as createChainedFunction, b as createSvgIcon$1, d as debounce, e as isMuiElement, o as ownerDocument, f as ownerWindow, s as setRef, u as useEnhancedEffect, g as useId, h as useControlled, j as useEventCallback, k as useForkRef, l as useIsFocusVisible, C as ClassNameGenerator, m as jsxRuntime, n as newStyled, p as css, q as COLOR_WHITE, S as SIZE1, r as SIZE4, t as SIZE3, v as jsx, w as jsxs, x as jsx$1, y as COLOR_GRAY700, z as generateUtilityClass, A as generateUtilityClasses, B as styled, P as Popper, D as alpha, E as react, F as useThemeProps, G as _objectWithoutPropertiesLoose, H as useTheme, I as clsx, J as composeClasses, K as Grow, L as COLOR_PRIMARY, M as COLOR_GRAY, N as FONT_EN, O as COLOR_GRAY_LINE, Q as Fragment, R as ReactDOM, T as EmotionCacheProvider } from './EmotionCacheProvider-92758dbd.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, P as PATH_COMPONENT, c as PATH_MEDIUM, d as PATH_ORGANISM, A as API_MEDIA_ALIMENT, e as Recoil_index_4 } from './paths-9e442dbc.js';
+import { g as getData } from './getData-f9032f11.js';
+import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 import { s as stringToArray } from './string-ad764b4c.js';
+import './index-d49f0e1c.js';
 
 var AddBoxOutlined = {};
 
@@ -216,6 +217,7 @@ const wrapper$9 = css `
   padding-bottom: ${SIZE4};
   & > .text {
     writing-mode: vertical-rl;
+    transform: translateX(-1px);
   }
   & > .spacer {
     display: block;
@@ -229,6 +231,8 @@ const iconBlank = css `
 `;
 const icon$1 = css `
   ${iconBlank};
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 `;
 
@@ -922,11 +926,6 @@ const Tooltip = /*#__PURE__*/react.exports.forwardRef(function Tooltip(inProps, 
 });
 var Tooltip$1 = Tooltip;
 
-const PATH_BASE = "http://growthmedium.org";
-const PATH_MEDIUM = `${PATH_BASE}/medium/`;
-const PATH_ORGANISM = `${PATH_BASE}/organism/`;
-const PATH_COMPONENT = `${PATH_BASE}/components/`;
-
 const AlignmentCell = ({ state, label, id }) => {
     return (jsx("div", Object.assign({ css: wrapper$5 }, { children: jsx(Tooltip$1, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${PATH_COMPONENT}${id}`, target: "_blank", className: `icon-${state} icon`, rel: "noreferrer" }, { children: jsx("span", {}, void 0) }), void 0) }), void 0) }), void 0));
 };
@@ -1038,12 +1037,12 @@ const makeAlignmentData = (data, footerComponents) => {
 };
 const makeMediaRowProp = (mediumData, organismsData, componentsData, footerList) => {
     const medium = {
-        id: mediumData.gmid,
+        id: mediumData.gm_id,
         label: mediumData.name,
     };
     const organisms = mediumData.organisms.map((taxid) => organismsData
-        .filter((organism) => organism.taxid === taxid)
-        .map((organism) => ({ id: organism.taxid, label: organism.name }))[0]);
+        .filter((organism) => organism.tax_id === taxid)
+        .map((organism) => ({ id: organism.tax_id, label: organism.name }))[0]);
     const components = footerList.map((data) => {
         return {
             id: data.id,
@@ -1072,7 +1071,7 @@ const findComponentState = (id, mediumComponents, allComponents, footerList) => 
 const listChildComponents = (id, components) => {
     const result = [];
     const addItem = (parentId) => {
-        const children = components.filter((c) => c.parent === parentId).map((c) => c.gmoid);
+        const children = components.filter((c) => c.parent === parentId).map((c) => c.gmo_id);
         result.push(...children);
         children.forEach((c) => addItem(c));
     };
@@ -1083,7 +1082,7 @@ const listChildComponents = (id, components) => {
 const makeComponentTree = (components) => {
     const items = components.map((item) => ({
         name: item.name,
-        id: item.gmoid,
+        id: item.gmo_id,
         level: 0,
         parent: item.parent,
         children: [],
@@ -1163,12 +1162,12 @@ const InfoColumns = ({ data, css, className }) => {
     };
     return (jsxs("div", Object.assign({ css: [wrapper$1, css], className: className }, { children: [jsxs("div", Object.assign({ css: header$1 }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }, void 0), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }, void 0)] }), void 0), data.media.map((m) => {
                 const organisms = m.organisms.map((taxid) => {
-                    const organism = data.organisms.find((o) => o.taxid === taxid);
-                    const id = organism ? organism.taxid : "";
+                    const organism = data.organisms.find((o) => o.tax_id === taxid);
+                    const id = organism ? organism.tax_id : "";
                     const label = organism ? organism.name : "";
                     return { id, label };
                 });
-                return (jsx(MediaRow, { medium: { id: m.gmid, label: m.name }, organisms: organisms, components: [] }, m.gmid));
+                return (jsx(MediaRow, { medium: { id: m.gm_id, label: m.name }, organisms: organisms, components: [] }, m.gm_id));
             }), jsxs("div", Object.assign({ css: spacerRow }, { children: [jsx("span", { css: spacer, className: isMediaExpanded ? "expanded" : "compact" }, void 0), jsx("span", { css: spacer, className: isOrganismsExpanded ? "expanded" : "compact" }, void 0)] }), void 0)] }), void 0));
 };
 const wrapper$1 = css `
@@ -1226,121 +1225,14 @@ const infoColumns = css `
   left: 0;
 `;
 
-const mediaAlignmentTableResponse1 = {
-    media: [
-        {
-            gmid: "HM_D00001a",
-            name: "REACTIVATION WITH LIQUID MEDIUM 1",
-            components: ["GMO_001001", "GMO_001007", "GMO_001003", "GMO_000012"],
-            organisms: ["384676", "643561"],
-        },
-        {
-            gmid: "HM_D00065",
-            name: "GYM STREPTOMYCES MEDIUM",
-            components: [
-                "GMO_001001",
-                "GMO_001830",
-                "GMO_001063",
-                "GMO_001007",
-                "GMO_001059",
-                "GMO_001815",
-            ],
-            organisms: ["316284", "446462"],
-        },
-    ],
-    organisms: [
-        {
-            taxid: "384676",
-            name: "Pseudomonas entomophila L48",
-        },
-        {
-            taxid: "643561",
-            name: "Acidovorax avenae subsp. avenae ATCC 19860",
-        },
-        {
-            taxid: "316284",
-            name: "Streptomyces noursei ATCC 11455",
-        },
-        {
-            taxid: "446462",
-            name: "Actinosynnema mirum DSM 43827",
-        },
-    ],
-    components: [
-        {
-            gmoid: "GMO_001001",
-            name: "Distilled water",
-            parent: "GMO_001890",
-            function: "Solvating media",
-        },
-        {
-            gmoid: "GMO_001890",
-            name: "Purified water",
-            parent: null,
-            function: "Solvating media",
-        },
-        {
-            gmoid: "GMO_001007",
-            name: "Agar",
-            parent: null,
-            function: "Solidifying component",
-        },
-        {
-            gmoid: "GMO_000011",
-            name: "Extract",
-            parent: null,
-            function: null,
-        },
-        {
-            gmoid: "GMO_001074",
-            name: "Meat extract",
-            parent: "GMO_000011",
-            function: null,
-        },
-        {
-            gmoid: "GMO_001830",
-            name: "Liver extract",
-            parent: "GMO_001074",
-            function: null,
-        },
-        {
-            gmoid: "GMO_000012",
-            name: "Peptone",
-            parent: null,
-            function: null,
-        },
-        {
-            gmoid: "GMO_001003",
-            name: "Yeast extract",
-            parent: "GMO_000011",
-            function: "Nutrient source",
-        },
-        {
-            gmoid: "GMO_001063",
-            name: "Calcium carbonate",
-            parent: null,
-            function: "Protective agent",
-        },
-        {
-            gmoid: "GMO_001059",
-            name: "Malt extract",
-            parent: "GMO_000011",
-            function: null,
-        },
-        {
-            gmoid: "GMO_001815",
-            name: "Glucose",
-            parent: null,
-            function: null,
-        },
-    ],
-};
-
-const App = ({ gmids }) => {
+const App = ({ gm_ids }) => {
     const [data, setData] = react.exports.useState();
     react.exports.useEffect(() => {
-        setData(mediaAlignmentTableResponse1);
-    }, []);
+        (() => __awaiter(void 0, void 0, void 0, function* () {
+            const response = yield getData(API_MEDIA_ALIMENT, {});
+            setData(response.body);
+        }))();
+    }, [gm_ids]);
     return jsx(Fragment, { children: data && jsx(ScrollableTable, { data: data }, void 0) }, void 0);
 };
 
@@ -1356,8 +1248,8 @@ class HelloReact extends Stanza {
     }
     _render() {
         const main = this.root.querySelector("main");
-        const gmids = stringToArray(this.params.gm_ids);
-        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, { gmids }), void 0) }, void 0) }, void 0) }, void 0), main);
+        const gm_ids = stringToArray(this.params.gm_ids);
+        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, { gm_ids }), void 0) }, void 0) }, void 0) }, void 0), main);
     }
 }
 

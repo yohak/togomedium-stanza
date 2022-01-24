@@ -1,4 +1,4 @@
-import { G as React, R as ReactDOM } from './EmotionCacheProvider-514a31e5.js';
+import { U as React, R as ReactDOM } from './EmotionCacheProvider-92758dbd.js';
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -7812,5 +7812,15 @@ var Recoil_index_6 = Recoil_index.atom;
 var Recoil_index_18 = Recoil_index.useRecoilValue;
 var Recoil_index_22 = Recoil_index.useSetRecoilState;
 
-export { Recoil_index_6 as R, Recoil_index_18 as a, Recoil_index_22 as b, Recoil_index_4 as c };
-//# sourceMappingURL=recoil-d3a049b1.js.map
+const PATH_BASE = "http://growthmedium.org";
+const PATH_MEDIUM = `${PATH_BASE}/medium/`;
+const PATH_ORGANISM = `${PATH_BASE}/organism/`;
+const PATH_COMPONENT = `${PATH_BASE}/components/`;
+
+const PATH_API = `http://growthmedium.org/sparqlist/api/`;
+const API_MEDIA_ALIMENT = `${PATH_API}gmdb_media_alignment_by_gmids`;
+const API_ALL_COMPONENTS = `${PATH_API}gmdb_all_components`;
+const API_MEDIA_BY_ATTRIBUTES = `${PATH_API}gmdb_media_by_attributes`;
+
+export { API_MEDIA_ALIMENT as A, PATH_COMPONENT as P, Recoil_index_6 as R, Recoil_index_18 as a, Recoil_index_22 as b, PATH_MEDIUM as c, PATH_ORGANISM as d, Recoil_index_4 as e, API_ALL_COMPONENTS as f, API_MEDIA_BY_ATTRIBUTES as g };
+//# sourceMappingURL=paths-9e442dbc.js.map
