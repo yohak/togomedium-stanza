@@ -3,7 +3,7 @@ import { mediaByAttributesResponse1 } from "./response1";
 import { mediaByAttributesResponse2 } from "./response2";
 import { mediaByAttributesResponse3 } from "./response3";
 import { mediaByAttributesResponse4 } from "./response4";
-import { MediaByAttributesParams, MediaByAttributesResponse } from "./types";
+import { MediaByAttributesResponse } from "./types";
 import { API_MEDIA_BY_ATTRIBUTES } from "../paths";
 
 const post = rest.post<string, MediaByAttributesResponse, never>(
