@@ -44,7 +44,6 @@ const wrapper = css`
 
 const queryPane = css`
   flex-grow: 1;
-  min-width: 700px;
 `;
 
 const mediaQueryPane = css`
