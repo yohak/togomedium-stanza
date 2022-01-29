@@ -1,8 +1,8 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 import { toggleFooterComponent } from "../functions/toggleFooterComponent";
-import { ComponentTree } from "../types";
+import { ComponentTrunk } from "../types";
 
-const componentTree = atom<ComponentTree>({ key: "componentTree", default: [] });
+const componentTree = atom<ComponentTrunk>({ key: "componentTree", default: [] });
 
 export const useComponentTreeState = () => {
   return useRecoilValue(componentTree);

@@ -3,8 +3,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, SyntheticEvent, useState } from "react";
 import { AllComponentsResponse } from "../../../api/all-components/types";
 import { API_ALL_COMPONENTS } from "../../../api/paths";
-import { LabelInfo } from "../../../components/types";
 import { getData } from "../../../utils/getData";
+import { LabelInfo } from "../../../utils/types";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;

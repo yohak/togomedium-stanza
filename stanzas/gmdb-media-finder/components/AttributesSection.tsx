@@ -5,8 +5,8 @@ import {
   MediaByAttributesResponse,
 } from "../../../api/media_by_attributes/types";
 import { API_MEDIA_BY_ATTRIBUTES } from "../../../api/paths";
-import { LabelInfo } from "../../../components/types";
 import { getData } from "../../../utils/getData";
+import { LabelInfo } from "../../../utils/types";
 import { useFoundMediaMutators } from "../states/foundMedia";
 import { useMediaLoadAbortMutators } from "../states/mediaLoadAbort";
 import { useQueryDataMutators } from "../states/queryData";

@@ -1,7 +1,7 @@
 import { makeComponentTree } from "./makeComponentBranch";
 import { toggleFooterComponent } from "./toggleFooterComponent";
 import { makeRawComponent } from "../../../utils/testing";
-import { ComponentTree } from "../types";
+import { ComponentTrunk } from "../types";
 
 describe("toggleFooterComponent", () => {
   it("should work", () => {
@@ -15,7 +15,7 @@ describe("toggleFooterComponent", () => {
   });
 });
 
-const tree: ComponentTree = makeComponentTree([
+const tree: ComponentTrunk = makeComponentTree([
   makeRawComponent("1"),
   makeRawComponent("2"),
   makeRawComponent("3"),

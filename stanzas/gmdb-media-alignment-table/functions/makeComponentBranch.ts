@@ -1,8 +1,7 @@
-import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { ComponentBranch, ComponentTree, RawComponent } from "../types";
+import { ComponentBranch, ComponentTrunk, RawComponent } from "../types";
 
-export const makeComponentTree = (components: RawComponent[]): ComponentTree => {
-  const items: ComponentTree = components.map((item) => ({
+export const makeComponentTree = (components: RawComponent[]): ComponentTrunk => {
+  const items: ComponentTrunk = components.map((item) => ({
     name: item.name,
     id: item.gmo_id,
     level: 0,

@@ -13,11 +13,11 @@ const Template: ComponentStory<typeof TreeNode> = (args) => <TreeNode {...args} 
 const defaultArgs: ComponentProps<typeof TreeNode> = {
   label: "Archaea",
   id: "2157",
-  linkString: "taxid:2157",
-  linkURL: "/",
   level: 0,
   check: "checked",
   hasChildren: true,
+  linkString: "taxid:2157",
+  linkURL: "/",
   isOpen: false,
   onClickCheck: () => {
     console.log("onClickCheck");

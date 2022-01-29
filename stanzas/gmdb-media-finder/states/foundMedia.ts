@@ -1,5 +1,5 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { LabelInfo } from "../../../components/types";
+import { LabelInfo } from "../../../utils/types";
 
 const foundMedia = atom<LabelInfo[]>({ key: "foundMedia", default: [] });
 

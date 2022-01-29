@@ -14,12 +14,12 @@ export type CheckStatus = "none" | "checked" | "indeterminate";
 type Props = {
   label: string;
   id: string;
-  linkString?: string;
-  linkURL?: string;
-  level: number;
   check: CheckStatus;
   hasChildren: boolean;
   isOpen: boolean;
+  level: number;
+  linkString?: string;
+  linkURL?: string;
   onClickCheck: (id: string) => void;
   onToggleChildren: (id: string) => void;
 };
@@ -87,7 +87,9 @@ const left = css`
   align-items: center;
   gap: 12px;
   line-height: 1;
+  font-size: 16px;
   a {
+    font-size: 14px;
     color: ${COLOR_PRIMARY};
   }
 `;

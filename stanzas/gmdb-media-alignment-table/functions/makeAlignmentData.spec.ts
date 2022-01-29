@@ -4,7 +4,7 @@ import { makeFooterComponents } from "./makeFooterComponents";
 import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
 import { makeRawComponent } from "../../../utils/testing";
-import { ComponentTree, RawComponent } from "../types";
+import { ComponentTrunk, RawComponent } from "../types";
 
 describe("makeAlignmentData", () => {
   it("should work", () => {
@@ -24,7 +24,10 @@ describe("makeAlignmentData", () => {
   });
 });
 
-const makeResult = (data: MediaAlignmentTableResponse, modTree?: (tree: ComponentTree) => void) => {
+const makeResult = (
+  data: MediaAlignmentTableResponse,
+  modTree?: (tree: ComponentTrunk) => void
+) => {
   const tree = makeComponentTree(data.components);
   modTree ? modTree(tree) : "";
   console.log(tree[0].isOpen);

@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { MediaList } from "./MediaList";
-import { LabelInfo } from "../../../components/types";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { LabelInfo } from "../../../utils/types";
 import { useFoundMediaMutators } from "../states/foundMedia";
 
 type WrapperProps = { media: LabelInfo[] } & ComponentProps<typeof MediaList>;

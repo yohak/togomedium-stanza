@@ -1,10 +1,10 @@
 import { ComponentProps } from "react";
 import { FooterCell } from "../components/FooterCell";
-import { ComponentBranch, ComponentTree } from "../types";
+import { ComponentBranch, ComponentTrunk } from "../types";
 
 type Props = ComponentProps<typeof FooterCell>;
 
-export const makeFooterComponents = (data: ComponentTree): Props[] => {
+export const makeFooterComponents = (data: ComponentTrunk): Props[] => {
   const result: Props[] = [];
   data.forEach((item) => {
     addToCollection(item, result);
