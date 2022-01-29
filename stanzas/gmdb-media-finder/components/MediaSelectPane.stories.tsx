@@ -1,13 +1,11 @@
 import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
-import { ActionPane } from "./ActionPane";
 import { MediaSelectPane } from "./MediaSelectPane";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 import { LabelInfo } from "../../../utils/types";
 import { useFoundMediaMutators } from "../states/foundMedia";
 import { QueryData, useQueryDataMutators } from "../states/queryData";
-import { useSelectedMediaMutators } from "../states/selectedMedia";
 
 type WrapperProps = { query: QueryData; foundMedia: LabelInfo[] } & ComponentProps<
   typeof MediaSelectPane
@@ -29,7 +27,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: makeComponentStoryTitle("MediaSelectPane", "MediaFinder"),
+  title: makeComponentStoryTitle(MediaSelectPane.name, "MediaFinder"),
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 

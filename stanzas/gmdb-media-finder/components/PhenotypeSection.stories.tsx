@@ -3,7 +3,7 @@ import { PhenotypeSection } from "./PhenotypeSection";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("PhenotypeSection", "MediaFinder"),
+  title: makeComponentStoryTitle(PhenotypeSection.name, "MediaFinder"),
   component: PhenotypeSection,
 } as ComponentMeta<typeof PhenotypeSection>;
 

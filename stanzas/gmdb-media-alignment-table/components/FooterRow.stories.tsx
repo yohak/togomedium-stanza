@@ -22,7 +22,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: makeComponentStoryTitle("FooterRow", "MediaAlignmentTable"),
+  title: makeComponentStoryTitle(FooterRow.name, "MediaAlignmentTable"),
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 

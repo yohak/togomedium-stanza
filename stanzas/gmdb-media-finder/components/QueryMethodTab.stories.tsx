@@ -5,7 +5,7 @@ import { COLOR_WHITE } from "../../../components/styles";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("QueryMethodTab", "MediaFinder"),
+  title: makeComponentStoryTitle(QueryMethodTab.name, "MediaFinder"),
   component: QueryMethodTab,
 } as ComponentMeta<typeof QueryMethodTab>;
 

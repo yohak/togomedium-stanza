@@ -14,7 +14,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: makeComponentStoryTitle("ActionPane", "MediaFinder"),
+  title: makeComponentStoryTitle(ActionPane.name, "MediaFinder"),
   component: Wrapper,
   args: { actionLabel: "compare media" },
 } as ComponentMeta<typeof Wrapper>;

@@ -5,7 +5,7 @@ import { allComponentsMocks } from "../../../api/all-components/msw";
 import { makeComponentStoryTitle, makeMswParameter } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("QueryPane", "MediaFinder"),
+  title: makeComponentStoryTitle(QueryPane.name, "MediaFinder"),
   component: QueryPane,
 } as ComponentMeta<typeof QueryPane>;
 

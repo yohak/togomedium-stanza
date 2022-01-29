@@ -4,7 +4,7 @@ import { TaxonomicTree } from "./TaxonomicTree";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("TaxonomicTree", "MediaFinder"),
+  title: makeComponentStoryTitle(TaxonomicTree.name, "MediaFinder"),
   component: TaxonomicTree,
 } as ComponentMeta<typeof TaxonomicTree>;
 

@@ -3,7 +3,7 @@ import { MediaListItem } from "./MediaListItem";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("MediaListItem", "MediaFinder"),
+  title: makeComponentStoryTitle(MediaListItem.name, "MediaFinder"),
   component: MediaListItem,
 } as ComponentMeta<typeof MediaListItem>;
 

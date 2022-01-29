@@ -24,7 +24,7 @@ type Props = {
   onToggleChildren: (id: string) => void;
 };
 
-export const TreeNode: FC<Props> = ({
+export const BranchView: FC<Props> = ({
   label,
   linkString,
   linkURL,

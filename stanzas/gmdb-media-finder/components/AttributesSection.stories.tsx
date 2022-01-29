@@ -6,7 +6,7 @@ import { COLOR_WHITE, SIZE2 } from "../../../components/styles";
 import { makeComponentStoryTitle, makeMswParameter } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("AttributesSection", "MediaFinder"),
+  title: makeComponentStoryTitle(AttributesSection.name, "MediaFinder"),
   component: AttributesSection,
 } as ComponentMeta<typeof AttributesSection>;
 

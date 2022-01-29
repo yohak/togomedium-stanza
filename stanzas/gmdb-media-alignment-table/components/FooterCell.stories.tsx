@@ -3,7 +3,7 @@ import { FooterCell } from "./FooterCell";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("FooterCell", "MediaAlignmentTable"),
+  title: makeComponentStoryTitle(FooterCell.name, "MediaAlignmentTable"),
   component: FooterCell,
 } as ComponentMeta<typeof FooterCell>;
 

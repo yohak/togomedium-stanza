@@ -4,7 +4,7 @@ import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("InfoColumns", "MediaAlignmentTable"),
+  title: makeComponentStoryTitle(InfoColumns.name, "MediaAlignmentTable"),
   component: InfoColumns,
 } as ComponentMeta<typeof InfoColumns>;
 

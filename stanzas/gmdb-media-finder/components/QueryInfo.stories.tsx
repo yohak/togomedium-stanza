@@ -22,7 +22,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: makeComponentStoryTitle("QueryInfo", "MediaFinder"),
+  title: makeComponentStoryTitle(QueryInfo.name, "MediaFinder"),
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 

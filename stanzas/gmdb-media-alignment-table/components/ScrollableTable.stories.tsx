@@ -4,7 +4,7 @@ import { mediaAlignmentTableResponse2 } from "../../../api/media-alignment-table
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("ScrollableTable", "MediaAlignmentTable"),
+  title: makeComponentStoryTitle(ScrollableTable.name, "MediaAlignmentTable"),
   component: ScrollableTable,
 } as ComponentMeta<typeof ScrollableTable>;
 

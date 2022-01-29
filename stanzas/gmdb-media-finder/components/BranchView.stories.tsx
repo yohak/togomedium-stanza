@@ -1,16 +1,16 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { TreeNode } from "./TreeNode";
+import { BranchView } from "./BranchView";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("TreeNode", "MediaFinder"),
-  component: TreeNode,
-} as ComponentMeta<typeof TreeNode>;
+  title: makeComponentStoryTitle(BranchView.name, "MediaFinder"),
+  component: BranchView,
+} as ComponentMeta<typeof BranchView>;
 
-const Template: ComponentStory<typeof TreeNode> = (args) => <TreeNode {...args} />;
+const Template: ComponentStory<typeof BranchView> = (args) => <BranchView {...args} />;
 
-const defaultArgs: ComponentProps<typeof TreeNode> = {
+const defaultArgs: ComponentProps<typeof BranchView> = {
   label: "Archaea",
   id: "2157",
   level: 0,

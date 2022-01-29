@@ -1,10 +1,10 @@
 import React, { ComponentProps, FC, useEffect, useState } from "react";
 import { Nullable } from "yohak-tools";
-import { TreeNode } from "./TreeNode";
+import { BranchView } from "./BranchView";
 
 type Props = {};
 
-type NodeProps = Omit<ComponentProps<typeof TreeNode>, "onToggleChildren" | "onClickCheck">;
+type NodeProps = Omit<ComponentProps<typeof BranchView>, "onToggleChildren" | "onClickCheck">;
 
 type TreeData = {
   id: string;
@@ -22,7 +22,7 @@ export const TaxonomicTree: FC<Props> = () => {
   return (
     <div>
       {data.map((item) => (
-        <TreeNode key={item.id} {...{ ...item, onClickCheck, onToggleChildren }} />
+        <BranchView key={item.id} {...{ ...item, onClickCheck, onToggleChildren }} />
       ))}
     </div>
   );

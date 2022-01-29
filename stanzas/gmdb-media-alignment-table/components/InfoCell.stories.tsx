@@ -4,7 +4,7 @@ import { PATH_MEDIUM, PATH_ORGANISM } from "../../../components/consts";
 import { makeComponentStoryTitle } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("InfoCell", "MediaAlignmentTable"),
+  title: makeComponentStoryTitle(InfoCell.name, "MediaAlignmentTable"),
   component: InfoCell,
 } as ComponentMeta<typeof InfoCell>;
 

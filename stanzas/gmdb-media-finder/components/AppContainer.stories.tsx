@@ -5,7 +5,7 @@ import { mediaByAttributesMocks } from "../../../api/media_by_attributes/msw";
 import { makeComponentStoryTitle, makeMswParameter } from "../../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle("AppContainer", "MediaFinder"),
+  title: makeComponentStoryTitle(AppContainer.name, "MediaFinder"),
   component: AppContainer,
 } as ComponentMeta<typeof AppContainer>;
 

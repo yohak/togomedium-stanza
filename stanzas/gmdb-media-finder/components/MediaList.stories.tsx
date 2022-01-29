@@ -15,7 +15,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: makeComponentStoryTitle("MediaList", "MediaFinder"),
+  title: makeComponentStoryTitle(MediaList.name, "MediaFinder"),
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 
