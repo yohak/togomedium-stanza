@@ -15,7 +15,7 @@ export const AppContainer: FC<Props> = ({}) => {
       </div>
       <div>
         <MediaSelectPane css={mediaQueryPane} />
-        <ActionPane actionLabel={"COMPARE"} />
+        <ActionPane actionLabel={"Compare"} />
       </div>
     </div>
   );

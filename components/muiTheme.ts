@@ -15,5 +15,8 @@ export const muiTheme = createTheme({
     MuiTab: {
       styleOverrides: {},
     },
+    MuiButton: {
+      styleOverrides: {},
+    },
   },
 });

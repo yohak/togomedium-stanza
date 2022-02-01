@@ -17,27 +17,26 @@ type Props = {
   check: CheckStatus;
   hasChildren: boolean;
   isOpen: boolean;
-  level: number;
   linkString?: string;
   linkURL?: string;
   onClickCheck: (id: string) => void;
   onToggleChildren: (id: string) => void;
 };
 
-export const BranchView: FC<Props> = ({
+export const TreeBranchView: FC<Props> = ({
   label,
   linkString,
   linkURL,
   id,
-  level,
   check,
   hasChildren,
   isOpen,
   onClickCheck,
   onToggleChildren,
+  children,
 }) => {
   return (
-    <div css={wrapper} style={{ paddingLeft: level * 32 }}>
+    <li css={wrapper}>
       <div css={inner}>
         <div css={left}>
           <span onClick={() => onToggleChildren(id)}>
@@ -56,7 +55,8 @@ export const BranchView: FC<Props> = ({
           onClick={() => onClickCheck(id)}
         />
       </div>
-    </div>
+      {isOpen && !!children && <ul css={childrenWrapper}>{children}</ul>}
+    </li>
   );
 };
 
@@ -67,8 +67,10 @@ const ToggleIcon: FC<{ hasChildren: boolean; isOpen: boolean }> = ({ hasChildren
 };
 
 const wrapper = css`
+  margin-top: -1px;
   display: flex;
   width: 100%;
+  flex-direction: column;
 `;
 
 const inner = css`
@@ -103,4 +105,8 @@ const icon = css`
 
 const clickable = css`
   cursor: pointer;
+`;
+
+const childrenWrapper = css`
+  padding-left: 32px;
 `;

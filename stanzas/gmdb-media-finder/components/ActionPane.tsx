@@ -21,11 +21,16 @@ export const ActionPane: FC<Props> = ({ actionLabel }) => {
     <div css={wrapper}>
       <p className={"info"}>{getInfoText(selectedMedia.length)}</p>
       <div css={buttonWrapper}>
-        <Button variant="contained" disableElevation={true} disabled={selectedMedia.length === 0}>
-          {actionLabel.toUpperCase()}
+        <Button
+          variant="contained"
+          disableElevation={true}
+          disabled={selectedMedia.length === 0}
+          sx={{ textTransform: "none" }}
+        >
+          {actionLabel}
         </Button>
-        <Button variant="outlined" onClick={clearSelectedMedia}>
-          CLEAR SELECTION
+        <Button variant="outlined" onClick={clearSelectedMedia} sx={{ textTransform: "none" }}>
+          Clear selection
         </Button>
       </div>
     </div>
@@ -46,6 +51,7 @@ const wrapper = css`
   ${ROUNDED_CORNER};
   background-color: ${COLOR_WHITE};
   padding: ${SIZE1} ${SIZE2};
+
   p.info {
     margin-bottom: ${SIZE05};
     font-size: 18px;
@@ -56,6 +62,7 @@ const wrapper = css`
 const buttonWrapper = css`
   display: flex;
   gap: ${SIZE1};
+
   & > * {
     flex-grow: 1;
     flex-basis: 0;
