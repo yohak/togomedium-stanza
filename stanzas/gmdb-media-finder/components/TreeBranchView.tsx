@@ -1,8 +1,11 @@
 import { css } from "@emotion/react";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
+import { AcceptsEmotion } from "yohak-tools";
 import { IconCompact, IconExpand, IconNoChildren } from "../../../components/icons";
 import {
+  COLOR_GRAY300,
+  COLOR_GRAY400,
   COLOR_GRAY700,
   COLOR_GRAY_LINE,
   COLOR_PRIMARY,
@@ -17,11 +20,12 @@ type Props = {
   check: CheckStatus;
   hasChildren: boolean;
   isOpen: boolean;
+  tag?: string;
   linkString?: string;
   linkURL?: string;
   onClickCheck: (id: string) => void;
   onToggleChildren: (id: string) => void;
-};
+} & AcceptsEmotion;
 
 export const TreeBranchView: FC<Props> = ({
   label,
@@ -29,20 +33,24 @@ export const TreeBranchView: FC<Props> = ({
   linkURL,
   id,
   check,
+  tag,
   hasChildren,
   isOpen,
   onClickCheck,
   onToggleChildren,
   children,
+  className,
+  css,
 }) => {
   return (
-    <li css={wrapper}>
+    <li css={[wrapper, css]} className={className}>
       <div css={inner}>
         <div css={left}>
           <span onClick={() => onToggleChildren(id)}>
             <ToggleIcon {...{ hasChildren, isOpen }} />
           </span>
           <span>{label}</span>
+          {tag && <span css={tagTip}>{tag}</span>}
           {linkString && linkURL && (
             <a href={linkURL} target="_blank" rel="noreferrer">
               [{linkString}]
@@ -87,7 +95,7 @@ const left = css`
   display: flex;
   justify-content: left;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   line-height: 1;
   font-size: 16px;
   a {
@@ -98,15 +106,23 @@ const left = css`
 
 const icon = css`
   display: block;
-  color: ${COLOR_GRAY700};
+  color: ${COLOR_GRAY300};
   width: 24px;
   height: 24px;
 `;
 
 const clickable = css`
   cursor: pointer;
+  color: ${COLOR_GRAY700};
 `;
 
 const childrenWrapper = css`
   padding-left: 32px;
+`;
+const tagTip = css`
+  font-size: 12px;
+  background-color: ${COLOR_GRAY400};
+  color: ${COLOR_WHITE};
+  padding: 4px 6px;
+  border-radius: 5px;
 `;

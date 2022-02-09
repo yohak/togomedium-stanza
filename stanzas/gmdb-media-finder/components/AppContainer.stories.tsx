@@ -13,6 +13,6 @@ const Template: ComponentStory<typeof AppContainer> = (args) => <AppContainer {.
 
 export const Primary = Template.bind({});
 Primary.parameters = {
-  msw: makeMswParameter([...allComponentsMocks, ...mediaByAttributesMocks]),
+  msw: makeMswParameter([...mediaByAttributesMocks]),
 };
 Primary.args = {};

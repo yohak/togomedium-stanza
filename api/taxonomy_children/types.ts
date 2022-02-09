@@ -1,14 +1,11 @@
-export type TaxonInfo = {
+export type TempTaxonInfo = {
   id: string;
   name: string;
-  rank?: string;
-  children?: TaxonInfo[];
+  rank: string;
+  children?: TempTaxonInfo[];
 };
 
-export type TaxonomyChildrenResponse = {
-  tax_id: string;
-  name: string;
-}[];
+export type TaxonomyChildrenResponse = { tax_id: string; name: string; rank: string }[];
 
 export type TaxonomyChildrenParams = {
   tax_id: string;

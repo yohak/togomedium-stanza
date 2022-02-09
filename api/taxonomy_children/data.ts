@@ -1,6 +1,6 @@
-import { TaxonInfo } from "./types";
+import { TempTaxonInfo } from "./types";
 
-export const fullData: TaxonInfo = {
+export const fullData: TempTaxonInfo = {
   id: "0",
   name: "taxonomy",
   children: [

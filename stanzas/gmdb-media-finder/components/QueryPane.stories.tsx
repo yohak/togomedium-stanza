@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof QueryPane> = (args) => <QueryPane css={ext
 
 export const Primary = Template.bind({});
 Primary.parameters = {
-  msw: makeMswParameter(allComponentsMocks),
+  // msw: makeMswParameter(allComponentsMocks),
 };
 Primary.args = {};
 

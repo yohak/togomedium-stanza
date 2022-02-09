@@ -1,37 +1,37 @@
 import { css } from "@emotion/react";
 import React, { FC, useEffect, useState } from "react";
-import { AcceptsEmotion } from "yohak-tools";
+import { AcceptsEmotion, Optional } from "yohak-tools";
 import { TreeBranchView } from "./TreeBranchView";
-import { API_TAXONOMY_CHILDREN } from "../../../api/paths";
-import {
-  TaxonomyChildrenParams,
-  TaxonomyChildrenResponse,
-} from "../../../api/taxonomy_children/types";
-import { getData } from "../../../utils/getData";
+import { retrieveTaxonInfo } from "../functions/proessTaxonInfo";
+import { TaxonInfo, useTaxonListMutators, useTaxonListState } from "../states/taxonList";
 
-type Props = { id: string; label: string } & AcceptsEmotion;
+type Props = { id: string } & AcceptsEmotion;
 
-export const TaxonomicTreeBranch: FC<Props> = ({ id, label, css, className }) => {
+export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
   const [linkString, linkURL] = useLinkString(id);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onToggleChildren = () => {
     setIsOpen((prev) => !prev);
   };
-  const { childrenProps, hasChildren } = useTaxChildren(id);
+  const { taxChildren, label, rank } = useTaxChildren(id);
   return (
     <TreeBranchView
+      css={css}
+      className={className}
       label={label}
       id={id}
+      tag={rank}
       linkString={linkString}
       linkURL={linkURL}
       check={"none"}
-      hasChildren={hasChildren}
+      hasChildren={!!taxChildren.length}
       isOpen={isOpen}
       onClickCheck={() => {}}
       onToggleChildren={onToggleChildren}
     >
-      {childrenProps?.length &&
-        childrenProps.map((prop) => <TaxonomicTreeBranch key={prop.id} {...prop} />)}
+      {isOpen &&
+        taxChildren.length &&
+        taxChildren.map((id) => <TaxonomicTreeBranch key={id} id={id} />)}
     </TreeBranchView>
   );
 };
@@ -47,28 +47,29 @@ const useLinkString = (id: string) => {
 };
 
 const useTaxChildren = (id: string) => {
-  const [childrenProps, setChildrenProps] = useState<Props[]>([]);
-  const [hasChildren, setHasChildren] = useState(false);
+  const taxonList = useTaxonListState();
+  const { addTaxonToList } = useTaxonListMutators();
+  const [taxChildren, setTaxChildren] = useState<string[]>([]);
+  const [rank, setRank] = useState("");
+  const [label, setLabel] = useState("");
   useEffect(() => {
-    (async () => {
-      const params: TaxonomyChildrenParams = {
-        tax_id: id,
-      };
-      const response = await getData<TaxonomyChildrenResponse, TaxonomyChildrenParams>(
-        API_TAXONOMY_CHILDREN,
-        params
-      );
-      if (response.body?.length) {
-        const data: Props[] = response.body.map<Props>((item) => ({
-          id: item.tax_id,
-          label: item.name,
-        }));
-        setHasChildren(true);
-        setChildrenProps(data);
-      }
-    })();
-  }, [id]);
-  return { childrenProps, hasChildren };
-};
+    const myInfo: Optional<TaxonInfo> = taxonList.find((taxon) => taxon.id === id);
+    if (myInfo) {
+      setRank(myInfo.rank);
+      setLabel(myInfo.label);
+      setTaxChildren(myInfo.children ?? []);
+    }
+  }, [id, taxonList]);
 
+  useEffect(() => {
+    if (!taxChildren.length) return;
+    taxChildren.forEach((id) => {
+      const childInfo: Optional<TaxonInfo> = taxonList.find((taxon) => taxon.id === id);
+      if (childInfo?.children === null) {
+        retrieveTaxonInfo(childInfo, addTaxonToList);
+      }
+    });
+  }, [taxChildren]);
+  return { taxChildren, rank, label };
+};
 const taxonomicTreeBranch = css``;

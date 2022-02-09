@@ -17,9 +17,9 @@ const Template: ComponentStory<typeof ComponentSelect> = (args) => (
 );
 
 export const Primary = Template.bind({});
-Primary.parameters = {
-  msw: makeMswParameter(allComponentsMocks),
-};
+// Primary.parameters = {
+//   msw: makeMswParameter(allComponentsMocks),
+// };
 Primary.args = {
   onChangeSelection: (ids) => {
     console.log(ids);
