@@ -1,29 +1,16 @@
-import React, { ComponentProps, FC, useEffect, useState } from "react";
-import { Nullable } from "yohak-tools";
-import { TreeBranchView } from "./TreeBranchView";
+import React, { FC } from "react";
+import { TaxonomicTreeBranch } from "./TaxonomicTreeBranch";
+import { useInitTaxonTree } from "../hooks/useInitTaxonTree";
 
 type Props = {};
 
-type NodeProps = Omit<ComponentProps<typeof TreeBranchView>, "onToggleChildren" | "onClickCheck">;
-
-type TreeData = {
-  id: string;
-  label: string;
-  children: Nullable<TreeData[]>;
-};
-
 export const TaxonomicTree: FC<Props> = () => {
-  const [data, setData] = useState<NodeProps[]>([]);
-  const onClickCheck = (id: string) => {};
-  const onToggleChildren = (id: string) => {};
-
-  useEffect(() => {});
-
+  useInitTaxonTree();
   return (
     <div>
-      {data.map((item) => (
-        <TreeBranchView key={item.id} {...{ ...item, onClickCheck, onToggleChildren }} />
-      ))}
+      <TaxonomicTreeBranch id="2157" />
+      <TaxonomicTreeBranch id="2" />
+      <TaxonomicTreeBranch id="2759" />
     </div>
   );
 };

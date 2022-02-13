@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
@@ -12,7 +13,7 @@ import {
   COLOR_WHITE,
 } from "../../../components/styles";
 
-export type CheckStatus = "none" | "checked" | "indeterminate";
+export type CheckStatus = "none" | "checked" | "grouped" | "indeterminate";
 
 type Props = {
   label: string;
@@ -20,6 +21,7 @@ type Props = {
   check: CheckStatus;
   hasChildren: boolean;
   isOpen: boolean;
+  toolTipLabel?: string;
   tag?: string;
   linkString?: string;
   linkURL?: string;
@@ -41,6 +43,7 @@ export const TreeBranchView: FC<Props> = ({
   children,
   className,
   css,
+  toolTipLabel = "",
 }) => {
   return (
     <li css={[wrapper, css]} className={className}>
@@ -49,7 +52,14 @@ export const TreeBranchView: FC<Props> = ({
           <span onClick={() => onToggleChildren(id)}>
             <ToggleIcon {...{ hasChildren, isOpen }} />
           </span>
-          <span>{label}</span>
+          <Tooltip
+            title={toolTipLabel}
+            PopperProps={{ disablePortal: true }}
+            arrow
+            placement={"top-start"}
+          >
+            <span>{label}</span>
+          </Tooltip>
           {tag && <span css={tagTip}>{tag}</span>}
           {linkString && linkURL && (
             <a href={linkURL} target="_blank" rel="noreferrer">
@@ -58,7 +68,7 @@ export const TreeBranchView: FC<Props> = ({
           )}
         </div>
         <Checkbox
-          checked={check === "checked"}
+          checked={check === "checked" || check === "grouped"}
           indeterminate={check === "indeterminate"}
           onClick={() => onClickCheck(id)}
         />

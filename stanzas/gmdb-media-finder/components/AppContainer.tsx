@@ -44,6 +44,8 @@ const wrapper = css`
 
 const queryPane = css`
   flex-grow: 1;
+  height: 100%;
+  overflow-y: auto;
 `;
 
 const mediaQueryPane = css`

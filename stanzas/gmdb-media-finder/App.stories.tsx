@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import App from "./App";
-import { Primary } from "./components/AppContainer.stories";
-import { allComponentsMocks } from "../../api/all-components/msw";
 import { mediaByAttributesMocks } from "../../api/media_by_attributes/msw";
+import { taxonomyChildrenMocks } from "../../api/taxonomy_children/msw";
 import { makeMswParameter } from "../../utils/storybook";
 
 export default {
@@ -18,5 +17,5 @@ Result1.args = {
 };
 
 Result1.parameters = {
-  msw: makeMswParameter([...allComponentsMocks, ...mediaByAttributesMocks]),
+  msw: makeMswParameter([...mediaByAttributesMocks, ...taxonomyChildrenMocks]),
 };

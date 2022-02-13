@@ -20,7 +20,7 @@ const defaultArgs: ComponentProps<typeof TaxonomicTreeBranch> = {
 };
 
 export const Primary = Template.bind({});
-// Primary.parameters = {
-//   msw: makeMswParameter(taxonomyChildrenMocks),
-// };
+Primary.parameters = {
+  // msw: makeMswParameter(taxonomyChildrenMocks),
+};
 Primary.args = { ...defaultArgs };

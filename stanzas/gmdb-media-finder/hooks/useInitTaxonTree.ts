@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import { retrieveTaxonInfo } from "../functions/proessTaxonInfo";
 import { TaxonInfo, useTaxonListMutators } from "../states/taxonList";
 
 export const useInitTaxonTree = () => {
   const { addTaxonToList } = useTaxonListMutators();
-  superkingdoms.forEach((info) => retrieveTaxonInfo(info, addTaxonToList));
+  useEffect(() => {
+    superkingdoms.forEach((info) => retrieveTaxonInfo(info, addTaxonToList));
+  }, []);
 };
 
 const superkingdoms: TaxonInfo[] = [

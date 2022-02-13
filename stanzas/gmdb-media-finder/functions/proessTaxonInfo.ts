@@ -26,3 +26,44 @@ export const retrieveTaxonInfo = (info: TaxonInfo, addTaxonToList: (info: TaxonI
     });
   })();
 };
+
+type Node = Pick<TaxonInfo, "id" | "children">;
+export const findAscendants = (list: Node[], id: string): string[] => {
+  let iterationCount = 0;
+  const result = [];
+  let currentId = id;
+  while (iterationCount < 255) {
+    iterationCount++;
+    const parent = list.find((node) => node.children?.includes(currentId));
+    if (parent) {
+      result.unshift(parent.id);
+      currentId = parent.id;
+    } else {
+      break;
+    }
+  }
+  return result;
+};
+
+export const findDescendants = (list: Node[], id: string): string[] => {
+  let result: string[] = [];
+  const findChildren = (targetId: string) => list.find((info) => info.id === targetId)?.children;
+  const process = (currentId: string) => {
+    const children = findChildren(currentId);
+    if (children) {
+      result = [...result, ...children];
+      children.forEach((childId) => process(childId));
+    }
+  };
+  process(id);
+  return result;
+};
+
+export const findSiblings = (list: Node[], id: string): string[] => {
+  const children = list.find((node) => node.children?.includes(id))?.children;
+  if (children) {
+    return children.filter((myId) => myId !== id);
+  } else {
+    return [];
+  }
+};
