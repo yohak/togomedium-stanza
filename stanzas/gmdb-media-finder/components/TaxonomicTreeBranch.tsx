@@ -2,12 +2,7 @@ import { css } from "@emotion/react";
 import React, { FC, useEffect, useState } from "react";
 import { AcceptsEmotion, Optional } from "yohak-tools";
 import { CheckStatus, TreeBranchView } from "./TreeBranchView";
-import {
-  findAscendants,
-  findDescendants,
-  findSiblings,
-  retrieveTaxonInfo,
-} from "../functions/proessTaxonInfo";
+import { findAscendants, findDescendants, retrieveTaxonInfo } from "../functions/proessTaxonInfo";
 import { useSelectedTaxonMutators, useSelectedTaxonState } from "../states/selectedTaxon";
 import { TaxonInfo, useTaxonListMutators, useTaxonListState } from "../states/taxonList";
 
@@ -51,7 +46,7 @@ const useLinkString = (id: string) => {
   const [linkString, setLinkString] = useState<string>("");
   const [linkURL, setLinkURL] = useState<string>("");
   useEffect(() => {
-    setLinkString(`taxid:${id}`);
+    setLinkString(`tax_id:${id}`);
     setLinkURL(`http://growthmedium.org/organism/${id}`);
   }, [id]);
   return [linkString, linkURL];
@@ -90,34 +85,10 @@ const useChecked = (
   descendants: string[]
 ) => {
   const selectedTaxon = useSelectedTaxonState();
-  const { toggleTaxonSelect, setTaxonSelect } = useSelectedTaxonMutators();
   const [check, setCheck] = useState<CheckStatus>("none");
+  const { updateSelection } = useSelectedTaxonMutators();
   const onClickCheck = () => {
-    setTaxonSelect(descendants, false);
-    //
-    const directSiblings = findSiblings(taxonList, id);
-    const checkedSiblings = directSiblings.filter((taxId) => selectedTaxon.includes(taxId));
-    if (
-      check === "none" &&
-      checkedSiblings.length > 0 &&
-      checkedSiblings.length === directSiblings.length
-    ) {
-      setTaxonSelect(directSiblings, false);
-      setTaxonSelect([ascendants.reverse()[0]], true);
-    } else if (check === "grouped") {
-      setTaxonSelect(ascendants, false);
-      const lineages = [...ascendants, id].reverse();
-      for (let i = 0; i < lineages.length; i++) {
-        const taxId = lineages[i];
-        const siblings = findSiblings(taxonList, taxId);
-        if (siblings) {
-          setTaxonSelect(siblings, true);
-          break;
-        }
-      }
-    } else {
-      toggleTaxonSelect(id);
-    }
+    updateSelection(taxonList, id);
   };
 
   useEffect(() => {
@@ -144,15 +115,13 @@ const useChecked = (
 const useLineages = (id: string, taxonList: TaxonInfo[]) => {
   const [ascendants, setAscendants] = useState<string[]>([]);
   const [descendants, setDescendants] = useState<string[]>([]);
-  const [siblings, setSiblings] = useState<string[]>([]);
 
   useEffect(() => {
     setAscendants(findAscendants(taxonList, id));
     setDescendants(findDescendants(taxonList, id));
-    setSiblings(findSiblings(taxonList, id));
   }, [taxonList, id]);
 
-  return { ascendants, descendants, siblings };
+  return { ascendants, descendants };
 };
 
 const useAscendantsLabel = (ascendants: string[]) => {

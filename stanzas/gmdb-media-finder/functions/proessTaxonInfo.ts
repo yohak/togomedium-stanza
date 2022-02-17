@@ -34,7 +34,7 @@ export const findAscendants = (list: Node[], id: string): string[] => {
   let currentId = id;
   while (iterationCount < 255) {
     iterationCount++;
-    const parent = list.find((node) => node.children?.includes(currentId));
+    const parent = findParent(list, currentId);
     if (parent) {
       result.unshift(parent.id);
       currentId = parent.id;
@@ -47,9 +47,8 @@ export const findAscendants = (list: Node[], id: string): string[] => {
 
 export const findDescendants = (list: Node[], id: string): string[] => {
   let result: string[] = [];
-  const findChildren = (targetId: string) => list.find((info) => info.id === targetId)?.children;
   const process = (currentId: string) => {
-    const children = findChildren(currentId);
+    const children = findChildren(list, currentId);
     if (children) {
       result = [...result, ...children];
       children.forEach((childId) => process(childId));
@@ -59,8 +58,74 @@ export const findDescendants = (list: Node[], id: string): string[] => {
   return result;
 };
 
-export const findSiblings = (list: Node[], id: string): string[] => {
-  const children = list.find((node) => node.children?.includes(id))?.children;
+export const makeNewSelection = (list: Node[], id: string, selection: string[]): string[] => {
+  const isSelected: boolean = checkIsSelected(id, selection);
+  let result = setSelection(selection, id, !isSelected);
+  let currentId: string;
+  const ascendants = findAscendants(list, id).reverse();
+  const descendants = findDescendants(list, id);
+  if (descendants) {
+    result = setMultipleSelection(result, descendants, false);
+  }
+
+  //
+  const checkedAscendant = ascendants.find((ascendant) => result.includes(ascendant));
+  if (checkedAscendant) {
+    currentId = id;
+    for (let i = 0; i < ascendants.length; i++) {
+      const parent = ascendants[i];
+      result = setSelection(result, parent, false);
+      const siblings = findSiblings(list, currentId);
+      result = setMultipleSelection(result, siblings, true);
+      result = setSelection(result, currentId, false);
+      if (checkedAscendant === parent) {
+        break;
+      }
+      currentId = parent;
+    }
+  }
+
+  currentId = id;
+  for (let i = 0; i < ascendants.length; i++) {
+    const parent = ascendants[i];
+    const siblings = [...findSiblings(list, currentId), currentId];
+    const checkedSiblings = siblings.filter((siblingId) => result.includes(siblingId));
+    if (parent && checkedSiblings.length && checkedSiblings.length === siblings.length) {
+      result = setMultipleSelection(result, checkedSiblings, false);
+      result = setSelection(result, parent, true);
+    }
+    currentId = parent;
+  }
+
+  return result;
+};
+
+const checkIsSelected = (id: string, selection: string[]): boolean => {
+  return selection.includes(id);
+};
+
+const setSelection = (selection: string[], id: string, value: boolean): string[] => {
+  const isSelected: boolean = checkIsSelected(id, selection);
+  switch (true) {
+    case isSelected && !value:
+      return selection.filter((item) => item !== id);
+    case !isSelected && value:
+      return [...selection, id];
+    default:
+      return [...selection];
+  }
+};
+
+const setMultipleSelection = (selection: string[], ids: string[], value: boolean): string[] => {
+  let result = [...selection];
+  ids.forEach((id) => (result = setSelection(result, id, value)));
+  return result;
+};
+
+const findChildren = (list: Node[], id: string) => list.find((info) => info.id === id)?.children;
+const findParent = (list: Node[], id: string) => list.find((node) => node.children?.includes(id));
+const findSiblings = (list: Node[], id: string): string[] => {
+  const children = findParent(list, id)?.children;
   if (children) {
     return children.filter((myId) => myId !== id);
   } else {

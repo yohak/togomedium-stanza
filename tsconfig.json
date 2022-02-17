@@ -24,7 +24,7 @@
       "togostanza/stanza": ["definitions/togostanza/stanza/index.d.ts"]
     },
     "strict": true,
-    "types": ["@emotion/react","jest"]
+    "types": ["@emotion/react", "jest", "jest-extended"]
   },
   "compileOnSave": false,
   "exclude": ["node_modules", "**/*.spec.ts"]

@@ -20,7 +20,7 @@ type Props = {
 export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
   return (
     <div css={wrapper}>
-      <a css={idCol} href={`${PATH_MEDIUM}`} target="_blank" rel="noreferrer">
+      <a css={idCol} href={`${PATH_MEDIUM}${id}`} target="_blank" rel="noreferrer">
         {id}
       </a>
       <span css={labelCol}>{label}</span>

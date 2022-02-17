@@ -12,4 +12,5 @@ module.exports = {
   },
   transformIgnorePatterns: ["/node_modules/(?!togostanza/stanza)"],
   testMatch: ["**/**/*.spec.ts"],
+  setupFilesAfterEnv: ["jest-extended/all"],
 };

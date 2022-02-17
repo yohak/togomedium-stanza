@@ -31,6 +31,13 @@ module.exports = {
         additionalHooks: "useRecoilCallback",
       },
     ],
+    "prefer-const": [
+      "warn",
+      {
+        destructuring: "any",
+        ignoreReadBeforeAssign: false,
+      },
+    ],
     "@typescript-eslint/ban-types": [
       "error",
       {

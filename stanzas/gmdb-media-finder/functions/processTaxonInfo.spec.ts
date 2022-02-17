@@ -1,47 +1,81 @@
-import { findAscendants, findDescendants, findSiblings } from "./proessTaxonInfo";
+import { findAscendants, findDescendants, makeNewSelection } from "./proessTaxonInfo";
 import { TaxonInfo } from "../states/taxonList";
 
 describe("findAscendants", () => {
   it("should work", () => {
     const result = findAscendants(list, "C");
-    expect(result).toEqual([]);
+    expect(result).toIncludeSameMembers([]);
   });
   it("should work", () => {
     const result = findAscendants(list, "A");
-    expect(result).toEqual([]);
+    expect(result).toIncludeSameMembers([]);
   });
   it("should work", () => {
     const result = findAscendants(list, "A-A-A-A");
-    expect(result).toEqual(["A", "A-A", "A-A-A"]);
+    expect(result).toIncludeSameMembers(["A", "A-A", "A-A-A"]);
   });
 });
 describe("findDescendants", () => {
   it("should work", () => {
     const result = findDescendants(list, "C");
-    expect(result).toEqual([]);
+    expect(result).toIncludeSameMembers([]);
   });
   it("should work", () => {
     const result = findDescendants(list, "B");
-    expect(result).toEqual([]);
+    expect(result).toIncludeSameMembers([]);
   });
   it("should work", () => {
     const result = findDescendants(list, "A-A");
-    expect(result).toEqual(["A-A-A", "A-A-B", "A-A-A-A", "A-A-B-A", "A-A-B-B"]);
+    expect(result).toIncludeSameMembers(["A-A-A", "A-A-B", "A-A-A-A", "A-A-B-A", "A-A-B-B"]);
   });
 });
 
-describe("findSiblings", () => {
-  it("should work", () => {
-    const result = findSiblings(list, "C");
-    expect(result).toEqual([]);
+describe("makeNewSelection", () => {
+  it("should simply toggle", () => {
+    const result = makeNewSelection(list, "A", []);
+    expect(result).toIncludeSameMembers(["A"]);
   });
-  it("should work", () => {
-    const result = findSiblings(list, "B");
-    expect(result).toEqual([]);
+  it("should simply toggle", () => {
+    const result = makeNewSelection(list, "A", ["C", "A", "B"]);
+    expect(result).toIncludeSameMembers(["B", "C"]);
   });
-  it("should work", () => {
-    const result = findSiblings(list, "A-B-A-B");
-    expect(result).toEqual(["A-B-A-A", "A-B-A-C"]);
+  it("should select the parent when all siblings are checked", () => {
+    const result = makeNewSelection(list, "A-A", ["A-B"]);
+    expect(result).toIncludeSameMembers(["A"]);
+  });
+
+  it("should recursively select the parent when all siblings are checked", () => {
+    const result = makeNewSelection(list, "A-A-A-A", ["A-A-B"]);
+    expect(result).toIncludeSameMembers(["A-A"]);
+  });
+
+  it("should deselect descendants when parent is checked", () => {
+    const result = makeNewSelection(list, "A-A", ["A-A-B"]);
+    expect(result).toIncludeSameMembers(["A-A"]);
+  });
+  it("should deselect target and select other siblings when parent is checked", () => {
+    const result = makeNewSelection(list, "A-B-A-A", ["A-B-A"]);
+    expect(result).toIncludeSameMembers(["A-B-A-B", "A-B-A-C"]);
+    /**
+     * [-]A          [-]A
+     * [-]-AB        [-]-AB
+     * [*]--ABA      [-]--ABA
+     * [@]---ABAA    [ ]---ABAA
+     * [@]---ABAB    [*]---ABAB
+     * [@]---ABAC    [*]---ABAC
+     */
+  });
+  it("should deselect target and select other siblings when parent is checked", () => {
+    const result = makeNewSelection(list, "A-A-A", ["A"]);
+    expect(result).toIncludeSameMembers(["A-B", "A-A-B"]);
+    /**
+     * [*] A        [-]A
+     * [@] -AA      [-]-AA
+     * [@] --AAA    [ ]--AAA
+     * [@] --AAB    [*]--AAB
+     * [@] -AB      [*]-AB
+     * [@] --AAB    [@]--AAB
+     **/
   });
 });
 
