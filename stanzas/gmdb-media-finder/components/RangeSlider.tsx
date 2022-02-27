@@ -3,7 +3,7 @@ import { Mark } from "@mui/base/SliderUnstyled/SliderUnstyled";
 import { FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 
 type Props = {
@@ -11,13 +11,26 @@ type Props = {
   max: number;
   label: string;
   marks: Mark[];
+  queryKey: string;
+  handleEnabledChange: (key: string, enabled: boolean) => void;
+  handleValueChange: (key: string, value: string) => void;
 } & AcceptsEmotion;
 
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
-export const RangeSlider: FC<Props> = ({ css, className, min, max, label, marks }) => {
+export const RangeSlider: FC<Props> = ({
+  css,
+  className,
+  min,
+  max,
+  label,
+  marks,
+  queryKey,
+  handleValueChange,
+  handleEnabledChange,
+}) => {
   const [value, setValue] = useState<number[]>([min, max]);
   const [enabled, setEnabled] = useState(false);
 
@@ -27,6 +40,20 @@ export const RangeSlider: FC<Props> = ({ css, className, min, max, label, marks 
   const handleCheckChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setEnabled(checked);
   };
+  const handleChangeCommitted = (
+    event: React.SyntheticEvent | Event,
+    newValue: number | number[]
+  ) => {
+    handleValueChange(queryKey, (newValue as number[]).join(","));
+  };
+
+  useEffect(() => {
+    if (enabled) {
+      handleValueChange(queryKey, value.join(","));
+    } else {
+      handleEnabledChange(queryKey, false);
+    }
+  }, [enabled]);
   return (
     <div css={[rangeSlider, css]} className={className}>
       <div>
@@ -40,6 +67,7 @@ export const RangeSlider: FC<Props> = ({ css, className, min, max, label, marks 
       <Slider
         value={value}
         onChange={handleSliderChange}
+        onChangeCommitted={handleChangeCommitted}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         min={min}

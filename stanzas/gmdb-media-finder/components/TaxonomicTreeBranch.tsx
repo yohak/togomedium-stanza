@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { AcceptsEmotion, Optional } from "yohak-tools";
+import { isArray } from "yohak-tools/";
 import { CheckStatus, TreeBranchView } from "./TreeBranchView";
 import { findAscendants, findDescendants, retrieveTaxonInfo } from "../functions/proessTaxonInfo";
 import { useSelectedTaxonMutators, useSelectedTaxonState } from "../states/selectedTaxon";
@@ -10,7 +11,11 @@ type Props = { id: string } & AcceptsEmotion;
 
 export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
   const taxonList = useTaxonListState();
-  const { taxChildren, label, rank } = useTaxChildren(id, taxonList);
+  const myInfo: Optional<TaxonInfo> = useMemo(() => {
+    return taxonList.find((item) => item.id === id);
+  }, [taxonList, id]);
+  const { branchChildren } = useBranchChildren(myInfo);
+  const { label, rank } = useTaxonInfo(id, myInfo);
   const { descendants, ascendants } = useLineages(id, taxonList);
   const { check, onClickCheck } = useChecked(id, taxonList, ascendants, descendants);
   const { ascendantsLabel } = useAscendantsLabel(ascendants);
@@ -30,14 +35,14 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
       linkURL={linkURL}
       toolTipLabel={ascendantsLabel}
       check={check}
-      hasChildren={!!taxChildren.length}
+      hasChildren={!!branchChildren.length}
       isOpen={isOpen}
       onClickCheck={() => onClickCheck()}
       onToggleChildren={onToggleChildren}
     >
       {isOpen &&
-        taxChildren.length &&
-        taxChildren.map((childId) => <TaxonomicTreeBranch key={childId} id={childId} />)}
+        branchChildren.length &&
+        branchChildren.map((childId) => <TaxonomicTreeBranch key={childId} id={childId} />)}
     </TreeBranchView>
   );
 };
@@ -52,30 +57,31 @@ const useLinkString = (id: string) => {
   return [linkString, linkURL];
 };
 
-const useTaxChildren = (id: string, taxonList: TaxonInfo[]) => {
-  const { addTaxonToList } = useTaxonListMutators();
-  const [taxChildren, setTaxChildren] = useState<string[]>([]);
+const useBranchChildren = (info: Optional<TaxonInfo>) => {
+  const [branchChildren, setBranchChildren] = useState<string[]>([]);
+  const { setTaxonAsLoading, addTaxonToList, setTaxonChildren } = useTaxonListMutators();
+  useEffect(() => {
+    if (info?.children === "not-yet") {
+      setTaxonAsLoading(info.id);
+      retrieveTaxonInfo(info, addTaxonToList, setTaxonChildren);
+    }
+    if (info && isArray(info.children)) {
+      setBranchChildren(info.children);
+    }
+  }, [info]);
+  return { branchChildren };
+};
+
+const useTaxonInfo = (id: string, myInfo: Optional<TaxonInfo>) => {
   const [rank, setRank] = useState("");
   const [label, setLabel] = useState("");
   useEffect(() => {
-    const myInfo: Optional<TaxonInfo> = taxonList.find((taxon) => taxon.id === id);
-    if (myInfo && myInfo.children?.length !== taxChildren.length) {
+    if (myInfo) {
       setRank(myInfo.rank);
       setLabel(myInfo.label);
-      setTaxChildren(myInfo.children ?? []);
     }
-  }, [id, taxonList]);
-
-  useEffect(() => {
-    if (!taxChildren.length) return;
-    taxChildren.forEach((id) => {
-      const childInfo: Optional<TaxonInfo> = taxonList.find((taxon) => taxon.id === id);
-      if (childInfo?.children === null) {
-        retrieveTaxonInfo(childInfo, addTaxonToList);
-      }
-    });
-  }, [taxChildren]);
-  return { taxChildren, rank, label };
+  }, [id, myInfo]);
+  return { rank, label };
 };
 
 const useChecked = (

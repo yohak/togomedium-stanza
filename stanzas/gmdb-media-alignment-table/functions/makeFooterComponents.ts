@@ -21,7 +21,7 @@ const addToCollection = (data: ComponentBranch, collection: Props[]) => {
     id: data.id,
   });
   if (data.isOpen) {
-    data.children.forEach((item) => {
+    (data.children as ComponentBranch[]).forEach((item) => {
       addToCollection(item, collection);
     });
   }

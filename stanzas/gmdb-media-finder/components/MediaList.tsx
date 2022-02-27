@@ -2,9 +2,10 @@ import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { ComponentProps, FC, RefObject, useEffect, useRef, useState } from "react";
 import { MediaListItem } from "./MediaListItem";
-import { COLOR_GRAY700, COLOR_GRAY_BG } from "../../../components/styles";
+import { COLOR_GRAY700 } from "../../../components/styles";
 import { deepEqual } from "../../../utils/deepEqual";
 import { AcceptsEmotion } from "../../../utils/types";
+import { useResetScroll } from "../hooks/useResetScroll";
 import { useFoundMediaState } from "../states/foundMedia";
 import { useIsMediaLoading } from "../states/mediaLoadAbort";
 import { useSelectedMediaMutators, useSelectedMediaState } from "../states/selectedMedia";
@@ -17,7 +18,7 @@ export const MediaList: FC<Props> = ({ css, className }) => {
   const isMediaLoading = useIsMediaLoading();
   const scrollInnerRef = useRef<HTMLDivElement>(null);
   const { data, toggleChecked } = useMediaList();
-  useResetMediaScroll(scrollInnerRef, data);
+  useResetScroll(scrollInnerRef, data);
 
   return (
     <div css={[wrapper, css]} className={className}>
@@ -82,11 +83,4 @@ const useMediaList = () => {
   }, [foundMedia, selectedMedia]);
 
   return { data, toggleChecked };
-};
-
-const useResetMediaScroll = (scrollInner: RefObject<HTMLDivElement>, data: MediaListInfo[]) => {
-  useEffect(() => {
-    if (!scrollInner.current) return;
-    scrollInner.current.scrollTop = 0;
-  }, [data]);
 };

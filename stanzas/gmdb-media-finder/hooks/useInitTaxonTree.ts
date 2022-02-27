@@ -4,8 +4,13 @@ import { TaxonInfo, useTaxonListMutators } from "../states/taxonList";
 
 export const useInitTaxonTree = () => {
   const { addTaxonToList } = useTaxonListMutators();
+  const process = () => {
+    superkingdoms.forEach((info) => {
+      addTaxonToList(info);
+    });
+  };
   useEffect(() => {
-    superkingdoms.forEach((info) => retrieveTaxonInfo(info, addTaxonToList));
+    process();
   }, []);
 };
 
@@ -14,18 +19,18 @@ const superkingdoms: TaxonInfo[] = [
     id: "2157",
     label: "Archaea",
     rank: "Superkingdom",
-    children: null,
+    children: "not-yet",
   },
   {
     id: "2",
     label: "Bacteria",
     rank: "Superkingdom",
-    children: null,
+    children: "not-yet",
   },
   {
     id: "2759",
     label: "Eukaryota",
     rank: "Superkingdom",
-    children: null,
+    children: "not-yet",
   },
 ];

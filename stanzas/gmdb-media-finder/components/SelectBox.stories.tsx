@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof SelectBox> = (args) => <SelectBox {...args
 
 const defaultArgs: ComponentProps<typeof SelectBox> = {
   label: "Oxygen requirement",
-  labelId: "MPO_10002",
+  queryKey: "MPO_10002",
   items: [
     ["MPO_04002", "Aerobe"],
     ["MPO_04003", "Anaerobe"],

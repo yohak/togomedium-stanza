@@ -1,17 +1,27 @@
 import { css } from "@emotion/react";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_WHITE } from "../../../components/styles";
 
 type Props = {
   label: string;
-  labelId: string;
+  queryKey: string;
   items: [string, string][];
+  handleEnabledChange: (key: string, enabled: boolean) => void;
+  handleValueChange: (key: string, value: string) => void;
 } & AcceptsEmotion;
 
-export const SelectBox: FC<Props> = ({ css, className, label, labelId, items }) => {
+export const SelectBox: FC<Props> = ({
+  css,
+  className,
+  label,
+  items,
+  queryKey,
+  handleEnabledChange,
+  handleValueChange,
+}) => {
   const [value, setValue] = useState("");
   const [enabled, setEnabled] = useState(false);
 
@@ -22,15 +32,22 @@ export const SelectBox: FC<Props> = ({ css, className, label, labelId, items }) 
     setEnabled(checked);
     setValue("");
   };
+  useEffect(() => {
+    if (enabled && value !== "") {
+      handleValueChange(queryKey, value);
+    } else {
+      handleEnabledChange(queryKey, false);
+    }
+  }, [value, enabled]);
 
   return (
     <div css={[selectBox, css]} className={className}>
       <Checkbox css={checkBoxStyle} onChange={handleCheckChange} />
       <FormControl sx={{ m: 1, minWidth: 300 }}>
-        <InputLabel id={labelId}>{label}</InputLabel>
+        <InputLabel id={queryKey}>{label}</InputLabel>
         <Select
-          labelId={labelId}
-          id={labelId}
+          labelId={queryKey}
+          id={queryKey}
           value={value}
           label={label}
           onChange={handleSelectChange}

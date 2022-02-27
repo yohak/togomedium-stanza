@@ -1,3 +1,4 @@
+import { isArray } from "yohak-tools/";
 import { API_TAXONOMY_CHILDREN } from "../../../api/paths";
 import {
   TaxonomyChildrenParams,
@@ -6,22 +7,28 @@ import {
 import { getData } from "../../../utils/getData";
 import { TaxonInfo } from "../states/taxonList";
 
-export const retrieveTaxonInfo = (info: TaxonInfo, addTaxonToList: (info: TaxonInfo) => void) => {
+export const retrieveTaxonInfo = (
+  info: TaxonInfo,
+  addTaxonToList: (info: TaxonInfo) => void,
+  setTaxonChildren: (id: string, children: string[]) => void
+) => {
   (async () => {
     const params: TaxonomyChildrenParams = {
       tax_id: info.id,
     };
+    console.log(info.id);
     const response = await getData<TaxonomyChildrenResponse, TaxonomyChildrenParams>(
       API_TAXONOMY_CHILDREN,
       params
     );
-    addTaxonToList({ ...info, children: response?.body?.map((item) => item.tax_id) ?? [] });
+
+    setTaxonChildren(info.id, response?.body?.map((item) => item.tax_id) ?? []);
     response?.body?.forEach((item) => {
       addTaxonToList({
         id: item.tax_id,
         label: item.name,
         rank: item.rank,
-        children: item.rank === "Species" ? [] : null,
+        children: item.rank === "Species" ? [] : "not-yet",
       });
     });
   })();
@@ -49,7 +56,7 @@ export const findDescendants = (list: Node[], id: string): string[] => {
   let result: string[] = [];
   const process = (currentId: string) => {
     const children = findChildren(list, currentId);
-    if (children) {
+    if (children && isArray(children)) {
       result = [...result, ...children];
       children.forEach((childId) => process(childId));
     }
@@ -126,7 +133,7 @@ const findChildren = (list: Node[], id: string) => list.find((info) => info.id =
 const findParent = (list: Node[], id: string) => list.find((node) => node.children?.includes(id));
 const findSiblings = (list: Node[], id: string): string[] => {
   const children = findParent(list, id)?.children;
-  if (children) {
+  if (children && isArray(children)) {
     return children.filter((myId) => myId !== id);
   } else {
     return [];
