@@ -9504,7 +9504,7 @@ var dependencies = {
 	recoil: "^0.5.2",
 	rfdc: "^1.3.0",
 	togostanza: "github:togostanza/togostanza",
-	"yohak-tools": "0.1.15"
+	"yohak-tools": "0.1.18"
 };
 var scripts = {
 	test: "jest --runInBand",
@@ -9544,12 +9544,15 @@ var devDependencies = {
 	"eslint-plugin-react-hooks": "^4.3.0",
 	"eslint-plugin-storybook": "^0.5.5",
 	jest: "^27.4.7",
+	"jest-extended": "^2.0.0",
 	"msw-storybook-addon": "^1.5.0",
 	prettier: "^2.2.1",
 	"rollup-plugin-typescript2": "^0.31.1",
+	"storybook-addon-paddings": "^4.2.1",
 	"ts-jest": "^27.1.2",
 	"tsc-watch": "^4.2.9",
-	typescript: "^4.2.2"
+	typescript: "^4.2.2",
+	"yohak-cli": "0.0.7"
 };
 var msw = {
 	workerDirectory: "public"
@@ -9628,4 +9631,4 @@ script.render = render;
 script.__file = "node_modules/togostanza/src/components/Layout.vue";
 
 export { Fragment as F, createElementBlock as a, renderList as b, createBlock as c, defineComponent as d, createBaseVNode as e, createCommentVNode as f, createApp as g, computed as h, createTextVNode as i, ref as j, octicons as k, watch as l, mergeProps as m, normalizeClass as n, openBlock as o, createVNode as p, normalizeProps as q, resolveComponent as r, script as s, toDisplayString as t, guardReactiveProps as u, resolveDynamicComponent as v, withCtx as w, pushScopeId as x, popScopeId as y, n as z };
-//# sourceMappingURL=Layout-ef4f7178.js.map
+//# sourceMappingURL=Layout-a2447a7f.js.map

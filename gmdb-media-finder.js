@@ -1,9 +1,9 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { V as useTheme, E as react, m as jsxRuntime, W as ThemeContext, _ as _extends, X as useTheme$1, Y as ThemeContext$1, A as generateUtilityClasses, z as generateUtilityClass, B as styled, Z as rootShouldForwardProp, c as capitalize, D as alpha, $ as resolveProps, F as useThemeProps, G as _objectWithoutPropertiesLoose, I as clsx, J as composeClasses, h as useControlled, b as createSvgIcon, a0 as keyframes, p as css, f as ownerWindow, d as debounce, H as useTheme$2, j as useEventCallback, o as ownerDocument, a1 as ROUNDED_CORNER, q as COLOR_WHITE, S as SIZE1, a2 as SIZE2, a3 as SIZE05, a4 as FONT_WEIGHT_MEDIUM, w as jsxs, v as jsx, O as COLOR_GRAY_LINE, L as COLOR_PRIMARY, y as COLOR_GRAY700, a5 as FONT_WEIGHT_BOLD, r as SIZE4, Q as Fragment, x as jsx$1, a6 as COLOR_GRAY_BG, a7 as createTheme, N as FONT_EN, R as ReactDOM, T as EmotionCacheProvider } from './EmotionCacheProvider-92758dbd.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, c as PATH_MEDIUM, f as API_ALL_COMPONENTS, g as API_MEDIA_BY_ATTRIBUTES, e as Recoil_index_4 } from './paths-9e442dbc.js';
-import { B as ButtonBase, u as useFormControl, T as TextField, C as Chip, A as Autocomplete } from './TextField-133d0f35.js';
-import { d as dist } from './index-d49f0e1c.js';
-import { g as getData } from './getData-f9032f11.js';
+import { _ as _objectWithoutPropertiesLoose, N as propToStyleFunction, O as isPlainObject, Q as useTheme, z as jsxRuntime, T as ThemeContext, U as useTheme$1, B as generateUtilityClass, D as generateUtilityClasses, G as styled, k as capitalize, I as useThemeProps, L as composeClasses, K as clsx, V as rootShouldForwardProp, H as alpha, W as resolveProps, t as useControlled, m as createSvgIcon, u as useEnhancedEffect, w as useForkRef, q as ownerWindow, n as debounce, J as useTheme$2, v as useEventCallback, p as ownerDocument, X as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, Y as SIZE2, Z as SIZE05, $ as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, g as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, a0 as FONT_WEIGHT_BOLD, a as SIZE4, h as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-a7740407.js';
+import { _ as _extends, r as react, T as ThemeContext$1, k as keyframes, c as css, d as dist, j as jsx$1 } from './index-6aec0cc7.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, T as Tooltip, l as IconNoChildren, I as IconCompact, d as IconExpand, m as API_TAXONOMY_CHILDREN, n as API_MEDIA_BY_TAXON, h as Recoil_index_4 } from './paths-bdb61437.js';
+import { B as ButtonBase, u as useFormControl, L as ListContext, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl, I as InputLabel, a as Select } from './TextField-b83138d6.js';
+import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 
 // Source from https://github.com/alitaheri/normalize-scroll-left
@@ -83,6 +83,56 @@ function getNormalizedScrollLeft(element, direction) {
   }
 }
 
+const _excluded$b = ["sx"];
+
+const splitProps = props => {
+  const result = {
+    systemProps: {},
+    otherProps: {}
+  };
+  Object.keys(props).forEach(prop => {
+    if (propToStyleFunction[prop]) {
+      result.systemProps[prop] = props[prop];
+    } else {
+      result.otherProps[prop] = props[prop];
+    }
+  });
+  return result;
+};
+
+function extendSxProp(props) {
+  const {
+    sx: inSx
+  } = props,
+        other = _objectWithoutPropertiesLoose(props, _excluded$b);
+
+  const {
+    systemProps,
+    otherProps
+  } = splitProps(other);
+  let finalSx;
+
+  if (Array.isArray(inSx)) {
+    finalSx = [systemProps, ...inSx];
+  } else if (typeof inSx === 'function') {
+    finalSx = (...args) => {
+      const result = inSx(...args);
+
+      if (!isPlainObject(result)) {
+        return systemProps;
+      }
+
+      return _extends({}, systemProps, result);
+    };
+  } else {
+    finalSx = _extends({}, systemProps, inSx);
+  }
+
+  return _extends({}, otherProps, {
+    sx: finalSx
+  });
+}
+
 const hasSymbol = typeof Symbol === 'function' && Symbol.for;
 var nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
 
@@ -149,6 +199,124 @@ function ThemeProvider(props) {
   });
 }
 
+function getTypographyUtilityClass(slot) {
+  return generateUtilityClass('MuiTypography', slot);
+}
+generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
+
+const _excluded$a = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
+
+const useUtilityClasses$9 = ownerState => {
+  const {
+    align,
+    gutterBottom,
+    noWrap,
+    paragraph,
+    variant,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', variant, ownerState.align !== 'inherit' && `align${capitalize(align)}`, gutterBottom && 'gutterBottom', noWrap && 'noWrap', paragraph && 'paragraph']
+  };
+  return composeClasses(slots, getTypographyUtilityClass, classes);
+};
+
+const TypographyRoot = styled('span', {
+  name: 'MuiTypography',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, ownerState.variant && styles[ownerState.variant], ownerState.align !== 'inherit' && styles[`align${capitalize(ownerState.align)}`], ownerState.noWrap && styles.noWrap, ownerState.gutterBottom && styles.gutterBottom, ownerState.paragraph && styles.paragraph];
+  }
+})(({
+  theme,
+  ownerState
+}) => _extends({
+  margin: 0
+}, ownerState.variant && theme.typography[ownerState.variant], ownerState.align !== 'inherit' && {
+  textAlign: ownerState.align
+}, ownerState.noWrap && {
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap'
+}, ownerState.gutterBottom && {
+  marginBottom: '0.35em'
+}, ownerState.paragraph && {
+  marginBottom: 16
+}));
+const defaultVariantMapping = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
+  h6: 'h6',
+  subtitle1: 'h6',
+  subtitle2: 'h6',
+  body1: 'p',
+  body2: 'p',
+  inherit: 'p'
+}; // TODO v6: deprecate these color values in v5.x and remove the transformation in v6
+
+const colorTransformations = {
+  primary: 'primary.main',
+  textPrimary: 'text.primary',
+  secondary: 'secondary.main',
+  textSecondary: 'text.secondary',
+  error: 'error.main'
+};
+
+const transformDeprecatedColors = color => {
+  return colorTransformations[color] || color;
+};
+
+const Typography = /*#__PURE__*/react.exports.forwardRef(function Typography(inProps, ref) {
+  const themeProps = useThemeProps({
+    props: inProps,
+    name: 'MuiTypography'
+  });
+  const color = transformDeprecatedColors(themeProps.color);
+  const props = extendSxProp(_extends({}, themeProps, {
+    color
+  }));
+
+  const {
+    align = 'inherit',
+    className,
+    component,
+    gutterBottom = false,
+    noWrap = false,
+    paragraph = false,
+    variant = 'body1',
+    variantMapping = defaultVariantMapping
+  } = props,
+        other = _objectWithoutPropertiesLoose(props, _excluded$a);
+
+  const ownerState = _extends({}, props, {
+    align,
+    color,
+    className,
+    component,
+    gutterBottom,
+    noWrap,
+    paragraph,
+    variant,
+    variantMapping
+  });
+
+  const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
+  const classes = useUtilityClasses$9(ownerState);
+  return /*#__PURE__*/jsxRuntime.exports.jsx(TypographyRoot, _extends({
+    as: Component,
+    ref: ref,
+    ownerState: ownerState,
+    className: clsx(classes.root, className)
+  }, other));
+});
+var Typography$1 = Typography;
+
 function getButtonUtilityClass(slot) {
   return generateUtilityClass('MuiButton', slot);
 }
@@ -162,9 +330,9 @@ const ButtonGroupContext = /*#__PURE__*/react.exports.createContext({});
 
 var ButtonGroupContext$1 = ButtonGroupContext;
 
-const _excluded$7 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
+const _excluded$9 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
 
-const useUtilityClasses$6 = ownerState => {
+const useUtilityClasses$8 = ownerState => {
   const {
     color,
     disableElevation,
@@ -387,7 +555,7 @@ const Button = /*#__PURE__*/react.exports.forwardRef(function Button(inProps, re
     type,
     variant = 'text'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$7);
+        other = _objectWithoutPropertiesLoose(props, _excluded$9);
 
   const ownerState = _extends({}, props, {
     color,
@@ -401,7 +569,7 @@ const Button = /*#__PURE__*/react.exports.forwardRef(function Button(inProps, re
     variant
   });
 
-  const classes = useUtilityClasses$6(ownerState);
+  const classes = useUtilityClasses$8(ownerState);
 
   const startIcon = startIconProp && /*#__PURE__*/jsxRuntime.exports.jsx(ButtonStartIcon, {
     className: classes.startIcon,
@@ -436,9 +604,9 @@ function getSwitchBaseUtilityClass(slot) {
 }
 generateUtilityClasses('PrivateSwitchBase', ['root', 'checked', 'disabled', 'input', 'edgeStart', 'edgeEnd']);
 
-const _excluded$6 = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
+const _excluded$8 = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
 
-const useUtilityClasses$5 = ownerState => {
+const useUtilityClasses$7 = ownerState => {
   const {
     classes,
     checked,
@@ -506,7 +674,7 @@ const SwitchBase = /*#__PURE__*/react.exports.forwardRef(function SwitchBase(pro
     type,
     value
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$6);
+        other = _objectWithoutPropertiesLoose(props, _excluded$8);
 
   const [checked, setCheckedState] = useControlled({
     controlled: checkedProp,
@@ -568,7 +736,7 @@ const SwitchBase = /*#__PURE__*/react.exports.forwardRef(function SwitchBase(pro
     edge
   });
 
-  const classes = useUtilityClasses$5(ownerState);
+  const classes = useUtilityClasses$7(ownerState);
   return /*#__PURE__*/jsxRuntime.exports.jsxs(SwitchBaseRoot, _extends({
     component: "span",
     className: clsx(classes.root, className),
@@ -622,9 +790,9 @@ function getCheckboxUtilityClass(slot) {
 const checkboxClasses = generateUtilityClasses('MuiCheckbox', ['root', 'checked', 'disabled', 'indeterminate', 'colorPrimary', 'colorSecondary']);
 var checkboxClasses$1 = checkboxClasses;
 
-const _excluded$5 = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size"];
+const _excluded$7 = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size"];
 
-const useUtilityClasses$4 = ownerState => {
+const useUtilityClasses$6 = ownerState => {
   const {
     classes,
     indeterminate,
@@ -692,7 +860,7 @@ const Checkbox = /*#__PURE__*/react.exports.forwardRef(function Checkbox(inProps
     inputProps,
     size = 'medium'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$5);
+        other = _objectWithoutPropertiesLoose(props, _excluded$7);
 
   const icon = indeterminate ? indeterminateIconProp : iconProp;
   const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon;
@@ -703,7 +871,7 @@ const Checkbox = /*#__PURE__*/react.exports.forwardRef(function Checkbox(inProps
     size
   });
 
-  const classes = useUtilityClasses$4(ownerState);
+  const classes = useUtilityClasses$6(ownerState);
   return /*#__PURE__*/jsxRuntime.exports.jsx(CheckboxRoot, _extends({
     type: "checkbox",
     inputProps: _extends({
@@ -728,7 +896,7 @@ function getCircularProgressUtilityClass(slot) {
 }
 generateUtilityClasses('MuiCircularProgress', ['root', 'determinate', 'indeterminate', 'colorPrimary', 'colorSecondary', 'svg', 'circle', 'circleDeterminate', 'circleIndeterminate', 'circleDisableShrink']);
 
-const _excluded$4 = ["className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"];
+const _excluded$6 = ["className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"];
 
 let _ = t => t,
     _t,
@@ -762,7 +930,7 @@ const circularDashKeyframe = keyframes(_t2 || (_t2 = _`
   }
 `));
 
-const useUtilityClasses$3 = ownerState => {
+const useUtilityClasses$5 = ownerState => {
   const {
     classes,
     variant,
@@ -858,7 +1026,7 @@ const CircularProgress = /*#__PURE__*/react.exports.forwardRef(function Circular
     value = 0,
     variant = 'indeterminate'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$4);
+        other = _objectWithoutPropertiesLoose(props, _excluded$6);
 
   const ownerState = _extends({}, props, {
     color,
@@ -869,7 +1037,7 @@ const CircularProgress = /*#__PURE__*/react.exports.forwardRef(function Circular
     variant
   });
 
-  const classes = useUtilityClasses$3(ownerState);
+  const classes = useUtilityClasses$5(ownerState);
   const circleStyle = {};
   const rootStyle = {};
   const rootProps = {};
@@ -910,6 +1078,321 @@ const CircularProgress = /*#__PURE__*/react.exports.forwardRef(function Circular
   }));
 });
 var CircularProgress$1 = CircularProgress;
+
+const dividerClasses = generateUtilityClasses('MuiDivider', ['root', 'absolute', 'fullWidth', 'inset', 'middle', 'flexItem', 'light', 'vertical', 'withChildren', 'withChildrenVertical', 'textAlignRight', 'textAlignLeft', 'wrapper', 'wrapperVertical']);
+var dividerClasses$1 = dividerClasses;
+
+function getFormControlLabelUtilityClasses(slot) {
+  return generateUtilityClass('MuiFormControlLabel', slot);
+}
+const formControlLabelClasses = generateUtilityClasses('MuiFormControlLabel', ['root', 'labelPlacementStart', 'labelPlacementTop', 'labelPlacementBottom', 'disabled', 'label']);
+var formControlLabelClasses$1 = formControlLabelClasses;
+
+const _excluded$5 = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "value"];
+
+const useUtilityClasses$4 = ownerState => {
+  const {
+    classes,
+    disabled,
+    labelPlacement
+  } = ownerState;
+  const slots = {
+    root: ['root', disabled && 'disabled', `labelPlacement${capitalize(labelPlacement)}`],
+    label: ['label', disabled && 'disabled']
+  };
+  return composeClasses(slots, getFormControlLabelUtilityClasses, classes);
+};
+
+const FormControlLabelRoot = styled('label', {
+  name: 'MuiFormControlLabel',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [{
+      [`& .${formControlLabelClasses$1.label}`]: styles.label
+    }, styles.root, styles[`labelPlacement${capitalize(ownerState.labelPlacement)}`]];
+  }
+})(({
+  theme,
+  ownerState
+}) => _extends({
+  display: 'inline-flex',
+  alignItems: 'center',
+  cursor: 'pointer',
+  // For correct alignment with the text.
+  verticalAlign: 'middle',
+  WebkitTapHighlightColor: 'transparent',
+  marginLeft: -11,
+  marginRight: 16,
+  // used for row presentation of radio/checkbox
+  [`&.${formControlLabelClasses$1.disabled}`]: {
+    cursor: 'default'
+  }
+}, ownerState.labelPlacement === 'start' && {
+  flexDirection: 'row-reverse',
+  marginLeft: 16,
+  // used for row presentation of radio/checkbox
+  marginRight: -11
+}, ownerState.labelPlacement === 'top' && {
+  flexDirection: 'column-reverse',
+  marginLeft: 16
+}, ownerState.labelPlacement === 'bottom' && {
+  flexDirection: 'column',
+  marginLeft: 16
+}, {
+  [`& .${formControlLabelClasses$1.label}`]: {
+    [`&.${formControlLabelClasses$1.disabled}`]: {
+      color: theme.palette.text.disabled
+    }
+  }
+}));
+/**
+ * Drop-in replacement of the `Radio`, `Switch` and `Checkbox` component.
+ * Use this component if you want to display an extra label.
+ */
+
+const FormControlLabel = /*#__PURE__*/react.exports.forwardRef(function FormControlLabel(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiFormControlLabel'
+  });
+
+  const {
+    className,
+    componentsProps = {},
+    control,
+    disabled: disabledProp,
+    disableTypography,
+    label,
+    labelPlacement = 'end'
+  } = props,
+        other = _objectWithoutPropertiesLoose(props, _excluded$5);
+
+  const muiFormControl = useFormControl();
+  let disabled = disabledProp;
+
+  if (typeof disabled === 'undefined' && typeof control.props.disabled !== 'undefined') {
+    disabled = control.props.disabled;
+  }
+
+  if (typeof disabled === 'undefined' && muiFormControl) {
+    disabled = muiFormControl.disabled;
+  }
+
+  const controlProps = {
+    disabled
+  };
+  ['checked', 'name', 'onChange', 'value', 'inputRef'].forEach(key => {
+    if (typeof control.props[key] === 'undefined' && typeof props[key] !== 'undefined') {
+      controlProps[key] = props[key];
+    }
+  });
+
+  const ownerState = _extends({}, props, {
+    disabled,
+    label,
+    labelPlacement
+  });
+
+  const classes = useUtilityClasses$4(ownerState);
+  return /*#__PURE__*/jsxRuntime.exports.jsxs(FormControlLabelRoot, _extends({
+    className: clsx(classes.root, className),
+    ownerState: ownerState,
+    ref: ref
+  }, other, {
+    children: [/*#__PURE__*/react.exports.cloneElement(control, controlProps), label.type === Typography$1 || disableTypography ? label : /*#__PURE__*/jsxRuntime.exports.jsx(Typography$1, _extends({
+      component: "span",
+      className: classes.label
+    }, componentsProps.typography, {
+      children: label
+    }))]
+  }));
+});
+var FormControlLabel$1 = FormControlLabel;
+
+const listItemIconClasses = generateUtilityClasses('MuiListItemIcon', ['root', 'alignItemsFlexStart']);
+var listItemIconClasses$1 = listItemIconClasses;
+
+const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
+var listItemTextClasses$1 = listItemTextClasses;
+
+function getMenuItemUtilityClass(slot) {
+  return generateUtilityClass('MuiMenuItem', slot);
+}
+const menuItemClasses = generateUtilityClasses('MuiMenuItem', ['root', 'focusVisible', 'dense', 'disabled', 'divider', 'gutters', 'selected']);
+var menuItemClasses$1 = menuItemClasses;
+
+const _excluded$4 = ["autoFocus", "component", "dense", "divider", "disableGutters", "focusVisibleClassName", "role", "tabIndex"];
+const overridesResolver = (props, styles) => {
+  const {
+    ownerState
+  } = props;
+  return [styles.root, ownerState.dense && styles.dense, ownerState.divider && styles.divider, !ownerState.disableGutters && styles.gutters];
+};
+
+const useUtilityClasses$3 = ownerState => {
+  const {
+    disabled,
+    dense,
+    divider,
+    disableGutters,
+    selected,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', dense && 'dense', disabled && 'disabled', !disableGutters && 'gutters', divider && 'divider', selected && 'selected']
+  };
+  const composedClasses = composeClasses(slots, getMenuItemUtilityClass, classes);
+  return _extends({}, classes, composedClasses);
+};
+
+const MenuItemRoot = styled(ButtonBase, {
+  shouldForwardProp: prop => rootShouldForwardProp(prop) || prop === 'classes',
+  name: 'MuiMenuItem',
+  slot: 'Root',
+  overridesResolver
+})(({
+  theme,
+  ownerState
+}) => _extends({}, theme.typography.body1, {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  position: 'relative',
+  textDecoration: 'none',
+  minHeight: 48,
+  paddingTop: 6,
+  paddingBottom: 6,
+  boxSizing: 'border-box',
+  whiteSpace: 'nowrap'
+}, !ownerState.disableGutters && {
+  paddingLeft: 16,
+  paddingRight: 16
+}, ownerState.divider && {
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  backgroundClip: 'padding-box'
+}, {
+  '&:hover': {
+    textDecoration: 'none',
+    backgroundColor: theme.palette.action.hover,
+    // Reset on touch devices, it doesn't add specificity
+    '@media (hover: none)': {
+      backgroundColor: 'transparent'
+    }
+  },
+  [`&.${menuItemClasses$1.selected}`]: {
+    backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+    [`&.${menuItemClasses$1.focusVisible}`]: {
+      backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+    }
+  },
+  [`&.${menuItemClasses$1.selected}:hover`]: {
+    backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+    // Reset on touch devices, it doesn't add specificity
+    '@media (hover: none)': {
+      backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
+    }
+  },
+  [`&.${menuItemClasses$1.focusVisible}`]: {
+    backgroundColor: theme.palette.action.focus
+  },
+  [`&.${menuItemClasses$1.disabled}`]: {
+    opacity: theme.palette.action.disabledOpacity
+  },
+  [`& + .${dividerClasses$1.root}`]: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  },
+  [`& + .${dividerClasses$1.inset}`]: {
+    marginLeft: 52
+  },
+  [`& .${listItemTextClasses$1.root}`]: {
+    marginTop: 0,
+    marginBottom: 0
+  },
+  [`& .${listItemTextClasses$1.inset}`]: {
+    paddingLeft: 36
+  },
+  [`& .${listItemIconClasses$1.root}`]: {
+    minWidth: 36
+  }
+}, !ownerState.dense && {
+  [theme.breakpoints.up('sm')]: {
+    minHeight: 'auto'
+  }
+}, ownerState.dense && _extends({
+  minHeight: 32,
+  // https://material.io/components/menus#specs > Dense
+  paddingTop: 4,
+  paddingBottom: 4
+}, theme.typography.body2, {
+  [`& .${listItemIconClasses$1.root} svg`]: {
+    fontSize: '1.25rem'
+  }
+})));
+const MenuItem = /*#__PURE__*/react.exports.forwardRef(function MenuItem(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiMenuItem'
+  });
+
+  const {
+    autoFocus = false,
+    component = 'li',
+    dense = false,
+    divider = false,
+    disableGutters = false,
+    focusVisibleClassName,
+    role = 'menuitem',
+    tabIndex: tabIndexProp
+  } = props,
+        other = _objectWithoutPropertiesLoose(props, _excluded$4);
+
+  const context = react.exports.useContext(ListContext);
+  const childContext = {
+    dense: dense || context.dense || false,
+    disableGutters
+  };
+  const menuItemRef = react.exports.useRef(null);
+  useEnhancedEffect(() => {
+    if (autoFocus) {
+      if (menuItemRef.current) {
+        menuItemRef.current.focus();
+      }
+    }
+  }, [autoFocus]);
+
+  const ownerState = _extends({}, props, {
+    dense: childContext.dense,
+    divider,
+    disableGutters
+  });
+
+  const classes = useUtilityClasses$3(props);
+  const handleRef = useForkRef(menuItemRef, ref);
+  let tabIndex;
+
+  if (!props.disabled) {
+    tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1;
+  }
+
+  return /*#__PURE__*/jsxRuntime.exports.jsx(ListContext.Provider, {
+    value: childContext,
+    children: /*#__PURE__*/jsxRuntime.exports.jsx(MenuItemRoot, _extends({
+      ref: handleRef,
+      role: role,
+      tabIndex: tabIndex,
+      component: component,
+      focusVisibleClassName: clsx(classes.focusVisible, focusVisibleClassName)
+    }, other, {
+      ownerState: ownerState,
+      classes: classes
+    }))
+  });
+});
+var MenuItem$1 = MenuItem;
 
 function getTabUtilityClass(slot) {
   return generateUtilityClass('MuiTab', slot);
@@ -1973,9 +2456,9 @@ const useSelectedMediaMutators = () => {
 const ActionPane = ({ actionLabel }) => {
     const selectedMedia = useSelectedMediaState();
     const { clearSelectedMedia } = useSelectedMediaMutators();
-    return (jsxs("div", Object.assign({ css: wrapper$7 }, { children: [jsx("p", Object.assign({ className: "info" }, { children: getInfoText$1(selectedMedia.length) }), void 0), jsxs("div", Object.assign({ css: buttonWrapper }, { children: [jsx(Button$1, Object.assign({ variant: "contained", disableElevation: true, disabled: selectedMedia.length === 0 }, { children: actionLabel.toUpperCase() }), void 0), jsx(Button$1, Object.assign({ variant: "outlined", onClick: clearSelectedMedia }, { children: "CLEAR SELECTION" }), void 0)] }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$8 }, { children: [jsx("p", Object.assign({ className: "info" }, { children: getInfoText$2(selectedMedia.length) }), void 0), jsxs("div", Object.assign({ css: buttonWrapper }, { children: [jsx(Button$1, Object.assign({ variant: "contained", disableElevation: true, disabled: selectedMedia.length === 0, sx: { textTransform: "none" } }, { children: actionLabel }), void 0), jsx(Button$1, Object.assign({ variant: "outlined", onClick: clearSelectedMedia, sx: { textTransform: "none" } }, { children: "Clear selection" }), void 0)] }), void 0)] }), void 0));
 };
-const getInfoText$1 = (mediaLength) => {
+const getInfoText$2 = (mediaLength) => {
     if (mediaLength === 0) {
         return "No media selected";
     }
@@ -1986,10 +2469,11 @@ const getInfoText$1 = (mediaLength) => {
         return `${mediaLength} media selected`;
     }
 };
-const wrapper$7 = css `
+const wrapper$8 = css `
   ${ROUNDED_CORNER};
   background-color: ${COLOR_WHITE};
   padding: ${SIZE1} ${SIZE2};
+
   p.info {
     margin-bottom: ${SIZE05};
     font-size: 18px;
@@ -1999,6 +2483,7 @@ const wrapper$7 = css `
 const buttonWrapper = css `
   display: flex;
   gap: ${SIZE1};
+
   & > * {
     flex-grow: 1;
     flex-basis: 0;
@@ -2006,9 +2491,9 @@ const buttonWrapper = css `
 `;
 
 const MediaListItem = ({ id, label, isChecked, onClick }) => {
-    return (jsxs("div", Object.assign({ css: wrapper$6 }, { children: [jsx("a", Object.assign({ css: idCol, href: `${PATH_MEDIUM}`, target: "_blank", rel: "noreferrer" }, { children: id }), void 0), jsx("span", Object.assign({ css: labelCol }, { children: label }), void 0), jsx("span", Object.assign({ css: checkCol }, { children: jsx(Checkbox$1, { checked: isChecked, onClick: () => onClick(id) }, void 0) }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$7 }, { children: [jsx("a", Object.assign({ css: idCol$1, href: `${PATH_MEDIUM}${id}`, target: "_blank", rel: "noreferrer" }, { children: id }), void 0), jsx("span", Object.assign({ css: labelCol$1 }, { children: label }), void 0), jsx("span", Object.assign({ css: checkCol$1 }, { children: jsx(Checkbox$1, { checked: isChecked, onClick: () => onClick(id) }, void 0) }), void 0)] }), void 0));
 };
-const wrapper$6 = css `
+const wrapper$7 = css `
   & + & {
     border-top: none;
   }
@@ -2020,23 +2505,35 @@ const wrapper$6 = css `
   align-items: center;
   gap: ${SIZE2};
 `;
-const idCol = css `
+const idCol$1 = css `
   flex-shrink: 0;
   flex-grow: 0;
   width: 90px;
   color: ${COLOR_PRIMARY};
   text-decoration: none;
 `;
-const labelCol = css `
+const labelCol$1 = css `
   flex-grow: 1;
   flex-shrink: 1;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 `;
-const checkCol = css `
+const checkCol$1 = css `
   flex-shrink: 0;
 `;
+
+const deepEqual = (a, b) => {
+    return JSON.stringify(a) === JSON.stringify(b);
+};
+
+const useResetScroll = (scrollInner, data) => {
+    react.exports.useEffect(() => {
+        if (!scrollInner.current)
+            return;
+        scrollInner.current.scrollTop = 0;
+    }, [data]);
+};
 
 const foundMedia = Recoil_index_6({ key: "foundMedia", default: [] });
 const useFoundMediaState = () => {
@@ -2076,15 +2573,21 @@ const useMediaLoadAbortMutators = () => {
 };
 
 const MediaList = ({ css, className }) => {
-    const { data, toggleChecked } = useMediaList();
     const isMediaLoading = useIsMediaLoading();
-    return (jsxs("div", Object.assign({ css: [wrapper$5, css], className: className }, { children: [isMediaLoading && (jsx("div", Object.assign({ css: loadingIndicator }, { children: jsx(CircularProgress$1, { color: "inherit", size: 40 }, void 0) }), void 0)), data.map((item) => (jsx(MediaListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id)))] }), void 0));
+    const scrollInnerRef = react.exports.useRef(null);
+    const { data, toggleChecked } = useMediaList();
+    useResetScroll(scrollInnerRef, data);
+    return (jsxs("div", Object.assign({ css: [wrapper$6, css], className: className }, { children: [isMediaLoading && (jsx("div", Object.assign({ css: loadingIndicator$1 }, { children: jsx(CircularProgress$1, { color: "inherit", size: 40 }, void 0) }), void 0)), jsx("div", Object.assign({ css: inner$2, ref: scrollInnerRef }, { children: data.map((item) => (jsx(MediaListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id))) }), void 0)] }), void 0));
 };
-const wrapper$5 = css `
-  overflow-y: auto;
+const wrapper$6 = css `
+  overflow: hidden;
   position: relative;
 `;
-const loadingIndicator = css `
+const inner$2 = css `
+  max-height: 100%;
+  overflow-y: auto;
+`;
+const loadingIndicator$1 = css `
   position: absolute;
   top: 0;
   left: 0;
@@ -2100,7 +2603,7 @@ const useMediaList = () => {
     const [data, setData] = react.exports.useState([]);
     const foundMedia = useFoundMediaState();
     const selectedMedia = useSelectedMediaState();
-    const { toggleMediumSelection } = useSelectedMediaMutators();
+    const { toggleMediumSelection, setSelectedMedia } = useSelectedMediaMutators();
     const toggleChecked = (id) => {
         toggleMediumSelection(id);
     };
@@ -2113,6 +2616,10 @@ const useMediaList = () => {
             };
         });
         setData(result);
+        const updatedSelection = selectedMedia.filter((id) => result.find((info) => info.id === id));
+        if (!deepEqual(updatedSelection, selectedMedia)) {
+            setSelectedMedia(updatedSelection);
+        }
     }, [foundMedia, selectedMedia]);
     return { data, toggleChecked };
 };
@@ -2143,9 +2650,9 @@ const useQueryDataMutators = () => {
 
 const QueryInfo = () => {
     const queryData = useQueryDataState();
-    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx("p", { children: "Queried with:" }, void 0), jsx("p", { children: queryDataToInfoText(queryData) }, void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$5 }, { children: [jsx("p", { children: "Queried with:" }, void 0), jsx("p", { children: queryDataToInfoText(queryData) }, void 0)] }), void 0));
 };
-const wrapper$4 = css `
+const wrapper$5 = css `
   ${ROUNDED_CORNER};
   border-color: ${COLOR_GRAY_LINE};
   border-style: dashed;
@@ -2160,9 +2667,9 @@ const wrapper$4 = css `
 const MediaSelectPane = ({ css, className }) => {
     const foundMedia = useFoundMediaState();
     const isLoading = useIsMediaLoading();
-    return (jsxs("div", Object.assign({ css: [wrapper$3, css], className: className }, { children: [jsx(QueryInfo, {}, void 0), jsx("p", Object.assign({ css: infoTextCSS }, { children: getInfoText(foundMedia.length, isLoading) }), void 0), jsx(MediaList, { css: list }, void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: [wrapper$4, css], className: className }, { children: [jsx(QueryInfo, {}, void 0), jsx("p", Object.assign({ css: infoTextCSS$1 }, { children: getInfoText$1(foundMedia.length, isLoading) }), void 0), jsx(MediaList, { css: list }, void 0)] }), void 0));
 };
-const wrapper$3 = css `
+const wrapper$4 = css `
   ${ROUNDED_CORNER};
   background-color: ${COLOR_WHITE};
   padding: ${SIZE2};
@@ -2170,7 +2677,7 @@ const wrapper$3 = css `
   flex-direction: column;
   overflow: hidden;
 `;
-const infoTextCSS = css `
+const infoTextCSS$1 = css `
   font-size: 18px;
   ${FONT_WEIGHT_BOLD};
   margin-top: ${SIZE4};
@@ -2179,7 +2686,7 @@ const infoTextCSS = css `
 const list = css `
   flex-grow: 1;
 `;
-const getInfoText = (mediaLength, isLoading) => {
+const getInfoText$1 = (mediaLength, isLoading) => {
     if (isLoading) {
         return "Loading...";
     }
@@ -2247,11 +2754,384 @@ const AttributesSection = () => {
     return (jsx("div", { children: jsx(ComponentSelect, { onChangeSelection: onChangeSelection }, void 0) }, void 0));
 };
 
-const PhenotypeSection = ({}) => {
-    return (jsx("div", { children: jsx("div", { children: "PhenotypeTab" }, void 0) }, void 0));
+const OrganismListItem = ({ css, className, id, label, isChecked, onClick }) => {
+    return (jsxs("div", Object.assign({ css: [organismListItem, css], className: className }, { children: [jsxs("div", Object.assign({ css: listInner }, { children: [jsx("span", Object.assign({ css: labelCol }, { children: label }), void 0), jsxs("a", Object.assign({ css: idCol, href: `${PATH_ORGANISM}${id}`, target: "_blank", rel: "noreferrer" }, { children: ["[tax_id:", id, "]"] }), void 0)] }), void 0), jsx("span", Object.assign({ css: checkCol }, { children: jsx(Checkbox$1, { checked: isChecked, onClick: () => onClick(id) }, void 0) }), void 0)] }), void 0));
+};
+const organismListItem = css `
+  & + & {
+    border-top: none;
+  }
+  display: flex;
+  justify-content: space-between;
+  background-color: ${COLOR_WHITE};
+  border: 1px solid ${COLOR_GRAY_LINE};
+  padding: 0 ${SIZE1};
+  align-items: center;
+`;
+const listInner = css `
+  display: flex;
+  gap: ${SIZE2};
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: calc(100% - 40px);
+`;
+const idCol = css `
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 100px;
+  color: ${COLOR_PRIMARY};
+  text-decoration: none;
+`;
+const labelCol = css `
+  flex-grow: 0;
+  flex-shrink: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+const checkCol = css `
+  flex-shrink: 0;
+  flex-grow: 0;
+`;
+
+const foundOrganisms = Recoil_index_6({ key: "foundOrganisms", default: [] });
+const useFoundOrganismsState = () => {
+    return Recoil_index_18(foundOrganisms);
+};
+const useFoundOrganismsMutators = () => {
+    const setFoundOrganisms = Recoil_index_22(foundOrganisms);
+    return { setFoundOrganisms };
 };
 
-const queryMethod = Recoil_index_6({ key: "queryMethod", default: "Media attributes" });
+const organismLoadAbort = Recoil_index_6({
+    key: "organismLoadAbort",
+    default: null,
+});
+const useIsOrganismLoading = () => {
+    return !!Recoil_index_18(organismLoadAbort);
+};
+const useOrganismLoadAbortMutators = () => {
+    const setOrganismLoadAbort = Recoil_index_22(organismLoadAbort);
+    const abortCurrentLoading = () => {
+        let result = false;
+        setOrganismLoadAbort((prev) => {
+            if (prev) {
+                prev.abort();
+                result = true;
+            }
+            return null;
+        });
+        return result;
+    };
+    const setNextOrganismLoadAbort = (abort) => {
+        setOrganismLoadAbort((prev) => {
+            if (prev) {
+                prev.abort();
+            }
+            return abort;
+        });
+    };
+    return { abortCurrentLoading, setNextOrganismLoadAbort };
+};
+
+const selectedOrganisms = Recoil_index_6({ key: "selectedOrganisms", default: [] });
+const useSelectedOrganismsState = () => {
+    return Recoil_index_18(selectedOrganisms);
+};
+const useSelectedOrganismsMutators = () => {
+    const setSelectedOrganisms = Recoil_index_22(selectedOrganisms);
+    const toggleOrganismSelection = (id) => {
+        setSelectedOrganisms((prev) => {
+            let result;
+            if (prev.includes(id)) {
+                result = prev.filter((r) => r !== id);
+            }
+            else {
+                result = [...prev, id];
+            }
+            return result;
+        });
+    };
+    const clearSelectedOrganisms = () => {
+        setSelectedOrganisms([]);
+    };
+    return { setSelectedOrganisms, toggleOrganismSelection, clearSelectedOrganisms };
+};
+
+const OrganismList = ({ css, className }) => {
+    const isOrganismLoading = useIsOrganismLoading();
+    const scrollInnerRef = react.exports.useRef(null);
+    const { data, toggleChecked } = useOrganismList();
+    useResetScroll(scrollInnerRef, data);
+    return (jsxs("div", Object.assign({ css: [organismList, css], className: className }, { children: [isOrganismLoading && (jsx("div", Object.assign({ css: loadingIndicator }, { children: jsx(CircularProgress$1, { color: "inherit", size: 40 }, void 0) }), void 0)), jsx("div", Object.assign({ css: inner$1, ref: scrollInnerRef }, { children: data.map((item) => (jsx(OrganismListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id))) }), void 0)] }), void 0));
+};
+const organismList = css `
+  background-color: ${COLOR_WHITE};
+  position: relative;
+  min-height: 100px;
+`;
+const inner$1 = css `
+  max-height: 100%;
+  overflow-y: auto;
+`;
+const loadingIndicator = css `
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${COLOR_GRAY700};
+`;
+const useOrganismList = () => {
+    const [data, setData] = react.exports.useState([]);
+    const foundOrganisms = useFoundOrganismsState();
+    const selectedOrganisms = useSelectedOrganismsState();
+    const { toggleOrganismSelection, setSelectedOrganisms } = useSelectedOrganismsMutators();
+    const toggleChecked = (id) => {
+        toggleOrganismSelection(id);
+    };
+    react.exports.useEffect(() => {
+        const result = foundOrganisms.map((organism) => {
+            return {
+                id: organism.id,
+                label: organism.label,
+                isChecked: selectedOrganisms.includes(organism.id),
+            };
+        });
+        setData(result);
+        const updatedSelection = selectedOrganisms.filter((id) => result.find((info) => info.id === id));
+        if (!deepEqual(updatedSelection, selectedOrganisms)) {
+            setSelectedOrganisms(updatedSelection);
+        }
+    }, [foundOrganisms, selectedOrganisms]);
+    return { data, toggleChecked };
+};
+
+function valuetext(value) {
+    return `${value}°C`;
+}
+const RangeSlider = ({ css, className, min, max, label, marks, queryKey, handleValueChange, handleEnabledChange, }) => {
+    const [value, setValue] = react.exports.useState([min, max]);
+    const [enabled, setEnabled] = react.exports.useState(false);
+    const handleSliderChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    const handleCheckChange = (event, checked) => {
+        setEnabled(checked);
+    };
+    const handleChangeCommitted = (event, newValue) => {
+        handleValueChange(queryKey, newValue.join(","));
+    };
+    react.exports.useEffect(() => {
+        if (enabled) {
+            handleValueChange(queryKey, value.join(","));
+        }
+        else {
+            handleEnabledChange(queryKey, false);
+        }
+    }, [enabled]);
+    return (jsxs("div", Object.assign({ css: [rangeSlider, css], className: className }, { children: [jsx("div", { children: jsx("span", { children: jsx(FormControlLabel$1, { label: label, control: jsx(Checkbox$1, { onChange: handleCheckChange, css: checkBoxStyle$1 }, void 0) }, void 0) }, void 0) }, void 0), jsx(Slider, { value: value, onChange: handleSliderChange, onChangeCommitted: handleChangeCommitted, valueLabelDisplay: "auto", getAriaValueText: valuetext, min: min, max: max, marks: marks, step: 0.1, disabled: enabled ? undefined : true }, void 0)] }), void 0));
+};
+const rangeSlider = css ``;
+const checkBoxStyle$1 = css `
+  padding-left: 0;
+`;
+
+const SelectBox = ({ css, className, label, items, queryKey, handleEnabledChange, handleValueChange, }) => {
+    const [value, setValue] = react.exports.useState("");
+    const [enabled, setEnabled] = react.exports.useState(false);
+    const handleSelectChange = (event) => {
+        setValue(event.target.value);
+    };
+    const handleCheckChange = (event, checked) => {
+        setEnabled(checked);
+        setValue("");
+    };
+    react.exports.useEffect(() => {
+        if (enabled && value !== "") {
+            handleValueChange(queryKey, value);
+        }
+        else {
+            handleEnabledChange(queryKey, false);
+        }
+    }, [value, enabled]);
+    return (jsxs("div", Object.assign({ css: [selectBox, css], className: className }, { children: [jsx(Checkbox$1, { css: checkBoxStyle, onChange: handleCheckChange }, void 0), jsxs(FormControl, Object.assign({ sx: { m: 1, minWidth: 300 } }, { children: [jsx(InputLabel, Object.assign({ id: queryKey }, { children: label }), void 0), jsx(Select, Object.assign({ labelId: queryKey, id: queryKey, value: value, label: label, onChange: handleSelectChange, disabled: enabled ? undefined : true }, { children: items.map(([value, name]) => (jsx(MenuItem$1, Object.assign({ value: value }, { children: name }), value))) }), void 0)] }), void 0)] }), void 0));
+};
+const selectBox = css `
+  background-color: ${COLOR_WHITE};
+  display: flex;
+  align-items: center;
+`;
+const checkBoxStyle = css `
+  padding-left: 0;
+`;
+
+const phenotypeQuery = Recoil_index_6({ key: "phenotypeQuery", default: {} });
+const usePhenotypeQueryState = () => {
+    return Recoil_index_18(phenotypeQuery);
+};
+const usePhenotypeQueryMutators = () => {
+    const setPhenotypeQuery = Recoil_index_22(phenotypeQuery);
+    const updatePhenotypeQuery = (key, value) => {
+        setPhenotypeQuery((prev) => {
+            const cloned = clone(prev);
+            cloned[key] = value;
+            return cloned;
+        });
+    };
+    const removePhenotypeQuery = (key) => {
+        setPhenotypeQuery((prev) => {
+            const cloned = clone(prev);
+            if (cloned[key]) {
+                delete cloned[key];
+            }
+            return cloned;
+        });
+    };
+    const clearPhenotypeQuery = () => {
+        setPhenotypeQuery({});
+    };
+    return { updatePhenotypeQuery, removePhenotypeQuery, clearPhenotypeQuery };
+};
+
+const PhenotypeSearchArea = ({ css, className }) => {
+    const { handleEnabledChange, handleValueChange } = usePhenotypeQuery();
+    return (jsxs("div", Object.assign({ css: [phenotypeSearchArea, css], className: className }, { children: [jsx(RangeSlider, { css: sliderStyle, min: 0, max: 110, label: "Growth Temperature", marks: [
+                    { value: 0, label: "0°C" },
+                    { value: 37, label: "37°C" },
+                    { value: 110, label: "110°C" },
+                ], queryKey: "growth_temp", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(RangeSlider, { css: sliderStyle, min: 0, max: 14, label: "Growth pH", marks: [
+                    { value: 0, label: "0" },
+                    { value: 14, label: "14" },
+                ], queryKey: "growth_ph", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Oxygen requirement", items: [
+                    ["MPO_04002", "Aerobe"],
+                    ["MPO_04003", "Anaerobe"],
+                    ["MPO_04004", "Obligate aerobe"],
+                    ["MPO_04005", "Facultative aerobe"],
+                    ["MPO_04006", "Obligate anaerobe"],
+                    ["MPO_04007", "Facultative anaerobe"],
+                    ["MPO_04009", "Microaerophilic"],
+                ], queryKey: "MPO_10002", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Gram Strain", queryKey: "MPO_10002", items: [
+                    ["MPO_07002", "Gram+"],
+                    ["MPO_07003", "Gram-"],
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Motility", queryKey: "MPO_10002", items: [
+                    ["MPO_02001", "Motile"],
+                    ["MPO_02002", "Nonmotile"],
+                    ["MPO_02007", "Chemotactic"],
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Cell shape", queryKey: "MPO_10002", items: [
+                    ["MPO_01015", "Rod-shaped"],
+                    ["MPO_01003", "Coccus-shaped"],
+                    ["MPO_01005", "Curved-shaped"],
+                    ["MPO_01014", "Pleomorphic-shaped"],
+                    ["MPO_01007", "Filament-shaped"],
+                    ["MPO_01003", "Sphere-shaped"],
+                    ["MPO_01022", "Vibrio-shaped"],
+                    ["MPO_01021", "Star-shaped"],
+                    ["MPO_01026", "Triangular"],
+                    ["MPO_01018", "Spiral-shaped"],
+                    ["MPO_01010", "Helical-shaped"],
+                    ["MPO_01013", "Ovoid-shaped"],
+                    ["MPO_01012", "Oval-shaped"],
+                    ["MPO_01017", "Spindle-shaped"],
+                    ["MPO_01004", "Crescent-shaped"],
+                    ["MPO_01009", "Fusiform"],
+                    ["MPO_01020", "Square-shaped"],
+                    ["MPO_01019", "Spore-shaped"],
+                    ["MPO_01006", "Disc-shaped"],
+                    ["MPO_01008", "Flask-shaped"],
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Salinity", queryKey: "MPO_10002", items: [
+                    ["MPO_03007", "Halophile"],
+                    ["MPO_03008", "Halotolerant"],
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0)] }), void 0));
+};
+const phenotypeSearchArea = css `
+  background-color: ${COLOR_WHITE};
+  padding: 0 20px;
+`;
+const sliderStyle = css `
+  & + & {
+    margin-top: 10px;
+  }
+`;
+const usePhenotypeQuery = () => {
+    const phenotypeQuery = usePhenotypeQueryState();
+    const { setFoundOrganisms } = useFoundOrganismsMutators();
+    const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
+    const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
+    const handleEnabledChange = (key, enabled) => {
+        if (!enabled) {
+            removePhenotypeQuery(key);
+        }
+    };
+    const handleValueChange = (key, value) => {
+        updatePhenotypeQuery(key, value);
+    };
+    react.exports.useEffect(() => {
+        if (Object.entries(phenotypeQuery).length === 0) {
+            setFoundOrganisms([]);
+            setNextOrganismLoadAbort(null);
+            return;
+        }
+        (() => __awaiter(void 0, void 0, void 0, function* () {
+            const abort = new AbortController();
+            setNextOrganismLoadAbort(abort);
+            const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, phenotypeQuery, abort);
+            setNextOrganismLoadAbort(null);
+            if (response.body) {
+                setFoundOrganisms(response.body.map((item) => ({ id: item.tax_id, label: item.name })));
+            }
+        }))();
+    }, [phenotypeQuery]);
+    return { handleEnabledChange, handleValueChange };
+};
+
+const PhenotypeSection = ({ css, className }) => {
+    const foundOrganism = useFoundOrganismsState();
+    const isLoading = useIsOrganismLoading();
+    return (jsxs("div", Object.assign({ css: [phenotypeSection, css], className: className }, { children: [jsx("div", Object.assign({ css: phenotypes }, { children: jsx(PhenotypeSearchArea, {}, void 0) }), void 0), jsxs("div", Object.assign({ css: organisms }, { children: [jsx("p", Object.assign({ css: infoTextCSS }, { children: getInfoText(foundOrganism.length, isLoading) }), void 0), jsx(OrganismList, {}, void 0)] }), void 0)] }), void 0));
+};
+const phenotypeSection = css `
+  background-color: ${COLOR_WHITE};
+  display: flex;
+`;
+const phenotypes = css `
+  max-width: 50%;
+  flex-grow: 1;
+  border-right-color: ${COLOR_GRAY_LINE};
+  border-right-style: dashed;
+  border-right-width: 2px;
+  padding: ${SIZE2};
+`;
+const organisms = css `
+  max-width: 50%;
+  flex-grow: 1;
+  padding: ${SIZE2};
+`;
+const infoTextCSS = css `
+  font-size: 18px;
+  ${FONT_WEIGHT_BOLD};
+  margin-bottom: ${SIZE1};
+`;
+const getInfoText = (organismLength, isLoading) => {
+    if (isLoading) {
+        return "Loading...";
+    }
+    if (organismLength === 0) {
+        return "No organisms found";
+    }
+    else if (organismLength === 1) {
+        return "1 organism found";
+    }
+    else {
+        return `${organismLength} organisms found`;
+    }
+};
+
+const queryMethod = Recoil_index_6({ key: "queryMethod", default: "Taxonomic tree" });
 const useQueryMethodState = () => {
     return Recoil_index_18(queryMethod);
 };
@@ -2267,9 +3147,9 @@ const QueryMethodTab = ({ css, className }) => {
     const handleChange = (event, newValue) => {
         setQueryMethod(newValue);
     };
-    return (jsx("div", Object.assign({ css: [wrapper$2, css], className: className }, { children: jsx(Tabs$1, Object.assign({ value: queryMethod, onChange: handleChange }, { children: tabNames.map((label) => (jsx(Tab$1, { label: label, value: label, css: tabCSS }, label))) }), void 0) }), void 0));
+    return (jsx("div", Object.assign({ css: [wrapper$3, css], className: className }, { children: jsx(Tabs$1, Object.assign({ value: queryMethod, onChange: handleChange }, { children: tabNames.map((label) => (jsx(Tab$1, { label: label, value: label, css: tabCSS }, label))) }), void 0) }), void 0));
 };
-const wrapper$2 = css `
+const wrapper$3 = css `
   width: 100%;
   border-bottom: 1px solid ${COLOR_GRAY_LINE};
   & > * {
@@ -2284,9 +3164,399 @@ const tabCSS = css `
   //width: 200px;
 `;
 
-const TaxonomicTreeSection = ({}) => {
-    return (jsx("div", { children: jsx("div", { children: "TaxonomicTreeTab" }, void 0) }, void 0));
+const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
+    return (jsxs("li", Object.assign({ css: [wrapper$2, css], className: className }, { children: [jsxs("div", Object.assign({ css: inner }, { children: [jsxs("div", Object.assign({ css: left }, { children: [jsx("span", Object.assign({ onClick: () => onToggleChildren(id) }, { children: jsx(ToggleIcon, Object.assign({}, { hasChildren, isOpen }), void 0) }), void 0), jsx(Tooltip, Object.assign({ title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start" }, { children: jsx("span", { children: label }, void 0) }), void 0), tag && jsx("span", Object.assign({ css: tagTip }, { children: tag }), void 0), linkString && linkURL && (jsxs("a", Object.assign({ href: linkURL, target: "_blank", rel: "noreferrer" }, { children: ["[", linkString, "]"] }), void 0))] }), void 0), jsx(Checkbox$1, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) }, void 0)] }), void 0), isOpen && !!children && jsx("ul", Object.assign({ css: childrenWrapper }, { children: children }), void 0)] }), void 0));
 };
+const ToggleIcon = ({ hasChildren, isOpen }) => {
+    if (!hasChildren)
+        return jsx(IconNoChildren, { css: icon }, void 0);
+    if (isOpen)
+        return jsx(IconCompact, { css: [icon, clickable] }, void 0);
+    return jsx(IconExpand, { css: [icon, clickable] }, void 0);
+};
+const wrapper$2 = css `
+  margin-top: -1px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+`;
+const inner = css `
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  background-color: ${COLOR_WHITE};
+  padding: 0 8px;
+  border: 1px solid ${COLOR_GRAY_LINE};
+`;
+const left = css `
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  font-size: 16px;
+  a {
+    font-size: 14px;
+    color: ${COLOR_PRIMARY};
+  }
+`;
+const icon = css `
+  display: block;
+  color: ${COLOR_GRAY300};
+  width: 24px;
+  height: 24px;
+`;
+const clickable = css `
+  cursor: pointer;
+  color: ${COLOR_GRAY700};
+`;
+const childrenWrapper = css `
+  padding-left: 32px;
+`;
+const tagTip = css `
+  font-size: 12px;
+  background-color: ${COLOR_GRAY400};
+  color: ${COLOR_WHITE};
+  padding: 4px 6px;
+  border-radius: 5px;
+`;
+
+const retrieveTaxonInfo = (info, addTaxonToList, setTaxonChildren) => {
+    (() => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b, _c;
+        const params = {
+            tax_id: info.id,
+        };
+        console.log(info.id);
+        const response = yield getData(API_TAXONOMY_CHILDREN, params);
+        setTaxonChildren(info.id, (_b = (_a = response === null || response === void 0 ? void 0 : response.body) === null || _a === void 0 ? void 0 : _a.map((item) => item.tax_id)) !== null && _b !== void 0 ? _b : []);
+        (_c = response === null || response === void 0 ? void 0 : response.body) === null || _c === void 0 ? void 0 : _c.forEach((item) => {
+            addTaxonToList({
+                id: item.tax_id,
+                label: item.name,
+                rank: item.rank,
+                children: item.rank === "Species" ? [] : "not-yet",
+            });
+        });
+    }))();
+};
+const findAscendants = (list, id) => {
+    let iterationCount = 0;
+    const result = [];
+    let currentId = id;
+    while (iterationCount < 255) {
+        iterationCount++;
+        const parent = findParent(list, currentId);
+        if (parent) {
+            result.unshift(parent.id);
+            currentId = parent.id;
+        }
+        else {
+            break;
+        }
+    }
+    return result;
+};
+const findDescendants = (list, id) => {
+    let result = [];
+    const process = (currentId) => {
+        const children = findChildren(list, currentId);
+        if (children && dist.isArray(children)) {
+            result = [...result, ...children];
+            children.forEach((childId) => process(childId));
+        }
+    };
+    process(id);
+    return result;
+};
+const makeNewSelection = (list, id, selection) => {
+    const isSelected = checkIsSelected(id, selection);
+    let result = setSelection(selection, id, !isSelected);
+    let currentId;
+    const ascendants = findAscendants(list, id).reverse();
+    const descendants = findDescendants(list, id);
+    if (descendants) {
+        result = setMultipleSelection(result, descendants, false);
+    }
+    const checkedAscendant = ascendants.find((ascendant) => result.includes(ascendant));
+    if (checkedAscendant) {
+        currentId = id;
+        for (let i = 0; i < ascendants.length; i++) {
+            const parent = ascendants[i];
+            result = setSelection(result, parent, false);
+            const siblings = findSiblings(list, currentId);
+            result = setMultipleSelection(result, siblings, true);
+            result = setSelection(result, currentId, false);
+            if (checkedAscendant === parent) {
+                break;
+            }
+            currentId = parent;
+        }
+    }
+    currentId = id;
+    for (let i = 0; i < ascendants.length; i++) {
+        const parent = ascendants[i];
+        const siblings = [...findSiblings(list, currentId), currentId];
+        const checkedSiblings = siblings.filter((siblingId) => result.includes(siblingId));
+        if (parent && checkedSiblings.length && checkedSiblings.length === siblings.length) {
+            result = setMultipleSelection(result, checkedSiblings, false);
+            result = setSelection(result, parent, true);
+        }
+        currentId = parent;
+    }
+    return result;
+};
+const checkIsSelected = (id, selection) => {
+    return selection.includes(id);
+};
+const setSelection = (selection, id, value) => {
+    const isSelected = checkIsSelected(id, selection);
+    switch (true) {
+        case isSelected && !value:
+            return selection.filter((item) => item !== id);
+        case !isSelected && value:
+            return [...selection, id];
+        default:
+            return [...selection];
+    }
+};
+const setMultipleSelection = (selection, ids, value) => {
+    let result = [...selection];
+    ids.forEach((id) => (result = setSelection(result, id, value)));
+    return result;
+};
+const findChildren = (list, id) => { var _a; return (_a = list.find((info) => info.id === id)) === null || _a === void 0 ? void 0 : _a.children; };
+const findParent = (list, id) => list.find((node) => { var _a; return (_a = node.children) === null || _a === void 0 ? void 0 : _a.includes(id); });
+const findSiblings = (list, id) => {
+    var _a;
+    const children = (_a = findParent(list, id)) === null || _a === void 0 ? void 0 : _a.children;
+    if (children && dist.isArray(children)) {
+        return children.filter((myId) => myId !== id);
+    }
+    else {
+        return [];
+    }
+};
+
+const selectedTaxon = Recoil_index_6({ key: "selectedTaxon", default: [] });
+const useSelectedTaxonState = () => {
+    return Recoil_index_18(selectedTaxon);
+};
+const useSelectedTaxonMutators = () => {
+    const setSelectedTaxon = Recoil_index_22(selectedTaxon);
+    const clearTaxonSelect = () => setSelectedTaxon([]);
+    const updateSelection = (list, id) => {
+        setSelectedTaxon((prev) => makeNewSelection(list, id, prev));
+    };
+    return {
+        __setSelectedTaxon: setSelectedTaxon,
+        clearTaxonSelect,
+        updateSelection,
+    };
+};
+
+const taxonList = Recoil_index_6({ key: "taxonList", default: [] });
+const useTaxonListState = () => {
+    return Recoil_index_18(taxonList);
+};
+const useTaxonListMutators = () => {
+    const setTaxonList = Recoil_index_22(taxonList);
+    const addTaxonToList = (taxon) => {
+        if (taxon.id === "157124") {
+            console.log(taxon);
+        }
+        setTaxonList((prev) => [...prev.filter((item) => item.id !== taxon.id), taxon]);
+    };
+    const setTaxonChildren = (id, children) => {
+        setTaxonList((prev) => {
+            const target = prev.find((item) => item.id === id);
+            const filtered = prev.filter((item) => item.id !== id);
+            if (!target) {
+                console.warn("no target found", id);
+                return prev;
+            }
+            return [...filtered, Object.assign(Object.assign({}, target), { children })];
+        });
+    };
+    const setTaxonAsLoading = (id) => {
+        setTaxonList((prev) => {
+            const target = prev.find((item) => item.id === id);
+            const filtered = prev.filter((item) => item.id !== id);
+            if (!target) {
+                console.warn("no target found", id);
+                return prev;
+            }
+            return [...filtered, Object.assign(Object.assign({}, target), { children: "loading" })];
+        });
+    };
+    return { addTaxonToList, setTaxonAsLoading, setTaxonChildren };
+};
+
+const TaxonomicTreeBranch = ({ id, css, className }) => {
+    const taxonList = useTaxonListState();
+    const myInfo = react.exports.useMemo(() => {
+        return taxonList.find((item) => item.id === id);
+    }, [taxonList, id]);
+    const { branchChildren } = useBranchChildren(myInfo);
+    const { label, rank } = useTaxonInfo(id, myInfo);
+    const { descendants, ascendants } = useLineages(id, taxonList);
+    const { check, onClickCheck } = useChecked(id, taxonList, ascendants, descendants);
+    const { ascendantsLabel } = useAscendantsLabel(ascendants);
+    const [linkString, linkURL] = useLinkString(id);
+    const [isOpen, setIsOpen] = react.exports.useState(false);
+    const onToggleChildren = () => {
+        setIsOpen((prev) => !prev);
+    };
+    return (jsx(TreeBranchView, Object.assign({ css: css, className: className, label: label, id: id, tag: rank, linkString: linkString, linkURL: linkURL, toolTipLabel: ascendantsLabel, check: check, hasChildren: !!branchChildren.length, isOpen: isOpen, onClickCheck: () => onClickCheck(), onToggleChildren: onToggleChildren }, { children: isOpen &&
+            branchChildren.length &&
+            branchChildren.map((childId) => jsx(TaxonomicTreeBranch, { id: childId }, childId)) }), void 0));
+};
+const useLinkString = (id) => {
+    const [linkString, setLinkString] = react.exports.useState("");
+    const [linkURL, setLinkURL] = react.exports.useState("");
+    react.exports.useEffect(() => {
+        setLinkString(`tax_id:${id}`);
+        setLinkURL(`http://growthmedium.org/organism/${id}`);
+    }, [id]);
+    return [linkString, linkURL];
+};
+const useBranchChildren = (info) => {
+    const [branchChildren, setBranchChildren] = react.exports.useState([]);
+    const { setTaxonAsLoading, addTaxonToList, setTaxonChildren } = useTaxonListMutators();
+    react.exports.useEffect(() => {
+        if ((info === null || info === void 0 ? void 0 : info.children) === "not-yet") {
+            setTaxonAsLoading(info.id);
+            retrieveTaxonInfo(info, addTaxonToList, setTaxonChildren);
+        }
+        if (info && dist.isArray(info.children)) {
+            setBranchChildren(info.children);
+        }
+    }, [info]);
+    return { branchChildren };
+};
+const useTaxonInfo = (id, myInfo) => {
+    const [rank, setRank] = react.exports.useState("");
+    const [label, setLabel] = react.exports.useState("");
+    react.exports.useEffect(() => {
+        if (myInfo) {
+            setRank(myInfo.rank);
+            setLabel(myInfo.label);
+        }
+    }, [id, myInfo]);
+    return { rank, label };
+};
+const useChecked = (id, taxonList, ascendants, descendants) => {
+    const selectedTaxon = useSelectedTaxonState();
+    const [check, setCheck] = react.exports.useState("none");
+    const { updateSelection } = useSelectedTaxonMutators();
+    const onClickCheck = () => {
+        updateSelection(taxonList, id);
+    };
+    react.exports.useEffect(() => {
+        const isChecked = !!selectedTaxon.find((taxId) => taxId === id);
+        const isGrouped = !!selectedTaxon.find((taxId) => ascendants.includes(taxId));
+        const isIndeterminate = !!selectedTaxon.find((taxId) => descendants.includes(taxId));
+        switch (true) {
+            case isChecked:
+                setCheck("checked");
+                break;
+            case isGrouped:
+                setCheck("grouped");
+                break;
+            case isIndeterminate:
+                setCheck("indeterminate");
+                break;
+            default:
+                setCheck("none");
+        }
+    }, [selectedTaxon, descendants, ascendants, id]);
+    return { check, onClickCheck };
+};
+const useLineages = (id, taxonList) => {
+    const [ascendants, setAscendants] = react.exports.useState([]);
+    const [descendants, setDescendants] = react.exports.useState([]);
+    react.exports.useEffect(() => {
+        setAscendants(findAscendants(taxonList, id));
+        setDescendants(findDescendants(taxonList, id));
+    }, [taxonList, id]);
+    return { ascendants, descendants };
+};
+const useAscendantsLabel = (ascendants) => {
+    const [label, setLabel] = react.exports.useState("");
+    const taxonList = useTaxonListState();
+    react.exports.useEffect(() => {
+        setLabel(ascendants.map((id) => { var _a; return (_a = taxonList.find((taxon) => taxon.id === id)) === null || _a === void 0 ? void 0 : _a.label; }).join(" > "));
+    }, [ascendants]);
+    return { ascendantsLabel: label };
+};
+css ``;
+
+const useInitTaxonTree = () => {
+    const { addTaxonToList } = useTaxonListMutators();
+    const process = () => {
+        superkingdoms.forEach((info) => {
+            addTaxonToList(info);
+        });
+    };
+    react.exports.useEffect(() => {
+        process();
+    }, []);
+};
+const superkingdoms = [
+    {
+        id: "2157",
+        label: "Archaea",
+        rank: "Superkingdom",
+        children: "not-yet",
+    },
+    {
+        id: "2",
+        label: "Bacteria",
+        rank: "Superkingdom",
+        children: "not-yet",
+    },
+    {
+        id: "2759",
+        label: "Eukaryota",
+        rank: "Superkingdom",
+        children: "not-yet",
+    },
+];
+
+const TaxonomicTreeSection = () => {
+    useInitTaxonTree();
+    const { setQueryData } = useQueryDataMutators();
+    const { setFoundMedia } = useFoundMediaMutators();
+    const selectedTaxon = useSelectedTaxonState();
+    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+    react.exports.useEffect(() => {
+        if (selectedTaxon.length === 0) {
+            setQueryData({});
+            setFoundMedia([]);
+            setNextMediaLoadAbort(null);
+            return;
+        }
+        (() => __awaiter(void 0, void 0, void 0, function* () {
+            const params = { tax_ids: selectedTaxon };
+            setQueryData(params);
+            const abort = new AbortController();
+            setNextMediaLoadAbort(abort);
+            const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
+            setNextMediaLoadAbort(null);
+            if (response.body) {
+                setFoundMedia(response.body.map((item) => ({
+                    id: item.gm_id,
+                    label: item.name,
+                })));
+            }
+        }))();
+    }, [selectedTaxon]);
+    return (jsx("div", Object.assign({ css: [taxonomicTreeSection] }, { children: jsxs("div", { children: [jsx(TaxonomicTreeBranch, { id: "2157" }, void 0), jsx(TaxonomicTreeBranch, { id: "2" }, void 0), jsx(TaxonomicTreeBranch, { id: "2759" }, void 0)] }, void 0) }), void 0));
+};
+const taxonomicTreeSection = css `
+  //overflow: scroll;
+`;
 
 const QueryPane = ({ css, className }) => {
     const queryMethod = useQueryMethodState();
@@ -2307,13 +3577,13 @@ const contents = css `
 `;
 
 const AppContainer = ({}) => {
-    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx("div", { children: jsx(QueryPane, { css: queryPane }, void 0) }, void 0), jsxs("div", { children: [jsx(MediaSelectPane, { css: mediaQueryPane }, void 0), jsx(ActionPane, { actionLabel: "COMPARE" }, void 0)] }, void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx("div", { children: jsx(QueryPane, { css: queryPane }, void 0) }, void 0), jsxs("div", { children: [jsx(MediaSelectPane, { css: mediaQueryPane }, void 0), jsx(ActionPane, { actionLabel: "Compare" }, void 0)] }, void 0)] }), void 0));
 };
 const wrapper = css `
   position: relative;
   background-color: ${COLOR_GRAY_BG};
   padding: ${SIZE1};
-  min-height: 500px;
+  min-height: 600px;
   height: 1px;
   display: flex;
   gap: ${SIZE1};
@@ -2331,7 +3601,8 @@ const wrapper = css `
 `;
 const queryPane = css `
   flex-grow: 1;
-  min-width: 700px;
+  height: 100%;
+  overflow-y: auto;
 `;
 const mediaQueryPane = css `
   flex-grow: 1;
@@ -2353,6 +3624,9 @@ const muiTheme = createTheme({
     },
     components: {
         MuiTab: {
+            styleOverrides: {},
+        },
+        MuiButton: {
             styleOverrides: {},
         },
     },

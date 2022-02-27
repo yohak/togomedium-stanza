@@ -1,5 +1,5 @@
 import { _ as __awaiter } from './stanza-f44e302d.js';
-import { d as dist } from './index-d49f0e1c.js';
+import { d as dist } from './index-6aec0cc7.js';
 
 const getData = (url, params, abortController) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield fetch(url, makeOptions(params, abortController ? abortController.signal : null));
@@ -35,4 +35,4 @@ const makeOptions = (params, signal = null) => {
 };
 
 export { getData as g, makeFormBody as m };
-//# sourceMappingURL=getData-f9032f11.js.map
+//# sourceMappingURL=getData-d291c717.js.map

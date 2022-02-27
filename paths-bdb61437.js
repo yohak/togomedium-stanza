@@ -1,4 +1,6 @@
-import { U as React, R as ReactDOM } from './EmotionCacheProvider-92758dbd.js';
+import { R as React, _ as _extends, r as react } from './index-6aec0cc7.js';
+import { R as ReactDOM, i as isHostComponent, k as capitalize, l as createChainedFunction, m as createSvgIcon$1, n as debounce, o as isMuiElement, p as ownerDocument, q as ownerWindow, s as setRef, u as useEnhancedEffect, r as useId, t as useControlled, v as useEventCallback, w as useForkRef, x as useIsFocusVisible, y as ClassNameGenerator, z as jsxRuntime, A as newStyled, B as generateUtilityClass, D as generateUtilityClasses, G as styled, P as Popper, H as alpha, I as useThemeProps, _ as _objectWithoutPropertiesLoose, J as useTheme, K as clsx, L as composeClasses, M as Grow } from './EmotionCacheProvider-a7740407.js';
+import { g as getAugmentedNamespace } from './stanza-f44e302d.js';
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -7812,6 +7814,753 @@ var Recoil_index_6 = Recoil_index.atom;
 var Recoil_index_18 = Recoil_index.useRecoilValue;
 var Recoil_index_22 = Recoil_index.useSetRecoilState;
 
+var AddBoxOutlined = {};
+
+var interopRequireDefault = {exports: {}};
+
+(function (module) {
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+}(interopRequireDefault));
+
+var createSvgIcon = {};
+
+function deprecatedPropType(validator, reason) {
+  {
+    return () => null;
+  }
+}
+
+function requirePropFactory(componentNameInError, Component) {
+  {
+    return () => null;
+  } // eslint-disable-next-line react/forbid-foreign-prop-types
+}
+
+function unsupportedProp(props, propName, componentName, location, propFullName) {
+  {
+    return null;
+  }
+}
+
+/**
+ * Appends the ownerState object to the props, merging with the existing one if necessary.
+ *
+ * @param elementType Type of the element that owns the `existingProps`. If the element is a DOM node, `ownerState` are not applied.
+ * @param existingProps Props of the element.
+ * @param ownerState
+ */
+
+function appendOwnerState(elementType, existingProps = {}, ownerState) {
+  if (isHostComponent(elementType)) {
+    return existingProps;
+  }
+
+  return _extends({}, existingProps, {
+    ownerState: _extends({}, existingProps.ownerState, ownerState)
+  });
+}
+
+var utils = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  capitalize: capitalize,
+  createChainedFunction: createChainedFunction,
+  createSvgIcon: createSvgIcon$1,
+  debounce: debounce,
+  deprecatedPropType: deprecatedPropType,
+  isMuiElement: isMuiElement,
+  ownerDocument: ownerDocument,
+  ownerWindow: ownerWindow,
+  requirePropFactory: requirePropFactory,
+  setRef: setRef,
+  unstable_useEnhancedEffect: useEnhancedEffect,
+  unstable_useId: useId,
+  unsupportedProp: unsupportedProp,
+  useControlled: useControlled,
+  useEventCallback: useEventCallback,
+  useForkRef: useForkRef,
+  useIsFocusVisible: useIsFocusVisible,
+  unstable_ClassNameGenerator: ClassNameGenerator
+});
+
+var require$$0 = /*@__PURE__*/getAugmentedNamespace(utils);
+
+(function (exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _utils.createSvgIcon;
+  }
+});
+
+var _utils = require$$0;
+}(createSvgIcon));
+
+var _interopRequireDefault$2 = interopRequireDefault.exports;
+
+Object.defineProperty(AddBoxOutlined, "__esModule", {
+  value: true
+});
+var default_1$2 = AddBoxOutlined.default = void 0;
+
+var _createSvgIcon$2 = _interopRequireDefault$2(createSvgIcon);
+
+var _jsxRuntime$2 = jsxRuntime.exports;
+
+var _default$2 = (0, _createSvgIcon$2.default)( /*#__PURE__*/(0, _jsxRuntime$2.jsx)("path", {
+  d: "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-8-2h2v-4h4v-2h-4V7h-2v4H7v2h4z"
+}), 'AddBoxOutlined');
+
+default_1$2 = AddBoxOutlined.default = _default$2;
+
+var AdjustOutlined = {};
+
+var _interopRequireDefault$1 = interopRequireDefault.exports;
+
+Object.defineProperty(AdjustOutlined, "__esModule", {
+  value: true
+});
+var default_1$1 = AdjustOutlined.default = void 0;
+
+var _createSvgIcon$1 = _interopRequireDefault$1(createSvgIcon);
+
+var _jsxRuntime$1 = jsxRuntime.exports;
+
+var _default$1 = (0, _createSvgIcon$1.default)( /*#__PURE__*/(0, _jsxRuntime$1.jsx)("path", {
+  d: "M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3-8c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"
+}), 'AdjustOutlined');
+
+default_1$1 = AdjustOutlined.default = _default$1;
+
+var IndeterminateCheckBoxOutlined = {};
+
+var _interopRequireDefault = interopRequireDefault.exports;
+
+Object.defineProperty(IndeterminateCheckBoxOutlined, "__esModule", {
+  value: true
+});
+var default_1 = IndeterminateCheckBoxOutlined.default = void 0;
+
+var _createSvgIcon = _interopRequireDefault(createSvgIcon);
+
+var _jsxRuntime = jsxRuntime.exports;
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 11h10v2H7z"
+}), 'IndeterminateCheckBoxOutlined');
+
+default_1 = IndeterminateCheckBoxOutlined.default = _default;
+
+const IconExpand = default_1$2;
+const IconCompact = default_1;
+const IconNoChildren = default_1$1;
+const IconBlank = newStyled.span({
+    width: 24,
+    height: 24,
+});
+
+const clone = (obj) => {
+    return JSON.parse(JSON.stringify(obj));
+};
+
+function getTooltipUtilityClass(slot) {
+  return generateUtilityClass('MuiTooltip', slot);
+}
+const tooltipClasses = generateUtilityClasses('MuiTooltip', ['popper', 'popperInteractive', 'popperArrow', 'popperClose', 'tooltip', 'tooltipArrow', 'touch', 'tooltipPlacementLeft', 'tooltipPlacementRight', 'tooltipPlacementTop', 'tooltipPlacementBottom', 'arrow']);
+var tooltipClasses$1 = tooltipClasses;
+
+const _excluded = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "title", "TransitionComponent", "TransitionProps"];
+
+function round(value) {
+  return Math.round(value * 1e5) / 1e5;
+}
+
+const useUtilityClasses = ownerState => {
+  const {
+    classes,
+    disableInteractive,
+    arrow,
+    touch,
+    placement
+  } = ownerState;
+  const slots = {
+    popper: ['popper', !disableInteractive && 'popperInteractive', arrow && 'popperArrow'],
+    tooltip: ['tooltip', arrow && 'tooltipArrow', touch && 'touch', `tooltipPlacement${capitalize(placement.split('-')[0])}`],
+    arrow: ['arrow']
+  };
+  return composeClasses(slots, getTooltipUtilityClass, classes);
+};
+
+const TooltipPopper = styled(Popper, {
+  name: 'MuiTooltip',
+  slot: 'Popper',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.popper, !ownerState.disableInteractive && styles.popperInteractive, ownerState.arrow && styles.popperArrow, !ownerState.open && styles.popperClose];
+  }
+})(({
+  theme,
+  ownerState,
+  open
+}) => _extends({
+  zIndex: theme.zIndex.tooltip,
+  pointerEvents: 'none'
+}, !ownerState.disableInteractive && {
+  pointerEvents: 'auto'
+}, !open && {
+  pointerEvents: 'none'
+}, ownerState.arrow && {
+  [`&[data-popper-placement*="bottom"] .${tooltipClasses$1.arrow}`]: {
+    top: 0,
+    marginTop: '-0.71em',
+    '&::before': {
+      transformOrigin: '0 100%'
+    }
+  },
+  [`&[data-popper-placement*="top"] .${tooltipClasses$1.arrow}`]: {
+    bottom: 0,
+    marginBottom: '-0.71em',
+    '&::before': {
+      transformOrigin: '100% 0'
+    }
+  },
+  [`&[data-popper-placement*="right"] .${tooltipClasses$1.arrow}`]: _extends({}, !ownerState.isRtl ? {
+    left: 0,
+    marginLeft: '-0.71em'
+  } : {
+    right: 0,
+    marginRight: '-0.71em'
+  }, {
+    height: '1em',
+    width: '0.71em',
+    '&::before': {
+      transformOrigin: '100% 100%'
+    }
+  }),
+  [`&[data-popper-placement*="left"] .${tooltipClasses$1.arrow}`]: _extends({}, !ownerState.isRtl ? {
+    right: 0,
+    marginRight: '-0.71em'
+  } : {
+    left: 0,
+    marginLeft: '-0.71em'
+  }, {
+    height: '1em',
+    width: '0.71em',
+    '&::before': {
+      transformOrigin: '0 0'
+    }
+  })
+}));
+const TooltipTooltip = styled('div', {
+  name: 'MuiTooltip',
+  slot: 'Tooltip',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.tooltip, ownerState.touch && styles.touch, ownerState.arrow && styles.tooltipArrow, styles[`tooltipPlacement${capitalize(ownerState.placement.split('-')[0])}`]];
+  }
+})(({
+  theme,
+  ownerState
+}) => _extends({
+  backgroundColor: alpha(theme.palette.grey[700], 0.92),
+  borderRadius: theme.shape.borderRadius,
+  color: theme.palette.common.white,
+  fontFamily: theme.typography.fontFamily,
+  padding: '4px 8px',
+  fontSize: theme.typography.pxToRem(11),
+  maxWidth: 300,
+  margin: 2,
+  wordWrap: 'break-word',
+  fontWeight: theme.typography.fontWeightMedium
+}, ownerState.arrow && {
+  position: 'relative',
+  margin: 0
+}, ownerState.touch && {
+  padding: '8px 16px',
+  fontSize: theme.typography.pxToRem(14),
+  lineHeight: `${round(16 / 14)}em`,
+  fontWeight: theme.typography.fontWeightRegular
+}, {
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="left"] &`]: _extends({
+    transformOrigin: 'right center'
+  }, !ownerState.isRtl ? _extends({
+    marginRight: '14px'
+  }, ownerState.touch && {
+    marginRight: '24px'
+  }) : _extends({
+    marginLeft: '14px'
+  }, ownerState.touch && {
+    marginLeft: '24px'
+  })),
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="right"] &`]: _extends({
+    transformOrigin: 'left center'
+  }, !ownerState.isRtl ? _extends({
+    marginLeft: '14px'
+  }, ownerState.touch && {
+    marginLeft: '24px'
+  }) : _extends({
+    marginRight: '14px'
+  }, ownerState.touch && {
+    marginRight: '24px'
+  })),
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="top"] &`]: _extends({
+    transformOrigin: 'center bottom',
+    marginBottom: '14px'
+  }, ownerState.touch && {
+    marginBottom: '24px'
+  }),
+  [`.${tooltipClasses$1.popper}[data-popper-placement*="bottom"] &`]: _extends({
+    transformOrigin: 'center top',
+    marginTop: '14px'
+  }, ownerState.touch && {
+    marginTop: '24px'
+  })
+}));
+const TooltipArrow = styled('span', {
+  name: 'MuiTooltip',
+  slot: 'Arrow',
+  overridesResolver: (props, styles) => styles.arrow
+})(({
+  theme
+}) => ({
+  overflow: 'hidden',
+  position: 'absolute',
+  width: '1em',
+  height: '0.71em'
+  /* = width / sqrt(2) = (length of the hypotenuse) */
+  ,
+  boxSizing: 'border-box',
+  color: alpha(theme.palette.grey[700], 0.9),
+  '&::before': {
+    content: '""',
+    margin: 'auto',
+    display: 'block',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'currentColor',
+    transform: 'rotate(45deg)'
+  }
+}));
+let hystersisOpen = false;
+let hystersisTimer = null;
+
+function composeEventHandler(handler, eventHandler) {
+  return event => {
+    if (eventHandler) {
+      eventHandler(event);
+    }
+
+    handler(event);
+  };
+} // TODO v6: Remove PopperComponent, PopperProps, TransitionComponent and TransitionProps.
+
+
+const Tooltip = /*#__PURE__*/react.exports.forwardRef(function Tooltip(inProps, ref) {
+  var _components$Popper, _ref, _components$Transitio, _components$Tooltip, _components$Arrow, _componentsProps$popp;
+
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTooltip'
+  });
+
+  const {
+    arrow = false,
+    children,
+    components = {},
+    componentsProps = {},
+    describeChild = false,
+    disableFocusListener = false,
+    disableHoverListener = false,
+    disableInteractive: disableInteractiveProp = false,
+    disableTouchListener = false,
+    enterDelay = 100,
+    enterNextDelay = 0,
+    enterTouchDelay = 700,
+    followCursor = false,
+    id: idProp,
+    leaveDelay = 0,
+    leaveTouchDelay = 1500,
+    onClose,
+    onOpen,
+    open: openProp,
+    placement = 'bottom',
+    PopperComponent: PopperComponentProp,
+    PopperProps = {},
+    title,
+    TransitionComponent: TransitionComponentProp = Grow,
+    TransitionProps
+  } = props,
+        other = _objectWithoutPropertiesLoose(props, _excluded);
+
+  const theme = useTheme();
+  const isRtl = theme.direction === 'rtl';
+  const [childNode, setChildNode] = react.exports.useState();
+  const [arrowRef, setArrowRef] = react.exports.useState(null);
+  const ignoreNonTouchEvents = react.exports.useRef(false);
+  const disableInteractive = disableInteractiveProp || followCursor;
+  const closeTimer = react.exports.useRef();
+  const enterTimer = react.exports.useRef();
+  const leaveTimer = react.exports.useRef();
+  const touchTimer = react.exports.useRef();
+  const [openState, setOpenState] = useControlled({
+    controlled: openProp,
+    default: false,
+    name: 'Tooltip',
+    state: 'open'
+  });
+  let open = openState;
+
+  const id = useId(idProp);
+  const prevUserSelect = react.exports.useRef();
+  const stopTouchInteraction = react.exports.useCallback(() => {
+    if (prevUserSelect.current !== undefined) {
+      document.body.style.WebkitUserSelect = prevUserSelect.current;
+      prevUserSelect.current = undefined;
+    }
+
+    clearTimeout(touchTimer.current);
+  }, []);
+  react.exports.useEffect(() => {
+    return () => {
+      clearTimeout(closeTimer.current);
+      clearTimeout(enterTimer.current);
+      clearTimeout(leaveTimer.current);
+      stopTouchInteraction();
+    };
+  }, [stopTouchInteraction]);
+
+  const handleOpen = event => {
+    clearTimeout(hystersisTimer);
+    hystersisOpen = true; // The mouseover event will trigger for every nested element in the tooltip.
+    // We can skip rerendering when the tooltip is already open.
+    // We are using the mouseover event instead of the mouseenter event to fix a hide/show issue.
+
+    setOpenState(true);
+
+    if (onOpen && !open) {
+      onOpen(event);
+    }
+  };
+
+  const handleClose = useEventCallback(
+  /**
+   * @param {React.SyntheticEvent | Event} event
+   */
+  event => {
+    clearTimeout(hystersisTimer);
+    hystersisTimer = setTimeout(() => {
+      hystersisOpen = false;
+    }, 800 + leaveDelay);
+    setOpenState(false);
+
+    if (onClose && open) {
+      onClose(event);
+    }
+
+    clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => {
+      ignoreNonTouchEvents.current = false;
+    }, theme.transitions.duration.shortest);
+  });
+
+  const handleEnter = event => {
+    if (ignoreNonTouchEvents.current && event.type !== 'touchstart') {
+      return;
+    } // Remove the title ahead of time.
+    // We don't want to wait for the next render commit.
+    // We would risk displaying two tooltips at the same time (native + this one).
+
+
+    if (childNode) {
+      childNode.removeAttribute('title');
+    }
+
+    clearTimeout(enterTimer.current);
+    clearTimeout(leaveTimer.current);
+
+    if (enterDelay || hystersisOpen && enterNextDelay) {
+      enterTimer.current = setTimeout(() => {
+        handleOpen(event);
+      }, hystersisOpen ? enterNextDelay : enterDelay);
+    } else {
+      handleOpen(event);
+    }
+  };
+
+  const handleLeave = event => {
+    clearTimeout(enterTimer.current);
+    clearTimeout(leaveTimer.current);
+    leaveTimer.current = setTimeout(() => {
+      handleClose(event);
+    }, leaveDelay);
+  };
+
+  const {
+    isFocusVisibleRef,
+    onBlur: handleBlurVisible,
+    onFocus: handleFocusVisible,
+    ref: focusVisibleRef
+  } = useIsFocusVisible(); // We don't necessarily care about the focusVisible state (which is safe to access via ref anyway).
+  // We just need to re-render the Tooltip if the focus-visible state changes.
+
+  const [, setChildIsFocusVisible] = react.exports.useState(false);
+
+  const handleBlur = event => {
+    handleBlurVisible(event);
+
+    if (isFocusVisibleRef.current === false) {
+      setChildIsFocusVisible(false);
+      handleLeave(event);
+    }
+  };
+
+  const handleFocus = event => {
+    // Workaround for https://github.com/facebook/react/issues/7769
+    // The autoFocus of React might trigger the event before the componentDidMount.
+    // We need to account for this eventuality.
+    if (!childNode) {
+      setChildNode(event.currentTarget);
+    }
+
+    handleFocusVisible(event);
+
+    if (isFocusVisibleRef.current === true) {
+      setChildIsFocusVisible(true);
+      handleEnter(event);
+    }
+  };
+
+  const detectTouchStart = event => {
+    ignoreNonTouchEvents.current = true;
+    const childrenProps = children.props;
+
+    if (childrenProps.onTouchStart) {
+      childrenProps.onTouchStart(event);
+    }
+  };
+
+  const handleMouseOver = handleEnter;
+  const handleMouseLeave = handleLeave;
+
+  const handleTouchStart = event => {
+    detectTouchStart(event);
+    clearTimeout(leaveTimer.current);
+    clearTimeout(closeTimer.current);
+    stopTouchInteraction();
+    prevUserSelect.current = document.body.style.WebkitUserSelect; // Prevent iOS text selection on long-tap.
+
+    document.body.style.WebkitUserSelect = 'none';
+    touchTimer.current = setTimeout(() => {
+      document.body.style.WebkitUserSelect = prevUserSelect.current;
+      handleEnter(event);
+    }, enterTouchDelay);
+  };
+
+  const handleTouchEnd = event => {
+    if (children.props.onTouchEnd) {
+      children.props.onTouchEnd(event);
+    }
+
+    stopTouchInteraction();
+    clearTimeout(leaveTimer.current);
+    leaveTimer.current = setTimeout(() => {
+      handleClose(event);
+    }, leaveTouchDelay);
+  };
+
+  react.exports.useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+    /**
+     * @param {KeyboardEvent} nativeEvent
+     */
+
+
+    function handleKeyDown(nativeEvent) {
+      // IE11, Edge (prior to using Bink?) use 'Esc'
+      if (nativeEvent.key === 'Escape' || nativeEvent.key === 'Esc') {
+        handleClose(nativeEvent);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleClose, open]);
+  const handleUseRef = useForkRef(setChildNode, ref);
+  const handleFocusRef = useForkRef(focusVisibleRef, handleUseRef);
+  const handleRef = useForkRef(children.ref, handleFocusRef); // There is no point in displaying an empty tooltip.
+
+  if (title === '') {
+    open = false;
+  }
+
+  const positionRef = react.exports.useRef({
+    x: 0,
+    y: 0
+  });
+  const popperRef = react.exports.useRef();
+
+  const handleMouseMove = event => {
+    const childrenProps = children.props;
+
+    if (childrenProps.onMouseMove) {
+      childrenProps.onMouseMove(event);
+    }
+
+    positionRef.current = {
+      x: event.clientX,
+      y: event.clientY
+    };
+
+    if (popperRef.current) {
+      popperRef.current.update();
+    }
+  };
+
+  const nameOrDescProps = {};
+  const titleIsString = typeof title === 'string';
+
+  if (describeChild) {
+    nameOrDescProps.title = !open && titleIsString && !disableHoverListener ? title : null;
+    nameOrDescProps['aria-describedby'] = open ? id : null;
+  } else {
+    nameOrDescProps['aria-label'] = titleIsString ? title : null;
+    nameOrDescProps['aria-labelledby'] = open && !titleIsString ? id : null;
+  }
+
+  const childrenProps = _extends({}, nameOrDescProps, other, children.props, {
+    className: clsx(other.className, children.props.className),
+    onTouchStart: detectTouchStart,
+    ref: handleRef
+  }, followCursor ? {
+    onMouseMove: handleMouseMove
+  } : {});
+
+  const interactiveWrapperListeners = {};
+
+  if (!disableTouchListener) {
+    childrenProps.onTouchStart = handleTouchStart;
+    childrenProps.onTouchEnd = handleTouchEnd;
+  }
+
+  if (!disableHoverListener) {
+    childrenProps.onMouseOver = composeEventHandler(handleMouseOver, childrenProps.onMouseOver);
+    childrenProps.onMouseLeave = composeEventHandler(handleMouseLeave, childrenProps.onMouseLeave);
+
+    if (!disableInteractive) {
+      interactiveWrapperListeners.onMouseOver = handleMouseOver;
+      interactiveWrapperListeners.onMouseLeave = handleMouseLeave;
+    }
+  }
+
+  if (!disableFocusListener) {
+    childrenProps.onFocus = composeEventHandler(handleFocus, childrenProps.onFocus);
+    childrenProps.onBlur = composeEventHandler(handleBlur, childrenProps.onBlur);
+
+    if (!disableInteractive) {
+      interactiveWrapperListeners.onFocus = handleFocus;
+      interactiveWrapperListeners.onBlur = handleBlur;
+    }
+  }
+
+  const popperOptions = react.exports.useMemo(() => {
+    var _PopperProps$popperOp;
+
+    let tooltipModifiers = [{
+      name: 'arrow',
+      enabled: Boolean(arrowRef),
+      options: {
+        element: arrowRef,
+        padding: 4
+      }
+    }];
+
+    if ((_PopperProps$popperOp = PopperProps.popperOptions) != null && _PopperProps$popperOp.modifiers) {
+      tooltipModifiers = tooltipModifiers.concat(PopperProps.popperOptions.modifiers);
+    }
+
+    return _extends({}, PopperProps.popperOptions, {
+      modifiers: tooltipModifiers
+    });
+  }, [arrowRef, PopperProps]);
+
+  const ownerState = _extends({}, props, {
+    isRtl,
+    arrow,
+    disableInteractive,
+    placement,
+    PopperComponentProp,
+    touch: ignoreNonTouchEvents.current
+  });
+
+  const classes = useUtilityClasses(ownerState);
+  const PopperComponent = (_components$Popper = components.Popper) != null ? _components$Popper : TooltipPopper;
+  const TransitionComponent = (_ref = (_components$Transitio = components.Transition) != null ? _components$Transitio : TransitionComponentProp) != null ? _ref : Grow;
+  const TooltipComponent = (_components$Tooltip = components.Tooltip) != null ? _components$Tooltip : TooltipTooltip;
+  const ArrowComponent = (_components$Arrow = components.Arrow) != null ? _components$Arrow : TooltipArrow;
+  const popperProps = appendOwnerState(PopperComponent, _extends({}, PopperProps, componentsProps.popper), ownerState);
+  const transitionProps = appendOwnerState(TransitionComponent, _extends({}, TransitionProps, componentsProps.transition), ownerState);
+  const tooltipProps = appendOwnerState(TooltipComponent, _extends({}, componentsProps.tooltip), ownerState);
+  const tooltipArrowProps = appendOwnerState(ArrowComponent, _extends({}, componentsProps.arrow), ownerState);
+  return /*#__PURE__*/jsxRuntime.exports.jsxs(react.exports.Fragment, {
+    children: [/*#__PURE__*/react.exports.cloneElement(children, childrenProps), /*#__PURE__*/jsxRuntime.exports.jsx(PopperComponent, _extends({
+      as: PopperComponentProp != null ? PopperComponentProp : Popper,
+      placement: placement,
+      anchorEl: followCursor ? {
+        getBoundingClientRect: () => ({
+          top: positionRef.current.y,
+          left: positionRef.current.x,
+          right: positionRef.current.x,
+          bottom: positionRef.current.y,
+          width: 0,
+          height: 0
+        })
+      } : childNode,
+      popperRef: popperRef,
+      open: childNode ? open : false,
+      id: id,
+      transition: true
+    }, interactiveWrapperListeners, popperProps, {
+      className: clsx(classes.popper, PopperProps == null ? void 0 : PopperProps.className, (_componentsProps$popp = componentsProps.popper) == null ? void 0 : _componentsProps$popp.className),
+      popperOptions: popperOptions,
+      children: ({
+        TransitionProps: TransitionPropsInner
+      }) => {
+        var _componentsProps$tool, _componentsProps$arro;
+
+        return /*#__PURE__*/jsxRuntime.exports.jsx(TransitionComponent, _extends({
+          timeout: theme.transitions.duration.shorter
+        }, TransitionPropsInner, transitionProps, {
+          children: /*#__PURE__*/jsxRuntime.exports.jsxs(TooltipComponent, _extends({}, tooltipProps, {
+            className: clsx(classes.tooltip, (_componentsProps$tool = componentsProps.tooltip) == null ? void 0 : _componentsProps$tool.className),
+            children: [title, arrow ? /*#__PURE__*/jsxRuntime.exports.jsx(ArrowComponent, _extends({}, tooltipArrowProps, {
+              className: clsx(classes.arrow, (_componentsProps$arro = componentsProps.arrow) == null ? void 0 : _componentsProps$arro.className),
+              ref: setArrowRef
+            })) : null]
+          }))
+        }));
+      }
+    }))]
+  });
+});
+var Tooltip$1 = Tooltip;
+
 const PATH_BASE = "http://growthmedium.org";
 const PATH_MEDIUM = `${PATH_BASE}/medium/`;
 const PATH_ORGANISM = `${PATH_BASE}/organism/`;
@@ -7821,6 +8570,9 @@ const PATH_API = `http://growthmedium.org/sparqlist/api/`;
 const API_MEDIA_ALIMENT = `${PATH_API}gmdb_media_alignment_by_gmids`;
 const API_ALL_COMPONENTS = `${PATH_API}gmdb_all_components`;
 const API_MEDIA_BY_ATTRIBUTES = `${PATH_API}gmdb_media_by_attributes`;
+const API_MEDIA_BY_TAXON = `${PATH_API}gmdb_media_by_taxon`;
+const API_TAXONOMY_CHILDREN = `${PATH_API}gmdb_taxonomy_children`;
+const API_ORGANISMS_BY_PHENOTYPES = `${PATH_API}gmdb_organisms_by_phenotypes`;
 
-export { API_MEDIA_ALIMENT as A, PATH_COMPONENT as P, Recoil_index_6 as R, Recoil_index_18 as a, Recoil_index_22 as b, PATH_MEDIUM as c, PATH_ORGANISM as d, Recoil_index_4 as e, API_ALL_COMPONENTS as f, API_MEDIA_BY_ATTRIBUTES as g };
-//# sourceMappingURL=paths-9e442dbc.js.map
+export { API_MEDIA_ALIMENT as A, IconCompact as I, PATH_COMPONENT as P, Recoil_index_6 as R, Tooltip$1 as T, Recoil_index_18 as a, Recoil_index_22 as b, clone as c, IconExpand as d, IconBlank as e, PATH_MEDIUM as f, PATH_ORGANISM as g, Recoil_index_4 as h, API_ALL_COMPONENTS as i, API_MEDIA_BY_ATTRIBUTES as j, API_ORGANISMS_BY_PHENOTYPES as k, IconNoChildren as l, API_TAXONOMY_CHILDREN as m, API_MEDIA_BY_TAXON as n };
+//# sourceMappingURL=paths-bdb61437.js.map
