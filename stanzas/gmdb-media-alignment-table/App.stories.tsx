@@ -17,5 +17,5 @@ Result1.args = {
 };
 
 Result1.parameters = {
-  msw: makeMswParameter(mediaAlignmentTableMocks),
+  // msw: makeMswParameter(mediaAlignmentTableMocks),
 };

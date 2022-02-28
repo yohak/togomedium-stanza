@@ -73,8 +73,11 @@ const wrapper = css`
   }
   &.compact {
     width: ${WIDTH_COMPACT};
+    //overflow: hidden;
+    //text-overflow: ellipsis;
     .inner {
       display: flex;
+      flex-wrap: wrap;
     }
     .text {
       margin-right: ${SIZE1};

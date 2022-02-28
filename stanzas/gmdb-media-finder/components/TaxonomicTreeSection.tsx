@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import React, { FC, useEffect } from "react";
-import { TaxonomicTree } from "./TaxonomicTree";
 import { TaxonomicTreeBranch } from "./TaxonomicTreeBranch";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
 import { API_MEDIA_BY_TAXON } from "../../../api/paths";
@@ -16,9 +15,26 @@ type Props = {};
 
 export const TaxonomicTreeSection: FC<Props> = () => {
   useInitTaxonTree();
+  useMediaLoadFromTaxon();
+  return (
+    <div css={[taxonomicTreeSection]}>
+      <div>
+        <TaxonomicTreeBranch id="2157" />
+        <TaxonomicTreeBranch id="2" />
+        <TaxonomicTreeBranch id="2759" />
+      </div>
+    </div>
+  );
+};
+
+const taxonomicTreeSection = css`
+  //overflow: scroll;
+`;
+
+const useMediaLoadFromTaxon = () => {
+  const selectedTaxon = useSelectedTaxonState();
   const { setQueryData } = useQueryDataMutators();
   const { setFoundMedia } = useFoundMediaMutators();
-  const selectedTaxon = useSelectedTaxonState();
   const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
   useEffect(() => {
     if (selectedTaxon.length === 0) {
@@ -48,17 +64,4 @@ export const TaxonomicTreeSection: FC<Props> = () => {
       }
     })();
   }, [selectedTaxon]);
-  return (
-    <div css={[taxonomicTreeSection]}>
-      <div>
-        <TaxonomicTreeBranch id="2157" />
-        <TaxonomicTreeBranch id="2" />
-        <TaxonomicTreeBranch id="2759" />
-      </div>
-    </div>
-  );
 };
-
-const taxonomicTreeSection = css`
-  //overflow: scroll;
-`;

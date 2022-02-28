@@ -66,7 +66,7 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
       />
       <SelectBox
         label={"Gram Strain"}
-        queryKey={"MPO_10002"}
+        queryKey={"MPO_07001"}
         items={[
           ["MPO_07002", "Gram+"],
           ["MPO_07003", "Gram-"],
@@ -76,7 +76,7 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
       />
       <SelectBox
         label={"Motility"}
-        queryKey={"MPO_10002"}
+        queryKey={"MPO_02000"}
         items={[
           ["MPO_02001", "Motile"],
           ["MPO_02002", "Nonmotile"],
@@ -87,14 +87,14 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
       />
       <SelectBox
         label={"Cell shape"}
-        queryKey={"MPO_10002"}
+        queryKey={"MPO_01001"}
         items={[
           ["MPO_01015", "Rod-shaped"],
           ["MPO_01003", "Coccus-shaped"],
           ["MPO_01005", "Curved-shaped"],
           ["MPO_01014", "Pleomorphic-shaped"],
           ["MPO_01007", "Filament-shaped"],
-          ["MPO_01003", "Sphere-shaped"],
+          // ["MPO_01003", "Sphere-shaped"],
           ["MPO_01022", "Vibrio-shaped"],
           ["MPO_01021", "Star-shaped"],
           ["MPO_01026", "Triangular"],
@@ -116,7 +116,7 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
       />
       <SelectBox
         label={"Salinity"}
-        queryKey={"MPO_10002"}
+        queryKey={"MPO_03006"}
         items={[
           ["MPO_03007", "Halophile"],
           ["MPO_03008", "Halotolerant"],
@@ -159,6 +159,7 @@ const usePhenotypeQuery = () => {
       return;
     }
     (async () => {
+      console.log(phenotypeQuery);
       const abort: AbortController = new AbortController();
       setNextOrganismLoadAbort(abort);
       const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(

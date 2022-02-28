@@ -37,6 +37,7 @@ const header = css`
 `;
 const infoColumns = css`
   position: absolute;
+  z-index: 2;
   top: 0;
   left: 0;
 `;

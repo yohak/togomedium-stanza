@@ -43,7 +43,7 @@ export const SelectBox: FC<Props> = ({
   return (
     <div css={[selectBox, css]} className={className}>
       <Checkbox css={checkBoxStyle} onChange={handleCheckChange} />
-      <FormControl sx={{ m: 1, minWidth: 300 }}>
+      <FormControl sx={{ m: 1, minWidth: 200 }}>
         <InputLabel id={queryKey}>{label}</InputLabel>
         <Select
           labelId={queryKey}

@@ -1,3 +1,4 @@
+import { ROOT_COMPONENT } from "../consts";
 import { ComponentBranch, ComponentTrunk, RawComponent } from "../types";
 
 export const makeComponentTree = (components: RawComponent[]): ComponentTrunk => {
@@ -11,7 +12,7 @@ export const makeComponentTree = (components: RawComponent[]): ComponentTrunk =>
     func: item.function,
   }));
 
-  const result = items.filter((item) => !item.parent);
+  const result = items.filter((item) => !item.parent || item.parent === ROOT_COMPONENT);
   items.forEach(
     (item) => (item.children = items.filter((filtering) => filtering.parent === item.id))
   );
