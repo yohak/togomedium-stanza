@@ -1,8 +1,8 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { _ as _objectWithoutPropertiesLoose, N as propToStyleFunction, O as isPlainObject, Q as useTheme, z as jsxRuntime, T as ThemeContext, U as useTheme$1, B as generateUtilityClass, D as generateUtilityClasses, G as styled, k as capitalize, I as useThemeProps, L as composeClasses, K as clsx, V as rootShouldForwardProp, H as alpha, W as resolveProps, t as useControlled, m as createSvgIcon, u as useEnhancedEffect, w as useForkRef, q as ownerWindow, n as debounce, J as useTheme$2, v as useEventCallback, p as ownerDocument, X as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, Y as SIZE2, Z as SIZE05, $ as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, g as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, a0 as FONT_WEIGHT_BOLD, a as SIZE4, h as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-a7740407.js';
+import { _ as _objectWithoutPropertiesLoose, M as propToStyleFunction, N as isPlainObject, O as useTheme, y as jsxRuntime, T as ThemeContext, Q as useTheme$1, A as generateUtilityClass, B as generateUtilityClasses, D as styled, h as capitalize, H as useThemeProps, K as composeClasses, J as clsx, U as rootShouldForwardProp, G as alpha, V as resolveProps, r as useControlled, l as createSvgIcon, u as useEnhancedEffect, v as useForkRef, p as ownerWindow, m as debounce, I as useTheme$2, t as useEventCallback, o as ownerDocument, W as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, X as SIZE2, Y as SIZE05, Z as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, g as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, $ as FONT_WEIGHT_BOLD, a as SIZE4, a0 as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d90cd57a.js';
 import { _ as _extends, r as react, T as ThemeContext$1, k as keyframes, c as css, d as dist, j as jsx$1 } from './index-6aec0cc7.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, T as Tooltip, l as IconNoChildren, I as IconCompact, d as IconExpand, m as API_TAXONOMY_CHILDREN, n as API_MEDIA_BY_TAXON, h as Recoil_index_4 } from './paths-bdb61437.js';
-import { B as ButtonBase, u as useFormControl, L as ListContext, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl, I as InputLabel, a as Select } from './TextField-b83138d6.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-0099bcd1.js';
+import { B as ButtonBase, u as useFormControl, L as ListContext, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl, I as InputLabel, a as Select } from './TextField-f1b8b2fc.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 
@@ -2959,7 +2959,7 @@ const SelectBox = ({ css, className, label, items, queryKey, handleEnabledChange
             handleEnabledChange(queryKey, false);
         }
     }, [value, enabled]);
-    return (jsxs("div", Object.assign({ css: [selectBox, css], className: className }, { children: [jsx(Checkbox$1, { css: checkBoxStyle, onChange: handleCheckChange }, void 0), jsxs(FormControl, Object.assign({ sx: { m: 1, minWidth: 300 } }, { children: [jsx(InputLabel, Object.assign({ id: queryKey }, { children: label }), void 0), jsx(Select, Object.assign({ labelId: queryKey, id: queryKey, value: value, label: label, onChange: handleSelectChange, disabled: enabled ? undefined : true }, { children: items.map(([value, name]) => (jsx(MenuItem$1, Object.assign({ value: value }, { children: name }), value))) }), void 0)] }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: [selectBox, css], className: className }, { children: [jsx(Checkbox$1, { css: checkBoxStyle, onChange: handleCheckChange }, void 0), jsxs(FormControl, Object.assign({ sx: { m: 1, minWidth: 200 } }, { children: [jsx(InputLabel, Object.assign({ id: queryKey }, { children: label }), void 0), jsx(Select, Object.assign({ labelId: queryKey, id: queryKey, value: value, label: label, onChange: handleSelectChange, disabled: enabled ? undefined : true }, { children: items.map(([value, name]) => (jsx(MenuItem$1, Object.assign({ value: value }, { children: name }), value))) }), void 0)] }), void 0)] }), void 0));
 };
 const selectBox = css `
   background-color: ${COLOR_WHITE};
@@ -3015,20 +3015,19 @@ const PhenotypeSearchArea = ({ css, className }) => {
                     ["MPO_04006", "Obligate anaerobe"],
                     ["MPO_04007", "Facultative anaerobe"],
                     ["MPO_04009", "Microaerophilic"],
-                ], queryKey: "MPO_10002", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Gram Strain", queryKey: "MPO_10002", items: [
+                ], queryKey: "MPO_10002", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Gram Strain", queryKey: "MPO_07001", items: [
                     ["MPO_07002", "Gram+"],
                     ["MPO_07003", "Gram-"],
-                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Motility", queryKey: "MPO_10002", items: [
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Motility", queryKey: "MPO_02000", items: [
                     ["MPO_02001", "Motile"],
                     ["MPO_02002", "Nonmotile"],
                     ["MPO_02007", "Chemotactic"],
-                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Cell shape", queryKey: "MPO_10002", items: [
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Cell shape", queryKey: "MPO_01001", items: [
                     ["MPO_01015", "Rod-shaped"],
                     ["MPO_01003", "Coccus-shaped"],
                     ["MPO_01005", "Curved-shaped"],
                     ["MPO_01014", "Pleomorphic-shaped"],
                     ["MPO_01007", "Filament-shaped"],
-                    ["MPO_01003", "Sphere-shaped"],
                     ["MPO_01022", "Vibrio-shaped"],
                     ["MPO_01021", "Star-shaped"],
                     ["MPO_01026", "Triangular"],
@@ -3043,7 +3042,7 @@ const PhenotypeSearchArea = ({ css, className }) => {
                     ["MPO_01019", "Spore-shaped"],
                     ["MPO_01006", "Disc-shaped"],
                     ["MPO_01008", "Flask-shaped"],
-                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Salinity", queryKey: "MPO_10002", items: [
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Salinity", queryKey: "MPO_03006", items: [
                     ["MPO_03007", "Halophile"],
                     ["MPO_03008", "Halotolerant"],
                 ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0)] }), void 0));
@@ -3077,6 +3076,7 @@ const usePhenotypeQuery = () => {
             return;
         }
         (() => __awaiter(void 0, void 0, void 0, function* () {
+            console.log(phenotypeQuery);
             const abort = new AbortController();
             setNextOrganismLoadAbort(abort);
             const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, phenotypeQuery, abort);
@@ -3092,6 +3092,7 @@ const usePhenotypeQuery = () => {
 const PhenotypeSection = ({ css, className }) => {
     const foundOrganism = useFoundOrganismsState();
     const isLoading = useIsOrganismLoading();
+    useMediaLoadFromOrganism();
     return (jsxs("div", Object.assign({ css: [phenotypeSection, css], className: className }, { children: [jsx("div", Object.assign({ css: phenotypes }, { children: jsx(PhenotypeSearchArea, {}, void 0) }), void 0), jsxs("div", Object.assign({ css: organisms }, { children: [jsx("p", Object.assign({ css: infoTextCSS }, { children: getInfoText(foundOrganism.length, isLoading) }), void 0), jsx(OrganismList, {}, void 0)] }), void 0)] }), void 0));
 };
 const phenotypeSection = css `
@@ -3129,6 +3130,34 @@ const getInfoText = (organismLength, isLoading) => {
     else {
         return `${organismLength} organisms found`;
     }
+};
+const useMediaLoadFromOrganism = () => {
+    const selectedOrganisms = useSelectedOrganismsState();
+    const { setQueryData } = useQueryDataMutators();
+    const { setFoundMedia } = useFoundMediaMutators();
+    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+    react.exports.useEffect(() => {
+        if (selectedOrganisms.length === 0) {
+            setQueryData({});
+            setFoundMedia([]);
+            setNextMediaLoadAbort(null);
+            return;
+        }
+        (() => __awaiter(void 0, void 0, void 0, function* () {
+            const params = { tax_ids: selectedOrganisms };
+            setQueryData(params);
+            const abort = new AbortController();
+            setNextMediaLoadAbort(abort);
+            const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
+            setNextMediaLoadAbort(null);
+            if (response.body) {
+                setFoundMedia(response.body.map((item) => ({
+                    id: item.gm_id,
+                    label: item.name,
+                })));
+            }
+        }))();
+    }, [selectedOrganisms]);
 };
 
 const queryMethod = Recoil_index_6({ key: "queryMethod", default: "Taxonomic tree" });
@@ -3526,9 +3555,16 @@ const superkingdoms = [
 
 const TaxonomicTreeSection = () => {
     useInitTaxonTree();
+    useMediaLoadFromTaxon();
+    return (jsx("div", Object.assign({ css: [taxonomicTreeSection] }, { children: jsxs("div", { children: [jsx(TaxonomicTreeBranch, { id: "2157" }, void 0), jsx(TaxonomicTreeBranch, { id: "2" }, void 0), jsx(TaxonomicTreeBranch, { id: "2759" }, void 0)] }, void 0) }), void 0));
+};
+const taxonomicTreeSection = css `
+  //overflow: scroll;
+`;
+const useMediaLoadFromTaxon = () => {
+    const selectedTaxon = useSelectedTaxonState();
     const { setQueryData } = useQueryDataMutators();
     const { setFoundMedia } = useFoundMediaMutators();
-    const selectedTaxon = useSelectedTaxonState();
     const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
     react.exports.useEffect(() => {
         if (selectedTaxon.length === 0) {
@@ -3552,11 +3588,7 @@ const TaxonomicTreeSection = () => {
             }
         }))();
     }, [selectedTaxon]);
-    return (jsx("div", Object.assign({ css: [taxonomicTreeSection] }, { children: jsxs("div", { children: [jsx(TaxonomicTreeBranch, { id: "2157" }, void 0), jsx(TaxonomicTreeBranch, { id: "2" }, void 0), jsx(TaxonomicTreeBranch, { id: "2759" }, void 0)] }, void 0) }), void 0));
 };
-const taxonomicTreeSection = css `
-  //overflow: scroll;
-`;
 
 const QueryPane = ({ css, className }) => {
     const queryMethod = useQueryMethodState();

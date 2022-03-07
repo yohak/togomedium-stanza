@@ -1,5 +1,5 @@
 import { R as React, _ as _extends, r as react } from './index-6aec0cc7.js';
-import { R as ReactDOM, i as isHostComponent, k as capitalize, l as createChainedFunction, m as createSvgIcon$1, n as debounce, o as isMuiElement, p as ownerDocument, q as ownerWindow, s as setRef, u as useEnhancedEffect, r as useId, t as useControlled, v as useEventCallback, w as useForkRef, x as useIsFocusVisible, y as ClassNameGenerator, z as jsxRuntime, A as newStyled, B as generateUtilityClass, D as generateUtilityClasses, G as styled, P as Popper, H as alpha, I as useThemeProps, _ as _objectWithoutPropertiesLoose, J as useTheme, K as clsx, L as composeClasses, M as Grow } from './EmotionCacheProvider-a7740407.js';
+import { R as ReactDOM, i as isHostComponent, h as capitalize, k as createChainedFunction, l as createSvgIcon$1, m as debounce, n as isMuiElement, o as ownerDocument, p as ownerWindow, s as setRef, u as useEnhancedEffect, q as useId, r as useControlled, t as useEventCallback, v as useForkRef, w as useIsFocusVisible, x as ClassNameGenerator, y as jsxRuntime, z as newStyled, A as generateUtilityClass, B as generateUtilityClasses, D as styled, P as Popper, G as alpha, H as useThemeProps, _ as _objectWithoutPropertiesLoose, I as useTheme, J as clsx, K as composeClasses, L as Grow } from './EmotionCacheProvider-d90cd57a.js';
 import { g as getAugmentedNamespace } from './stanza-f44e302d.js';
 
 /**
@@ -8567,12 +8567,12 @@ const PATH_ORGANISM = `${PATH_BASE}/organism/`;
 const PATH_COMPONENT = `${PATH_BASE}/components/`;
 
 const PATH_API = `http://growthmedium.org/sparqlist/api/`;
-const API_MEDIA_ALIMENT = `${PATH_API}gmdb_media_alignment_by_gmids`;
+const API_MEDIA_ALIMENT = `${PATH_API}gmdb_media_alignment_by_gm_ids`;
 const API_ALL_COMPONENTS = `${PATH_API}gmdb_all_components`;
 const API_MEDIA_BY_ATTRIBUTES = `${PATH_API}gmdb_media_by_attributes`;
 const API_MEDIA_BY_TAXON = `${PATH_API}gmdb_media_by_taxon`;
 const API_TAXONOMY_CHILDREN = `${PATH_API}gmdb_taxonomy_children`;
 const API_ORGANISMS_BY_PHENOTYPES = `${PATH_API}gmdb_organisms_by_phenotypes`;
 
-export { API_MEDIA_ALIMENT as A, IconCompact as I, PATH_COMPONENT as P, Recoil_index_6 as R, Tooltip$1 as T, Recoil_index_18 as a, Recoil_index_22 as b, clone as c, IconExpand as d, IconBlank as e, PATH_MEDIUM as f, PATH_ORGANISM as g, Recoil_index_4 as h, API_ALL_COMPONENTS as i, API_MEDIA_BY_ATTRIBUTES as j, API_ORGANISMS_BY_PHENOTYPES as k, IconNoChildren as l, API_TAXONOMY_CHILDREN as m, API_MEDIA_BY_TAXON as n };
-//# sourceMappingURL=paths-bdb61437.js.map
+export { API_MEDIA_ALIMENT as A, IconCompact as I, PATH_COMPONENT as P, Recoil_index_6 as R, Tooltip$1 as T, Recoil_index_18 as a, Recoil_index_22 as b, clone as c, IconExpand as d, IconBlank as e, PATH_MEDIUM as f, PATH_ORGANISM as g, Recoil_index_4 as h, API_ALL_COMPONENTS as i, API_MEDIA_BY_ATTRIBUTES as j, API_ORGANISMS_BY_PHENOTYPES as k, API_MEDIA_BY_TAXON as l, IconNoChildren as m, API_TAXONOMY_CHILDREN as n };
+//# sourceMappingURL=paths-0099bcd1.js.map
