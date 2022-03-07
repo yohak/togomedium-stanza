@@ -26,7 +26,7 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
         css={sliderStyle}
         min={0}
         max={110}
-        label={"Growth Temperature"}
+        label={"Growth temperature"}
         marks={[
           { value: 0, label: "0°C" },
           { value: 37, label: "37°C" },
@@ -46,6 +46,45 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
           { value: 14, label: "14" },
         ]}
         queryKey={"growth_ph"}
+        handleEnabledChange={handleEnabledChange}
+        handleValueChange={handleValueChange}
+      />
+      <RangeSlider
+        css={sliderStyle}
+        min={0}
+        max={25}
+        label={"Growth salinity"}
+        marks={[
+          { value: 0, label: "0%" },
+          { value: 25, label: "25%" },
+        ]}
+        queryKey={"growth_salinity"}
+        handleEnabledChange={handleEnabledChange}
+        handleValueChange={handleValueChange}
+      />
+      <RangeSlider
+        css={sliderStyle}
+        min={0}
+        max={50}
+        label={"Cell length"}
+        marks={[
+          { value: 0, label: "0µm" },
+          { value: 50, label: "50µm" },
+        ]}
+        queryKey={"cell_length"}
+        handleEnabledChange={handleEnabledChange}
+        handleValueChange={handleValueChange}
+      />
+      <RangeSlider
+        css={sliderStyle}
+        min={0}
+        max={25}
+        label={"Cell diameter"}
+        marks={[
+          { value: 0, label: "0µm" },
+          { value: 25, label: "25µm" },
+        ]}
+        queryKey={"cell_diameter"}
         handleEnabledChange={handleEnabledChange}
         handleValueChange={handleValueChange}
       />

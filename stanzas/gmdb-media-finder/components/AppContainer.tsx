@@ -5,9 +5,11 @@ import { MediaSelectPane } from "./MediaSelectPane";
 import { QueryPane } from "./QueryPane";
 import { COLOR_GRAY, COLOR_GRAY_BG, COLOR_WHITE, SIZE1 } from "../../../components/styles";
 
-type Props = {};
+type Props = {
+  dispatchEvent: (gmIds: string[]) => void;
+};
 
-export const AppContainer: FC<Props> = ({}) => {
+export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
   return (
     <div css={wrapper}>
       <div>
@@ -15,7 +17,7 @@ export const AppContainer: FC<Props> = ({}) => {
       </div>
       <div>
         <MediaSelectPane css={mediaQueryPane} />
-        <ActionPane actionLabel={"Compare"} />
+        <ActionPane actionLabel={"Compare"} dispatchEvent={dispatchEvent} />
       </div>
     </div>
   );

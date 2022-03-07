@@ -11,12 +11,14 @@ import {
 } from "../../../components/styles";
 import { useSelectedMediaMutators, useSelectedMediaState } from "../states/selectedMedia";
 
-type Props = { actionLabel: string };
+type Props = { actionLabel: string; dispatchEvent: (gmIds: string[]) => void };
 
-export const ActionPane: FC<Props> = ({ actionLabel }) => {
+export const ActionPane: FC<Props> = ({ actionLabel, dispatchEvent }) => {
   const selectedMedia = useSelectedMediaState();
   const { clearSelectedMedia } = useSelectedMediaMutators();
-
+  const onClickAction = () => {
+    dispatchEvent(selectedMedia);
+  };
   return (
     <div css={wrapper}>
       <p className={"info"}>{getInfoText(selectedMedia.length)}</p>
@@ -26,6 +28,7 @@ export const ActionPane: FC<Props> = ({ actionLabel }) => {
           disableElevation={true}
           disabled={selectedMedia.length === 0}
           sx={{ textTransform: "none" }}
+          onClick={onClickAction}
         >
           {actionLabel}
         </Button>

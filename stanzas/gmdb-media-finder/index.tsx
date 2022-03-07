@@ -25,7 +25,7 @@ export default class HelloReact extends Stanza<StanzaParameters> {
         <RecoilRoot>
           <ThemeProvider theme={muiTheme}>
             <EmotionCacheProvider>
-              <App />
+              <App stanzaElement={this.root} />
             </EmotionCacheProvider>
           </ThemeProvider>
         </RecoilRoot>
