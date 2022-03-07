@@ -1,8 +1,8 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { _ as _objectWithoutPropertiesLoose, M as propToStyleFunction, N as isPlainObject, O as useTheme, y as jsxRuntime, T as ThemeContext, Q as useTheme$1, A as generateUtilityClass, B as generateUtilityClasses, D as styled, h as capitalize, H as useThemeProps, K as composeClasses, J as clsx, U as rootShouldForwardProp, G as alpha, V as resolveProps, r as useControlled, l as createSvgIcon, u as useEnhancedEffect, v as useForkRef, p as ownerWindow, m as debounce, I as useTheme$2, t as useEventCallback, o as ownerDocument, W as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, X as SIZE2, Y as SIZE05, Z as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, g as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, $ as FONT_WEIGHT_BOLD, a as SIZE4, a0 as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d90cd57a.js';
+import { _ as _objectWithoutPropertiesLoose, M as propToStyleFunction, N as isPlainObject, O as useTheme, y as jsxRuntime, T as ThemeContext, Q as useTheme$1, A as generateUtilityClass, B as generateUtilityClasses, D as styled, h as capitalize, H as useThemeProps, K as composeClasses, J as clsx, U as rootShouldForwardProp, G as alpha, V as resolveProps, r as useControlled, l as createSvgIcon, u as useEnhancedEffect, v as useForkRef, p as ownerWindow, m as debounce, I as useTheme$2, t as useEventCallback, o as ownerDocument, W as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, X as SIZE2, Y as SIZE05, Z as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, g as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, $ as FONT_WEIGHT_BOLD, a as SIZE4, a0 as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-07efdcf7.js';
 import { _ as _extends, r as react, T as ThemeContext$1, k as keyframes, c as css, d as dist, j as jsx$1 } from './index-6aec0cc7.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-0099bcd1.js';
-import { B as ButtonBase, u as useFormControl, L as ListContext, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl, I as InputLabel, a as Select } from './TextField-f1b8b2fc.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-a146f7de.js';
+import { B as ButtonBase, u as useFormControl, L as ListContext, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl, I as InputLabel, a as Select } from './TextField-924285d7.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 
@@ -2453,10 +2453,13 @@ const useSelectedMediaMutators = () => {
     return { setSelectedMedia, toggleMediumSelection, clearSelectedMedia };
 };
 
-const ActionPane = ({ actionLabel }) => {
+const ActionPane = ({ actionLabel, dispatchEvent }) => {
     const selectedMedia = useSelectedMediaState();
     const { clearSelectedMedia } = useSelectedMediaMutators();
-    return (jsxs("div", Object.assign({ css: wrapper$8 }, { children: [jsx("p", Object.assign({ className: "info" }, { children: getInfoText$2(selectedMedia.length) }), void 0), jsxs("div", Object.assign({ css: buttonWrapper }, { children: [jsx(Button$1, Object.assign({ variant: "contained", disableElevation: true, disabled: selectedMedia.length === 0, sx: { textTransform: "none" } }, { children: actionLabel }), void 0), jsx(Button$1, Object.assign({ variant: "outlined", onClick: clearSelectedMedia, sx: { textTransform: "none" } }, { children: "Clear selection" }), void 0)] }), void 0)] }), void 0));
+    const onClickAction = () => {
+        dispatchEvent(selectedMedia);
+    };
+    return (jsxs("div", Object.assign({ css: wrapper$8 }, { children: [jsx("p", Object.assign({ className: "info" }, { children: getInfoText$2(selectedMedia.length) }), void 0), jsxs("div", Object.assign({ css: buttonWrapper }, { children: [jsx(Button$1, Object.assign({ variant: "contained", disableElevation: true, disabled: selectedMedia.length === 0, sx: { textTransform: "none" }, onClick: onClickAction }, { children: actionLabel }), void 0), jsx(Button$1, Object.assign({ variant: "outlined", onClick: clearSelectedMedia, sx: { textTransform: "none" } }, { children: "Clear selection" }), void 0)] }), void 0)] }), void 0));
 };
 const getInfoText$2 = (mediaLength) => {
     if (mediaLength === 0) {
@@ -3000,14 +3003,23 @@ const usePhenotypeQueryMutators = () => {
 
 const PhenotypeSearchArea = ({ css, className }) => {
     const { handleEnabledChange, handleValueChange } = usePhenotypeQuery();
-    return (jsxs("div", Object.assign({ css: [phenotypeSearchArea, css], className: className }, { children: [jsx(RangeSlider, { css: sliderStyle, min: 0, max: 110, label: "Growth Temperature", marks: [
+    return (jsxs("div", Object.assign({ css: [phenotypeSearchArea, css], className: className }, { children: [jsx(RangeSlider, { css: sliderStyle, min: 0, max: 110, label: "Growth temperature", marks: [
                     { value: 0, label: "0°C" },
                     { value: 37, label: "37°C" },
                     { value: 110, label: "110°C" },
                 ], queryKey: "growth_temp", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(RangeSlider, { css: sliderStyle, min: 0, max: 14, label: "Growth pH", marks: [
                     { value: 0, label: "0" },
                     { value: 14, label: "14" },
-                ], queryKey: "growth_ph", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Oxygen requirement", items: [
+                ], queryKey: "growth_ph", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(RangeSlider, { css: sliderStyle, min: 0, max: 25, label: "Growth salinity", marks: [
+                    { value: 0, label: "0%" },
+                    { value: 25, label: "25%" },
+                ], queryKey: "growth_salinity", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(RangeSlider, { css: sliderStyle, min: 0, max: 50, label: "Cell length", marks: [
+                    { value: 0, label: "0µm" },
+                    { value: 50, label: "50µm" },
+                ], queryKey: "cell_length", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(RangeSlider, { css: sliderStyle, min: 0, max: 25, label: "Cell diameter", marks: [
+                    { value: 0, label: "0µm" },
+                    { value: 25, label: "25µm" },
+                ], queryKey: "cell_diameter", handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }, void 0), jsx(SelectBox, { label: "Oxygen requirement", items: [
                     ["MPO_04002", "Aerobe"],
                     ["MPO_04003", "Anaerobe"],
                     ["MPO_04004", "Obligate aerobe"],
@@ -3608,8 +3620,8 @@ const contents = css `
   overflow-y: auto;
 `;
 
-const AppContainer = ({}) => {
-    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx("div", { children: jsx(QueryPane, { css: queryPane }, void 0) }, void 0), jsxs("div", { children: [jsx(MediaSelectPane, { css: mediaQueryPane }, void 0), jsx(ActionPane, { actionLabel: "Compare" }, void 0)] }, void 0)] }), void 0));
+const AppContainer = ({ dispatchEvent }) => {
+    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx("div", { children: jsx(QueryPane, { css: queryPane }, void 0) }, void 0), jsxs("div", { children: [jsx(MediaSelectPane, { css: mediaQueryPane }, void 0), jsx(ActionPane, { actionLabel: "Compare", dispatchEvent: dispatchEvent }, void 0)] }, void 0)] }), void 0));
 };
 const wrapper = css `
   position: relative;
@@ -3640,8 +3652,15 @@ const mediaQueryPane = css `
   flex-grow: 1;
 `;
 
-const App = () => {
-    return jsx(AppContainer, {}, void 0);
+const App = ({ stanzaElement }) => {
+    const dispatchEvent = (gmIds) => {
+        console.log(stanzaElement);
+        if (!stanzaElement)
+            return;
+        stanzaElement.dispatchEvent(new CustomEvent("STANZA_RUN_ACTION", { bubbles: true, composed: true, detail: gmIds }));
+        console.log("dispatch", { detail: gmIds });
+    };
+    return jsx(AppContainer, { dispatchEvent: dispatchEvent }, void 0);
 };
 
 const muiTheme = createTheme({
@@ -3676,7 +3695,7 @@ class HelloReact extends Stanza {
     }
     _render() {
         const main = this.root.querySelector("main");
-        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, {}, void 0) }, void 0) }), void 0) }, void 0) }, void 0), main);
+        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, { stanzaElement: this.root }, void 0) }, void 0) }), void 0) }, void 0) }, void 0), main);
     }
 }
 

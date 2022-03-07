@@ -1,5 +1,5 @@
 import { R as React, _ as _extends, r as react } from './index-6aec0cc7.js';
-import { R as ReactDOM, i as isHostComponent, h as capitalize, k as createChainedFunction, l as createSvgIcon$1, m as debounce, n as isMuiElement, o as ownerDocument, p as ownerWindow, s as setRef, u as useEnhancedEffect, q as useId, r as useControlled, t as useEventCallback, v as useForkRef, w as useIsFocusVisible, x as ClassNameGenerator, y as jsxRuntime, z as newStyled, A as generateUtilityClass, B as generateUtilityClasses, D as styled, P as Popper, G as alpha, H as useThemeProps, _ as _objectWithoutPropertiesLoose, I as useTheme, J as clsx, K as composeClasses, L as Grow } from './EmotionCacheProvider-d90cd57a.js';
+import { R as ReactDOM, i as isHostComponent, h as capitalize, k as createChainedFunction, l as createSvgIcon$1, m as debounce, n as isMuiElement, o as ownerDocument, p as ownerWindow, s as setRef, u as useEnhancedEffect, q as useId, r as useControlled, t as useEventCallback, v as useForkRef, w as useIsFocusVisible, x as ClassNameGenerator, y as jsxRuntime, z as newStyled, A as generateUtilityClass, B as generateUtilityClasses, D as styled, P as Popper, G as alpha, H as useThemeProps, _ as _objectWithoutPropertiesLoose, I as useTheme, J as clsx, K as composeClasses, L as Grow } from './EmotionCacheProvider-07efdcf7.js';
 import { g as getAugmentedNamespace } from './stanza-f44e302d.js';
 
 /**
@@ -8575,4 +8575,4 @@ const API_TAXONOMY_CHILDREN = `${PATH_API}gmdb_taxonomy_children`;
 const API_ORGANISMS_BY_PHENOTYPES = `${PATH_API}gmdb_organisms_by_phenotypes`;
 
 export { API_MEDIA_ALIMENT as A, IconCompact as I, PATH_COMPONENT as P, Recoil_index_6 as R, Tooltip$1 as T, Recoil_index_18 as a, Recoil_index_22 as b, clone as c, IconExpand as d, IconBlank as e, PATH_MEDIUM as f, PATH_ORGANISM as g, Recoil_index_4 as h, API_ALL_COMPONENTS as i, API_MEDIA_BY_ATTRIBUTES as j, API_ORGANISMS_BY_PHENOTYPES as k, API_MEDIA_BY_TAXON as l, IconNoChildren as m, API_TAXONOMY_CHILDREN as n };
-//# sourceMappingURL=paths-0099bcd1.js.map
+//# sourceMappingURL=paths-a146f7de.js.map

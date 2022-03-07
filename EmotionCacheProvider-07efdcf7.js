@@ -3581,7 +3581,7 @@ const FONT_EN = "'Fira Sans Condensed', sans-serif";
 const COLOR_WHITE = "#FFFFFF";
 const COLOR_PRIMARY = "#8FC31F";
 const COLOR_GRAY = "#CCCCCC";
-const COLOR_GRAY_BG = "#F0F0F0";
+const COLOR_GRAY_BG = "#f4f3f2";
 const COLOR_GRAY700 = "#374151";
 const COLOR_GRAY400 = "#9ca3af";
 const COLOR_GRAY300 = "#d1d5db";
@@ -4304,4 +4304,4 @@ const EmotionCacheProvider = ({ children }) => {
 };
 
 export { FONT_WEIGHT_BOLD as $, generateUtilityClass as A, generateUtilityClasses as B, COLOR_WHITE as C, styled$1 as D, EmotionCacheProvider as E, FONT_EN as F, alpha as G, useThemeProps as H, useTheme as I, clsx as J, composeClasses as K, Grow$1 as L, propToStyleFunction as M, isPlainObject as N, useTheme$3 as O, Popper$1 as P, useTheme$1 as Q, ReactDOM as R, SIZE1 as S, ThemeContext$1 as T, rootShouldForwardProp as U, resolveProps as V, ROUNDED_CORNER as W, SIZE2 as X, SIZE05 as Y, FONT_WEIGHT_MEDIUM as Z, _objectWithoutPropertiesLoose as _, SIZE4 as a, Fragment as a0, COLOR_GRAY300 as a1, COLOR_GRAY400 as a2, COLOR_GRAY_BG as a3, createTheme as a4, Portal$1 as a5, _inheritsLoose as a6, TransitionGroupContext as a7, duration as a8, Transition$1 as a9, reflow as aa, getTransitionProps as ab, defaultTheme$1 as ac, formatMuiErrorMessage as ad, deepmerge as ae, slotShouldForwardProp as af, lighten as ag, darken as ah, SIZE3 as b, jsxs as c, COLOR_GRAY700 as d, COLOR_PRIMARY as e, COLOR_GRAY as f, COLOR_GRAY_LINE as g, capitalize as h, isHostComponent as i, jsx as j, createChainedFunction as k, createSvgIcon as l, debounce as m, isMuiElement as n, ownerDocument as o, ownerWindow as p, useId as q, useControlled as r, setRef as s, useEventCallback as t, useEnhancedEffect$1 as u, useForkRef as v, useIsFocusVisible as w, ClassNameGenerator$1 as x, jsxRuntime as y, newStyled as z };
-//# sourceMappingURL=EmotionCacheProvider-d90cd57a.js.map
+//# sourceMappingURL=EmotionCacheProvider-07efdcf7.js.map
