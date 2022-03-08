@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Autocomplete, Chip, FormControl, TextField } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_WHITE } from "../../../components/styles";
 
@@ -25,8 +25,13 @@ export const SelectBox: FC<Props> = ({
   const [value, setValue] = useState("");
   const [enabled, setEnabled] = useState(false);
 
-  const handleSelectChange = (event: SelectChangeEvent) => {
-    setValue(event.target.value as string);
+  const handleSelectChange = (event: SyntheticEvent, value: [string, string] | null) => {
+    console.log(value);
+    if (value) {
+      setValue(value[1]);
+    } else {
+      setValue("");
+    }
   };
   const handleCheckChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setEnabled(checked);
@@ -44,21 +49,35 @@ export const SelectBox: FC<Props> = ({
     <div css={[selectBox, css]} className={className}>
       <Checkbox css={checkBoxStyle} onChange={handleCheckChange} />
       <FormControl sx={{ m: 1, minWidth: 200 }}>
-        <InputLabel id={queryKey}>{label}</InputLabel>
-        <Select
-          labelId={queryKey}
-          id={queryKey}
-          value={value}
-          label={label}
+        <Autocomplete
+          filterSelectedOptions
           onChange={handleSelectChange}
+          disablePortal={true}
+          disableClearable={true}
+          options={items}
           disabled={enabled ? undefined : true}
-        >
-          {items.map(([value, name]) => (
-            <MenuItem key={value} value={value}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
+          getOptionLabel={(item) => item[1]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={label}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: <>{params.InputProps.endAdornment}</>,
+              }}
+            />
+          )}
+          renderTags={(value, getTagProps) =>
+            value.map((option, index) => (
+              <Chip
+                variant="outlined"
+                {...getTagProps({ index })}
+                label={option[1]}
+                key={option[0]}
+              />
+            ))
+          }
+        />
       </FormControl>
     </div>
   );
