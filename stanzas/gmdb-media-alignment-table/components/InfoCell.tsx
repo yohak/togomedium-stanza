@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { Slider, Tooltip } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN, SIZE1 } from "../../../components/styles";
 import { LabelInfo } from "../../../utils/types";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
@@ -16,24 +16,30 @@ export const InfoCell: FC<Props> = (props) => {
 };
 
 const Compact: FC<Props> = ({ info, linkBase }) => {
+  const [item, setItem] = useState<LabelInfo>({ label: "", id: "" });
+  const [restText, setRestText] = useState("");
+  useEffect(() => {
+    setItem(info[0]);
+    if (info.length > 1) {
+      const remain = info.length - 1;
+      if (remain === 1) {
+        setRestText(`, + ${remain} organism`);
+      } else {
+        setRestText(`, + ${remain} organisms`);
+      }
+    }
+  }, [info]);
   return (
     <div css={wrapper} className="compact">
       <div className="inner">
-        {info.map((item, index) => (
-          <div key={item.id} className="text">
-            <Tooltip
-              title={item.label}
-              placement={"top"}
-              PopperProps={{ disablePortal: true }}
-              arrow
-            >
-              <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
-                {item.id}
-              </a>
-            </Tooltip>
-            {index < info.length - 1 && ","}
-          </div>
-        ))}
+        <div className="text">
+          <Tooltip title={item.label} placement={"top"} PopperProps={{ disablePortal: true }} arrow>
+            <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
+              {item.id}
+            </a>
+          </Tooltip>
+          {info.length > 1 && <>{restText}</>}
+        </div>
       </div>
     </div>
   );
