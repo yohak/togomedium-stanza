@@ -19,7 +19,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
   const { descendants, ascendants } = useLineages(id, taxonList);
   const { check, onClickCheck } = useChecked(id, taxonList, ascendants, descendants);
   const { ascendantsLabel } = useAscendantsLabel(ascendants);
-  const [linkString, linkURL] = useLinkString(id);
+  const [linkString, linkURL] = useLinkString(id, rank);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onToggleChildren = () => {
     setIsOpen((prev) => !prev);
@@ -47,13 +47,13 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
   );
 };
 
-const useLinkString = (id: string) => {
+const useLinkString = (id: string, rank: string) => {
   const [linkString, setLinkString] = useState<string>("");
   const [linkURL, setLinkURL] = useState<string>("");
   useEffect(() => {
     setLinkString(`tax_id:${id}`);
-    setLinkURL(`http://growthmedium.org/organism/${id}`);
-  }, [id]);
+    setLinkURL(`http://growthmedium.org/${rank === "Species" ? "organism" : "taxon"}/${id}`);
+  }, [id, rank]);
   return [linkString, linkURL];
 };
 

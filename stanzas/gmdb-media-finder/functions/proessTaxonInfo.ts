@@ -16,7 +16,7 @@ export const retrieveTaxonInfo = (
     const params: TaxonomyChildrenParams = {
       tax_id: info.id,
     };
-    console.log(info.id);
+    // console.log(info.id);
     const response = await getData<TaxonomyChildrenResponse, TaxonomyChildrenParams>(
       API_TAXONOMY_CHILDREN,
       params
