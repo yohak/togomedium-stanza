@@ -1,6 +1,7 @@
 import Stanza from "togostanza/stanza";
 import { makeFormBody } from "../../utils/getData";
 import { importWebFontForTogoMedium } from "../../utils/stanza";
+import { convertHTMLEntity } from "../../utils/string";
 import { ApiResponse, SimpleObject, TemplateBase } from "../../utils/types";
 
 export default class GmdbMetaList extends Stanza<StanzaParameters> {
@@ -93,6 +94,7 @@ const makeSuccessData = (
         value.nowrap = true;
       }
       result.push(value);
+      value.label = convertHTMLEntity(value.label);
     });
     return result;
   });

@@ -30,3 +30,13 @@ export const makeNcbiOrganismLink = (taxid: Optional<string>): Optional<string> 
 export const stringToArray = (str: string): string[] => {
   return str.split(",").map((str) => str.trim());
 };
+
+export const convertHTMLEntity = (text: string) => {
+  const span = document.createElement("span");
+
+  return text.replace(/&[#A-Za-z0-9]+;/gi, (entity, position, text) => {
+    span.innerHTML = entity;
+    console.log("converted", text, span.innerText);
+    return span.innerText;
+  });
+};
