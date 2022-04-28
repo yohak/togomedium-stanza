@@ -14,7 +14,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
   const myInfo: Optional<TaxonInfo> = useMemo(() => {
     return taxonList.find((item) => item.id === id);
   }, [taxonList, id]);
-  const { branchChildren } = useBranchChildren(myInfo);
+  const { branchChildren, isLoading } = useBranchChildren(myInfo);
   const { label, rank } = useTaxonInfo(id, myInfo);
   const { descendants, ascendants } = useLineages(id, taxonList);
   const { check, onClickCheck } = useChecked(id, taxonList, ascendants, descendants);
@@ -37,6 +37,7 @@ export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
       check={check}
       hasChildren={!!branchChildren.length}
       isOpen={isOpen}
+      isLoading={isLoading}
       onClickCheck={() => onClickCheck()}
       onToggleChildren={onToggleChildren}
     >
@@ -60,16 +61,19 @@ const useLinkString = (id: string, rank: string) => {
 const useBranchChildren = (info: Optional<TaxonInfo>) => {
   const [branchChildren, setBranchChildren] = useState<string[]>([]);
   const { setTaxonAsLoading, addTaxonToList, setTaxonChildren } = useTaxonListMutators();
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(info?.children === "loading");
     if (info?.children === "not-yet") {
       setTaxonAsLoading(info.id);
+      setIsLoading(true);
       retrieveTaxonInfo(info, addTaxonToList, setTaxonChildren);
     }
     if (info && isArray(info.children)) {
       setBranchChildren(info.children);
     }
   }, [info]);
-  return { branchChildren };
+  return { branchChildren, isLoading };
 };
 
 const useTaxonInfo = (id: string, myInfo: Optional<TaxonInfo>) => {

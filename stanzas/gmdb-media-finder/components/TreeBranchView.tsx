@@ -3,7 +3,7 @@ import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { IconCompact, IconExpand, IconNoChildren } from "../../../components/icons";
+import { IconCompact, IconExpand, IconNoChildren, IconBlank } from "../../../components/icons";
 import {
   COLOR_GRAY300,
   COLOR_GRAY400,
@@ -21,6 +21,7 @@ type Props = {
   check: CheckStatus;
   hasChildren: boolean;
   isOpen: boolean;
+  isLoading: boolean;
   toolTipLabel?: string;
   tag?: string;
   linkString?: string;
@@ -38,6 +39,7 @@ export const TreeBranchView: FC<Props> = ({
   tag,
   hasChildren,
   isOpen,
+  isLoading,
   onClickCheck,
   onToggleChildren,
   children,
@@ -50,7 +52,7 @@ export const TreeBranchView: FC<Props> = ({
       <div css={inner}>
         <div css={left}>
           <span onClick={() => onToggleChildren(id)}>
-            <ToggleIcon {...{ hasChildren, isOpen }} />
+            <ToggleIcon {...{ hasChildren, isOpen, isLoading }} />
           </span>
           <Tooltip
             title={toolTipLabel}
@@ -78,7 +80,12 @@ export const TreeBranchView: FC<Props> = ({
   );
 };
 
-const ToggleIcon: FC<{ hasChildren: boolean; isOpen: boolean }> = ({ hasChildren, isOpen }) => {
+const ToggleIcon: FC<{ hasChildren: boolean; isOpen: boolean; isLoading: boolean }> = ({
+  hasChildren,
+  isOpen,
+  isLoading,
+}) => {
+  if (isLoading) return <IconBlank css={icon} />;
   if (!hasChildren) return <IconNoChildren css={icon} />;
   if (isOpen) return <IconCompact css={[icon, clickable]} />;
   return <IconExpand css={[icon, clickable]} />;

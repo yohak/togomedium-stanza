@@ -18,6 +18,7 @@ const defaultArgs: ComponentProps<typeof TreeBranchView> = {
   linkString: "taxid:2157",
   linkURL: "/",
   isOpen: true,
+  isLoading: false,
   tag: "Phylum",
   onClickCheck: () => {
     console.log("onClickCheck");
