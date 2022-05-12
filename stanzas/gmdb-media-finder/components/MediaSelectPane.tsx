@@ -1,14 +1,15 @@
 import { css } from "@emotion/react";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { MediaList } from "./MediaList";
+import { Pagination } from "./Pagination";
 import { QueryInfo } from "./QueryInfo";
 import {
   COLOR_WHITE,
   FONT_WEIGHT_BOLD,
   ROUNDED_CORNER,
-  SIZE1,
+  SIZE05,
   SIZE2,
-  SIZE4,
+  SIZE3,
 } from "../../../components/styles";
 import { AcceptsEmotion } from "../../../utils/types";
 import { useFoundMediaState } from "../states/foundMedia";
@@ -24,6 +25,13 @@ export const MediaSelectPane: FC<Props> = ({ css, className }) => {
       <QueryInfo />
       <p css={infoTextCSS}>{getInfoText(foundMedia.length, isLoading)}</p>
       <MediaList css={list} />
+      <Pagination
+        total={965}
+        current={0}
+        displayLength={10}
+        onClickNext={() => {}}
+        onClickPrev={() => {}}
+      />
     </div>
   );
 };
@@ -40,12 +48,12 @@ const wrapper = css`
 const infoTextCSS = css`
   font-size: 18px;
   ${FONT_WEIGHT_BOLD};
-  margin-top: ${SIZE4};
-  margin-bottom: ${SIZE1};
+  margin-top: ${SIZE3};
+  margin-bottom: ${SIZE05};
 `;
 
 const list = css`
-  flex-grow: 1;
+  flex-grow: 0;
 `;
 
 const getInfoText = (mediaLength: number, isLoading: boolean): string => {
