@@ -28,11 +28,18 @@ export const Pagination: FC<Props> = ({
           <input type="button" value={"NEXT"} onClick={onClickNext} />
         )}
       </div>
-      <div>
-        Showing {current + 1} to {current + displayLength} of total {total} items
-      </div>
+      <div>{makeDisplayMessage(total, current, displayLength)}</div>
     </div>
   );
+};
+
+const makeDisplayMessage = (total: number, current: number, displayLength: number) => {
+  switch (true) {
+    case current + displayLength > total:
+      return `Showing ${current + 1} to ${total} of total ${total} items`;
+    default:
+      return `Showing ${current + 1} to ${current + displayLength} of total ${total} items`;
+  }
 };
 
 const pagination = css`

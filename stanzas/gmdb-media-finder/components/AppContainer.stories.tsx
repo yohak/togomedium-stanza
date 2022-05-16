@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AppContainer } from "./AppContainer";
 import { allComponentsMocks } from "../../../api/all-components/msw";
 import { mediaByAttributesMocks } from "../../../api/media_by_attributes/msw";
+import { mediaByTaxonMocks } from "../../../api/media_by_taxon/msw";
 import { makeComponentStoryTitle, makeMswParameter } from "../../../utils/storybook";
 
 export default {
@@ -13,6 +14,6 @@ const Template: ComponentStory<typeof AppContainer> = (args) => <AppContainer {.
 
 export const Primary = Template.bind({});
 Primary.parameters = {
-  msw: makeMswParameter([...mediaByAttributesMocks]),
+  msw: makeMswParameter([...mediaByAttributesMocks, ...mediaByTaxonMocks]),
 };
 Primary.args = {};
