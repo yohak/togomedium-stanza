@@ -11,21 +11,21 @@ const post = rest.post<string, MediaByAttributesResponse, never>(
   (req, res, ctx) => {
     const urlParams = new URLSearchParams(req.body);
     let result: MediaByAttributesResponse;
-    switch (urlParams.get("gmo_ids")!.split(",").length) {
-      case 1:
+    switch (parseInt(urlParams.get("offset")!, 10)) {
+      case 0:
         result = mediaByAttributesResponse1;
         break;
-      case 2:
+      case 10:
         result = mediaByAttributesResponse2;
         break;
-      case 3:
+      case 20:
         result = mediaByAttributesResponse3;
         break;
-      case 4:
+      case 30:
         result = mediaByAttributesResponse4;
         break;
       default:
-        result = [];
+        result = { total: 0, offset: 0, limit: 0, contents: [] };
     }
 
     return res(ctx.delay(2000), ctx.status(200), ctx.json(result));

@@ -3,8 +3,12 @@ import React, { FC, useEffect, useState } from "react";
 import { MediaList } from "./MediaList";
 import { Pagination } from "./Pagination";
 import { QueryInfo } from "./QueryInfo";
+import {
+  MediaByAttributesParams,
+  MediaByAttributesResponse,
+} from "../../../api/media_by_attributes/types";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
-import { API_MEDIA_BY_TAXON } from "../../../api/paths";
+import { API_MEDIA_BY_ATTRIBUTES, API_MEDIA_BY_TAXON } from "../../../api/paths";
 import {
   COLOR_WHITE,
   FONT_WEIGHT_BOLD,
@@ -15,6 +19,7 @@ import {
 } from "../../../components/styles";
 import { getData } from "../../../utils/getData";
 import { AcceptsEmotion } from "../../../utils/types";
+import { useSelectedAttributesState } from "../hooks/selectedAttributes";
 import { nullResponse, useFoundMediaMutators, useFoundMediaState } from "../states/foundMedia";
 import { useIsMediaLoading, useMediaLoadAbortMutators } from "../states/mediaLoadAbort";
 import { useSelectedTaxonState } from "../states/selectedTaxon";
@@ -41,6 +46,7 @@ const usePagination = () => {
   const [current, setCurrent] = useState(0);
   const [displayLength, setDisplayLength] = useState(0);
   const selectedTaxon: string[] = useSelectedTaxonState();
+  const selectedAttributes = useSelectedAttributesState();
   const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
   const onClickNext = () => {
     setCurrent((prev) => prev + 10);
@@ -55,28 +61,54 @@ const usePagination = () => {
     setDisplayLength(response.limit);
   }, [response]);
   useEffect(() => {
-    if (selectedTaxon.length === 0) {
+    if (selectedTaxon.length === 0 && selectedAttributes.gmo_ids.length === 0) {
       setFoundMedia(nullResponse);
       setNextMediaLoadAbort(null);
       return;
     }
-    (async () => {
-      const params: MediaByTaxonParams = { tax_ids: selectedTaxon, limit: 10, offset: current };
-      const abort: AbortController = new AbortController();
-      setNextMediaLoadAbort(abort);
-      const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
-        API_MEDIA_BY_TAXON,
-        params,
-        abort
-      );
-      setNextMediaLoadAbort(null);
-      if (response.body) {
-        setFoundMedia({
-          queryType: "taxon",
-          response: response.body,
-        });
-      }
-    })();
+
+    if (queryType === "taxon") {
+      (async () => {
+        const params: MediaByTaxonParams = { tax_ids: selectedTaxon, limit: 10, offset: current };
+        const abort: AbortController = new AbortController();
+        setNextMediaLoadAbort(abort);
+        const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
+          API_MEDIA_BY_TAXON,
+          params,
+          abort
+        );
+        setNextMediaLoadAbort(null);
+        if (response.body) {
+          setFoundMedia({
+            queryType: "taxon",
+            response: response.body,
+          });
+        }
+      })();
+    } else if (queryType === "attribute") {
+      console.log("paginate attributes");
+      (async () => {
+        const params: MediaByAttributesParams = {
+          gmo_ids: selectedAttributes.gmo_ids,
+          limit: 10,
+          offset: current,
+        };
+        const abort: AbortController = new AbortController();
+        setNextMediaLoadAbort(abort);
+        const response = await getData<MediaByAttributesResponse, MediaByAttributesParams>(
+          API_MEDIA_BY_ATTRIBUTES,
+          params,
+          abort
+        );
+        setNextMediaLoadAbort(null);
+        if (response.body) {
+          setFoundMedia({
+            queryType: "attribute",
+            response: response.body,
+          });
+        }
+      })();
+    }
   }, [current]);
 
   return { onClickPrev, onClickNext, total, current, displayLength };
