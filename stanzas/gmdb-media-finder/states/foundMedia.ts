@@ -9,7 +9,7 @@ export const nullResponse: FoundMedia = {
 };
 
 export type FoundMedia = {
-  queryType: "taxon" | "attribute" | "";
+  queryType: "taxon" | "organism" | "attribute" | "";
   response: MediaByAttributesResponse & MediaByTaxonResponse;
 };
 

@@ -66,25 +66,25 @@ const useOrganismList = () => {
   const [data, setData] = useState<OrganismListInfo[]>([]);
   const foundOrganisms = useFoundOrganismsState();
   const selectedOrganisms = useSelectedOrganismsState();
-  const { toggleOrganismSelection, setSelectedOrganisms } = useSelectedOrganismsMutators();
+  const { toggleOrganismSelection } = useSelectedOrganismsMutators();
   const toggleChecked = (id: string) => {
     toggleOrganismSelection(id);
   };
   useEffect(() => {
-    const result: OrganismListInfo[] = foundOrganisms.map<OrganismListInfo>((organism) => {
+    const result: OrganismListInfo[] = foundOrganisms.response.contents.map((organism) => {
       return {
-        id: organism.id,
-        label: organism.label,
-        isChecked: selectedOrganisms.includes(organism.id),
+        id: organism.tax_id,
+        label: organism.name,
+        isChecked: selectedOrganisms.includes(organism.tax_id),
       };
     });
     setData(result);
-    const updatedSelection = selectedOrganisms.filter((id) =>
-      result.find((info) => info.id === id)
-    );
-    if (!deepEqual(updatedSelection, selectedOrganisms)) {
-      setSelectedOrganisms(updatedSelection);
-    }
+    // const updatedSelection = selectedOrganisms.filter((id) =>
+    //   result.find((info) => info.id === id)
+    // );
+    // if (!deepEqual(updatedSelection, selectedOrganisms)) {
+    //   setSelectedOrganisms(updatedSelection);
+    // }
   }, [foundOrganisms, selectedOrganisms]);
 
   return { data, toggleChecked };

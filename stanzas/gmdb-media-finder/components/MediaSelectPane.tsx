@@ -22,6 +22,7 @@ import { AcceptsEmotion } from "../../../utils/types";
 import { useSelectedAttributesState } from "../hooks/selectedAttributes";
 import { nullResponse, useFoundMediaMutators, useFoundMediaState } from "../states/foundMedia";
 import { useIsMediaLoading, useMediaLoadAbortMutators } from "../states/mediaLoadAbort";
+import { useSelectedOrganismsState } from "../states/selectedOrganisms";
 import { useSelectedTaxonState } from "../states/selectedTaxon";
 
 type Props = {} & AcceptsEmotion;
@@ -46,6 +47,7 @@ const usePagination = () => {
   const [current, setCurrent] = useState(0);
   const [displayLength, setDisplayLength] = useState(0);
   const selectedTaxon: string[] = useSelectedTaxonState();
+  const selectedOrganisms = useSelectedOrganismsState();
   const selectedAttributes = useSelectedAttributesState();
   const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
   const onClickNext = () => {
@@ -61,53 +63,63 @@ const usePagination = () => {
     setDisplayLength(response.limit);
   }, [response]);
   useEffect(() => {
-    if (selectedTaxon.length === 0 && selectedAttributes.gmo_ids.length === 0) {
-      setFoundMedia(nullResponse);
-      setNextMediaLoadAbort(null);
-      return;
+    switch (true) {
+      case selectedTaxon.length === 0 && queryType === "taxon":
+      case selectedAttributes.gmo_ids.length === 0 && queryType === "attribute":
+      case selectedOrganisms.length === 0 && queryType === "organism":
+        setFoundMedia(nullResponse);
+        setNextMediaLoadAbort(null);
+        return;
     }
 
-    if (queryType === "taxon") {
-      (async () => {
-        const params: MediaByTaxonParams = { tax_ids: selectedTaxon, limit: 10, offset: current };
-        const abort: AbortController = new AbortController();
-        setNextMediaLoadAbort(abort);
-        const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
-          API_MEDIA_BY_TAXON,
-          params,
-          abort
-        );
-        setNextMediaLoadAbort(null);
-        if (response.body) {
-          setFoundMedia({
-            queryType: "taxon",
-            response: response.body,
-          });
-        }
-      })();
-    } else if (queryType === "attribute") {
-      console.log("paginate attributes");
-      (async () => {
-        const params: MediaByAttributesParams = {
-          gmo_ids: selectedAttributes.gmo_ids,
-          limit: 10,
-          offset: current,
-        };
-        const abort: AbortController = new AbortController();
-        setNextMediaLoadAbort(abort);
-        const response = await getData<MediaByAttributesResponse, MediaByAttributesParams>(
-          API_MEDIA_BY_ATTRIBUTES,
-          params,
-          abort
-        );
-        setNextMediaLoadAbort(null);
-        if (response.body) {
-          setFoundMedia({
-            queryType: "attribute",
-            response: response.body,
-          });
-        }
-      })();
+    switch (queryType) {
+      case "taxon":
+      case "organism":
+        (async () => {
+          const params: MediaByTaxonParams = {
+            tax_ids: queryType === "taxon" ? selectedTaxon : selectedOrganisms,
+            limit: 10,
+            offset: current,
+          };
+          const abort: AbortController = new AbortController();
+          setNextMediaLoadAbort(abort);
+          const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
+            API_MEDIA_BY_TAXON,
+            params,
+            abort
+          );
+          setNextMediaLoadAbort(null);
+          if (response.body) {
+            setFoundMedia({
+              queryType,
+              response: response.body,
+            });
+          }
+        })();
+        break;
+      case "attribute":
+        (async () => {
+          const params: MediaByAttributesParams = {
+            gmo_ids: selectedAttributes.gmo_ids,
+            limit: 10,
+            offset: current,
+          };
+          const abort: AbortController = new AbortController();
+          setNextMediaLoadAbort(abort);
+          const response = await getData<MediaByAttributesResponse, MediaByAttributesParams>(
+            API_MEDIA_BY_ATTRIBUTES,
+            params,
+            abort
+          );
+          setNextMediaLoadAbort(null);
+          if (response.body) {
+            setFoundMedia({
+              queryType,
+              response: response.body,
+            });
+          }
+        })();
+        break;
     }
   }, [current]);
 

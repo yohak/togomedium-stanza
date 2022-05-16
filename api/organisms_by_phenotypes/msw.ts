@@ -37,4 +37,4 @@ const post = rest.post<string, OrganismsByPhenotypesResponse, never>(
   }
 );
 
-export const mediaByTaxonMocks = [post];
+export const organismsByPhenotypesMocks = [post];
