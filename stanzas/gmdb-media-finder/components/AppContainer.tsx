@@ -27,7 +27,7 @@ const wrapper = css`
   position: relative;
   background-color: ${COLOR_GRAY_BG};
   padding: ${SIZE1};
-  min-height: 600px;
+  min-height: 640px;
   height: 1px;
   display: flex;
   gap: ${SIZE1};

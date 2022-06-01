@@ -1,7 +1,14 @@
 export type OrganismsByPhenotypesResponse = {
-  tax_id: string;
-  name: string;
-}[];
+  total: number;
+  offset: number;
+  limit: number;
+  contents: {
+    tax_id: string;
+    name: string;
+  }[];
+};
 export type OrganismsByPhenotypeParams = {
-  [key: string]: string;
+  limit: number;
+  offset: number;
+  [key: string]: string | number;
 };

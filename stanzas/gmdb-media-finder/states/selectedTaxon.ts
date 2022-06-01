@@ -10,7 +10,9 @@ export const useSelectedTaxonState = () => {
 
 export const useSelectedTaxonMutators = () => {
   const setSelectedTaxon = useSetRecoilState(selectedTaxon);
-  const clearTaxonSelect = () => setSelectedTaxon([]);
+  const clearTaxonSelect = () => {
+    setSelectedTaxon([]);
+  };
   const updateSelection = (list: TaxonInfo[], id: string) => {
     setSelectedTaxon((prev) => makeNewSelection(list, id, prev));
   };

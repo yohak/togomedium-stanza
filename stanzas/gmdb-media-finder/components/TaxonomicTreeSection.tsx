@@ -4,11 +4,11 @@ import { TaxonomicTreeBranch } from "./TaxonomicTreeBranch";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
 import { API_MEDIA_BY_TAXON } from "../../../api/paths";
 import { getData } from "../../../utils/getData";
-import { LabelInfo } from "../../../utils/types";
 import { useInitTaxonTree } from "../hooks/useInitTaxonTree";
-import { useFoundMediaMutators } from "../states/foundMedia";
+import { nullResponse, useFoundMediaMutators } from "../states/foundMedia";
 import { useMediaLoadAbortMutators } from "../states/mediaLoadAbort";
 import { useQueryDataMutators } from "../states/queryData";
+import { useSelectedMediaMutators } from "../states/selectedMedia";
 import { useSelectedTaxonState } from "../states/selectedTaxon";
 
 type Props = {};
@@ -36,16 +36,18 @@ const useMediaLoadFromTaxon = () => {
   const { setQueryData } = useQueryDataMutators();
   const { setFoundMedia } = useFoundMediaMutators();
   const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+  const { clearSelectedMedia } = useSelectedMediaMutators();
   useEffect(() => {
     if (selectedTaxon.length === 0) {
       setQueryData({});
-      setFoundMedia([]);
+      setFoundMedia(nullResponse);
       setNextMediaLoadAbort(null);
       return;
     }
+    clearSelectedMedia();
     (async () => {
-      const params: MediaByTaxonParams = { tax_ids: selectedTaxon };
-      setQueryData(params);
+      const params: MediaByTaxonParams = { tax_ids: selectedTaxon, limit: 10, offset: 0 };
+      setQueryData({ tax_ids: selectedTaxon });
       const abort: AbortController = new AbortController();
       setNextMediaLoadAbort(abort);
       const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
@@ -55,12 +57,10 @@ const useMediaLoadFromTaxon = () => {
       );
       setNextMediaLoadAbort(null);
       if (response.body) {
-        setFoundMedia(
-          response.body.map<LabelInfo>((item) => ({
-            id: item.gm_id,
-            label: item.name,
-          }))
-        );
+        setFoundMedia({
+          queryType: "taxon",
+          response: response.body,
+        });
       }
     })();
   }, [selectedTaxon]);

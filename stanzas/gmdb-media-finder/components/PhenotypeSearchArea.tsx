@@ -10,10 +10,10 @@ import {
 import { API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
 import { COLOR_WHITE } from "../../../components/styles";
 import { getData } from "../../../utils/getData";
-import { LabelInfo } from "../../../utils/types";
-import { useFoundOrganismsMutators } from "../states/foundOrganisms";
+import { nullResponse, useFoundOrganismsMutators } from "../states/foundOrganisms";
 import { useOrganismLoadAbortMutators } from "../states/organismLoadAbort";
 import { usePhenotypeQueryMutators, usePhenotypeQueryState } from "../states/phenotypeQuery";
+import { useSelectedOrganismsMutators } from "../states/selectedOrganisms";
 
 type Props = {} & AcceptsEmotion;
 
@@ -183,6 +183,7 @@ const usePhenotypeQuery = () => {
   const { setFoundOrganisms } = useFoundOrganismsMutators();
   const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
   const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
+  const { clearSelectedOrganisms } = useSelectedOrganismsMutators();
   const handleEnabledChange = (key: string, enabled: boolean) => {
     if (!enabled) {
       removePhenotypeQuery(key);
@@ -193,24 +194,22 @@ const usePhenotypeQuery = () => {
   };
   useEffect(() => {
     if (Object.entries(phenotypeQuery).length === 0) {
-      setFoundOrganisms([]);
+      setFoundOrganisms(nullResponse);
       setNextOrganismLoadAbort(null);
       return;
     }
+    clearSelectedOrganisms();
     (async () => {
-      console.log(phenotypeQuery);
       const abort: AbortController = new AbortController();
       setNextOrganismLoadAbort(abort);
       const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(
         API_ORGANISMS_BY_PHENOTYPES,
-        phenotypeQuery,
+        { ...phenotypeQuery, limit: 10, offset: 0 },
         abort
       );
       setNextOrganismLoadAbort(null);
       if (response.body) {
-        setFoundOrganisms(
-          response.body.map<LabelInfo>((item) => ({ id: item.tax_id, label: item.name }))
-        );
+        setFoundOrganisms({ response: response.body });
       }
     })();
   }, [phenotypeQuery]);

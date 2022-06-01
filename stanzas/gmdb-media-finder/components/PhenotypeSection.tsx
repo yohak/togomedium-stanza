@@ -1,10 +1,15 @@
 import { css } from "@emotion/react";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { OrganismList } from "./OrganismList";
+import { Pagination } from "./Pagination";
 import { PhenotypeSearchArea } from "./PhenotypeSearchArea";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
-import { API_MEDIA_BY_TAXON } from "../../../api/paths";
+import {
+  OrganismsByPhenotypeParams,
+  OrganismsByPhenotypesResponse,
+} from "../../../api/organisms_by_phenotypes/types";
+import { API_MEDIA_BY_TAXON, API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
 import {
   COLOR_GRAY_LINE,
   COLOR_WHITE,
@@ -13,20 +18,25 @@ import {
   SIZE2,
 } from "../../../components/styles";
 import { getData } from "../../../utils/getData";
-import { LabelInfo } from "../../../utils/types";
-import { useFoundMediaMutators } from "../states/foundMedia";
-import { useFoundOrganismsState } from "../states/foundOrganisms";
+import { nullResponse, useFoundMediaMutators } from "../states/foundMedia";
+import {
+  FoundOrganisms,
+  useFoundOrganismsMutators,
+  useFoundOrganismsState,
+} from "../states/foundOrganisms";
 import { useMediaLoadAbortMutators } from "../states/mediaLoadAbort";
-import { useIsOrganismLoading } from "../states/organismLoadAbort";
+import { useIsOrganismLoading, useOrganismLoadAbortMutators } from "../states/organismLoadAbort";
+import { usePhenotypeQueryState } from "../states/phenotypeQuery";
 import { useQueryDataMutators } from "../states/queryData";
 import { useSelectedOrganismsState } from "../states/selectedOrganisms";
 
 type Props = {} & AcceptsEmotion;
 
 export const PhenotypeSection: FC<Props> = ({ css, className }) => {
-  const foundOrganism = useFoundOrganismsState();
+  const foundOrganisms = useFoundOrganismsState();
   const isLoading = useIsOrganismLoading();
   useMediaLoadFromOrganism();
+  const paginationParams = usePagination(foundOrganisms);
   //
   return (
     <div css={[phenotypeSection, css]} className={className}>
@@ -34,8 +44,9 @@ export const PhenotypeSection: FC<Props> = ({ css, className }) => {
         <PhenotypeSearchArea />
       </div>
       <div css={organisms}>
-        <p css={infoTextCSS}>{getInfoText(foundOrganism.length, isLoading)}</p>
+        <p css={infoTextCSS}>{getInfoText(foundOrganisms.response.total, isLoading)}</p>
         <OrganismList />
+        {!!paginationParams.total && !isLoading && <Pagination {...paginationParams} />}
       </div>
     </div>
   );
@@ -87,13 +98,13 @@ const useMediaLoadFromOrganism = () => {
   useEffect(() => {
     if (selectedOrganisms.length === 0) {
       setQueryData({});
-      setFoundMedia([]);
+      setFoundMedia(nullResponse);
       setNextMediaLoadAbort(null);
       return;
     }
     (async () => {
-      const params: MediaByTaxonParams = { tax_ids: selectedOrganisms };
-      setQueryData(params);
+      const params: MediaByTaxonParams = { tax_ids: selectedOrganisms, limit: 10, offset: 0 };
+      setQueryData({ tax_ids: selectedOrganisms });
       const abort: AbortController = new AbortController();
       setNextMediaLoadAbort(abort);
       const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
@@ -103,13 +114,47 @@ const useMediaLoadFromOrganism = () => {
       );
       setNextMediaLoadAbort(null);
       if (response.body) {
-        setFoundMedia(
-          response.body.map<LabelInfo>((item) => ({
-            id: item.gm_id,
-            label: item.name,
-          }))
-        );
+        setFoundMedia({
+          queryType: "organism",
+          response: response.body,
+        });
       }
     })();
   }, [selectedOrganisms]);
+};
+
+const usePagination = (foundOrganisms: FoundOrganisms) => {
+  const [total, setTotal] = useState(0);
+  const [current, setCurrent] = useState(0);
+  const [displayLength, setDisplayLength] = useState(0);
+  const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
+  const phenotypeQuery = usePhenotypeQueryState();
+  const { setFoundOrganisms } = useFoundOrganismsMutators();
+  const onClickNext = () => {
+    setCurrent((prev) => prev + 10);
+  };
+  const onClickPrev = () => {
+    setCurrent((prev) => prev - 10);
+  };
+  useEffect(() => {
+    setTotal(foundOrganisms.response.total);
+    setCurrent(foundOrganisms.response.offset);
+    setDisplayLength(foundOrganisms.response.limit);
+  }, [foundOrganisms]);
+  useEffect(() => {
+    (async () => {
+      const abort: AbortController = new AbortController();
+      setNextOrganismLoadAbort(abort);
+      const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(
+        API_ORGANISMS_BY_PHENOTYPES,
+        { ...phenotypeQuery, limit: 10, offset: current },
+        abort
+      );
+      setNextOrganismLoadAbort(null);
+      if (response.body) {
+        setFoundOrganisms({ response: response.body });
+      }
+    })();
+  }, [current]);
+  return { onClickPrev, onClickNext, total, current, displayLength };
 };

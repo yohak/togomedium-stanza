@@ -1,9 +1,8 @@
 import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
-import React, { ComponentProps, FC, RefObject, useEffect, useRef, useState } from "react";
+import React, { ComponentProps, FC, useEffect, useRef, useState } from "react";
 import { MediaListItem } from "./MediaListItem";
 import { COLOR_GRAY700 } from "../../../components/styles";
-import { deepEqual } from "../../../utils/deepEqual";
 import { AcceptsEmotion } from "../../../utils/types";
 import { useResetScroll } from "../hooks/useResetScroll";
 import { useFoundMediaState } from "../states/foundMedia";
@@ -63,23 +62,20 @@ const useMediaList = () => {
   const [data, setData] = useState<MediaListInfo[]>([]);
   const foundMedia = useFoundMediaState();
   const selectedMedia = useSelectedMediaState();
-  const { toggleMediumSelection, setSelectedMedia } = useSelectedMediaMutators();
+  const { toggleMediumSelection } = useSelectedMediaMutators();
   const toggleChecked = (id: string) => {
     toggleMediumSelection(id);
   };
+
   useEffect(() => {
-    const result: MediaListInfo[] = foundMedia.map<MediaListInfo>((medium) => {
+    const result: MediaListInfo[] = foundMedia.response.contents.map((medium) => {
       return {
-        id: medium.id,
-        label: medium.label,
-        isChecked: selectedMedia.includes(medium.id),
+        id: medium.gm_id,
+        label: medium.name,
+        isChecked: selectedMedia.includes(medium.gm_id),
       };
     });
     setData(result);
-    const updatedSelection = selectedMedia.filter((id) => result.find((info) => info.id === id));
-    if (!deepEqual(updatedSelection, selectedMedia)) {
-      setSelectedMedia(updatedSelection);
-    }
   }, [foundMedia, selectedMedia]);
 
   return { data, toggleChecked };

@@ -9,21 +9,26 @@ import { API_MEDIA_BY_TAXON } from "../paths";
 const post = rest.post<string, MediaByTaxonResponse, never>(API_MEDIA_BY_TAXON, (req, res, ctx) => {
   const urlParams = new URLSearchParams(req.body);
   let result: MediaByTaxonResponse;
-  switch (urlParams.get("tax_ids")!.split(",").length) {
-    case 1:
+  switch (parseInt(urlParams.get("offset")!, 10)) {
+    case 0:
       result = mediaByTaxonResponse1;
       break;
-    case 2:
+    case 10:
       result = mediaByTaxonResponse2;
       break;
-    case 3:
+    case 20:
       result = mediaByTaxonResponse3;
       break;
-    case 4:
+    case 30:
       result = mediaByTaxonResponse4;
       break;
     default:
-      result = [];
+      result = {
+        total: 0,
+        offset: 0,
+        limit: 0,
+        contents: [],
+      };
   }
 
   return res(ctx.delay(2000), ctx.status(200), ctx.json(result));

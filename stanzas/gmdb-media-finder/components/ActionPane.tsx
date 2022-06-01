@@ -17,6 +17,7 @@ export const ActionPane: FC<Props> = ({ actionLabel, dispatchEvent }) => {
   const selectedMedia = useSelectedMediaState();
   const { clearSelectedMedia } = useSelectedMediaMutators();
   const onClickAction = () => {
+    if (!dispatchEvent) return;
     dispatchEvent(selectedMedia);
   };
   return (

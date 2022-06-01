@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
 import { PATH_MEDIUM } from "../../../components/consts";
@@ -23,9 +24,19 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
       <a css={idCol} href={`${PATH_MEDIUM}${id}`} target="_blank" rel="noreferrer">
         {id}
       </a>
-      <span css={labelCol}>{label}</span>
+      <span css={labelCol}>
+        <Tooltip title={label} placement={"top"} PopperProps={{ disablePortal: true }} arrow>
+          <span>{label}</span>
+        </Tooltip>
+      </span>
       <span css={checkCol}>
-        <Checkbox checked={isChecked} onClick={() => onClick(id)} />
+        <Checkbox
+          checked={isChecked}
+          onClick={() => onClick(id)}
+          css={css`
+            padding: 5px;
+          `}
+        />
       </span>
     </div>
   );
