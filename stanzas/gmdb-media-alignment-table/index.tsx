@@ -24,7 +24,7 @@ export default class HelloReact extends Stanza<StanzaParameters> {
       <StrictMode>
         <RecoilRoot>
           <EmotionCacheProvider>
-            <App {...{ gm_ids }} />
+            <App {...{ gm_ids, stanzaElement: this.root }} />
           </EmotionCacheProvider>
         </RecoilRoot>
       </StrictMode>,
