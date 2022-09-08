@@ -12,9 +12,9 @@ import {
   useIsOrganismsExpendedState,
 } from "../states/isOrganismsExpanded";
 
-type Props = { data: MediaAlignmentTableResponse } & AcceptsEmotion;
+type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism: string[] } & AcceptsEmotion;
 
-export const InfoColumns: FC<Props> = ({ data, css, className }) => {
+export const InfoColumns: FC<Props> = ({ data, css, className, prioritizedOrganism = [] }) => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -53,6 +53,7 @@ export const InfoColumns: FC<Props> = ({ data, css, className }) => {
             medium={{ id: m.gm_id, label: m.name }}
             organisms={organisms}
             components={[]}
+            prioritizedOrganism={prioritizedOrganism}
           />
         );
       })}

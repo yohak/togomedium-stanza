@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { Slider, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN, SIZE1 } from "../../../components/styles";
 import { LabelInfo } from "../../../utils/types";
@@ -9,47 +9,79 @@ type Props = {
   info: LabelInfo[];
   linkBase: string;
   expanded: boolean;
+  priority?: string[];
 };
 
-export const InfoCell: FC<Props> = (props) => {
-  return props.expanded ? <Expanded {...props} /> : <Compact {...props} />;
+export const InfoCell: FC<Props> = ({ info, linkBase, expanded, priority = [] }) => {
+  return expanded ? (
+    <Expanded {...{ info: sortInfo(info, priority), linkBase, priority }} />
+  ) : (
+    <Compact {...{ info: sortInfo(info, priority), linkBase, priority }} />
+  );
 };
 
-const Compact: FC<Props> = ({ info, linkBase }) => {
-  const [item, setItem] = useState<LabelInfo>({ label: "", id: "" });
+const sortInfo = (info: LabelInfo[], priority: string[]): LabelInfo[] => {
+  return [
+    ...priority.map((id) => info.find((item) => item.id === id)!).filter((item) => !!item),
+    ...info.filter((item) => !priority.includes(item.id)),
+  ];
+};
+
+const Compact: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] }) => {
+  const [items, setItems] = useState<LabelInfo[]>([]);
   const [restText, setRestText] = useState("");
   useEffect(() => {
-    setItem(info[0]);
-    if (info.length > 1) {
-      const remain = info.length - 1;
-      if (remain === 1) {
-        setRestText(`, + ${remain} organism`);
-      } else {
-        setRestText(`, + ${remain} organisms`);
-      }
+    const myPriorityItems: string[] = info
+      .map((item) => item.id)
+      .filter((str) => priority.includes(str));
+    setItems(
+      myPriorityItems.length ? info.filter((item) => priority.includes(item.id)) : [info[0]]
+    );
+    const remain = myPriorityItems.length ? info.length - myPriorityItems.length : info.length - 1;
+    switch (remain) {
+      case 0:
+        break;
+      case 1:
+        setRestText(` + ${remain} organism`);
+        break;
+      default:
+        setRestText(` + ${remain} organisms`);
     }
   }, [info]);
   return (
     <div css={wrapper} className="compact">
       <div className="inner">
         <div className="text">
-          <Tooltip title={item.label} placement={"top"} PopperProps={{ disablePortal: true }} arrow>
-            <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
-              {item.id}
-            </a>
-          </Tooltip>
-          {info.length > 1 && <>{restText}</>}
+          {items.map((item, index) => (
+            <span key={index}>
+              <Tooltip
+                title={item.label}
+                placement={"top"}
+                PopperProps={{ disablePortal: true }}
+                arrow
+              >
+                <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
+                  {item.id}
+                </a>
+              </Tooltip>
+              {index < items.length - 1 ? ", " : ""}
+            </span>
+          ))}
+          <span style={{ whiteSpace: "nowrap" }}>{restText}</span>
         </div>
       </div>
     </div>
   );
 };
 
-const Expanded: FC<Props> = ({ info, linkBase }) => {
+const Expanded: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] }) => {
   return (
     <div css={wrapper} className="expanded">
       <div className="inner">
-        {info.map((item) => (
+        {[
+          ...info.filter((item) => priority.includes(item.id)),
+          ...info.filter((item) => !priority.includes(item.id)),
+        ].map((item) => (
           <div key={item.id} className="text">
             <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
               {item.id}

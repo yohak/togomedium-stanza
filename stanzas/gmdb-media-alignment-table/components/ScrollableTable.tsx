@@ -6,15 +6,15 @@ import { InfoColumns } from "./InfoColumns";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
 import { COLOR_GRAY_LINE } from "../../../components/styles";
 
-type Props = { data: MediaAlignmentTableResponse };
+type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism?: string[] };
 
-export const ScrollableTable: FC<Props> = ({ data }) => {
+export const ScrollableTable: FC<Props> = ({ data, prioritizedOrganism = [] }) => {
   return (
     <div css={wrapper}>
       <HeaderRow css={header} />
-      <InfoColumns data={data} css={infoColumns} />
+      <InfoColumns data={data} prioritizedOrganism={prioritizedOrganism} css={infoColumns} />
       <div className="inner">
-        <AlignmentTable data={data} />
+        <AlignmentTable data={data} prioritizedOrganism={prioritizedOrganism} />
       </div>
     </div>
   );

@@ -12,15 +12,26 @@ type Props = {
   medium: LabelInfo;
   organisms: LabelInfo[];
   components: ComponentProps<typeof AlignmentCell>[];
+  prioritizedOrganism?: string[];
 };
 
-export const MediaRow: FC<Props> = ({ medium, organisms, components }) => {
+export const MediaRow: FC<Props> = ({
+  medium,
+  organisms,
+  components,
+  prioritizedOrganism = [],
+}) => {
   const isMediaExpanded = useIsMediaExpendedState();
   const isOrganismsExpanded = useIsOrganismsExpendedState();
   return (
     <div css={wrapper}>
       <InfoCell info={[medium]} expanded={isMediaExpanded} linkBase={PATH_MEDIUM} />
-      <InfoCell info={organisms} expanded={isOrganismsExpanded} linkBase={PATH_ORGANISM} />
+      <InfoCell
+        info={organisms}
+        expanded={isOrganismsExpanded}
+        linkBase={PATH_ORGANISM}
+        priority={prioritizedOrganism}
+      />
       {components.map((component) => (
         <AlignmentCell {...component} key={component.id} />
       ))}

@@ -10,11 +10,11 @@ import { makeComponentTree } from "../functions/makeComponentBranch";
 import { makeFooterComponents } from "../functions/makeFooterComponents";
 import { useComponentTreeMutators, useComponentTreeState } from "../states/componentTree";
 
-type Props = { data: MediaAlignmentTableResponse };
+type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism: string[] };
 type RowProps = ComponentProps<typeof MediaRow>[];
 type FooterProps = ComponentProps<typeof FooterRow>;
 
-export const AlignmentTable: FC<Props> = ({ data }) => {
+export const AlignmentTable: FC<Props> = ({ data, prioritizedOrganism }) => {
   const [rowProps, setRowProps] = useState<RowProps>([]);
   const componentTree = useComponentTreeState();
   const { setComponentTree } = useComponentTreeMutators();
@@ -31,7 +31,7 @@ export const AlignmentTable: FC<Props> = ({ data }) => {
     <div css={wrapper}>
       <HeaderRow />
       {rowProps.map((props) => (
-        <MediaRow {...props} key={props.medium.id} />
+        <MediaRow {...props} key={props.medium.id} prioritizedOrganism={prioritizedOrganism} />
       ))}
       <FooterRow {...footerProps} />
     </div>

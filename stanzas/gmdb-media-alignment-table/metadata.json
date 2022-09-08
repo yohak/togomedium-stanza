@@ -17,6 +17,13 @@
       "stanza:example": "HM_D00001a,HM_D00065",
       "stanza:description": "",
       "stanza:required": true
+    },
+    {
+      "stanza:key": "prioritized_tax_ids",
+      "stanza:type": "string",
+      "stanza:example": "123456,12345",
+      "stanza:description": "",
+      "stanza:required": false
     }
   ],
   "stanza:menu-placement": "none",

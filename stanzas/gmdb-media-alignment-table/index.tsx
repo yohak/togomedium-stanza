@@ -20,11 +20,14 @@ export default class HelloReact extends Stanza<StanzaParameters> {
   _render() {
     const main = this.root.querySelector("main");
     const gm_ids = stringToArray(this.params.gm_ids);
+    const prioritizedOrganism = this.params.prioritized_tax_ids
+      ? stringToArray(this.params.prioritized_tax_ids)
+      : [];
     ReactDOM.render(
       <StrictMode>
         <RecoilRoot>
           <EmotionCacheProvider>
-            <App {...{ gm_ids, stanzaElement: this.root }} />
+            <App {...{ gm_ids, stanzaElement: this.root, prioritizedOrganism }} />
           </EmotionCacheProvider>
         </RecoilRoot>
       </StrictMode>,
@@ -35,4 +38,5 @@ export default class HelloReact extends Stanza<StanzaParameters> {
 
 type StanzaParameters = {
   gm_ids: string;
+  prioritized_tax_ids?: string;
 };

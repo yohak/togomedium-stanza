@@ -30,7 +30,32 @@ OrganismsCompact.args = {
   info: [
     { id: "384676", label: "Pseudomonas entomophila L48" },
     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
+    { id: "169489", label: "Malassezia dermatis" },
   ],
+  linkBase: PATH_ORGANISM,
+};
+
+export const OrganismsCompactWithPriority = Template.bind({});
+OrganismsCompactWithPriority.args = {
+  expanded: false,
+  info: [
+    { id: "384676", label: "Pseudomonas entomophila L48" },
+    { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
+    { id: "169489", label: "Malassezia dermatis" },
+  ],
+  priority: ["169489", "643561"],
+  linkBase: PATH_ORGANISM,
+};
+
+export const OrganismsCompactWithPriority2 = Template.bind({});
+OrganismsCompactWithPriority2.args = {
+  expanded: false,
+  info: [
+    { id: "384676", label: "Pseudomonas entomophila L48" },
+    { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
+    { id: "169489", label: "Malassezia dermatis" },
+  ],
+  priority: ["abc", "bbb", "ddd"],
   linkBase: PATH_ORGANISM,
 };
 
@@ -40,6 +65,19 @@ OrganismsExpanded.args = {
   info: [
     { id: "384676", label: "Pseudomonas entomophila L48" },
     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
+    { id: "169489", label: "Malassezia dermatis" },
   ],
   linkBase: PATH_ORGANISM,
+};
+
+export const OrganismsExpandedWithPriority = Template.bind({});
+OrganismsExpandedWithPriority.args = {
+  expanded: true,
+  info: [
+    { id: "384676", label: "Pseudomonas entomophila L48" },
+    { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
+    { id: "169489", label: "Malassezia dermatis" },
+  ],
+  linkBase: PATH_ORGANISM,
+  priority: ["169489", "643561"],
 };
