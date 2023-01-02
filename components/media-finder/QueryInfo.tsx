@@ -1,14 +1,8 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
-import {
-  COLOR_GRAY_LINE,
-  FONT_WEIGHT_BOLD,
-  ROUNDED_CORNER,
-  SIZE05,
-  SIZE1,
-} from "../../../components/styles";
-import { useQueryDataState } from "../../../shared/state/queryData";
-import { queryDataToInfoText } from "../../../utils/queryDataToInfoText";
+import { useQueryDataState } from "../../shared/state/queryData";
+import { queryDataToInfoText } from "../../stanzas/gmdb-find-media-by-components/functions/queryDataToInfoText";
+import { COLOR_GRAY_LINE, FONT_WEIGHT_BOLD, ROUNDED_CORNER, SIZE05, SIZE1 } from "../styles";
 
 type Props = {};
 

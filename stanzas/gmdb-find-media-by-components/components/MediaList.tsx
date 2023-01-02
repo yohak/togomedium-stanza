@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
-import React, { ComponentProps, FC, useEffect, useState } from "react";
+import React, { ComponentProps, FC, useEffect, useRef, useState } from "react";
 import { MediaListItem } from "../../../components/media-finder/MediaListItem";
 import { COLOR_GRAY700 } from "../../../components/styles";
 import { useFoundMediaState } from "../../../shared/state/foundMedia";
@@ -17,6 +17,7 @@ type MediaListInfo = Omit<ComponentProps<typeof MediaListItem>, "onClick">;
 
 export const MediaList: FC<Props> = ({ css, className }) => {
   const isMediaLoading = useIsMediaLoading();
+  const scrollInnerRef = useRef<HTMLDivElement>(null);
   const { data, toggleChecked } = useMediaList();
 
   return (
@@ -26,7 +27,7 @@ export const MediaList: FC<Props> = ({ css, className }) => {
           <CircularProgress color="inherit" size={40} />
         </div>
       )}
-      <div css={inner}>
+      <div css={inner} ref={scrollInnerRef}>
         {data.map((item) => (
           <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
         ))}

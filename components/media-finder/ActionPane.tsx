@@ -1,18 +1,8 @@
 import { css } from "@emotion/react";
 import Button from "@mui/material/Button";
 import React, { FC } from "react";
-import {
-  COLOR_WHITE,
-  FONT_WEIGHT_MEDIUM,
-  ROUNDED_CORNER,
-  SIZE05,
-  SIZE1,
-  SIZE2,
-} from "../../../components/styles";
-import {
-  useSelectedMediaMutators,
-  useSelectedMediaState,
-} from "../../../shared/state/selectedMedia";
+import { useSelectedMediaMutators, useSelectedMediaState } from "../../shared/state/selectedMedia";
+import { COLOR_WHITE, FONT_WEIGHT_MEDIUM, ROUNDED_CORNER, SIZE05, SIZE1, SIZE2 } from "../styles";
 
 type Props = { actionLabel: string; dispatchEvent: (gmIds: string[]) => void };
 

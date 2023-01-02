@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MediaListItem } from "./MediaListItem";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle } from "../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle(MediaListItem.name, "FindMediaByTaxonomicTree"),
+  title: makeComponentStoryTitle(MediaListItem.name, "MediaFinder"),
   component: MediaListItem,
 } as ComponentMeta<typeof MediaListItem>;
 

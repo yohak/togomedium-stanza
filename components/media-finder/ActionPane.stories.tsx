@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { ActionPane } from "./ActionPane";
-import { useSelectedMediaMutators } from "../../../shared/state/selectedMedia";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { useSelectedMediaMutators } from "../../shared/state/selectedMedia";
+import { makeComponentStoryTitle } from "../../utils/storybook";
 
 type WrapperProps = { selectedMedia: string[] } & ComponentProps<typeof ActionPane>;
 const Wrapper: FC<WrapperProps> = (args) => {
@@ -14,7 +14,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: makeComponentStoryTitle(ActionPane.name, "FindMediaByTaxonomicTree"),
+  title: makeComponentStoryTitle(ActionPane.name, "MediaFinder"),
   component: Wrapper,
   args: { actionLabel: "compare media" },
 } as ComponentMeta<typeof Wrapper>;

@@ -2,14 +2,8 @@ import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
-import { PATH_MEDIUM } from "../../../components/consts";
-import {
-  COLOR_GRAY_LINE,
-  COLOR_PRIMARY,
-  COLOR_WHITE,
-  SIZE1,
-  SIZE2,
-} from "../../../components/styles";
+import { PATH_MEDIUM } from "../consts";
+import { COLOR_GRAY_LINE, COLOR_PRIMARY, COLOR_WHITE, SIZE1, SIZE2 } from "../styles";
 
 type Props = {
   id: string;

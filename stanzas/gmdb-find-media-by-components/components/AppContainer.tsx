@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { MediaSelectPane } from "./MediaSelectPane";
 import { QueryPane } from "./QueryPane";
+import { ActionPane } from "../../../components/media-finder/ActionPane";
 import { COLOR_GRAY_BG, SIZE1 } from "../../../components/styles";
 
 type Props = {
@@ -16,7 +17,7 @@ export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
       </div>
       <div>
         <MediaSelectPane css={mediaQueryPane} />
-        {/*<ActionPane actionLabel={"Compare"} dispatchEvent={dispatchEvent} />*/}
+        <ActionPane actionLabel={"Compare"} dispatchEvent={dispatchEvent} />
       </div>
     </div>
   );

@@ -2,10 +2,10 @@ import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
 import { Pagination } from "./Pagination";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle } from "../../utils/storybook";
 
 export default {
-  title: makeComponentStoryTitle(Pagination.name, "FindMediaByTaxonomicTree"),
+  title: makeComponentStoryTitle(Pagination.name, "MediaFinder"),
   component: Pagination,
 } as ComponentMeta<typeof Pagination>;
 

@@ -1,12 +1,10 @@
 import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
-import { ActionPane } from "./ActionPane";
 import { QueryInfo } from "./QueryInfo";
-import { COLOR_WHITE, SIZE2 } from "../../../components/styles";
-import { QueryData, useQueryDataMutators } from "../../../shared/state/queryData";
-import { useSelectedMediaMutators } from "../../../shared/state/selectedMedia";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { QueryData, useQueryDataMutators } from "../../shared/state/queryData";
+import { makeComponentStoryTitle } from "../../utils/storybook";
+import { COLOR_WHITE, SIZE2 } from "../styles";
 
 type WrapperProps = { queryData: QueryData } & ComponentProps<typeof QueryInfo>;
 const Wrapper: FC<WrapperProps> = (args) => {
@@ -22,7 +20,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
 };
 
 export default {
-  title: makeComponentStoryTitle(QueryInfo.name, "FindMediaByTaxonomicTree"),
+  title: makeComponentStoryTitle(QueryInfo.name, "MediaFinder"),
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 
