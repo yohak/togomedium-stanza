@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { useQueryDataState } from "../../shared/state/queryData";
-import { queryDataToInfoText } from "../../stanzas/gmdb-find-media-by-components/functions/queryDataToInfoText";
+import { queryDataToInfoText } from "../../utils/queryDataToInfoText";
 import { COLOR_GRAY_LINE, FONT_WEIGHT_BOLD, ROUNDED_CORNER, SIZE05, SIZE1 } from "../styles";
 
 type Props = {};

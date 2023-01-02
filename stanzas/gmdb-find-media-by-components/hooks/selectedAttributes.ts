@@ -1,9 +1,9 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 
-export type SelectedAttibutes = {
+export type SelectedAttributes = {
   gmo_ids: string[];
 };
-const selectedAttributes = atom<SelectedAttibutes>({
+const selectedAttributes = atom<SelectedAttributes>({
   key: "selectedAttributes",
   default: { gmo_ids: [] },
 });
