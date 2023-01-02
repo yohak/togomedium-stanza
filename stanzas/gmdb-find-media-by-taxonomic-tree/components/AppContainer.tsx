@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { MediaSelectPane } from "./MediaSelectPane";
-import { QueryPane } from "./QueryPane";
-import { COLOR_GRAY_BG, SIZE1 } from "../../../components/styles";
+import { TaxonomicTreeSection } from "./TaxonomicTreeSection";
+import { COLOR_GRAY_BG, COLOR_WHITE, ROUNDED_CORNER, SIZE1 } from "../../../components/styles";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
@@ -11,8 +11,8 @@ type Props = {
 export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
   return (
     <div css={wrapper}>
-      <div>
-        <QueryPane css={queryPane} />
+      <div css={queryPane}>
+        <TaxonomicTreeSection />
       </div>
       <div>
         <MediaSelectPane css={mediaQueryPane} />
@@ -47,6 +47,11 @@ const queryPane = css`
   flex-grow: 1;
   height: 100%;
   overflow-y: auto;
+  ${ROUNDED_CORNER};
+  padding: ${SIZE1};
+  background-color: ${COLOR_WHITE};
+  display: flex;
+  flex-direction: column;
 `;
 
 const mediaQueryPane = css`
