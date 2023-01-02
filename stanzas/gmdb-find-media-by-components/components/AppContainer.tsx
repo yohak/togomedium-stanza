@@ -1,65 +1,81 @@
-import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AttributesSection } from "./AttributesSection";
-import { MediaSelectPane } from "./MediaSelectPane";
-import { ActionPane } from "../../../shared/components/media-finder/ActionPane";
 import {
-  COLOR_GRAY_BG,
-  COLOR_WHITE,
-  ROUNDED_CORNER,
-  SIZE1,
-} from "../../../shared/components/styles";
+  MediaByAttributesParams,
+  MediaByAttributesResponse,
+} from "../../../api/media_by_attributes/types";
+import { API_MEDIA_BY_ATTRIBUTES } from "../../../api/paths";
+import { mediaPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
+import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
+import {
+  FoundMedia,
+  useFoundMediaMutators,
+  useFoundMediaState,
+} from "../../../shared/state/foundMedia";
+import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
+import { getData } from "../../../shared/utils/getData";
+import { useSelectedAttributesState } from "../hooks/selectedAttributes";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
 };
 
 export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
+  const { next, prev } = useMediaPagination();
   return (
     <div css={wrapper}>
       <div css={queryPane}>
         <AttributesSection />
       </div>
-      <div>
-        <MediaSelectPane css={mediaQueryPane} />
-        <ActionPane actionLabel={"Compare"} dispatchEvent={dispatchEvent} />
+      <div css={mediaPane}>
+        <MediaPane dispatchEvent={dispatchEvent} next={next} prev={prev} />
       </div>
     </div>
   );
 };
 
-const wrapper = css`
-  position: relative;
-  background-color: ${COLOR_GRAY_BG};
-  padding: ${SIZE1};
-  min-height: 640px;
-  height: 1px;
-  display: flex;
-  gap: ${SIZE1};
-  & > * {
-    flex-grow: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: ${SIZE1};
-    &:nth-of-type(2) {
-      max-width: 360px;
-      min-width: 360px;
-    }
+const useMediaPagination = () => {
+  const selectedAttributes = useSelectedAttributesState();
+  const response = useFoundMediaState();
+  const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+  const { setFoundMedia } = useFoundMediaMutators();
+  const next = () => {
+    paginate({
+      offset: response.offset + 10,
+      gmo_ids: selectedAttributes.gmo_ids,
+      abortLoader: setNextMediaLoadAbort,
+      setFoundMedia,
+    });
+  };
+  const prev = () => {
+    paginate({
+      offset: response.offset - 10,
+      gmo_ids: selectedAttributes.gmo_ids,
+      abortLoader: setNextMediaLoadAbort,
+      setFoundMedia,
+    });
+  };
+
+  return { next, prev };
+};
+
+type PaginateParams = {
+  offset: number;
+  abortLoader: (abort: AbortController | null) => void;
+  gmo_ids: string[];
+  setFoundMedia: (media: FoundMedia) => void;
+};
+const paginate = async ({ offset, abortLoader, gmo_ids, setFoundMedia }: PaginateParams) => {
+  const params: MediaByAttributesParams = { gmo_ids, offset, limit: 10 };
+  const abort: AbortController = new AbortController();
+  abortLoader(abort);
+  const response = await getData<MediaByAttributesResponse, MediaByAttributesParams>(
+    API_MEDIA_BY_ATTRIBUTES,
+    params,
+    abort
+  );
+  abortLoader(null);
+  if (response.body) {
+    setFoundMedia(response.body);
   }
-`;
-
-const queryPane = css`
-  flex-grow: 1;
-  height: 100%;
-  overflow-y: auto;
-  ${ROUNDED_CORNER};
-  padding: ${SIZE1};
-  background-color: ${COLOR_WHITE};
-  display: flex;
-  flex-direction: column;
-`;
-
-const mediaQueryPane = css`
-  flex-grow: 1;
-`;
+};

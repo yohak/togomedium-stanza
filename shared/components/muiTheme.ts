@@ -13,10 +13,23 @@ export const muiTheme = createTheme({
   },
   components: {
     MuiTab: {
-      styleOverrides: {},
+      styleOverrides: {
+        root: {
+          fontSize: "14px",
+          fontWeight: "500",
+        },
+      },
     },
     MuiButton: {
       styleOverrides: {},
+    },
+    MuiBadge: {
+      styleOverrides: {
+        root: {
+          paddingRight: "12px",
+          fontWeight: "500",
+        },
+      },
     },
   },
 });

@@ -1,64 +1,78 @@
-import { css } from "@emotion/react";
 import React, { FC } from "react";
-import { MediaSelectPane } from "./MediaSelectPane";
 import { TaxonomicTreeSection } from "./TaxonomicTreeSection";
+import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
+import { API_MEDIA_BY_TAXON } from "../../../api/paths";
+import { mediaPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
+import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
 import {
-  COLOR_GRAY_BG,
-  COLOR_WHITE,
-  ROUNDED_CORNER,
-  SIZE1,
-} from "../../../shared/components/styles";
+  FoundMedia,
+  useFoundMediaMutators,
+  useFoundMediaState,
+} from "../../../shared/state/foundMedia";
+import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
+import { getData } from "../../../shared/utils/getData";
+import { useSelectedTaxonState } from "../states/selectedTaxon";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
 };
 
 export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
+  const { next, prev } = useMediaPagination();
   return (
     <div css={wrapper}>
       <div css={queryPane}>
         <TaxonomicTreeSection />
       </div>
-      <div>
-        <MediaSelectPane css={mediaQueryPane} />
-        {/*<ActionPane actionLabel={"Compare"} dispatchEvent={dispatchEvent} />*/}
+      <div css={mediaPane}>
+        <MediaPane dispatchEvent={dispatchEvent} next={next} prev={prev} />
       </div>
     </div>
   );
 };
 
-const wrapper = css`
-  position: relative;
-  background-color: ${COLOR_GRAY_BG};
-  padding: ${SIZE1};
-  min-height: 640px;
-  height: 1px;
-  display: flex;
-  gap: ${SIZE1};
-  & > * {
-    flex-grow: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: ${SIZE1};
-    &:nth-of-type(2) {
-      max-width: 360px;
-      min-width: 360px;
-    }
+const useMediaPagination = () => {
+  const selectedTaxon: string[] = useSelectedTaxonState();
+  const response = useFoundMediaState();
+  const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+  const { setFoundMedia } = useFoundMediaMutators();
+  const next = () => {
+    paginate({
+      offset: response.offset + 10,
+      tax_ids: selectedTaxon,
+      abortLoader: setNextMediaLoadAbort,
+      setFoundMedia,
+    });
+  };
+  const prev = () => {
+    paginate({
+      offset: response.offset - 10,
+      tax_ids: selectedTaxon,
+      abortLoader: setNextMediaLoadAbort,
+      setFoundMedia,
+    });
+  };
+
+  return { next, prev };
+};
+
+type PaginateParams = {
+  offset: number;
+  abortLoader: (abort: AbortController | null) => void;
+  tax_ids: string[];
+  setFoundMedia: (media: FoundMedia) => void;
+};
+const paginate = async ({ offset, abortLoader, tax_ids, setFoundMedia }: PaginateParams) => {
+  const params: MediaByTaxonParams = { tax_ids, offset, limit: 10 };
+  const abort: AbortController = new AbortController();
+  abortLoader(abort);
+  const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
+    API_MEDIA_BY_TAXON,
+    params,
+    abort
+  );
+  abortLoader(null);
+  if (response.body) {
+    setFoundMedia(response.body);
   }
-`;
-
-const queryPane = css`
-  flex-grow: 1;
-  height: 100%;
-  overflow-y: auto;
-  ${ROUNDED_CORNER};
-  padding: ${SIZE1};
-  background-color: ${COLOR_WHITE};
-  display: flex;
-  flex-direction: column;
-`;
-
-const mediaQueryPane = css`
-  flex-grow: 1;
-`;
+};

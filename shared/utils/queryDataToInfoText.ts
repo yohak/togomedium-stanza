@@ -1,7 +1,10 @@
 import { isArray } from "yohak-tools/";
 import { QueryData } from "../state/queryData";
 
-export const queryDataToInfoText = (data: QueryData): string => {
+export const queryDataToInfoText = (data: QueryData | null): string => {
+  if (!data) {
+    return "";
+  }
   return Object.entries(data)
     .map(([key, value]) => {
       let valueText: string;

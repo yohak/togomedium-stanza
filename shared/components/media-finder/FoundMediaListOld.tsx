@@ -1,26 +1,20 @@
 import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
-import React, { ComponentProps, FC, useEffect, useRef, useState } from "react";
-import { MediaListItem } from "../../../shared/components/media-finder/MediaListItem";
-import { COLOR_GRAY700 } from "../../../shared/components/styles";
-import { useFoundMediaState } from "../../../shared/state/foundMedia";
-import { useIsMediaLoading } from "../../../shared/state/mediaLoadAbort";
-import {
-  useSelectedMediaMutators,
-  useSelectedMediaState,
-} from "../../../shared/state/selectedMedia";
-import { AcceptsEmotion } from "../../../shared/utils/types";
-import { useResetScroll } from "../hooks/useResetScroll";
+import React, { ComponentProps, FC, useEffect, useState } from "react";
+import { MediaListItem } from "./MediaListItem";
+import { useFoundMediaState } from "../../state/foundMedia";
+import { useIsMediaLoading } from "../../state/mediaLoadAbort";
+import { useSelectedMediaMutators, useSelectedMediaState } from "../../state/selectedMedia";
+import { AcceptsEmotion } from "../../utils/types";
+import { COLOR_GRAY700 } from "../styles";
 
 type Props = {} & AcceptsEmotion;
 
 type MediaListInfo = Omit<ComponentProps<typeof MediaListItem>, "onClick">;
 
-export const MediaList: FC<Props> = ({ css, className }) => {
+export const FoundMediaListOld: FC<Props> = ({ css, className }) => {
   const isMediaLoading = useIsMediaLoading();
-  const scrollInnerRef = useRef<HTMLDivElement>(null);
-  const { data, toggleChecked } = useMediaList();
-  useResetScroll(scrollInnerRef, data);
+  const { data, toggleChecked } = useFoundMediaList();
 
   return (
     <div css={[wrapper, css]} className={className}>
@@ -29,7 +23,7 @@ export const MediaList: FC<Props> = ({ css, className }) => {
           <CircularProgress color="inherit" size={40} />
         </div>
       )}
-      <div css={inner} ref={scrollInnerRef}>
+      <div css={inner}>
         {data.map((item) => (
           <MediaListItem key={item.id} {...item} onClick={toggleChecked} />
         ))}
@@ -61,7 +55,7 @@ const loadingIndicator = css`
   color: ${COLOR_GRAY700};
 `;
 
-const useMediaList = () => {
+const useFoundMediaList = () => {
   const [data, setData] = useState<MediaListInfo[]>([]);
   const foundMedia = useFoundMediaState();
   const selectedMedia = useSelectedMediaState();
