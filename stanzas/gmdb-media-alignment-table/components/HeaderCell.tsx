@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
-import { IconCompact, IconExpand } from "../../../components/icons";
-import { COLOR_GRAY700, COLOR_WHITE, SIZE1 } from "../../../components/styles";
+import { IconCompact, IconExpand } from "../../../shared/components/icons";
+import { COLOR_GRAY700, COLOR_WHITE, SIZE1 } from "../../../shared/components/styles";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 
 type Props = {

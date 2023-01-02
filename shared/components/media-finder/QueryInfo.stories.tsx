@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { QueryInfo } from "./QueryInfo";
-import { QueryData, useQueryDataMutators } from "../../shared/state/queryData";
+import { QueryData, useQueryDataMutators } from "../../state/queryData";
 import { makeComponentStoryTitle } from "../../utils/storybook";
 import { COLOR_WHITE, SIZE2 } from "../styles";
 

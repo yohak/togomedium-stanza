@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
 import Stanza from "togostanza/stanza";
 import App from "./App";
-import { EmotionCacheProvider } from "../../components/EmotionCacheProvider";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
-import { stringToArray } from "../../utils/string";
+import { EmotionCacheProvider } from "../../shared/components/EmotionCacheProvider";
+import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
+import { stringToArray } from "../../shared/utils/string";
 
 export default class HelloReact extends Stanza<StanzaParameters> {
   async render() {

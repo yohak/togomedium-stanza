@@ -3,7 +3,12 @@ import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { IconCompact, IconExpand, IconNoChildren, IconBlank } from "../../../components/icons";
+import {
+  IconCompact,
+  IconExpand,
+  IconNoChildren,
+  IconBlank,
+} from "../../../shared/components/icons";
 import {
   COLOR_GRAY300,
   COLOR_GRAY400,
@@ -11,7 +16,7 @@ import {
   COLOR_GRAY_LINE,
   COLOR_PRIMARY,
   COLOR_WHITE,
-} from "../../../components/styles";
+} from "../../../shared/components/styles";
 
 export type CheckStatus = "none" | "checked" | "grouped" | "indeterminate";
 

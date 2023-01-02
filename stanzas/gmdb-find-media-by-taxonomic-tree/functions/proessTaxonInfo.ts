@@ -4,7 +4,7 @@ import {
   TaxonomyChildrenParams,
   TaxonomyChildrenResponse,
 } from "../../../api/taxonomy_children/types";
-import { getData } from "../../../utils/getData";
+import { getData } from "../../../shared/utils/getData";
 import { TaxonInfo } from "../states/taxonList";
 
 export const retrieveTaxonInfo = (

@@ -1,17 +1,17 @@
 import pluralize from "pluralize";
 import Stanza from "togostanza/stanza";
 import { Optional } from "yohak-tools";
-import { getData } from "../../utils/getData";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
+import { getData } from "../../shared/utils/getData";
+import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
 import {
   capitalizeFirstLetter,
   makeNcbiOrganismLink,
   makeTogoGenomeOrganismLink,
   unescapeJsonString,
-} from "../../utils/string";
-import { getNextTaxon, TAXON_RANK } from "../../utils/taxon";
-import { ApiResponse } from "../../utils/types";
-import { API_GROWTH_MEDIUM } from "../../utils/variables";
+} from "../../shared/utils/string";
+import { getNextTaxon, TAXON_RANK } from "../../shared/utils/taxon";
+import { ApiResponse } from "../../shared/utils/types";
+import { API_GROWTH_MEDIUM } from "../../shared/utils/variables";
 
 export default class gmdbTaxonByTaxid extends Stanza<StanzaParameters> {
   async render() {

@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import App from "./App";
-import { makeMswParameter } from "../../utils/storybook";
+import { makeMswParameter } from "../../shared/utils/storybook";
 
 export default {
   title: "Stanzas/FineMediaByComponents",

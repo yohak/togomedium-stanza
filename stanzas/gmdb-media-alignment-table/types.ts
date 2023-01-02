@@ -1,6 +1,6 @@
 import { Nullable } from "yohak-tools";
 import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
-import { TreeBranch } from "../../utils/types";
+import { TreeBranch } from "../../shared/utils/types";
 
 export type ComponentTrunk = ComponentBranch[];
 export type ComponentBranch = {

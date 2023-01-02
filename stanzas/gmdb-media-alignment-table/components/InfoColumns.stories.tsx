@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { InfoColumns } from "./InfoColumns";
 import { mediaAlignmentTableResponse1 } from "../../../api/media-alignment-table/response1";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 export default {
   title: makeComponentStoryTitle(InfoColumns.name, "MediaAlignmentTable"),

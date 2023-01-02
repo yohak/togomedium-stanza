@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { ActionPane } from "./ActionPane";
-import { useSelectedMediaMutators } from "../../shared/state/selectedMedia";
+import { useSelectedMediaMutators } from "../../state/selectedMedia";
 import { makeComponentStoryTitle } from "../../utils/storybook";
 
 type WrapperProps = { selectedMedia: string[] } & ComponentProps<typeof ActionPane>;

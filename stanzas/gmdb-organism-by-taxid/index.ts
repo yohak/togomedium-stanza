@@ -1,10 +1,10 @@
 import Stanza from "togostanza/stanza";
 import { Optional } from "yohak-tools";
-import { getData } from "../../utils/getData";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
-import { capitalizeFirstLetter, unescapeJsonString } from "../../utils/string";
-import { ApiResponse, TemplateBase } from "../../utils/types";
-import { API_GROWTH_MEDIUM } from "../../utils/variables";
+import { getData } from "../../shared/utils/getData";
+import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
+import { capitalizeFirstLetter, unescapeJsonString } from "../../shared/utils/string";
+import { ApiResponse, TemplateBase } from "../../shared/utils/types";
+import { API_GROWTH_MEDIUM } from "../../shared/utils/variables";
 
 export default class GmdbOrganismByTaxid extends Stanza<StanzaParameters> {
   async render() {

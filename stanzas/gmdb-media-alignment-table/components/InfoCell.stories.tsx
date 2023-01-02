@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_ORGANISM } from "../../../components/consts";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { PATH_MEDIUM, PATH_ORGANISM } from "../../../shared/components/consts";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 export default {
   title: makeComponentStoryTitle(InfoCell.name, "MediaAlignmentTable"),

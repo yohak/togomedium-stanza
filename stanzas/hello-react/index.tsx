@@ -2,7 +2,7 @@ import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import Stanza from "togostanza/stanza";
 import App from "./App";
-import { EmotionCacheProvider } from "../../components/EmotionCacheProvider";
+import { EmotionCacheProvider } from "../../shared/components/EmotionCacheProvider";
 
 export default class HelloReact extends Stanza {
   async render() {

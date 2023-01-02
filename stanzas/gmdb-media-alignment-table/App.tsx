@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { ScrollableTable } from "./components/ScrollableTable";
 import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
 import { API_MEDIA_ALIGNMENT } from "../../api/paths";
-import { COLOR_WHITE, SIZE1 } from "../../components/styles";
-import { getData } from "../../utils/getData";
+import { COLOR_WHITE, SIZE1 } from "../../shared/components/styles";
+import { getData } from "../../shared/utils/getData";
 
 export type AppProps = {
   gm_ids: string[];

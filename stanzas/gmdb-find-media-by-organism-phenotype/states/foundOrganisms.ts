@@ -1,6 +1,6 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 import { OrganismsByPhenotypesResponse } from "../../../api/organisms_by_phenotypes/types";
-import { LabelInfo } from "../../../utils/types";
+import { LabelInfo } from "../../../shared/utils/types";
 
 export const nullResponse: FoundOrganisms = {
   response: { total: 0, limit: 10, contents: [], offset: 0 },

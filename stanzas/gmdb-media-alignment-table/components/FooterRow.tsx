@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
 import { FooterCell } from "./FooterCell";
-import { COLOR_WHITE } from "../../../components/styles";
+import { COLOR_WHITE } from "../../../shared/components/styles";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";

@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
 import { TaxonomicTreeBranch } from "./TaxonomicTreeBranch";
 import { taxonomyChildrenMocks } from "../../../api/taxonomy_children/msw";
-import { makeComponentStoryTitle, makeMswParameter } from "../../../utils/storybook";
+import { makeComponentStoryTitle, makeMswParameter } from "../../../shared/utils/storybook";
 import { useInitTaxonTree } from "../hooks/useInitTaxonTree";
 
 export default {

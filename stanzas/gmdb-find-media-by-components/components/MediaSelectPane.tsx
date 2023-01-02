@@ -6,8 +6,8 @@ import {
   MediaByAttributesResponse,
 } from "../../../api/media_by_attributes/types";
 import { API_MEDIA_BY_ATTRIBUTES } from "../../../api/paths";
-import { Pagination } from "../../../components/media-finder/Pagination";
-import { QueryInfo } from "../../../components/media-finder/QueryInfo";
+import { Pagination } from "../../../shared/components/media-finder/Pagination";
+import { QueryInfo } from "../../../shared/components/media-finder/QueryInfo";
 import {
   COLOR_WHITE,
   FONT_WEIGHT_BOLD,
@@ -15,15 +15,15 @@ import {
   SIZE05,
   SIZE2,
   SIZE3,
-} from "../../../components/styles";
+} from "../../../shared/components/styles";
 import {
   nullResponse,
   useFoundMediaMutators,
   useFoundMediaState,
 } from "../../../shared/state/foundMedia";
 import { useIsMediaLoading, useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
-import { getData } from "../../../utils/getData";
-import { AcceptsEmotion } from "../../../utils/types";
+import { getData } from "../../../shared/utils/getData";
+import { AcceptsEmotion } from "../../../shared/utils/types";
 import { useSelectedAttributesState } from "../hooks/selectedAttributes";
 
 type Props = {} & AcceptsEmotion;

@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AlignmentCell } from "./AlignmentCell";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 export default {
   title: makeComponentStoryTitle(AlignmentCell.name, "MediaAlignmentTable"),

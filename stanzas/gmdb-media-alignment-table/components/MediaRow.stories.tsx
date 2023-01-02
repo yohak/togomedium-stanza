@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { MediaRow } from "./MediaRow";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 import { useIsMediaExpandedMutators } from "../states/isMediaExpanded";
 import { useIsOrganismsExpandedMutators } from "../states/isOrganismsExpanded";
 

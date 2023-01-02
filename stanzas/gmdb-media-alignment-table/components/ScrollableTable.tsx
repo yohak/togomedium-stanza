@@ -4,7 +4,7 @@ import { AlignmentTable } from "./AlignmentTable";
 import { HeaderRow } from "./HeaderRow";
 import { InfoColumns } from "./InfoColumns";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { COLOR_GRAY_LINE } from "../../../components/styles";
+import { COLOR_GRAY_LINE } from "../../../shared/components/styles";
 
 type Props = { data: MediaAlignmentTableResponse; prioritizedOrganism?: string[] };
 

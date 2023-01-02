@@ -9,18 +9,18 @@ import {
   OrganismsByPhenotypesResponse,
 } from "../../../api/organisms_by_phenotypes/types";
 import { API_MEDIA_BY_TAXON, API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
-import { Pagination } from "../../../components/media-finder/Pagination";
+import { Pagination } from "../../../shared/components/media-finder/Pagination";
 import {
   COLOR_GRAY_LINE,
   COLOR_WHITE,
   FONT_WEIGHT_BOLD,
   SIZE1,
   SIZE2,
-} from "../../../components/styles";
+} from "../../../shared/components/styles";
 import { nullResponse, useFoundMediaMutators } from "../../../shared/state/foundMedia";
 import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
 import { useQueryDataMutators } from "../../../shared/state/queryData";
-import { getData } from "../../../utils/getData";
+import { getData } from "../../../shared/utils/getData";
 import {
   FoundOrganisms,
   useFoundOrganismsMutators,

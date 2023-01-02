@@ -1,6 +1,6 @@
 import { Optional } from "yohak-tools";
-import { clone } from "../../../utils/clone";
-import { findBranchFromTrunk } from "../../../utils/findBranchFromTrunk";
+import { clone } from "../../../shared/utils/clone";
+import { findBranchFromTrunk } from "../../../shared/utils/findBranchFromTrunk";
 import { ComponentTrunk } from "../types";
 
 export const toggleFooterComponent = (

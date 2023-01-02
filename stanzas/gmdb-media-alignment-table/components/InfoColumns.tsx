@@ -3,8 +3,8 @@ import React, { FC } from "react";
 import { HeaderCell } from "./HeaderCell";
 import { MediaRow } from "./MediaRow";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../components/styles";
-import { AcceptsEmotion } from "../../../utils/types";
+import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../shared/components/styles";
+import { AcceptsEmotion } from "../../../shared/utils/types";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
 import {

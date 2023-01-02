@@ -8,8 +8,8 @@ import {
   OrganismsByPhenotypesResponse,
 } from "../../../api/organisms_by_phenotypes/types";
 import { API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
-import { COLOR_WHITE } from "../../../components/styles";
-import { getData } from "../../../utils/getData";
+import { COLOR_WHITE } from "../../../shared/components/styles";
+import { getData } from "../../../shared/utils/getData";
 import { nullResponse, useFoundOrganismsMutators } from "../states/foundOrganisms";
 import { useOrganismLoadAbortMutators } from "../states/organismLoadAbort";
 import { usePhenotypeQueryMutators, usePhenotypeQueryState } from "../states/phenotypeQuery";

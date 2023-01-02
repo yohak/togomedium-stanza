@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
 import { OrganismListItem } from "./OrganismListItem";
-import { makeComponentStoryTitle, makeNoPadding } from "../../../utils/storybook";
+import { makeComponentStoryTitle, makeNoPadding } from "../../../shared/utils/storybook";
 
 export default {
   title: makeComponentStoryTitle(OrganismListItem.name, "FindMediaByOrganismPhenotype"),

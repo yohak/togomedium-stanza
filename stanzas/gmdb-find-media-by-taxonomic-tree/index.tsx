@@ -4,9 +4,9 @@ import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
 import Stanza from "togostanza/stanza";
 import App from "./App";
-import { EmotionCacheProvider } from "../../components/EmotionCacheProvider";
-import { muiTheme } from "../../components/muiTheme";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
+import { EmotionCacheProvider } from "../../shared/components/EmotionCacheProvider";
+import { muiTheme } from "../../shared/components/muiTheme";
+import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
 
 export default class HelloReact extends Stanza<StanzaParameters> {
   async render() {

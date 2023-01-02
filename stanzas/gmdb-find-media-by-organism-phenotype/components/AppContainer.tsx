@@ -2,7 +2,12 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { MediaSelectPane } from "./MediaSelectPane";
 import { PhenotypeSection } from "./PhenotypeSection";
-import { COLOR_GRAY_BG, COLOR_WHITE, ROUNDED_CORNER, SIZE1 } from "../../../components/styles";
+import {
+  COLOR_GRAY_BG,
+  COLOR_WHITE,
+  ROUNDED_CORNER,
+  SIZE1,
+} from "../../../shared/components/styles";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;

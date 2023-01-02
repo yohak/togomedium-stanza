@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { TaxonomicTreeSection } from "./TaxonomicTreeSection";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 export default {
   title: makeComponentStoryTitle(TaxonomicTreeSection.name, "FindMediaByTaxonomicTree"),

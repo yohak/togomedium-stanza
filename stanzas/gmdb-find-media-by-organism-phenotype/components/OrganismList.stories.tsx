@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { OrganismList } from "./OrganismList";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
-import { LabelInfo } from "../../../utils/types";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
+import { LabelInfo } from "../../../shared/utils/types";
 import { useFoundOrganismsMutators } from "../states/foundOrganisms";
 
 type WrapperProps = { organisms: LabelInfo[] } & ComponentProps<typeof OrganismList>;

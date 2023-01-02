@@ -4,8 +4,8 @@ import { ComponentProps, FC, useEffect } from "react";
 import { MediaSelectPane } from "./MediaSelectPane";
 import { FoundMedia, useFoundMediaMutators } from "../../../shared/state/foundMedia";
 import { QueryData, useQueryDataMutators } from "../../../shared/state/queryData";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
-import { LabelInfo } from "../../../utils/types";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
+import { LabelInfo } from "../../../shared/utils/types";
 
 type WrapperProps = { query: QueryData; media: FoundMedia } & ComponentProps<
   typeof MediaSelectPane

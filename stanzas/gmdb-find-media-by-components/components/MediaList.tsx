@@ -1,15 +1,15 @@
 import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { ComponentProps, FC, useEffect, useRef, useState } from "react";
-import { MediaListItem } from "../../../components/media-finder/MediaListItem";
-import { COLOR_GRAY700 } from "../../../components/styles";
+import { MediaListItem } from "../../../shared/components/media-finder/MediaListItem";
+import { COLOR_GRAY700 } from "../../../shared/components/styles";
 import { useFoundMediaState } from "../../../shared/state/foundMedia";
 import { useIsMediaLoading } from "../../../shared/state/mediaLoadAbort";
 import {
   useSelectedMediaMutators,
   useSelectedMediaState,
 } from "../../../shared/state/selectedMedia";
-import { AcceptsEmotion } from "../../../utils/types";
+import { AcceptsEmotion } from "../../../shared/utils/types";
 
 type Props = {} & AcceptsEmotion;
 

@@ -1,8 +1,8 @@
 import Stanza from "togostanza/stanza";
-import { getData } from "../../utils/getData";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
-import { ApiResponse, TemplateBase } from "../../utils/types";
-import { API_GROWTH_MEDIUM } from "../../utils/variables";
+import { getData } from "../../shared/utils/getData";
+import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
+import { ApiResponse, TemplateBase } from "../../shared/utils/types";
+import { API_GROWTH_MEDIUM } from "../../shared/utils/variables";
 
 export default class GmdbMediumByGmid extends Stanza<StanzaParameters> {
   async render() {

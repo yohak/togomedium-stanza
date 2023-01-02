@@ -1,5 +1,5 @@
 import { queryDataToInfoText } from "./queryDataToInfoText";
-import { QueryData } from "../shared/state/queryData";
+import { QueryData } from "../state/queryData";
 
 describe("queryDataToInfoText", () => {
   it("should return null when data is empty", () => {

@@ -1,8 +1,8 @@
 import { initialize, mswDecorator } from "msw-storybook-addon";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "@mui/material/styles";
-import { muiTheme } from "../components/muiTheme";
-import { EmotionGlobalStyles } from "../components/EmotionGlobalStyles";
+import { muiTheme } from "../shared/components/muiTheme";
+import { EmotionGlobalStyles } from "../shared/components/EmotionGlobalStyles";
 import React from "react";
 initialize();
 export const decorators = [

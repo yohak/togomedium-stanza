@@ -1,5 +1,5 @@
 import { isArray } from "yohak-tools/";
-import { QueryData } from "../shared/state/queryData";
+import { QueryData } from "../state/queryData";
 
 export const queryDataToInfoText = (data: QueryData): string => {
   return Object.entries(data)

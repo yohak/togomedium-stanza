@@ -1,8 +1,8 @@
 import Stanza from "togostanza/stanza";
-import { makeFormBody } from "../../utils/getData";
-import { importWebFontForTogoMedium } from "../../utils/stanza";
-import { convertHTMLEntity } from "../../utils/string";
-import { ApiResponse, SimpleObject, TemplateBase } from "../../utils/types";
+import { makeFormBody } from "../../shared/utils/getData";
+import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
+import { convertHTMLEntity } from "../../shared/utils/string";
+import { ApiResponse, SimpleObject, TemplateBase } from "../../shared/utils/types";
 
 export default class GmdbMetaList extends Stanza<StanzaParameters> {
   async render() {

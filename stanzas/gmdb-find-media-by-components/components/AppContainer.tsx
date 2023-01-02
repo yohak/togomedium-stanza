@@ -2,8 +2,13 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AttributesSection } from "./AttributesSection";
 import { MediaSelectPane } from "./MediaSelectPane";
-import { ActionPane } from "../../../components/media-finder/ActionPane";
-import { COLOR_GRAY_BG, COLOR_WHITE, ROUNDED_CORNER, SIZE1 } from "../../../components/styles";
+import { ActionPane } from "../../../shared/components/media-finder/ActionPane";
+import {
+  COLOR_GRAY_BG,
+  COLOR_WHITE,
+  ROUNDED_CORNER,
+  SIZE1,
+} from "../../../shared/components/styles";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;

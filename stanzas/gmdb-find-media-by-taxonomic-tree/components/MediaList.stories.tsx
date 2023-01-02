@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { MediaList } from "./MediaList";
 import { FoundMedia, useFoundMediaMutators } from "../../../shared/state/foundMedia";
-import { makeComponentStoryTitle } from "../../../utils/storybook";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 type WrapperProps = { media: FoundMedia } & ComponentProps<typeof MediaList>;
 const Wrapper: FC<WrapperProps> = (args) => {

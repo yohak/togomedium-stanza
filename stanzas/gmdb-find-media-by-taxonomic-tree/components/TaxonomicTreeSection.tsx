@@ -7,7 +7,7 @@ import { nullResponse, useFoundMediaMutators } from "../../../shared/state/found
 import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
 import { useQueryDataMutators } from "../../../shared/state/queryData";
 import { useSelectedMediaMutators } from "../../../shared/state/selectedMedia";
-import { getData } from "../../../utils/getData";
+import { getData } from "../../../shared/utils/getData";
 import { useInitTaxonTree } from "../hooks/useInitTaxonTree";
 import { useSelectedTaxonState } from "../states/selectedTaxon";
 

@@ -1,5 +1,5 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { clone } from "../../../utils/clone";
+import { clone } from "../../../shared/utils/clone";
 
 type QueryObj = { [key: string]: string };
 const phenotypeQuery = atom<QueryObj>({ key: "phenotypeQuery", default: {} });
