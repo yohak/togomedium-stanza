@@ -1,7 +1,7 @@
 import { ComponentStory } from "@storybook/react";
 import { RestHandler } from "msw";
 
-type StanzaNames = "MediaFinder" | "MediaAlignmentTable";
+type StanzaNames = "MediaFinder" | "MediaAlignmentTable" | "FindMediaByTaxonomicTree";
 export const makeComponentStoryTitle = (name: string, stanza: StanzaNames): string =>
   `Components/${stanza}/${name}`;
 
