@@ -3,7 +3,7 @@ import App from "./App";
 import { makeMswParameter } from "../../shared/utils/storybook";
 
 export default {
-  title: "Stanzas/FineMediaByComponents",
+  title: "Stanzas/FindMediaByComponents",
   component: App,
 } as ComponentMeta<typeof App>;
 

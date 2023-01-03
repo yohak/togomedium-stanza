@@ -1,20 +1,20 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
-import { FoundMediaListOld } from "./FoundMediaListOld";
+import { FoundMediaList } from "./FoundMediaList";
 import { FoundMedia, useFoundMediaMutators } from "../../state/foundMedia";
 import { makeComponentStoryTitle } from "../../utils/storybook";
 
-type WrapperProps = { media: FoundMedia } & ComponentProps<typeof FoundMediaListOld>;
+type WrapperProps = { media: FoundMedia } & ComponentProps<typeof FoundMediaList>;
 const Wrapper: FC<WrapperProps> = (args) => {
   const { setFoundMedia } = useFoundMediaMutators();
   useEffect(() => {
     setFoundMedia(args.media);
   }, [args.media]);
-  return <FoundMediaListOld {...args} />;
+  return <FoundMediaList {...args} />;
 };
 
 export default {
-  title: makeComponentStoryTitle(FoundMediaListOld.name, "MediaFinder"),
+  title: makeComponentStoryTitle(FoundMediaList.name, "MediaFinder"),
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 

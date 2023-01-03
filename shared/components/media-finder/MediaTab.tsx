@@ -29,7 +29,7 @@ export const MediaTab: FC<Props> = ({ css, className }) => {
               <Tab
                 key={label}
                 label={
-                  <Badge badgeContent={selectedMedia.length.toString()} color="primary">
+                  <Badge badgeContent={selectedMedia.length} color="primary">
                     {label}
                   </Badge>
                 }

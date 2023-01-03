@@ -3,8 +3,9 @@ import { ComponentProps, FC, useEffect } from "react";
 import { ActionPane } from "./ActionPane";
 import { useSelectedMediaMutators } from "../../state/selectedMedia";
 import { makeComponentStoryTitle } from "../../utils/storybook";
+import { LabelInfo } from "../../utils/types";
 
-type WrapperProps = { selectedMedia: string[] } & ComponentProps<typeof ActionPane>;
+type WrapperProps = { selectedMedia: LabelInfo[] } & ComponentProps<typeof ActionPane>;
 const Wrapper: FC<WrapperProps> = (args) => {
   const { setSelectedMedia } = useSelectedMediaMutators();
   useEffect(() => {
@@ -28,10 +29,14 @@ NoSelection.args = {
 
 export const OneSelection = Template.bind({});
 OneSelection.args = {
-  selectedMedia: ["aa"],
+  selectedMedia: [{ id: "aa", label: "aa" }],
 };
 
 export const MultipleSelection = Template.bind({});
 MultipleSelection.args = {
-  selectedMedia: ["aa", "bb", "cc"],
+  selectedMedia: [
+    { id: "aa", label: "aa" },
+    { id: "bb", label: "bb" },
+    { id: "cc", label: "cc" },
+  ],
 };

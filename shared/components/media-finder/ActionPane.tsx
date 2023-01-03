@@ -11,7 +11,7 @@ export const ActionPane: FC<Props> = ({ actionLabel, dispatchEvent }) => {
   const { clearSelectedMedia } = useSelectedMediaMutators();
   const onClickAction = () => {
     if (!dispatchEvent) return;
-    dispatchEvent(selectedMedia);
+    dispatchEvent(selectedMedia.map((item) => item.id));
   };
   return (
     <div css={wrapper}>

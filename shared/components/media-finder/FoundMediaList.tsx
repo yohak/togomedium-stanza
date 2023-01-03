@@ -2,17 +2,18 @@ import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { MediaListInfo, MediaListItem } from "./MediaListItem";
+import { MediaListItemInfo, MediaListItem } from "./MediaListItem";
 import { Pagination } from "./Pagination";
 import { QueryInfo } from "./QueryInfo";
 import { useFoundMediaState } from "../../state/foundMedia";
 import { useIsMediaLoading } from "../../state/mediaLoadAbort";
 import { useSelectedMediaMutators, useSelectedMediaState } from "../../state/selectedMedia";
+import { LabelInfo } from "../../utils/types";
 import { COLOR_GRAY700, COLOR_WHITE, FONT_WEIGHT_BOLD, SIZE05, SIZE3 } from "../styles";
 
 type Props = {
-  next: () => {};
-  prev: () => {};
+  next: () => void;
+  prev: () => void;
 } & AcceptsEmotion;
 
 export const FoundMediaList: FC<Props> = ({ next, prev, css, className }) => {
@@ -47,21 +48,21 @@ export const FoundMediaList: FC<Props> = ({ next, prev, css, className }) => {
 };
 
 const useFoundMedia = () => {
-  const [data, setData] = useState<MediaListInfo[]>([]);
+  const [data, setData] = useState<MediaListItemInfo[]>([]);
   const response = useFoundMediaState();
   const isLoading = useIsMediaLoading();
   const selectedMedia = useSelectedMediaState();
   const { toggleMediumSelection } = useSelectedMediaMutators();
-  const toggleChecked = (id: string) => {
-    toggleMediumSelection(id);
+  const toggleChecked = (info: LabelInfo) => {
+    toggleMediumSelection(info);
   };
 
   useEffect(() => {
-    const result: MediaListInfo[] = response.contents.map((medium) => {
+    const result: MediaListItemInfo[] = response.contents.map((medium) => {
       return {
         id: medium.gm_id,
         label: medium.name,
-        isChecked: selectedMedia.includes(medium.gm_id),
+        isChecked: !!selectedMedia.find((info) => info.id === medium.gm_id),
       };
     });
     setData(result);

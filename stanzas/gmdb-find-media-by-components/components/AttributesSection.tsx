@@ -8,7 +8,6 @@ import { API_MEDIA_BY_ATTRIBUTES } from "../../../api/paths";
 import { nullResponse, useFoundMediaMutators } from "../../../shared/state/foundMedia";
 import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
 import { useQueryDataMutators } from "../../../shared/state/queryData";
-import { useSelectedMediaMutators } from "../../../shared/state/selectedMedia";
 import { getData } from "../../../shared/utils/getData";
 import {
   useSelectedAttributesMutators,
@@ -23,7 +22,6 @@ export const AttributesSection: FC<Props> = () => {
   const { setQueryData } = useQueryDataMutators();
   const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
   const { setSelectedAttributes } = useSelectedAttributesMutators();
-  const { clearSelectedMedia } = useSelectedMediaMutators();
 
   const onChangeSelection = (ids: string[]) => {
     setSelectedAttributes({ gmo_ids: ids });
@@ -37,7 +35,6 @@ export const AttributesSection: FC<Props> = () => {
       setNextMediaLoadAbort(null);
       return;
     }
-    clearSelectedMedia();
     (async () => {
       const params: MediaByAttributesParams = { gmo_ids, limit: 10, offset: 0 };
       setQueryData({ gmo_ids });

@@ -1,18 +1,17 @@
 import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import React, { ComponentProps, FC } from "react";
+import React, { FC } from "react";
+import { MediaInfo } from "../../state/selectedMedia";
 import { PATH_MEDIUM } from "../consts";
 import { COLOR_GRAY_LINE, COLOR_PRIMARY, COLOR_WHITE, SIZE1, SIZE2 } from "../styles";
 
 type Props = {
-  id: string;
-  label: string;
   isChecked: boolean;
-  onClick: (id: string) => void;
-};
+  onClick: (info: MediaInfo) => void;
+} & MediaInfo;
 
-export type MediaListInfo = Omit<Props, "onClick">;
+export type MediaListItemInfo = Omit<Props, "onClick">;
 
 export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
   return (
@@ -28,7 +27,7 @@ export const MediaListItem: FC<Props> = ({ id, label, isChecked, onClick }) => {
       <span css={checkCol}>
         <Checkbox
           checked={isChecked}
-          onClick={() => onClick(id)}
+          onClick={() => onClick({ id, label })}
           css={css`
             padding: 5px;
           `}

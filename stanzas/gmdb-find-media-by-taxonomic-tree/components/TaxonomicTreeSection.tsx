@@ -6,7 +6,6 @@ import { API_MEDIA_BY_TAXON } from "../../../api/paths";
 import { nullResponse, useFoundMediaMutators } from "../../../shared/state/foundMedia";
 import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
 import { useQueryDataMutators } from "../../../shared/state/queryData";
-import { useSelectedMediaMutators } from "../../../shared/state/selectedMedia";
 import { getData } from "../../../shared/utils/getData";
 import { useInitTaxonTree } from "../hooks/useInitTaxonTree";
 import { useSelectedTaxonState } from "../states/selectedTaxon";
@@ -36,7 +35,6 @@ const useMediaLoadFromTaxon = () => {
   const { setQueryData } = useQueryDataMutators();
   const { setFoundMedia } = useFoundMediaMutators();
   const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
-  const { clearSelectedMedia } = useSelectedMediaMutators();
   useEffect(() => {
     if (selectedTaxon.length === 0) {
       setQueryData({});
@@ -44,7 +42,6 @@ const useMediaLoadFromTaxon = () => {
       setNextMediaLoadAbort(null);
       return;
     }
-    clearSelectedMedia();
     (async () => {
       const params: MediaByTaxonParams = { tax_ids: selectedTaxon, limit: 10, offset: 0 };
       setQueryData({ tax_ids: selectedTaxon });

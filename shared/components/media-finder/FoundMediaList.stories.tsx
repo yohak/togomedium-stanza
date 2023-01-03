@@ -10,7 +10,10 @@ export default {
 
 const Template: ComponentStory<typeof FoundMediaList> = (args) => <FoundMediaList {...args} />;
 
-const defaultArgs: ComponentProps<typeof FoundMediaList> = {};
+const defaultArgs: ComponentProps<typeof FoundMediaList> = {
+  next: () => {},
+  prev: () => {},
+};
 
 export const Primary = Template.bind({});
 Primary.args = { ...defaultArgs };
