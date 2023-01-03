@@ -4,7 +4,7 @@ import { getData } from "../../shared/utils/getData";
 import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
 import { capitalizeFirstLetter, unescapeJsonString } from "../../shared/utils/string";
 import { ApiResponse, TemplateBase } from "../../shared/utils/types";
-import { API_GROWTH_MEDIUM } from "../../shared/utils/variables";
+import { URL_API } from "../../shared/utils/variables";
 
 export default class GmdbOrganismByTaxid extends Stanza<StanzaParameters> {
   async render() {
@@ -13,7 +13,7 @@ export default class GmdbOrganismByTaxid extends Stanza<StanzaParameters> {
       return;
     }
     const apiName = "gmdb_organism_by_taxid";
-    const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
+    const result = await getData<ApiBody>(`${URL_API}${apiName}`, {
       tax_id: params.tax_id,
     });
     // console.log(JSON.parse(JSON.stringify(result)));

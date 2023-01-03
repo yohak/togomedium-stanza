@@ -11,7 +11,7 @@ import {
 } from "../../shared/utils/string";
 import { getNextTaxon, TAXON_RANK } from "../../shared/utils/taxon";
 import { ApiResponse } from "../../shared/utils/types";
-import { API_GROWTH_MEDIUM } from "../../shared/utils/variables";
+import { URL_API } from "../../shared/utils/variables";
 
 export default class gmdbTaxonByTaxid extends Stanza<StanzaParameters> {
   async render() {
@@ -20,7 +20,7 @@ export default class gmdbTaxonByTaxid extends Stanza<StanzaParameters> {
       return;
     }
     const apiName = "gmdb_taxonomic_rank_by_taxid";
-    const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
+    const result = await getData<ApiBody>(`${URL_API}${apiName}`, {
       tax_id: params.tax_id,
     });
     // console.log(result.body);
@@ -40,7 +40,7 @@ const addRankChildren = async (data: TemplateParameters): Promise<TemplateParame
   const rank: TAXON_RANK =
     data.rank === "Superkingdom" ? TAXON_RANK._0_KINGDOM : (data.rank as TAXON_RANK);
   const nextRank = getNextTaxon(rank)!;
-  const response = await getData<SubRankApiBody>(`${API_GROWTH_MEDIUM}list_taxons_by_rank`, {
+  const response = await getData<SubRankApiBody>(`${URL_API}list_taxons_by_rank`, {
     tax_id: data.taxid,
     rank: nextRank,
   });

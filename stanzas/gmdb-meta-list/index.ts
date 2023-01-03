@@ -277,16 +277,16 @@ type TemplateParameters = {
   isFixedTable: boolean;
 } & TemplateBase;
 
-type ApiBody = {
+type ApiBody<T extends string = string> = {
   total: number;
   offset: number;
   limit: number;
-  contents: Content[];
-  columns: Column[];
+  contents: Content<T>[];
+  columns: Column<T>[];
 };
 
-type Content = {
-  [key: string]: LinkItem | string;
+type Content<T extends string> = {
+  [Key in T]: LinkItem | string;
 };
 
 type LinkItem = {
@@ -299,13 +299,13 @@ type StringItem = {
   nowrap?: boolean;
 };
 
-type Column = {
-  key: string;
+type Column<T extends string> = {
+  key: T;
   label: string;
   nowrap?: boolean;
   size?: number;
 };
 
-export type ListApiBody = ApiBody;
-export type ListContent = Content;
-export type ListColumn = Column;
+export type ListApiBody<T extends string = string> = ApiBody<T>;
+export type ListContent<T extends string = string> = Content<T>;
+export type ListColumn<T extends string = string> = Column<T>;

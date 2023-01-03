@@ -5,9 +5,12 @@ import { AcceptsEmotion } from "yohak-tools";
 import { MediaListItemInfo, MediaListItem } from "./MediaListItem";
 import { Pagination } from "./Pagination";
 import { QueryInfo } from "./QueryInfo";
-import { useFoundMediaState } from "../../state/foundMedia";
-import { useIsMediaLoading } from "../../state/mediaLoadAbort";
-import { useSelectedMediaMutators, useSelectedMediaState } from "../../state/selectedMedia";
+import { useFoundMediaState } from "../../state/media-finder/foundMedia";
+import { useIsMediaLoading } from "../../state/media-finder/mediaLoadAbort";
+import {
+  useSelectedMediaMutators,
+  useSelectedMediaState,
+} from "../../state/media-finder/selectedMedia";
 import { hasIdOfLabel, LabelInfo } from "../../utils/labelInfo";
 import { COLOR_GRAY700, COLOR_WHITE, FONT_WEIGHT_BOLD, SIZE05, SIZE3 } from "../styles";
 

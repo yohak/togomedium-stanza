@@ -1,1 +1,1 @@
-export const API_GROWTH_MEDIUM: string = "http://growthmedium.org/sparqlist/api/";
+export const URL_API: string = "http://growthmedium.org/sparqlist/api/";

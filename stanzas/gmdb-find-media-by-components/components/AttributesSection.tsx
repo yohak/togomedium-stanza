@@ -5,14 +5,14 @@ import {
   MediaByAttributesResponse,
 } from "../../../api/media_by_attributes/types";
 import { API_MEDIA_BY_ATTRIBUTES } from "../../../api/paths";
-import { nullResponse, useFoundMediaMutators } from "../../../shared/state/foundMedia";
-import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
-import { useQueryDataMutators } from "../../../shared/state/queryData";
+import { nullResponse, useFoundMediaMutators } from "../../../shared/state/media-finder/foundMedia";
+import { useMediaLoadAbortMutators } from "../../../shared/state/media-finder/mediaLoadAbort";
+import { useQueryDataMutators } from "../../../shared/state/media-finder/queryData";
 import { getData } from "../../../shared/utils/getData";
 import {
   useSelectedAttributesMutators,
   useSelectedAttributesState,
-} from "../hooks/selectedAttributes";
+} from "../states/selectedAttributes";
 
 type Props = {};
 

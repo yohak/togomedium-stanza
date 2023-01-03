@@ -9,9 +9,7 @@ type Props = {} & AcceptsEmotion;
 export const PhenotypeSection: FC<Props> = ({ css, className }) => {
   return (
     <div css={[phenotypeSection, css]} className={className}>
-      <div css={phenotypes}>
-        <PhenotypeSearchArea />
-      </div>
+      <PhenotypeSearchArea />
     </div>
   );
 };
@@ -19,13 +17,5 @@ export const PhenotypeSection: FC<Props> = ({ css, className }) => {
 const phenotypeSection = css`
   background-color: ${COLOR_WHITE};
   display: flex;
-`;
-
-const phenotypes = css`
-  max-width: 50%;
   flex-grow: 1;
-  border-right-color: ${COLOR_GRAY_LINE};
-  border-right-style: dashed;
-  border-right-width: 2px;
-  padding: ${SIZE2};
 `;

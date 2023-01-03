@@ -1,13 +1,13 @@
 import * as d3 from "d3";
 import Stanza from "togostanza/stanza";
-import { API_GROWTH_MEDIUM } from "../../shared/utils/variables";
+import { URL_API } from "../../shared/utils/variables";
 
 type D3Selection = d3.Selection<any, any, any, any>;
 
 // 'kegg_code - kegg_T_num' SPARQList via KEGG API
 //  将来的にはTogoDB "http://dev.togodb.org/sparql/kegg_gold" を使う？
 //  今はSPARQL endpointに不具合あり。遅い。
-const TID_API: string = `${API_GROWTH_MEDIUM}gms_kegg_code_tid`;
+const TID_API: string = `${URL_API}gms_kegg_code_tid`;
 
 export default class GmdbRoundtree extends Stanza<StanzaParameters> {
   async render() {

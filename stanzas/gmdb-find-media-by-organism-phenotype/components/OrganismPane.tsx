@@ -7,28 +7,40 @@ import { SelectedOrganismsList } from "./SelectedOrganismsList";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
 import { API_MEDIA_BY_TAXON } from "../../../api/paths";
 import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../../shared/components/styles";
-import { nullResponse, useFoundMediaMutators } from "../../../shared/state/foundMedia";
-import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
-import { useQueryDataMutators } from "../../../shared/state/queryData";
+import { nullResponse, useFoundMediaMutators } from "../../../shared/state/media-finder/foundMedia";
+import { useMediaLoadAbortMutators } from "../../../shared/state/media-finder/mediaLoadAbort";
+import { useQueryDataMutators } from "../../../shared/state/media-finder/queryData";
 import { getData } from "../../../shared/utils/getData";
 import { extractLabelIds } from "../../../shared/utils/labelInfo";
-import { useOrganismTabFocusState } from "../states/organismTabFocus";
+import { useFoundOrganismsState } from "../states/foundOrganisms";
+import { useOrganismTabFocusMutators, useOrganismTabFocusState } from "../states/organismTabFocus";
 import { useSelectedOrganismsState } from "../states/selectedOrganisms";
 
 type Props = {} & AcceptsEmotion;
 
 export const OrganismPane: FC<Props> = ({ css, className }) => {
-  const organismTabFocus = useOrganismTabFocusState();
   useMediaLoadFromOrganismSelection();
+  const { tabFocus } = useTabFocus();
   return (
     <div css={[wrapper, css]} className={className}>
       <OrganismTab />
       <div css={contents}>
-        {organismTabFocus === "Found organisms" && <FoundOrganismsList />}
-        {organismTabFocus === "Selected organisms" && <SelectedOrganismsList />}
+        {tabFocus === "Found organisms" && <FoundOrganismsList />}
+        {tabFocus === "Selected organisms" && <SelectedOrganismsList />}
       </div>
     </div>
   );
+};
+
+const useTabFocus = () => {
+  const tabFocus = useOrganismTabFocusState();
+  const { setOrganismTabFocus } = useOrganismTabFocusMutators();
+  const foundOrganisms = useFoundOrganismsState();
+  useEffect(() => {
+    setOrganismTabFocus("Found organisms");
+  }, [foundOrganisms]);
+
+  return { tabFocus };
 };
 
 const useMediaLoadFromOrganismSelection = () => {

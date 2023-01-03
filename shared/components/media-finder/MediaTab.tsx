@@ -7,8 +7,8 @@ import {
   mediaTabNames,
   useMediaTabFocusMutators,
   useMediaTabFocusState,
-} from "../../state/mediaTabFocus";
-import { useSelectedMediaState } from "../../state/selectedMedia";
+} from "../../state/media-finder/mediaTabFocus";
+import { useSelectedMediaState } from "../../state/media-finder/selectedMedia";
 import { COLOR_GRAY_LINE, SIZE4 } from "../styles";
 
 type Props = {} & AcceptsEmotion;

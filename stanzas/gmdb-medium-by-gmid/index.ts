@@ -2,7 +2,7 @@ import Stanza from "togostanza/stanza";
 import { getData } from "../../shared/utils/getData";
 import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
 import { ApiResponse, TemplateBase } from "../../shared/utils/types";
-import { API_GROWTH_MEDIUM } from "../../shared/utils/variables";
+import { URL_API } from "../../shared/utils/variables";
 
 export default class GmdbMediumByGmid extends Stanza<StanzaParameters> {
   async render() {
@@ -11,7 +11,7 @@ export default class GmdbMediumByGmid extends Stanza<StanzaParameters> {
       return;
     }
     const apiName = "gmdb_medium_by_gmid";
-    const result = await getData<ApiBody>(`${API_GROWTH_MEDIUM}${apiName}`, {
+    const result = await getData<ApiBody>(`${URL_API}${apiName}`, {
       gm_id: params.gm_id,
     });
     const parameters = parseData(result, params);

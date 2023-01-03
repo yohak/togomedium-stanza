@@ -1,5 +1,5 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { filterOutInfo, hasInfo, LabelInfo } from "../utils/labelInfo";
+import { filterOutInfo, hasInfo, LabelInfo } from "../../utils/labelInfo";
 
 const selectedMedia = atom<LabelInfo[]>({ key: "selectedMedia", default: [] });
 

@@ -1,5 +1,5 @@
 import { isArray } from "yohak-tools/";
-import { QueryData } from "../state/queryData";
+import { QueryData } from "../state/media-finder/queryData";
 
 export const queryDataToInfoText = (data: QueryData | null): string => {
   if (!data) {

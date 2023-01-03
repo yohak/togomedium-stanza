@@ -3,7 +3,7 @@ import { Badge, Tab, Tabs } from "@mui/material";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_GRAY_LINE, SIZE4 } from "../../../shared/components/styles";
-import { mediaTabNames } from "../../../shared/state/mediaTabFocus";
+import { mediaTabNames } from "../../../shared/state/media-finder/mediaTabFocus";
 import {
   OrganismTabName,
   organismTabNames,

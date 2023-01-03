@@ -21,6 +21,13 @@ export type ApiResponse<T> = {
   body: Optional<T>;
 };
 
+export type MediaFinderListApiBody<T extends string = string> = {
+  limit: number;
+  total: number;
+  offset: number;
+  contents: { [Key in T]: string }[];
+};
+
 export type TreeBranch = {
   name: string;
   id: string;

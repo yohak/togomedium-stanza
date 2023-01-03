@@ -9,8 +9,8 @@ import {
   FoundMedia,
   useFoundMediaMutators,
   useFoundMediaState,
-} from "../../../shared/state/foundMedia";
-import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
+} from "../../../shared/state/media-finder/foundMedia";
+import { useMediaLoadAbortMutators } from "../../../shared/state/media-finder/mediaLoadAbort";
 import { getData } from "../../../shared/utils/getData";
 import { extractLabelIds } from "../../../shared/utils/labelInfo";
 import { useSelectedOrganismsState } from "../states/selectedOrganisms";

@@ -1,12 +1,6 @@
-export type OrganismsByPhenotypesResponse = {
-  total: number;
-  offset: number;
-  limit: number;
-  contents: {
-    tax_id: string;
-    name: string;
-  }[];
-};
+import { MediaFinderListApiBody } from "../../shared/utils/types";
+
+export type OrganismsByPhenotypesResponse = MediaFinderListApiBody<"tax_id" | "name">;
 export type OrganismsByPhenotypeParams = {
   limit: number;
   offset: number;

@@ -1,11 +1,16 @@
 import { css } from "@emotion/react";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { ActionPane } from "./ActionPane";
 import { FoundMediaList } from "./FoundMediaList";
 import { MediaTab } from "./MediaTab";
 import { SelectedMediaList } from "./SelectedMediaList";
-import { useMediaTabFocusState } from "../../state/mediaTabFocus";
+import { useFoundMediaState } from "../../state/media-finder/foundMedia";
+import {
+  useMediaTabFocusMutators,
+  useMediaTabFocusState,
+} from "../../state/media-finder/mediaTabFocus";
+import { useSelectedMediaState } from "../../state/media-finder/selectedMedia";
 import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../styles";
 
 type Props = {
@@ -15,21 +20,31 @@ type Props = {
 } & AcceptsEmotion;
 
 export const MediaPane: FC<Props> = ({ css, className, dispatchEvent, next, prev }) => {
-  const mediaTabFocus = useMediaTabFocusState();
+  const { tabFocus } = useTabFocus();
   return (
     <div css={wrapper}>
       <div css={[media, css]} className={className}>
         <MediaTab />
         <div css={contents}>
-          {mediaTabFocus === "Found media" && <FoundMediaList next={next} prev={prev} />}
-          {mediaTabFocus === "Selected media" && <SelectedMediaList />}
+          {tabFocus === "Found media" && <FoundMediaList next={next} prev={prev} />}
+          {tabFocus === "Selected media" && <SelectedMediaList />}
         </div>
       </div>
-      {mediaTabFocus === "Selected media" && (
+      {tabFocus === "Selected media" && (
         <ActionPane actionLabel={"Compare media"} dispatchEvent={dispatchEvent} />
       )}
     </div>
   );
+};
+
+const useTabFocus = () => {
+  const tabFocus = useMediaTabFocusState();
+  const { setMediaTabFocus } = useMediaTabFocusMutators();
+  const foundMedia = useFoundMediaState();
+  useEffect(() => {
+    setMediaTabFocus("Found media");
+  }, [foundMedia]);
+  return { tabFocus };
 };
 
 const wrapper = css`

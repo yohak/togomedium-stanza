@@ -1,12 +1,6 @@
-export type MediaByAttributesResponse = {
-  total: number;
-  offset: number;
-  limit: number;
-  contents: {
-    gm_id: string;
-    name: string;
-  }[];
-};
+import { MediaFinderListApiBody } from "../../shared/utils/types";
+
+export type MediaByAttributesResponse = MediaFinderListApiBody<"gm_id" | "name">;
 
 export type MediaByAttributesParams = {
   gmo_ids: string[];

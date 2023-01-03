@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { ActionPane } from "./ActionPane";
-import { useSelectedMediaMutators } from "../../state/selectedMedia";
+import { useSelectedMediaMutators } from "../../state/media-finder/selectedMedia";
 import { LabelInfo } from "../../utils/labelInfo";
 import { makeComponentStoryTitle } from "../../utils/storybook";
 

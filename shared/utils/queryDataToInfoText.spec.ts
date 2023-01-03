@@ -1,5 +1,5 @@
 import { queryDataToInfoText } from "./queryDataToInfoText";
-import { QueryData } from "../state/queryData";
+import { QueryData } from "../state/media-finder/queryData";
 
 describe("queryDataToInfoText", () => {
   it("should return null when data is empty", () => {

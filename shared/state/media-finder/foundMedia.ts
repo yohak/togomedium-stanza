@@ -1,11 +1,7 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { MediaFinderListApiBody } from "../../utils/types";
 
-export type FoundMedia = {
-  total: number;
-  limit: number;
-  contents: { gm_id: string; name: string }[];
-  offset: number;
-};
+export type FoundMedia = MediaFinderListApiBody<"gm_id" | "name">;
 export const nullResponse: FoundMedia = {
   total: 0,
   limit: 0,

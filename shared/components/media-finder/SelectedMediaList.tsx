@@ -3,7 +3,10 @@ import React, { FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { MediaListItem } from "./MediaListItem";
 import { Pagination } from "./Pagination";
-import { useSelectedMediaMutators, useSelectedMediaState } from "../../state/selectedMedia";
+import {
+  useSelectedMediaMutators,
+  useSelectedMediaState,
+} from "../../state/media-finder/selectedMedia";
 import { LabelInfo } from "../../utils/labelInfo";
 
 type Props = {} & AcceptsEmotion;

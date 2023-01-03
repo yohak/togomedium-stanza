@@ -1,8 +1,10 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 import { OrganismsByPhenotypesResponse } from "../../../api/organisms_by_phenotypes/types";
 import { LabelInfo } from "../../../shared/utils/labelInfo";
+import { MediaFinderListApiBody } from "../../../shared/utils/types";
 
-export const nullResponse: OrganismsByPhenotypesResponse = {
+export type FoundOrganisms = MediaFinderListApiBody<"tax_id" | "name">;
+export const nullResponse: FoundOrganisms = {
   total: 0,
   limit: 10,
   contents: [],
@@ -12,8 +14,6 @@ const foundOrganisms = atom<FoundOrganisms>({
   key: "foundOrganisms",
   default: nullResponse,
 });
-
-export type FoundOrganisms = OrganismsByPhenotypesResponse;
 
 export const useFoundOrganismsState = () => {
   return useRecoilValue(foundOrganisms);
