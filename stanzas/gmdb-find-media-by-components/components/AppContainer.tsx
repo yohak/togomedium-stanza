@@ -5,7 +5,7 @@ import {
   MediaByAttributesResponse,
 } from "../../../api/media_by_attributes/types";
 import { API_MEDIA_BY_ATTRIBUTES } from "../../../api/paths";
-import { mediaPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
+import { subPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
 import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
 import {
   FoundMedia,
@@ -27,7 +27,7 @@ export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
       <div css={queryPane}>
         <AttributesSection />
       </div>
-      <div css={mediaPane}>
+      <div css={subPane}>
         <MediaPane dispatchEvent={dispatchEvent} next={next} prev={prev} />
       </div>
     </div>

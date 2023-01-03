@@ -3,8 +3,8 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { SelectedMediaList } from "./SelectedMediaList";
 import { useSelectedMediaMutators } from "../../state/selectedMedia";
+import { LabelInfo } from "../../utils/labelInfo";
 import { makeComponentStoryTitle } from "../../utils/storybook";
-import { LabelInfo } from "../../utils/types";
 
 type WrapperProps = { media: LabelInfo[] } & ComponentProps<typeof SelectedMediaList>;
 const Wrapper: FC<WrapperProps> = (args) => {

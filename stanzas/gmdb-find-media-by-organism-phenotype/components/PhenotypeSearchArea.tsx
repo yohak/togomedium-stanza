@@ -13,7 +13,6 @@ import { getData } from "../../../shared/utils/getData";
 import { nullResponse, useFoundOrganismsMutators } from "../states/foundOrganisms";
 import { useOrganismLoadAbortMutators } from "../states/organismLoadAbort";
 import { usePhenotypeQueryMutators, usePhenotypeQueryState } from "../states/phenotypeQuery";
-import { useSelectedOrganismsMutators } from "../states/selectedOrganisms";
 
 type Props = {} & AcceptsEmotion;
 
@@ -183,7 +182,6 @@ const usePhenotypeQuery = () => {
   const { setFoundOrganisms } = useFoundOrganismsMutators();
   const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
   const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
-  const { clearSelectedOrganisms } = useSelectedOrganismsMutators();
   const handleEnabledChange = (key: string, enabled: boolean) => {
     if (!enabled) {
       removePhenotypeQuery(key);
@@ -198,7 +196,6 @@ const usePhenotypeQuery = () => {
       setNextOrganismLoadAbort(null);
       return;
     }
-    clearSelectedOrganisms();
     (async () => {
       const abort: AbortController = new AbortController();
       setNextOrganismLoadAbort(abort);
@@ -209,7 +206,7 @@ const usePhenotypeQuery = () => {
       );
       setNextOrganismLoadAbort(null);
       if (response.body) {
-        setFoundOrganisms({ response: response.body });
+        setFoundOrganisms(response.body);
       }
     })();
   }, [phenotypeQuery]);

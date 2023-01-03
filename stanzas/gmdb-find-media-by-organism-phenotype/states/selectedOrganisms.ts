@@ -1,6 +1,7 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { filterOutInfo, hasInfo, LabelInfo } from "../../../shared/utils/labelInfo";
 
-const selectedOrganisms = atom<string[]>({ key: "selectedOrganisms", default: [] });
+const selectedOrganisms = atom<LabelInfo[]>({ key: "selectedOrganisms", default: [] });
 
 export const useSelectedOrganismsState = () => {
   return useRecoilValue(selectedOrganisms);
@@ -8,15 +9,9 @@ export const useSelectedOrganismsState = () => {
 
 export const useSelectedOrganismsMutators = () => {
   const setSelectedOrganisms = useSetRecoilState(selectedOrganisms);
-  const toggleOrganismSelection = (id: string) => {
-    setSelectedOrganisms((prev) => {
-      let result: string[];
-      if (prev.includes(id)) {
-        result = prev.filter((r) => r !== id);
-      } else {
-        result = [...prev, id];
-      }
-      return result;
+  const toggleOrganismSelection = (info: LabelInfo) => {
+    setSelectedOrganisms((prev: LabelInfo[]) => {
+      return hasInfo(prev, info) ? filterOutInfo(prev, info) : [...prev, info];
     });
   };
   const clearSelectedOrganisms = () => {

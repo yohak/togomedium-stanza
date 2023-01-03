@@ -8,7 +8,7 @@ import { QueryInfo } from "./QueryInfo";
 import { useFoundMediaState } from "../../state/foundMedia";
 import { useIsMediaLoading } from "../../state/mediaLoadAbort";
 import { useSelectedMediaMutators, useSelectedMediaState } from "../../state/selectedMedia";
-import { LabelInfo } from "../../utils/types";
+import { hasIdOfLabel, LabelInfo } from "../../utils/labelInfo";
 import { COLOR_GRAY700, COLOR_WHITE, FONT_WEIGHT_BOLD, SIZE05, SIZE3 } from "../styles";
 
 type Props = {
@@ -62,7 +62,7 @@ const useFoundMedia = () => {
       return {
         id: medium.gm_id,
         label: medium.name,
-        isChecked: !!selectedMedia.find((info) => info.id === medium.gm_id),
+        isChecked: hasIdOfLabel(selectedMedia, medium.gm_id),
       };
     });
     setData(result);

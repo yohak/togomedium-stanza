@@ -4,7 +4,7 @@ import React, { FC, SyntheticEvent, useState } from "react";
 import { AllComponentsResponse } from "../../../api/all-components/types";
 import { API_ALL_COMPONENTS } from "../../../api/paths";
 import { getData } from "../../../shared/utils/getData";
-import { LabelInfo } from "../../../shared/utils/types";
+import { LabelInfo } from "../../../shared/utils/labelInfo";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;

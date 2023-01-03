@@ -4,7 +4,7 @@ import { AcceptsEmotion } from "yohak-tools";
 import { MediaListItem } from "./MediaListItem";
 import { Pagination } from "./Pagination";
 import { useSelectedMediaMutators, useSelectedMediaState } from "../../state/selectedMedia";
-import { LabelInfo } from "../../utils/types";
+import { LabelInfo } from "../../utils/labelInfo";
 
 type Props = {} & AcceptsEmotion;
 
@@ -22,7 +22,10 @@ export const SelectedMediaList: FC<Props> = ({ css, className }) => {
   };
 
   useEffect(() => {
-    setData(selectedMedia.filter((item, i) => i >= current).filter((item, i) => i < SHOW_COUNT));
+    const filtered = selectedMedia
+      .filter((item, i) => i >= current)
+      .filter((item, i) => i < SHOW_COUNT);
+    setData(filtered);
   }, [selectedMedia, current]);
 
   return (

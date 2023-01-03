@@ -15,10 +15,6 @@ export const wrapper = css`
     display: flex;
     flex-direction: column;
     gap: ${SIZE1};
-    &:nth-of-type(2) {
-      max-width: 360px;
-      min-width: 360px;
-    }
   }
 `;
 
@@ -33,7 +29,9 @@ export const queryPane = css`
   flex-direction: column;
 `;
 
-export const mediaPane = css`
+export const subPane = css`
   display: flex;
   flex-direction: column;
+  max-width: 380px;
+  min-width: 380px;
 `;

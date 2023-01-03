@@ -1,8 +1,9 @@
 import React, { FC } from "react";
+import { OrganismPane } from "./OrganismPane";
 import { PhenotypeSection } from "./PhenotypeSection";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
 import { API_MEDIA_BY_TAXON } from "../../../api/paths";
-import { mediaPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
+import { subPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
 import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
 import {
   FoundMedia,
@@ -11,6 +12,7 @@ import {
 } from "../../../shared/state/foundMedia";
 import { useMediaLoadAbortMutators } from "../../../shared/state/mediaLoadAbort";
 import { getData } from "../../../shared/utils/getData";
+import { extractLabelIds } from "../../../shared/utils/labelInfo";
 import { useSelectedOrganismsState } from "../states/selectedOrganisms";
 
 type Props = {
@@ -24,7 +26,10 @@ export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
       <div css={queryPane}>
         <PhenotypeSection />
       </div>
-      <div css={mediaPane}>
+      <div css={subPane}>
+        <OrganismPane />
+      </div>
+      <div css={subPane}>
         <MediaPane dispatchEvent={dispatchEvent} next={next} prev={prev} />
       </div>
     </div>
@@ -39,7 +44,7 @@ const useMediaPagination = () => {
   const next = () => {
     paginate({
       offset: response.offset + 10,
-      tax_ids: selectedOrganisms,
+      tax_ids: extractLabelIds(selectedOrganisms),
       abortLoader: setNextMediaLoadAbort,
       setFoundMedia,
     });
@@ -47,7 +52,7 @@ const useMediaPagination = () => {
   const prev = () => {
     paginate({
       offset: response.offset - 10,
-      tax_ids: selectedOrganisms,
+      tax_ids: extractLabelIds(selectedOrganisms),
       abortLoader: setNextMediaLoadAbort,
       setFoundMedia,
     });

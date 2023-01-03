@@ -10,13 +10,13 @@ import {
   SIZE1,
   SIZE2,
 } from "../../../shared/components/styles";
+import { LabelInfo } from "../../../shared/utils/labelInfo";
 
 type Props = {
-  id: string;
-  label: string;
   isChecked: boolean;
-  onClick: (id: string) => void;
-} & AcceptsEmotion;
+  onClick: (info: LabelInfo) => void;
+} & LabelInfo &
+  AcceptsEmotion;
 
 export const OrganismListItem: FC<Props> = ({ css, className, id, label, isChecked, onClick }) => {
   return (
@@ -28,7 +28,7 @@ export const OrganismListItem: FC<Props> = ({ css, className, id, label, isCheck
         </a>
       </div>
       <span css={checkCol}>
-        <Checkbox checked={isChecked} onClick={() => onClick(id)} />
+        <Checkbox checked={isChecked} onClick={() => onClick({ id, label })} />
       </span>
     </div>
   );

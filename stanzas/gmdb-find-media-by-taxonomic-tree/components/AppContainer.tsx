@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { TaxonomicTreeSection } from "./TaxonomicTreeSection";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
 import { API_MEDIA_BY_TAXON } from "../../../api/paths";
-import { mediaPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
+import { subPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
 import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
 import {
   FoundMedia,
@@ -24,7 +24,7 @@ export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
       <div css={queryPane}>
         <TaxonomicTreeSection />
       </div>
-      <div css={mediaPane}>
+      <div css={subPane}>
         <MediaPane dispatchEvent={dispatchEvent} next={next} prev={prev} />
       </div>
     </div>

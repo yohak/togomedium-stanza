@@ -1,5 +1,5 @@
 import { SerializedStyles } from "@emotion/serialize";
-import { Nullable, Optional } from "yohak-tools";
+import { Optional } from "yohak-tools";
 
 export type AcceptsEmotion = {
   css?: SerializedStyles;
@@ -19,10 +19,6 @@ export type ApiResponse<T> = {
   status: number;
   message?: string;
   body: Optional<T>;
-};
-export type LabelInfo = {
-  label: string;
-  id: string;
 };
 
 export type TreeBranch = {

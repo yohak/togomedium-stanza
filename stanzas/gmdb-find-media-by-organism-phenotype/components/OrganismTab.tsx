@@ -2,29 +2,30 @@ import { css } from "@emotion/react";
 import { Badge, Tab, Tabs } from "@mui/material";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
+import { COLOR_GRAY_LINE, SIZE4 } from "../../../shared/components/styles";
+import { mediaTabNames } from "../../../shared/state/mediaTabFocus";
 import {
-  MediaTabName,
-  mediaTabNames,
-  useMediaTabFocusMutators,
-  useMediaTabFocusState,
-} from "../../state/mediaTabFocus";
-import { useSelectedMediaState } from "../../state/selectedMedia";
-import { COLOR_GRAY_LINE, SIZE4 } from "../styles";
+  OrganismTabName,
+  organismTabNames,
+  useOrganismTabFocusMutators,
+  useOrganismTabFocusState,
+} from "../states/organismTabFocus";
+import { useSelectedOrganismsState } from "../states/selectedOrganisms";
 
 type Props = {} & AcceptsEmotion;
 
-export const MediaTab: FC<Props> = ({ css, className }) => {
-  const tabFocus = useMediaTabFocusState();
-  const { setMediaTabFocus } = useMediaTabFocusMutators();
-  const selected = useSelectedMediaState();
-  const handleChange = (event: React.SyntheticEvent, newValue: MediaTabName) => {
-    setMediaTabFocus(newValue);
+export const OrganismTab: FC<Props> = ({ css, className }) => {
+  const tabFocus = useOrganismTabFocusState();
+  const { setOrganismTabFocus } = useOrganismTabFocusMutators();
+  const selected = useSelectedOrganismsState();
+  const handleChange = (event: React.SyntheticEvent, newValue: OrganismTabName) => {
+    setOrganismTabFocus(newValue);
   };
   return (
     <div css={[wrapper, css]} className={className}>
       <Tabs value={tabFocus} onChange={handleChange}>
-        {mediaTabNames.map((label) => {
-          if (label === "Selected media") {
+        {organismTabNames.map((label) => {
+          if (label === "Selected organisms") {
             return (
               <Tab
                 key={label}

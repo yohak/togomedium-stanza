@@ -4,7 +4,7 @@ import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
 import { PATH_MEDIUM, PATH_ORGANISM } from "../../../shared/components/consts";
 import { COLOR_WHITE } from "../../../shared/components/styles";
-import { LabelInfo } from "../../../shared/utils/types";
+import { LabelInfo } from "../../../shared/utils/labelInfo";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";
 

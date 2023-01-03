@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { LabelInfo } from "../../../shared/utils/types";
+import { LabelInfo } from "../../../shared/utils/labelInfo";
 import { AlignmentCellState } from "../components/AlignmentCell";
 import { FooterCell } from "../components/FooterCell";
 import { MediaRow } from "../components/MediaRow";

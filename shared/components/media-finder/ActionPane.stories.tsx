@@ -2,8 +2,8 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { ActionPane } from "./ActionPane";
 import { useSelectedMediaMutators } from "../../state/selectedMedia";
+import { LabelInfo } from "../../utils/labelInfo";
 import { makeComponentStoryTitle } from "../../utils/storybook";
-import { LabelInfo } from "../../utils/types";
 
 type WrapperProps = { selectedMedia: LabelInfo[] } & ComponentProps<typeof ActionPane>;
 const Wrapper: FC<WrapperProps> = (args) => {
