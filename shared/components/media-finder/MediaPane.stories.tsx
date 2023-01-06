@@ -12,6 +12,8 @@ const Template: ComponentStory<typeof MediaPane> = (args) => <MediaPane {...args
 
 const defaultArgs: ComponentProps<typeof MediaPane> = {
   dispatchEvent: () => {},
+  next: () => {},
+  prev: () => {},
 };
 
 export const Primary = Template.bind({});

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { Mark } from "@mui/base/SliderUnstyled/SliderUnstyled";
+import { Mark } from "@mui/base/SliderUnstyled/useSlider.types";
 import { FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";

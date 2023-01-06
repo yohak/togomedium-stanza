@@ -3,6 +3,7 @@ import { TempTaxonInfo } from "./types";
 export const fullData: TempTaxonInfo = {
   id: "0",
   name: "taxonomy",
+  rank: "",
   children: [
     {
       id: "2157",

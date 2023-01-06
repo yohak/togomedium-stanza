@@ -19,6 +19,9 @@ const defaultArgs: ComponentProps<typeof RangeSlider> = {
     { value: 37, label: "37°C" },
     { value: 110, label: "110°C" },
   ],
+  queryKey: "",
+  handleValueChange: () => {},
+  handleEnabledChange: () => {},
 };
 
 export const Primary = Template.bind({});
