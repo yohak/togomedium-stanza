@@ -151,7 +151,7 @@ var metadata = {
 	"@context": {
 	stanza: "http://togostanza.org/resource/stanza#"
 },
-	"@id": "gmdb-fine-media-by-components",
+	"@id": "gmdb-find-media-by-components",
 	"stanza:label": "Find Media by Components",
 	"stanza:definition": "",
 	"stanza:license": "MIT",
