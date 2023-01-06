@@ -1,9 +1,9 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { g as getData } from './getData-d291c717.js';
-import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
-import { u as unescapeJsonString, c as capitalizeFirstLetter } from './string-ad764b4c.js';
-import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
-import './index-6aec0cc7.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-6dd55acc.js';
+import { g as getData } from './getData-633488a0.js';
+import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
+import { u as unescapeJsonString, a as capitalizeFirstLetter } from './string-7cf8ed98.js';
+import { U as URL_API } from './variables-58529e5c.js';
+import './index-a2ea6875.js';
 
 class GmdbOrganismByTaxid extends Stanza {
     render() {
@@ -13,7 +13,7 @@ class GmdbOrganismByTaxid extends Stanza {
                 return;
             }
             const apiName = "gmdb_organism_by_taxid";
-            const result = yield getData(`${API_GROWTH_MEDIUM}${apiName}`, {
+            const result = yield getData(`${URL_API}${apiName}`, {
                 tax_id: params.tax_id,
             });
             const parameters = parseData(result);

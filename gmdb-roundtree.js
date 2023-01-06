@@ -1,6 +1,6 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { s as select } from './index-7ac31beb.js';
-import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-6dd55acc.js';
+import { s as select } from './transform-83917164.js';
+import { U as URL_API } from './variables-58529e5c.js';
 
 const pi = Math.PI,
     tau = 2 * pi,
@@ -766,7 +766,7 @@ function linkRadial() {
   return l;
 }
 
-const TID_API = `${API_GROWTH_MEDIUM}gms_kegg_code_tid`;
+const TID_API = `${URL_API}gms_kegg_code_tid`;
 class GmdbRoundtree extends Stanza {
     render() {
         return __awaiter(this, void 0, void 0, function* () {

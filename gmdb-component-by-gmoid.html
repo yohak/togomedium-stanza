@@ -12,7 +12,7 @@
       import createHelpApp from './-togostanza/help-app.js';
 
       const metadata = {"@context":{"stanza":"http://togostanza.org/resource/stanza#"},"@id":"gmdb-component-by-gmoid","stanza:label":"Gmdb component by gmoid","stanza:definition":"","stanza:type":"Stanza","stanza:display":"Text","stanza:provider":"","stanza:license":"MIT","stanza:author":"Satoshi Onoda","stanza:address":"satoshionoda@gmail.com","stanza:contributor":[],"stanza:created":"2021-03-07","stanza:updated":"2021-03-07","stanza:parameter":[{"stanza:key":"gmo_id","stanza:example":"GMO_001005","stanza:description":"","stanza:required":true}],"stanza:about-link-placement":"bottom-right","stanza:style":[{"stanza:key":"--greeting-color","stanza:type":"color","stanza:default":"#eb7900","stanza:description":"text color of greeting"},{"stanza:key":"--greeting-align","stanza:type":"single-choice","stanza:choice":["left","center","right"],"stanza:default":"center","stanza:description":"text align of greeting"}]};
-      const readme   = "<h1>Gmdb component by gmoid</h1>\n<p>Stanza description goes here. Edit <code>stanzas/gmdb-component-by-gmoid/README.md</code> to update.</p>\n";
+      const readme   = "<h1 id=\"gmdb-component-by-gmoid\">Gmdb component by gmoid</h1>\n<p>Stanza description goes here. Edit <code>stanzas/gmdb-component-by-gmoid/README.md</code> to update.</p>\n";
 
       createHelpApp({metadata, readme}).mount('body');
     </script>

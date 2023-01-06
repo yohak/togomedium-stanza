@@ -12,7 +12,7 @@
       import createHelpApp from './-togostanza/help-app.js';
 
       const metadata = {"@context":{"stanza":"http://togostanza.org/resource/stanza#"},"@id":"gmdb-roundtree","stanza:label":"Gmdb roundtree","stanza:definition":"","stanza:type":"Stanza","stanza:display":"Graph","stanza:provider":"","stanza:license":"MIT","stanza:author":"Satoshi Onoda","stanza:address":"satoshionoda@gmail.com","stanza:contributor":[],"stanza:created":"2021-02-20","stanza:updated":"2021-02-20","stanza:parameter":[{"stanza:key":"newick","stanza:example":"http://keggoc-rdf.dbcls.jp/tmp/phylo2.newick","stanza:description":"newick tree format","stanza:required":true}],"stanza:about-link-placement":"bottom-right","stanza:style":[{"stanza:key":"--greeting-color","stanza:type":"color","stanza:default":"#eb7900","stanza:description":"text color of greeting"},{"stanza:key":"--greeting-align","stanza:type":"single-choice","stanza:choice":["left","center","right"],"stanza:default":"center","stanza:description":"text align of greeting"}]};
-      const readme   = "<h1>Gmdb roundtree</h1>\n<p>Stanza description goes here. Edit <code>stanzas/gmdb-roundtree/README.md</code> to update.</p>\n";
+      const readme   = "<h1 id=\"gmdb-roundtree\">Gmdb roundtree</h1>\n<p>Stanza description goes here. Edit <code>stanzas/gmdb-roundtree/README.md</code> to update.</p>\n";
 
       createHelpApp({metadata, readme}).mount('body');
     </script>

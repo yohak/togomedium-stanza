@@ -1,8 +1,8 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { g as getData } from './getData-d291c717.js';
-import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
-import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
-import './index-6aec0cc7.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-6dd55acc.js';
+import { g as getData } from './getData-633488a0.js';
+import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
+import { U as URL_API } from './variables-58529e5c.js';
+import './index-a2ea6875.js';
 
 class GmdbMediumByGmid extends Stanza {
     render() {
@@ -12,7 +12,7 @@ class GmdbMediumByGmid extends Stanza {
                 return;
             }
             const apiName = "gmdb_medium_by_gmid";
-            const result = yield getData(`${API_GROWTH_MEDIUM}${apiName}`, {
+            const result = yield getData(`${URL_API}${apiName}`, {
                 gm_id: params.gm_id,
             });
             const parameters = parseData(result, params);

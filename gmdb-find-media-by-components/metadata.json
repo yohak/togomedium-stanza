@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "stanza": "http://togostanza.org/resource/stanza#"
+  },
+  "@id": "gmdb-fine-media-by-components",
+  "stanza:label": "Find Media by Components",
+  "stanza:definition": "",
+  "stanza:license": "MIT",
+  "stanza:author": "Satoshi Onoda",
+  "stanza:contributor": [],
+  "stanza:created": "2022-01-01",
+  "stanza:updated": "2022-01-01",
+  "stanza:parameter": [],
+  "stanza:menu-placement": "none",
+  "stanza:style": [],
+  "stanza:incomingEvent": [],
+  "stanza:outgoingEvent": []
+}

@@ -1,16 +1,18 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { c as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-07efdcf7.js';
-import { c as css, r as react, j as jsx$1, d as dist } from './index-6aec0cc7.js';
-import { S as Slider, C as Chip, T as TextField, A as Autocomplete } from './TextField-924285d7.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-6dd55acc.js';
+import { a as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-0baa3c8b.js';
+import { e as css, r as reactExports, j as jsx$1, d as dist } from './index-a2ea6875.js';
+import { S as Slider } from './Slider-15572382.js';
+import { C as Chip, T as TextField, A as Autocomplete } from './TextField-f3df1412.js';
+import './shouldSpreadAdditionalProps-7b1b8d0d.js';
 
 const App = ({ sayTo, wrapper }) => {
-    const [count, setCount] = react.exports.useState(0);
+    const [count, setCount] = reactExports.useState(0);
     const increment = () => setCount((prev) => prev + 1);
     const handleClick = () => {
         console.log(dist.qs("p"));
         increment();
     };
-    return (jsxs("div", { children: [jsxs("p", Object.assign({ css: myStyle }, { children: ["Hello ", jsx("i", { children: sayTo }, void 0)] }), void 0), jsxs("p", { children: [count, " time(s) clicked"] }, void 0), jsx("button", Object.assign({ onClick: handleClick }, { children: "Click this" }), void 0), jsx(Slider, { getAriaLabel: () => "Temperature range", valueLabelDisplay: "auto" }, void 0), jsx(Autocomplete, { id: "tags-filled", disablePortal: true, options: top100Films.map((option) => option.title), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined", label: option }, getTagProps({ index }), { key: index })))), renderInput: (params) => (jsx(TextField, Object.assign({}, params, { variant: "filled", label: "freeSolo", placeholder: "Favorites" }), void 0)) }, void 0)] }, void 0));
+    return (jsxs("div", { children: [jsxs("p", Object.assign({ css: myStyle }, { children: ["Hello ", jsx("i", { children: sayTo })] })), jsxs("p", { children: [count, " time(s) clicked"] }), jsx("button", Object.assign({ onClick: handleClick }, { children: "Click this" })), jsx(Slider, { getAriaLabel: () => "Temperature range", valueLabelDisplay: "auto" }), jsx(Autocomplete, { id: "tags-filled", disablePortal: true, options: top100Films.map((option) => option.title), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined", label: option }, getTagProps({ index }), { key: index })))), renderInput: (params) => (jsx(TextField, Object.assign({}, params, { variant: "filled", label: "freeSolo", placeholder: "Favorites" }))) })] }));
 };
 const myStyle = css `
   font-size: 48px !important;
@@ -148,13 +150,13 @@ class HelloReact extends Stanza {
         return __awaiter(this, void 0, void 0, function* () {
             const main = this.root.querySelector("main");
             const props = this.params;
-            ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, props), void 0) }, void 0) }, void 0), main);
+            ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, props)) }) }), main);
         });
     }
     handleAttributeChange() {
         const main = this.root.querySelector("main");
         const props = this.params;
-        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, props), void 0) }, void 0) }, void 0), main);
+        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, props)) }) }), main);
     }
 }
 

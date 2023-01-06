@@ -1,0 +1,1 @@
+{"version":3,"file":"variables-58529e5c.js","sources":["../../../home/runner/work/togomedium-stanza/togomedium-stanza/shared/utils/variables.ts"],"sourcesContent":["export const URL_API: string = \"http://growthmedium.org/sparqlist/api/\";\n"],"names":[],"mappings":"AAAO,MAAM,OAAO,GAAW;;;;"}
