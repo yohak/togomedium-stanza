@@ -272,7 +272,7 @@ var metadata = {
 		"stanza:required": false
 	}
 ],
-	"stanza:about-link-placement": "bottom-right",
+	"stanza:menu-placement": "none",
 	"stanza:style": [
 	{
 		"stanza:key": "--link-color",

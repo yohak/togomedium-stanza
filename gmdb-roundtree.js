@@ -1170,7 +1170,7 @@ var metadata = {
 		"stanza:required": true
 	}
 ],
-	"stanza:about-link-placement": "bottom-right",
+	"stanza:menu-placement": "none",
 	"stanza:style": [
 	{
 		"stanza:key": "--greeting-color",
