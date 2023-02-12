@@ -3,8 +3,8 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { QueryInfo } from "./QueryInfo";
 import { QueryData, useQueryDataMutators } from "../../state/media-finder/queryData";
+import { COLOR_WHITE, SIZE2 } from "../../styles/variables";
 import { makeComponentStoryTitle } from "../../utils/storybook";
-import { COLOR_WHITE, SIZE2 } from "../styles";
 
 type WrapperProps = { queryData: QueryData } & ComponentProps<typeof QueryInfo>;
 const Wrapper: FC<WrapperProps> = (args) => {

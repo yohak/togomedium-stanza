@@ -10,6 +10,7 @@ export const COLOR_GRAY500 = "#6B7280";
 export const COLOR_GRAY400 = "#9ca3af";
 export const COLOR_GRAY300 = "#d1d5db";
 export const COLOR_GRAY_LINE = "#E5E7EB";
+export const COLOR_TEXT = "#333333";
 export const SIZE_BASE = 8;
 export const SIZE05 = `${SIZE_BASE / 2}px`;
 export const SIZE1 = `${SIZE_BASE}px`;
@@ -20,7 +21,7 @@ export const SIZE5 = `${SIZE_BASE * 5}px`;
 
 export const FONT_DEFAULT = css`
   font-family: ${FONT_EN};
-  font-size: 14px;
+  //font-size: 14px;
 `;
 
 export const FONT_WEIGHT_BOLD = css`

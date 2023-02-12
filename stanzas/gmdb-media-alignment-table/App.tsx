@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollableTable } from "./components/ScrollableTable";
 import { MediaAlignmentTableResponse } from "../../api/media-alignment-table/types";
 import { API_MEDIA_ALIGNMENT } from "../../api/paths";
-import { COLOR_WHITE, SIZE1 } from "../../shared/components/styles";
+import { COLOR_WHITE, SIZE1 } from "../../shared/styles/variables";
 import { getData } from "../../shared/utils/getData";
 
 export type AppProps = {
@@ -51,6 +51,5 @@ const wrapper = css`
   border-radius: 5px;
   padding: ${SIZE1};
 `;
-const loadingWrapper = css``;
 
 export default App;

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { HeaderCell } from "./HeaderCell";
-import { COLOR_WHITE, SIZE1 } from "../../../shared/components/styles";
+import { COLOR_WHITE, SIZE1 } from "../../../shared/styles/variables";
 import { AcceptsEmotion } from "../../../shared/utils/types";
 import { useIsMediaExpandedMutators, useIsMediaExpendedState } from "../states/isMediaExpanded";
 import {

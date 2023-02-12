@@ -1,9 +1,8 @@
 import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentSelect } from "./ComponentSelect";
-import { allComponentsMocks } from "../../../api/all-components/msw";
-import { COLOR_WHITE, SIZE2 } from "../../../shared/components/styles";
-import { makeComponentStoryTitle, makeMswParameter } from "../../../shared/utils/storybook";
+import { COLOR_WHITE, SIZE2 } from "../../../shared/styles/variables";
+import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 export default {
   title: makeComponentStoryTitle(ComponentSelect.name, "FindMediaByComponents"),

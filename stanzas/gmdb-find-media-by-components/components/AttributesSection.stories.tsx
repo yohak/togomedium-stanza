@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AttributesSection } from "./AttributesSection";
 import { allComponentsMocks } from "../../../api/all-components/msw";
-import { COLOR_WHITE, SIZE2 } from "../../../shared/components/styles";
+import { COLOR_WHITE, SIZE2 } from "../../../shared/styles/variables";
 import { makeComponentStoryTitle, makeMswParameter } from "../../../shared/utils/storybook";
 
 export default {

@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN } from "./styles";
+import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN } from "../styles/variables";
 
 export const muiTheme = createTheme({
   palette: {

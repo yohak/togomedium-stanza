@@ -4,7 +4,7 @@ import { FooterRow } from "./FooterRow";
 import { HeaderRow } from "./HeaderRow";
 import { MediaRow } from "./MediaRow";
 import { MediaAlignmentTableResponse } from "../../../api/media-alignment-table/types";
-import { COLOR_GRAY_LINE } from "../../../shared/components/styles";
+import { COLOR_GRAY_LINE } from "../../../shared/styles/variables";
 import { makeAlignmentData } from "../functions/makeAlignmentData";
 import { makeComponentTree } from "../functions/makeComponentBranch";
 import { makeFooterComponents } from "../functions/makeFooterComponents";

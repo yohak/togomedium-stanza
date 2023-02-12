@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
-import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN, SIZE1 } from "../../../shared/components/styles";
+import { COLOR_PRIMARY, COLOR_WHITE, FONT_EN, SIZE1 } from "../../../shared/styles/variables";
 import { LabelInfo } from "../../../shared/utils/labelInfo";
 import { WIDTH_COMPACT, WIDTH_EXPANDED } from "../consts";
 

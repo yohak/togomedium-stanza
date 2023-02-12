@@ -16,7 +16,7 @@ import {
   COLOR_GRAY_LINE,
   COLOR_PRIMARY,
   COLOR_WHITE,
-} from "../../../shared/components/styles";
+} from "../../../shared/styles/variables";
 
 export type CheckStatus = "none" | "checked" | "grouped" | "indeterminate";
 

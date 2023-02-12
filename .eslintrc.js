@@ -31,6 +31,7 @@ module.exports = {
         additionalHooks: "useRecoilCallback",
       },
     ],
+    "react/no-unknown-property": ["error", { ignore: ["css"] }],
     "prefer-const": [
       "warn",
       {

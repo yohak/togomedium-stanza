@@ -3,7 +3,7 @@ import React, { ComponentProps, FC } from "react";
 import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
 import { PATH_MEDIUM, PATH_ORGANISM } from "../../../shared/components/consts";
-import { COLOR_WHITE } from "../../../shared/components/styles";
+import { COLOR_WHITE } from "../../../shared/styles/variables";
 import { LabelInfo } from "../../../shared/utils/labelInfo";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
 import { useIsOrganismsExpendedState } from "../states/isOrganismsExpanded";

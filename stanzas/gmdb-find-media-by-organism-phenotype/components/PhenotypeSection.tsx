@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { PhenotypeSearchArea } from "./PhenotypeSearchArea";
-import { COLOR_GRAY_LINE, COLOR_WHITE, SIZE2 } from "../../../shared/components/styles";
+import { COLOR_WHITE } from "../../../shared/styles/variables";
 
 type Props = {} & AcceptsEmotion;
 

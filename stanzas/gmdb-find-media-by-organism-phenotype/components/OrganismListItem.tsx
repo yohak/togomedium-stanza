@@ -2,14 +2,14 @@ import { css } from "@emotion/react";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { PATH_MEDIUM, PATH_ORGANISM } from "../../../shared/components/consts";
+import { PATH_ORGANISM } from "../../../shared/components/consts";
 import {
   COLOR_GRAY_LINE,
   COLOR_PRIMARY,
   COLOR_WHITE,
   SIZE1,
   SIZE2,
-} from "../../../shared/components/styles";
+} from "../../../shared/styles/variables";
 import { LabelInfo } from "../../../shared/utils/labelInfo";
 
 type Props = {

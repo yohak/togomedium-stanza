@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { SIZE1, SIZE2 } from "../styles";
+import { SIZE1 } from "../../styles/variables";
 
 type Props = {
   total: number;

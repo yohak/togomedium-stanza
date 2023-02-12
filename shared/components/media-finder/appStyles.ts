@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLOR_GRAY_BG, COLOR_WHITE, ROUNDED_CORNER, SIZE1 } from "../styles";
+import { COLOR_GRAY_BG, COLOR_WHITE, ROUNDED_CORNER, SIZE1 } from "../../styles/variables";
 
 export const wrapper = css`
   position: relative;

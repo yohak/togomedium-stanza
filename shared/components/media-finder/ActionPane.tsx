@@ -5,7 +5,14 @@ import {
   useSelectedMediaMutators,
   useSelectedMediaState,
 } from "../../state/media-finder/selectedMedia";
-import { COLOR_WHITE, FONT_WEIGHT_MEDIUM, ROUNDED_CORNER, SIZE05, SIZE1, SIZE2 } from "../styles";
+import {
+  COLOR_WHITE,
+  FONT_WEIGHT_MEDIUM,
+  ROUNDED_CORNER,
+  SIZE05,
+  SIZE1,
+  SIZE2,
+} from "../../styles/variables";
 
 type Props = { actionLabel: string; dispatchEvent: (gmIds: string[]) => void };
 

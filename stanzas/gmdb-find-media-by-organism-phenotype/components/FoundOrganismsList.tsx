@@ -9,12 +9,7 @@ import {
 } from "../../../api/organisms_by_phenotypes/types";
 import { API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
 import { Pagination } from "../../../shared/components/media-finder/Pagination";
-import {
-  COLOR_GRAY700,
-  COLOR_WHITE,
-  FONT_WEIGHT_BOLD,
-  SIZE1,
-} from "../../../shared/components/styles";
+import { COLOR_GRAY700, FONT_WEIGHT_BOLD, SIZE1 } from "../../../shared/styles/variables";
 import { getData } from "../../../shared/utils/getData";
 import { hasIdOfLabel, LabelInfo } from "../../../shared/utils/labelInfo";
 import { useFoundOrganismsMutators, useFoundOrganismsState } from "../states/foundOrganisms";
@@ -141,12 +136,6 @@ const infoTextCSS = css`
   font-size: 18px;
   ${FONT_WEIGHT_BOLD};
   margin-bottom: ${SIZE1};
-`;
-
-const organismList = css`
-  background-color: ${COLOR_WHITE};
-  position: relative;
-  min-height: 100px;
 `;
 
 const inner = css`

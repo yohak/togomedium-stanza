@@ -10,8 +10,7 @@ import {
   useMediaTabFocusMutators,
   useMediaTabFocusState,
 } from "../../state/media-finder/mediaTabFocus";
-import { useSelectedMediaState } from "../../state/media-finder/selectedMedia";
-import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../styles";
+import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../styles/variables";
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;

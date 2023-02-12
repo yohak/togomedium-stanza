@@ -2,6 +2,7 @@ import { ComponentStory } from "@storybook/react";
 import { RestHandler } from "msw";
 
 type StanzaNames =
+  | "ComponentByGmoid"
   | "MediaFinder"
   | "MediaAlignmentTable"
   | "FindMediaByTaxonomicTree"

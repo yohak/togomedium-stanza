@@ -1,8 +1,14 @@
 import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { useQueryDataState } from "../../state/media-finder/queryData";
+import {
+  COLOR_GRAY_LINE,
+  FONT_WEIGHT_BOLD,
+  ROUNDED_CORNER,
+  SIZE05,
+  SIZE1,
+} from "../../styles/variables";
 import { queryDataToInfoText } from "../../utils/queryDataToInfoText";
-import { COLOR_GRAY_LINE, FONT_WEIGHT_BOLD, ROUNDED_CORNER, SIZE05, SIZE1 } from "../styles";
 
 type Props = {};
 
