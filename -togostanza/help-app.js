@@ -1,4 +1,4 @@
-import { d as defineComponent, h as ref, i as octicons, a as createElementBlock, F as Fragment, e as createBaseVNode, j as createTextVNode, m as mergeProps, o as openBlock, k as computed, l as watch, c as createBlock, n as normalizeProps, p as guardReactiveProps, q as resolveDynamicComponent, u as createVNode, t as toDisplayString, r as resolveComponent, b as renderList, v as pushScopeId, x as popScopeId, y as n, f as createCommentVNode, z as normalizeClass, A as unref, B as normalizeStyle, s as script$8, w as withCtx, g as createApp } from './Layout-c6a70883.js';
+import { d as defineComponent, h as ref, i as octicons, a as createElementBlock, F as Fragment, e as createBaseVNode, j as createTextVNode, m as mergeProps, o as openBlock, k as computed, l as watch, c as createBlock, n as normalizeProps, p as guardReactiveProps, q as resolveDynamicComponent, u as createVNode, t as toDisplayString, r as resolveComponent, b as renderList, v as pushScopeId, x as popScopeId, y as n, f as createCommentVNode, z as normalizeClass, A as unref, B as normalizeStyle, s as script$8, w as withCtx, g as createApp } from './Layout-dba06276.js';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -3708,13 +3708,32 @@ n(css,{});
 script$5.__scopeId = "data-v-43688ce6";
 script$5.__file = "node_modules/togostanza/src/components/HelpAboutPane.vue";
 
+function removePrefix(str, prefix) {
+  if (str.startsWith(prefix)) {
+    return str.slice(prefix.length);
+  }
+  return str;
+}
+
 var script$4 = defineComponent({
-  props: ['choices', 'helpText', 'input', 'name', 'required', 'type', 'label'],
+  props: [
+    'choices',
+    'helpText',
+    'input',
+    'name',
+    'required',
+    'type',
+    'label',
+    'pathPrefix',
+  ],
   setup(props) {
+    const shortName = computed(() => {
+      return removePrefix(props.name, props.pathPrefix);
+    });
     const formType = computed(() => {
       return props.type === 'datetime' ? 'datetime-local' : props.type;
     });
-    return { ...props, formType };
+    return { ...props, formType, shortName };
   },
 });
 
@@ -3725,15 +3744,17 @@ const _hoisted_3$4 = {
   class: "text-danger"
 };
 const _hoisted_4$4 = { class: "text-muted" };
-const _hoisted_5$4 = { class: "input-group" };
-const _hoisted_6$3 = ["value"];
-const _hoisted_7$2 = ["value"];
-const _hoisted_8$2 = { class: "input-group-text" };
-const _hoisted_9$1 = ["checked", "id"];
-const _hoisted_10$1 = ["for"];
-const _hoisted_11$1 = ["type", "value"];
-const _hoisted_12$1 = ["disabled"];
-const _hoisted_13 = { class: "form-text text-muted" };
+const _hoisted_5$4 = { class: "fs-5" };
+const _hoisted_6$3 = { class: "text-muted" };
+const _hoisted_7$2 = { class: "input-group" };
+const _hoisted_8$2 = ["value"];
+const _hoisted_9$1 = ["value"];
+const _hoisted_10$1 = { class: "input-group-text" };
+const _hoisted_11$1 = ["checked", "id"];
+const _hoisted_12$1 = ["for"];
+const _hoisted_13 = ["type", "value"];
+const _hoisted_14 = ["disabled"];
+const _hoisted_15 = { class: "form-text text-muted" };
 
 function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createElementBlock(Fragment, null, [
@@ -3742,11 +3763,12 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
         (_ctx.required)
           ? (openBlock(), createElementBlock("span", _hoisted_3$4, "*"))
           : createCommentVNode("v-if", true),
-        createTextVNode(" " + toDisplayString(_ctx.name), 1 /* TEXT */)
+        createBaseVNode("span", _hoisted_4$4, toDisplayString(_ctx.pathPrefix), 1 /* TEXT */),
+        createBaseVNode("span", _hoisted_5$4, toDisplayString(_ctx.shortName), 1 /* TEXT */)
       ]),
-      createBaseVNode("small", _hoisted_4$4, toDisplayString(_ctx.type || 'string'), 1 /* TEXT */)
+      createBaseVNode("small", _hoisted_6$3, toDisplayString(_ctx.type || 'string'), 1 /* TEXT */)
     ]),
-    createBaseVNode("div", _hoisted_5$4, [
+    createBaseVNode("div", _hoisted_7$2, [
       (_ctx.formType === 'single-choice')
         ? (openBlock(), createElementBlock("select", {
             key: 0,
@@ -3758,24 +3780,24 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
               return (openBlock(), createElementBlock("option", {
                 value: choice,
                 key: choice
-              }, toDisplayString(choice), 9 /* TEXT, PROPS */, _hoisted_7$2))
+              }, toDisplayString(choice), 9 /* TEXT, PROPS */, _hoisted_9$1))
             }), 128 /* KEYED_FRAGMENT */))
-          ], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_6$3))
+          ], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_8$2))
         : (_ctx.formType === 'boolean')
           ? (openBlock(), createElementBlock(Fragment, { key: 1 }, [
-              createBaseVNode("div", _hoisted_8$2, [
+              createBaseVNode("div", _hoisted_10$1, [
                 createBaseVNode("input", {
                   class: "form-check-input mt-0",
                   type: "checkbox",
                   checked: _ctx.input.valueParsed.value,
                   onChange: _cache[1] || (_cache[1] = $event => (_ctx.input.setValueStr($event.target.checked.toString()))),
                   id: _ctx.name
-                }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_9$1)
+                }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_11$1)
               ]),
               createBaseVNode("label", {
                 class: "input-group-text flex-fill bg-body",
                 for: _ctx.name
-              }, toDisplayString(_ctx.label), 9 /* TEXT, PROPS */, _hoisted_10$1)
+              }, toDisplayString(_ctx.label), 9 /* TEXT, PROPS */, _hoisted_12$1)
             ], 64 /* STABLE_FRAGMENT */))
           : (openBlock(), createElementBlock("input", {
               key: 2,
@@ -3783,7 +3805,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
               value: _ctx.input.valueStr.value,
               onInput: _cache[2] || (_cache[2] = $event => (_ctx.input.setValueStr($event.target.value))),
               class: normalizeClass(["form-control mw-100", { 'form-control-color': _ctx.formType === 'color' }])
-            }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_11$1)),
+            }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_13)),
       (_ctx.input.hasDefault)
         ? (openBlock(), createElementBlock("button", {
             key: 3,
@@ -3791,10 +3813,10 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
             disabled: _ctx.input.isDefault.value,
             type: "button",
             class: "btn btn-light border"
-          }, " Reset ", 8 /* PROPS */, _hoisted_12$1))
+          }, " Reset ", 8 /* PROPS */, _hoisted_14))
         : createCommentVNode("v-if", true)
     ]),
-    createBaseVNode("small", _hoisted_13, toDisplayString(_ctx.helpText), 1 /* TEXT */)
+    createBaseVNode("small", _hoisted_15, toDisplayString(_ctx.helpText), 1 /* TEXT */)
   ], 64 /* STABLE_FRAGMENT */))
 }
 
@@ -3880,13 +3902,14 @@ return (_ctx, _cache) => {
             }, [
               createVNode(script$4, {
                 input: input,
+                "path-prefix": path.join('-') + '-',
                 name: param['stanza:key'],
                 type: param['stanza:type'],
                 choices: param['stanza:choice'],
                 required: param['stanza:required'],
                 "help-text": param['stanza:description'],
                 label: param['stanza:label']
-              }, null, 8 /* PROPS */, ["input", "name", "type", "choices", "required", "help-text", "label"])
+              }, null, 8 /* PROPS */, ["input", "path-prefix", "name", "type", "choices", "required", "help-text", "label"])
             ]))
           }), 128 /* KEYED_FRAGMENT */))
         ], 10 /* CLASS, PROPS */, _hoisted_5$3))
@@ -3984,13 +4007,14 @@ return (_ctx, _cache) => {
                 }, [
                   createVNode(script$4, {
                     input: input,
+                    "path-prefix": '--togostanza-' + path.join('-') + '-',
                     name: style['stanza:key'],
                     type: style['stanza:type'],
                     choices: style['stanza:choice'],
                     required: style['stanza:required'],
                     "help-text": style['stanza:description'],
                     label: style['stanza:label']
-                  }, null, 8 /* PROPS */, ["input", "name", "type", "choices", "required", "help-text", "label"])
+                  }, null, 8 /* PROPS */, ["input", "path-prefix", "name", "type", "choices", "required", "help-text", "label"])
                 ]))
               }), 128 /* KEYED_FRAGMENT */))
             ], 10 /* CLASS, PROPS */, _hoisted_6$2))
@@ -4337,25 +4361,25 @@ const _hoisted_5 = /*#__PURE__*/createBaseVNode("nav", {
 }, [
   /*#__PURE__*/createBaseVNode("a", {
     class: "nav-link active",
-    href: "#parameters",
+    href: "#tabpane-parameters",
     "data-bs-toggle": "tab",
     role: "tab"
   }, "Parameters"),
   /*#__PURE__*/createBaseVNode("a", {
     class: "nav-link",
-    href: "#styles",
+    href: "#tabpane-styles",
     "data-bs-toggle": "tab",
     role: "tab"
   }, "Styles"),
   /*#__PURE__*/createBaseVNode("a", {
     class: "nav-link",
-    href: "#events",
+    href: "#tabpane-events",
     "data-bs-toggle": "tab",
     role: "tab"
   }, "Events"),
   /*#__PURE__*/createBaseVNode("a", {
     class: "nav-link",
-    href: "#about",
+    href: "#tabpane-about",
     "data-bs-toggle": "tab",
     role: "tab"
   }, "About")
@@ -4363,22 +4387,22 @@ const _hoisted_5 = /*#__PURE__*/createBaseVNode("nav", {
 const _hoisted_6 = { class: "tab-content mt-3" };
 const _hoisted_7 = {
   class: "tab-pane px-lg-5",
-  id: "about",
+  id: "tabpane-about",
   role: "tabpanel"
 };
 const _hoisted_8 = {
   class: "tab-pane active",
-  id: "parameters",
+  id: "tabpane-parameters",
   role: "tabpanel"
 };
 const _hoisted_9 = {
   class: "tab-pane",
-  id: "styles",
+  id: "tabpane-styles",
   role: "tabpanel"
 };
 const _hoisted_10 = {
   class: "tab-pane",
-  id: "events",
+  id: "tabpane-events",
   role: "tabpanel"
 };
 const _hoisted_11 = { class: "col-lg-6" };

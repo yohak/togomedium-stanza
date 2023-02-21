@@ -31,6 +31,15 @@ const convertHTMLEntity = (text) => {
         return span.innerText;
     });
 };
+const makeSpeciesName = (str) => {
+    const arr = str.split(" ");
+    if (arr.length < 1) {
+        return "";
+    }
+    const first = arr.shift().charAt(0) + ".";
+    const rest = capitalizeFirstLetter(arr.join(" "));
+    return `${first} ${rest}`;
+};
 
-export { capitalizeFirstLetter as a, makeNcbiOrganismLink as b, convertHTMLEntity as c, makeTogoGenomeOrganismLink as m, stringToArray as s, unescapeJsonString as u };
-//# sourceMappingURL=string-7cf8ed98.js.map
+export { convertHTMLEntity as a, makeTogoGenomeOrganismLink as b, capitalizeFirstLetter as c, makeNcbiOrganismLink as d, makeSpeciesName as m, stringToArray as s, unescapeJsonString as u };
+//# sourceMappingURL=string-b0eb559d.js.map

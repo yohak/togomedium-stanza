@@ -1,5 +1,7 @@
-import { r as reactExports, _ as _extends, b as React, k as keyframes } from './index-a2ea6875.js';
-import { aa as _inheritsLoose, _ as _objectWithoutPropertiesLoose, ab as TransitionGroupContext, m as clsx, o as jsxRuntimeExports, g as generateUtilityClasses, s as styled, u as useThemeProps, b as generateUtilityClass, l as useForkRef, k as useIsFocusVisible, i as useEventCallback, p as composeClasses, a1 as isHostComponent } from './EmotionCacheProvider-0baa3c8b.js';
+import { r as reactExports, _ as _extends, R as React, k as keyframes } from './index-c7537c15.js';
+import { _ as _objectWithoutPropertiesLoose } from './createTheme-f7661377.js';
+import { _ as _inheritsLoose, F as TransitionGroupContext, i as clsx, g as generateUtilityClasses, s as styled, u as useThemeProps, a as generateUtilityClass, h as useForkRef, f as useIsFocusVisible, e as useEventCallback, k as composeClasses } from './Grow-2e6d9fa7.js';
+import { e as jsxRuntimeExports } from './EmotionCacheProvider-4e306bf1.js';
 
 var reactIsExports = {};
 var reactIs = {
@@ -30,6 +32,15 @@ reactIs_production_min.isValidElementType=function(a){return "string"===typeof a
 	  module.exports = reactIs_production_min;
 	}
 } (reactIs));
+
+const usePreviousProps = value => {
+  const ref = reactExports.useRef({});
+  reactExports.useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+var usePreviousProps$1 = usePreviousProps;
 
 function _assertThisInitialized(self) {
   if (self === void 0) {
@@ -966,10 +977,5 @@ function useFormControl() {
   return reactExports.useContext(FormControlContext$1);
 }
 
-const shouldSpreadAdditionalProps = Slot => {
-  return !Slot || !isHostComponent(Slot);
-};
-var shouldSpreadAdditionalProps$1 = shouldSpreadAdditionalProps;
-
-export { ButtonBase$1 as B, FormControlContext$1 as F, shouldSpreadAdditionalProps$1 as s, useFormControl as u };
-//# sourceMappingURL=shouldSpreadAdditionalProps-7b1b8d0d.js.map
+export { ButtonBase$1 as B, FormControlContext$1 as F, useFormControl as a, usePreviousProps$1 as u };
+//# sourceMappingURL=useFormControl-dfa096e1.js.map

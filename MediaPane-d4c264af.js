@@ -1,7 +1,10 @@
-import { r as reactExports, _ as _extends, T as ThemeContext$1, k as keyframes, e as css, d as dist } from './index-a2ea6875.js';
-import { q as useTheme, o as jsxRuntimeExports, T as ThemeContext, r as useTheme$1, b as generateUtilityClass, g as generateUtilityClasses, _ as _objectWithoutPropertiesLoose, t as useSlotProps, p as composeClasses, s as styled, c as capitalize, u as useThemeProps, m as clsx, v as rootShouldForwardProp, d as alpha, w as resolveProps, f as useControlled, x as createSvgIcon, y as ownerWindow, z as debounce, e as useTheme$2, i as useEventCallback, A as ownerDocument, C as COLOR_GRAY_BG, S as SIZE1, B as ROUNDED_CORNER, D as COLOR_WHITE, H as SIZE2, I as SIZE05, J as FONT_WEIGHT_MEDIUM, a as jsxs, j as jsx, K as COLOR_GRAY_LINE, L as COLOR_PRIMARY, M as FONT_WEIGHT_BOLD, N as SIZE3, O as COLOR_GRAY700, Q as SIZE4, U as createTheme, V as FONT_EN } from './EmotionCacheProvider-0baa3c8b.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, P as PATH_MEDIUM, T as Tooltip } from './consts-6faa5a31.js';
-import { s as shouldSpreadAdditionalProps, B as ButtonBase, u as useFormControl } from './shouldSpreadAdditionalProps-7b1b8d0d.js';
+import { _ as _extends, r as reactExports, k as keyframes, c as css, e as dist } from './index-c7537c15.js';
+import { e as jsxRuntimeExports, g as COLOR_GRAY_BG, S as SIZE1, h as ROUNDED_CORNER, C as COLOR_WHITE, i as SIZE2, k as SIZE05, l as FONT_WEIGHT_MEDIUM, d as jsxs, j as jsx, m as COLOR_GRAY_LINE, b as COLOR_PRIMARY, n as FONT_WEIGHT_BOLD, o as SIZE3, p as COLOR_GRAY700, q as SIZE4 } from './EmotionCacheProvider-4e306bf1.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22 } from './recoil-b4c2016b.js';
+import { b as capitalize, _ as _objectWithoutPropertiesLoose, d as alpha } from './createTheme-f7661377.js';
+import { g as generateUtilityClasses, a as generateUtilityClass, s as styled, u as useThemeProps, l as useSlotProps, i as clsx, k as composeClasses, r as rootShouldForwardProp, m as resolveProps, c as useControlled, n as createSvgIcon, o as ownerWindow, p as debounce, b as useTheme, e as useEventCallback, q as ownerDocument } from './Grow-2e6d9fa7.js';
+import { u as usePreviousProps, B as ButtonBase, a as useFormControl } from './useFormControl-dfa096e1.js';
+import { P as PATH_MEDIUM, T as Tooltip } from './consts-4e65898a.js';
 
 // Source from https://github.com/alitaheri/normalize-scroll-left
 let cachedType;
@@ -74,76 +77,16 @@ function getNormalizedScrollLeft(element, direction) {
   }
 }
 
-const usePreviousProps = value => {
-  const ref = reactExports.useRef({});
-  reactExports.useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-};
-var usePreviousProps$1 = usePreviousProps;
-
-const hasSymbol = typeof Symbol === 'function' && Symbol.for;
-var nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
-
-function mergeOuterLocalTheme(outerTheme, localTheme) {
-  if (typeof localTheme === 'function') {
-    const mergedTheme = localTheme(outerTheme);
-    return mergedTheme;
-  }
-  return _extends({}, outerTheme, localTheme);
-}
-
 /**
- * This component takes a `theme` prop.
- * It makes the `theme` available down the React tree thanks to React context.
- * This component should preferably be used at **the root of your component tree**.
+ *
+ * Demos:
+ *
+ * - [Unstyled badge](https://mui.com/base/react-badge/#hook)
+ *
+ * API:
+ *
+ * - [useBadge API](https://mui.com/base/api/use-badge/)
  */
-function ThemeProvider$1(props) {
-  const {
-    children,
-    theme: localTheme
-  } = props;
-  const outerTheme = useTheme();
-  const theme = reactExports.useMemo(() => {
-    const output = outerTheme === null ? localTheme : mergeOuterLocalTheme(outerTheme, localTheme);
-    if (output != null) {
-      output[nested] = outerTheme !== null;
-    }
-    return output;
-  }, [localTheme, outerTheme]);
-  return /*#__PURE__*/jsxRuntimeExports.jsx(ThemeContext.Provider, {
-    value: theme,
-    children: children
-  });
-}
-
-const EMPTY_THEME = {};
-function InnerThemeProvider(props) {
-  const theme = useTheme$1();
-  return /*#__PURE__*/jsxRuntimeExports.jsx(ThemeContext$1.Provider, {
-    value: typeof theme === 'object' ? theme : EMPTY_THEME,
-    children: props.children
-  });
-}
-
-/**
- * This component makes the `theme` available down the React tree.
- * It should preferably be used at **the root of your component tree**.
- */
-function ThemeProvider(props) {
-  const {
-    children,
-    theme: localTheme
-  } = props;
-  return /*#__PURE__*/jsxRuntimeExports.jsx(ThemeProvider$1, {
-    theme: localTheme,
-    children: /*#__PURE__*/jsxRuntimeExports.jsx(InnerThemeProvider, {
-      children: children
-    })
-  });
-}
-
 function useBadge(parameters) {
   const {
     badgeContent: badgeContentProp,
@@ -151,7 +94,7 @@ function useBadge(parameters) {
     max: maxProp = 99,
     showZero = false
   } = parameters;
-  const prevProps = usePreviousProps$1({
+  const prevProps = usePreviousProps({
     badgeContent: badgeContentProp,
     max: maxProp
   });
@@ -172,83 +115,6 @@ function useBadge(parameters) {
   };
 }
 
-function getBadgeUnstyledUtilityClass(slot) {
-  return generateUtilityClass('MuiBadge', slot);
-}
-generateUtilityClasses('MuiBadge', ['root', 'badge', 'invisible']);
-
-const _excluded$9 = ["badgeContent", "component", "children", "invisible", "max", "slotProps", "slots", "showZero"];
-const useUtilityClasses$8 = ownerState => {
-  const {
-    invisible
-  } = ownerState;
-  const slots = {
-    root: ['root'],
-    badge: ['badge', invisible && 'invisible']
-  };
-  return composeClasses(slots, getBadgeUnstyledUtilityClass, undefined);
-};
-/**
- *
- * Demos:
- *
- * - [Unstyled badge](https://mui.com/base/react-badge/)
- *
- * API:
- *
- * - [BadgeUnstyled API](https://mui.com/base/api/badge-unstyled/)
- */
-const BadgeUnstyled = /*#__PURE__*/reactExports.forwardRef(function BadgeUnstyled(props, ref) {
-  const {
-      component,
-      children,
-      max: maxProp = 99,
-      slotProps = {},
-      slots = {},
-      showZero = false
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$9);
-  const {
-    badgeContent,
-    max,
-    displayValue,
-    invisible
-  } = useBadge(_extends({}, props, {
-    max: maxProp
-  }));
-  const ownerState = _extends({}, props, {
-    badgeContent,
-    invisible,
-    max,
-    showZero
-  });
-  const classes = useUtilityClasses$8(ownerState);
-  const Root = component || slots.root || 'span';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps.root,
-    externalForwardedProps: other,
-    additionalProps: {
-      ref
-    },
-    ownerState,
-    className: classes.root
-  });
-  const Badge = slots.badge || 'span';
-  const badgeProps = useSlotProps({
-    elementType: Badge,
-    externalSlotProps: slotProps.badge,
-    ownerState,
-    className: classes.badge
-  });
-  return /*#__PURE__*/jsxRuntimeExports.jsxs(Root, _extends({}, rootProps, {
-    children: [children, /*#__PURE__*/jsxRuntimeExports.jsx(Badge, _extends({}, badgeProps, {
-      children: displayValue
-    }))]
-  }));
-});
-var BadgeUnstyled$1 = BadgeUnstyled;
-
 function getBadgeUtilityClass(slot) {
   return generateUtilityClass('MuiBadge', slot);
 }
@@ -257,7 +123,7 @@ const badgeClasses = generateUtilityClasses('MuiBadge', ['root', 'badge', 'dot',
 'anchorOriginTopLeftCircular', 'anchorOriginTopLeftRectangular', 'anchorOriginTopRightCircular', 'anchorOriginTopRightRectangular', 'anchorOriginBottomLeftCircular', 'anchorOriginBottomLeftRectangular', 'anchorOriginBottomRightCircular', 'anchorOriginBottomRightRectangular']);
 var badgeClasses$1 = badgeClasses;
 
-const _excluded$8 = ["anchorOrigin", "className", "component", "components", "componentsProps", "overlap", "color", "invisible", "max", "badgeContent", "slots", "slotProps", "showZero", "variant"];
+const _excluded$8 = ["anchorOrigin", "className", "classes", "component", "components", "componentsProps", "children", "overlap", "color", "invisible", "max", "badgeContent", "slots", "slotProps", "showZero", "variant"];
 const RADIUS_STANDARD = 10;
 const RADIUS_DOT = 4;
 const useUtilityClasses$7 = ownerState => {
@@ -411,13 +277,14 @@ const Badge = /*#__PURE__*/reactExports.forwardRef(function Badge(inProps, ref) 
         horizontal: 'right'
       },
       className,
-      component = 'span',
+      component,
       components = {},
       componentsProps = {},
+      children,
       overlap: overlapProp = 'rectangular',
       color: colorProp = 'default',
       invisible: invisibleProp = false,
-      max,
+      max: maxProp = 99,
       badgeContent: badgeContentProp,
       slots,
       slotProps,
@@ -425,73 +292,71 @@ const Badge = /*#__PURE__*/reactExports.forwardRef(function Badge(inProps, ref) 
       variant: variantProp = 'standard'
     } = props,
     other = _objectWithoutPropertiesLoose(props, _excluded$8);
-  const prevProps = usePreviousProps$1({
+  const {
+    badgeContent,
+    invisible: invisibleFromHook,
+    max,
+    displayValue: displayValueFromHook
+  } = useBadge({
+    max: maxProp,
+    invisible: invisibleProp,
+    badgeContent: badgeContentProp,
+    showZero
+  });
+  const prevProps = usePreviousProps({
     anchorOrigin: anchorOriginProp,
     color: colorProp,
     overlap: overlapProp,
-    variant: variantProp
+    variant: variantProp,
+    badgeContent: badgeContentProp
   });
-  let invisible = invisibleProp;
-  if (invisibleProp === false && (badgeContentProp === 0 && !showZero || badgeContentProp == null && variantProp !== 'dot')) {
-    invisible = true;
-  }
+  const invisible = invisibleFromHook || badgeContent == null && variantProp !== 'dot';
   const {
     color = colorProp,
     overlap = overlapProp,
     anchorOrigin = anchorOriginProp,
     variant = variantProp
   } = invisible ? prevProps : props;
+  const displayValue = variant !== 'dot' ? displayValueFromHook : undefined;
   const ownerState = _extends({}, props, {
-    anchorOrigin,
+    badgeContent,
     invisible,
+    max,
+    displayValue,
+    showZero,
+    anchorOrigin,
     color,
     overlap,
     variant
   });
   const classes = useUtilityClasses$7(ownerState);
-  let displayValue;
-  if (variant !== 'dot') {
-    displayValue = badgeContentProp && Number(badgeContentProp) > max ? `${max}+` : badgeContentProp;
-  }
 
   // support both `slots` and `components` for backward compatibility
   const RootSlot = (_ref = (_slots$root = slots == null ? void 0 : slots.root) != null ? _slots$root : components.Root) != null ? _ref : BadgeRoot;
   const BadgeSlot = (_ref2 = (_slots$badge = slots == null ? void 0 : slots.badge) != null ? _slots$badge : components.Badge) != null ? _ref2 : BadgeBadge;
   const rootSlotProps = (_slotProps$root = slotProps == null ? void 0 : slotProps.root) != null ? _slotProps$root : componentsProps.root;
   const badgeSlotProps = (_slotProps$badge = slotProps == null ? void 0 : slotProps.badge) != null ? _slotProps$badge : componentsProps.badge;
-  return /*#__PURE__*/jsxRuntimeExports.jsx(BadgeUnstyled$1, _extends({
-    invisible: invisibleProp,
-    badgeContent: displayValue,
-    showZero: showZero,
-    max: max
-  }, other, {
-    slots: {
-      root: RootSlot,
-      badge: BadgeSlot
+  const rootProps = useSlotProps({
+    elementType: RootSlot,
+    externalSlotProps: rootSlotProps,
+    externalForwardedProps: other,
+    additionalProps: {
+      ref,
+      as: component
     },
-    className: clsx(rootSlotProps == null ? void 0 : rootSlotProps.className, classes.root, className),
-    slotProps: {
-      root: _extends({}, rootSlotProps, shouldSpreadAdditionalProps(RootSlot) && {
-        as: component,
-        ownerState: _extends({}, rootSlotProps == null ? void 0 : rootSlotProps.ownerState, {
-          anchorOrigin,
-          color,
-          overlap,
-          variant
-        })
-      }),
-      badge: _extends({}, badgeSlotProps, {
-        className: clsx(classes.badge, badgeSlotProps == null ? void 0 : badgeSlotProps.className)
-      }, shouldSpreadAdditionalProps(BadgeSlot) && {
-        ownerState: _extends({}, badgeSlotProps == null ? void 0 : badgeSlotProps.ownerState, {
-          anchorOrigin,
-          color,
-          overlap,
-          variant
-        })
-      })
-    },
-    ref: ref
+    ownerState,
+    className: clsx(rootSlotProps == null ? void 0 : rootSlotProps.className, classes.root, className)
+  });
+  const badgeProps = useSlotProps({
+    elementType: BadgeSlot,
+    externalSlotProps: badgeSlotProps,
+    ownerState,
+    className: clsx(classes.badge, badgeSlotProps == null ? void 0 : badgeSlotProps.className)
+  });
+  return /*#__PURE__*/jsxRuntimeExports.jsxs(RootSlot, _extends({}, rootProps, {
+    children: [children, /*#__PURE__*/jsxRuntimeExports.jsx(BadgeSlot, _extends({}, badgeProps, {
+      children: displayValue
+    }))]
   }));
 });
 var Badge$1 = Badge;
@@ -607,8 +472,6 @@ const ButtonRoot = styled(ButtonBase, {
       color: (theme.vars || theme).palette.action.disabled
     }, ownerState.variant === 'outlined' && {
       border: `1px solid ${(theme.vars || theme).palette.action.disabledBackground}`
-    }, ownerState.variant === 'outlined' && ownerState.color === 'secondary' && {
-      border: `1px solid ${(theme.vars || theme).palette.action.disabled}`
     }, ownerState.variant === 'contained' && {
       color: (theme.vars || theme).palette.action.disabled,
       boxShadow: (theme.vars || theme).shadows[0],
@@ -837,7 +700,7 @@ const SwitchBase = /*#__PURE__*/reactExports.forwardRef(function SwitchBase(prop
       onChange,
       onFocus,
       readOnly,
-      required,
+      required = false,
       tabIndex,
       type,
       value
@@ -911,7 +774,7 @@ const SwitchBase = /*#__PURE__*/reactExports.forwardRef(function SwitchBase(prop
       defaultChecked: defaultChecked,
       className: classes.input,
       disabled: disabled,
-      id: hasLabelFor && id,
+      id: hasLabelFor ? id : undefined,
       name: name,
       onChange: handleInputChange,
       readOnly: readOnly,
@@ -1545,7 +1408,7 @@ const TabScrollButton = /*#__PURE__*/reactExports.forwardRef(function TabScrollB
       direction
     } = props,
     other = _objectWithoutPropertiesLoose(props, _excluded$1);
-  const theme = useTheme$2();
+  const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
   const ownerState = _extends({
     isRtl
@@ -1762,7 +1625,7 @@ const Tabs = /*#__PURE__*/reactExports.forwardRef(function Tabs(inProps, ref) {
     props: inProps,
     name: 'MuiTabs'
   });
-  const theme = useTheme$2();
+  const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
   const {
       'aria-label': ariaLabel,
@@ -2588,38 +2451,5 @@ const contents = css `
   overflow-y: auto;
 `;
 
-const muiTheme = createTheme({
-    palette: {
-        primary: {
-            main: COLOR_PRIMARY,
-            contrastText: COLOR_WHITE,
-        },
-    },
-    typography: {
-        fontFamily: FONT_EN,
-    },
-    components: {
-        MuiTab: {
-            styleOverrides: {
-                root: {
-                    fontSize: "14px",
-                    fontWeight: "500",
-                },
-            },
-        },
-        MuiButton: {
-            styleOverrides: {},
-        },
-        MuiBadge: {
-            styleOverrides: {
-                root: {
-                    paddingRight: "12px",
-                    fontWeight: "500",
-                },
-            },
-        },
-    },
-});
-
-export { Badge$1 as B, CircularProgress$1 as C, MediaPane as M, Pagination as P, ThemeProvider as T, useQueryDataMutators as a, useMediaLoadAbortMutators as b, useFoundMediaState as c, Checkbox$1 as d, hasIdOfLabel as e, filterOutInfo as f, Tabs$1 as g, hasInfo as h, Tab$1 as i, extractLabelIds as j, muiTheme as m, nullResponse as n, queryPane as q, subPane as s, useFoundMediaMutators as u, wrapper$6 as w };
-//# sourceMappingURL=muiTheme-8e73562e.js.map
+export { Badge$1 as B, CircularProgress$1 as C, MediaPane as M, Pagination as P, Tabs$1 as T, useQueryDataMutators as a, useMediaLoadAbortMutators as b, useFoundMediaState as c, Checkbox$1 as d, hasIdOfLabel as e, filterOutInfo as f, Tab$1 as g, hasInfo as h, extractLabelIds as i, nullResponse as n, queryPane as q, subPane as s, useFoundMediaMutators as u, wrapper$6 as w };
+//# sourceMappingURL=MediaPane-d4c264af.js.map

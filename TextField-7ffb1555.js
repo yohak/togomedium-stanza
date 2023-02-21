@@ -1,6 +1,8 @@
-import { o as jsxRuntimeExports, h as useId, f as useControlled, i as useEventCallback, W as setRef, l as useForkRef, A as ownerDocument, y as ownerWindow, b as generateUtilityClass, g as generateUtilityClasses, _ as _objectWithoutPropertiesLoose, X as createChainedFunction, t as useSlotProps, Y as Portal, p as composeClasses, z as debounce, Z as useEnhancedEffect, $ as reactDomExports, s as styled, d as alpha, u as useThemeProps, m as clsx, c as capitalize, x as createSvgIcon, a0 as defaultTheme, a1 as isHostComponent, a2 as formatMuiErrorMessage, P as Popper, e as useTheme, a3 as Transition, a4 as reflow, a5 as getTransitionProps, a6 as resolveComponentProps, v as rootShouldForwardProp, a7 as deepmerge, a8 as isMuiElement, G as Grow, a9 as slotShouldForwardProp } from './EmotionCacheProvider-0baa3c8b.js';
-import { G as Global, r as reactExports, _ as _extends } from './index-a2ea6875.js';
-import { B as ButtonBase, u as useFormControl, F as FormControlContext } from './shouldSpreadAdditionalProps-7b1b8d0d.js';
+import { _ as _objectWithoutPropertiesLoose, d as alpha, b as capitalize, f as formatMuiErrorMessage, e as deepmerge } from './createTheme-f7661377.js';
+import { G as Global, r as reactExports, _ as _extends } from './index-c7537c15.js';
+import { d as useId, c as useControlled, e as useEventCallback, t as setRef, h as useForkRef, q as ownerDocument, o as ownerWindow, a as generateUtilityClass, g as generateUtilityClasses, v as createChainedFunction, l as useSlotProps, w as Portal, k as composeClasses, p as debounce, x as useEnhancedEffect, s as styled, u as useThemeProps, i as clsx, n as createSvgIcon, y as defaultTheme, z as isHostComponent, P as Popper, b as useTheme, T as Transition, A as reflow, B as getTransitionProps, C as resolveComponentProps, r as rootShouldForwardProp, D as isMuiElement, G as Grow, E as slotShouldForwardProp } from './Grow-2e6d9fa7.js';
+import { e as jsxRuntimeExports, r as reactDomExports } from './EmotionCacheProvider-4e306bf1.js';
+import { u as usePreviousProps, B as ButtonBase, a as useFormControl, F as FormControlContext } from './useFormControl-dfa096e1.js';
 
 // A change of the browser zoom change the scrollbar size.
 // Credit https://github.com/twbs/bootstrap/blob/488fd8afc535ca3a6ad4dc581f5e89217b6a36ac/js/src/util/scrollbar.js#L14-L18
@@ -86,7 +88,7 @@ function findIndex(array, comp) {
 }
 const defaultFilterOptions = createFilterOptions();
 
-// Number of options to jump in list box when pageup and pagedown keys are used.
+// Number of options to jump in list box when `Page Up` and `Page Down` keys are used.
 const pageSize = 5;
 const defaultIsActiveElementInListbox = listboxRef => {
   var _listboxRef$current$p;
@@ -191,20 +193,6 @@ function useAutocomplete(props) {
       onInputChange(event, newInputValue, 'reset');
     }
   }, [getOptionLabel, inputValue, multiple, onInputChange, setInputValueState, clearOnBlur, value]);
-  const prevValue = reactExports.useRef();
-  reactExports.useEffect(() => {
-    const valueChange = value !== prevValue.current;
-    prevValue.current = value;
-    if (focused && !valueChange) {
-      return;
-    }
-
-    // Only reset the input's value when freeSolo if the component's value changes.
-    if (freeSolo && !valueChange) {
-      return;
-    }
-    resetInputValue(null, value);
-  }, [value, resetInputValue, focused, prevValue, freeSolo]);
   const [open, setOpenState] = useControlled({
     controlled: openProp,
     default: false,
@@ -226,6 +214,22 @@ function useAutocomplete(props) {
     inputValue: inputValueIsSelectedValue && inputPristine ? '' : inputValue,
     getOptionLabel
   }) : [];
+  const previousProps = usePreviousProps({
+    filteredOptions,
+    value
+  });
+  reactExports.useEffect(() => {
+    const valueChange = value !== previousProps.value;
+    if (focused && !valueChange) {
+      return;
+    }
+
+    // Only reset the input's value when freeSolo if the component's value changes.
+    if (freeSolo && !valueChange) {
+      return;
+    }
+    resetInputValue(null, value);
+  }, [value, resetInputValue, focused, previousProps.value, freeSolo]);
   const listboxAvailable = open && filteredOptions.length > 0 && !readOnly;
   const focusTag = useEventCallback(tagToFocus => {
     if (tagToFocus === -1) {
@@ -308,7 +312,7 @@ function useAutocomplete(props) {
     }
 
     // Scroll active descendant into view.
-    // Logic copied from https://www.w3.org/WAI/ARIA/apg/example-index/combobox/js/select-only.js
+    // Logic copied from https://www.w3.org/WAI/content-assets/wai-aria-practices/patterns/combobox/examples/js/select-only.js
     //
     // Consider this API instead once it has a better browser support:
     // .scrollIntoView({ scrollMode: 'if-needed', block: 'nearest' });
@@ -388,8 +392,33 @@ function useAutocomplete(props) {
       }
     }
   });
+  const checkHighlightedOptionExists = () => {
+    const isSameValue = (value1, value2) => {
+      const label1 = value1 ? getOptionLabel(value1) : '';
+      const label2 = value2 ? getOptionLabel(value2) : '';
+      return label1 === label2;
+    };
+    if (highlightedIndexRef.current !== -1 && previousProps.filteredOptions && previousProps.filteredOptions.length !== filteredOptions.length && (multiple ? value.length === previousProps.value.length && previousProps.value.every((val, i) => getOptionLabel(value[i]) === getOptionLabel(val)) : isSameValue(previousProps.value, value))) {
+      const previousHighlightedOption = previousProps.filteredOptions[highlightedIndexRef.current];
+      if (previousHighlightedOption) {
+        const previousHighlightedOptionExists = filteredOptions.some(option => {
+          return getOptionLabel(option) === getOptionLabel(previousHighlightedOption);
+        });
+        if (previousHighlightedOptionExists) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
   const syncHighlightedIndex = reactExports.useCallback(() => {
     if (!popupOpen) {
+      return;
+    }
+
+    // Check if the previously highlighted option still exists in the updated filtered options list and if the value hasn't changed
+    // If it exists and the value hasn't changed, return, otherwise continue execution
+    if (checkHighlightedOptionExists()) {
       return;
     }
     const valueItem = multiple ? value[0] : value;
@@ -861,7 +890,8 @@ function useAutocomplete(props) {
       ref: inputRef,
       autoCapitalize: 'none',
       spellCheck: 'false',
-      role: 'combobox'
+      role: 'combobox',
+      disabled: disabledProp
     }),
     getClearProps: () => ({
       tabIndex: -1,
@@ -1118,7 +1148,7 @@ function FocusTrap(props) {
       }
 
       // Make sure the next tab starts from the right place.
-      // doc.activeElement referes to the origin.
+      // doc.activeElement refers to the origin.
       if (doc.activeElement === rootRef.current && nativeEvent.shiftKey) {
         // We need to ignore the next contain as
         // it will try to move the focus back to the rootRef element.
@@ -3210,6 +3240,20 @@ const AutocompleteRoot = styled('div', {
   [`& .${inputBaseClasses$1.hiddenLabel}`]: {
     paddingTop: 8
   },
+  [`& .${filledInputClasses$1.root}.${inputBaseClasses$1.hiddenLabel}`]: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    [`& .${autocompleteClasses$1.input}`]: {
+      paddingTop: 16,
+      paddingBottom: 17
+    }
+  },
+  [`& .${filledInputClasses$1.root}.${inputBaseClasses$1.hiddenLabel}.${inputBaseClasses$1.sizeSmall}`]: {
+    [`& .${autocompleteClasses$1.input}`]: {
+      paddingTop: 8,
+      paddingBottom: 9
+    }
+  },
   [`& .${autocompleteClasses$1.input}`]: _extends({
     flexGrow: 1,
     textOverflow: 'ellipsis',
@@ -3534,6 +3578,7 @@ const Autocomplete = /*#__PURE__*/reactExports.forwardRef(function Autocomplete(
       className: classes.option
     }), option, {
       selected: optionProps['aria-selected'],
+      index,
       inputValue
     });
   };
@@ -3760,7 +3805,7 @@ function getBackdropUtilityClass(slot) {
 }
 generateUtilityClasses('MuiBackdrop', ['root', 'invisible']);
 
-const _excluded$h = ["children", "component", "components", "componentsProps", "className", "invisible", "open", "slotProps", "slots", "transitionDuration", "TransitionComponent"];
+const _excluded$h = ["children", "className", "component", "components", "componentsProps", "invisible", "open", "slotProps", "slots", "TransitionComponent", "transitionDuration"];
 const useUtilityClasses$e = ownerState => {
   const {
     classes,
@@ -3804,17 +3849,16 @@ const Backdrop = /*#__PURE__*/reactExports.forwardRef(function Backdrop(inProps,
   });
   const {
       children,
+      className,
       component = 'div',
       components = {},
       componentsProps = {},
-      className,
       invisible = false,
       open,
       slotProps = {},
       slots = {},
-      transitionDuration,
-      // eslint-disable-next-line react/prop-types
-      TransitionComponent = Fade$1
+      TransitionComponent = Fade$1,
+      transitionDuration
     } = props,
     other = _objectWithoutPropertiesLoose(props, _excluded$h);
   const ownerState = _extends({}, props, {
@@ -4041,12 +4085,8 @@ const FilledInputRoot = styled(InputBaseRoot, {
     [`&.${filledInputClasses$1.error}`]: {
       '&:before, &:after': {
         borderBottomColor: (theme.vars || theme).palette.error.main
-      },
-      '&:focus-within:after': {
-        transform: 'scaleX(1)' // error is always underlined in red
       }
     },
-
     '&:before': {
       borderBottom: `1px solid ${theme.vars ? `rgba(${theme.vars.palette.common.onBackgroundChannel} / ${theme.vars.opacity.inputUnderline})` : bottomLineColor}`,
       left: 0,
@@ -4640,12 +4680,8 @@ const InputRoot = styled(InputBaseRoot, {
     [`&.${inputClasses$1.error}`]: {
       '&:before, &:after': {
         borderBottomColor: (theme.vars || theme).palette.error.main
-      },
-      '&:focus-within:after': {
-        transform: 'scaleX(1)' // error is always underlined in red
       }
     },
-
     '&:before': {
       borderBottom: `1px solid ${bottomLineColor}`,
       left: 0,
@@ -4661,7 +4697,7 @@ const InputRoot = styled(InputBaseRoot, {
     },
 
     [`&:hover:not(.${inputClasses$1.disabled}, .${inputClasses$1.error}):before`]: {
-      borderBottom: `1px solid ${(theme.vars || theme).palette.text.primary}`,
+      borderBottom: `2px solid ${(theme.vars || theme).palette.text.primary}`,
       // Reset on touch devices, it doesn't add specificity
       '@media (hover: none)': {
         borderBottom: `1px solid ${bottomLineColor}`
@@ -5007,7 +5043,7 @@ function moveFocus(list, currentFocus, disableListWrap, disabledItemsFocusable, 
 }
 
 /**
- * A permanently displayed menu following https://www.w3.org/WAI/ARIA/apg/patterns/menubutton/.
+ * A permanently displayed menu following https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/.
  * It's exposed to help customization of the [`Menu`](/material-ui/api/menu/) component if you
  * use it separately you need to move focus into the component manually. Once
  * the focus is placed inside the component it is fully keyboard accessible.
@@ -6303,7 +6339,7 @@ const SelectInput = /*#__PURE__*/reactExports.forwardRef(function SelectInput(pr
     if (!readOnly) {
       const validKeys = [' ', 'ArrowUp', 'ArrowDown',
       // The native select doesn't respond to enter on macOS, but it's recommended by
-      // https://www.w3.org/WAI/ARIA/apg/example-index/combobox/combobox-select-only.html
+      // https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/
       'Enter'];
       if (validKeys.indexOf(event.key) !== -1) {
         event.preventDefault();
@@ -6802,4 +6838,4 @@ const TextField = /*#__PURE__*/reactExports.forwardRef(function TextField(inProp
 var TextField$1 = TextField;
 
 export { Autocomplete$1 as A, Chip$1 as C, FormControl$1 as F, TextField$1 as T, formControlState as f };
-//# sourceMappingURL=TextField-f3df1412.js.map
+//# sourceMappingURL=TextField-7ffb1555.js.map

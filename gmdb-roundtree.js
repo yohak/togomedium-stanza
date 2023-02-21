@@ -1,4 +1,4 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-6dd55acc.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
 import { s as select } from './transform-83917164.js';
 import { U as URL_API } from './variables-58529e5c.js';
 

@@ -1,13 +1,17 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-6dd55acc.js';
-import { _ as _objectWithoutPropertiesLoose, ac as defaultSxConfig, ad as isPlainObject, b as generateUtilityClass, g as generateUtilityClasses, s as styled, c as capitalize, u as useThemeProps, o as jsxRuntimeExports, m as clsx, p as composeClasses, D as COLOR_WHITE, K as COLOR_GRAY_LINE, S as SIZE1, H as SIZE2, L as COLOR_PRIMARY, a as jsxs, j as jsx, M as FONT_WEIGHT_BOLD, O as COLOR_GRAY700, Q as SIZE4, B as ROUNDED_CORNER, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-0baa3c8b.js';
-import { _ as _extends, r as reactExports, e as css, j as jsx$1 } from './index-a2ea6875.js';
-import { e as PATH_ORGANISM, R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as API_ORGANISMS_BY_PHENOTYPES, g as API_MEDIA_BY_TAXON, d as Recoil_index_4 } from './consts-6faa5a31.js';
-import { d as Checkbox, h as hasInfo, f as filterOutInfo, C as CircularProgress, P as Pagination, e as hasIdOfLabel, g as Tabs, i as Tab, B as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, j as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState, T as ThemeProvider, m as muiTheme } from './muiTheme-8e73562e.js';
-import { g as getData } from './getData-633488a0.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
+import { e as jsxRuntimeExports, C as COLOR_WHITE, m as COLOR_GRAY_LINE, S as SIZE1, i as SIZE2, b as COLOR_PRIMARY, d as jsxs, j as jsx, n as FONT_WEIGHT_BOLD, p as COLOR_GRAY700, q as SIZE4, h as ROUNDED_CORNER, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-4e306bf1.js';
+import { _ as _extends, r as reactExports, c as css, j as jsx$1 } from './index-c7537c15.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-b4c2016b.js';
+import { b as PATH_ORGANISM, c as API_ORGANISMS_BY_PHENOTYPES, d as API_MEDIA_BY_TAXON } from './consts-4e65898a.js';
+import { d as Checkbox, h as hasInfo, f as filterOutInfo, C as CircularProgress, P as Pagination, e as hasIdOfLabel, T as Tabs, g as Tab, B as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, i as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d4c264af.js';
+import { g as getData } from './getData-10fc182b.js';
 import { c as clone } from './clone-e8609f76.js';
-import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-f3df1412.js';
-import { u as useFormControl } from './shouldSpreadAdditionalProps-7b1b8d0d.js';
-import { S as Slider } from './Slider-15572382.js';
+import { _ as _objectWithoutPropertiesLoose, i as defaultSxConfig, j as isPlainObject, b as capitalize } from './createTheme-f7661377.js';
+import { a as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, i as clsx, k as composeClasses } from './Grow-2e6d9fa7.js';
+import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-7ffb1555.js';
+import { a as useFormControl } from './useFormControl-dfa096e1.js';
+import { S as Slider } from './Slider-5d41c120.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-df03ad6e.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './variables-58529e5c.js';
 
@@ -507,11 +511,6 @@ const infoTextCSS = css `
   font-size: 18px;
   ${FONT_WEIGHT_BOLD};
   margin-bottom: ${SIZE1};
-`;
-css `
-  background-color: ${COLOR_WHITE};
-  position: relative;
-  min-height: 100px;
 `;
 const inner = css `
   max-height: 100%;
