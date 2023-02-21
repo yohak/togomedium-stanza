@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter, unescapeJsonString } from "./string";
+import { capitalizeFirstLetter, makeSpeciesName, unescapeJsonString } from "./string";
 
 describe("unescapeJsonString", () => {
   it("should work", () => {
@@ -36,5 +36,12 @@ describe("capitalizeFirstLegger", () => {
   it("should return empty string if empty string is passed", () => {
     const result = capitalizeFirstLetter("");
     expect(result).toBe("");
+  });
+});
+
+describe("makeSpeciesName", () => {
+  it("should change", () => {
+    const result = makeSpeciesName("Anoxybacillus flavithermus WK1");
+    expect(result).toBe("A. Flavithermus WK1");
   });
 });

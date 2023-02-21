@@ -40,3 +40,14 @@ export const convertHTMLEntity = (text: string) => {
     return span.innerText;
   });
 };
+
+export const makeSpeciesName = (str: string) => {
+  const arr = str.split(" ");
+  if (arr.length < 1) {
+    return "";
+  }
+  const first = arr.shift()!.charAt(0) + ".";
+  const rest = capitalizeFirstLetter(arr.join(" "));
+
+  return `${first} ${rest}`;
+};

@@ -7,7 +7,9 @@ type StanzaNames =
   | "MediaAlignmentTable"
   | "FindMediaByTaxonomicTree"
   | "FindMediaByComponents"
-  | "FindMediaByOrganismPhenotype";
+  | "FindMediaByOrganismPhenotype"
+  | "MediaStrainAlignment"
+  | "icons";
 export const makeComponentStoryTitle = (name: string, stanza: StanzaNames): string =>
   `Components/${stanza}/${name}`;
 
