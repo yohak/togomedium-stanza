@@ -134,9 +134,10 @@ const parseData = (body) => {
     };
 };
 const getComponentData = (gmo_id) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const apiName = "gmdb_component_by_gmoid";
     const result = yield getData(`${URL_API}${apiName}`, { gmo_id });
-    if (result.body) {
+    if ((_a = result.body) === null || _a === void 0 ? void 0 : _a.id) {
         return parseData(result.body);
     }
     else {
