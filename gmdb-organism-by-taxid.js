@@ -2,7 +2,7 @@ import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-
 import { g as getData } from './getData-10fc182b.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import { u as unescapeJsonString, c as capitalizeFirstLetter } from './string-b0eb559d.js';
-import { U as URL_API } from './variables-58529e5c.js';
+import { U as URL_API } from './variables-0b8fac13.js';
 import './index-c7537c15.js';
 
 class GmdbOrganismByTaxid extends Stanza {

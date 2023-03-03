@@ -2,37 +2,43 @@ import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-
 import { j as jsx, d as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-4e306bf1.js';
 import { r as reactExports, j as jsx$1 } from './index-c7537c15.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-b4c2016b.js';
-import { A as API_ALL_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './consts-4e65898a.js';
+import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './consts-1a495836.js';
 import { g as getData } from './getData-10fc182b.js';
 import { T as TextField, C as Chip, A as Autocomplete } from './TextField-7ffb1555.js';
-import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d4c264af.js';
+import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-3b8127ea.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-df03ad6e.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './createTheme-f7661377.js';
 import './Grow-2e6d9fa7.js';
-import './variables-58529e5c.js';
+import './variables-0b8fac13.js';
 import './useFormControl-dfa096e1.js';
 
 const ComponentSelect = ({ onChangeSelection }) => {
     const [loading, setLoading] = reactExports.useState(false);
+    const [components, setComponents] = reactExports.useState([]);
+    const loadComponents = (ids = []) => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield getData(API_COMPONENTS_WITH_COMPONENTS, {
+            gmo_ids: ids.join(","),
+        });
+        if (response.body) {
+            setComponents(response.body
+                .map((item) => ({
+                id: item.gmo_id,
+                label: item.name,
+            }))
+                .filter((item) => !ids.includes(item.id)));
+        }
+        setLoading(false);
+    });
     const onOpen = () => {
         if (components.length)
             return;
-        setLoading(true);
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            const response = yield getData(API_ALL_COMPONENTS, {});
-            if (response.body) {
-                setComponents(response.body.map((item) => ({
-                    id: item.gmo_id,
-                    label: item.name,
-                })));
-            }
-            setLoading(false);
-        }))();
+        loadComponents();
     };
-    const [components, setComponents] = reactExports.useState([]);
     const onChange = (e, value) => {
-        onChangeSelection(value.map((v) => v.id));
+        const ids = value.map((v) => v.id);
+        onChangeSelection(ids);
+        loadComponents(ids);
     };
     return (jsx(Autocomplete, { multiple: true, filterSelectedOptions: true, onChange: onChange, onOpen: onOpen, disablePortal: true, options: components, loading: loading, getOptionLabel: (option) => option.label, renderInput: (params) => (jsx(TextField, Object.assign({}, params, { label: "Components", InputProps: Object.assign(Object.assign({}, params.InputProps), { endAdornment: (jsxs(Fragment, { children: [loading ? jsx(CircularProgress, { color: "inherit", size: 20 }) : null, params.InputProps.endAdornment] })) }) }))), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined" }, getTagProps({ index }), { label: option.label, key: option.id })))) }));
 };

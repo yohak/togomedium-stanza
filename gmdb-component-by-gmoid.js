@@ -4,7 +4,7 @@ import { c as css, r as reactExports } from './index-c7537c15.js';
 import { R as Recoil_index_4 } from './recoil-b4c2016b.js';
 import { n as newStyled } from './createTheme-f7661377.js';
 import { g as getData } from './getData-10fc182b.js';
-import { U as URL_API } from './variables-58529e5c.js';
+import { U as URL_API } from './variables-0b8fac13.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-df03ad6e.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 
