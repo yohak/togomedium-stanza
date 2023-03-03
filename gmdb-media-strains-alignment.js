@@ -1,8 +1,12 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { C as COLOR_WHITE, b as COLOR_PRIMARY, d as jsxs, j as jsx, s as COLOR_GRAY400, F as Fragment, m as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-4e306bf1.js';
-import { c as css, e as dist, r as reactExports } from './index-c7537c15.js';
-import { m as makeSpeciesName, c as capitalizeFirstLetter } from './string-b0eb559d.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22 } from './recoil-b4c2016b.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
+import { C as COLOR_WHITE, b as COLOR_PRIMARY, d as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
+import { c as css, r as reactExports, e as dist } from './index-56cafe6b.js';
+import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-01eb8e0e.js';
+import { m as makeSpeciesName, a as makeStrainName, c as capitalizeFirstLetter } from './string-21df0709.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22 } from './recoil-503ca0af.js';
+import { g as getData } from './getData-b32e78c1.js';
+import './Grow-b02e3735.js';
+import './variables-0b8fac13.js';
 
 const lineageRanks = [
     "superkingdom",
@@ -12,6 +16,7 @@ const lineageRanks = [
     "family",
     "genus",
     "species",
+    "strain",
 ];
 
 const rfdc = require("rfdc")();
@@ -19,33 +24,34 @@ const uuid = require("uuid");
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;
 };
-const processMediaCell = (data, allSpecies) => {
-    return data.media.map((item) => {
+const processMediaCell = (data) => {
+    return data.map((item) => {
         return {
             id: item.gm_id,
             label: item.label,
-            size: item.strains.filter((id) => allSpecies.includes(id)).length,
+            size: item.organisms.length,
         };
     });
 };
 const fillNullTaxon = (data) => {
     const cloned = rfdc(data);
-    cloned.strains.forEach((strain) => {
-        lineageRanks.forEach((rank) => {
-            if (strain.lineage[rank] === null) {
-                strain.lineage[rank] = {
-                    id: uuid(),
-                    label: "",
-                };
-            }
+    cloned.forEach((media) => {
+        media.organisms.forEach((organism) => {
+            lineageRanks.forEach((rank) => {
+                if (organism[rank] === null) {
+                    organism[rank] = {
+                        id: uuid(),
+                        label: "",
+                    };
+                }
+            });
         });
     });
     return cloned;
 };
 const processTaxonCol = (data, rank) => {
-    return data.media.map((medium) => {
-        const strains = getStrainsOfMedia(data, medium.gm_id);
-        const tree = makeTaxonTree(strains);
+    return data.map((medium) => {
+        const tree = makeTaxonTree(medium.organisms);
         return getNodeListOfRankFromTree(tree, rank).map((node) => ({
             id: node.id,
             label: node.label,
@@ -54,30 +60,25 @@ const processTaxonCol = (data, rank) => {
     });
 };
 const processDisplayData = (data, filterId = "") => {
-    const cloned = fillNullTaxon(data);
-    cloned.strains = cloned.strains.filter((strain) => {
-        if (filterId === "")
-            return true;
-        let result = false;
-        lineageRanks.forEach((rank) => {
-            var _a;
-            if (((_a = strain.lineage[rank]) === null || _a === void 0 ? void 0 : _a.id) === filterId) {
-                result = true;
-            }
-        });
-        return result;
-    });
-    cloned.media = cloned.media.filter((medium) => {
-        return cloned.strains.find((strain) => medium.strains.includes(strain.id));
-    });
+    const cloned = filterData(fillNullTaxon(data), filterId);
     const taxon = lineageRanks.reduce((accum, rank) => {
         const result = Object.assign({}, accum);
         result[rank] = processTaxonCol(cloned, rank);
         return result;
     }, {});
-    const allSpeciesKey = taxon.species.flat().map((item) => item.id);
-    const media = processMediaCell(cloned, allSpeciesKey);
+    const media = processMediaCell(cloned);
     return { media, taxon };
+};
+const filterData = (data, filterId = "") => {
+    if (filterId === "")
+        return data;
+    data.forEach((media) => {
+        media.organisms = media.organisms.filter((organism) => {
+            const organismIds = Object.values(organism).map((item) => item.id);
+            return organismIds.includes(filterId);
+        });
+    });
+    return data.filter((medium) => medium.organisms.length > 0);
 };
 const getSizeOfCell = (node) => {
     let total = 1;
@@ -92,25 +93,18 @@ const getSizeOfCell = (node) => {
     process(node);
     return total;
 };
-const getStrainsOfMedia = (data, id) => {
-    const media = data.media.find((medium) => medium.gm_id === id);
-    if (!media)
-        return [];
-    const strainIds = media.strains;
-    return data.strains.filter((strain) => strainIds.includes(strain.id));
-};
-const makeTaxonTree = (strains) => {
-    const flatTaxonList = strains
-        .map((strain) => lineageToTaxonNode(strain.lineage))
+const makeTaxonTree = (organisms) => {
+    const flatTaxonList = organisms
+        .map((organism) => lineageToTaxonNode(organism))
         .flat()
         .reduce(reduceSingle, []);
-    strains.forEach((strain) => {
+    organisms.forEach((organism) => {
         lineageRanks.forEach((rank, index) => {
-            const targetTaxon = strain.lineage[rank];
+            const targetTaxon = organism[rank];
             const targetNode = findNodeFromFlatList(flatTaxonList, (targetTaxon === null || targetTaxon === void 0 ? void 0 : targetTaxon.id) || "", rank);
             if (rank !== "superkingdom") {
                 const parentRank = lineageRanks[index - 1];
-                const parentTaxon = strain.lineage[parentRank];
+                const parentTaxon = organism[parentRank];
                 const parentNode = findNodeFromFlatList(flatTaxonList, (parentTaxon === null || parentTaxon === void 0 ? void 0 : parentTaxon.id) || "", parentRank);
                 parentNode.children.push(targetNode);
             }
@@ -162,8 +156,20 @@ const reduceSingle = (accum, current) => {
         : [...accum, current];
 };
 
+const useToolTipEnabled = () => {
+    const labelRef = reactExports.useRef(null);
+    const [toolTipEnabled, setToolTipEnabled] = reactExports.useState(false);
+    reactExports.useEffect(() => {
+        var _a, _b;
+        const offsetWidth = (_a = labelRef.current) === null || _a === void 0 ? void 0 : _a.offsetWidth;
+        const scrollWidth = (_b = labelRef.current) === null || _b === void 0 ? void 0 : _b.scrollWidth;
+        setToolTipEnabled(!!scrollWidth && !!offsetWidth && scrollWidth > offsetWidth);
+    }, [labelRef]);
+    return { labelRef, toolTipEnabled };
+};
 const MediaCell = ({ label, id, size, css, className }) => {
-    return (jsxs("div", Object.assign({ css: [mediaCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [jsx("a", Object.assign({ href: `/media/${id}` }, { children: id })), jsx("span", { children: label })] })));
+    const { labelRef, toolTipEnabled } = useToolTipEnabled();
+    return (jsxs("div", Object.assign({ css: [mediaCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [jsx("a", Object.assign({ href: `/media/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ ref: labelRef, className: "label" }, { children: label })) })) }))] })));
 };
 const mediaCell = css `
   width: 200px;
@@ -178,7 +184,10 @@ const mediaCell = css `
     text-decoration: none;
     width: fit-content;
   }
-  span {
+  .label-wrapper {
+    position: relative;
+  }
+  .label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -222,10 +231,13 @@ const TaxonCell = ({ label, id, size, rank, css, className }) => {
     const onClickFilter = () => {
         setFilterId(id);
     };
-    return (jsx("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: !!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `/taxon/${id}` }, { children: id })), jsx("span", { children: makeLabel(label, rank) }), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })) })));
+    const { labelRef, toolTipEnabled } = useToolTipEnabled();
+    return (jsx("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: !!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `/taxon/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })) })));
 };
 const makeLabel = (label, rank) => {
     switch (rank) {
+        case "strain":
+            return makeStrainName(label);
         case "species":
             return makeSpeciesName(label);
         default:
@@ -247,7 +259,10 @@ const taxonCell = css `
     width: fit-content;
   }
 
-  span {
+  .label-wrapper {
+    position: relative;
+  }
+  .label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -337,16 +352,18 @@ const mediumTaxonWrapper = css `
 `;
 
 const AppContainer = ({ data }) => {
-    const [displayData, setDisplayData] = reactExports.useState(processDisplayData(data));
+    const [displayData, setDisplayData] = reactExports.useState(undefined);
     const filterId = useFilterIdState();
     reactExports.useEffect(() => {
-        setDisplayData(processDisplayData(data, filterId));
+        if (data) {
+            setDisplayData(processDisplayData(data, filterId));
+        }
     }, [data, filterId]);
     reactExports.useEffect(() => { }, [displayData]);
-    return (jsxs("div", Object.assign({ css: appContainer }, { children: [jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
+    return displayData ? (jsxs("div", Object.assign({ css: appContainer }, { children: [jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
                     .concat()
                     .reverse()
-                    .map((rank, index) => (jsx(TaxonCol, { rank: rank, taxonList: displayData.taxon[rank] }, index))) }))] })));
+                    .map((rank, index) => (jsx(TaxonCol, { rank: rank, taxonList: displayData.taxon[rank] }, index))) }))] }))) : (jsx(Fragment, {}));
 };
 const appContainer = css `
   display: flex;
@@ -360,300 +377,17 @@ const taxonContainer = css `
   gap: 1px;
 `;
 
-const data1 = {
-    media: [
-        {
-            label: "NUTRIENT AGAR",
-            gm_id: "HM_D00001",
-            strains: [
-                "1076550",
-                "1247726",
-                "400667",
-                "47883",
-                "491915",
-                "595494",
-                "630626",
-                "692420",
-                "745277",
-            ],
-        },
-        {
-            label: "POTATO-CARROT AGAR",
-            gm_id: "JCM_M54",
-            strains: ["113562", "1952", "46175", "67581", "68225", "68233"],
-        },
-        {
-            label: "1/10 POTATO-CARROT AGAR",
-            gm_id: "JCM_M55",
-            strains: ["1869", "1999", "28887", "47479", "58117"],
-        },
-    ],
-    strains: [
-        {
-            id: "47479",
-            label: "Streptosporangium album",
-            lineage: {
-                species: { id: "47479", label: "Streptosporangium album" },
-                genus: { id: "2000", label: "Streptosporangium" },
-                family: { id: "2004", label: "Streptosporangiaceae" },
-                order: { id: "85012", label: "Streptosporangiales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "630626",
-            label: "Shimwellia blattae DSM 4481 = NBRC 105725",
-            lineage: {
-                species: { id: "630626", label: "Shimwellia blattae DSM 4481 = NBRC 105725" },
-                genus: { id: "1335483", label: "Shimwellia" },
-                family: { id: "543", label: "Enterobacteriaceae" },
-                order: { id: "91347", label: "Enterobacterales" },
-                class: { id: "1236", label: "Gammaproteobacteria" },
-                phylum: { id: "1224", label: "Proteobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "491915",
-            label: "Anoxybacillus flavithermus WK1",
-            lineage: {
-                species: { id: "491915", label: "Anoxybacillus flavithermus WK1" },
-                genus: { id: "150247", label: "Anoxybacillus" },
-                family: { id: "186817", label: "Bacillaceae" },
-                order: { id: "1385", label: "Bacillales" },
-                class: { id: "91061", label: "Bacilli" },
-                phylum: { id: "1239", label: "Firmicutes" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "46175",
-            label: "Microtetraspora niveoalba",
-            lineage: {
-                species: { id: "46175", label: "Microtetraspora niveoalba" },
-                genus: { id: "1995", label: "Microtetraspora" },
-                family: { id: "2004", label: "Streptosporangiaceae" },
-                order: { id: "85012", label: "Streptosporangiales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "1999",
-            label: "Planomonospora venezuelensis",
-            lineage: {
-                species: { id: "1999", label: "Planomonospora venezuelensis" },
-                genus: { id: "1998", label: "Planomonospora" },
-                family: { id: "2004", label: "Streptosporangiaceae" },
-                order: { id: "85012", label: "Streptosporangiales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "400667",
-            label: "Acinetobacter baumannii ATCC 17978",
-            lineage: {
-                species: { id: "400667", label: "Acinetobacter baumannii ATCC 17978" },
-                genus: { id: "469", label: "Acinetobacter" },
-                family: { id: "468", label: "Moraxellaceae" },
-                order: { id: "72274", label: "Pseudomonadales" },
-                class: { id: "1236", label: "Gammaproteobacteria" },
-                phylum: { id: "1224", label: "Proteobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "113562",
-            label: "Actinoplanes derwentensis",
-            lineage: {
-                species: { id: "113562", label: "Actinoplanes derwentensis" },
-                genus: { id: "1865", label: "Actinoplanes" },
-                family: { id: "28056", label: "Micromonosporaceae" },
-                order: { id: "85008", label: "Micromonosporales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "595494",
-            label: "Tolumonas auensis DSM 9187",
-            lineage: {
-                species: { id: "595494", label: "Tolumonas auensis DSM 9187" },
-                genus: { id: "43947", label: "Tolumonas" },
-                family: { id: "84642", label: "Aeromonadaceae" },
-                order: { id: "135624", label: "Aeromonadales" },
-                class: { id: "1236", label: "Gammaproteobacteria" },
-                phylum: { id: "1224", label: "Proteobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "67581",
-            label: "Streptomyces viridosporus",
-            lineage: {
-                species: { id: "67581", label: "Streptomyces viridosporus" },
-                genus: { id: "1883", label: "Streptomyces" },
-                family: { id: "2062", label: "Streptomycetaceae" },
-                order: { id: "85011", label: "Streptomycetales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "68233",
-            label: "Streptomyces luteogriseus",
-            lineage: {
-                species: { id: "68233", label: "Streptomyces luteogriseus" },
-                genus: { id: "1883", label: "Streptomyces" },
-                family: { id: "2062", label: "Streptomycetaceae" },
-                order: { id: "85011", label: "Streptomycetales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "745277",
-            label: "Rahnella aquatilis CIP 78.65 = ATCC 33071",
-            lineage: {
-                species: { id: "745277", label: "Rahnella aquatilis CIP 78.65 = ATCC 33071" },
-                genus: { id: "34037", label: "Rahnella" },
-                family: { id: "1903411", label: "Yersiniaceae" },
-                order: { id: "91347", label: "Enterobacterales" },
-                class: { id: "1236", label: "Gammaproteobacteria" },
-                phylum: { id: "1224", label: "Proteobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "1076550",
-            label: "Pantoea rwandensis",
-            lineage: {
-                species: { id: "1076550", label: "Pantoea rwandensis" },
-                genus: { id: "53335", label: "Pantoea" },
-                family: { id: "1903409", label: "Erwiniaceae" },
-                order: { id: "91347", label: "Enterobacterales" },
-                class: { id: "1236", label: "Gammaproteobacteria" },
-                phylum: { id: "1224", label: "Proteobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "68225",
-            label: "Streptomyces kunmingensis",
-            lineage: {
-                species: { id: "68225", label: "Streptomyces kunmingensis" },
-                genus: { id: "1883", label: "Streptomyces" },
-                family: { id: "2062", label: "Streptomycetaceae" },
-                order: { id: "85011", label: "Streptomycetales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "47883",
-            label: "Pseudomonas synxantha",
-            lineage: {
-                species: { id: "47883", label: "Pseudomonas synxantha" },
-                genus: { id: "286", label: "Pseudomonas" },
-                family: { id: "135621", label: "Pseudomonadaceae" },
-                order: { id: "72274", label: "Pseudomonadales" },
-                class: { id: "1236", label: "Gammaproteobacteria" },
-                phylum: { id: "1224", label: "Proteobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "1952",
-            label: "Streptomyces thermoviolaceus",
-            lineage: {
-                species: { id: "1952", label: "Streptomyces thermoviolaceus" },
-                genus: { id: "1883", label: "Streptomyces" },
-                family: { id: "2062", label: "Streptomycetaceae" },
-                order: { id: "85011", label: "Streptomycetales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "58117",
-            label: "Microbispora rosea",
-            lineage: {
-                species: { id: "58117", label: "Microbispora rosea" },
-                genus: { id: "2005", label: "Microbispora" },
-                family: { id: "2004", label: "Streptosporangiaceae" },
-                order: { id: "85012", label: "Streptosporangiales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "1247726",
-            label: "Advenella mimigardefordensis DPN7",
-            lineage: {
-                species: { id: "1247726", label: "Advenella mimigardefordensis DPN7" },
-                genus: { id: "290425", label: "Advenella" },
-                family: { id: "506", label: "Alcaligenaceae" },
-                order: { id: "80840", label: "Burkholderiales" },
-                class: { id: "28216", label: "Betaproteobacteria" },
-                phylum: { id: "1224", label: "Proteobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "692420",
-            label: "Bacillus amyloliquefaciens DSM 7 = ATCC 23350",
-            lineage: {
-                species: { id: "692420", label: "Bacillus amyloliquefaciens DSM 7 = ATCC 23350" },
-                genus: { id: "1386", label: "Bacillus" },
-                family: { id: "186817", label: "Bacillaceae" },
-                order: { id: "1385", label: "Bacillales" },
-                class: { id: "91061", label: "Bacilli" },
-                phylum: { id: "1239", label: "Firmicutes" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "1869",
-            label: "Actinoplanes utahensis",
-            lineage: {
-                species: { id: "1869", label: "Actinoplanes utahensis" },
-                genus: { id: "1865", label: "Actinoplanes" },
-                family: { id: "28056", label: "Micromonosporaceae" },
-                order: { id: "85008", label: "Micromonosporales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-        {
-            id: "28887",
-            label: "Planobispora longispora",
-            lineage: {
-                species: { id: "28887", label: "Planobispora longispora" },
-                genus: { id: "29298", label: "Planobispora" },
-                family: { id: "2004", label: "Streptosporangiaceae" },
-                order: { id: "85012", label: "Streptosporangiales" },
-                class: { id: "1760", label: "Actinobacteria" },
-                phylum: { id: "201174", label: "Actinobacteria" },
-                superkingdom: { id: "2", label: "Bacteria" },
-            },
-        },
-    ],
-};
-
-const App = () => {
-    return jsx(AppContainer, { data: data1 });
+const App = ({ gm_ids, stanzaElement }) => {
+    const [data, setData] = reactExports.useState();
+    reactExports.useEffect(() => {
+        (() => __awaiter(void 0, void 0, void 0, function* () {
+            const response = yield getData(API_MEDIA_STRAINS_ALIGNMENT, {
+                gm_ids,
+            });
+            setData(response.body);
+        }))();
+    }, [gm_ids]);
+    return jsx(AppContainer, { data: data });
 };
 
 class HelloReact extends Stanza {
@@ -680,43 +414,26 @@ var metadata = {
 	"@context": {
 	stanza: "http://togostanza.org/resource/stanza#"
 },
-	"@id": "hello-react",
-	"stanza:label": "Hello react",
+	"@id": "gmdb-media-alignment-table",
+	"stanza:label": "Media Alignment Table",
 	"stanza:definition": "",
 	"stanza:license": "MIT",
-	"stanza:author": "Yoji Shidara",
+	"stanza:author": "Satoshi Onoda",
 	"stanza:contributor": [
 ],
-	"stanza:created": "2021-10-11",
-	"stanza:updated": "2021-10-11",
+	"stanza:created": "2022-01-01",
+	"stanza:updated": "2022-01-01",
 	"stanza:parameter": [
 	{
-		"stanza:key": "say-to",
+		"stanza:key": "gm_ids",
 		"stanza:type": "string",
-		"stanza:example": "world",
-		"stanza:description": "who to say hello to",
-		"stanza:required": false
+		"stanza:example": "HM_D00001a,HM_D00065",
+		"stanza:description": "",
+		"stanza:required": true
 	}
 ],
-	"stanza:menu-placement": "bottom-right",
+	"stanza:menu-placement": "none",
 	"stanza:style": [
-	{
-		"stanza:key": "--greeting-color",
-		"stanza:type": "color",
-		"stanza:default": "#eb7900",
-		"stanza:description": "text color of greeting"
-	},
-	{
-		"stanza:key": "--greeting-align",
-		"stanza:type": "single-choice",
-		"stanza:choice": [
-			"left",
-			"center",
-			"right"
-		],
-		"stanza:default": "center",
-		"stanza:description": "text align of greeting"
-	}
 ],
 	"stanza:incomingEvent": [
 ],

@@ -1,7 +1,6 @@
-import { b as capitalize, d as alpha, _ as _objectWithoutPropertiesLoose } from './createTheme-f7661377.js';
-import { _ as _extends, r as reactExports } from './index-c7537c15.js';
-import { g as generateUtilityClasses, a as generateUtilityClass, s as styled, P as Popper, u as useThemeProps, b as useTheme, c as useControlled, d as useId, e as useEventCallback, f as useIsFocusVisible, h as useForkRef, i as clsx, G as Grow, j as appendOwnerState, k as composeClasses } from './Grow-2e6d9fa7.js';
-import { e as jsxRuntimeExports } from './EmotionCacheProvider-4e306bf1.js';
+import { i as capitalize, k as alpha, _ as _objectWithoutPropertiesLoose, e as jsxRuntimeExports } from './EmotionCacheProvider-d698af90.js';
+import { _ as _extends, r as reactExports } from './index-56cafe6b.js';
+import { g as generateUtilityClasses, a as generateUtilityClass, s as styled, P as Popper, u as useThemeProps, b as useTheme, c as useControlled, d as useId, e as useEventCallback, f as useIsFocusVisible, h as useForkRef, i as clsx, G as Grow, j as appendOwnerState, k as composeClasses } from './Grow-b02e3735.js';
 import { U as URL_API } from './variables-0b8fac13.js';
 
 function getTooltipUtilityClass(slot) {
@@ -544,11 +543,7 @@ const API_MEDIA_BY_TAXON = `${URL_API}gmdb_media_by_taxon`;
 const API_TAXONOMY_CHILDREN = `${URL_API}gmdb_taxonomy_children`;
 const API_ORGANISMS_BY_PHENOTYPES = `${URL_API}gmdb_organisms_by_phenotypes`;
 const API_COMPONENTS_WITH_COMPONENTS = `${URL_API}gmdb_components_with_components`;
+const API_MEDIA_STRAINS_ALIGNMENT = `${URL_API}gmdb_media_strains_alignment_by_gm_ids`;
 
-const PATH_BASE = "http://growthmedium.org";
-const PATH_MEDIUM = `${PATH_BASE}/medium/`;
-const PATH_ORGANISM = `${PATH_BASE}/organism/`;
-const PATH_COMPONENT = `${PATH_BASE}/components/`;
-
-export { API_COMPONENTS_WITH_COMPONENTS as A, PATH_MEDIUM as P, Tooltip$1 as T, API_MEDIA_BY_ATTRIBUTES as a, PATH_ORGANISM as b, API_ORGANISMS_BY_PHENOTYPES as c, API_MEDIA_BY_TAXON as d, API_TAXONOMY_CHILDREN as e, PATH_COMPONENT as f, API_MEDIA_ALIGNMENT as g };
-//# sourceMappingURL=consts-1a495836.js.map
+export { API_COMPONENTS_WITH_COMPONENTS as A, Tooltip$1 as T, API_MEDIA_BY_ATTRIBUTES as a, API_ORGANISMS_BY_PHENOTYPES as b, API_MEDIA_BY_TAXON as c, API_TAXONOMY_CHILDREN as d, API_MEDIA_ALIGNMENT as e, API_MEDIA_STRAINS_ALIGNMENT as f };
+//# sourceMappingURL=paths-01eb8e0e.js.map

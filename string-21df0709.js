@@ -36,10 +36,20 @@ const makeSpeciesName = (str) => {
     if (arr.length < 1) {
         return "";
     }
-    const first = arr.shift().charAt(0) + ".";
+    const first = arr.shift().charAt(0).toUpperCase();
     const rest = capitalizeFirstLetter(arr.join(" "));
-    return `${first} ${rest}`;
+    return `${first}. ${rest}`;
+};
+const makeStrainName = (str) => {
+    const arr = str.split(" ");
+    if (arr.length < 2) {
+        return "";
+    }
+    const first = arr.shift().charAt(0).toUpperCase();
+    const second = arr.shift().charAt(0).toUpperCase();
+    const rest = capitalizeFirstLetter(arr.join(" "));
+    return `${first}. ${second}. ${rest}`;
 };
 
-export { convertHTMLEntity as a, makeTogoGenomeOrganismLink as b, capitalizeFirstLetter as c, makeNcbiOrganismLink as d, makeSpeciesName as m, stringToArray as s, unescapeJsonString as u };
-//# sourceMappingURL=string-b0eb559d.js.map
+export { makeStrainName as a, convertHTMLEntity as b, capitalizeFirstLetter as c, makeTogoGenomeOrganismLink as d, makeNcbiOrganismLink as e, makeSpeciesName as m, stringToArray as s, unescapeJsonString as u };
+//# sourceMappingURL=string-21df0709.js.map
