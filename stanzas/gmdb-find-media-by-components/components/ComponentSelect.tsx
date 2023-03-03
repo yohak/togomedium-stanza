@@ -2,7 +2,7 @@ import { Autocomplete, Chip, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, SyntheticEvent, useState } from "react";
 import { AllComponentsResponse } from "../../../api/all-components/types";
-import { API_ALL_COMPONENTS } from "../../../api/paths";
+import { API_COMPONENTS_WITH_COMPONENTS } from "../../../api/paths";
 import { getData } from "../../../shared/utils/getData";
 import { LabelInfo } from "../../../shared/utils/labelInfo";
 
@@ -12,26 +12,32 @@ type Props = {
 
 export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
   const [loading, setLoading] = useState(false);
-  const onOpen = () => {
-    if (components.length) return;
-    setLoading(true);
-    (async () => {
-      const response = await getData<AllComponentsResponse>(API_ALL_COMPONENTS, {});
-      if (response.body) {
-        setComponents(
-          response.body.map<LabelInfo>((item) => ({
+  const [components, setComponents] = useState<readonly LabelInfo[]>([]);
+  const loadComponents = async (ids: string[] = []) => {
+    const response = await getData<AllComponentsResponse>(API_COMPONENTS_WITH_COMPONENTS, {
+      gmo_ids: ids.join(","),
+    });
+    if (response.body) {
+      setComponents(
+        response.body
+          .map<LabelInfo>((item) => ({
             id: item.gmo_id,
             label: item.name,
           }))
-        );
-      }
-      setLoading(false);
-    })();
+          .filter((item) => !ids.includes(item.id))
+      );
+    }
+    setLoading(false);
+  };
+  const onOpen = () => {
+    if (components.length) return;
+    loadComponents();
   };
 
-  const [components, setComponents] = useState<readonly LabelInfo[]>([]);
   const onChange = (e: SyntheticEvent, value: LabelInfo[]) => {
-    onChangeSelection(value.map((v) => v.id));
+    const ids = value.map((v) => v.id);
+    onChangeSelection(ids);
+    loadComponents(ids);
   };
   //
   return (
