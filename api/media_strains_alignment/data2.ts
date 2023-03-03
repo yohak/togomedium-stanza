@@ -1,293 +1,243 @@
 import { MediaStrainsAlimentResponse } from "./types";
 
-export const data2: MediaStrainsAlimentResponse = {
-  media: [
-    {
-      label: "NUTRIENT AGAR",
-      gm_id: "HM_D00001",
-      strains: [
-        "1076550",
-        "1247726",
-        "400667",
-        "47883",
-        "491915",
-        "595494",
-        "630626",
-        "692420",
-        "745277",
-      ],
-    },
-    {
-      label: "POTATO-CARROT AGAR",
-      gm_id: "JCM_M54",
-      strains: ["113562", "1952", "46175", "67581", "68225", "68233"],
-    },
-    {
-      label: "1/10 POTATO-CARROT AGAR",
-      gm_id: "JCM_M55",
-      strains: ["1869", "1999", "28887", "47479", "58117"],
-    },
-  ],
-  strains: [
-    {
-      id: "47479",
-      label: "Streptosporangium album",
-      lineage: {
-        species: { id: "47479", label: "Streptosporangium album" },
-        genus: { id: "2000", label: "Streptosporangium" },
-        family: { id: "2004", label: "Streptosporangiaceae" },
-        order: { id: "85012", label: "Streptosporangiales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
+export const data2: MediaStrainsAlimentResponse = [
+  {
+    gm_id: "JCM_M900",
+    label: "M13a MEDIUM",
+    organisms: [
+      {
+        superkingdom: {
+          id: "2",
+          label: "Bacteria",
+        },
+        phylum: {
+          id: "203682",
+          label: "Planctomycetes",
+        },
+        class: {
+          id: "203683",
+          label: "Planctomycetia",
+        },
+        order: {
+          id: "2691354",
+          label: "Pirellulales",
+        },
+        family: {
+          id: "2691357",
+          label: "Pirellulaceae",
+        },
+        genus: null,
+        species: {
+          id: "1031537",
+          label: "Blastopirellula cremea",
+        },
+        strain: {
+          id: "000003918",
+          label: "Blastopirellula cremea Lee et al. 2013",
+        },
       },
-    },
-    {
-      id: "630626",
-      label: "Shimwellia blattae DSM 4481 = NBRC 105725",
-      lineage: {
-        species: { id: "630626", label: "Shimwellia blattae DSM 4481 = NBRC 105725" },
-        genus: { id: "1335483", label: "Shimwellia" },
+      {
+        superkingdom: {
+          id: "2",
+          label: "Bacteria",
+        },
+        phylum: {
+          id: "203682",
+          label: "Planctomycetes",
+        },
+        class: {
+          id: "203683",
+          label: "Planctomycetia",
+        },
+        order: {
+          id: "2691354",
+          label: "Pirellulales",
+        },
+        family: {
+          id: "2691357",
+          label: "Pirellulaceae",
+        },
+        genus: {
+          id: "265488",
+          label: "Rhodopirellula",
+        },
+        species: {
+          id: "1031540",
+          label: "Rhodopirellula rosea",
+        },
+        strain: {
+          id: "000010736",
+          label: "Rhodopirellula rosea Roh et al. 2014",
+        },
+      },
+      {
+        superkingdom: {
+          id: "2",
+          label: "Bacteria",
+        },
+        phylum: {
+          id: "203682",
+          label: "Planctomycetes",
+        },
+        class: {
+          id: "203683",
+          label: "Planctomycetia",
+        },
+        order: {
+          id: "2691354",
+          label: "Pirellulales",
+        },
+        family: {
+          id: "2691357",
+          label: "Pirellulaceae",
+        },
+        genus: {
+          id: "265488",
+          label: "Rhodopirellula",
+        },
+        species: {
+          id: "265606",
+          label: "Rhodopirellula baltica",
+        },
+        strain: {
+          id: "000001447",
+          label: "Rhodopirellula baltica Schlesner et al. 2004",
+        },
+      },
+      {
+        superkingdom: {
+          id: "2",
+          label: "Bacteria",
+        },
+        phylum: {
+          id: "203682",
+          label: "Planctomycetes",
+        },
+        class: {
+          id: "203683",
+          label: "Planctomycetia",
+        },
+        order: {
+          id: "2691354",
+          label: "Pirellulales",
+        },
+        family: {
+          id: "2691357",
+          label: "Pirellulaceae",
+        },
+        genus: {
+          id: "265488",
+          label: "Rhodopirellula",
+        },
+        species: {
+          id: "265606",
+          label: "Rhodopirellula baltica",
+        },
+        strain: {
+          id: "000005773",
+          label: "Rhodopirellula baltica Schlesner et al. 2004",
+        },
+      },
+      {
+        superkingdom: {
+          id: "2",
+          label: "Bacteria",
+        },
+        phylum: {
+          id: "203682",
+          label: "Planctomycetes",
+        },
+        class: {
+          id: "203683",
+          label: "Planctomycetia",
+        },
+        order: {
+          id: "2691354",
+          label: "Pirellulales",
+        },
+        family: {
+          id: "2691357",
+          label: "Pirellulaceae",
+        },
+        genus: {
+          id: "265488",
+          label: "Rhodopirellula",
+        },
+        species: {
+          id: "265606",
+          label: "Rhodopirellula baltica",
+        },
+        strain: {
+          id: "000006444",
+          label: "Rhodopirellula baltica Schlesner et al. 2004",
+        },
+      },
+      {
+        superkingdom: {
+          id: "2",
+          label: "Bacteria",
+        },
+        phylum: {
+          id: "203682",
+          label: "Planctomycetes",
+        },
+        class: {
+          id: "203683",
+          label: "Planctomycetia",
+        },
+        order: {
+          id: "2691354",
+          label: "Pirellulales",
+        },
+        family: {
+          id: "2691357",
+          label: "Pirellulaceae",
+        },
+        genus: {
+          id: "265488",
+          label: "Rhodopirellula",
+        },
+        species: {
+          id: "265606",
+          label: "Rhodopirellula baltica",
+        },
+        strain: null,
+      },
+    ],
+  },
+  {
+    gm_id: "SY4047",
+    label:
+      "Tryptic soy broth medium supplemented with 0.5% yeast extract, 0.05% cysteine HCl-H2O, 0.5 mg/ml of hemin, 2 μg/ml of vitamin K1, and 5% sheep blood",
+    organisms: [
+      {
+        superkingdom: {
+          id: "2",
+          label: "Bacteria",
+        },
+        phylum: {
+          id: "201174",
+          label: "Actinobacteria",
+        },
+        class: {
+          id: "1760",
+          label: "Actinomycetia",
+        },
+        order: null,
         family: null,
-        order: { id: "91347", label: "Enterobacterales" },
-        class: { id: "1236", label: "Gammaproteobacteria" },
-        phylum: { id: "1224", label: "Proteobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
+        genus: {
+          id: "1912216",
+          label: "Cutibacterium",
+        },
+        species: {
+          id: "1747",
+          label: "Cutibacterium acnes",
+        },
+        strain: {
+          id: "000039480",
+          label: "Cutibacterium acnes KCOM 1861",
+        },
       },
-    },
-    {
-      id: "491915",
-      label: "Anoxybacillus flavithermus WK1",
-      lineage: {
-        species: { id: "491915", label: "Anoxybacillus flavithermus WK1" },
-        genus: { id: "150247", label: "Anoxybacillus" },
-        family: null,
-        order: { id: "1385", label: "Bacillales" },
-        class: { id: "91061", label: "Bacilli" },
-        phylum: { id: "1239", label: "Firmicutes" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "46175",
-      label: "Microtetraspora niveoalba",
-      lineage: {
-        species: { id: "46175", label: "Microtetraspora niveoalba" },
-        genus: { id: "1995", label: "Microtetraspora" },
-        family: { id: "2004", label: "Streptosporangiaceae" },
-        order: { id: "85012", label: "Streptosporangiales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "1999",
-      label: "Planomonospora venezuelensis",
-      lineage: {
-        species: { id: "1999", label: "Planomonospora venezuelensis" },
-        genus: { id: "1998", label: "Planomonospora" },
-        family: { id: "2004", label: "Streptosporangiaceae" },
-        order: { id: "85012", label: "Streptosporangiales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "400667",
-      label: "Acinetobacter baumannii ATCC 17978",
-      lineage: {
-        species: { id: "400667", label: "Acinetobacter baumannii ATCC 17978" },
-        genus: { id: "469", label: "Acinetobacter" },
-        family: { id: "468", label: "Moraxellaceae" },
-        order: { id: "72274", label: "Pseudomonadales" },
-        class: { id: "1236", label: "Gammaproteobacteria" },
-        phylum: { id: "1224", label: "Proteobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "113562",
-      label: "Actinoplanes derwentensis",
-      lineage: {
-        species: { id: "113562", label: "Actinoplanes derwentensis" },
-        genus: { id: "1865", label: "Actinoplanes" },
-        family: { id: "28056", label: "Micromonosporaceae" },
-        order: { id: "85008", label: "Micromonosporales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "595494",
-      label: "Tolumonas auensis DSM 9187",
-      lineage: {
-        species: { id: "595494", label: "Tolumonas auensis DSM 9187" },
-        genus: { id: "43947", label: "Tolumonas" },
-        family: { id: "84642", label: "Aeromonadaceae" },
-        order: { id: "135624", label: "Aeromonadales" },
-        class: { id: "1236", label: "Gammaproteobacteria" },
-        phylum: { id: "1224", label: "Proteobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "67581",
-      label: "Streptomyces viridosporus",
-      lineage: {
-        species: { id: "67581", label: "Streptomyces viridosporus" },
-        genus: { id: "1883", label: "Streptomyces" },
-        family: { id: "2062", label: "Streptomycetaceae" },
-        order: { id: "85011", label: "Streptomycetales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "68233",
-      label: "Streptomyces luteogriseus",
-      lineage: {
-        species: { id: "68233", label: "Streptomyces luteogriseus" },
-        genus: { id: "1883", label: "Streptomyces" },
-        family: { id: "2062", label: "Streptomycetaceae" },
-        order: { id: "85011", label: "Streptomycetales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "745277",
-      label: "Rahnella aquatilis CIP 78.65 = ATCC 33071",
-      lineage: {
-        species: { id: "745277", label: "Rahnella aquatilis CIP 78.65 = ATCC 33071" },
-        genus: { id: "34037", label: "Rahnella" },
-        family: { id: "1903411", label: "Yersiniaceae" },
-        order: { id: "91347", label: "Enterobacterales" },
-        class: { id: "1236", label: "Gammaproteobacteria" },
-        phylum: { id: "1224", label: "Proteobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "1076550",
-      label: "Pantoea rwandensis",
-      lineage: {
-        species: { id: "1076550", label: "Pantoea rwandensis" },
-        genus: { id: "53335", label: "Pantoea" },
-        family: { id: "1903409", label: "Erwiniaceae" },
-        order: { id: "91347", label: "Enterobacterales" },
-        class: { id: "1236", label: "Gammaproteobacteria" },
-        phylum: { id: "1224", label: "Proteobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "68225",
-      label: "Streptomyces kunmingensis",
-      lineage: {
-        species: { id: "68225", label: "Streptomyces kunmingensis" },
-        genus: { id: "1883", label: "Streptomyces" },
-        family: { id: "2062", label: "Streptomycetaceae" },
-        order: { id: "85011", label: "Streptomycetales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "47883",
-      label: "Pseudomonas synxantha",
-      lineage: {
-        species: { id: "47883", label: "Pseudomonas synxantha" },
-        genus: { id: "286", label: "Pseudomonas" },
-        family: { id: "135621", label: "Pseudomonadaceae" },
-        order: { id: "72274", label: "Pseudomonadales" },
-        class: { id: "1236", label: "Gammaproteobacteria" },
-        phylum: { id: "1224", label: "Proteobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "1952",
-      label: "Streptomyces thermoviolaceus",
-      lineage: {
-        species: { id: "1952", label: "Streptomyces thermoviolaceus" },
-        genus: { id: "1883", label: "Streptomyces" },
-        family: { id: "2062", label: "Streptomycetaceae" },
-        order: { id: "85011", label: "Streptomycetales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "58117",
-      label: "Microbispora rosea",
-      lineage: {
-        species: { id: "58117", label: "Microbispora rosea" },
-        genus: { id: "2005", label: "Microbispora" },
-        family: { id: "2004", label: "Streptosporangiaceae" },
-        order: { id: "85012", label: "Streptosporangiales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "1247726",
-      label: "Advenella mimigardefordensis DPN7",
-      lineage: {
-        species: { id: "1247726", label: "Advenella mimigardefordensis DPN7" },
-        genus: { id: "290425", label: "Advenella" },
-        family: { id: "506", label: "Alcaligenaceae" },
-        order: { id: "80840", label: "Burkholderiales" },
-        class: { id: "28216", label: "Betaproteobacteria" },
-        phylum: { id: "1224", label: "Proteobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "692420",
-      label: "Bacillus amyloliquefaciens DSM 7 = ATCC 23350",
-      lineage: {
-        species: { id: "692420", label: "Bacillus amyloliquefaciens DSM 7 = ATCC 23350" },
-        genus: { id: "1386", label: "Bacillus" },
-        family: { id: "186817", label: "Bacillaceae" },
-        order: { id: "1385", label: "Bacillales" },
-        class: { id: "91061", label: "Bacilli" },
-        phylum: { id: "1239", label: "Firmicutes" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "1869",
-      label: "Actinoplanes utahensis",
-      lineage: {
-        species: { id: "1869", label: "Actinoplanes utahensis" },
-        genus: { id: "1865", label: "Actinoplanes" },
-        family: { id: "28056", label: "Micromonosporaceae" },
-        order: { id: "85008", label: "Micromonosporales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-    {
-      id: "28887",
-      label: "Planobispora longispora",
-      lineage: {
-        species: { id: "28887", label: "Planobispora longispora" },
-        genus: { id: "29298", label: "Planobispora" },
-        family: { id: "2004", label: "Streptosporangiaceae" },
-        order: { id: "85012", label: "Streptosporangiales" },
-        class: { id: "1760", label: "Actinobacteria" },
-        phylum: { id: "201174", label: "Actinobacteria" },
-        superkingdom: { id: "2", label: "Bacteria" },
-      },
-    },
-  ],
-};
+    ],
+  },
+];

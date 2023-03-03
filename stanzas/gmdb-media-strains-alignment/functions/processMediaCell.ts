@@ -1,5 +1,5 @@
 import { Nullable } from "yohak-tools";
-import { CellInfo, DisplayData, Lineage, LineageRank, lineageRanks, Strain, Taxon } from "./types";
+import { CellInfo, DisplayData, Lineage, LineageRank, lineageRanks, Taxon } from "./types";
 import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignment/types";
 const rfdc = require("rfdc")();
 const uuid = require("uuid");
@@ -15,36 +15,36 @@ export const makeCellHeight = (size: number): number => {
   return 48 * size + size - 1;
 };
 
-const processMediaCell = (data: MediaStrainsAlimentResponse, allSpecies: string[]): CellInfo[] => {
-  return data.media.map((item) => {
+const processMediaCell = (data: MediaStrainsAlimentResponse): CellInfo[] => {
+  return data.map((item) => {
     return {
       id: item.gm_id,
       label: item.label,
-      size: item.strains.filter((id) => allSpecies.includes(id)).length,
+      size: item.organisms.length,
     };
   });
 };
 
 const fillNullTaxon = (data: MediaStrainsAlimentResponse): MediaStrainsAlimentResponse => {
   const cloned: MediaStrainsAlimentResponse = rfdc(data);
-  cloned.strains.forEach((strain) => {
-    lineageRanks.forEach((rank) => {
-      if (strain.lineage[rank] === null) {
-        strain.lineage[rank] = {
-          id: uuid(),
-          label: "",
-        };
-      }
+  cloned.forEach((media) => {
+    media.organisms.forEach((organism) => {
+      lineageRanks.forEach((rank) => {
+        if (organism[rank] === null) {
+          organism[rank] = {
+            id: uuid(),
+            label: "",
+          };
+        }
+      });
     });
   });
-
   return cloned;
 };
 
 const processTaxonCol = (data: MediaStrainsAlimentResponse, rank: LineageRank): CellInfo[][] => {
-  return data.media.map((medium) => {
-    const strains = getStrainsOfMedia(data, medium.gm_id);
-    const tree = makeTaxonTree(strains);
+  return data.map((medium) => {
+    const tree = makeTaxonTree(medium.organisms);
     return getNodeListOfRankFromTree(tree, rank).map<CellInfo>((node) => ({
       id: node.id,
       label: node.label,
@@ -57,28 +57,28 @@ export const processDisplayData = (
   data: MediaStrainsAlimentResponse,
   filterId: string = ""
 ): DisplayData => {
-  const cloned: MediaStrainsAlimentResponse = fillNullTaxon(data);
-  cloned.strains = cloned.strains.filter((strain) => {
-    if (filterId === "") return true;
-    let result = false;
-    lineageRanks.forEach((rank) => {
-      if (strain.lineage[rank]?.id === filterId) {
-        result = true;
-      }
-    });
-    return result;
-  });
-  cloned.media = cloned.media.filter((medium) => {
-    return cloned.strains.find((strain) => medium.strains.includes(strain.id));
-  });
+  const cloned: MediaStrainsAlimentResponse = filterData(fillNullTaxon(data), filterId);
   const taxon: DisplayData["taxon"] = lineageRanks.reduce<any>((accum, rank) => {
     const result = { ...accum };
     result[rank] = processTaxonCol(cloned, rank);
     return result;
   }, {});
-  const allSpeciesKey = taxon.species.flat().map((item) => item.id);
-  const media: DisplayData["media"] = processMediaCell(cloned, allSpeciesKey);
+  const media: DisplayData["media"] = processMediaCell(cloned);
   return { media, taxon };
+};
+
+const filterData = (
+  data: MediaStrainsAlimentResponse,
+  filterId: string = ""
+): MediaStrainsAlimentResponse => {
+  if (filterId === "") return data;
+  data.forEach((media) => {
+    media.organisms = media.organisms.filter((organism) => {
+      const organismIds = Object.values(organism).map((item) => item!.id);
+      return organismIds.includes(filterId);
+    });
+  });
+  return data.filter((medium) => medium.organisms.length > 0);
 };
 
 const getSizeOfCell = (node: TaxonNode): number => {
@@ -95,26 +95,26 @@ const getSizeOfCell = (node: TaxonNode): number => {
   return total;
 };
 
-const getStrainsOfMedia = (data: MediaStrainsAlimentResponse, id: string): Strain[] => {
-  const media = data.media.find((medium) => medium.gm_id === id);
-  if (!media) return [];
-  const strainIds = media.strains;
-  return data.strains.filter((strain) => strainIds.includes(strain.id));
-};
+// const getStrainsOfMedia = (data: MediaStrainsAlimentResponse, id: string): Strain[] => {
+//   const media = data.media.find((medium) => medium.gm_id === id);
+//   if (!media) return [];
+//   const strainIds = media.organisms;
+//   return data.strains.filter((strain) => strainIds.includes(strain.id));
+// };
 
-const makeTaxonTree = (strains: Strain[]): TaxonNode[] => {
-  // strains.forEach(strain => strain.lineage.)
-  const flatTaxonList: TaxonNode[] = strains
-    .map<TaxonNode[]>((strain) => lineageToTaxonNode(strain.lineage))
+const makeTaxonTree = (organisms: Lineage[]): TaxonNode[] => {
+  const flatTaxonList = organisms
+    .map((organism) => lineageToTaxonNode(organism))
     .flat()
     .reduce<TaxonNode[]>(reduceSingle, []);
-  strains.forEach((strain) => {
+
+  organisms.forEach((organism) => {
     lineageRanks.forEach((rank, index) => {
-      const targetTaxon = strain.lineage[rank];
+      const targetTaxon = organism[rank];
       const targetNode = findNodeFromFlatList(flatTaxonList, targetTaxon?.id || "", rank);
       if (rank !== "superkingdom") {
         const parentRank = lineageRanks[index - 1]!;
-        const parentTaxon = strain.lineage[parentRank];
+        const parentTaxon = organism[parentRank];
         const parentNode = findNodeFromFlatList(flatTaxonList, parentTaxon?.id || "", parentRank);
         parentNode.children.push(targetNode);
       }
@@ -173,7 +173,7 @@ const reduceSingle = (accum: TaxonNode[], current: TaxonNode): TaxonNode[] => {
 
 export const __TEST__ = {
   getNodeListOfRankFromTree,
-  getStrainsOfMedia,
+  // getStrainsOfMedia,
   makeTaxonTree,
   processMediaCell,
   getSizeOfCell,

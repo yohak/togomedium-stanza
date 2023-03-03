@@ -5,7 +5,7 @@ export const data1: MediaStrainsAlimentResponse = {
     {
       label: "NUTRIENT AGAR",
       gm_id: "HM_D00001",
-      strains: [
+      organisms: [
         "1076550",
         "491915",
         "1247726",

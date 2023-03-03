@@ -18,19 +18,17 @@ export const lineageRanks = [
   "family",
   "genus",
   "species",
+  "strain",
 ] as const;
 export type LineageRank = (typeof lineageRanks)[number];
 
 export type Medium = {
   gm_id: string;
   label: string;
-  strains: string[];
+  organisms: Lineage[];
 };
 export type Taxon = {
   id: string;
   label: string;
 };
 export type Lineage = Record<LineageRank, Nullable<Taxon>>;
-export type Strain = {
-  lineage: Lineage;
-} & Taxon;

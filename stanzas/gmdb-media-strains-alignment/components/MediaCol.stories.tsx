@@ -14,10 +14,7 @@ export default {
 const Template: ComponentStory<typeof MediaCol> = (args) => <MediaCol {...args} />;
 
 const defaultArgs: ComponentProps<typeof MediaCol> = {
-  mediaList: processMediaCell(
-    data1,
-    data1.strains.map((strain) => strain.id)
-  ),
+  mediaList: processMediaCell(data1),
 };
 
 export const Primary = Template.bind({});

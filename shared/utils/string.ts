@@ -46,8 +46,20 @@ export const makeSpeciesName = (str: string) => {
   if (arr.length < 1) {
     return "";
   }
-  const first = arr.shift()!.charAt(0) + ".";
+  const first = arr.shift()!.charAt(0).toUpperCase();
   const rest = capitalizeFirstLetter(arr.join(" "));
 
-  return `${first} ${rest}`;
+  return `${first}. ${rest}`;
+};
+
+export const makeStrainName = (str: string) => {
+  const arr = str.split(" ");
+  if (arr.length < 2) {
+    return "";
+  }
+  const first = arr.shift()!.charAt(0).toUpperCase();
+  const second = arr.shift()!.charAt(0).toUpperCase();
+  const rest = capitalizeFirstLetter(arr.join(" "));
+
+  return `${first}. ${second}. ${rest}`;
 };

@@ -29,7 +29,7 @@ export const scrapeAlignmentData = async (
     result.media.push({
       label: name,
       gm_id: gmId,
-      strains: contents.map((content: any) => content.tax_id.label),
+      organisms: contents.map((content: any) => content.tax_id.label),
     });
 
     for await (const content of contents) {
