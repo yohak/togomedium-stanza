@@ -2,43 +2,25 @@
   "@context": {
     "stanza": "http://togostanza.org/resource/stanza#"
   },
-  "@id": "hello-react",
-  "stanza:label": "Hello react",
+  "@id": "gmdb-media-alignment-table",
+  "stanza:label": "Media Alignment Table",
   "stanza:definition": "",
   "stanza:license": "MIT",
-  "stanza:author": "Yoji Shidara",
+  "stanza:author": "Satoshi Onoda",
   "stanza:contributor": [],
-  "stanza:created": "2021-10-11",
-  "stanza:updated": "2021-10-11",
+  "stanza:created": "2022-01-01",
+  "stanza:updated": "2022-01-01",
   "stanza:parameter": [
     {
-      "stanza:key": "say-to",
+      "stanza:key": "gm_ids",
       "stanza:type": "string",
-      "stanza:example": "world",
-      "stanza:description": "who to say hello to",
-      "stanza:required": false
+      "stanza:example": "HM_D00001a,HM_D00065",
+      "stanza:description": "",
+      "stanza:required": true
     }
   ],
-  "stanza:menu-placement": "bottom-right",
-  "stanza:style": [
-    {
-      "stanza:key": "--greeting-color",
-      "stanza:type": "color",
-      "stanza:default": "#eb7900",
-      "stanza:description": "text color of greeting"
-    },
-    {
-      "stanza:key": "--greeting-align",
-      "stanza:type": "single-choice",
-      "stanza:choice": [
-        "left",
-        "center",
-        "right"
-      ],
-      "stanza:default": "center",
-      "stanza:description": "text align of greeting"
-    }
-  ],
+  "stanza:menu-placement": "none",
+  "stanza:style": [],
   "stanza:incomingEvent": [],
   "stanza:outgoingEvent": []
 }

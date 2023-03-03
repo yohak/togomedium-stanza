@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
+import { Tooltip } from "@mui/material";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
+import { useToolTipEnabled } from "./MediaCell";
 import { FilterIcon } from "../../../shared/components/svg/FilterIcon";
 import { COLOR_GRAY400, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
 import { makeSpeciesName, makeStrainName } from "../../../shared/utils/string";
@@ -16,6 +18,7 @@ export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) 
   const onClickFilter = () => {
     setFilterId(id);
   };
+  const { labelRef, toolTipEnabled } = useToolTipEnabled();
   return (
     <div
       css={[taxonCell, css]}
@@ -25,7 +28,19 @@ export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) 
       {!!label && (
         <>
           <a href={`/taxon/${id}`}>{id}</a>
-          <span>{makeLabel(label, rank)}</span>
+          <div className={"label-wrapper"}>
+            <Tooltip
+              title={makeLabel(label, rank)}
+              placement={"top"}
+              PopperProps={{ disablePortal: true }}
+              arrow
+              disableHoverListener={!toolTipEnabled}
+            >
+              <span className={"label"} ref={labelRef}>
+                {makeLabel(label, rank)}
+              </span>
+            </Tooltip>
+          </div>
           <span css={filterIcon} onClick={onClickFilter}>
             <FilterIcon css={[id === filterId ? filterIconColorActive : filterIconColorInactive]} />
           </span>
@@ -61,7 +76,10 @@ const taxonCell = css`
     width: fit-content;
   }
 
-  span {
+  .label-wrapper {
+    position: relative;
+  }
+  .label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
-import React, { FC } from "react";
+import { Tooltip } from "@mui/material";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
 import { makeCellHeight } from "../functions/processMediaCell";
@@ -7,7 +8,19 @@ import { CellInfo } from "../functions/types";
 
 type Props = {} & CellInfo & AcceptsEmotion;
 
+export const useToolTipEnabled = () => {
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const [toolTipEnabled, setToolTipEnabled] = useState(false);
+  useEffect(() => {
+    const offsetWidth = labelRef.current?.offsetWidth;
+    const scrollWidth = labelRef.current?.scrollWidth;
+    setToolTipEnabled(!!scrollWidth && !!offsetWidth && scrollWidth > offsetWidth);
+  }, [labelRef]);
+  return { labelRef, toolTipEnabled };
+};
+
 export const MediaCell: FC<Props> = ({ label, id, size, css, className }) => {
+  const { labelRef, toolTipEnabled } = useToolTipEnabled();
   return (
     <div
       css={[mediaCell, css]}
@@ -15,7 +28,19 @@ export const MediaCell: FC<Props> = ({ label, id, size, css, className }) => {
       style={{ height: `${makeCellHeight(size)}px` }}
     >
       <a href={`/media/${id}`}>{id}</a>
-      <span>{label}</span>
+      <div className={"label-wrapper"}>
+        <Tooltip
+          title={label}
+          placement={"top"}
+          PopperProps={{ disablePortal: true }}
+          arrow
+          disableHoverListener={!toolTipEnabled}
+        >
+          <span ref={labelRef} className={"label"}>
+            {label}
+          </span>
+        </Tooltip>
+      </div>
     </div>
   );
 };
@@ -33,7 +58,10 @@ const mediaCell = css`
     text-decoration: none;
     width: fit-content;
   }
-  span {
+  .label-wrapper {
+    position: relative;
+  }
+  .label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
