@@ -414,8 +414,8 @@ var metadata = {
 	"@context": {
 	stanza: "http://togostanza.org/resource/stanza#"
 },
-	"@id": "gmdb-media-alignment-table",
-	"stanza:label": "Media Alignment Table",
+	"@id": "gmdb-media-strains-alignment-table",
+	"stanza:label": "Media Strains Alignment Table",
 	"stanza:definition": "",
 	"stanza:license": "MIT",
 	"stanza:author": "Satoshi Onoda",
