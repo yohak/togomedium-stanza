@@ -3,7 +3,7 @@ import { C as COLOR_WHITE, b as COLOR_PRIMARY, d as jsxs, j as jsx, K as COLOR_G
 import { c as css, r as reactExports, e as dist } from './index-56cafe6b.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-503ca0af.js';
 import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-01eb8e0e.js';
-import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-52ff4a91.js';
+import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-a3c2e0f8.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-ace01225.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';

@@ -8,7 +8,7 @@ import { b as PATH_COMPONENT, P as PATH_MEDIUM, a as PATH_ORGANISM } from './con
 import { T as Tooltip, e as API_MEDIA_ALIGNMENT } from './paths-01eb8e0e.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import { s as stringToArray } from './string-52ff4a91.js';
+import { s as stringToArray } from './string-a3c2e0f8.js';
 import './createSvgIcon-51ee6b54.js';
 import './Grow-b02e3735.js';
 import './variables-0b8fac13.js';

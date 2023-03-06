@@ -4,6 +4,7 @@ import { r as reactExports, j as jsx$1 } from './index-56cafe6b.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-503ca0af.js';
 import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-01eb8e0e.js';
 import { g as getData } from './getData-b32e78c1.js';
+import { d as decodeHTMLEntities } from './string-a3c2e0f8.js';
 import { T as TextField, C as Chip, A as Autocomplete } from './TextField-8e325181.js';
 import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-71b7f450.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-ace01225.js';
@@ -25,7 +26,7 @@ const ComponentSelect = ({ onChangeSelection }) => {
             setComponents(response.body
                 .map((item) => ({
                 id: item.gmo_id,
-                label: item.name,
+                label: item.name.includes(";") ? decodeHTMLEntities(item.name) : item.name,
             }))
                 .filter((item) => !ids.includes(item.id)));
         }

@@ -40,6 +40,11 @@ const makeSpeciesName = (str) => {
     const rest = capitalizeFirstLetter(arr.join(" "));
     return `${first}. ${rest}`;
 };
+const decodeHTMLEntities = (text) => {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = text;
+    return textArea.value;
+};
 
-export { convertHTMLEntity as a, makeTogoGenomeOrganismLink as b, capitalizeFirstLetter as c, makeNcbiOrganismLink as d, makeSpeciesName as m, stringToArray as s, unescapeJsonString as u };
-//# sourceMappingURL=string-52ff4a91.js.map
+export { convertHTMLEntity as a, makeTogoGenomeOrganismLink as b, capitalizeFirstLetter as c, decodeHTMLEntities as d, makeNcbiOrganismLink as e, makeSpeciesName as m, stringToArray as s, unescapeJsonString as u };
+//# sourceMappingURL=string-a3c2e0f8.js.map
