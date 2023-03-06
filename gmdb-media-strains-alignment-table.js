@@ -123,12 +123,33 @@ const processMediaCell = (data) => {
 };
 const fillNullTaxon = (data) => {
     const cloned = copy(data);
+    const nullCells = [];
+    const findNullId = (gmId, parentId) => {
+        var _a;
+        return (_a = nullCells.find((cell) => parentId === cell.parentId && cell.gmId === gmId)) === null || _a === void 0 ? void 0 : _a.id;
+    };
     cloned.forEach((media) => {
-        media.organisms.forEach((organism) => {
-            lineageRanks.forEach((rank) => {
+        media.organisms.forEach((organism, organismIndex) => {
+            lineageRanks.forEach((rank, lineageIndex) => {
                 if (organism[rank] === null) {
+                    const parentRank = lineageRanks[lineageIndex - 1];
+                    const parent = organism[parentRank];
+                    const parentId = parent.id;
+                    const foundId = findNullId(media.gm_id, parentId);
+                    if (rank === "class" && organismIndex === 0) {
+                        console.log(foundId);
+                    }
+                    if (rank === "class" && organismIndex === 1) {
+                        console.log(parentId);
+                        console.log(foundId);
+                        console.log(nullCells[0].parentId);
+                    }
+                    const id = foundId || nanoid();
+                    if (!foundId) {
+                        nullCells.push({ id, parentId, gmId: media.gm_id });
+                    }
                     organism[rank] = {
-                        id: nanoid(),
+                        id,
                         label: "",
                     };
                 }
@@ -225,19 +246,17 @@ const getNodeListOfRankFromTree = (tree, rank) => {
 };
 const findNodeFromFlatList = (list, id, rank) => list.find((node) => node.rank === rank && id === node.id);
 const lineageToTaxonNode = (lineage) => lineageRanks.map((key) => makeTaxonNode(lineage[key], key));
-const makeTaxonNode = (taxon, rank) => taxon
-    ? {
+const makeTaxonNode = (taxon, rank) => {
+    if (!taxon) {
+        throw Error("taxon should not be null");
+    }
+    return {
         rank,
         id: taxon.id,
         label: taxon.label,
         children: [],
-    }
-    : {
-        rank,
-        id: nanoid(),
-        label: "",
-        children: [],
     };
+};
 const reduceSingle = (accum, current) => {
     return accum.find((item) => item.id === current.id && item.rank === current.rank)
         ? [...accum]
@@ -320,7 +339,7 @@ const TaxonCell = ({ label, id, size, rank, css, className }) => {
         setFilterId(id);
     };
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
-    return (jsx("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: !!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `/taxon/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })) })));
+    return (jsxs("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [!!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `/taxon/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })), !label && jsx(Fragment, { children: "" })] })));
 };
 const makeLabel = (label, rank) => {
     switch (rank) {
