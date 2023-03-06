@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AppContainer } from "./AppContainer";
 import { data1 } from "../../../api/media_strains_alignment/data1";
 import { data2 } from "../../../api/media_strains_alignment/data2";
+import { data3 } from "../../../api/media_strains_alignment/data3";
 import { makeComponentStoryTitle, makeMswParameter } from "../../../shared/utils/storybook";
 
 export default {
@@ -22,3 +23,6 @@ Primary.parameters = {
 Primary.args = { data: data1 };
 export const WithNull = Template.bind({});
 WithNull.args = { data: data2 };
+
+export const NoOrganisms = Template.bind({});
+NoOrganisms.args = { data: data3 };

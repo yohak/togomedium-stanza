@@ -27,7 +27,7 @@ export const MediaRow: FC<Props> = ({
     <div css={wrapper}>
       <InfoCell info={[medium]} expanded={isMediaExpanded} linkBase={PATH_MEDIUM} />
       <InfoCell
-        info={organisms}
+        info={organisms.length ? organisms : [{ id: "", label: "No organisms found" }]}
         expanded={isOrganismsExpanded}
         linkBase={PATH_ORGANISM}
         priority={prioritizedOrganism}

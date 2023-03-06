@@ -59,3 +59,28 @@ Type1.args = {
     },
   ],
 };
+
+export const NoOrganism = Template.bind({});
+NoOrganism.args = {
+  isMediaExpanded: false,
+  isOrganismsExpanded: false,
+  medium: { id: "HM_D00001a", label: "REACTIVATION WITH LIQUID MEDIUM 1" },
+  organisms: [],
+  components: [
+    {
+      state: "available",
+      id: "aaa",
+      label: "hogehoge",
+    },
+    {
+      state: "grouped",
+      id: "bbb",
+      label: "hogehoge",
+    },
+    {
+      state: "none",
+      id: "ccc",
+      label: "hogehoge",
+    },
+  ],
+};

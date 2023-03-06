@@ -54,16 +54,20 @@ const Compact: FC<Omit<Props, "expanded">> = ({ info, linkBase, priority = [] })
         <div className="text">
           {items.map((item, index) => (
             <span key={index}>
-              <Tooltip
-                title={item.label}
-                placement={"top"}
-                PopperProps={{ disablePortal: true }}
-                arrow
-              >
-                <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
-                  {item.id}
-                </a>
-              </Tooltip>
+              {item.id ? (
+                <Tooltip
+                  title={item.label}
+                  placement={"top"}
+                  PopperProps={{ disablePortal: true }}
+                  arrow
+                >
+                  <a href={`${linkBase}${item.id}`} target="_blank" rel="noreferrer">
+                    {item.id}
+                  </a>
+                </Tooltip>
+              ) : (
+                <>{item.label}</>
+              )}
               {index < items.length - 1 ? ", " : ""}
             </span>
           ))}
