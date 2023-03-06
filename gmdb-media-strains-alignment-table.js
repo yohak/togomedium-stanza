@@ -258,7 +258,7 @@ const useToolTipEnabled = () => {
 };
 const MediaCell = ({ label, id, size, css, className }) => {
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
-    return (jsxs("div", Object.assign({ css: [mediaCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [jsx("a", Object.assign({ href: `/media/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ ref: labelRef, className: "label" }, { children: label })) })) }))] })));
+    return (jsxs("div", Object.assign({ css: [mediaCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [jsx("a", Object.assign({ href: `/medium/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ ref: labelRef, className: "label" }, { children: label })) })) }))] })));
 };
 const mediaCell = css `
   width: 200px;
