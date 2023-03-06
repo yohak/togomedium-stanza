@@ -27,7 +27,7 @@ export const MediaCell: FC<Props> = ({ label, id, size, css, className }) => {
       className={className}
       style={{ height: `${makeCellHeight(size)}px` }}
     >
-      <a href={`/media/${id}`}>{id}</a>
+      <a href={`/medium/${id}`}>{id}</a>
       <div className={"label-wrapper"}>
         <Tooltip
           title={label}
