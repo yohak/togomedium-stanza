@@ -2,7 +2,6 @@ import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-
 import { C as COLOR_WHITE, b as COLOR_PRIMARY, d as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
 import { c as css, r as reactExports, e as dist } from './index-56cafe6b.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-503ca0af.js';
-import { css as css$1 } from '@emotion/react/dist/emotion-react.cjs';
 import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-01eb8e0e.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-52ff4a91.js';
 import { g as getData } from './getData-b32e78c1.js';
@@ -478,7 +477,7 @@ const App = ({ gm_ids, stanzaElement }) => {
     }, [gm_ids]);
     return jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(AppContainer, { data: data }) }));
 };
-const wrapper = css$1 `
+const wrapper = css `
   min-height: 100px;
   background-color: ${COLOR_WHITE};
   border-radius: 5px;
