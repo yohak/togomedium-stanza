@@ -53,7 +53,7 @@ export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) 
 const makeLabel = (label: string, rank: LineageRank): string => {
   switch (rank) {
     case "strain":
-      return makeStrainName(label);
+      return makeSpeciesName(label);
     case "species":
       return makeSpeciesName(label);
     default:
