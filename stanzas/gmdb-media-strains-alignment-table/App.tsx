@@ -1,4 +1,4 @@
-import { css } from "@emotion/react/dist/emotion-react.cjs";
+import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import { AppContainer } from "./components/AppContainer";
 import { MediaStrainsAlimentResponse } from "../../api/media_strains_alignment/types";
