@@ -4,7 +4,7 @@ import { MediaStrainsAlimentResponse } from "../../api/media_strains_alignment/t
 import { API_MEDIA_STRAINS_ALIGNMENT } from "../../api/paths";
 import { getData } from "../../shared/utils/getData";
 export type AppProps = {
-  gm_ids: string;
+  gm_ids: string[];
   prioritizedOrganism?: string[];
   stanzaElement?: Document;
 };
@@ -14,7 +14,7 @@ const App = ({ gm_ids, stanzaElement }: AppProps) => {
   useEffect(() => {
     (async () => {
       const response = await getData<MediaStrainsAlimentResponse>(API_MEDIA_STRAINS_ALIGNMENT, {
-        gm_ids,
+        gm_ids: gm_ids.join(","),
       });
       setData(response.body);
     })();

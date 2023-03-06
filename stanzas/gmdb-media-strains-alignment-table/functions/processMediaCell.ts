@@ -1,8 +1,8 @@
+import { copy } from "copy-anything";
+import { nanoid } from "nanoid";
 import { Nullable } from "yohak-tools";
 import { CellInfo, DisplayData, Lineage, LineageRank, lineageRanks, Taxon } from "./types";
 import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignment/types";
-const rfdc = require("rfdc")();
-const uuid = require("uuid");
 
 type TaxonNode = {
   id: string;
@@ -26,13 +26,13 @@ const processMediaCell = (data: MediaStrainsAlimentResponse): CellInfo[] => {
 };
 
 const fillNullTaxon = (data: MediaStrainsAlimentResponse): MediaStrainsAlimentResponse => {
-  const cloned: MediaStrainsAlimentResponse = rfdc(data);
+  const cloned: MediaStrainsAlimentResponse = copy(data);
   cloned.forEach((media) => {
     media.organisms.forEach((organism) => {
       lineageRanks.forEach((rank) => {
         if (organism[rank] === null) {
           organism[rank] = {
-            id: uuid(),
+            id: nanoid(),
             label: "",
           };
         }
@@ -160,7 +160,7 @@ const makeTaxonNode = (taxon: Nullable<Taxon>, rank: LineageRank): TaxonNode =>
       }
     : {
         rank,
-        id: uuid(),
+        id: nanoid(),
         label: "",
         children: [],
       };
