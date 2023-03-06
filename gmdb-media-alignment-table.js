@@ -1,5 +1,5 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { C as COLOR_WHITE, S as SIZE1, w as SIZE4, t as SIZE3, j as jsx, d as jsxs, v as COLOR_GRAY700, b as COLOR_PRIMARY, L as COLOR_GRAY, h as FONT_EN, r as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
+import { C as COLOR_WHITE, S as SIZE1, w as SIZE4, t as SIZE3, j as jsx, d as jsxs, v as COLOR_GRAY700, b as COLOR_PRIMARY, L as COLOR_GRAY, h as FONT_EN, F as Fragment, r as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
 import { c as css, j as jsx$1, r as reactExports } from './index-56cafe6b.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-503ca0af.js';
 import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-c3797527.js';
@@ -278,7 +278,7 @@ const Compact = ({ info, linkBase, priority = [] }) => {
                 setRestText(` + ${remain} organisms`);
         }
     }, [info]);
-    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: jsxs("div", Object.assign({ className: "text" }, { children: [items.map((item, index) => (jsxs("span", { children: [jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id })) })), index < items.length - 1 ? ", " : ""] }, index))), jsx("span", Object.assign({ style: { whiteSpace: "nowrap" } }, { children: restText }))] })) })) })));
+    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: jsxs("div", Object.assign({ className: "text" }, { children: [items.map((item, index) => (jsxs("span", { children: [item.id ? (jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id })) }))) : (jsx(Fragment, { children: item.label })), index < items.length - 1 ? ", " : ""] }, index))), jsx("span", Object.assign({ style: { whiteSpace: "nowrap" } }, { children: restText }))] })) })) })));
 };
 const Expanded = ({ info, linkBase, priority = [] }) => {
     return (jsx("div", Object.assign({ css: wrapper$5, className: "expanded" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: [
@@ -328,7 +328,7 @@ const wrapper$5 = css `
 const MediaRow = ({ medium, organisms, components, prioritizedOrganism = [], }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
-    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }), jsx(InfoCell, { info: organisms, expanded: isOrganismsExpanded, linkBase: PATH_ORGANISM, priority: prioritizedOrganism }), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 })] })));
+    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }), jsx(InfoCell, { info: organisms.length ? organisms : [{ id: "", label: "No organisms found" }], expanded: isOrganismsExpanded, linkBase: PATH_ORGANISM, priority: prioritizedOrganism }), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 })] })));
 };
 const wrapper$4 = css `
   display: flex;
