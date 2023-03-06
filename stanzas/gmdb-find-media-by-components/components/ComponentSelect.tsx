@@ -5,6 +5,7 @@ import { AllComponentsResponse } from "../../../api/all-components/types";
 import { API_COMPONENTS_WITH_COMPONENTS } from "../../../api/paths";
 import { getData } from "../../../shared/utils/getData";
 import { LabelInfo } from "../../../shared/utils/labelInfo";
+import { decodeHTMLEntities } from "../../../shared/utils/string";
 
 type Props = {
   onChangeSelection: (ids: string[]) => void;
@@ -22,7 +23,7 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
         response.body
           .map<LabelInfo>((item) => ({
             id: item.gmo_id,
-            label: item.name,
+            label: item.name.includes(";") ? decodeHTMLEntities(item.name) : item.name,
           }))
           .filter((item) => !ids.includes(item.id))
       );
