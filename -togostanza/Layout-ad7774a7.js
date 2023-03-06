@@ -25151,15 +25151,15 @@ var dependencies = {
 	"@mui/icons-material": "^5.2.5",
 	"@mui/material": "^5.2.6",
 	"@rollup/plugin-typescript": "^8.2.0",
+	"copy-anything": "^3.0.3",
 	d3: "^6.5.0",
 	msw: "^0.35.0",
+	nanoid: "^4.0.1",
 	"node-fetch": "^2.6.9",
 	pluralize: "^8.0.0",
 	react: "^17.0.2",
 	"react-dom": "^17.0.2",
-	"react-uuid": "^2.0.0",
 	recoil: "^0.5.2",
-	rfdc: "^1.3.0",
 	"sleep-promise": "^9.1.0",
 	togostanza: "github:togostanza/togostanza",
 	"yohak-tools": "0.1.18"
@@ -25288,4 +25288,4 @@ script.render = render;
 script.__file = "node_modules/togostanza/src/components/Layout.vue";
 
 export { unref as A, normalizeStyle as B, Fragment as F, createElementBlock as a, renderList as b, createBlock as c, defineComponent as d, createBaseVNode as e, createCommentVNode as f, createApp as g, ref as h, octicons as i, createTextVNode as j, computed as k, watch as l, mergeProps as m, normalizeProps as n, openBlock as o, guardReactiveProps as p, resolveDynamicComponent as q, resolveComponent as r, script as s, toDisplayString as t, createVNode as u, pushScopeId as v, withCtx as w, popScopeId as x, n as y, normalizeClass as z };
-//# sourceMappingURL=Layout-dba06276.js.map
+//# sourceMappingURL=Layout-ad7774a7.js.map

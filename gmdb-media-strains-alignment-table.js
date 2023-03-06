@@ -1,12 +1,102 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
 import { C as COLOR_WHITE, b as COLOR_PRIMARY, d as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
 import { c as css, r as reactExports, e as dist } from './index-56cafe6b.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-503ca0af.js';
 import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-01eb8e0e.js';
-import { m as makeSpeciesName, a as makeStrainName, c as capitalizeFirstLetter } from './string-21df0709.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22 } from './recoil-503ca0af.js';
+import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-52ff4a91.js';
 import { g as getData } from './getData-b32e78c1.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-ace01225.js';
+import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './Grow-b02e3735.js';
 import './variables-0b8fac13.js';
+
+/**
+ * Returns the object type of the given payload
+ *
+ * @param {*} payload
+ * @returns {string}
+ */
+function getType(payload) {
+    return Object.prototype.toString.call(payload).slice(8, -1);
+}
+/**
+ * Returns whether the payload is a plain JavaScript object (excluding special classes or objects with other prototypes)
+ *
+ * @param {*} payload
+ * @returns {payload is PlainObject}
+ */
+function isPlainObject(payload) {
+    if (getType(payload) !== 'Object')
+        return false;
+    const prototype = Object.getPrototypeOf(payload);
+    return prototype.constructor === Object && prototype === Object.prototype;
+}
+/**
+ * Returns whether the payload is an array
+ *
+ * @param {any} payload
+ * @returns {payload is any[]}
+ */
+function isArray(payload) {
+    return getType(payload) === 'Array';
+}
+
+function assignProp(carry, key, newVal, originalObject, includeNonenumerable) {
+    const propType = {}.propertyIsEnumerable.call(originalObject, key)
+        ? 'enumerable'
+        : 'nonenumerable';
+    if (propType === 'enumerable')
+        carry[key] = newVal;
+    if (includeNonenumerable && propType === 'nonenumerable') {
+        Object.defineProperty(carry, key, {
+            value: newVal,
+            enumerable: false,
+            writable: true,
+            configurable: true,
+        });
+    }
+}
+/**
+ * Copy (clone) an object and all its props recursively to get rid of any prop referenced of the original object. Arrays are also cloned, however objects inside arrays are still linked.
+ *
+ * @param target Target can be anything
+ * @param [options = {}] Options can be `props` or `nonenumerable`
+ * @returns the target with replaced values
+ */
+function copy(target, options = {}) {
+    if (isArray(target)) {
+        return target.map((item) => copy(item, options));
+    }
+    if (!isPlainObject(target)) {
+        return target;
+    }
+    const props = Object.getOwnPropertyNames(target);
+    const symbols = Object.getOwnPropertySymbols(target);
+    return [...props, ...symbols].reduce((carry, key) => {
+        if (isArray(options.props) && !options.props.includes(key)) {
+            return carry;
+        }
+        const val = target[key];
+        const newVal = copy(val, options);
+        assignProp(carry, key, newVal, target, options.nonenumerable);
+        return carry;
+    }, {});
+}
+
+let nanoid = (size = 21) =>
+  crypto.getRandomValues(new Uint8Array(size)).reduce((id, byte) => {
+    byte &= 63;
+    if (byte < 36) {
+      id += byte.toString(36);
+    } else if (byte < 62) {
+      id += (byte - 26).toString(36).toUpperCase();
+    } else if (byte > 62) {
+      id += '-';
+    } else {
+      id += '_';
+    }
+    return id
+  }, '');
 
 const lineageRanks = [
     "superkingdom",
@@ -19,8 +109,6 @@ const lineageRanks = [
     "strain",
 ];
 
-const rfdc = require("rfdc")();
-const uuid = require("uuid");
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;
 };
@@ -34,13 +122,13 @@ const processMediaCell = (data) => {
     });
 };
 const fillNullTaxon = (data) => {
-    const cloned = rfdc(data);
+    const cloned = copy(data);
     cloned.forEach((media) => {
         media.organisms.forEach((organism) => {
             lineageRanks.forEach((rank) => {
                 if (organism[rank] === null) {
                     organism[rank] = {
-                        id: uuid(),
+                        id: nanoid(),
                         label: "",
                     };
                 }
@@ -146,7 +234,7 @@ const makeTaxonNode = (taxon, rank) => taxon
     }
     : {
         rank,
-        id: uuid(),
+        id: nanoid(),
         label: "",
         children: [],
     };
@@ -237,7 +325,7 @@ const TaxonCell = ({ label, id, size, rank, css, className }) => {
 const makeLabel = (label, rank) => {
     switch (rank) {
         case "strain":
-            return makeStrainName(label);
+            return makeSpeciesName(label);
         case "species":
             return makeSpeciesName(label);
         default:
@@ -382,7 +470,7 @@ const App = ({ gm_ids, stanzaElement }) => {
     reactExports.useEffect(() => {
         (() => __awaiter(void 0, void 0, void 0, function* () {
             const response = yield getData(API_MEDIA_STRAINS_ALIGNMENT, {
-                gm_ids,
+                gm_ids: gm_ids.join(","),
             });
             setData(response.body);
         }))();
@@ -393,21 +481,23 @@ const App = ({ gm_ids, stanzaElement }) => {
 class HelloReact extends Stanza {
     render() {
         return __awaiter(this, void 0, void 0, function* () {
-            const main = this.root.querySelector("main");
-            const props = this.params;
-            ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, props)) }) }), main);
+            this._render();
+            importWebFontForTogoMedium(this);
         });
     }
     handleAttributeChange() {
+        this._render();
+    }
+    _render() {
         const main = this.root.querySelector("main");
-        const props = this.params;
-        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, props)) }) }), main);
+        const gm_ids = stringToArray(this.params.gm_ids);
+        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, { stanzaElement: this.root, gm_ids: gm_ids }) }) })) }) }), main);
     }
 }
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  'default': HelloReact
+    __proto__: null,
+    'default': HelloReact
 });
 
 var metadata = {
@@ -459,4 +549,4 @@ var templates = [
 const url = import.meta.url.replace(/\?.*$/, '');
 
 defineStanzaElement({stanzaModule, metadata, templates, url});
-//# sourceMappingURL=gmdb-media-strains-alignment.js.map
+//# sourceMappingURL=gmdb-media-strains-alignment-table.js.map

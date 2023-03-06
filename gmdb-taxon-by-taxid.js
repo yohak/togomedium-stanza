@@ -1,7 +1,7 @@
 import { c as commonjsGlobal, S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import { d as makeTogoGenomeOrganismLink, e as makeNcbiOrganismLink, u as unescapeJsonString, c as capitalizeFirstLetter } from './string-21df0709.js';
+import { b as makeTogoGenomeOrganismLink, d as makeNcbiOrganismLink, u as unescapeJsonString, c as capitalizeFirstLetter } from './string-52ff4a91.js';
 import { U as URL_API } from './variables-0b8fac13.js';
 import './index-56cafe6b.js';
 
