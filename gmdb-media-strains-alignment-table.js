@@ -479,6 +479,8 @@ const App = ({ gm_ids, stanzaElement }) => {
 };
 const wrapper = css `
   min-height: 100px;
+  width: fit-content;
+  min-width: 100%;
   background-color: ${COLOR_WHITE};
   border-radius: 5px;
   padding: ${SIZE1};
