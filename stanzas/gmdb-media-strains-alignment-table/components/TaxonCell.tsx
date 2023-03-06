@@ -5,7 +5,7 @@ import { AcceptsEmotion } from "yohak-tools";
 import { useToolTipEnabled } from "./MediaCell";
 import { FilterIcon } from "../../../shared/components/svg/FilterIcon";
 import { COLOR_GRAY400, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
-import { makeSpeciesName, makeStrainName } from "../../../shared/utils/string";
+import { makeSpeciesName } from "../../../shared/utils/string";
 import { makeCellHeight } from "../functions/processMediaCell";
 import { CellInfo, LineageRank } from "../functions/types";
 import { useFilterIdMutators, useFilterIdState } from "../states/filterId";
@@ -46,6 +46,7 @@ export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) 
           </span>
         </>
       )}
+      {!label && <>{""}</>}
     </div>
   );
 };

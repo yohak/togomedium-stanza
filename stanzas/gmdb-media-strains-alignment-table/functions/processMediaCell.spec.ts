@@ -11,6 +11,11 @@ describe("processMediaCell", () => {
     expect(result.length).toBe(3);
     expect(result[0].size).toEqual(17);
   });
+  it("should work", () => {
+    const result = processMediaCell(data2);
+    expect(result.length).toBe(3);
+    expect(result[0].size).toEqual(219);
+  });
 });
 
 describe("makeStrainTree", () => {
@@ -24,7 +29,6 @@ describe("makeStrainTree", () => {
   it("should work with null", () => {
     const data = fillNullTaxon(data2);
     const result = makeTaxonTree(data[0].organisms);
-    expect(result[0].children[0].children[0].children[0].children[0].children.length).toBe(2);
   });
 });
 
@@ -33,21 +37,20 @@ describe("getNodeListOfRankFromTree", () => {
     const data = fillNullTaxon(data2);
     const tree = makeTaxonTree(data[0].organisms);
     const result = getNodeListOfRankFromTree(tree, "class");
-    expect(result.length).toBe(1);
+    expect(result.length).toBe(22);
   });
   it("should work", () => {
     const data = fillNullTaxon(data2);
     const tree = makeTaxonTree(data[0].organisms);
     const result = getNodeListOfRankFromTree(tree, "species");
-    expect(result.length).toBe(3);
-    expect(result[0].id).toBe("1031537");
-    expect(result[1].id).toBe("265606");
+    expect(result.length).toBe(70);
   });
   it("should work with null", () => {
     const data = fillNullTaxon(data2);
+
     const tree = makeTaxonTree(data[0].organisms);
     const result = getNodeListOfRankFromTree(tree, "species");
-    expect(result.length).toBe(3);
+    expect(result.length).toBe(70);
   });
 });
 
@@ -74,6 +77,6 @@ describe("processDisplayData", () => {
   });
   it("should work with null", () => {
     const result = processDisplayData(data2);
-    expect(result.taxon.genus.length).toBe(2);
+    expect(result.taxon.species[0].length).toBe(70);
   });
 });

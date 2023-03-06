@@ -1,6 +1,5 @@
 import { copy } from "copy-anything";
 import { nanoid } from "nanoid";
-import { Nullable } from "yohak-tools";
 import { CellInfo, DisplayData, Lineage, LineageRank, lineageRanks, Taxon } from "./types";
 import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignment/types";
 
@@ -27,12 +26,33 @@ const processMediaCell = (data: MediaStrainsAlimentResponse): CellInfo[] => {
 
 const fillNullTaxon = (data: MediaStrainsAlimentResponse): MediaStrainsAlimentResponse => {
   const cloned: MediaStrainsAlimentResponse = copy(data);
+  const nullCells: { id: string; parentId: string; gmId: string }[] = [];
+  const findNullId = (gmId: string, parentId: string): string | undefined => {
+    return nullCells.find((cell) => parentId === cell.parentId && cell.gmId === gmId)?.id;
+  };
   cloned.forEach((media) => {
-    media.organisms.forEach((organism) => {
-      lineageRanks.forEach((rank) => {
+    media.organisms.forEach((organism, organismIndex) => {
+      lineageRanks.forEach((rank, lineageIndex) => {
         if (organism[rank] === null) {
+          const parentRank = lineageRanks[lineageIndex - 1];
+
+          const parent = organism[parentRank]!;
+          const parentId = parent.id;
+          const foundId = findNullId(media.gm_id, parentId);
+          if (rank === "class" && organismIndex === 0) {
+            console.log(foundId);
+          }
+          if (rank === "class" && organismIndex === 1) {
+            console.log(parentId);
+            console.log(foundId);
+            console.log(nullCells[0].parentId);
+          }
+          const id = foundId || nanoid();
+          if (!foundId) {
+            nullCells.push({ id, parentId, gmId: media.gm_id });
+          }
           organism[rank] = {
-            id: nanoid(),
+            id,
             label: "",
           };
         }
@@ -149,21 +169,18 @@ const findNodeFromFlatList = (list: TaxonNode[], id: string, rank: string): Taxo
   list.find((node) => node.rank === rank && id === node.id)!;
 
 const lineageToTaxonNode = (lineage: Lineage): TaxonNode[] =>
-  lineageRanks.map((key) => makeTaxonNode(lineage[key], key));
-const makeTaxonNode = (taxon: Nullable<Taxon>, rank: LineageRank): TaxonNode =>
-  taxon
-    ? {
-        rank,
-        id: taxon.id,
-        label: taxon.label,
-        children: [],
-      }
-    : {
-        rank,
-        id: nanoid(),
-        label: "",
-        children: [],
-      };
+  lineageRanks.map((key) => makeTaxonNode(lineage[key]!, key));
+const makeTaxonNode = (taxon: Taxon, rank: LineageRank): TaxonNode => {
+  if (!taxon) {
+    throw Error("taxon should not be null");
+  }
+  return {
+    rank,
+    id: taxon.id,
+    label: taxon.label,
+    children: [],
+  };
+};
 
 const reduceSingle = (accum: TaxonNode[], current: TaxonNode): TaxonNode[] => {
   return accum.find((item) => item.id === current.id && item.rank === current.rank)
