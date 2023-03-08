@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { AcceptsEmotion, Ease } from "yohak-tools";
 import { TaxonCell } from "./TaxonCell";
 import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../shared/styles/variables";
@@ -14,9 +14,7 @@ type Props = {
 
 export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
   const { changeFilterRank } = useFilterRankMutators();
-  const [isFolded, setIsFolded] = useState(
-    rank === "superkingdom" || rank === "phylum" || rank === "class"
-  );
+  const [isFolded, setIsFolded] = useState(false);
   const onClickRank = () => {
     setIsFolded((prev) => {
       const result = !prev;
@@ -24,6 +22,13 @@ export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
       return result;
     });
   };
+  useEffect(() => {
+    const isFolded = rank === "superkingdom" || rank === "phylum" || rank === "class";
+    if (isFolded) {
+      setIsFolded(true);
+      changeFilterRank(rank, true);
+    }
+  }, [rank, changeFilterRank]);
   return (
     <div css={[taxonCol, isFolded ? foldedStyle : null, css]} className={className}>
       {!isFolded && (
