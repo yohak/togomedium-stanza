@@ -2,16 +2,16 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps, FC, useEffect } from "react";
 import { TaxonCell } from "./TaxonCell";
 import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
-import { useFilterIdMutators } from "../states/filterId";
+import { useFilterTaxonMutators } from "../states/filterTaxon";
 
 type WrapperProps = {
   filterId: string;
 } & ComponentProps<typeof TaxonCell>;
 const Wrapper: FC<WrapperProps> = (args) => {
-  const { setFilterId } = useFilterIdMutators();
-  setFilterId(args.filterId);
+  const { setFilterTaxon } = useFilterTaxonMutators();
+  setFilterTaxon(args.filterId);
   useEffect(() => {
-    setFilterId(args.filterId);
+    setFilterTaxon(args.filterId);
   }, [args.filterId]);
   return <TaxonCell {...args} />;
 };

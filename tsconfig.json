@@ -2,6 +2,10 @@
   "compilerOptions": {
     "target": "es6",
     "jsx": "react-jsx",
+    "lib": [
+      "ESNext",
+      "dom"
+    ],
     "jsxImportSource": "@emotion/react",
     "declaration": false,
     "removeComments": true,

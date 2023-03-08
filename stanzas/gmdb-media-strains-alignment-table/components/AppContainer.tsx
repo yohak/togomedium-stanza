@@ -7,18 +7,20 @@ import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignmen
 import { COLOR_GRAY_LINE } from "../../../shared/styles/variables";
 import { processDisplayData } from "../functions/processMediaCell";
 import { DisplayData, lineageRanks } from "../functions/types";
-import { useFilterIdState } from "../states/filterId";
+import { useFilterRankState } from "../states/filterRank";
+import { useFilterTaxonState } from "../states/filterTaxon";
 
 type Props = { data?: MediaStrainsAlimentResponse } & AcceptsEmotion;
 
 export const AppContainer: FC<Props> = ({ data }) => {
   const [displayData, setDisplayData] = useState<Optional<DisplayData>>(undefined);
-  const filterId = useFilterIdState();
+  const filterTaxon = useFilterTaxonState();
+  const filterRank = useFilterRankState();
   useEffect(() => {
     if (data) {
-      setDisplayData(processDisplayData(data, filterId));
+      setDisplayData(processDisplayData(data, filterTaxon, filterRank));
     }
-  }, [data, filterId]);
+  }, [data, filterTaxon, filterRank]);
   useEffect(() => {}, [displayData]);
   return displayData ? (
     <div css={appContainer}>

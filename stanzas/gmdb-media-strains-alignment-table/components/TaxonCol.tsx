@@ -5,6 +5,7 @@ import { TaxonCell } from "./TaxonCell";
 import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../shared/styles/variables";
 import { capitalizeFirstLetter } from "../../../shared/utils/string";
 import { CellInfo, LineageRank } from "../functions/types";
+import { useFilterRankMutators } from "../states/filterRank";
 
 type Props = {
   rank: LineageRank;
@@ -12,26 +13,35 @@ type Props = {
 } & AcceptsEmotion;
 
 export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
+  const { changeFilterRank } = useFilterRankMutators();
   const [isFolded, setIsFolded] = useState(
     rank === "superkingdom" || rank === "phylum" || rank === "class"
   );
   const onClickRank = () => {
-    setIsFolded((prev) => !prev);
+    setIsFolded((prev) => {
+      const result = !prev;
+      changeFilterRank(rank, result);
+      return result;
+    });
   };
   return (
     <div css={[taxonCol, isFolded ? foldedStyle : null, css]} className={className}>
-      <div css={rankCell} onClick={onClickRank}>
-        {capitalizeFirstLetter(rank)}
-      </div>
-      <div css={allTaxonWrapper}>
-        {taxonList.map((list, index) => (
-          <div key={index} css={mediumTaxonWrapper}>
-            {list.map((info, index) => (
-              <TaxonCell key={index} {...info} rank={rank} />
+      {!isFolded && (
+        <>
+          <div css={rankCell} onClick={onClickRank}>
+            {capitalizeFirstLetter(rank)}
+          </div>
+          <div css={allTaxonWrapper}>
+            {taxonList.map((list, index) => (
+              <div key={index} css={mediumTaxonWrapper}>
+                {list.map((info, index) => (
+                  <TaxonCell key={index} {...info} rank={rank} />
+                ))}
+              </div>
             ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
       {isFolded && (
         <div css={foldedCover} onClick={onClickRank}>
           <span>{capitalizeFirstLetter(rank)}</span>
@@ -48,6 +58,8 @@ const taxonCol = css`
   flex-direction: column;
   gap: 2px;
   position: relative;
+  height: 100%;
+  min-height: ${48 + 24}px;
   transition-duration: 0.4s;
   transition-timing-function: ${Ease._4_IN_OUT_QUART};
   overflow: hidden;
@@ -65,6 +77,7 @@ const foldedCover = css`
   padding-top: 8px;
   padding-right: 8px;
   cursor: pointer;
+
   span {
     display: block;
     transform-origin: left top;

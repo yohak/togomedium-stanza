@@ -3,8 +3,7 @@ import { ComponentProps } from "react";
 import { MediaCol } from "./MediaCol";
 import { data1 } from "../../../api/media_strains_alignment/data1";
 import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
-import { __SB_TEST__ } from "../functions/processMediaCell";
-const { processMediaCell } = __SB_TEST__;
+import { processDisplayData } from "../functions/processMediaCell";
 
 export default {
   title: makeComponentStoryTitle(MediaCol.name, "MediaStrainAlignment"),
@@ -13,8 +12,9 @@ export default {
 
 const Template: ComponentStory<typeof MediaCol> = (args) => <MediaCol {...args} />;
 
+const processedData = processDisplayData(data1);
 const defaultArgs: ComponentProps<typeof MediaCol> = {
-  mediaList: processMediaCell(data1),
+  mediaList: processedData.media,
 };
 
 export const Primary = Template.bind({});

@@ -8,15 +8,15 @@ import { COLOR_GRAY400, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/style
 import { makeSpeciesName } from "../../../shared/utils/string";
 import { makeCellHeight } from "../functions/processMediaCell";
 import { CellInfo, LineageRank } from "../functions/types";
-import { useFilterIdMutators, useFilterIdState } from "../states/filterId";
+import { useFilterTaxonMutators, useFilterTaxonState } from "../states/filterTaxon";
 
 type Props = { rank: LineageRank } & CellInfo & AcceptsEmotion;
 
 export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) => {
-  const filterId = useFilterIdState();
-  const { setFilterId } = useFilterIdMutators();
+  const filterId = useFilterTaxonState();
+  const { setFilterTaxon } = useFilterTaxonMutators();
   const onClickFilter = () => {
-    setFilterId(id);
+    setFilterTaxon(id);
   };
   const { labelRef, toolTipEnabled } = useToolTipEnabled();
   return (
