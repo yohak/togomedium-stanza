@@ -16,14 +16,17 @@ const Template: ComponentStory<typeof TaxonCol> = (args) => <TaxonCol {...args} 
 
 const defaultArgs: ComponentProps<typeof TaxonCol> = {
   rank: "species",
-  taxonList: processTaxonCol(data1, "species"),
+  taxonList: processTaxonCol(data1, "species", "strain"),
 };
 
 export const Species = Template.bind({});
 Species.args = { ...defaultArgs };
 
 export const Order = Template.bind({});
-Order.args = { rank: "order", taxonList: processTaxonCol(data1, "order") };
+Order.args = { rank: "order", taxonList: processTaxonCol(data1, "order", "strain") };
 
 export const Superkingdom = Template.bind({});
-Superkingdom.args = { rank: "superkingdom", taxonList: processTaxonCol(data1, "superkingdom") };
+Superkingdom.args = {
+  rank: "superkingdom",
+  taxonList: processTaxonCol(data1, "superkingdom", "strain"),
+};
