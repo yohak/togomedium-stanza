@@ -35,6 +35,7 @@ const parseData = (data: ApiResponse<ApiBody>, params: StanzaParameters): Templa
 const makeErrorData = (msg: string): TemplateParameters => {
   return {
     id: undefined,
+    original_id: undefined,
     name: undefined,
     src_url: undefined,
     src_label: undefined,
@@ -48,6 +49,7 @@ const makeErrorData = (msg: string): TemplateParameters => {
 const makeSuccessData = (body: ApiBody): TemplateParameters => {
   return {
     id: body.meta.gm.split("/").pop(),
+    original_id: body.meta.original_media_id,
     name: body.meta.name,
     src_label: getSrcLabel(body.meta.src_url),
     src_url: body.meta.src_url,
@@ -119,6 +121,7 @@ type StanzaParameters = {
 };
 type TemplateParameters = {
   id: string | undefined;
+  original_id: string | undefined;
   src_url: string | undefined;
   src_label: string | undefined;
   name: string | undefined;
@@ -136,6 +139,7 @@ type Meta = {
   name: string;
   src_url: string;
   ph: number;
+  original_media_id?: string;
 };
 type ComponentTable = {
   subcomponent_name: string;
