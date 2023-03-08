@@ -1,4 +1,5 @@
 import { __TEST__ } from "./filterRank";
+import { lineageRanks } from "../functions/types";
 const { findCurrentFilterRank, makeDefaultStatus } = __TEST__;
 
 describe("findCurrentFilterRank", () => {
@@ -25,5 +26,13 @@ describe("findCurrentFilterRank", () => {
     defaultStatus.species = true;
     const result = findCurrentFilterRank(defaultStatus);
     expect(result).toBe("genus");
+  });
+  it("should return 'superkingdom' when all folding are active", () => {
+    const defaultStatus = makeDefaultStatus();
+    lineageRanks.forEach((key) => {
+      defaultStatus[key] = true;
+    });
+    const result = findCurrentFilterRank(defaultStatus);
+    expect(result).toBe("superkingdom");
   });
 });

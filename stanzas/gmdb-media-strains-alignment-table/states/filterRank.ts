@@ -46,6 +46,9 @@ const findCurrentFilterRank = (status: FilterStatus): LineageRank => {
       break;
     }
   }
+  if (found === "superkingdom") {
+    return "superkingdom";
+  }
   const result = lineageRanks[lineageRanks.indexOf(found!) - 1];
   return result || "strain";
 };

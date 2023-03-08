@@ -28,7 +28,7 @@ export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
       setIsFolded(true);
       changeFilterRank(rank, true);
     }
-  }, [rank, changeFilterRank]);
+  }, []);
   return (
     <div css={[taxonCol, isFolded ? foldedStyle : null, css]} className={className}>
       {!isFolded && (
