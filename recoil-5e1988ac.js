@@ -7810,8 +7810,9 @@ var Recoil_index = {
 };
 var Recoil_index_4 = Recoil_index.RecoilRoot;
 var Recoil_index_6 = Recoil_index.atom;
+var Recoil_index_7 = Recoil_index.selector;
 var Recoil_index_18 = Recoil_index.useRecoilValue;
 var Recoil_index_22 = Recoil_index.useSetRecoilState;
 
-export { Recoil_index_4 as R, Recoil_index_6 as a, Recoil_index_18 as b, Recoil_index_22 as c };
-//# sourceMappingURL=recoil-503ca0af.js.map
+export { Recoil_index_4 as R, Recoil_index_6 as a, Recoil_index_18 as b, Recoil_index_22 as c, Recoil_index_7 as d };
+//# sourceMappingURL=recoil-5e1988ac.js.map

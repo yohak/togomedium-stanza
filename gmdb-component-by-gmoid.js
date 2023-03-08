@@ -1,7 +1,7 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
 import { C as COLOR_WHITE, a as COLOR_TEXT, n as newStyled, b as COLOR_PRIMARY, c as COLOR_GRAY300, j as jsx, d as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
 import { c as css, r as reactExports } from './index-56cafe6b.js';
-import { R as Recoil_index_4 } from './recoil-503ca0af.js';
+import { R as Recoil_index_4 } from './recoil-5e1988ac.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { U as URL_API } from './variables-0b8fac13.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-ace01225.js';

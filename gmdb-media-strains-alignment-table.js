@@ -1,7 +1,7 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
 import { C as COLOR_WHITE, b as COLOR_PRIMARY, d as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
 import { c as css, r as reactExports, e as dist } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-503ca0af.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-5e1988ac.js';
 import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-01eb8e0e.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-a3c2e0f8.js';
 import { g as getData } from './getData-b32e78c1.js';
@@ -112,12 +112,12 @@ const lineageRanks = [
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;
 };
-const processMediaCell = (data) => {
-    return data.map((item) => {
+const processMediaCell = (data, taxon, filterRank) => {
+    return data.map((item, i) => {
         return {
             id: item.gm_id,
             label: item.label,
-            size: item.organisms.length,
+            size: taxon[filterRank][i].length,
         };
     });
 };
@@ -130,69 +130,64 @@ const fillNullTaxon = (data) => {
     };
     cloned.forEach((media) => {
         media.organisms.forEach((organism, organismIndex) => {
+            const gmId = media.gm_id;
             lineageRanks.forEach((rank, lineageIndex) => {
-                if (organism[rank] === null) {
-                    const parentRank = lineageRanks[lineageIndex - 1];
-                    const parent = organism[parentRank];
-                    const parentId = parent.id;
-                    const foundId = findNullId(media.gm_id, parentId);
-                    if (rank === "class" && organismIndex === 0) {
-                        console.log(foundId);
-                    }
-                    if (rank === "class" && organismIndex === 1) {
-                        console.log(parentId);
-                        console.log(foundId);
-                        console.log(nullCells[0].parentId);
-                    }
-                    const id = foundId || nanoid();
-                    if (!foundId) {
-                        nullCells.push({ id, parentId, gmId: media.gm_id });
-                    }
-                    organism[rank] = {
-                        id,
-                        label: "",
-                    };
+                if (organism[rank] !== null)
+                    return;
+                const parentRank = lineageRanks[lineageIndex - 1];
+                const parent = organism[parentRank];
+                const parentId = parent.id;
+                const foundId = findNullId(gmId, parentId);
+                const id = foundId || nanoid();
+                organism[rank] = { id, label: "" };
+                if (!foundId) {
+                    nullCells.push({ id, parentId, gmId });
                 }
             });
         });
     });
     return cloned;
 };
-const processTaxonCol = (data, rank) => {
+const processTaxonCol = (data, rank, filterRank) => {
     return data.map((medium) => {
-        const tree = makeTaxonTree(medium.organisms);
+        const tree = makeTaxonTree(medium.organisms, medium.gm_id);
         return getNodeListOfRankFromTree(tree, rank).map((node) => ({
             id: node.id,
             label: node.label,
-            size: getSizeOfCell(node),
+            size: getSizeOfCell(node, filterRank),
         }));
     });
 };
-const processDisplayData = (data, filterId = "") => {
-    const cloned = filterData(fillNullTaxon(data), filterId);
-    const taxon = lineageRanks.reduce((accum, rank) => {
-        const result = Object.assign({}, accum);
-        result[rank] = processTaxonCol(cloned, rank);
-        return result;
-    }, {});
-    const media = processMediaCell(cloned);
+const processDisplayData = (data, filterTaxon = "", filterRank = "strain") => {
+    const nullFilled = fillNullTaxon(data);
+    const filtered = filterData(nullFilled, filterTaxon);
+    const taxon = processTaxonColList(filtered, filterRank);
+    const media = processMediaCell(filtered, taxon, filterRank);
     return { media, taxon };
 };
-const filterData = (data, filterId = "") => {
-    if (filterId === "")
+const processTaxonColList = (data, filterRank) => {
+    return lineageRanks.reduce((accum, rank) => {
+        const result = Object.assign({}, accum);
+        result[rank] = processTaxonCol(data, rank, filterRank);
+        return result;
+    }, {});
+};
+const filterData = (data, taxId = "") => {
+    if (taxId === "")
         return data;
-    data.forEach((media) => {
+    const cloned = copy(data);
+    cloned.forEach((media) => {
         media.organisms = media.organisms.filter((organism) => {
             const organismIds = Object.values(organism).map((item) => item.id);
-            return organismIds.includes(filterId);
+            return organismIds.includes(taxId);
         });
     });
-    return data.filter((medium) => medium.organisms.length > 0);
+    return cloned.filter((medium) => medium.organisms.length > 0);
 };
-const getSizeOfCell = (node) => {
+const getSizeOfCell = (node, filterRank) => {
     let total = 1;
     const process = (n) => {
-        if (n.children) {
+        if (n.rank !== filterRank) {
             total += Math.max(n.children.length - 1, 0);
             n.children.forEach((c) => {
                 process(c);
@@ -202,9 +197,9 @@ const getSizeOfCell = (node) => {
     process(node);
     return total;
 };
-const makeTaxonTree = (organisms) => {
+const makeTaxonTree = (organisms, gmId) => {
     const flatTaxonList = organisms
-        .map((organism) => lineageToTaxonNode(organism))
+        .map((organism) => lineageToTaxonNode(organism, gmId))
         .flat()
         .reduce(reduceSingle, []);
     organisms.forEach((organism) => {
@@ -245,8 +240,8 @@ const getNodeListOfRankFromTree = (tree, rank) => {
     return process(tree, "superkingdom");
 };
 const findNodeFromFlatList = (list, id, rank) => list.find((node) => node.rank === rank && id === node.id);
-const lineageToTaxonNode = (lineage) => lineageRanks.map((key) => makeTaxonNode(lineage[key], key));
-const makeTaxonNode = (taxon, rank) => {
+const lineageToTaxonNode = (lineage, gmId) => lineageRanks.map((key) => makeTaxonNode(lineage[key], key, gmId));
+const makeTaxonNode = (taxon, rank, gmId) => {
     if (!taxon) {
         throw Error("taxon should not be null");
     }
@@ -254,6 +249,7 @@ const makeTaxonNode = (taxon, rank) => {
         rank,
         id: taxon.id,
         label: taxon.label,
+        gmId,
         children: [],
     };
 };
@@ -322,21 +318,21 @@ const FilterIcon = ({ css, className }) => {
     return (jsx("svg", Object.assign({ css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" }, { children: jsx("path", { d: "M324.4 64C339.6 64 352 76.37 352 91.63C352 98.32 349.6 104.8 345.2 109.8L240 230V423.6C240 437.1 229.1 448 215.6 448C210.3 448 205.2 446.3 200.9 443.1L124.7 385.6C116.7 379.5 112 370.1 112 360V230L6.836 109.8C2.429 104.8 0 98.32 0 91.63C0 76.37 12.37 64 27.63 64H324.4zM144 224V360L208 408.3V223.1C208 220.1 209.4 216.4 211.1 213.5L314.7 95.1H37.26L140 213.5C142.6 216.4 143.1 220.1 143.1 223.1L144 224zM496 400C504.8 400 512 407.2 512 416C512 424.8 504.8 432 496 432H336C327.2 432 320 424.8 320 416C320 407.2 327.2 400 336 400H496zM320 256C320 247.2 327.2 240 336 240H496C504.8 240 512 247.2 512 256C512 264.8 504.8 272 496 272H336C327.2 272 320 264.8 320 256zM496 80C504.8 80 512 87.16 512 96C512 104.8 504.8 112 496 112H400C391.2 112 384 104.8 384 96C384 87.16 391.2 80 400 80H496z" }) })));
 };
 
-const filterId = Recoil_index_6({ key: "filterId", default: "" });
-const useFilterIdState = () => {
-    return Recoil_index_18(filterId);
+const filterTaxon = Recoil_index_6({ key: "filterId", default: "" });
+const useFilterTaxonState = () => {
+    return Recoil_index_18(filterTaxon);
 };
-const useFilterIdMutators = () => {
-    const setter = Recoil_index_22(filterId);
-    const setFilterId = (id) => setter((prev) => (id === prev ? "" : id));
-    return { setFilterId };
+const useFilterTaxonMutators = () => {
+    const setter = Recoil_index_22(filterTaxon);
+    const setFilterTaxon = (id) => setter((prev) => (id === prev ? "" : id));
+    return { setFilterTaxon };
 };
 
 const TaxonCell = ({ label, id, size, rank, css, className }) => {
-    const filterId = useFilterIdState();
-    const { setFilterId } = useFilterIdMutators();
+    const filterId = useFilterTaxonState();
+    const { setFilterTaxon } = useFilterTaxonMutators();
     const onClickFilter = () => {
-        setFilterId(id);
+        setFilterTaxon(id);
     };
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
     return (jsxs("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [!!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `/taxon/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })), !label && jsx(Fragment, { children: "" })] })));
@@ -398,12 +394,60 @@ const filterIconColorActive = css `
   fill: ${COLOR_PRIMARY};
 `;
 
+const makeDefaultStatus = () => lineageRanks.reduce((accum, current) => {
+    return Object.assign(Object.assign({}, accum), { [current]: false });
+}, {});
+const filterStatus = Recoil_index_6({
+    key: "filterStatus",
+    default: makeDefaultStatus(),
+});
+const filterRank = Recoil_index_7({
+    key: "filterRank",
+    get: ({ get }) => {
+        const status = get(filterStatus);
+        return findCurrentFilterRank(status);
+    },
+});
+const useFilterRankState = () => {
+    return Recoil_index_18(filterRank);
+};
+const useFilterRankMutators = () => {
+    const setFilterRankStatus = Recoil_index_22(filterStatus);
+    const changeFilterRank = (rank, val) => {
+        setFilterRankStatus((prev) => {
+            return Object.assign(Object.assign({}, prev), { [rank]: val });
+        });
+    };
+    return { changeFilterRank };
+};
+const findCurrentFilterRank = (status) => {
+    let found = undefined;
+    const arr = lineageRanks.concat().reverse();
+    for (let i = 0; i < arr.length; i++) {
+        const key = arr[i];
+        const val = status[key];
+        if (val) {
+            found = key;
+        }
+        else {
+            break;
+        }
+    }
+    const result = lineageRanks[lineageRanks.indexOf(found) - 1];
+    return result || "strain";
+};
+
 const TaxonCol = ({ css, className, rank, taxonList }) => {
+    const { changeFilterRank } = useFilterRankMutators();
     const [isFolded, setIsFolded] = reactExports.useState(rank === "superkingdom" || rank === "phylum" || rank === "class");
     const onClickRank = () => {
-        setIsFolded((prev) => !prev);
+        setIsFolded((prev) => {
+            const result = !prev;
+            changeFilterRank(rank, result);
+            return result;
+        });
     };
-    return (jsxs("div", Object.assign({ css: [taxonCol, isFolded ? foldedStyle : null, css], className: className }, { children: [jsx("div", Object.assign({ css: rankCell, onClick: onClickRank }, { children: capitalizeFirstLetter(rank) })), jsx("div", Object.assign({ css: allTaxonWrapper }, { children: taxonList.map((list, index) => (jsx("div", Object.assign({ css: mediumTaxonWrapper }, { children: list.map((info, index) => (jsx(TaxonCell, Object.assign({}, info, { rank: rank }), index))) }), index))) })), isFolded && (jsx("div", Object.assign({ css: foldedCover, onClick: onClickRank }, { children: jsx("span", { children: capitalizeFirstLetter(rank) }) })))] })));
+    return (jsxs("div", Object.assign({ css: [taxonCol, isFolded ? foldedStyle : null, css], className: className }, { children: [!isFolded && (jsxs(Fragment, { children: [jsx("div", Object.assign({ css: rankCell, onClick: onClickRank }, { children: capitalizeFirstLetter(rank) })), jsx("div", Object.assign({ css: allTaxonWrapper }, { children: taxonList.map((list, index) => (jsx("div", Object.assign({ css: mediumTaxonWrapper }, { children: list.map((info, index) => (jsx(TaxonCell, Object.assign({}, info, { rank: rank }), index))) }), index))) }))] })), isFolded && (jsx("div", Object.assign({ css: foldedCover, onClick: onClickRank }, { children: jsx("span", { children: capitalizeFirstLetter(rank) }) })))] })));
 };
 const taxonCol = css `
   width: 200px;
@@ -412,6 +456,8 @@ const taxonCol = css `
   flex-direction: column;
   gap: 2px;
   position: relative;
+  height: 100%;
+  min-height: ${48 + 24}px;
   transition-duration: 0.4s;
   transition-timing-function: ${dist.Ease._4_IN_OUT_QUART};
   overflow: hidden;
@@ -429,6 +475,7 @@ const foldedCover = css `
   padding-top: 8px;
   padding-right: 8px;
   cursor: pointer;
+
   span {
     display: block;
     transform-origin: left top;
@@ -460,12 +507,13 @@ const mediumTaxonWrapper = css `
 
 const AppContainer = ({ data }) => {
     const [displayData, setDisplayData] = reactExports.useState(undefined);
-    const filterId = useFilterIdState();
+    const filterTaxon = useFilterTaxonState();
+    const filterRank = useFilterRankState();
     reactExports.useEffect(() => {
         if (data) {
-            setDisplayData(processDisplayData(data, filterId));
+            setDisplayData(processDisplayData(data, filterTaxon, filterRank));
         }
-    }, [data, filterId]);
+    }, [data, filterTaxon, filterRank]);
     reactExports.useEffect(() => { }, [displayData]);
     return displayData ? (jsxs("div", Object.assign({ css: appContainer }, { children: [jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
                     .concat()

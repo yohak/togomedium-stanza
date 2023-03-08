@@ -1,9 +1,9 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
 import { _ as _objectWithoutPropertiesLoose, G as defaultSxConfig, H as isPlainObject, i as capitalize, e as jsxRuntimeExports, C as COLOR_WHITE, r as COLOR_GRAY_LINE, S as SIZE1, o as SIZE2, b as COLOR_PRIMARY, d as jsxs, j as jsx, s as FONT_WEIGHT_BOLD, v as COLOR_GRAY700, w as SIZE4, m as ROUNDED_CORNER, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
 import { _ as _extends, r as reactExports, c as css, j as jsx$1 } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-503ca0af.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-5e1988ac.js';
 import { a as PATH_ORGANISM } from './consts-7a6e604d.js';
-import { d as Checkbox, h as hasInfo, f as filterOutInfo, C as CircularProgress, P as Pagination, e as hasIdOfLabel, T as Tabs, g as Tab, B as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, i as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-71b7f450.js';
+import { d as Checkbox, h as hasInfo, f as filterOutInfo, C as CircularProgress, P as Pagination, e as hasIdOfLabel, T as Tabs, g as Tab, B as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, i as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-965758ee.js';
 import { b as API_ORGANISMS_BY_PHENOTYPES, c as API_MEDIA_BY_TAXON } from './paths-01eb8e0e.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { c as clone } from './clone-e8609f76.js';
