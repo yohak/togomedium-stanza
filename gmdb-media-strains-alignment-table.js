@@ -433,13 +433,16 @@ const findCurrentFilterRank = (status) => {
             break;
         }
     }
+    if (found === "superkingdom") {
+        return "superkingdom";
+    }
     const result = lineageRanks[lineageRanks.indexOf(found) - 1];
     return result || "strain";
 };
 
 const TaxonCol = ({ css, className, rank, taxonList }) => {
     const { changeFilterRank } = useFilterRankMutators();
-    const [isFolded, setIsFolded] = reactExports.useState(rank === "superkingdom" || rank === "phylum" || rank === "class");
+    const [isFolded, setIsFolded] = reactExports.useState(false);
     const onClickRank = () => {
         setIsFolded((prev) => {
             const result = !prev;
@@ -447,6 +450,13 @@ const TaxonCol = ({ css, className, rank, taxonList }) => {
             return result;
         });
     };
+    reactExports.useEffect(() => {
+        const isFolded = rank === "superkingdom" || rank === "phylum" || rank === "class";
+        if (isFolded) {
+            setIsFolded(true);
+            changeFilterRank(rank, true);
+        }
+    }, []);
     return (jsxs("div", Object.assign({ css: [taxonCol, isFolded ? foldedStyle : null, css], className: className }, { children: [!isFolded && (jsxs(Fragment, { children: [jsx("div", Object.assign({ css: rankCell, onClick: onClickRank }, { children: capitalizeFirstLetter(rank) })), jsx("div", Object.assign({ css: allTaxonWrapper }, { children: taxonList.map((list, index) => (jsx("div", Object.assign({ css: mediumTaxonWrapper }, { children: list.map((info, index) => (jsx(TaxonCell, Object.assign({}, info, { rank: rank }), index))) }), index))) }))] })), isFolded && (jsx("div", Object.assign({ css: foldedCover, onClick: onClickRank }, { children: jsx("span", { children: capitalizeFirstLetter(rank) }) })))] })));
 };
 const taxonCol = css `
