@@ -4,6 +4,7 @@ import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { stanzaWrapper } from "../../../shared/styles/common";
 import { COLOR_GRAY300, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
+import { decodeHTMLEntities } from "../../../shared/utils/string";
 import { ComponentClass, LinkInfo } from "../utils/api";
 
 type Props = {
@@ -44,20 +45,20 @@ export const StanzaView: FC<Props> = ({
             <span>GMO ID: </span>
             <span>{gmoId}</span>
           </InfoId>
-          <InfoTitle>{prefLabel}</InfoTitle>
+          <InfoTitle>{decodeHTMLEntities(prefLabel)}</InfoTitle>
           {!!altLabels.length && (
             <StandardParagraph>
               Alternative labels:
               <br />
               {altLabels.map((str, i, arr) => (
-                <span key={str}>{`${str}${addLastComma(i, arr)}`}</span>
+                <span key={str}>{`${decodeHTMLEntities(str)}${addLastComma(i, arr)}`}</span>
               ))}
             </StandardParagraph>
           )}
           <div>
             {!!properties.length && (
               <>
-                <SubHeading>Properties</SubHeading>
+                <SubHeading>Component type</SubHeading>
                 <StandardParagraph>
                   {properties.map((item, i, arr) => (
                     <span key={i}>{`${item.label_en}${addLastComma(i, arr)}`}</span>
@@ -67,7 +68,7 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!roles.length && (
               <>
-                <SubHeading>Functions</SubHeading>
+                <SubHeading>Role</SubHeading>
                 <ul>
                   {roles.map((item, i) => (
                     <li key={i}>{item.label_en}</li>
@@ -103,7 +104,7 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!links.length && (
               <>
-                <SubHeading>Links</SubHeading>
+                <SubHeading>Cross references</SubHeading>
                 <TagList>
                   {links.map((item, i) => (
                     <ColorButton key={i} href={item.uri} target="_blank" rel="noreferrer">

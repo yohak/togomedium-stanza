@@ -14,10 +14,7 @@ Result1.args = {
   gmo_id: "GMO_001001",
 };
 
-Result1.parameters = {
-  msw: makeMswParameter([
-    // ...mediaByAttributesMocks,
-    // ...mediaByTaxonMocks,
-    // ...taxonomyChildrenMocks,
-  ]),
+export const Result2 = Template.bind({});
+Result2.args = {
+  gmo_id: "GMO_001018",
 };
