@@ -3,12 +3,12 @@ import { C as COLOR_WHITE, S as SIZE1, w as SIZE4, t as SIZE3, j as jsx, d as js
 import { c as css, j as jsx$1, r as reactExports } from './index-56cafe6b.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-5e1988ac.js';
 import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-c3797527.js';
+import { d as decodeHTMLEntities, s as stringToArray } from './string-a3c2e0f8.js';
 import { c as clone } from './clone-e8609f76.js';
 import { b as PATH_COMPONENT, P as PATH_MEDIUM, a as PATH_ORGANISM } from './consts-7a6e604d.js';
 import { T as Tooltip, e as API_MEDIA_ALIGNMENT } from './paths-01eb8e0e.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import { s as stringToArray } from './string-a3c2e0f8.js';
 import './createSvgIcon-51ee6b54.js';
 import './Grow-b02e3735.js';
 import './variables-0b8fac13.js';
@@ -74,7 +74,7 @@ const FooterCell = ({ label, level, hasChildren, isOpen, id }) => {
     const { toggleComponent } = useComponentTreeMutators();
     const onClickFooterItem = (id) => toggleComponent(id);
     const Icon = hasChildren ? (isOpen ? (jsx(IconCompact, { css: icon$1, onClick: () => onClickFooterItem(id) })) : (jsx(IconExpand, { css: icon$1, onClick: () => onClickFooterItem(id) }))) : (jsx(IconBlank, { css: icon$1 }));
-    return (jsxs("div", Object.assign({ css: wrapper$a }, { children: [new Array(level).fill(null).map((r, index) => (jsx("span", { className: "spacer" }, index))), Icon, jsx("span", Object.assign({ className: "text" }, { children: label }))] })));
+    return (jsxs("div", Object.assign({ css: wrapper$a }, { children: [new Array(level).fill(null).map((r, index) => (jsx("span", { className: "spacer" }, index))), Icon, jsx("span", Object.assign({ className: "text" }, { children: decodeHTMLEntities(label) }))] })));
 };
 const wrapper$a = css `
   box-sizing: border-box;
