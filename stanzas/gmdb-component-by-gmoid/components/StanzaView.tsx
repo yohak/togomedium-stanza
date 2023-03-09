@@ -58,7 +58,7 @@ export const StanzaView: FC<Props> = ({
           <div>
             {!!properties.length && (
               <>
-                <SubHeading>Component type</SubHeading>
+                <SubHeading>Component types</SubHeading>
                 <StandardParagraph>
                   {properties.map((item, i, arr) => (
                     <span key={i}>{`${item.label_en}${addLastComma(i, arr)}`}</span>
@@ -68,7 +68,7 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!roles.length && (
               <>
-                <SubHeading>Role</SubHeading>
+                <SubHeading>Roles</SubHeading>
                 <ul>
                   {roles.map((item, i) => (
                     <li key={i}>{item.label_en}</li>
