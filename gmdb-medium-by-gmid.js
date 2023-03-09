@@ -252,7 +252,7 @@ var templates = [
     };
 
   return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"subcomponent_name") : depth0),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":33,"column":6},"end":{"line":35,"column":13}}})) != null ? stack1 : "")
-    + "      <table class=\"component-table\">\n        <tr>\n          <th class=\"id\">GMO ID</th>\n          <th class=\"name\">GMO Label</th>\n          <th class=\"name\">Component</th>\n          <th class=\"volume\"></th>\n          <th class=\"volume\"></th>\n        </tr>\n"
+    + "      <table class=\"component-table\">\n        <tr>\n          <th class=\"id\">GMO ID</th>\n          <th class=\"name\">Component</th>\n          <th class=\"name\">Original label</th>\n          <th class=\"volume\"></th>\n          <th class=\"volume\">Amount</th>\n        </tr>\n"
     + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"items") : depth0),{"name":"each","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":44,"column":8},"end":{"line":62,"column":17}}})) != null ? stack1 : "")
     + "      </table>\n";
 },"13":function(container,depth0,helpers,partials,data) {
