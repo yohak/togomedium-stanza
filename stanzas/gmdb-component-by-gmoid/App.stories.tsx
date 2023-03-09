@@ -18,3 +18,8 @@ export const Result2 = Template.bind({});
 Result2.args = {
   gmo_id: "GMO_001018",
 };
+
+export const Result3 = Template.bind({});
+Result3.args = {
+  gmo_id: "GMO_001113",
+};

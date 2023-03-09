@@ -83,7 +83,7 @@ export const StanzaView: FC<Props> = ({
                   {superClasses.map((item, i) => (
                     <li key={i}>
                       <a href={`/component/${item.gmo_id}`}>{item.gmo_id}</a>
-                      <span>{item.label_en}</span>
+                      <span>{decodeHTMLEntities(item.label_en)}</span>
                     </li>
                   ))}
                 </LinkList>
@@ -96,7 +96,7 @@ export const StanzaView: FC<Props> = ({
                   {subClasses.map((item, i) => (
                     <li key={i}>
                       <a href={`/component/${item.gmo_id}`}>{item.gmo_id}</a>
-                      <span>{item.label_en}</span>
+                      <span>{decodeHTMLEntities(item.label_en)}</span>
                     </li>
                   ))}
                 </LinkList>

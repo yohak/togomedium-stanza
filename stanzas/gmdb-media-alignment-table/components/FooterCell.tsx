@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { IconBlank, IconCompact, IconExpand } from "../../../shared/components/icons";
 import { COLOR_WHITE, SIZE1, SIZE3, SIZE4 } from "../../../shared/styles/variables";
+import { decodeHTMLEntities } from "../../../shared/utils/string";
 import { WIDTH_ALIGNMENT_CELL } from "../consts";
 import { useComponentTreeMutators } from "../states/componentTree";
 
@@ -33,7 +34,7 @@ export const FooterCell: FC<Props> = ({ label, level, hasChildren, isOpen, id })
         <span key={index} className="spacer" />
       ))}
       {Icon}
-      <span className={"text"}>{label}</span>
+      <span className={"text"}>{decodeHTMLEntities(label)}</span>
     </div>
   );
 };
