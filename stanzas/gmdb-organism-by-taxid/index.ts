@@ -83,7 +83,7 @@ type OtherMaterialParameter = {
 type ApiBody = {
   scientific_name: string;
   taxid: string;
-  authority_name: string;
+  authority_name?: string;
   lineage: Lineage[];
   type_material: TypeMaterial[];
   other_type_material: TypeMaterial[];

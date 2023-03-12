@@ -2,8 +2,8 @@
   "@context": {
     "stanza": "http://togostanza.org/resource/stanza#"
   },
-  "@id": "gmdb-taxon-by-taxid",
-  "stanza:label": "Gmdb taxon by taxid",
+  "@id": "gmdb-strain-by-strainid",
+  "stanza:label": "Gmdb strain by strainid",
   "stanza:definition": "",
   "stanza:type": "Stanza",
   "stanza:display": "Text",
@@ -16,8 +16,8 @@
   "stanza:updated": "2021-03-07",
   "stanza:parameter": [
     {
-      "stanza:key": "tax_id",
-      "stanza:example": "1301",
+      "stanza:key": "strain_id",
+      "stanza:example": "S6357",
       "stanza:description": "",
       "stanza:required": true
     }

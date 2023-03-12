@@ -3,6 +3,8 @@ import { RestHandler } from "msw";
 
 type StanzaNames =
   | "ComponentByGmoid"
+  | "TaxonByTaxid"
+  | "StrainByStrainId"
   | "MediaFinder"
   | "MediaAlignmentTable"
   | "FindMediaByTaxonomicTree"

@@ -14,6 +14,7 @@ type Props = { rank: LineageRank } & CellInfo & AcceptsEmotion;
 
 export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) => {
   const filterId = useFilterTaxonState();
+  const pathRoot = rank === "strain" ? "/strain/" : "/taxon/";
   const { setFilterTaxon } = useFilterTaxonMutators();
   const onClickFilter = () => {
     setFilterTaxon(id);
@@ -27,7 +28,7 @@ export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) 
     >
       {!!label && (
         <>
-          <a href={`/taxon/${id}`}>{id}</a>
+          <a href={`${pathRoot}${id}`}>{id}</a>
           <div className={"label-wrapper"}>
             <Tooltip
               title={makeLabel(label, rank)}

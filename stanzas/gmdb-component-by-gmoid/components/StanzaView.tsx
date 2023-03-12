@@ -2,6 +2,15 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
+import {
+  ColorButton,
+  ColWrapper,
+  InfoId,
+  InfoTitle,
+  StandardParagraph,
+  SubHeading,
+  TagList,
+} from "../../../shared/components/info-detail/styles";
 import { stanzaWrapper } from "../../../shared/styles/common";
 import { COLOR_GRAY300, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
 import { decodeHTMLEntities } from "../../../shared/utils/string";
@@ -138,48 +147,6 @@ const addLastComma = (index: number, arr: any[]): "" | ", " => {
   return index === arr.length - 1 ? "" : ", ";
 };
 
-const ColWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const InfoId = styled.p`
-  span {
-    font-weight: 300;
-    font-size: 16px;
-  }
-`;
-const InfoTitle = styled.h1`
-  font-size: 40px;
-  margin: 24px 0 16px;
-  font-weight: 300;
-  line-height: 0.9;
-`;
-const SubHeading = styled.h3`
-  font-weight: 600;
-  margin-top: 24px;
-  margin-bottom: 8px;
-  font-size: 20px;
-`;
-const StandardParagraph = styled.p`
-  font-size: 16px;
-  font-weight: 300;
-  span {
-    font-weight: 300;
-    font-size: 16px;
-  }
-`;
-const ColorButton = styled.a`
-  background-color: ${COLOR_PRIMARY};
-  color: ${COLOR_WHITE};
-  padding: 4px 8px 2px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-`;
-
 const LinkList = styled.ul`
   li {
     display: flex;
@@ -189,11 +156,6 @@ const LinkList = styled.ul`
   a {
     color: ${COLOR_PRIMARY};
   }
-`;
-
-const TagList = styled.div`
-  display: flex;
-  gap: 8px;
 `;
 
 const WikipediaInfo = styled.div`
