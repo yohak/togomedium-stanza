@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
+import { Optional } from "yohak-tools";
 import { AppContainer } from "./components/AppContainer";
 import { MediaStrainsAlimentResponse } from "../../api/media_strains_alignment/types";
 import { API_MEDIA_STRAINS_ALIGNMENT } from "../../api/paths";
@@ -12,7 +13,7 @@ export type AppProps = {
 };
 
 const App = ({ gm_ids, stanzaElement }: AppProps) => {
-  const [data, setData] = useState<MediaStrainsAlimentResponse>();
+  const [data, setData] = useState<Optional<MediaStrainsAlimentResponse>>(undefined);
   useEffect(() => {
     (async () => {
       const response = await getData<MediaStrainsAlimentResponse>(API_MEDIA_STRAINS_ALIGNMENT, {
@@ -21,7 +22,11 @@ const App = ({ gm_ids, stanzaElement }: AppProps) => {
       setData(response.body);
     })();
   }, [gm_ids]);
-  return <div css={wrapper}>{data && <AppContainer data={data}></AppContainer>}</div>;
+  return data ? (
+    <div css={wrapper}>{data && <AppContainer data={data}></AppContainer>}</div>
+  ) : (
+    <>Loading...</>
+  );
 };
 
 const wrapper = css`
