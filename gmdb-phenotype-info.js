@@ -1,4 +1,4 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-311696ff.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 
 class GmdbPhenotypeInfo extends Stanza {

@@ -1,16 +1,16 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { C as COLOR_WHITE, S as SIZE1, w as SIZE4, t as SIZE3, j as jsx, d as jsxs, v as COLOR_GRAY700, b as COLOR_PRIMARY, L as COLOR_GRAY, h as FONT_EN, F as Fragment, r as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
-import { c as css, j as jsx$1, r as reactExports } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-5e1988ac.js';
-import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-c3797527.js';
-import { d as decodeHTMLEntities, s as stringToArray } from './string-a3c2e0f8.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
+import { f as COLOR_WHITE, S as SIZE1, w as SIZE4, t as SIZE3, j as jsx, b as jsxs, v as COLOR_GRAY700, C as COLOR_PRIMARY, L as COLOR_GRAY, g as FONT_EN, F as Fragment, r as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
+import { c as css, j as jsx$1, r as reactExports } from './index-8d82cef7.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-14beaca9.js';
+import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-8fd98eed.js';
+import { d as decodeHTMLEntities, s as stringToArray } from './string-77fa4d93.js';
 import { c as clone } from './clone-e8609f76.js';
-import { b as PATH_COMPONENT, P as PATH_MEDIUM, a as PATH_ORGANISM } from './consts-7a6e604d.js';
-import { T as Tooltip, e as API_MEDIA_ALIGNMENT } from './paths-01eb8e0e.js';
-import { g as getData } from './getData-b32e78c1.js';
+import { b as PATH_COMPONENT, P as PATH_MEDIUM, a as PATH_TAXON } from './consts-234f4433.js';
+import { T as Tooltip, e as API_MEDIA_ALIGNMENT } from './paths-2746fdb2.js';
+import { g as getData } from './getData-9618d463.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './createSvgIcon-51ee6b54.js';
-import './Grow-b02e3735.js';
+import './createSvgIcon-87040e42.js';
+import './Grow-d939d7fb.js';
 import './variables-0b8fac13.js';
 
 const WIDTH_EXPANDED = "200px";
@@ -328,7 +328,7 @@ const wrapper$5 = css `
 const MediaRow = ({ medium, organisms, components, prioritizedOrganism = [], }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
-    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }), jsx(InfoCell, { info: organisms.length ? organisms : [{ id: "", label: "No organisms found" }], expanded: isOrganismsExpanded, linkBase: PATH_ORGANISM, priority: prioritizedOrganism }), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 })] })));
+    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }), jsx(InfoCell, { info: organisms.length ? organisms : [{ id: "", label: "No organisms found" }], expanded: isOrganismsExpanded, linkBase: PATH_TAXON, priority: prioritizedOrganism }), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 })] })));
 };
 const wrapper$4 = css `
   display: flex;

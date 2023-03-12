@@ -1,26 +1,13 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { C as COLOR_WHITE, a as COLOR_TEXT, n as newStyled, b as COLOR_PRIMARY, c as COLOR_GRAY300, j as jsx, d as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
-import { c as css, r as reactExports } from './index-56cafe6b.js';
-import { R as Recoil_index_4 } from './recoil-5e1988ac.js';
-import { d as decodeHTMLEntities } from './string-a3c2e0f8.js';
-import { g as getData } from './getData-b32e78c1.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
+import { n as newStyled, C as COLOR_PRIMARY, a as COLOR_GRAY300, j as jsx, b as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
+import { c as css, r as reactExports } from './index-8d82cef7.js';
+import { R as Recoil_index_4 } from './recoil-14beaca9.js';
+import { s as stanzaWrapper, I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './common-413406e9.js';
+import { d as decodeHTMLEntities } from './string-77fa4d93.js';
+import { g as getData } from './getData-9618d463.js';
 import { U as URL_API } from './variables-0b8fac13.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-ace01225.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-
-const stanzaWrapper = css `
-  position: relative;
-  font-size: 16px;
-  //font-family: $web-font, sans-serif;
-  padding: 16px;
-  background-color: ${COLOR_WHITE};
-  border-radius: 5px;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: ${COLOR_TEXT};
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-`;
 
 const StanzaView = ({ css, className, prefLabel, gmoId, altLabels, properties, roles, superClasses, subClasses, links, wikipediaData, }) => {
     return (jsx("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: jsxs(ColWrapper, { children: [jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "GMO ID: " }), jsx("span", { children: gmoId })] }), jsx(InfoTitle, { children: decodeHTMLEntities(prefLabel) }), !!altLabels.length && (jsxs(StandardParagraph, { children: ["Alternative labels:", jsx("br", {}), altLabels.map((str, i, arr) => (jsx("span", { children: `${decodeHTMLEntities(str)}${addLastComma(i, arr)}` }, str)))] })), jsxs("div", { children: [!!properties.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Component types" }), jsx(StandardParagraph, { children: properties.map((item, i, arr) => (jsx("span", { children: `${item.label_en}${addLastComma(i, arr)}` }, i))) })] })), !!roles.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Roles" }), jsx("ul", { children: roles.map((item, i) => (jsx("li", { children: item.label_en }, i))) })] })), !!superClasses.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Super classes" }), jsx(LinkList, { children: superClasses.map((item, i) => (jsxs("li", { children: [jsx("a", Object.assign({ href: `/component/${item.gmo_id}` }, { children: item.gmo_id })), jsx("span", { children: decodeHTMLEntities(item.label_en) })] }, i))) })] })), !!subClasses.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Sub classes" }), jsx(LinkList, { children: subClasses.map((item, i) => (jsxs("li", { children: [jsx("a", Object.assign({ href: `/component/${item.gmo_id}` }, { children: item.gmo_id })), jsx("span", { children: decodeHTMLEntities(item.label_en) })] }, i))) })] })), !!links.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Cross references" }), jsx(TagList, { children: links.map((item, i) => (jsx(ColorButton, Object.assign({ href: item.uri, target: "_blank", rel: "noreferrer" }, { children: item.label }), i))) })] }))] })] }), wikipediaData && (jsxs(WikipediaInfo, { children: [jsxs("p", { children: [wikipediaData.thumb && jsx("img", { src: wikipediaData.thumb }), wikipediaData.description] }), jsx("cite", { children: jsx("a", Object.assign({ href: wikipediaData.link, target: "_blank", rel: "noreferrer" }, { children: "From Wikipedia" })) })] }))] }) })));
@@ -28,46 +15,6 @@ const StanzaView = ({ css, className, prefLabel, gmoId, altLabels, properties, r
 const addLastComma = (index, arr) => {
     return index === arr.length - 1 ? "" : ", ";
 };
-const ColWrapper = newStyled.div `
-  display: flex;
-  justify-content: space-between;
-`;
-const InfoId = newStyled.p `
-  span {
-    font-weight: 300;
-    font-size: 16px;
-  }
-`;
-const InfoTitle = newStyled.h1 `
-  font-size: 40px;
-  margin: 24px 0 16px;
-  font-weight: 300;
-  line-height: 0.9;
-`;
-const SubHeading = newStyled.h3 `
-  font-weight: 600;
-  margin-top: 24px;
-  margin-bottom: 8px;
-  font-size: 20px;
-`;
-const StandardParagraph = newStyled.p `
-  font-size: 16px;
-  font-weight: 300;
-  span {
-    font-weight: 300;
-    font-size: 16px;
-  }
-`;
-const ColorButton = newStyled.a `
-  background-color: ${COLOR_PRIMARY};
-  color: ${COLOR_WHITE};
-  padding: 4px 8px 2px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-`;
 const LinkList = newStyled.ul `
   li {
     display: flex;
@@ -77,10 +24,6 @@ const LinkList = newStyled.ul `
   a {
     color: ${COLOR_PRIMARY};
   }
-`;
-const TagList = newStyled.div `
-  display: flex;
-  gap: 8px;
 `;
 const WikipediaInfo = newStyled.div `
   margin-top: 32px;

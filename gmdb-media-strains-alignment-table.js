@@ -1,13 +1,14 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { C as COLOR_WHITE, b as COLOR_PRIMARY, d as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
-import { c as css, r as reactExports, e as dist } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-5e1988ac.js';
-import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-01eb8e0e.js';
-import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-a3c2e0f8.js';
-import { g as getData } from './getData-b32e78c1.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-ace01225.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
+import { f as COLOR_WHITE, C as COLOR_PRIMARY, b as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
+import { c as css, r as reactExports, d as dist } from './index-8d82cef7.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-14beaca9.js';
+import { l as lineageRanks } from './types-3f4e9278.js';
+import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-2746fdb2.js';
+import { b as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-77fa4d93.js';
+import { g as getData } from './getData-9618d463.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './Grow-b02e3735.js';
+import './Grow-d939d7fb.js';
 import './variables-0b8fac13.js';
 
 /**
@@ -97,17 +98,6 @@ let nanoid = (size = 21) =>
     }
     return id
   }, '');
-
-const lineageRanks = [
-    "superkingdom",
-    "phylum",
-    "class",
-    "order",
-    "family",
-    "genus",
-    "species",
-    "strain",
-];
 
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;
@@ -330,12 +320,13 @@ const useFilterTaxonMutators = () => {
 
 const TaxonCell = ({ label, id, size, rank, css, className }) => {
     const filterId = useFilterTaxonState();
+    const pathRoot = rank === "strain" ? "/strain/" : "/taxon/";
     const { setFilterTaxon } = useFilterTaxonMutators();
     const onClickFilter = () => {
         setFilterTaxon(id);
     };
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
-    return (jsxs("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [!!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `/taxon/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })), !label && jsx(Fragment, { children: "" })] })));
+    return (jsxs("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [!!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `${pathRoot}${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })), !label && jsx(Fragment, { children: "" })] })));
 };
 const makeLabel = (label, rank) => {
     switch (rank) {
@@ -516,7 +507,7 @@ const mediumTaxonWrapper = css `
 `;
 
 const AppContainer = ({ data }) => {
-    const [displayData, setDisplayData] = reactExports.useState(undefined);
+    const [displayData, setDisplayData] = reactExports.useState(processDisplayData(data));
     const filterTaxon = useFilterTaxonState();
     const filterRank = useFilterRankState();
     reactExports.useEffect(() => {
@@ -524,11 +515,10 @@ const AppContainer = ({ data }) => {
             setDisplayData(processDisplayData(data, filterTaxon, filterRank));
         }
     }, [data, filterTaxon, filterRank]);
-    reactExports.useEffect(() => { }, [displayData]);
-    return displayData ? (jsxs("div", Object.assign({ css: appContainer }, { children: [jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
+    return displayData.media.length ? (jsxs("div", Object.assign({ css: appContainer }, { children: [jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
                     .concat()
                     .reverse()
-                    .map((rank, index) => (jsx(TaxonCol, { rank: rank, taxonList: displayData.taxon[rank] }, index))) }))] }))) : (jsx(Fragment, {}));
+                    .map((rank, index) => (jsx(TaxonCol, { rank: rank, taxonList: displayData.taxon[rank] }, index))) }))] }))) : (jsx("p", { children: "NO RESULT FOUND" }));
 };
 const appContainer = css `
   display: flex;
@@ -543,7 +533,7 @@ const taxonContainer = css `
 `;
 
 const App = ({ gm_ids, stanzaElement }) => {
-    const [data, setData] = reactExports.useState();
+    const [data, setData] = reactExports.useState(undefined);
     reactExports.useEffect(() => {
         (() => __awaiter(void 0, void 0, void 0, function* () {
             const response = yield getData(API_MEDIA_STRAINS_ALIGNMENT, {
@@ -552,7 +542,7 @@ const App = ({ gm_ids, stanzaElement }) => {
             setData(response.body);
         }))();
     }, [gm_ids]);
-    return jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(AppContainer, { data: data }) }));
+    return data ? (jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(AppContainer, { data: data }) }))) : (jsx(Fragment, { children: "Loading..." }));
 };
 const wrapper = css `
   min-height: 100px;

@@ -1,18 +1,18 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { C as COLOR_WHITE, r as COLOR_GRAY_LINE, b as COLOR_PRIMARY, c as COLOR_GRAY300, v as COLOR_GRAY700, K as COLOR_GRAY400, d as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-d698af90.js';
-import { c as css, e as dist, r as reactExports } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-5e1988ac.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-c3797527.js';
-import { T as Tooltip, d as API_TAXONOMY_CHILDREN, c as API_MEDIA_BY_TAXON } from './paths-01eb8e0e.js';
-import { d as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-965758ee.js';
-import { g as getData } from './getData-b32e78c1.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-ace01225.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
+import { f as COLOR_WHITE, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, a as COLOR_GRAY300, v as COLOR_GRAY700, K as COLOR_GRAY400, b as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
+import { c as css, d as dist, r as reactExports } from './index-8d82cef7.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-14beaca9.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-8fd98eed.js';
+import { T as Tooltip, d as API_TAXONOMY_CHILDREN, c as API_MEDIA_BY_TAXON } from './paths-2746fdb2.js';
+import { d as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-6c3ef357.js';
+import { g as getData } from './getData-9618d463.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './createSvgIcon-51ee6b54.js';
-import './Grow-b02e3735.js';
+import './createSvgIcon-87040e42.js';
+import './Grow-d939d7fb.js';
 import './variables-0b8fac13.js';
-import './useFormControl-6f170b3e.js';
-import './consts-7a6e604d.js';
+import './useFormControl-91c26a87.js';
+import './consts-234f4433.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
     return (jsxs("li", Object.assign({ css: [wrapper, css], className: className }, { children: [jsxs("div", Object.assign({ css: inner }, { children: [jsxs("div", Object.assign({ css: left }, { children: [jsx("span", Object.assign({ onClick: () => onToggleChildren(id) }, { children: jsx(ToggleIcon, Object.assign({}, { hasChildren, isOpen, isLoading })) })), jsx(Tooltip, Object.assign({ title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start" }, { children: jsx("span", { children: label }) })), tag && jsx("span", Object.assign({ css: tagTip }, { children: tag })), linkString && linkURL && (jsxs("a", Object.assign({ href: linkURL, target: "_blank", rel: "noreferrer" }, { children: ["[", linkString, "]"] })))] })), jsx(Checkbox, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) })] })), isOpen && !!children && jsx("ul", Object.assign({ css: childrenWrapper }, { children: children }))] })));
