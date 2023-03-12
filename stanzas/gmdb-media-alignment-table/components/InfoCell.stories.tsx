@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_ORGANISM } from "../../../shared/components/consts";
+import { PATH_MEDIUM, PATH_TAXON } from "../../../shared/components/consts";
 import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 export default {
@@ -32,7 +32,7 @@ OrganismsCompact.args = {
     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
     { id: "169489", label: "Malassezia dermatis" },
   ],
-  linkBase: PATH_ORGANISM,
+  linkBase: PATH_TAXON,
 };
 
 export const OrganismsCompactWithPriority = Template.bind({});
@@ -44,7 +44,7 @@ OrganismsCompactWithPriority.args = {
     { id: "169489", label: "Malassezia dermatis" },
   ],
   priority: ["169489", "643561"],
-  linkBase: PATH_ORGANISM,
+  linkBase: PATH_TAXON,
 };
 
 export const OrganismsCompactWithPriority2 = Template.bind({});
@@ -56,7 +56,7 @@ OrganismsCompactWithPriority2.args = {
     { id: "169489", label: "Malassezia dermatis" },
   ],
   priority: ["abc", "bbb", "ddd"],
-  linkBase: PATH_ORGANISM,
+  linkBase: PATH_TAXON,
 };
 
 export const OrganismsExpanded = Template.bind({});
@@ -67,7 +67,7 @@ OrganismsExpanded.args = {
     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
     { id: "169489", label: "Malassezia dermatis" },
   ],
-  linkBase: PATH_ORGANISM,
+  linkBase: PATH_TAXON,
 };
 
 export const OrganismsExpandedWithPriority = Template.bind({});
@@ -78,6 +78,6 @@ OrganismsExpandedWithPriority.args = {
     { id: "643561", label: "Acidovorax avenae subsp. avenae ATCC 19860" },
     { id: "169489", label: "Malassezia dermatis" },
   ],
-  linkBase: PATH_ORGANISM,
+  linkBase: PATH_TAXON,
   priority: ["169489", "643561"],
 };

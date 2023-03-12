@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import Checkbox from "@mui/material/Checkbox";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { PATH_ORGANISM } from "../../../shared/components/consts";
+import { PATH_TAXON } from "../../../shared/components/consts";
 import {
   COLOR_GRAY_LINE,
   COLOR_PRIMARY,
@@ -23,7 +23,7 @@ export const OrganismListItem: FC<Props> = ({ css, className, id, label, isCheck
     <div css={[organismListItem, css]} className={className}>
       <div css={listInner}>
         <span css={labelCol}>{label}</span>
-        <a css={idCol} href={`${PATH_ORGANISM}${id}`} target="_blank" rel="noreferrer">
+        <a css={idCol} href={`${PATH_TAXON}${id}`} target="_blank" rel="noreferrer">
           [tax_id:{id}]
         </a>
       </div>

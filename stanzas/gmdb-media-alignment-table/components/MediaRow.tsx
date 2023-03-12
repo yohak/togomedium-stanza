@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import React, { ComponentProps, FC } from "react";
 import { AlignmentCell } from "./AlignmentCell";
 import { InfoCell } from "./InfoCell";
-import { PATH_MEDIUM, PATH_ORGANISM } from "../../../shared/components/consts";
+import { PATH_MEDIUM, PATH_TAXON } from "../../../shared/components/consts";
 import { COLOR_WHITE } from "../../../shared/styles/variables";
 import { LabelInfo } from "../../../shared/utils/labelInfo";
 import { useIsMediaExpendedState } from "../states/isMediaExpanded";
@@ -29,7 +29,7 @@ export const MediaRow: FC<Props> = ({
       <InfoCell
         info={organisms.length ? organisms : [{ id: "", label: "No organisms found" }]}
         expanded={isOrganismsExpanded}
-        linkBase={PATH_ORGANISM}
+        linkBase={PATH_TAXON}
         priority={prioritizedOrganism}
       />
       {components.map((component) => (
