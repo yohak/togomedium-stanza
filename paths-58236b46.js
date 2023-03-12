@@ -1,7 +1,7 @@
 import { i as capitalize, k as alpha, _ as _objectWithoutPropertiesLoose, c as jsxRuntimeExports } from './EmotionCacheProvider-53d8142c.js';
 import { _ as _extends, r as reactExports } from './index-8d82cef7.js';
 import { g as generateUtilityClasses, a as generateUtilityClass, s as styled, P as Popper, u as useThemeProps, b as useTheme, c as useControlled, d as useId, e as useEventCallback, f as useIsFocusVisible, h as useForkRef, i as clsx, G as Grow, j as appendOwnerState, k as composeClasses } from './Grow-d939d7fb.js';
-import { U as URL_API } from './variables-0b8fac13.js';
+import { U as URL_API } from './variables-37194d58.js';
 
 function getTooltipUtilityClass(slot) {
   return generateUtilityClass('MuiTooltip', slot);
@@ -546,4 +546,4 @@ const API_COMPONENTS_WITH_COMPONENTS = `${URL_API}gmdb_components_with_component
 const API_MEDIA_STRAINS_ALIGNMENT = `${URL_API}gmdb_media_strains_alignment_by_gm_ids`;
 
 export { API_COMPONENTS_WITH_COMPONENTS as A, Tooltip$1 as T, API_MEDIA_BY_ATTRIBUTES as a, API_ORGANISMS_BY_PHENOTYPES as b, API_MEDIA_BY_TAXON as c, API_TAXONOMY_CHILDREN as d, API_MEDIA_ALIGNMENT as e, API_MEDIA_STRAINS_ALIGNMENT as f };
-//# sourceMappingURL=paths-2746fdb2.js.map
+//# sourceMappingURL=paths-58236b46.js.map

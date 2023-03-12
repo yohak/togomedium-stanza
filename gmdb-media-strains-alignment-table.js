@@ -3,13 +3,13 @@ import { f as COLOR_WHITE, C as COLOR_PRIMARY, b as jsxs, j as jsx, K as COLOR_G
 import { c as css, r as reactExports, d as dist } from './index-8d82cef7.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-14beaca9.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
-import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-2746fdb2.js';
+import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-58236b46.js';
 import { b as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-77fa4d93.js';
 import { g as getData } from './getData-9618d463.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './Grow-d939d7fb.js';
-import './variables-0b8fac13.js';
+import './variables-37194d58.js';
 
 /**
  * Returns the object type of the given payload
