@@ -1,26 +1,24 @@
 import { css } from "@emotion/react";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useMemo } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { MediaCol } from "./MediaCol";
 import { TaxonCol } from "./TaxonCol";
 import { MediaStrainsAlimentResponse } from "../../../api/media_strains_alignment/types";
 import { COLOR_GRAY_LINE } from "../../../shared/styles/variables";
 import { processDisplayData } from "../functions/processMediaCell";
-import { DisplayData, lineageRanks } from "../functions/types";
+import { lineageRanks } from "../functions/types";
 import { useFilterRankState } from "../states/filterRank";
 import { useFilterTaxonState } from "../states/filterTaxon";
 
 type Props = { data: MediaStrainsAlimentResponse } & AcceptsEmotion;
 
 export const AppContainer: FC<Props> = ({ data }) => {
-  const [displayData, setDisplayData] = useState<DisplayData>(processDisplayData(data));
   const filterTaxon = useFilterTaxonState();
   const filterRank = useFilterRankState();
-  useEffect(() => {
-    if (data) {
-      setDisplayData(processDisplayData(data, filterTaxon, filterRank));
-    }
-  }, [data, filterTaxon, filterRank]);
+  const displayData = useMemo(
+    () => processDisplayData(data, filterTaxon, filterRank),
+    [data, filterTaxon, filterRank]
+  );
   return displayData.media.length ? (
     <div css={appContainer}>
       <MediaCol mediaList={displayData.media} />

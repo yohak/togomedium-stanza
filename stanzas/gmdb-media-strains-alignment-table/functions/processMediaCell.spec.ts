@@ -2,14 +2,7 @@ import { __TEST__, processDisplayData } from "./processMediaCell";
 import { data1 } from "../../../api/media_strains_alignment/data1";
 import { data2 } from "../../../api/media_strains_alignment/data2";
 
-const {
-  getNodeListOfRankFromTree,
-  makeTaxonTree,
-  processMediaCell,
-  getSizeOfCell,
-  fillNullTaxon,
-  processTaxonCol,
-} = __TEST__;
+const { getNodeListOfRankFromTree, makeTaxonTree, getSizeOfCell, fillNullTaxon } = __TEST__;
 
 describe("processDisplayData", () => {
   it("should work", () => {

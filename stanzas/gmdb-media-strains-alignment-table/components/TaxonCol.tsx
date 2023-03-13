@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import { AcceptsEmotion, Ease } from "yohak-tools";
 import { TaxonCell } from "./TaxonCell";
 import { COLOR_GRAY_LINE, COLOR_WHITE } from "../../../shared/styles/variables";
@@ -15,7 +15,9 @@ type Props = {
 export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
   const { changeFilterRank } = useFilterRankMutators();
   const [isFolded, setIsFolded] = useState(false);
-  const onClickRank = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const onClickRank = (e: SyntheticEvent<HTMLDivElement>) => {
+    e.preventDefault();
     setIsFolded((prev) => {
       const result = !prev;
       changeFilterRank(rank, result);
@@ -29,24 +31,34 @@ export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
       changeFilterRank(rank, true);
     }
   }, []);
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+    setTimeout(() => {
+      wrapperRef.current!.style.display = !isFolded ? "flex" : "none";
+    }, 16);
+  }, [isFolded]);
   return (
     <div css={[taxonCol, isFolded ? foldedStyle : null, css]} className={className}>
       {!isFolded && (
-        <>
-          <div css={rankCell} onClick={onClickRank}>
-            {capitalizeFirstLetter(rank)}
-          </div>
-          <div css={allTaxonWrapper}>
-            {taxonList.map((list, index) => (
-              <div key={index} css={mediumTaxonWrapper}>
-                {list.map((info, index) => (
-                  <TaxonCell key={index} {...info} rank={rank} />
-                ))}
-              </div>
+        <div css={rankCell} onClick={onClickRank}>
+          {capitalizeFirstLetter(rank)}
+        </div>
+      )}
+      <div css={allTaxonWrapper} ref={wrapperRef}>
+        {taxonList.map((list, index) => (
+          <div key={index} css={mediumTaxonWrapper}>
+            {list.map((info, index) => (
+              <TaxonCell
+                key={index}
+                {...info}
+                rank={rank}
+                actualSize={isFolded ? 1 : info.size}
+                isFolded={isFolded}
+              />
             ))}
           </div>
-        </>
-      )}
+        ))}
+      </div>
       {isFolded && (
         <div css={foldedCover} onClick={onClickRank}>
           <span>{capitalizeFirstLetter(rank)}</span>

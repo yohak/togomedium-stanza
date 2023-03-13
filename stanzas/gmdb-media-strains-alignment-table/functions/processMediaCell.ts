@@ -15,6 +15,19 @@ export const makeCellHeight = (size: number): number => {
   return 48 * size + size - 1;
 };
 
+export const processDisplayData = (
+  data: MediaStrainsAlimentResponse,
+  filterTaxon: string = "",
+  filterRank: LineageRank = "strain"
+): DisplayData => {
+  // console.log("process", data.length, data[0].organisms.length, filterTaxon, filterRank);
+  const nullFilled = fillNullTaxon(data);
+  const filtered: MediaStrainsAlimentResponse = filterData(nullFilled, filterTaxon);
+  const taxon = processTaxonColList(filtered, filterRank);
+  const media = processMediaCell(filtered, taxon, filterRank);
+  return { media, taxon };
+};
+
 const processMediaCell = (
   data: MediaStrainsAlimentResponse,
   taxon: DisplayData["taxon"],
@@ -36,7 +49,7 @@ const fillNullTaxon = (data: MediaStrainsAlimentResponse): MediaStrainsAlimentRe
     return nullCells.find((cell) => parentId === cell.parentId && cell.gmId === gmId)?.id;
   };
   cloned.forEach((media) => {
-    media.organisms.forEach((organism, organismIndex) => {
+    media.organisms.forEach((organism) => {
       const gmId = media.gm_id;
       lineageRanks.forEach((rank, lineageIndex) => {
         if (organism[rank] !== null) return;
@@ -58,39 +71,27 @@ const fillNullTaxon = (data: MediaStrainsAlimentResponse): MediaStrainsAlimentRe
 };
 
 const processTaxonCol = (
-  data: MediaStrainsAlimentResponse,
+  trees: TaxonNode[][],
   rank: LineageRank,
   filterRank: LineageRank
 ): CellInfo[][] => {
-  return data.map((medium) => {
-    const tree = makeTaxonTree(medium.organisms, medium.gm_id);
-    return getNodeListOfRankFromTree(tree, rank).map<CellInfo>((node) => ({
+  return trees.map((tree) =>
+    getNodeListOfRankFromTree(tree, rank).map<CellInfo>((node) => ({
       id: node.id,
       label: node.label,
       size: getSizeOfCell(node, filterRank),
-    }));
-  });
-};
-
-export const processDisplayData = (
-  data: MediaStrainsAlimentResponse,
-  filterTaxon: string = "",
-  filterRank: LineageRank = "strain"
-): DisplayData => {
-  const nullFilled = fillNullTaxon(data);
-  const filtered: MediaStrainsAlimentResponse = filterData(nullFilled, filterTaxon);
-  const taxon = processTaxonColList(filtered, filterRank);
-  const media = processMediaCell(filtered, taxon, filterRank);
-  return { media, taxon };
+    }))
+  );
 };
 
 const processTaxonColList = (
   data: MediaStrainsAlimentResponse,
   filterRank: LineageRank
 ): DisplayData["taxon"] => {
+  const trees = data.map((medium) => makeTaxonTree(medium.organisms, medium.gm_id));
   return lineageRanks.reduce<any>((accum, rank) => {
     const result = { ...accum };
-    result[rank] = processTaxonCol(data, rank, filterRank);
+    result[rank] = processTaxonCol(trees, rank, filterRank);
     return result;
   }, {});
 };

@@ -18,3 +18,5 @@ Result1.parameters = {
     // ...taxonomyChildrenMocks,
   ]),
 };
+export const LargeData = Template.bind({});
+LargeData.args = { gm_ids: ["M18"] };

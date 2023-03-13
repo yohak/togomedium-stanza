@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect, useMemo } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { useToolTipEnabled } from "./MediaCell";
 import { FilterIcon } from "../../../shared/components/svg/FilterIcon";
@@ -10,9 +10,22 @@ import { makeCellHeight } from "../functions/processMediaCell";
 import { CellInfo, LineageRank } from "../functions/types";
 import { useFilterTaxonMutators, useFilterTaxonState } from "../states/filterTaxon";
 
-type Props = { rank: LineageRank } & CellInfo & AcceptsEmotion;
+type Props = { rank: LineageRank; actualSize: number; isFolded: boolean } & CellInfo &
+  AcceptsEmotion;
+type ToMemoizeProps = Props & { wrapperRef: React.RefObject<HTMLDivElement> };
 
-export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) => {
+export const TaxonCell: FC<Props> = (props) => {
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+    const size = props.isFolded ? 1 : props.size;
+    wrapperRef.current.style.height = makeCellHeight(size) + "px";
+    // console.log("set height", size, props.id, props.isFolded);
+  }, [props.size, props.isFolded]);
+  return useMemo(() => <ToMemoize {...props} wrapperRef={wrapperRef} />, []);
+};
+
+const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank, css, className }) => {
   const filterId = useFilterTaxonState();
   const pathRoot = rank === "strain" ? "/strain/" : "/taxon/";
   const { setFilterTaxon } = useFilterTaxonMutators();
@@ -20,12 +33,9 @@ export const TaxonCell: FC<Props> = ({ label, id, size, rank, css, className }) 
     setFilterTaxon(id);
   };
   const { labelRef, toolTipEnabled } = useToolTipEnabled();
+  // console.log("render TaxonCell", rank, size);
   return (
-    <div
-      css={[taxonCell, css]}
-      className={className}
-      style={{ height: `${makeCellHeight(size)}px` }}
-    >
+    <div css={[taxonCell, css]} className={className} ref={wrapperRef}>
       {!!label && (
         <>
           <a href={`${pathRoot}${id}`}>{id}</a>
