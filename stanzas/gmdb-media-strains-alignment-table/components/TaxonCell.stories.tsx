@@ -29,6 +29,7 @@ const defaultArgs: ComponentProps<typeof Wrapper> = {
   size: 1,
   rank: "species",
   filterId: "",
+  isFolded: false,
 };
 
 export const Primary = Template.bind({});

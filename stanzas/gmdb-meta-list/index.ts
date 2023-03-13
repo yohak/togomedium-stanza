@@ -85,8 +85,8 @@ const makeSuccessData = (
     const result: Item[] = [];
     keys.forEach((key) => {
       let value: StringItem;
-      if (typeof item[key] === "string") {
-        value = { label: item[key] as string };
+      if (typeof item[key] === "string" || typeof item[key] === "number") {
+        value = { label: item[key].toString() };
       } else {
         value = item[key] as LinkItem;
       }
@@ -94,7 +94,9 @@ const makeSuccessData = (
         value.nowrap = true;
       }
       result.push(value);
-      value.label = convertHTMLEntity(value.label.toString());
+      if (value.label) {
+        value.label = convertHTMLEntity(value.label.toString());
+      }
     });
     return result;
   });

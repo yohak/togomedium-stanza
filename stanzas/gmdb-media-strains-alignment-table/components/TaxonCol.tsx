@@ -48,13 +48,7 @@ export const TaxonCol: FC<Props> = ({ css, className, rank, taxonList }) => {
         {taxonList.map((list, index) => (
           <div key={index} css={mediumTaxonWrapper}>
             {list.map((info, index) => (
-              <TaxonCell
-                key={index}
-                {...info}
-                rank={rank}
-                actualSize={isFolded ? 1 : info.size}
-                isFolded={isFolded}
-              />
+              <TaxonCell key={index} {...info} rank={rank} isFolded={isFolded} />
             ))}
           </div>
         ))}

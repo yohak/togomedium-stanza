@@ -88,7 +88,7 @@ const processTaxonColList = (
   data: MediaStrainsAlimentResponse,
   filterRank: LineageRank
 ): DisplayData["taxon"] => {
-  const trees = data.map((medium) => makeTaxonTree(medium.organisms, medium.gm_id));
+  const trees = makeTaxonTreesFromData(data);
   return lineageRanks.reduce<any>((accum, rank) => {
     const result = { ...accum };
     result[rank] = processTaxonCol(trees, rank, filterRank);
@@ -123,6 +123,10 @@ const getSizeOfCell = (node: TaxonNode, filterRank: LineageRank): number => {
   };
   process(node);
   return total;
+};
+
+const makeTaxonTreesFromData = (data: MediaStrainsAlimentResponse): TaxonNode[][] => {
+  return data.map((medium) => makeTaxonTree(medium.organisms, medium.gm_id));
 };
 
 const makeTaxonTree = (organisms: Lineage[], gmId: string): TaxonNode[] => {
@@ -206,4 +210,5 @@ export const __TEST__ = {
 export const __SB_TEST__ = {
   processMediaCell,
   processTaxonCol,
+  makeTaxonTreesFromData,
 };

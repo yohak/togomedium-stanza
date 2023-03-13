@@ -10,8 +10,7 @@ import { makeCellHeight } from "../functions/processMediaCell";
 import { CellInfo, LineageRank } from "../functions/types";
 import { useFilterTaxonMutators, useFilterTaxonState } from "../states/filterTaxon";
 
-type Props = { rank: LineageRank; actualSize: number; isFolded: boolean } & CellInfo &
-  AcceptsEmotion;
+type Props = { rank: LineageRank; isFolded: boolean } & CellInfo & AcceptsEmotion;
 type ToMemoizeProps = Props & { wrapperRef: React.RefObject<HTMLDivElement> };
 
 export const TaxonCell: FC<Props> = (props) => {
