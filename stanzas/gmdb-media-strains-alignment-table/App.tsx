@@ -15,6 +15,7 @@ export type AppProps = {
 const App = ({ gm_ids, stanzaElement }: AppProps) => {
   const [data, setData] = useState<Optional<MediaStrainsAlimentResponse>>(undefined);
   useEffect(() => {
+    if (gm_ids.length === 0) return;
     (async () => {
       const response = await getData<MediaStrainsAlimentResponse>(API_MEDIA_STRAINS_ALIGNMENT, {
         gm_ids: gm_ids.join(","),
