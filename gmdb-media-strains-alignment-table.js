@@ -550,6 +550,8 @@ const taxonContainer = css `
 const App = ({ gm_ids, stanzaElement }) => {
     const [data, setData] = reactExports.useState(undefined);
     reactExports.useEffect(() => {
+        if (gm_ids.length === 0)
+            return;
         (() => __awaiter(void 0, void 0, void 0, function* () {
             const response = yield getData(API_MEDIA_STRAINS_ALIGNMENT, {
                 gm_ids: gm_ids.join(","),
