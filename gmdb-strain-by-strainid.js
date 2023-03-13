@@ -1,15 +1,15 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
-import { j as jsx, b as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
-import { c as css, r as reactExports } from './index-8d82cef7.js';
-import { R as Recoil_index_4 } from './recoil-14beaca9.js';
-import { L as LineageList } from './LineageList-430b69cd.js';
-import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-413406e9.js';
-import { g as getData } from './getData-9618d463.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
+import { j as jsx, b as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
+import { c as css, r as reactExports } from './index-56cafe6b.js';
+import { R as Recoil_index_4 } from './recoil-b0ceac4c.js';
+import { L as LineageList } from './LineageList-66985c0f.js';
+import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-b9bd53c8.js';
+import { g as getData } from './getData-b32e78c1.js';
 import { U as URL_API } from './variables-0b8fac13.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './types-3f4e9278.js';
-import './string-77fa4d93.js';
+import './string-e923d624.js';
 
 const StanzaView = ({ css, className, strainId, strainName, infoSources, taxonomy, }) => {
     return (jsx("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Strain Id: " }), jsx("span", { children: strainId })] }), jsx(InfoTitle, { children: strainName }), jsx(SubHeading, { children: "Source strains" }), jsx(TagList, { children: infoSources.map((source, index) => (jsx(ColorButton, Object.assign({ href: source.url, target: "_blank", rel: "noreferrer" }, { children: source.label }), index))) }), taxonomy && (jsxs("div", { children: [jsx(SubHeading, { children: "Taxonomic Lineage" }), jsx(LineageList, { lineage: taxonomy.lineage })] }))] }) }) })));

@@ -1,14 +1,14 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
-import { f as COLOR_WHITE, C as COLOR_PRIMARY, b as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
-import { c as css, r as reactExports, R as React, d as dist } from './index-8d82cef7.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-14beaca9.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
+import { f as COLOR_WHITE, C as COLOR_PRIMARY, b as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
+import { c as css, r as reactExports, R as React, e as dist } from './index-56cafe6b.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-b0ceac4c.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
-import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-2746fdb2.js';
-import { b as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-77fa4d93.js';
-import { g as getData } from './getData-9618d463.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
+import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-66dbaf1f.js';
+import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-e923d624.js';
+import { g as getData } from './getData-b32e78c1.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './Grow-d939d7fb.js';
+import './Grow-1eacc08f.js';
 import './variables-0b8fac13.js';
 
 /**
@@ -327,7 +327,7 @@ const TaxonCell = (props) => {
         const size = props.isFolded ? 1 : props.size;
         wrapperRef.current.style.height = makeCellHeight(size) + "px";
     }, [props.size, props.isFolded]);
-    return reactExports.useMemo(() => jsx(ToMemoize, Object.assign({}, props, { wrapperRef: wrapperRef })), []);
+    return reactExports.useMemo(() => jsx(ToMemoize, Object.assign({}, props, { wrapperRef: wrapperRef })), [props.id]);
 };
 const ToMemoize = ({ wrapperRef, label, id, rank, css, className }) => {
     const filterId = useFilterTaxonState();

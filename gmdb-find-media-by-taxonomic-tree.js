@@ -1,17 +1,17 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
-import { f as COLOR_WHITE, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, a as COLOR_GRAY300, v as COLOR_GRAY700, K as COLOR_GRAY400, b as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
-import { c as css, d as dist, r as reactExports } from './index-8d82cef7.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-14beaca9.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-8fd98eed.js';
-import { T as Tooltip, d as API_TAXONOMY_CHILDREN, c as API_MEDIA_BY_TAXON } from './paths-2746fdb2.js';
-import { d as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-6c3ef357.js';
-import { g as getData } from './getData-9618d463.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
+import { f as COLOR_WHITE, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, a as COLOR_GRAY300, v as COLOR_GRAY700, K as COLOR_GRAY400, b as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
+import { c as css, e as dist, r as reactExports } from './index-56cafe6b.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-b0ceac4c.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-4aba2f6b.js';
+import { T as Tooltip, d as API_TAXONOMY_CHILDREN, c as API_MEDIA_BY_TAXON } from './paths-66dbaf1f.js';
+import { d as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-8a75fa29.js';
+import { g as getData } from './getData-b32e78c1.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './createSvgIcon-87040e42.js';
-import './Grow-d939d7fb.js';
+import './createSvgIcon-74eb21f1.js';
+import './Grow-1eacc08f.js';
 import './variables-0b8fac13.js';
-import './useFormControl-91c26a87.js';
+import './useFormControl-a1db82cb.js';
 import './consts-234f4433.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
@@ -267,7 +267,7 @@ const useLinkString = (id, rank) => {
     const [linkURL, setLinkURL] = reactExports.useState("");
     reactExports.useEffect(() => {
         setLinkString(`tax_id:${id}`);
-        setLinkURL(`http://growthmedium.org/${rank === "Species" ? "organism" : "taxon"}/${id}`);
+        setLinkURL(`/taxon/${id}`);
     }, [id, rank]);
     return [linkString, linkURL];
 };
