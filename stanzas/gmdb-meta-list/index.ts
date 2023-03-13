@@ -94,7 +94,7 @@ const makeSuccessData = (
         value.nowrap = true;
       }
       result.push(value);
-      value.label = convertHTMLEntity(value.label);
+      value.label = convertHTMLEntity(value.label.toString());
     });
     return result;
   });
@@ -295,7 +295,7 @@ type LinkItem = {
   nowrap?: boolean;
 };
 type StringItem = {
-  label: string;
+  label: string | number;
   nowrap?: boolean;
 };
 
