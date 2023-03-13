@@ -49,6 +49,10 @@ describe("makeSpeciesName", () => {
     const result = makeSpeciesName("Anoxybacillus flavithermus WK1");
     expect(result).toBe("A. Flavithermus WK1");
   });
+  it("should work with brackets", () => {
+    const result = makeSpeciesName("[anoxybacillus] flavithermus (WK1)");
+    expect(result).toBe("A. Flavithermus (WK1)");
+  });
 });
 
 describe("makeStrainName", () => {

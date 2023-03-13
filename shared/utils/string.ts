@@ -46,7 +46,8 @@ export const makeSpeciesName = (str: string) => {
   if (arr.length < 1) {
     return "";
   }
-  const first = arr.shift()!.charAt(0).toUpperCase();
+  const first = arr.shift()!.replace("[", "").charAt(0).toUpperCase();
+
   const rest = capitalizeFirstLetter(arr.join(" "));
 
   return `${first}. ${rest}`;
