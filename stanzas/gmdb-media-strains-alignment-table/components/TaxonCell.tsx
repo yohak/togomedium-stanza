@@ -21,7 +21,7 @@ export const TaxonCell: FC<Props> = (props) => {
     wrapperRef.current.style.height = makeCellHeight(size) + "px";
     // console.log("set height", size, props.id, props.isFolded);
   }, [props.size, props.isFolded]);
-  return useMemo(() => <ToMemoize {...props} wrapperRef={wrapperRef} />, []);
+  return useMemo(() => <ToMemoize {...props} wrapperRef={wrapperRef} />, [props.id]);
 };
 
 const ToMemoize: FC<ToMemoizeProps> = ({ wrapperRef, label, id, rank, css, className }) => {
