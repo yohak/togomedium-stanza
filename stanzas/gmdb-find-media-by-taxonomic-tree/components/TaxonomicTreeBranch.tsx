@@ -53,7 +53,7 @@ const useLinkString = (id: string, rank: string) => {
   const [linkURL, setLinkURL] = useState<string>("");
   useEffect(() => {
     setLinkString(`tax_id:${id}`);
-    setLinkURL(`http://growthmedium.org/${rank === "Species" ? "organism" : "taxon"}/${id}`);
+    setLinkURL(`/taxon/${id}`);
   }, [id, rank]);
   return [linkString, linkURL];
 };
