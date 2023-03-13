@@ -6,7 +6,7 @@ import { L as LineageList, p as parseLineage } from './LineageList-430b69cd.js';
 import { s as stanzaWrapper, c as ColWrapper, I as InfoId, C as ColorButton, a as InfoTitle, S as StandardParagraph, b as SubHeading } from './common-413406e9.js';
 import { g as getData } from './getData-9618d463.js';
 import { u as unescapeJsonString } from './string-77fa4d93.js';
-import { U as URL_API } from './variables-37194d58.js';
+import { U as URL_API } from './variables-0b8fac13.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './types-3f4e9278.js';

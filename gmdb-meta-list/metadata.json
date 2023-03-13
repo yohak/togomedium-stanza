@@ -41,7 +41,7 @@
     },
     {
       "stanza:key": "column_sizes",
-      "stanza:example": "30,70",
+      "stanza:example": "15,70,15",
       "stanza:description": "column sizes from left. should be separated with comma",
       "stanza:required": false
     },

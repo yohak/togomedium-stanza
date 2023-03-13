@@ -2,7 +2,7 @@ import { c as commonjsGlobal, S as Stanza, _ as __awaiter, d as defineStanzaElem
 import { g as getData } from './getData-9618d463.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import { m as makeTogoGenomeOrganismLink, a as makeNcbiOrganismLink, u as unescapeJsonString, c as capitalizeFirstLetter } from './string-77fa4d93.js';
-import { U as URL_API } from './variables-37194d58.js';
+import { U as URL_API } from './variables-0b8fac13.js';
 import './index-8d82cef7.js';
 
 function commonjsRequire(path) {

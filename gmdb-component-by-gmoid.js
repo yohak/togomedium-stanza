@@ -5,7 +5,7 @@ import { R as Recoil_index_4 } from './recoil-14beaca9.js';
 import { s as stanzaWrapper, I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './common-413406e9.js';
 import { d as decodeHTMLEntities } from './string-77fa4d93.js';
 import { g as getData } from './getData-9618d463.js';
-import { U as URL_API } from './variables-37194d58.js';
+import { U as URL_API } from './variables-0b8fac13.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 

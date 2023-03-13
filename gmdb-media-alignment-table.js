@@ -6,12 +6,12 @@ import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-8fd98
 import { d as decodeHTMLEntities, s as stringToArray } from './string-77fa4d93.js';
 import { c as clone } from './clone-e8609f76.js';
 import { b as PATH_COMPONENT, P as PATH_MEDIUM, a as PATH_TAXON } from './consts-234f4433.js';
-import { T as Tooltip, e as API_MEDIA_ALIGNMENT } from './paths-58236b46.js';
+import { T as Tooltip, e as API_MEDIA_ALIGNMENT } from './paths-2746fdb2.js';
 import { g as getData } from './getData-9618d463.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './createSvgIcon-87040e42.js';
 import './Grow-d939d7fb.js';
-import './variables-37194d58.js';
+import './variables-0b8fac13.js';
 
 const WIDTH_EXPANDED = "200px";
 const WIDTH_COMPACT = "150px";

@@ -3,8 +3,8 @@ import { _ as _objectWithoutPropertiesLoose, G as defaultSxConfig, H as isPlainO
 import { _ as _extends, r as reactExports, c as css, j as jsx$1 } from './index-8d82cef7.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-14beaca9.js';
 import { a as PATH_TAXON } from './consts-234f4433.js';
-import { d as Checkbox, h as hasInfo, f as filterOutInfo, C as CircularProgress, P as Pagination, e as hasIdOfLabel, T as Tabs, g as Tab, B as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, i as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-b1f9e7fb.js';
-import { b as API_ORGANISMS_BY_PHENOTYPES, c as API_MEDIA_BY_TAXON } from './paths-58236b46.js';
+import { d as Checkbox, h as hasInfo, f as filterOutInfo, C as CircularProgress, P as Pagination, e as hasIdOfLabel, T as Tabs, g as Tab, B as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, i as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-6c3ef357.js';
+import { b as API_ORGANISMS_BY_PHENOTYPES, c as API_MEDIA_BY_TAXON } from './paths-2746fdb2.js';
 import { g as getData } from './getData-9618d463.js';
 import { c as clone } from './clone-e8609f76.js';
 import { a as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, i as clsx, k as composeClasses } from './Grow-d939d7fb.js';
@@ -14,7 +14,7 @@ import { S as Slider } from './Slider-87e2ade8.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './createSvgIcon-87040e42.js';
-import './variables-37194d58.js';
+import './variables-0b8fac13.js';
 
 const _excluded$2 = ["sx"];
 const splitProps = props => {

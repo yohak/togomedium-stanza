@@ -65,8 +65,8 @@ const makeSuccessData = (response, offset, stanzaParams) => {
         const result = [];
         keys.forEach((key) => {
             let value;
-            if (typeof item[key] === "string") {
-                value = { label: item[key] };
+            if (typeof item[key] === "string" || typeof item[key] === "number") {
+                value = { label: item[key].toString() };
             }
             else {
                 value = item[key];
@@ -75,7 +75,9 @@ const makeSuccessData = (response, offset, stanzaParams) => {
                 value.nowrap = true;
             }
             result.push(value);
-            value.label = convertHTMLEntity(value.label);
+            if (value.label) {
+                value.label = convertHTMLEntity(value.label.toString());
+            }
         });
         return result;
     });
@@ -261,7 +263,7 @@ var metadata = {
 	},
 	{
 		"stanza:key": "column_sizes",
-		"stanza:example": "30,70",
+		"stanza:example": "15,70,15",
 		"stanza:description": "column sizes from left. should be separated with comma",
 		"stanza:required": false
 	},

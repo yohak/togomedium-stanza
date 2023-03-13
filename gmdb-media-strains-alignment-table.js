@@ -1,15 +1,15 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
 import { f as COLOR_WHITE, C as COLOR_PRIMARY, b as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
-import { c as css, r as reactExports, d as dist } from './index-8d82cef7.js';
+import { c as css, r as reactExports, R as React, d as dist } from './index-8d82cef7.js';
 import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-14beaca9.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
-import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-58236b46.js';
+import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-2746fdb2.js';
 import { b as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-77fa4d93.js';
 import { g as getData } from './getData-9618d463.js';
 import { T as ThemeProvider, m as muiTheme } from './muiTheme-b3d5a276.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './Grow-d939d7fb.js';
-import './variables-37194d58.js';
+import './variables-0b8fac13.js';
 
 /**
  * Returns the object type of the given payload
@@ -102,6 +102,13 @@ let nanoid = (size = 21) =>
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;
 };
+const processDisplayData = (data, filterTaxon = "", filterRank = "strain") => {
+    const nullFilled = fillNullTaxon(data);
+    const filtered = filterData(nullFilled, filterTaxon);
+    const taxon = processTaxonColList(filtered, filterRank);
+    const media = processMediaCell(filtered, taxon, filterRank);
+    return { media, taxon };
+};
 const processMediaCell = (data, taxon, filterRank) => {
     return data.map((item, i) => {
         return {
@@ -119,7 +126,7 @@ const fillNullTaxon = (data) => {
         return (_a = nullCells.find((cell) => parentId === cell.parentId && cell.gmId === gmId)) === null || _a === void 0 ? void 0 : _a.id;
     };
     cloned.forEach((media) => {
-        media.organisms.forEach((organism, organismIndex) => {
+        media.organisms.forEach((organism) => {
             const gmId = media.gm_id;
             lineageRanks.forEach((rank, lineageIndex) => {
                 if (organism[rank] !== null)
@@ -138,27 +145,18 @@ const fillNullTaxon = (data) => {
     });
     return cloned;
 };
-const processTaxonCol = (data, rank, filterRank) => {
-    return data.map((medium) => {
-        const tree = makeTaxonTree(medium.organisms, medium.gm_id);
-        return getNodeListOfRankFromTree(tree, rank).map((node) => ({
-            id: node.id,
-            label: node.label,
-            size: getSizeOfCell(node, filterRank),
-        }));
-    });
-};
-const processDisplayData = (data, filterTaxon = "", filterRank = "strain") => {
-    const nullFilled = fillNullTaxon(data);
-    const filtered = filterData(nullFilled, filterTaxon);
-    const taxon = processTaxonColList(filtered, filterRank);
-    const media = processMediaCell(filtered, taxon, filterRank);
-    return { media, taxon };
+const processTaxonCol = (trees, rank, filterRank) => {
+    return trees.map((tree) => getNodeListOfRankFromTree(tree, rank).map((node) => ({
+        id: node.id,
+        label: node.label,
+        size: getSizeOfCell(node, filterRank),
+    })));
 };
 const processTaxonColList = (data, filterRank) => {
+    const trees = makeTaxonTreesFromData(data);
     return lineageRanks.reduce((accum, rank) => {
         const result = Object.assign({}, accum);
-        result[rank] = processTaxonCol(data, rank, filterRank);
+        result[rank] = processTaxonCol(trees, rank, filterRank);
         return result;
     }, {});
 };
@@ -186,6 +184,9 @@ const getSizeOfCell = (node, filterRank) => {
     };
     process(node);
     return total;
+};
+const makeTaxonTreesFromData = (data) => {
+    return data.map((medium) => makeTaxonTree(medium.organisms, medium.gm_id));
 };
 const makeTaxonTree = (organisms, gmId) => {
     const flatTaxonList = organisms
@@ -318,7 +319,17 @@ const useFilterTaxonMutators = () => {
     return { setFilterTaxon };
 };
 
-const TaxonCell = ({ label, id, size, rank, css, className }) => {
+const TaxonCell = (props) => {
+    const wrapperRef = React.useRef(null);
+    reactExports.useEffect(() => {
+        if (!wrapperRef.current)
+            return;
+        const size = props.isFolded ? 1 : props.size;
+        wrapperRef.current.style.height = makeCellHeight(size) + "px";
+    }, [props.size, props.isFolded]);
+    return reactExports.useMemo(() => jsx(ToMemoize, Object.assign({}, props, { wrapperRef: wrapperRef })), []);
+};
+const ToMemoize = ({ wrapperRef, label, id, rank, css, className }) => {
     const filterId = useFilterTaxonState();
     const pathRoot = rank === "strain" ? "/strain/" : "/taxon/";
     const { setFilterTaxon } = useFilterTaxonMutators();
@@ -326,7 +337,7 @@ const TaxonCell = ({ label, id, size, rank, css, className }) => {
         setFilterTaxon(id);
     };
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
-    return (jsxs("div", Object.assign({ css: [taxonCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [!!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `${pathRoot}${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })), !label && jsx(Fragment, { children: "" })] })));
+    return (jsxs("div", Object.assign({ css: [taxonCell, css], className: className, ref: wrapperRef }, { children: [!!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `${pathRoot}${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })), !label && jsx(Fragment, { children: "" })] })));
 };
 const makeLabel = (label, rank) => {
     switch (rank) {
@@ -434,7 +445,9 @@ const findCurrentFilterRank = (status) => {
 const TaxonCol = ({ css, className, rank, taxonList }) => {
     const { changeFilterRank } = useFilterRankMutators();
     const [isFolded, setIsFolded] = reactExports.useState(false);
-    const onClickRank = () => {
+    const wrapperRef = reactExports.useRef(null);
+    const onClickRank = (e) => {
+        e.preventDefault();
         setIsFolded((prev) => {
             const result = !prev;
             changeFilterRank(rank, result);
@@ -448,7 +461,14 @@ const TaxonCol = ({ css, className, rank, taxonList }) => {
             changeFilterRank(rank, true);
         }
     }, []);
-    return (jsxs("div", Object.assign({ css: [taxonCol, isFolded ? foldedStyle : null, css], className: className }, { children: [!isFolded && (jsxs(Fragment, { children: [jsx("div", Object.assign({ css: rankCell, onClick: onClickRank }, { children: capitalizeFirstLetter(rank) })), jsx("div", Object.assign({ css: allTaxonWrapper }, { children: taxonList.map((list, index) => (jsx("div", Object.assign({ css: mediumTaxonWrapper }, { children: list.map((info, index) => (jsx(TaxonCell, Object.assign({}, info, { rank: rank }), index))) }), index))) }))] })), isFolded && (jsx("div", Object.assign({ css: foldedCover, onClick: onClickRank }, { children: jsx("span", { children: capitalizeFirstLetter(rank) }) })))] })));
+    reactExports.useEffect(() => {
+        if (!wrapperRef.current)
+            return;
+        setTimeout(() => {
+            wrapperRef.current.style.display = !isFolded ? "flex" : "none";
+        }, 16);
+    }, [isFolded]);
+    return (jsxs("div", Object.assign({ css: [taxonCol, isFolded ? foldedStyle : null, css], className: className }, { children: [!isFolded && (jsx("div", Object.assign({ css: rankCell, onClick: onClickRank }, { children: capitalizeFirstLetter(rank) }))), jsx("div", Object.assign({ css: allTaxonWrapper, ref: wrapperRef }, { children: taxonList.map((list, index) => (jsx("div", Object.assign({ css: mediumTaxonWrapper }, { children: list.map((info, index) => (jsx(TaxonCell, Object.assign({}, info, { rank: rank, isFolded: isFolded }), index))) }), index))) })), isFolded && (jsx("div", Object.assign({ css: foldedCover, onClick: onClickRank }, { children: jsx("span", { children: capitalizeFirstLetter(rank) }) })))] })));
 };
 const taxonCol = css `
   width: 200px;
@@ -507,14 +527,9 @@ const mediumTaxonWrapper = css `
 `;
 
 const AppContainer = ({ data }) => {
-    const [displayData, setDisplayData] = reactExports.useState(processDisplayData(data));
     const filterTaxon = useFilterTaxonState();
     const filterRank = useFilterRankState();
-    reactExports.useEffect(() => {
-        if (data) {
-            setDisplayData(processDisplayData(data, filterTaxon, filterRank));
-        }
-    }, [data, filterTaxon, filterRank]);
+    const displayData = reactExports.useMemo(() => processDisplayData(data, filterTaxon, filterRank), [data, filterTaxon, filterRank]);
     return displayData.media.length ? (jsxs("div", Object.assign({ css: appContainer }, { children: [jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
                     .concat()
                     .reverse()

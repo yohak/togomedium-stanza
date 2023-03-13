@@ -2,7 +2,7 @@ import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-
 import { s as select } from './transform-83917164.js';
 import './index-8d82cef7.js';
 import { g as getData } from './getData-9618d463.js';
-import { U as URL_API } from './variables-37194d58.js';
+import { U as URL_API } from './variables-0b8fac13.js';
 
 let mouseX = 0;
 let mouseY = 0;
