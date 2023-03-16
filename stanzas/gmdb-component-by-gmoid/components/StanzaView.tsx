@@ -11,8 +11,9 @@ import {
   SubHeading,
   TagList,
 } from "../../../shared/components/info-detail/styles";
+import { WikipediaData, WikipediaView } from "../../../shared/components/info-detail/WikipediaView";
 import { stanzaWrapper } from "../../../shared/styles/common";
-import { COLOR_GRAY300, COLOR_PRIMARY, COLOR_WHITE } from "../../../shared/styles/variables";
+import { COLOR_PRIMARY } from "../../../shared/styles/variables";
 import { decodeHTMLEntities } from "../../../shared/utils/string";
 import { ComponentClass, LinkInfo } from "../utils/api";
 
@@ -28,11 +29,6 @@ type Props = {
   wikipediaData?: WikipediaData;
 } & AcceptsEmotion;
 
-export type WikipediaData = {
-  thumb?: string;
-  description?: string;
-  link: string;
-};
 export const StanzaView: FC<Props> = ({
   css,
   className,
@@ -125,19 +121,7 @@ export const StanzaView: FC<Props> = ({
             )}
           </div>
         </div>
-        {wikipediaData && (
-          <WikipediaInfo>
-            <p>
-              {wikipediaData.thumb && <img src={wikipediaData.thumb} />}
-              {wikipediaData.description}
-            </p>
-            <cite>
-              <a href={wikipediaData.link} target={"_blank"} rel="noreferrer">
-                From Wikipedia
-              </a>
-            </cite>
-          </WikipediaInfo>
-        )}
+        {wikipediaData && <WikipediaView {...wikipediaData} />}
       </ColWrapper>
     </div>
   );
@@ -155,23 +139,6 @@ const LinkList = styled.ul`
 
   a {
     color: ${COLOR_PRIMARY};
-  }
-`;
-
-const WikipediaInfo = styled.div`
-  margin-top: 32px;
-  width: 336px;
-  border: 1px ${COLOR_GRAY300} dashed;
-  padding: 8px;
-  border-radius: 5px;
-  height: fit-content;
-  cite {
-    display: block;
-    text-align: right;
-    margin-top: 8px;
-    a {
-      color: ${COLOR_PRIMARY};
-    }
   }
 `;
 

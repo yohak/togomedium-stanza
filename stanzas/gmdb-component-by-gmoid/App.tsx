@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { StanzaView, WikipediaData } from "./components/StanzaView";
+import { StanzaView } from "./components/StanzaView";
 import { getComponentData, ViewProps } from "./utils/api";
+import { fetchWikipediaData } from "../../shared/components/info-detail/WikipediaView";
 
 type Props = {
   stanzaElement?: Document;
@@ -36,12 +37,3 @@ const makeEmptyProps = (): ViewProps => ({
   subClasses: [],
   links: [],
 });
-
-const fetchWikipediaData = async (link: string): Promise<WikipediaData> => {
-  const key = link.split("/").pop();
-  const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${key}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  if (!data) return { link };
-  return { thumb: data.thumbnail?.source, description: data.extract, link };
-};

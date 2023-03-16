@@ -11,6 +11,7 @@ import {
   StandardParagraph,
   SubHeading,
 } from "../../../shared/components/info-detail/styles";
+import { WikipediaData, WikipediaView } from "../../../shared/components/info-detail/WikipediaView";
 import { stanzaWrapper } from "../../../shared/styles/common";
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";
@@ -23,13 +24,9 @@ type Props = {
   lineage: ComponentProps<typeof LineageList>["lineage"];
   typeMaterials: string[];
   otherTypeMaterials: { key: string; labels: string[] }[];
+  wikipediaData?: WikipediaData;
 } & AcceptsEmotion;
 
-export type WikipediaData = {
-  thumb?: string;
-  description?: string;
-  link: string;
-};
 export const StanzaView: FC<Props> = ({
   css,
   className,
@@ -39,6 +36,7 @@ export const StanzaView: FC<Props> = ({
   lineage,
   typeMaterials,
   otherTypeMaterials,
+  wikipediaData,
 }) => {
   return (
     <div css={[stanzaView, css, stanzaWrapper]} className={className}>
@@ -85,6 +83,7 @@ export const StanzaView: FC<Props> = ({
             </div>
           )}
         </div>
+        {wikipediaData && !lineage.species && <WikipediaView {...wikipediaData} />}
       </ColWrapper>
     </div>
   );
