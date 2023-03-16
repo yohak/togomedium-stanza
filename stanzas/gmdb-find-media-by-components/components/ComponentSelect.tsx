@@ -10,10 +10,10 @@ import { decodeHTMLEntities } from "../../../shared/utils/string";
 type Props = {
   onChangeSelection: (ids: string[]) => void;
 };
-
+type ComponentLabelInfo = LabelInfo & { japaneseName: string };
 export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
   const [loading, setLoading] = useState(false);
-  const [components, setComponents] = useState<readonly LabelInfo[]>([]);
+  const [components, setComponents] = useState<readonly ComponentLabelInfo[]>([]);
   const loadComponents = async (ids: string[] = []) => {
     const response = await getData<AllComponentsResponse>(API_COMPONENTS_WITH_COMPONENTS, {
       gmo_ids: ids.join(","),
@@ -21,9 +21,10 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
     if (response.body) {
       setComponents(
         response.body
-          .map<LabelInfo>((item) => ({
+          .map<ComponentLabelInfo>((item) => ({
             id: item.gmo_id,
             label: item.name.includes(";") ? decodeHTMLEntities(item.name) : item.name,
+            japaneseName: item.japanese_name,
           }))
           .filter((item) => !ids.includes(item.id))
       );
@@ -45,6 +46,14 @@ export const ComponentSelect: FC<Props> = ({ onChangeSelection }) => {
     <Autocomplete
       multiple
       filterSelectedOptions
+      filterOptions={(options, params) => {
+        return options.filter((option) => {
+          const label = option.label.toLowerCase();
+          const japaneseName = option.japaneseName.toLowerCase();
+          const filter = params.inputValue.toLowerCase();
+          return label.includes(filter) || japaneseName.includes(filter);
+        });
+      }}
       onChange={onChange}
       onOpen={onOpen}
       disablePortal={true}
