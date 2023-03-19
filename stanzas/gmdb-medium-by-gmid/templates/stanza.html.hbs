@@ -50,7 +50,12 @@
               <span class="{{#if can_wrap_label}}can-wrap{{/if}}">{{{label}}}</span>
             </td>
             <td class="name">
-              <span class="{{#if can_wrap_name}}can-wrap{{/if}}">{{{component_name}}}</span>
+              {{#if reference_media_id}}
+                <a href="/medium/{{reference_media_id}}">{{{component_name}}}</a>
+              {{/if}}
+              {{#unless reference_media_id}}
+                <span class="{{#if can_wrap_name}}can-wrap{{/if}}">{{{component_name}}}</span>
+              {{/unless}}
             </td>
             <td class="volume">
               <span>{{conc_value}}</span><span>{{conc_unit}}</span>

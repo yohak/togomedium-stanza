@@ -47,34 +47,43 @@ const makeErrorData = (msg: string): TemplateParameters => {
 };
 
 const makeSuccessData = (body: ApiBody): TemplateParameters => {
+  const id = body.meta.gm.split("/").pop()!;
   return {
-    id: body.meta.gm.split("/").pop(),
+    id,
     original_id: body.meta.original_media_id,
     name: body.meta.name,
     src_label: getSrcLabel(body.meta.src_url),
     src_url: body.meta.src_url,
     ph: body.meta.ph,
     components: [
-      ...processComponentTables(body.components),
+      ...processComponentTables(body.components, id),
       ...processComponentComments(body.comments),
     ].sort((a, b) => a.paragraph_index - b.paragraph_index),
   };
 };
 
-const processComponentTables = (tables: ComponentTable[]): ComponentTable[] => {
-  return tables.map((table) => ({
-    ...table,
-    items: table.items.map((item) => ({
-      ...item,
-      // component_name: "MgCl<sup>2</sup>&middot;6H<sub>2</sub>O",
-      can_wrap_label: item.label?.length >= 20,
-      can_wrap_name: item.component_name?.length >= 20,
-      properties: item.properties.map((property) => ({
-        ...property,
-        displayLabel: getShortPropertyLabel(property.label),
-      })),
-    })),
-  }));
+const processComponentTables = (tables: ComponentTable[], gmID: string): ComponentTable[] => {
+  return tables.map((table) => {
+    return {
+      ...table,
+      items: table.items.map((item) => {
+        const reference_media_id =
+          !item.reference_media_id || item.reference_media_id === gmID
+            ? ""
+            : item.reference_media_id;
+        return {
+          ...item,
+          reference_media_id,
+          can_wrap_label: item.label?.length >= 20,
+          can_wrap_name: item.component_name?.length >= 20,
+          properties: item.properties.map((property) => ({
+            ...property,
+            displayLabel: getShortPropertyLabel(property.label),
+          })),
+        };
+      }),
+    };
+  });
 };
 const processComponentComments = (comments: ComponentComment[]): ComponentComment[] => {
   return comments.map((item) => ({
@@ -159,6 +168,7 @@ type Component = {
   roles: Role[];
   can_wrap_name?: boolean;
   can_wrap_label?: boolean;
+  reference_media_id?: string;
 };
 
 type Property = {} & ComponentFunction;
