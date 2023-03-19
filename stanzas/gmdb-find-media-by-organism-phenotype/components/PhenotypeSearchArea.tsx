@@ -29,6 +29,9 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
         marks={[
           { value: 0, label: "0°C" },
           { value: 37, label: "37°C" },
+          { value: 55, label: "55°C" },
+          { value: 75, label: "75°C" },
+          { value: 90, label: "90°C" },
           { value: 110, label: "110°C" },
         ]}
         queryKey={"growth_temp"}
