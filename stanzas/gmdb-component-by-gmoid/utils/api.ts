@@ -29,10 +29,9 @@ export type ComponentClass = {
   uri: string;
   label_en: string;
 };
-
 const getLinkLabel = (link: string): Nullable<LinkLabel> => {
   switch (true) {
-    case /pccompound/.test(link):
+    case /pccompound\/.+/.test(link):
       return "PubChem";
     case /wikipedia/.test(link):
       return "Wikipedia";
