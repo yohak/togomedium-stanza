@@ -28,7 +28,7 @@ export const LineageList: FC<{
   return (
     <LineageListWrapper>
       {lineageRanks
-        .filter((rank) => !!lineage[rank])
+        .filter((rank) => !!lineage[rank] && lineage[rank]!.label !== "NA")
         .map((rank, index) => {
           const item = lineage[rank]!;
           return (
