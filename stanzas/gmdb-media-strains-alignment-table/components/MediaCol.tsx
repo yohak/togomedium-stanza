@@ -24,6 +24,7 @@ const mediaCol = css`
   gap: 2px;
   width: 200px;
 `;
+
 const emptyCell = css`
   height: 24px;
   background-color: ${COLOR_WHITE};

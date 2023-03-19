@@ -10,9 +10,9 @@ import { lineageRanks } from "../functions/types";
 import { useFilterRankState } from "../states/filterRank";
 import { useFilterTaxonState } from "../states/filterTaxon";
 
-type Props = { data: MediaStrainsAlimentResponse } & AcceptsEmotion;
+type Props = { data: MediaStrainsAlimentResponse; hideMedia?: boolean } & AcceptsEmotion;
 
-export const AppContainer: FC<Props> = ({ data }) => {
+export const AppContainer: FC<Props> = ({ data, hideMedia = false }) => {
   const filterTaxon = useFilterTaxonState();
   const filterRank = useFilterRankState();
   const displayData = useMemo(
@@ -21,7 +21,7 @@ export const AppContainer: FC<Props> = ({ data }) => {
   );
   return displayData.media.length ? (
     <div css={appContainer}>
-      <MediaCol mediaList={displayData.media} />
+      {!hideMedia && <MediaCol mediaList={displayData.media} />}
       <div css={taxonContainer}>
         {lineageRanks
           .concat()

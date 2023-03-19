@@ -7,24 +7,25 @@ import { API_MEDIA_STRAINS_ALIGNMENT } from "../../api/paths";
 import { COLOR_WHITE, SIZE1 } from "../../shared/styles/variables";
 import { getData } from "../../shared/utils/getData";
 export type AppProps = {
-  gm_ids: string[];
+  gmIds: string[];
+  hideMedia?: boolean;
   prioritizedOrganism?: string[];
   stanzaElement?: Document;
 };
 
-const App = ({ gm_ids, stanzaElement }: AppProps) => {
+const App = ({ gmIds, stanzaElement, hideMedia = false }: AppProps) => {
   const [data, setData] = useState<Optional<MediaStrainsAlimentResponse>>(undefined);
   useEffect(() => {
-    if (gm_ids.length === 0) return;
+    if (gmIds.length === 0) return;
     (async () => {
       const response = await getData<MediaStrainsAlimentResponse>(API_MEDIA_STRAINS_ALIGNMENT, {
-        gm_ids: gm_ids.join(","),
+        gm_ids: gmIds.join(","),
       });
       setData(response.body);
     })();
-  }, [gm_ids]);
+  }, [gmIds]);
   return data ? (
-    <div css={wrapper}>{data && <AppContainer data={data}></AppContainer>}</div>
+    <div css={wrapper}>{data && <AppContainer {...{ data, hideMedia }} />}</div>
   ) : (
     <>Loading...</>
   );

@@ -9,7 +9,7 @@ import { muiTheme } from "../../shared/components/muiTheme";
 import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
 import { stringToArray } from "../../shared/utils/string";
 
-export default class HelloReact extends Stanza {
+export default class HelloReact extends Stanza<StanzaParameters> {
   async render() {
     this._render();
     importWebFontForTogoMedium(this);
@@ -21,13 +21,15 @@ export default class HelloReact extends Stanza {
 
   _render() {
     const main = this.root.querySelector("main");
-    const gm_ids = stringToArray(this.params.gm_ids);
+    const gmIds = stringToArray(this.params.gm_ids);
+    const hideMedia = this.params.hide_media === "true";
+    const stanzaElement = this.root;
     ReactDOM.render(
       <StrictMode>
         <RecoilRoot>
           <ThemeProvider theme={muiTheme}>
             <EmotionCacheProvider>
-              <App stanzaElement={this.root} gm_ids={gm_ids} />
+              <App {...{ hideMedia, gmIds, stanzaElement }} />
             </EmotionCacheProvider>
           </ThemeProvider>
         </RecoilRoot>
@@ -36,3 +38,8 @@ export default class HelloReact extends Stanza {
     );
   }
 }
+
+type StanzaParameters = {
+  gm_ids: string;
+  hide_media?: "true" | "false";
+};

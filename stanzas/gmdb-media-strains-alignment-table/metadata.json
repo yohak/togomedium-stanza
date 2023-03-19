@@ -17,6 +17,13 @@
       "stanza:example": "HM_D00001a,HM_D00065",
       "stanza:description": "",
       "stanza:required": true
+    },
+    {
+      "stanza:key": "hide_media",
+      "stanza:type": "string",
+      "stanza:example": "false",
+      "stanza:description": "",
+      "stanza:required": false
     }
   ],
   "stanza:menu-placement": "none",

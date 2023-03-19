@@ -10,7 +10,7 @@ export default {
 const Template: ComponentStory<typeof App> = (args) => <App {...args} />;
 
 export const Result1 = Template.bind({});
-Result1.args = { gm_ids: ["JCM_M900", "HM_D00067"] };
+Result1.args = { gmIds: ["JCM_M900", "HM_D00067"] };
 Result1.parameters = {
   msw: makeMswParameter([
     // ...mediaByAttributesMocks,
@@ -19,4 +19,4 @@ Result1.parameters = {
   ]),
 };
 export const LargeData = Template.bind({});
-LargeData.args = { gm_ids: ["M18"] };
+LargeData.args = { gmIds: ["M18"] };
