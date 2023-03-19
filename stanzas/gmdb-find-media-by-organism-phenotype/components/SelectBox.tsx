@@ -26,9 +26,9 @@ export const SelectBox: FC<Props> = ({
   const [enabled, setEnabled] = useState(false);
 
   const handleSelectChange = (event: SyntheticEvent, value: [string, string] | null) => {
-    console.log(value);
     if (value) {
-      setValue(value[1]);
+      const [key, label] = value;
+      setValue(key);
     } else {
       setValue("");
     }
