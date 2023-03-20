@@ -1,15 +1,10 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { f as COLOR_WHITE, C as COLOR_PRIMARY, b as jsxs, j as jsx, K as COLOR_GRAY400, F as Fragment, r as COLOR_GRAY_LINE, S as SIZE1, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
-import { c as css, r as reactExports, R as React, e as dist } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, d as Recoil_index_7, R as Recoil_index_4 } from './recoil-b0ceac4c.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
+import { c as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, K as COLOR_GRAY400, F as Fragment, N as Recoil_index_7, x as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
+import { c as css, r as reactExports, R as React, l as dist, g as getData } from './getData-c69eb59a.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
-import { T as Tooltip, f as API_MEDIA_STRAINS_ALIGNMENT } from './paths-66dbaf1f.js';
+import { m as Tooltip, J as API_MEDIA_STRAINS_ALIGNMENT } from './paths-b6edcbba.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-e923d624.js';
-import { g as getData } from './getData-b32e78c1.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
-import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './Grow-1eacc08f.js';
-import './variables-0b8fac13.js';
+import './variables-37194d58.js';
 
 /**
  * Returns the object type of the given payload
@@ -526,11 +521,11 @@ const mediumTaxonWrapper = css `
   flex-shrink: 0;
 `;
 
-const AppContainer = ({ data }) => {
+const AppContainer = ({ data, hideMedia = false }) => {
     const filterTaxon = useFilterTaxonState();
     const filterRank = useFilterRankState();
     const displayData = reactExports.useMemo(() => processDisplayData(data, filterTaxon, filterRank), [data, filterTaxon, filterRank]);
-    return displayData.media.length ? (jsxs("div", Object.assign({ css: appContainer }, { children: [jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
+    return displayData.media.length ? (jsxs("div", Object.assign({ css: appContainer }, { children: [!hideMedia && jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
                     .concat()
                     .reverse()
                     .map((rank, index) => (jsx(TaxonCol, { rank: rank, taxonList: displayData.taxon[rank] }, index))) }))] }))) : (jsx("p", { children: "NO RESULT FOUND" }));
@@ -547,19 +542,19 @@ const taxonContainer = css `
   gap: 1px;
 `;
 
-const App = ({ gm_ids, stanzaElement }) => {
+const App = ({ gmIds, stanzaElement, hideMedia = false }) => {
     const [data, setData] = reactExports.useState(undefined);
     reactExports.useEffect(() => {
-        if (gm_ids.length === 0)
+        if (gmIds.length === 0)
             return;
         (() => __awaiter(void 0, void 0, void 0, function* () {
             const response = yield getData(API_MEDIA_STRAINS_ALIGNMENT, {
-                gm_ids: gm_ids.join(","),
+                gm_ids: gmIds.join(","),
             });
             setData(response.body);
         }))();
-    }, [gm_ids]);
-    return data ? (jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(AppContainer, { data: data }) }))) : (jsx(Fragment, { children: "Loading..." }));
+    }, [gmIds]);
+    return data ? (jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(AppContainer, Object.assign({}, { data, hideMedia })) }))) : (jsx(Fragment, { children: "Loading..." }));
 };
 const wrapper = css `
   min-height: 100px;
@@ -570,26 +565,17 @@ const wrapper = css `
   padding: ${SIZE1};
 `;
 
-class HelloReact extends Stanza {
-    render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._render();
-            importWebFontForTogoMedium(this);
-        });
-    }
-    handleAttributeChange() {
-        this._render();
-    }
-    _render() {
-        const main = this.root.querySelector("main");
-        const gm_ids = stringToArray(this.params.gm_ids);
-        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, { stanzaElement: this.root, gm_ids: gm_ids }) }) })) }) }), main);
+class ReactStanza extends TogoMediumReactStanza {
+    makeApp() {
+        const gmIds = stringToArray(this.params.gm_ids);
+        const hideMedia = this.params.hide_media === "true";
+        return jsx(App, Object.assign({}, { hideMedia, gmIds, stanzaElement: this.root }));
     }
 }
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    'default': HelloReact
+    'default': ReactStanza
 });
 
 var metadata = {
@@ -612,6 +598,13 @@ var metadata = {
 		"stanza:example": "HM_D00001a,HM_D00065",
 		"stanza:description": "",
 		"stanza:required": true
+	},
+	{
+		"stanza:key": "hide_media",
+		"stanza:type": "string",
+		"stanza:example": "false",
+		"stanza:description": "",
+		"stanza:required": false
 	}
 ],
 	"stanza:menu-placement": "none",

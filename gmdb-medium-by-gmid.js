@@ -1,8 +1,7 @@
 import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { g as getData } from './getData-b32e78c1.js';
+import { g as getData } from './getData-c69eb59a.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import { U as URL_API } from './variables-0b8fac13.js';
-import './index-56cafe6b.js';
+import { U as URL_API } from './variables-37194d58.js';
 
 class GmdbMediumByGmid extends Stanza {
     render() {
@@ -47,24 +46,30 @@ const makeErrorData = (msg) => {
     };
 };
 const makeSuccessData = (body) => {
+    const id = body.meta.gm.split("/").pop();
     return {
-        id: body.meta.gm.split("/").pop(),
+        id,
         original_id: body.meta.original_media_id,
         name: body.meta.name,
         src_label: getSrcLabel(body.meta.src_url),
         src_url: body.meta.src_url,
         ph: body.meta.ph,
         components: [
-            ...processComponentTables(body.components),
+            ...processComponentTables(body.components, id),
             ...processComponentComments(body.comments),
         ].sort((a, b) => a.paragraph_index - b.paragraph_index),
     };
 };
-const processComponentTables = (tables) => {
-    return tables.map((table) => (Object.assign(Object.assign({}, table), { items: table.items.map((item) => {
-            var _a, _b;
-            return (Object.assign(Object.assign({}, item), { can_wrap_label: ((_a = item.label) === null || _a === void 0 ? void 0 : _a.length) >= 20, can_wrap_name: ((_b = item.component_name) === null || _b === void 0 ? void 0 : _b.length) >= 20, properties: item.properties.map((property) => (Object.assign(Object.assign({}, property), { displayLabel: getShortPropertyLabel(property.label) }))) }));
-        }) })));
+const processComponentTables = (tables, gmID) => {
+    return tables.map((table) => {
+        return Object.assign(Object.assign({}, table), { items: table.items.map((item) => {
+                var _a, _b;
+                const reference_media_id = !item.reference_media_id || item.reference_media_id === gmID
+                    ? ""
+                    : item.reference_media_id;
+                return Object.assign(Object.assign({}, item), { reference_media_id, can_wrap_label: ((_a = item.label) === null || _a === void 0 ? void 0 : _a.length) >= 20, can_wrap_name: ((_b = item.component_name) === null || _b === void 0 ? void 0 : _b.length) >= 20, properties: item.properties.map((property) => (Object.assign(Object.assign({}, property), { displayLabel: getShortPropertyLabel(property.label) }))) });
+            }) });
+    });
 };
 const processComponentComments = (comments) => {
     return comments.map((item) => (Object.assign(Object.assign({}, item), { comment: item.comment ? item.comment : "&nbsp;" })));
@@ -182,7 +187,7 @@ var templates = [
     + "</span>\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"ph") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":25,"column":2},"end":{"line":27,"column":9}}})) != null ? stack1 : "")
     + "  </p>\n  <div class=\"recipe\">\n  <h3>Components</h3>\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"components") : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":31,"column":2},"end":{"line":68,"column":11}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"components") : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":31,"column":2},"end":{"line":73,"column":11}}})) != null ? stack1 : "")
     + "  </div>\n";
 },"4":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -241,8 +246,8 @@ var templates = [
         return undefined
     };
 
-  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"items") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":32,"column":4},"end":{"line":64,"column":11}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"comment") : depth0),{"name":"if","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":65,"column":4},"end":{"line":67,"column":11}}})) != null ? stack1 : "");
+  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"items") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":32,"column":4},"end":{"line":69,"column":11}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"comment") : depth0),{"name":"if","hash":{},"fn":container.program(22, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":70,"column":4},"end":{"line":72,"column":11}}})) != null ? stack1 : "");
 },"12":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -253,7 +258,7 @@ var templates = [
 
   return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"subcomponent_name") : depth0),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":33,"column":6},"end":{"line":35,"column":13}}})) != null ? stack1 : "")
     + "      <table class=\"component-table\">\n        <tr>\n          <th class=\"id\">GMO ID</th>\n          <th class=\"name\">Component</th>\n          <th class=\"name\">Original label</th>\n          <th class=\"volume\"></th>\n          <th class=\"volume\">Amount</th>\n        </tr>\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"items") : depth0),{"name":"each","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":44,"column":8},"end":{"line":62,"column":17}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"items") : depth0),{"name":"each","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":44,"column":8},"end":{"line":67,"column":17}}})) != null ? stack1 : "")
     + "      </table>\n";
 },"13":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -282,22 +287,47 @@ var templates = [
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"can_wrap_label") : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":50,"column":27},"end":{"line":50,"column":64}}})) != null ? stack1 : "")
     + "\">"
     + ((stack1 = ((helper = (helper = lookupProperty(helpers,"label") || (depth0 != null ? lookupProperty(depth0,"label") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"label","hash":{},"data":data,"loc":{"start":{"line":50,"column":66},"end":{"line":50,"column":77}}}) : helper))) != null ? stack1 : "")
-    + "</span>\n            </td>\n            <td class=\"name\">\n              <span class=\""
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"can_wrap_name") : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":53,"column":27},"end":{"line":53,"column":63}}})) != null ? stack1 : "")
-    + "\">"
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"component_name") || (depth0 != null ? lookupProperty(depth0,"component_name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"component_name","hash":{},"data":data,"loc":{"start":{"line":53,"column":65},"end":{"line":53,"column":85}}}) : helper))) != null ? stack1 : "")
-    + "</span>\n            </td>\n            <td class=\"volume\">\n              <span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"conc_value") || (depth0 != null ? lookupProperty(depth0,"conc_value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"conc_value","hash":{},"data":data,"loc":{"start":{"line":56,"column":20},"end":{"line":56,"column":34}}}) : helper)))
+    + "</span>\n            </td>\n            <td class=\"name\">\n"
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"reference_media_id") : depth0),{"name":"if","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":53,"column":14},"end":{"line":55,"column":21}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"reference_media_id") : depth0),{"name":"unless","hash":{},"fn":container.program(20, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":56,"column":14},"end":{"line":58,"column":25}}})) != null ? stack1 : "")
+    + "            </td>\n            <td class=\"volume\">\n              <span>"
+    + alias4(((helper = (helper = lookupProperty(helpers,"conc_value") || (depth0 != null ? lookupProperty(depth0,"conc_value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"conc_value","hash":{},"data":data,"loc":{"start":{"line":61,"column":20},"end":{"line":61,"column":34}}}) : helper)))
     + "</span><span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"conc_unit") || (depth0 != null ? lookupProperty(depth0,"conc_unit") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"conc_unit","hash":{},"data":data,"loc":{"start":{"line":56,"column":47},"end":{"line":56,"column":60}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"conc_unit") || (depth0 != null ? lookupProperty(depth0,"conc_unit") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"conc_unit","hash":{},"data":data,"loc":{"start":{"line":61,"column":47},"end":{"line":61,"column":60}}}) : helper)))
     + "</span>\n            </td>\n            <td class=\"volume\">\n              <span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"volume") || (depth0 != null ? lookupProperty(depth0,"volume") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"volume","hash":{},"data":data,"loc":{"start":{"line":59,"column":20},"end":{"line":59,"column":30}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"volume") || (depth0 != null ? lookupProperty(depth0,"volume") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"volume","hash":{},"data":data,"loc":{"start":{"line":64,"column":20},"end":{"line":64,"column":30}}}) : helper)))
     + "</span><span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"unit") || (depth0 != null ? lookupProperty(depth0,"unit") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unit","hash":{},"data":data,"loc":{"start":{"line":59,"column":43},"end":{"line":59,"column":51}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"unit") || (depth0 != null ? lookupProperty(depth0,"unit") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unit","hash":{},"data":data,"loc":{"start":{"line":64,"column":43},"end":{"line":64,"column":51}}}) : helper)))
     + "</span>\n            </td>\n          </tr>\n";
 },"16":function(container,depth0,helpers,partials,data) {
     return "can-wrap";
 },"18":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "                <a href=\"/medium/"
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"reference_media_id") || (depth0 != null ? lookupProperty(depth0,"reference_media_id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"reference_media_id","hash":{},"data":data,"loc":{"start":{"line":54,"column":33},"end":{"line":54,"column":55}}}) : helper)))
+    + "\">"
+    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"component_name") || (depth0 != null ? lookupProperty(depth0,"component_name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"component_name","hash":{},"data":data,"loc":{"start":{"line":54,"column":57},"end":{"line":54,"column":77}}}) : helper))) != null ? stack1 : "")
+    + "</a>\n";
+},"20":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "                <span class=\""
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"can_wrap_name") : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":57,"column":29},"end":{"line":57,"column":65}}})) != null ? stack1 : "")
+    + "\">"
+    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"component_name") || (depth0 != null ? lookupProperty(depth0,"component_name") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"component_name","hash":{},"data":data,"loc":{"start":{"line":57,"column":67},"end":{"line":57,"column":87}}}) : helper))) != null ? stack1 : "")
+    + "</span>\n";
+},"22":function(container,depth0,helpers,partials,data) {
     var stack1, helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -306,7 +336,7 @@ var templates = [
     };
 
   return "      <p>"
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"comment") || (depth0 != null ? lookupProperty(depth0,"comment") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"comment","hash":{},"data":data,"loc":{"start":{"line":66,"column":9},"end":{"line":66,"column":22}}}) : helper))) != null ? stack1 : "")
+    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"comment") || (depth0 != null ? lookupProperty(depth0,"comment") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"comment","hash":{},"data":data,"loc":{"start":{"line":71,"column":9},"end":{"line":71,"column":22}}}) : helper))) != null ? stack1 : "")
     + "</p>\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -319,7 +349,7 @@ var templates = [
   return "<div class=\"wrapper\">\n\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"error") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":3,"column":0},"end":{"line":5,"column":7}}})) != null ? stack1 : "")
     + "\n"
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"error") : depth0),{"name":"unless","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":7,"column":0},"end":{"line":70,"column":11}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"error") : depth0),{"name":"unless","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":7,"column":0},"end":{"line":75,"column":11}}})) != null ? stack1 : "")
     + "</div>\n";
 },"useData":true}]
 ];

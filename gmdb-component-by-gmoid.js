@@ -1,16 +1,13 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { n as newStyled, C as COLOR_PRIMARY, a as COLOR_GRAY300, j as jsx, b as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
-import { c as css, r as reactExports } from './index-56cafe6b.js';
-import { R as Recoil_index_4 } from './recoil-b0ceac4c.js';
-import { s as stanzaWrapper, I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './common-b9bd53c8.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
+import { n as newStyled, C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
+import { c as css, g as getData, r as reactExports } from './getData-c69eb59a.js';
+import { s as stanzaWrapper, I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './common-f12b37a6.js';
+import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-1cb263f5.js';
 import { d as decodeHTMLEntities } from './string-e923d624.js';
-import { g as getData } from './getData-b32e78c1.js';
-import { U as URL_API } from './variables-0b8fac13.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
-import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
+import { U as URL_API } from './variables-37194d58.js';
 
 const StanzaView = ({ css, className, prefLabel, gmoId, altLabels, properties, roles, superClasses, subClasses, links, wikipediaData, }) => {
-    return (jsx("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: jsxs(ColWrapper, { children: [jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "GMO ID: " }), jsx("span", { children: gmoId })] }), jsx(InfoTitle, { children: decodeHTMLEntities(prefLabel) }), !!altLabels.length && (jsxs(StandardParagraph, { children: ["Alternative labels:", jsx("br", {}), altLabels.map((str, i, arr) => (jsx("span", { children: `${decodeHTMLEntities(str)}${addLastComma(i, arr)}` }, str)))] })), jsxs("div", { children: [!!properties.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Component types" }), jsx(StandardParagraph, { children: properties.map((item, i, arr) => (jsx("span", { children: `${item.label_en}${addLastComma(i, arr)}` }, i))) })] })), !!roles.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Roles" }), jsx("ul", { children: roles.map((item, i) => (jsx("li", { children: item.label_en }, i))) })] })), !!superClasses.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Super classes" }), jsx(LinkList, { children: superClasses.map((item, i) => (jsxs("li", { children: [jsx("a", Object.assign({ href: `/component/${item.gmo_id}` }, { children: item.gmo_id })), jsx("span", { children: decodeHTMLEntities(item.label_en) })] }, i))) })] })), !!subClasses.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Sub classes" }), jsx(LinkList, { children: subClasses.map((item, i) => (jsxs("li", { children: [jsx("a", Object.assign({ href: `/component/${item.gmo_id}` }, { children: item.gmo_id })), jsx("span", { children: decodeHTMLEntities(item.label_en) })] }, i))) })] })), !!links.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Cross references" }), jsx(TagList, { children: links.map((item, i) => (jsx(ColorButton, Object.assign({ href: item.uri, target: "_blank", rel: "noreferrer" }, { children: item.label }), i))) })] }))] })] }), wikipediaData && (jsxs(WikipediaInfo, { children: [jsxs("p", { children: [wikipediaData.thumb && jsx("img", { src: wikipediaData.thumb }), wikipediaData.description] }), jsx("cite", { children: jsx("a", Object.assign({ href: wikipediaData.link, target: "_blank", rel: "noreferrer" }, { children: "From Wikipedia" })) })] }))] }) })));
+    return (jsx("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: jsxs(ColWrapper, { children: [jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "GMO ID: " }), jsx("span", { children: gmoId })] }), jsx(InfoTitle, { children: decodeHTMLEntities(prefLabel) }), !!altLabels.length && (jsxs(StandardParagraph, { children: ["Alternative labels:", jsx("br", {}), altLabels.map((str, i, arr) => (jsx("span", { children: `${decodeHTMLEntities(str)}${addLastComma(i, arr)}` }, str)))] })), jsxs("div", { children: [!!properties.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Component types" }), jsx(StandardParagraph, { children: properties.map((item, i, arr) => (jsx("span", { children: `${item.label_en}${addLastComma(i, arr)}` }, i))) })] })), !!roles.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Roles" }), jsx("ul", { children: roles.map((item, i) => (jsx("li", { children: item.label_en }, i))) })] })), !!superClasses.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Super classes" }), jsx(LinkList, { children: superClasses.map((item, i) => (jsxs("li", { children: [jsx("a", Object.assign({ href: `/component/${item.gmo_id}` }, { children: item.gmo_id })), jsx("span", { children: decodeHTMLEntities(item.label_en) })] }, i))) })] })), !!subClasses.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Sub classes" }), jsx(LinkList, { children: subClasses.map((item, i) => (jsxs("li", { children: [jsx("a", Object.assign({ href: `/component/${item.gmo_id}` }, { children: item.gmo_id })), jsx("span", { children: decodeHTMLEntities(item.label_en) })] }, i))) })] })), !!links.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Cross references" }), jsx(TagList, { children: links.map((item, i) => (jsx(ColorButton, Object.assign({ href: item.uri, target: "_blank", rel: "noreferrer" }, { children: item.label }), i))) })] }))] })] }), wikipediaData && jsx(WikipediaView, Object.assign({}, wikipediaData))] }) })));
 };
 const addLastComma = (index, arr) => {
     return index === arr.length - 1 ? "" : ", ";
@@ -25,32 +22,14 @@ const LinkList = newStyled.ul `
     color: ${COLOR_PRIMARY};
   }
 `;
-const WikipediaInfo = newStyled.div `
-  margin-top: 32px;
-  width: 336px;
-  border: 1px ${COLOR_GRAY300} dashed;
-  padding: 8px;
-  border-radius: 5px;
-  height: fit-content;
-  cite {
-    display: block;
-    text-align: right;
-    margin-top: 8px;
-    a {
-      color: ${COLOR_PRIMARY};
-    }
-  }
-`;
 const stanzaView = css ``;
 
 const getLinkLabel = (link) => {
     switch (true) {
-        case /pccompound/.test(link):
+        case /pccompound\/.+/.test(link):
             return "PubChem";
         case /wikipedia/.test(link):
             return "Wikipedia";
-        case /ncicb/.test(link):
-            return "NCI Thesaurus";
         case /CHEBI/.test(link):
             return "ChEBI";
         case /SNOMEDCT/.test(link):
@@ -115,37 +94,17 @@ const makeEmptyProps = () => ({
     subClasses: [],
     links: [],
 });
-const fetchWikipediaData = (link) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const key = link.split("/").pop();
-    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${key}`;
-    const res = yield fetch(url);
-    const data = yield res.json();
-    if (!data)
-        return { link };
-    return { thumb: (_a = data.thumbnail) === null || _a === void 0 ? void 0 : _a.source, description: data.extract, link };
-});
 
-class HelloReact extends Stanza {
-    render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._render();
-            importWebFontForTogoMedium(this);
-        });
-    }
-    handleAttributeChange() {
-        this._render();
-    }
-    _render() {
-        const main = this.root.querySelector("main");
+class ReactStanza extends TogoMediumReactStanza {
+    makeApp() {
         const gmo_id = this.params.gmo_id;
-        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, { stanzaElement: this.root, gmo_id: gmo_id }) }) })) }) }), main);
+        return jsx(App, { stanzaElement: this.root, gmo_id: gmo_id });
     }
 }
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  'default': HelloReact
+  'default': ReactStanza
 });
 
 var metadata = {

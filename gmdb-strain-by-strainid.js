@@ -1,13 +1,9 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { j as jsx, b as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
-import { c as css, r as reactExports } from './index-56cafe6b.js';
-import { R as Recoil_index_4 } from './recoil-b0ceac4c.js';
-import { L as LineageList } from './LineageList-66985c0f.js';
-import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-b9bd53c8.js';
-import { g as getData } from './getData-b32e78c1.js';
-import { U as URL_API } from './variables-0b8fac13.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
-import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
+import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
+import { c as css, g as getData, r as reactExports } from './getData-c69eb59a.js';
+import { L as LineageList } from './LineageList-27d4b35c.js';
+import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-f12b37a6.js';
+import { U as URL_API } from './variables-37194d58.js';
 import './types-3f4e9278.js';
 import './string-e923d624.js';
 
@@ -69,26 +65,16 @@ const App = ({ strain_id }) => {
     return props ? jsx(StanzaView, Object.assign({}, props)) : jsx(Fragment, {});
 };
 
-class HelloReact extends Stanza {
-    render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._render();
-            importWebFontForTogoMedium(this);
-        });
-    }
-    handleAttributeChange() {
-        this._render();
-    }
-    _render() {
-        const main = this.root.querySelector("main");
+class ReactStanza extends TogoMediumReactStanza {
+    makeApp() {
         const strain_id = this.params.strain_id;
-        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, { stanzaElement: this.root, strain_id: strain_id }) }) })) }) }), main);
+        return jsx(App, { stanzaElement: this.root, strain_id: strain_id });
     }
 }
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  'default': HelloReact
+  'default': ReactStanza
 });
 
 var metadata = {

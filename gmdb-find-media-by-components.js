@@ -1,19 +1,12 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { j as jsx, b as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
-import { r as reactExports, j as jsx$1 } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-b0ceac4c.js';
-import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-66dbaf1f.js';
-import { g as getData } from './getData-b32e78c1.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
+import { j as jsx, a as jsxs, F as Fragment, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
+import { r as reactExports, j as jsx$1, g as getData } from './getData-c69eb59a.js';
+import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-b6edcbba.js';
 import { d as decodeHTMLEntities } from './string-e923d624.js';
-import { T as TextField, C as Chip, A as Autocomplete } from './TextField-b194da9b.js';
-import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-8a75fa29.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
-import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './Grow-1eacc08f.js';
-import './variables-0b8fac13.js';
-import './createSvgIcon-74eb21f1.js';
-import './useFormControl-a1db82cb.js';
-import './consts-234f4433.js';
+import { T as TextField, C as Chip, A as Autocomplete } from './TextField-fbb99f40.js';
+import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-ae235850.js';
+import './variables-37194d58.js';
+import './consts-bcbace22.js';
 
 const ComponentSelect = ({ onChangeSelection }) => {
     const [loading, setLoading] = reactExports.useState(false);
@@ -27,6 +20,7 @@ const ComponentSelect = ({ onChangeSelection }) => {
                 .map((item) => ({
                 id: item.gmo_id,
                 label: item.name.includes(";") ? decodeHTMLEntities(item.name) : item.name,
+                japaneseName: item.japanese_name,
             }))
                 .filter((item) => !ids.includes(item.id)));
         }
@@ -42,7 +36,14 @@ const ComponentSelect = ({ onChangeSelection }) => {
         onChangeSelection(ids);
         loadComponents(ids);
     };
-    return (jsx(Autocomplete, { multiple: true, filterSelectedOptions: true, onChange: onChange, onOpen: onOpen, disablePortal: true, options: components, loading: loading, getOptionLabel: (option) => option.label, renderInput: (params) => (jsx(TextField, Object.assign({}, params, { label: "Components", InputProps: Object.assign(Object.assign({}, params.InputProps), { endAdornment: (jsxs(Fragment, { children: [loading ? jsx(CircularProgress, { color: "inherit", size: 20 }) : null, params.InputProps.endAdornment] })) }) }))), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined" }, getTagProps({ index }), { label: option.label, key: option.id })))) }));
+    return (jsx(Autocomplete, { multiple: true, filterSelectedOptions: true, filterOptions: (options, params) => {
+            return options.filter((option) => {
+                const label = option.label.toLowerCase();
+                const japaneseName = option.japaneseName.toLowerCase();
+                const filter = params.inputValue.toLowerCase();
+                return label.includes(filter) || japaneseName.includes(filter);
+            });
+        }, onChange: onChange, onOpen: onOpen, disablePortal: true, options: components, loading: loading, getOptionLabel: (option) => option.label, renderInput: (params) => (jsx(TextField, Object.assign({}, params, { label: "Components", InputProps: Object.assign(Object.assign({}, params.InputProps), { endAdornment: (jsxs(Fragment, { children: [loading ? jsx(CircularProgress, { color: "inherit", size: 20 }) : null, params.InputProps.endAdornment] })) }) }))), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined" }, getTagProps({ index }), { label: option.label, key: option.id })))) }));
 };
 
 const selectedAttributes = Recoil_index_6({
@@ -138,25 +139,15 @@ const App = ({ stanzaElement }) => {
     return jsx(AppContainer, { dispatchEvent: dispatchEvent });
 };
 
-class HelloReact extends Stanza {
-    render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._render();
-            importWebFontForTogoMedium(this);
-        });
-    }
-    handleAttributeChange() {
-        this._render();
-    }
-    _render() {
-        const main = this.root.querySelector("main");
-        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, { stanzaElement: this.root }) }) })) }) }), main);
+class ReactStanza extends TogoMediumReactStanza {
+    makeApp() {
+        return jsx(App, { stanzaElement: this.root });
     }
 }
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  'default': HelloReact
+  'default': ReactStanza
 });
 
 var metadata = {

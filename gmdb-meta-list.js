@@ -1,8 +1,7 @@
 import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { m as makeFormBody } from './getData-b32e78c1.js';
+import { n as makeFormBody } from './getData-c69eb59a.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import { a as convertHTMLEntity } from './string-e923d624.js';
-import './index-56cafe6b.js';
 
 class GmdbMetaList extends Stanza {
     render() {

@@ -1,18 +1,11 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { f as COLOR_WHITE, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, a as COLOR_GRAY300, v as COLOR_GRAY700, K as COLOR_GRAY400, b as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
-import { c as css, e as dist, r as reactExports } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-b0ceac4c.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-4aba2f6b.js';
-import { T as Tooltip, d as API_TAXONOMY_CHILDREN, c as API_MEDIA_BY_TAXON } from './paths-66dbaf1f.js';
-import { d as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-8a75fa29.js';
-import { g as getData } from './getData-b32e78c1.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
-import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './createSvgIcon-74eb21f1.js';
-import './Grow-1eacc08f.js';
-import './variables-0b8fac13.js';
-import './useFormControl-a1db82cb.js';
-import './consts-234f4433.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
+import { c as COLOR_WHITE, x as COLOR_GRAY_LINE, C as COLOR_PRIMARY, b as COLOR_GRAY300, A as COLOR_GRAY700, K as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
+import { c as css, g as getData, l as dist, r as reactExports } from './getData-c69eb59a.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-6c77da14.js';
+import { m as Tooltip, F as API_TAXONOMY_CHILDREN, E as API_MEDIA_BY_TAXON } from './paths-b6edcbba.js';
+import { f as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-ae235850.js';
+import './consts-bcbace22.js';
+import './variables-37194d58.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
     return (jsxs("li", Object.assign({ css: [wrapper, css], className: className }, { children: [jsxs("div", Object.assign({ css: inner }, { children: [jsxs("div", Object.assign({ css: left }, { children: [jsx("span", Object.assign({ onClick: () => onToggleChildren(id) }, { children: jsx(ToggleIcon, Object.assign({}, { hasChildren, isOpen, isLoading })) })), jsx(Tooltip, Object.assign({ title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start" }, { children: jsx("span", { children: label }) })), tag && jsx("span", Object.assign({ css: tagTip }, { children: tag })), linkString && linkURL && (jsxs("a", Object.assign({ href: linkURL, target: "_blank", rel: "noreferrer" }, { children: ["[", linkString, "]"] })))] })), jsx(Checkbox, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) })] })), isOpen && !!children && jsx("ul", Object.assign({ css: childrenWrapper }, { children: children }))] })));
@@ -459,25 +452,15 @@ const App = ({ stanzaElement }) => {
     return jsx(AppContainer, { dispatchEvent: dispatchEvent });
 };
 
-class HelloReact extends Stanza {
-    render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this._render();
-            importWebFontForTogoMedium(this);
-        });
-    }
-    handleAttributeChange() {
-        this._render();
-    }
-    _render() {
-        const main = this.root.querySelector("main");
-        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(ThemeProvider, Object.assign({ theme: muiTheme }, { children: jsx(EmotionCacheProvider, { children: jsx(App, { stanzaElement: this.root }) }) })) }) }), main);
+class ReactStanza extends TogoMediumReactStanza {
+    makeApp() {
+        return jsx(App, { stanzaElement: this.root });
     }
 }
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  'default': HelloReact
+  'default': ReactStanza
 });
 
 var metadata = {
