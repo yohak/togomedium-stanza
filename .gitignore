@@ -4,6 +4,8 @@
 /node_modules/
 /build/
 
+.env
+
 stanzas/**/*.js
 stanzas/**/*.js.map
 utils/**/*.js
