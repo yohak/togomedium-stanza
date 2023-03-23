@@ -83,7 +83,7 @@ export const StanzaView: FC<Props> = ({
             </div>
           )}
         </div>
-        {wikipediaData && !lineage.species && <WikipediaView {...wikipediaData} />}
+        {wikipediaData?.description && !lineage.species && <WikipediaView {...wikipediaData} />}
       </ColWrapper>
     </div>
   );

@@ -22,3 +22,8 @@ export const Result3 = Template.bind({});
 Result3.args = {
   tax_id: "201174",
 };
+
+export const Result4 = Template.bind({});
+Result4.args = {
+  tax_id: "2636952",
+};
