@@ -2,9 +2,9 @@ import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
 import { c as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, K as COLOR_GRAY400, F as Fragment, N as Recoil_index_7, x as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
 import { c as css, r as reactExports, R as React, l as dist, g as getData } from './getData-c69eb59a.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
-import { m as Tooltip, J as API_MEDIA_STRAINS_ALIGNMENT } from './paths-b6edcbba.js';
+import { m as Tooltip, J as API_MEDIA_STRAINS_ALIGNMENT } from './paths-a8f18b1e.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-e923d624.js';
-import './variables-37194d58.js';
+import './variables-4ec2e9c7.js';
 
 /**
  * Returns the object type of the given payload

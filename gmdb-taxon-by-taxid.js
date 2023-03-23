@@ -5,7 +5,7 @@ import { L as LineageList, p as parseLineage } from './LineageList-27d4b35c.js';
 import { s as stanzaWrapper, I as InfoId, C as ColorButton, a as InfoTitle, S as StandardParagraph, b as SubHeading, c as ColWrapper } from './common-f12b37a6.js';
 import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-1cb263f5.js';
 import { u as unescapeJsonString } from './string-e923d624.js';
-import { U as URL_API } from './variables-37194d58.js';
+import { U as URL_API } from './variables-4ec2e9c7.js';
 import './types-3f4e9278.js';
 
 const CapsuleList = ({ labels }) => (jsx(CapsuleListWrapper, { children: labels.map((label, index) => (jsx("li", { children: label }, index))) }));

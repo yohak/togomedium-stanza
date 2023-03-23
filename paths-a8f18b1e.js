@@ -1,7 +1,7 @@
 import { n as newStyled, _ as _objectWithoutPropertiesLoose, g as capitalize, h as createTheme, s as styleFunctionSx, u as useTheme$1, i as createTheme$1, k as jsxRuntimeExports, r as reactDomExports, l as ReactDOM, m as useTheme$2, o as alpha } from './StanzaReactProvider-719976b7.js';
 import { r as reactExports, f as React, _ as _extends, R as React$1 } from './getData-c69eb59a.js';
 import { e as createPopper } from './stanza-bd712360.js';
-import { U as URL_API } from './variables-37194d58.js';
+import { U as URL_API } from './variables-4ec2e9c7.js';
 
 function ownerDocument(node) {
   return node && node.ownerDocument || document;
@@ -2348,4 +2348,4 @@ const API_COMPONENTS_WITH_COMPONENTS = `${URL_API}gmdb_components_with_component
 const API_MEDIA_STRAINS_ALIGNMENT = `${URL_API}gmdb_media_strains_alignment_by_gm_ids`;
 
 export { API_COMPONENTS_WITH_COMPONENTS as A, resolveComponentProps as B, slotShouldForwardProp as C, API_ORGANISMS_BY_PHENOTYPES as D, API_MEDIA_BY_TAXON as E, API_TAXONOMY_CHILDREN as F, Grow$1 as G, ClassNameGenerator$1 as H, API_MEDIA_ALIGNMENT as I, API_MEDIA_STRAINS_ALIGNMENT as J, Portal$1 as P, TransitionGroupContext as T, _inheritsLoose as _, API_MEDIA_BY_ATTRIBUTES as a, generateUtilityClass as b, clsx as c, useForkRef as d, useIsFocusVisible as e, useEventCallback as f, generateUtilityClasses as g, composeClasses as h, useSlotProps as i, resolveProps as j, useControlled as k, useTheme as l, Tooltip$1 as m, useId as n, ownerDocument as o, setRef as p, useEnhancedEffect$1 as q, rootShouldForwardProp as r, styled$1 as s, defaultTheme$1 as t, useThemeProps as u, isHostComponent as v, Popper$1 as w, Transition$1 as x, reflow as y, getTransitionProps as z };
-//# sourceMappingURL=paths-b6edcbba.js.map
+//# sourceMappingURL=paths-a8f18b1e.js.map
