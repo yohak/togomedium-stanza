@@ -7,6 +7,7 @@ export const data1: ViewProps = {
   srcLabel: "NBRC",
   srcUrl: "https://www.nite.go.jp/nbrc/catalogue/NBRCMediumDetailServlet?NO=249",
   ph: "6.5",
+  extraComponents: [],
   components: [
     {
       index: 1,
