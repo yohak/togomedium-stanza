@@ -27,7 +27,7 @@ export const RecipeTable: FC<Props> = ({ css, className, name, items, referenceI
         <h4 css={titleStyle}>{name}</h4>
         {referenceId && (
           <span>
-            (See also <a href={`/media/${referenceId}`}>{referenceId}</a>)
+            (See also <a href={`/medium/${referenceId}`}>{referenceId}</a>)
           </span>
         )}
       </div>
