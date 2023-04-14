@@ -12,7 +12,6 @@ export const App: FC<Props> = ({ gm_id }) => {
       setProps(null);
       const result = await getMedia(gm_id);
       if (!result) return;
-      console.log(result);
       setProps(result);
     })();
   }, [gm_id]);

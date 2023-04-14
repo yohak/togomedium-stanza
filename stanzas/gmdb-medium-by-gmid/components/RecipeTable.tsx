@@ -2,10 +2,12 @@ import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_GRAY_LINE, COLOR_PRIMARY_DARK } from "../../../shared/styles/variables";
+import { decodeHTMLEntities } from "../../../shared/utils/string";
 
 type Props = {
   index: number;
   name: string;
+  referenceId?: string;
   items: {
     id: string;
     referenceMediaId: string;
@@ -18,10 +20,17 @@ type Props = {
   }[];
 } & AcceptsEmotion;
 
-export const RecipeTable: FC<Props> = ({ css, className, name, items }) => {
+export const RecipeTable: FC<Props> = ({ css, className, name, items, referenceId }) => {
   return (
     <div css={[recipeTable, css]} className={className}>
-      <h4 css={titleStyle}>{name}</h4>
+      <div css={titleWrapper}>
+        <h4 css={titleStyle}>{name}</h4>
+        {referenceId && (
+          <span>
+            (See also <a href={`/media/${referenceId}`}>{referenceId}</a>)
+          </span>
+        )}
+      </div>
       <table css={tableStyle}>
         <thead>
           <tr>
@@ -37,15 +46,13 @@ export const RecipeTable: FC<Props> = ({ css, className, name, items }) => {
             return (
               <tr key={index}>
                 <td className="id">
-                  <a href={`/component/${item.id}`}>{item.id}</a>
+                  <a href={`/component/${item.id}`} target={"_blank"} rel="noreferrer">
+                    {item.id}
+                  </a>
                 </td>
-                <td className="name">{item.componentLabel}</td>
+                <td className="name">{decodeHTMLEntities(item.componentLabel)}</td>
                 <td className="name">
-                  {item.referenceMediaId ? (
-                    <a href={`/media/${item.referenceMediaId}`}>{item.componentName}</a>
-                  ) : (
-                    <span>{item.componentName}</span>
-                  )}
+                  <span>{item.componentName.replace(/\(see.*\)/, "(see below)")}</span>
                 </td>
                 <td className="volume">
                   <span>{item.concValue}</span>
@@ -66,9 +73,20 @@ export const RecipeTable: FC<Props> = ({ css, className, name, items }) => {
 
 const recipeTable = css``;
 
+const titleWrapper = css`
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  span {
+    padding-top: 2px;
+  }
+  a {
+    color: ${COLOR_PRIMARY_DARK};
+  }
+`;
+
 const titleStyle = css`
   font-size: 18px;
-  margin-top: 16px;
 `;
 
 const tableStyle = css`

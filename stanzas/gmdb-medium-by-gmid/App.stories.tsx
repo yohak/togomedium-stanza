@@ -14,11 +14,11 @@ Result1.args = {
   gm_id: "M1470",
 };
 
-// export const Result2 = Template.bind({});
-// Result2.args = {
-//   gm_id: "GMO_001018",
-// };
-//
+export const Result2 = Template.bind({});
+Result2.args = {
+  gm_id: "M439",
+};
+
 // export const Result3 = Template.bind({});
 // Result3.args = {
 //   gm_id: "GMO_001113",

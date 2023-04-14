@@ -14,11 +14,14 @@ type Props = {
   srcLabel: string | undefined;
   name: string | undefined;
   ph: string | undefined;
-  components: (RecipeTableProps | RecipeCommentProps)[];
+  components: ComponentRecipe[];
+  extraComponents: ReferencingRecipe[];
 } & AcceptsEmotion;
 
 export type RecipeTableProps = ComponentProps<typeof RecipeTable>;
 export type RecipeCommentProps = ComponentProps<typeof RecipeComment>;
+export type ComponentRecipe = RecipeTableProps | RecipeCommentProps;
+export type ReferencingRecipe = { components: ComponentRecipe[]; id: string };
 
 export const StanzaView: FC<Props> = ({
   css,
@@ -30,6 +33,7 @@ export const StanzaView: FC<Props> = ({
   name,
   ph,
   components,
+  extraComponents,
 }) => {
   return (
     <div css={[stanzaView, css, stanzaWrapper]} className={className}>
@@ -61,6 +65,20 @@ export const StanzaView: FC<Props> = ({
           })}
         </>
       )}
+
+      {extraComponents.map((item, i) => {
+        return (
+          <div key={i}>
+            {item.components.map((component, index) => {
+              if ("comment" in component) {
+                return <RecipeComment key={index} {...component} />;
+              } else {
+                return <RecipeTable key={index} {...component} referenceId={item.id} />;
+              }
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };

@@ -1,20 +1,71 @@
+import { copy } from "copy-anything";
 import { ComponentProps } from "react";
 import { getData } from "../../../shared/utils/getData";
 import { URL_API } from "../../../shared/utils/variables";
-import { RecipeCommentProps, RecipeTableProps, StanzaView } from "../components/StanzaView";
+import {
+  RecipeCommentProps,
+  RecipeTableProps,
+  ReferencingRecipe,
+  StanzaView,
+} from "../components/StanzaView";
 
+export type ViewProps = ComponentProps<typeof StanzaView>;
 export const getMedia = async (gm_id: string) => {
   const apiName = "gmdb_medium_by_gmid";
   const result = await getData<ApiBody>(`${URL_API}${apiName}`, { gm_id });
   if (result.body) {
-    return processData(result.body);
+    const extra = await getExternalReferences(result.body, gm_id);
+
+    return processData(result.body, extra);
   } else {
     return undefined;
   }
 };
 
-export type ViewProps = ComponentProps<typeof StanzaView>;
-const processData = (body: ApiBody): ViewProps => {
+export const getExternalReferences = async (
+  body: ApiBody,
+  gm_id: string
+): Promise<ReferencingRecipe[]> => {
+  const externalReferences = copy(body)
+    .components.map((component) =>
+      component.items.filter(
+        (item) => !!item.reference_media_id && item.reference_media_id !== gm_id
+      )
+    )
+    .filter((item) => item.length > 0)
+    .flat()
+    .map((item) => ({
+      id: item.reference_media_id!,
+      name: item.component_name.replace(/ \(.*\)/, "").replace(/\*/g, ""),
+    }));
+
+  const extraData: ReferencingRecipe[] = [];
+
+  for await (const ref of externalReferences) {
+    const apiName = "gmdb_medium_by_gmid";
+    const result = await getData<ApiBody>(`${URL_API}${apiName}`, { gm_id: ref.id });
+    if (result.body) {
+      const data = processData(result.body);
+      const components = data.components;
+      const target = components.find((item: any) => item.name === ref.name);
+      const arr: any[] = [target];
+      if (target) {
+        const targetIndex = components.indexOf(target);
+        let i = 1;
+        while ((components[targetIndex + i] as any)?.comment) {
+          const comment = components[targetIndex + i] as any;
+          arr.push(comment);
+          i++;
+          if (i > 100) break;
+        }
+      }
+      extraData.push({ components: arr, id: ref.id });
+    }
+  }
+  return extraData;
+};
+
+const processData = (body: ApiBody, extraComponents: ReferencingRecipe[] = []): ViewProps => {
   const id = body.meta.gm.split("/").pop()!;
   return {
     id,
@@ -24,6 +75,7 @@ const processData = (body: ApiBody): ViewProps => {
     srcUrl: body.meta.src_url,
     ph: body.meta.ph,
     components: processComponents(id, body.components, body.comments),
+    extraComponents,
   };
 };
 
