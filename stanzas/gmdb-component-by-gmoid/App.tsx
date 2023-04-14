@@ -9,7 +9,7 @@ type Props = {
 };
 
 const App: FC<Props> = ({ gmo_id }) => {
-  const [props, setProps] = useState<ViewProps>(makeEmptyProps());
+  const [props, setProps] = useState<ViewProps | null>(null);
   useEffect(() => {
     (async () => {
       const result = await getComponentData(gmo_id);
@@ -22,18 +22,7 @@ const App: FC<Props> = ({ gmo_id }) => {
       }
     })();
   }, [gmo_id]);
-  return <StanzaView {...props} />;
+  return props ? <StanzaView {...props} /> : <>Loading...</>;
 };
 
 export default App;
-
-const makeEmptyProps = (): ViewProps => ({
-  prefLabel: "",
-  gmoId: "",
-  altLabels: [],
-  properties: [],
-  roles: [],
-  superClasses: [],
-  subClasses: [],
-  links: [],
-});

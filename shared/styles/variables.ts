@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 export const FONT_EN = "'Fira Sans Condensed', sans-serif";
 export const COLOR_WHITE = "#FFFFFF";
 export const COLOR_PRIMARY = "#8FC31F";
+export const COLOR_PRIMARY_DARK = "#6FA80C";
 export const COLOR_GRAY = "#CCCCCC";
 export const COLOR_GRAY_BG = "#f4f3f2";
 export const COLOR_GRAY700 = "#374151";

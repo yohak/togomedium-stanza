@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { COLOR_PRIMARY, COLOR_WHITE } from "../../styles/variables";
+import { COLOR_PRIMARY, COLOR_PRIMARY_DARK, COLOR_WHITE } from "../../styles/variables";
 
 export const ColWrapper = styled.div`
   display: flex;
@@ -18,6 +18,10 @@ export const InfoId = styled.div`
     margin-left: 20px;
     gap: 4px;
   }
+
+  a {
+    color: ${COLOR_PRIMARY_DARK};
+  }
 `;
 
 export const InfoTitle = styled.h1`
@@ -25,6 +29,10 @@ export const InfoTitle = styled.h1`
   margin: 24px 0 16px;
   font-weight: 300;
   line-height: 0.9;
+  small {
+    font-size: 24px;
+    margin-left: 10px;
+  }
 `;
 
 export const SubHeading = styled.h3`
