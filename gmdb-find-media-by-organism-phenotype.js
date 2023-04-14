@@ -1,12 +1,12 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { _ as _objectWithoutPropertiesLoose, G as defaultSxConfig, H as isPlainObject, g as capitalize, k as jsxRuntimeExports, I as lighten, J as darken, o as alpha, c as COLOR_WHITE, x as COLOR_GRAY_LINE, S as SIZE1, t as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, y as FONT_WEIGHT_BOLD, A as COLOR_GRAY700, B as SIZE4, q as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
-import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-c69eb59a.js';
-import { b as PATH_TAXON } from './consts-825efcf0.js';
-import { e as useFormControl, f as Checkbox, h as hasInfo, g as filterOutInfo, C as CircularProgress, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, l as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-7cc02c6f.js';
-import { k as useControlled, e as useIsFocusVisible, d as useForkRef, q as useEnhancedEffect, f as useEventCallback, o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses, v as isHostComponent, C as slotShouldForwardProp, l as useTheme, i as useSlotProps, D as API_ORGANISMS_BY_PHENOTYPES, E as API_MEDIA_BY_TAXON } from './paths-a8f18b1e.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-33129828.js';
+import { _ as _objectWithoutPropertiesLoose, H as defaultSxConfig, I as isPlainObject, h as capitalize, l as jsxRuntimeExports, J as lighten, K as darken, p as alpha, d as COLOR_WHITE, y as COLOR_GRAY_LINE, S as SIZE1, v as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, z as FONT_WEIGHT_BOLD, B as COLOR_GRAY700, D as SIZE4, t as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-5a1c35e0.js';
+import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-0fc4e1b9.js';
+import { b as PATH_TAXON } from './consts-d8934727.js';
+import { e as useFormControl, f as Checkbox, h as hasInfo, g as filterOutInfo, C as CircularProgress, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, l as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-7499d61c.js';
+import { k as useControlled, e as useIsFocusVisible, d as useForkRef, q as useEnhancedEffect, f as useEventCallback, o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses, v as isHostComponent, C as slotShouldForwardProp, l as useTheme, i as useSlotProps, D as API_ORGANISMS_BY_PHENOTYPES, E as API_MEDIA_BY_TAXON } from './paths-d1e79f8a.js';
 import { c as clone } from './clone-e8609f76.js';
-import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-cd62b638.js';
-import './variables-4ec2e9c7.js';
+import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-a97bd455.js';
+import './variables-fde23d74.js';
 
 const visuallyHidden = {
   border: 0,

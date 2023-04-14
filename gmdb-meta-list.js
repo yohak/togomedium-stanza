@@ -1,7 +1,11 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { n as makeFormBody } from './getData-c69eb59a.js';
-import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-33129828.js';
+import { n as makeFormBody } from './getData-0fc4e1b9.js';
 import { a as convertHTMLEntity } from './string-e923d624.js';
+
+const importWebFontForTogoMedium = (stanza, name = "Fira Sans Condensed") => {
+    name = name.replace(/ /gi, "+");
+    stanza.importWebFontCSS(`https://fonts.googleapis.com/css2?family=${name}:wght@400;500;700`);
+};
 
 class GmdbMetaList extends Stanza {
     render() {

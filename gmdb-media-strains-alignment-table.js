@@ -1,83 +1,11 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { c as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, K as COLOR_GRAY400, F as Fragment, N as Recoil_index_7, x as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
-import { c as css, r as reactExports, R as React, l as dist, g as getData } from './getData-c69eb59a.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-33129828.js';
+import { d as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, L as COLOR_GRAY400, F as Fragment, O as Recoil_index_7, y as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-5a1c35e0.js';
+import { c as css, r as reactExports, R as React, l as dist, g as getData } from './getData-0fc4e1b9.js';
+import { c as copy } from './index.es-918fddc1.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
-import { m as Tooltip, J as API_MEDIA_STRAINS_ALIGNMENT } from './paths-a8f18b1e.js';
+import { m as Tooltip, J as API_MEDIA_STRAINS_ALIGNMENT } from './paths-d1e79f8a.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-e923d624.js';
-import './variables-4ec2e9c7.js';
-
-/**
- * Returns the object type of the given payload
- *
- * @param {*} payload
- * @returns {string}
- */
-function getType(payload) {
-    return Object.prototype.toString.call(payload).slice(8, -1);
-}
-/**
- * Returns whether the payload is a plain JavaScript object (excluding special classes or objects with other prototypes)
- *
- * @param {*} payload
- * @returns {payload is PlainObject}
- */
-function isPlainObject(payload) {
-    if (getType(payload) !== 'Object')
-        return false;
-    const prototype = Object.getPrototypeOf(payload);
-    return prototype.constructor === Object && prototype === Object.prototype;
-}
-/**
- * Returns whether the payload is an array
- *
- * @param {any} payload
- * @returns {payload is any[]}
- */
-function isArray(payload) {
-    return getType(payload) === 'Array';
-}
-
-function assignProp(carry, key, newVal, originalObject, includeNonenumerable) {
-    const propType = {}.propertyIsEnumerable.call(originalObject, key)
-        ? 'enumerable'
-        : 'nonenumerable';
-    if (propType === 'enumerable')
-        carry[key] = newVal;
-    if (includeNonenumerable && propType === 'nonenumerable') {
-        Object.defineProperty(carry, key, {
-            value: newVal,
-            enumerable: false,
-            writable: true,
-            configurable: true,
-        });
-    }
-}
-/**
- * Copy (clone) an object and all its props recursively to get rid of any prop referenced of the original object. Arrays are also cloned, however objects inside arrays are still linked.
- *
- * @param target Target can be anything
- * @param [options = {}] Options can be `props` or `nonenumerable`
- * @returns the target with replaced values
- */
-function copy(target, options = {}) {
-    if (isArray(target)) {
-        return target.map((item) => copy(item, options));
-    }
-    if (!isPlainObject(target)) {
-        return target;
-    }
-    const props = Object.getOwnPropertyNames(target);
-    const symbols = Object.getOwnPropertySymbols(target);
-    return [...props, ...symbols].reduce((carry, key) => {
-        if (isArray(options.props) && !options.props.includes(key)) {
-            return carry;
-        }
-        const val = target[key];
-        const newVal = copy(val, options);
-        assignProp(carry, key, newVal, target, options.nonenumerable);
-        return carry;
-    }, {});
-}
+import './variables-fde23d74.js';
 
 let nanoid = (size = 21) =>
   crypto.getRandomValues(new Uint8Array(size)).reduce((id, byte) => {
@@ -574,8 +502,8 @@ class ReactStanza extends TogoMediumReactStanza {
 }
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    'default': ReactStanza
+  __proto__: null,
+  'default': ReactStanza
 });
 
 var metadata = {

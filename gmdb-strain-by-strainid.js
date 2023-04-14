@@ -1,9 +1,9 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
-import { c as css, g as getData, r as reactExports } from './getData-c69eb59a.js';
-import { L as LineageList } from './LineageList-27d4b35c.js';
-import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-f12b37a6.js';
-import { U as URL_API } from './variables-4ec2e9c7.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-33129828.js';
+import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-5a1c35e0.js';
+import { c as css, g as getData, r as reactExports } from './getData-0fc4e1b9.js';
+import { L as LineageList } from './LineageList-2254f15e.js';
+import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-ccbc87e2.js';
+import { U as URL_API } from './variables-fde23d74.js';
 import './types-3f4e9278.js';
 import './string-e923d624.js';
 

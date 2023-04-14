@@ -1,94 +1,211 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { g as getData } from './getData-c69eb59a.js';
-import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import { U as URL_API } from './variables-4ec2e9c7.js';
+import { _ as __awaiter, f as __asyncValues, d as defineStanzaElement } from './stanza-33129828.js';
+import { j as jsx, c as COLOR_PRIMARY_DARK, y as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-5a1c35e0.js';
+import { c as css, g as getData, r as reactExports } from './getData-0fc4e1b9.js';
+import { d as decodeHTMLEntities } from './string-e923d624.js';
+import { s as stanzaWrapper, I as InfoId, a as InfoTitle, b as SubHeading } from './common-ccbc87e2.js';
+import { c as copy } from './index.es-918fddc1.js';
+import { U as URL_API } from './variables-fde23d74.js';
 
-class GmdbMediumByGmid extends Stanza {
-    render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const params = this.params;
-            if (!params.gm_id) {
-                return;
+const RecipeComment = ({ css, className, comment }) => {
+    return (jsx("div", Object.assign({ css: [recipeComments, css], className: className }, { children: parseText(comment) })));
+};
+const recipeComments = css `
+  margin: 4px 0;
+`;
+const parseText = (str) => {
+    return decodeHTMLEntities(str.replace(/℃/g, "°C"));
+};
+
+const RecipeTable = ({ css, className, name, items, referenceId }) => {
+    return (jsxs("div", Object.assign({ css: [recipeTable, css], className: className }, { children: [jsxs("div", Object.assign({ css: titleWrapper }, { children: [jsx("h4", Object.assign({ css: titleStyle }, { children: name })), referenceId && (jsxs("span", { children: ["(See also ", jsx("a", Object.assign({ href: `/media/${referenceId}` }, { children: referenceId })), ")"] }))] })), jsxs("table", Object.assign({ css: tableStyle }, { children: [jsx("thead", { children: jsxs("tr", { children: [jsx("th", Object.assign({ className: "id" }, { children: "GMO ID" })), jsx("th", Object.assign({ className: "name" }, { children: "Component" })), jsx("th", Object.assign({ className: "name" }, { children: "Original label" })), jsx("th", Object.assign({ className: "volume" }, { children: "\u00A0" })), jsx("th", Object.assign({ className: "volume" }, { children: "Amount" }))] }) }), jsx("tbody", { children: items.map((item, index) => {
+                            return (jsxs("tr", { children: [jsx("td", Object.assign({ className: "id" }, { children: jsx("a", Object.assign({ href: `/component/${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id })) })), jsx("td", Object.assign({ className: "name" }, { children: decodeHTMLEntities(item.componentLabel) })), jsx("td", Object.assign({ className: "name" }, { children: jsx("span", { children: item.componentName.replace(/\(see.*\)/, "(see below)") }) })), jsxs("td", Object.assign({ className: "volume" }, { children: [jsx("span", { children: item.concValue }), jsx("span", { children: item.concUnit })] })), jsxs("td", Object.assign({ className: "volume" }, { children: [jsx("span", { children: item.volume }), jsx("span", { children: item.unit })] }))] }, index));
+                        }) })] }))] })));
+};
+const recipeTable = css ``;
+const titleWrapper = css `
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  span {
+    padding-top: 2px;
+  }
+  a {
+    color: ${COLOR_PRIMARY_DARK};
+  }
+`;
+const titleStyle = css `
+  font-size: 18px;
+`;
+const tableStyle = css `
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0 16px;
+  border: 1px solid ${COLOR_GRAY_LINE};
+  a {
+    color: ${COLOR_PRIMARY_DARK};
+  }
+  th,
+  td {
+    border: 1px solid ${COLOR_GRAY_LINE};
+    padding: 8px;
+    text-align: left;
+  }
+  tbody {
+    tr:nth-of-type(odd) {
+      background-color: #f2f2f2;
+    }
+  }
+  .id {
+    width: 10%;
+    white-space: nowrap;
+  }
+  .name {
+    width: 35%;
+  }
+  .volume {
+    width: 10%;
+    white-space: nowrap;
+    span {
+      display: inline-block;
+      &:first-of-type {
+        width: 60%;
+        text-align: right;
+        box-sizing: border-box;
+        padding-right: 4px;
+      }
+      &:last-of-type {
+        width: 40%;
+      }
+    }
+  }
+`;
+
+const StanzaView = ({ css, className, id, originalId, srcUrl, srcLabel, name, ph, components, extraComponents, }) => {
+    return (jsxs("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: [jsxs(InfoId, { children: [jsx("span", { children: "Growth Medium ID:\u00A0" }), jsx("span", { children: id })] }), srcUrl && (jsxs(InfoId, { children: [jsx("span", { children: "Information source:\u00A0" }), jsx("a", Object.assign({ href: srcUrl, target: "_blank", rel: "noreferrer" }, { children: originalId || srcLabel || id }))] })), jsxs(InfoTitle, { children: [name && decodeHTMLEntities(name), ph && jsxs("small", { children: ["(pH", ph, ")"] })] }), components.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Components" }), components.map((component, index) => {
+                        if ("comment" in component) {
+                            return jsx(RecipeComment, Object.assign({}, component), index);
+                        }
+                        else {
+                            return jsx(RecipeTable, Object.assign({}, component), index);
+                        }
+                    })] })), extraComponents.map((item, i) => {
+                return (jsx("div", { children: item.components.map((component, index) => {
+                        if ("comment" in component) {
+                            return jsx(RecipeComment, Object.assign({}, component), index);
+                        }
+                        else {
+                            return jsx(RecipeTable, Object.assign({}, component, { referenceId: item.id }), index);
+                        }
+                    }) }, i));
+            })] })));
+};
+const stanzaView = css ``;
+
+const getMedia = (gm_id) => __awaiter(void 0, void 0, void 0, function* () {
+    const apiName = "gmdb_medium_by_gmid";
+    const result = yield getData(`${URL_API}${apiName}`, { gm_id });
+    if (result.body) {
+        const extra = yield getExternalReferences(result.body, gm_id);
+        return processData(result.body, extra);
+    }
+    else {
+        return undefined;
+    }
+});
+const getExternalReferences = (body, gm_id) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, e_1, _b, _c;
+    var _d;
+    const externalReferences = copy(body)
+        .components.map((component) => component.items.filter((item) => !!item.reference_media_id && item.reference_media_id !== gm_id))
+        .filter((item) => item.length > 0)
+        .flat()
+        .map((item) => ({
+        id: item.reference_media_id,
+        name: item.component_name.replace(/ \(.*\)/, "").replace(/\*/g, ""),
+    }));
+    const extraData = [];
+    try {
+        for (var _e = true, externalReferences_1 = __asyncValues(externalReferences), externalReferences_1_1; externalReferences_1_1 = yield externalReferences_1.next(), _a = externalReferences_1_1.done, !_a;) {
+            _c = externalReferences_1_1.value;
+            _e = false;
+            try {
+                const ref = _c;
+                const apiName = "gmdb_medium_by_gmid";
+                const result = yield getData(`${URL_API}${apiName}`, { gm_id: ref.id });
+                if (result.body) {
+                    const data = processData(result.body);
+                    const components = data.components;
+                    const target = components.find((item) => item.name === ref.name);
+                    const arr = [target];
+                    if (target) {
+                        const targetIndex = components.indexOf(target);
+                        let i = 1;
+                        while ((_d = components[targetIndex + i]) === null || _d === void 0 ? void 0 : _d.comment) {
+                            const comment = components[targetIndex + i];
+                            arr.push(comment);
+                            i++;
+                            if (i > 100)
+                                break;
+                        }
+                    }
+                    extraData.push({ components: arr, id: ref.id });
+                }
             }
-            const apiName = "gmdb_medium_by_gmid";
-            const result = yield getData(`${URL_API}${apiName}`, {
-                gm_id: params.gm_id,
-            });
-            const parameters = parseData(result, params);
-            const template = "stanza.html.hbs";
-            this.renderTemplate({ template, parameters });
-            importWebFontForTogoMedium(this);
-        });
+            finally {
+                _e = true;
+            }
+        }
     }
-}
-const parseData = (data, params) => {
-    var _a;
-    switch (true) {
-        case data.status !== 200:
-            return makeErrorData(`Error ${data.status}<br />${data.message}`);
-        case !((_a = data === null || data === void 0 ? void 0 : data.body) === null || _a === void 0 ? void 0 : _a.meta):
-            return makeErrorData(`No Medium Found with ${params.gm_id}`);
-        default:
-            return makeSuccessData(data.body);
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (!_e && !_a && (_b = externalReferences_1.return)) yield _b.call(externalReferences_1);
+        }
+        finally { if (e_1) throw e_1.error; }
     }
-};
-const makeErrorData = (msg) => {
-    return {
-        id: undefined,
-        original_id: undefined,
-        name: undefined,
-        src_url: undefined,
-        src_label: undefined,
-        ph: undefined,
-        components: [],
-        error: true,
-        statusText: msg,
-    };
-};
-const makeSuccessData = (body) => {
+    return extraData;
+});
+const processData = (body, extraComponents = []) => {
     const id = body.meta.gm.split("/").pop();
     return {
         id,
-        original_id: body.meta.original_media_id,
+        originalId: body.meta.original_media_id,
         name: body.meta.name,
-        src_label: getSrcLabel(body.meta.src_url),
-        src_url: body.meta.src_url,
+        srcLabel: getSrcLabel(body.meta.src_url),
+        srcUrl: body.meta.src_url,
         ph: body.meta.ph,
-        components: [
-            ...processComponentTables(body.components, id),
-            ...processComponentComments(body.comments),
-        ].sort((a, b) => a.paragraph_index - b.paragraph_index),
+        components: processComponents(id, body.components, body.comments),
+        extraComponents,
     };
+};
+const processComponents = (myId, tables, comments) => {
+    return [...processComponentTables(tables, myId), ...processComponentComments(comments)].sort((a, b) => a.index - b.index);
 };
 const processComponentTables = (tables, gmID) => {
-    return tables.map((table) => {
-        return Object.assign(Object.assign({}, table), { items: table.items.map((item) => {
-                var _a, _b;
-                const reference_media_id = !item.reference_media_id || item.reference_media_id === gmID
-                    ? ""
-                    : item.reference_media_id;
-                return Object.assign(Object.assign({}, item), { reference_media_id, can_wrap_label: ((_a = item.label) === null || _a === void 0 ? void 0 : _a.length) >= 20, can_wrap_name: ((_b = item.component_name) === null || _b === void 0 ? void 0 : _b.length) >= 20, properties: item.properties.map((property) => (Object.assign(Object.assign({}, property), { displayLabel: getShortPropertyLabel(property.label) }))) });
-            }) });
-    });
+    return tables.map((table) => ({
+        index: table.paragraph_index,
+        name: table.subcomponent_name,
+        items: table.items.map((item) => {
+            var _a, _b;
+            return ({
+                id: item.gmo_id || "",
+                componentName: item.component_name,
+                componentLabel: item.label || "",
+                concValue: ((_a = item.conc_value) === null || _a === void 0 ? void 0 : _a.toString()) || "",
+                concUnit: item.conc_unit || "",
+                volume: ((_b = item.volume) === null || _b === void 0 ? void 0 : _b.toString()) || "",
+                unit: item.unit || "",
+                referenceMediaId: !item.reference_media_id || item.reference_media_id === gmID ? "" : item.reference_media_id,
+            });
+        }),
+    }));
 };
 const processComponentComments = (comments) => {
-    return comments.map((item) => (Object.assign(Object.assign({}, item), { comment: item.comment ? item.comment : "&nbsp;" })));
+    return comments.map((item) => ({
+        index: item.paragraph_index,
+        comment: item.comment ? item.comment : "&nbsp;",
+    }));
 };
-function getShortPropertyLabel(str) {
-    const dic = {
-        "Simple component": "Simple",
-        "Complex component": "Complex",
-        "Defined component": "Defined",
-        "Undefined component": "Undefined",
-        "Inorganic compound": "Inorganic",
-        "Organic compound": "Organic",
-        Solution: "Solution",
-    };
-    if (!dic[str]) {
-        console.warn("no short property label found:", str);
-    }
-    return dic[str] ? dic[str] : "ERR";
-}
 const getSrcLabel = (str) => {
     switch (true) {
         case str.match(/jcm.*riken/) !== null:
@@ -103,12 +220,31 @@ const getSrcLabel = (str) => {
             return "SRC";
     }
 };
-const __TEST__ = { getSrcLabel };
+
+const App = ({ gm_id }) => {
+    const [props, setProps] = reactExports.useState(null);
+    reactExports.useEffect(() => {
+        (() => __awaiter(void 0, void 0, void 0, function* () {
+            setProps(null);
+            const result = yield getMedia(gm_id);
+            if (!result)
+                return;
+            setProps(result);
+        }))();
+    }, [gm_id]);
+    return props ? jsx(StanzaView, Object.assign({}, props)) : jsx(Fragment, { children: "Loading..." });
+};
+
+class ReactStanza extends TogoMediumReactStanza {
+    makeApp() {
+        const gm_id = this.params.gm_id;
+        return jsx(App, { gm_id: gm_id });
+    }
+}
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  'default': GmdbMediumByGmid,
-  __TEST__: __TEST__
+  'default': ReactStanza
 });
 
 var metadata = {
@@ -159,199 +295,7 @@ var metadata = {
 };
 
 var templates = [
-  ["stanza.html.hbs", {"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "  <p class=\"error\">"
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"statusText") || (depth0 != null ? lookupProperty(depth0,"statusText") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"statusText","hash":{},"data":data,"loc":{"start":{"line":4,"column":19},"end":{"line":4,"column":35}}}) : helper))) != null ? stack1 : "")
-    + "</p>\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "  <p class=\"gm-id\">\n  <span class=\"key\">Growth Medium ID: </span>\n  <span class=\"value\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":10,"column":22},"end":{"line":10,"column":28}}}) : helper)))
-    + "</span>\n  </p>\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"src_url") : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":12,"column":2},"end":{"line":22,"column":9}}})) != null ? stack1 : "")
-    + "  <p class=\"title\">\n  <span class=\"value\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":24,"column":22},"end":{"line":24,"column":30}}}) : helper)))
-    + "</span>\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"ph") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":25,"column":2},"end":{"line":27,"column":9}}})) != null ? stack1 : "")
-    + "  </p>\n  <div class=\"recipe\">\n  <h3>Components</h3>\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"components") : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":31,"column":2},"end":{"line":73,"column":11}}})) != null ? stack1 : "")
-    + "  </div>\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "    <p class=\"gm-id\">\n    <span class=\"key\">Information source:</span>\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"original_id") : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":15,"column":4},"end":{"line":17,"column":11}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"original_id") : depth0),{"name":"unless","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":18,"column":4},"end":{"line":20,"column":15}}})) != null ? stack1 : "")
-    + "    </p>\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "      <span><a class=\"link-btn\" target=\"_blank\" href=\""
-    + alias4(((helper = (helper = lookupProperty(helpers,"src_url") || (depth0 != null ? lookupProperty(depth0,"src_url") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"src_url","hash":{},"data":data,"loc":{"start":{"line":16,"column":54},"end":{"line":16,"column":65}}}) : helper)))
-    + "\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"original_id") || (depth0 != null ? lookupProperty(depth0,"original_id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"original_id","hash":{},"data":data,"loc":{"start":{"line":16,"column":67},"end":{"line":16,"column":82}}}) : helper)))
-    + "</a></span>\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "      <span><a class=\"link-btn\" target=\"_blank\" href=\""
-    + alias4(((helper = (helper = lookupProperty(helpers,"src_url") || (depth0 != null ? lookupProperty(depth0,"src_url") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"src_url","hash":{},"data":data,"loc":{"start":{"line":19,"column":54},"end":{"line":19,"column":65}}}) : helper)))
-    + "\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"src_label") || (depth0 != null ? lookupProperty(depth0,"src_label") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"src_label","hash":{},"data":data,"loc":{"start":{"line":19,"column":67},"end":{"line":19,"column":80}}}) : helper)))
-    + "</a></span>\n";
-},"9":function(container,depth0,helpers,partials,data) {
-    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "    <span class=\"ph\"> (pH"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"ph") || (depth0 != null ? lookupProperty(depth0,"ph") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ph","hash":{},"data":data,"loc":{"start":{"line":26,"column":25},"end":{"line":26,"column":31}}}) : helper)))
-    + ")</span>\n";
-},"11":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"items") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":32,"column":4},"end":{"line":69,"column":11}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"comment") : depth0),{"name":"if","hash":{},"fn":container.program(22, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":70,"column":4},"end":{"line":72,"column":11}}})) != null ? stack1 : "");
-},"12":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"subcomponent_name") : depth0),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":33,"column":6},"end":{"line":35,"column":13}}})) != null ? stack1 : "")
-    + "      <table class=\"component-table\">\n        <tr>\n          <th class=\"id\">GMO ID</th>\n          <th class=\"name\">Component</th>\n          <th class=\"name\">Original label</th>\n          <th class=\"volume\"></th>\n          <th class=\"volume\">Amount</th>\n        </tr>\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"items") : depth0),{"name":"each","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":44,"column":8},"end":{"line":67,"column":17}}})) != null ? stack1 : "")
-    + "      </table>\n";
-},"13":function(container,depth0,helpers,partials,data) {
-    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "        <h4>"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"subcomponent_name") || (depth0 != null ? lookupProperty(depth0,"subcomponent_name") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"subcomponent_name","hash":{},"data":data,"loc":{"start":{"line":34,"column":12},"end":{"line":34,"column":33}}}) : helper)))
-    + "</h4>\n";
-},"15":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "          <tr>\n            <td class=\"id\">\n              <a href=\"/component/"
-    + alias4(((helper = (helper = lookupProperty(helpers,"gmo_id") || (depth0 != null ? lookupProperty(depth0,"gmo_id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gmo_id","hash":{},"data":data,"loc":{"start":{"line":47,"column":34},"end":{"line":47,"column":44}}}) : helper)))
-    + "\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"gmo_id") || (depth0 != null ? lookupProperty(depth0,"gmo_id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gmo_id","hash":{},"data":data,"loc":{"start":{"line":47,"column":46},"end":{"line":47,"column":56}}}) : helper)))
-    + "</a>\n            </td>\n            <td class=\"name\">\n              <span class=\""
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"can_wrap_label") : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":50,"column":27},"end":{"line":50,"column":64}}})) != null ? stack1 : "")
-    + "\">"
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"label") || (depth0 != null ? lookupProperty(depth0,"label") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"label","hash":{},"data":data,"loc":{"start":{"line":50,"column":66},"end":{"line":50,"column":77}}}) : helper))) != null ? stack1 : "")
-    + "</span>\n            </td>\n            <td class=\"name\">\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"reference_media_id") : depth0),{"name":"if","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":53,"column":14},"end":{"line":55,"column":21}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"reference_media_id") : depth0),{"name":"unless","hash":{},"fn":container.program(20, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":56,"column":14},"end":{"line":58,"column":25}}})) != null ? stack1 : "")
-    + "            </td>\n            <td class=\"volume\">\n              <span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"conc_value") || (depth0 != null ? lookupProperty(depth0,"conc_value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"conc_value","hash":{},"data":data,"loc":{"start":{"line":61,"column":20},"end":{"line":61,"column":34}}}) : helper)))
-    + "</span><span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"conc_unit") || (depth0 != null ? lookupProperty(depth0,"conc_unit") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"conc_unit","hash":{},"data":data,"loc":{"start":{"line":61,"column":47},"end":{"line":61,"column":60}}}) : helper)))
-    + "</span>\n            </td>\n            <td class=\"volume\">\n              <span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"volume") || (depth0 != null ? lookupProperty(depth0,"volume") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"volume","hash":{},"data":data,"loc":{"start":{"line":64,"column":20},"end":{"line":64,"column":30}}}) : helper)))
-    + "</span><span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"unit") || (depth0 != null ? lookupProperty(depth0,"unit") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unit","hash":{},"data":data,"loc":{"start":{"line":64,"column":43},"end":{"line":64,"column":51}}}) : helper)))
-    + "</span>\n            </td>\n          </tr>\n";
-},"16":function(container,depth0,helpers,partials,data) {
-    return "can-wrap";
-},"18":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "                <a href=\"/medium/"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"reference_media_id") || (depth0 != null ? lookupProperty(depth0,"reference_media_id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"reference_media_id","hash":{},"data":data,"loc":{"start":{"line":54,"column":33},"end":{"line":54,"column":55}}}) : helper)))
-    + "\">"
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"component_name") || (depth0 != null ? lookupProperty(depth0,"component_name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"component_name","hash":{},"data":data,"loc":{"start":{"line":54,"column":57},"end":{"line":54,"column":77}}}) : helper))) != null ? stack1 : "")
-    + "</a>\n";
-},"20":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "                <span class=\""
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"can_wrap_name") : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":57,"column":29},"end":{"line":57,"column":65}}})) != null ? stack1 : "")
-    + "\">"
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"component_name") || (depth0 != null ? lookupProperty(depth0,"component_name") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"component_name","hash":{},"data":data,"loc":{"start":{"line":57,"column":67},"end":{"line":57,"column":87}}}) : helper))) != null ? stack1 : "")
-    + "</span>\n";
-},"22":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "      <p>"
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"comment") || (depth0 != null ? lookupProperty(depth0,"comment") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"comment","hash":{},"data":data,"loc":{"start":{"line":71,"column":9},"end":{"line":71,"column":22}}}) : helper))) != null ? stack1 : "")
-    + "</p>\n";
-},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "<div class=\"wrapper\">\n\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"error") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":3,"column":0},"end":{"line":5,"column":7}}})) != null ? stack1 : "")
-    + "\n"
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"error") : depth0),{"name":"unless","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":7,"column":0},"end":{"line":75,"column":11}}})) != null ? stack1 : "")
-    + "</div>\n";
-},"useData":true}]
+  
 ];
 
 const url = import.meta.url.replace(/\?.*$/, '');

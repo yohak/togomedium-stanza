@@ -1,5 +1,5 @@
-import { n as newStyled, C as COLOR_PRIMARY, c as COLOR_WHITE, d as COLOR_TEXT } from './StanzaReactProvider-719976b7.js';
-import { c as css } from './getData-c69eb59a.js';
+import { n as newStyled, c as COLOR_PRIMARY_DARK, C as COLOR_PRIMARY, d as COLOR_WHITE, e as COLOR_TEXT } from './StanzaReactProvider-5a1c35e0.js';
+import { c as css } from './getData-0fc4e1b9.js';
 
 const ColWrapper = newStyled.div `
   display: flex;
@@ -16,12 +16,20 @@ const InfoId = newStyled.div `
     margin-left: 20px;
     gap: 4px;
   }
+
+  a {
+    color: ${COLOR_PRIMARY_DARK};
+  }
 `;
 const InfoTitle = newStyled.h1 `
   font-size: 40px;
   margin: 24px 0 16px;
   font-weight: 300;
   line-height: 0.9;
+  small {
+    font-size: 24px;
+    margin-left: 10px;
+  }
 `;
 const SubHeading = newStyled.h3 `
   font-weight: 600;
@@ -67,4 +75,4 @@ const stanzaWrapper = css `
 `;
 
 export { ColorButton as C, InfoId as I, StandardParagraph as S, TagList as T, InfoTitle as a, SubHeading as b, ColWrapper as c, stanzaWrapper as s };
-//# sourceMappingURL=common-f12b37a6.js.map
+//# sourceMappingURL=common-ccbc87e2.js.map

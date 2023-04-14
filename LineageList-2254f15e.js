@@ -1,4 +1,4 @@
-import { n as newStyled, x as COLOR_GRAY_LINE, C as COLOR_PRIMARY, j as jsx, a as jsxs } from './StanzaReactProvider-719976b7.js';
+import { n as newStyled, y as COLOR_GRAY_LINE, C as COLOR_PRIMARY, j as jsx, a as jsxs } from './StanzaReactProvider-5a1c35e0.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
 import { c as capitalizeFirstLetter, m as makeSpeciesName } from './string-e923d624.js';
 
@@ -45,4 +45,4 @@ const parseLineage = (lineage) => lineage.reduce((accum, current) => {
 }, {});
 
 export { LineageList as L, parseLineage as p };
-//# sourceMappingURL=LineageList-27d4b35c.js.map
+//# sourceMappingURL=LineageList-2254f15e.js.map

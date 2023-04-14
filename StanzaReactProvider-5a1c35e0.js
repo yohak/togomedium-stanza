@@ -1,5 +1,5 @@
-import { r as reactExports, h as hasOwnProperty, E as Emotion, a as createEmotionProps, m as memoize$1, w as withEmotionCache, _ as _extends, T as ThemeContext$2, b as getRegisteredStyles, s as serializeStyles, d as registerStyles, u as useInsertionEffectAlwaysWithSyncFallback, i as insertStyles, c as css, R as React, G as Global, C as CacheProvider, e as createCache } from './getData-c69eb59a.js';
-import { o as objectAssign, g as getDefaultExportFromCjs, S as Stanza, _ as __awaiter } from './stanza-bd712360.js';
+import { r as reactExports, h as hasOwnProperty, E as Emotion, a as createEmotionProps, m as memoize$1, w as withEmotionCache, _ as _extends, T as ThemeContext$2, b as getRegisteredStyles, s as serializeStyles, d as registerStyles, u as useInsertionEffectAlwaysWithSyncFallback, i as insertStyles, c as css, R as React, G as Global, C as CacheProvider, e as createCache } from './getData-0fc4e1b9.js';
+import { o as objectAssign, g as getDefaultExportFromCjs, S as Stanza, _ as __awaiter } from './stanza-33129828.js';
 
 var jsxRuntimeExports = {};
 var jsxRuntime = {
@@ -222,6 +222,7 @@ tags.forEach(function (tagName) {
 const FONT_EN = "'Fira Sans Condensed', sans-serif";
 const COLOR_WHITE = "#FFFFFF";
 const COLOR_PRIMARY = "#8FC31F";
+const COLOR_PRIMARY_DARK = "#6FA80C";
 const COLOR_GRAY = "#CCCCCC";
 const COLOR_GRAY_BG = "#f4f3f2";
 const COLOR_GRAY700 = "#374151";
@@ -10565,5 +10566,5 @@ class TogoMediumReactStanza extends Stanza {
     }
 }
 
-export { COLOR_GRAY700 as A, SIZE4 as B, COLOR_PRIMARY as C, formatMuiErrorMessage as D, deepmerge as E, Fragment as F, defaultSxConfig$1 as G, isPlainObject as H, lighten as I, darken as J, COLOR_GRAY400 as K, COLOR_GRAY as L, FONT_EN as M, Recoil_index_7 as N, Recoil_index_6 as R, SIZE1 as S, TogoMediumReactStanza as T, _objectWithoutPropertiesLoose as _, jsxs as a, COLOR_GRAY300 as b, COLOR_WHITE as c, COLOR_TEXT as d, Recoil_index_18 as e, Recoil_index_22 as f, capitalize as g, createTheme$1 as h, createTheme as i, jsx as j, jsxRuntimeExports as k, ReactDOM as l, useTheme$1 as m, newStyled as n, alpha as o, COLOR_GRAY_BG as p, ROUNDED_CORNER as q, reactDomExports as r, styleFunctionSx$1 as s, SIZE2 as t, useTheme as u, SIZE05 as v, FONT_WEIGHT_MEDIUM as w, COLOR_GRAY_LINE as x, FONT_WEIGHT_BOLD as y, SIZE3 as z };
-//# sourceMappingURL=StanzaReactProvider-719976b7.js.map
+export { SIZE3 as A, COLOR_GRAY700 as B, COLOR_PRIMARY as C, SIZE4 as D, formatMuiErrorMessage as E, Fragment as F, deepmerge as G, defaultSxConfig$1 as H, isPlainObject as I, lighten as J, darken as K, COLOR_GRAY400 as L, COLOR_GRAY as M, FONT_EN as N, Recoil_index_7 as O, Recoil_index_6 as R, SIZE1 as S, TogoMediumReactStanza as T, _objectWithoutPropertiesLoose as _, jsxs as a, COLOR_GRAY300 as b, COLOR_PRIMARY_DARK as c, COLOR_WHITE as d, COLOR_TEXT as e, Recoil_index_18 as f, Recoil_index_22 as g, capitalize as h, createTheme$1 as i, jsx as j, createTheme as k, jsxRuntimeExports as l, ReactDOM as m, newStyled as n, useTheme$1 as o, alpha as p, COLOR_GRAY_BG as q, reactDomExports as r, styleFunctionSx$1 as s, ROUNDED_CORNER as t, useTheme as u, SIZE2 as v, SIZE05 as w, FONT_WEIGHT_MEDIUM as x, COLOR_GRAY_LINE as y, FONT_WEIGHT_BOLD as z };
+//# sourceMappingURL=StanzaReactProvider-5a1c35e0.js.map
