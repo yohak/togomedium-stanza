@@ -70,6 +70,7 @@ export const StanzaView: FC<Props> = ({
         return (
           <div key={i}>
             {item.components.map((component, index) => {
+              if (!component) return <></>;
               if ("comment" in component) {
                 return <RecipeComment key={index} {...component} />;
               } else {
