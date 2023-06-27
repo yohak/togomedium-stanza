@@ -4,7 +4,9 @@ import { ThemeProvider } from "@mui/material/styles";
 import { muiTheme } from "../shared/components/muiTheme";
 import { EmotionGlobalStyles } from "../shared/components/EmotionGlobalStyles";
 import React from "react";
-initialize();
+initialize({
+  onUnhandledRequest: "bypass",
+});
 export const decorators = [
   mswDecorator,
   (Story) => (

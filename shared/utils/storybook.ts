@@ -11,6 +11,7 @@ type StanzaNames =
   | "FindMediaByComponents"
   | "FindMediaByOrganismPhenotype"
   | "MediaStrainAlignment"
+  | "SimilarMediaNode"
   | "icons";
 export const makeComponentStoryTitle = (name: string, stanza: StanzaNames): string =>
   `Components/${stanza}/${name}`;

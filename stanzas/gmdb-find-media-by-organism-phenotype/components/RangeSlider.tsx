@@ -1,10 +1,11 @@
 import { css } from "@emotion/react";
-import { Mark } from "@mui/base/SliderUnstyled/useSlider.types";
 import { FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
+
+type Mark = any;
 
 type Props = {
   min: number;

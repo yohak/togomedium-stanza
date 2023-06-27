@@ -195,7 +195,7 @@ const renderD3 = (
       .style("max-width", "300px");
     const g = svg.append("g").attr("transform", "translate(" + radius + "," + radius + ")");
 
-    let hierarchyNode = d3.hierarchy(newicTree);
+    let hierarchyNode = d3.hierarchy(newicTree) as any;
     const cluster = d3.cluster().size([360, radius - 80]); // cluster type
     const tree = d3
       .tree()
@@ -235,7 +235,7 @@ const renderD3 = (
 
     node
       .append("circle")
-      .attr("id", (d) => {
+      .attr("id", (d: any) => {
         return d.data.name;
       })
       .attr("r", 4.5);
