@@ -2,7 +2,7 @@ import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
 import { j as jsx, c as COLOR_PRIMARY_DARK, x as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
 import { c as css, r as reactExports } from './getData-e69d262f.js';
 import { d as decodeHTMLEntities } from './string-878ee74c.js';
-import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-ad8b0922.js';
+import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-d9cd01f8.js';
 import { s as stanzaWrapper } from './common-1d90404b.js';
 import { g as getMedia } from './api-66a29d3d.js';
 import './emotion-styled.browser.esm-90764b6a.js';

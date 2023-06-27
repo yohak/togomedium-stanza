@@ -2,7 +2,7 @@ import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
 import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
 import { c as css, g as getData, r as reactExports } from './getData-e69d262f.js';
 import { L as LineageList } from './LineageList-8a4c9fdc.js';
-import { c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './styles-ad8b0922.js';
+import { c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './styles-d9cd01f8.js';
 import { s as stanzaWrapper } from './common-1d90404b.js';
 import { U as URL_API } from './variables-42acbc42.js';
 import './emotion-styled.browser.esm-90764b6a.js';

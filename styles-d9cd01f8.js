@@ -39,7 +39,7 @@ const SubHeading = newStyled.h3 `
 `;
 const ColorButton = newStyled.a `
   background-color: ${COLOR_PRIMARY};
-  color: ${COLOR_WHITE};
+  color: ${COLOR_WHITE} !important;
   padding: 4px 8px 2px;
   border-radius: 3px;
   text-decoration: none;
@@ -61,4 +61,4 @@ const StandardParagraph = newStyled.p `
 `;
 
 export { ColorButton as C, InfoId as I, StandardParagraph as S, TagList as T, InfoTitle as a, SubHeading as b, ColWrapper as c };
-//# sourceMappingURL=styles-ad8b0922.js.map
+//# sourceMappingURL=styles-d9cd01f8.js.map
