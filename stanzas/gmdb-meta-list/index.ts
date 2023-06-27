@@ -4,7 +4,7 @@ import { importWebFontForTogoMedium } from "../../shared/utils/stanza";
 import { convertHTMLEntity } from "../../shared/utils/string";
 import { ApiResponse, SimpleObject, TemplateBase } from "../../shared/utils/types";
 
-export default class GmdbMetaList extends Stanza<StanzaParameters> {
+export default class GmdbMetaList extends Stanza {
   async render() {
     const params = this.params;
     if (!params.api_url) {
@@ -17,9 +17,9 @@ export default class GmdbMetaList extends Stanza<StanzaParameters> {
   }
 }
 
-const render = (stanza: Stanza, parameters: TemplateParameters, stanzaParams: StanzaParameters) => {
+const render = (stanza: Stanza, parameters: any, stanzaParams: any) => {
   const limit: number = parseInt(stanzaParams.limit, 10);
-  stanza.renderTemplate<TemplateParameters>({
+  stanza.renderTemplate({
     template: "stanza.html.hbs",
     parameters,
   });
@@ -49,7 +49,7 @@ const movePage = async (
 const processData = (
   response: ApiResponse<ApiBody>,
   offset: number,
-  stanzaParams: StanzaParameters
+  stanzaParams: any
 ): TemplateParameters => {
   switch (response.status) {
     case 200:

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { AppContainer } from "./components/AppContainer";
 
 type Props = {
-  stanzaElement?: Document;
+  stanzaElement?: ShadowRoot;
 };
 
 const App: FC<Props> = ({ stanzaElement }) => {

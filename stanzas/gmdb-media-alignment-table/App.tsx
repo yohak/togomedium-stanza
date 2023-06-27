@@ -9,7 +9,7 @@ import { getData } from "../../shared/utils/getData";
 export type AppProps = {
   gm_ids: string[];
   prioritizedOrganism?: string[];
-  stanzaElement?: Document;
+  stanzaElement?: ShadowRoot;
 };
 
 const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }: AppProps) => {

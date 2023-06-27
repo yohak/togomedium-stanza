@@ -22,7 +22,7 @@ const importWebFontForTogoMedium = (stanza: Stanza, name: string = "Fira Sans Co
   stanza.importWebFontCSS(`https://fonts.googleapis.com/css2?family=${name}:wght@400;500;700`);
 };
 
-export abstract class TogoMediumReactStanza<T> extends Stanza<T> {
+export abstract class TogoMediumReactStanza<T> extends Stanza {
   abstract makeApp(): React.ReactElement;
   async render() {
     this._render();

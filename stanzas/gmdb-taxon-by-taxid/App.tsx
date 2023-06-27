@@ -5,7 +5,7 @@ import { getTaxonData, ViewProps } from "./utils/api";
 import { fetchWikipediaData } from "../../shared/components/info-detail/WikipediaView";
 
 type Props = {
-  stanzaElement?: Document;
+  stanzaElement?: ShadowRoot;
   tax_id: string;
 };
 

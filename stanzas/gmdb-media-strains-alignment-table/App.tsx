@@ -10,7 +10,7 @@ export type AppProps = {
   gmIds: string[];
   hideMedia?: boolean;
   prioritizedOrganism?: string[];
-  stanzaElement?: Document;
+  stanzaElement?: ShadowRoot;
 };
 
 const App = ({ gmIds, stanzaElement, hideMedia = false }: AppProps) => {

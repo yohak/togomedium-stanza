@@ -3,7 +3,7 @@ import { Optional } from "yohak-tools";
 import { StanzaView } from "./components/StanzaView";
 
 type Props = {
-  stanzaElement?: Document;
+  stanzaElement?: ShadowRoot;
   gmId: string;
 };
 

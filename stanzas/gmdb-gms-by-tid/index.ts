@@ -14,7 +14,7 @@ document.body.addEventListener("mousemove", function (e) {
   mouseY = e.clientY;
 });
 
-export default class GmdbGmsByTid extends Stanza<StanzaParameters> {
+export default class GmdbGmsByTid extends Stanza {
   async render() {
     const params = this.params;
     const apiName = "gms_by_kegg_tids_3";
@@ -23,7 +23,7 @@ export default class GmdbGmsByTid extends Stanza<StanzaParameters> {
     });
 
     const { sorted_groups } = processData(result.body);
-    this.renderTemplate<TemplateParameters>({ template: "stanza.html.hbs", parameters: {} });
+    this.renderTemplate({ template: "stanza.html.hbs", parameters: {} });
     const wrapper = this.root.querySelector<HTMLElement>("#table_area");
 
     if (wrapper) {

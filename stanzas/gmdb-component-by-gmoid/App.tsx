@@ -4,7 +4,7 @@ import { getComponentData, ViewProps } from "./utils/api";
 import { fetchWikipediaData } from "../../shared/components/info-detail/WikipediaView";
 
 type Props = {
-  stanzaElement?: Document;
+  stanzaElement?: ShadowRoot;
   gmo_id: string;
 };
 

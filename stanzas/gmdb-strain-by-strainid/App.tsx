@@ -4,7 +4,7 @@ import { StanzaView } from "./components/StanzaView";
 import { getStrainData, ViewProps } from "./utils/api";
 
 type Props = {
-  stanzaElement?: Document;
+  stanzaElement?: ShadowRoot;
   strain_id: string;
 };
 
