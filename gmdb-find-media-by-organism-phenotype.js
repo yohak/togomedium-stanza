@@ -1,12 +1,13 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-33129828.js';
-import { _ as _objectWithoutPropertiesLoose, H as defaultSxConfig, I as isPlainObject, h as capitalize, l as jsxRuntimeExports, J as lighten, K as darken, p as alpha, d as COLOR_WHITE, y as COLOR_GRAY_LINE, S as SIZE1, v as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, z as FONT_WEIGHT_BOLD, B as COLOR_GRAY700, D as SIZE4, t as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-5a1c35e0.js';
-import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-0fc4e1b9.js';
-import { b as PATH_TAXON } from './consts-d8934727.js';
-import { e as useFormControl, f as Checkbox, h as hasInfo, g as filterOutInfo, C as CircularProgress, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, l as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-7499d61c.js';
-import { k as useControlled, e as useIsFocusVisible, d as useForkRef, q as useEnhancedEffect, f as useEventCallback, o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses, v as isHostComponent, C as slotShouldForwardProp, l as useTheme, i as useSlotProps, D as API_ORGANISMS_BY_PHENOTYPES, E as API_MEDIA_BY_TAXON } from './paths-d1e79f8a.js';
-import { c as clone } from './clone-e8609f76.js';
-import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-a97bd455.js';
-import './variables-fde23d74.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
+import { _ as _objectWithoutPropertiesLoose, G as defaultSxConfig, H as isPlainObject, i as capitalize, m as jsxRuntimeExports, I as lighten, J as darken, o as alpha, d as COLOR_WHITE, x as COLOR_GRAY_LINE, S as SIZE1, t as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, y as FONT_WEIGHT_BOLD, A as COLOR_GRAY700, B as SIZE4, q as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-e69d262f.js';
+import { b as PATH_TAXON } from './consts-c8281bfe.js';
+import { e as useFormControl, f as Checkbox, h as hasInfo, g as filterOutInfo, C as CircularProgress, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, l as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-f235d087.js';
+import { k as useControlled, e as useIsFocusVisible, d as useForkRef, l as useEnhancedEffect, f as useEventCallback, o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses, x as isHostComponent, E as slotShouldForwardProp, m as useTheme, i as useSlotProps, F as API_ORGANISMS_BY_PHENOTYPES, H as API_MEDIA_BY_TAXON } from './paths-ee59fa78.js';
+import { c as clone } from './clone-1fb93465.js';
+import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-65e31080.js';
+import './emotion-styled.browser.esm-90764b6a.js';
+import './variables-42acbc42.js';
 
 const visuallyHidden = {
   border: 0,
@@ -66,6 +67,10 @@ function extendSxProp(props) {
   });
 }
 
+function areArraysEqual(array1, array2, itemComparer = (a, b) => a === b) {
+  return array1.length === array2.length && array1.every((value, index) => itemComparer(value, array2[index]));
+}
+
 const INTENTIONAL_DRAG_COUNT_THRESHOLD = 2;
 function asc(a, b) {
   return a - b;
@@ -114,7 +119,7 @@ function trackFinger(event, touchId) {
     y: event.clientY
   };
 }
-function valueToPercent$1(value, min, max) {
+function valueToPercent(value, min, max) {
   return (value - min) * 100 / (max - min);
 }
 function percentToValue(percent, min, max) {
@@ -158,6 +163,15 @@ function focusThumb({
   if (setActive) {
     setActive(activeIndex);
   }
+}
+function areValuesEqual(newValue, oldValue) {
+  if (typeof newValue === 'number' && typeof oldValue === 'number') {
+    return newValue === oldValue;
+  }
+  if (typeof newValue === 'object' && typeof oldValue === 'object') {
+    return areArraysEqual(newValue, oldValue);
+  }
+  return false;
 }
 const axisProps = {
   horizontal: {
@@ -212,11 +226,11 @@ function doesSupportTouchActionNone() {
  *
  * Demos:
  *
- * - [Unstyled Slider](https://mui.com/base/react-slider/#hook)
+ * - [Slider](https://mui.com/base-ui/react-slider/#hook)
  *
  * API:
  *
- * - [useSlider API](https://mui.com/base/api/use-slider/)
+ * - [useSlider API](https://mui.com/base-ui/react-slider/hooks-api/#use-slider)
  */
 function useSlider(parameters) {
   const {
@@ -232,7 +246,7 @@ function useSlider(parameters) {
     onChange,
     onChangeCommitted,
     orientation = 'horizontal',
-    ref,
+    rootRef: ref,
     scale = Identity$1,
     step = 1,
     tabIndex,
@@ -330,13 +344,16 @@ function useSlider(parameters) {
     // @ts-ignore
     let newValue = event.target.valueAsNumber;
     if (marks && step == null) {
-      newValue = newValue < value ? marksValues[marksIndex - 1] : marksValues[marksIndex + 1];
+      const maxMarksValue = marksValues[marksValues.length - 1];
+      if (newValue > maxMarksValue) {
+        newValue = maxMarksValue;
+      } else if (newValue < marksValues[0]) {
+        newValue = marksValues[0];
+      } else {
+        newValue = newValue < value ? marksValues[marksIndex - 1] : marksValues[marksIndex + 1];
+      }
     }
     newValue = clamp(newValue, min, max);
-    if (marks && step == null) {
-      const currentMarkIndex = marksValues.indexOf(values[index]);
-      newValue = newValue < values[index] ? marksValues[currentMarkIndex - 1] : marksValues[currentMarkIndex + 1];
-    }
     if (range) {
       // Bound the new value to the thumb's neighbours.
       if (disableSwap) {
@@ -361,7 +378,7 @@ function useSlider(parameters) {
     }
     setValueState(newValue);
     setFocusedThumbIndex(index);
-    if (handleChange) {
+    if (handleChange && !areValuesEqual(newValue, valueDerived)) {
       handleChange(event, newValue, index);
     }
     if (onChangeCommitted) {
@@ -464,7 +481,7 @@ function useSlider(parameters) {
     if (!dragging && moveCount.current > INTENTIONAL_DRAG_COUNT_THRESHOLD) {
       setDragging(true);
     }
-    if (handleChange && newValue !== valueDerived) {
+    if (handleChange && !areValuesEqual(newValue, valueDerived)) {
       handleChange(nativeEvent, newValue, activeIndex);
     }
   });
@@ -519,7 +536,7 @@ function useSlider(parameters) {
         setActive
       });
       setValueState(newValue);
-      if (handleChange) {
+      if (handleChange && !areValuesEqual(newValue, valueDerived)) {
         handleChange(nativeEvent, newValue, activeIndex);
       }
     }
@@ -586,7 +603,7 @@ function useSlider(parameters) {
         setActive
       });
       setValueState(newValue);
-      if (handleChange) {
+      if (handleChange && !areValuesEqual(newValue, valueDerived)) {
         handleChange(event, newValue, activeIndex);
       }
     }
@@ -595,8 +612,8 @@ function useSlider(parameters) {
     doc.addEventListener('mousemove', handleTouchMove);
     doc.addEventListener('mouseup', handleTouchEnd);
   };
-  const trackOffset = valueToPercent$1(range ? values[0] : min, min, max);
-  const trackLeap = valueToPercent$1(values[values.length - 1], min, max) - trackOffset;
+  const trackOffset = valueToPercent(range ? values[0] : min, min, max);
+  const trackLeap = valueToPercent(values[values.length - 1], min, max) - trackOffset;
   const getRootProps = (otherHandlers = {}) => {
     const ownEventHandlers = {
       onMouseDown: createHandleMouseDown(otherHandlers || {})
@@ -642,7 +659,7 @@ function useSlider(parameters) {
       type: 'range',
       min: parameters.min,
       max: parameters.max,
-      step: (_parameters$step = parameters.step) != null ? _parameters$step : undefined,
+      step: parameters.step === null && parameters.marks ? 'any' : (_parameters$step = parameters.step) != null ? _parameters$step : undefined,
       disabled
     }, mergedEventHandlers, {
       style: _extends({}, visuallyHidden$1, {
@@ -665,6 +682,7 @@ function useSlider(parameters) {
     marks: marks,
     open,
     range,
+    rootRef: handleRef,
     trackLeap,
     trackOffset,
     values
@@ -786,20 +804,22 @@ var Typography$1 = Typography;
 function getFormControlLabelUtilityClasses(slot) {
   return generateUtilityClass('MuiFormControlLabel', slot);
 }
-const formControlLabelClasses = generateUtilityClasses('MuiFormControlLabel', ['root', 'labelPlacementStart', 'labelPlacementTop', 'labelPlacementBottom', 'disabled', 'label', 'error']);
+const formControlLabelClasses = generateUtilityClasses('MuiFormControlLabel', ['root', 'labelPlacementStart', 'labelPlacementTop', 'labelPlacementBottom', 'disabled', 'label', 'error', 'required', 'asterisk']);
 var formControlLabelClasses$1 = formControlLabelClasses;
 
-const _excluded$1 = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "slotProps", "value"];
+const _excluded$1 = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "required", "slotProps", "value"];
 const useUtilityClasses$1 = ownerState => {
   const {
     classes,
     disabled,
     labelPlacement,
-    error
+    error,
+    required
   } = ownerState;
   const slots = {
-    root: ['root', disabled && 'disabled', `labelPlacement${capitalize(labelPlacement)}`, error && 'error'],
-    label: ['label', disabled && 'disabled']
+    root: ['root', disabled && 'disabled', `labelPlacement${capitalize(labelPlacement)}`, error && 'error', required && 'required'],
+    label: ['label', disabled && 'disabled'],
+    asterisk: ['asterisk', error && 'error']
   };
   return composeClasses(slots, getFormControlLabelUtilityClasses, classes);
 };
@@ -848,13 +868,24 @@ const FormControlLabelRoot = styled('label', {
     }
   }
 }));
+const AsteriskComponent = styled('span', {
+  name: 'MuiFormControlLabel',
+  slot: 'Asterisk',
+  overridesResolver: (props, styles) => styles.asterisk
+})(({
+  theme
+}) => ({
+  [`&.${formControlLabelClasses$1.error}`]: {
+    color: (theme.vars || theme).palette.error.main
+  }
+}));
 
 /**
  * Drop-in replacement of the `Radio`, `Switch` and `Checkbox` component.
  * Use this component if you want to display an extra label.
  */
 const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormControlLabel(inProps, ref) {
-  var _slotProps$typography;
+  var _ref, _slotProps$typography;
   const props = useThemeProps({
     props: inProps,
     name: 'MuiFormControlLabel'
@@ -867,19 +898,16 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
       disableTypography,
       label: labelProp,
       labelPlacement = 'end',
+      required: requiredProp,
       slotProps = {}
     } = props,
     other = _objectWithoutPropertiesLoose(props, _excluded$1);
   const muiFormControl = useFormControl();
-  let disabled = disabledProp;
-  if (typeof disabled === 'undefined' && typeof control.props.disabled !== 'undefined') {
-    disabled = control.props.disabled;
-  }
-  if (typeof disabled === 'undefined' && muiFormControl) {
-    disabled = muiFormControl.disabled;
-  }
+  const disabled = (_ref = disabledProp != null ? disabledProp : control.props.disabled) != null ? _ref : muiFormControl == null ? void 0 : muiFormControl.disabled;
+  const required = requiredProp != null ? requiredProp : control.props.required;
   const controlProps = {
-    disabled
+    disabled,
+    required
   };
   ['checked', 'name', 'onChange', 'value', 'inputRef'].forEach(key => {
     if (typeof control.props[key] === 'undefined' && typeof props[key] !== 'undefined') {
@@ -894,6 +922,7 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
   const ownerState = _extends({}, props, {
     disabled,
     labelPlacement,
+    required,
     error: fcs.error
   });
   const classes = useUtilityClasses$1(ownerState);
@@ -912,7 +941,12 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
     ownerState: ownerState,
     ref: ref
   }, other, {
-    children: [/*#__PURE__*/reactExports.cloneElement(control, controlProps), label]
+    children: [/*#__PURE__*/reactExports.cloneElement(control, controlProps), label, required && /*#__PURE__*/jsxRuntimeExports.jsxs(AsteriskComponent, {
+      ownerState: ownerState,
+      "aria-hidden": true,
+      className: classes.asterisk,
+      children: ["\u2009", '*']
+    })]
   }));
 });
 var FormControlLabel$1 = FormControlLabel;
@@ -971,7 +1005,6 @@ function SliderValueLabel(props) {
 }
 
 const _excluded = ["aria-label", "aria-valuetext", "aria-labelledby", "component", "components", "componentsProps", "color", "classes", "className", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "orientation", "size", "step", "scale", "slotProps", "slots", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat"];
-const valueToPercent = (value, min, max) => (value - min) * 100 / (max - min);
 function Identity(x) {
   return x;
 }
@@ -1180,7 +1213,7 @@ const StyledSliderValueLabel = styled(SliderValueLabel, {
   ownerState
 }) => _extends({
   [`&.${sliderClasses$1.valueLabelOpen}`]: {
-    transform: 'translateY(-100%) scale(1)'
+    transform: `${ownerState.orientation === 'vertical' ? 'translateY(-50%)' : 'translateY(-100%)'} scale(1)`
   },
   zIndex: 1,
   whiteSpace: 'nowrap'
@@ -1189,7 +1222,7 @@ const StyledSliderValueLabel = styled(SliderValueLabel, {
   transition: theme.transitions.create(['transform'], {
     duration: theme.transitions.duration.shortest
   }),
-  transform: 'translateY(-100%) scale(0)',
+  transform: `${ownerState.orientation === 'vertical' ? 'translateY(-50%)' : 'translateY(-100%)'} scale(0)`,
   position: 'absolute',
   backgroundColor: (theme.vars || theme).palette.grey[600],
   borderRadius: 2,
@@ -1212,18 +1245,18 @@ const StyledSliderValueLabel = styled(SliderValueLabel, {
     left: '50%'
   }
 }, ownerState.orientation === 'vertical' && {
-  right: '30px',
-  top: '24px',
+  right: ownerState.size === 'small' ? '20px' : '30px',
+  top: '50%',
   transformOrigin: 'right center',
   '&:before': {
     position: 'absolute',
     content: '""',
     width: 8,
     height: 8,
-    transform: 'translate(-50%, 50%) rotate(45deg)',
+    transform: 'translate(-50%, -50%) rotate(45deg)',
     backgroundColor: 'inherit',
-    right: '-20%',
-    top: '25%'
+    right: -8,
+    top: '50%'
   }
 }, ownerState.size === 'small' && {
   fontSize: theme.typography.pxToRem(12),
@@ -1335,7 +1368,6 @@ const Slider = /*#__PURE__*/reactExports.forwardRef(function Slider(inputProps, 
       componentsProps = {},
       color = 'primary',
       classes: classesProp,
-      // eslint-disable-next-line react/prop-types
       className,
       disableSwap = false,
       disabled = false,
@@ -1388,7 +1420,7 @@ const Slider = /*#__PURE__*/reactExports.forwardRef(function Slider(inputProps, 
     trackOffset,
     trackLeap
   } = useSlider(_extends({}, ownerState, {
-    ref
+    rootRef: ref
   }));
   ownerState.marked = marks.length > 0 && marks.some(mark => mark.label);
   ownerState.dragging = dragging;
@@ -1442,7 +1474,8 @@ const Slider = /*#__PURE__*/reactExports.forwardRef(function Slider(inputProps, 
     elementType: ThumbSlot,
     getSlotProps: getThumbProps,
     externalSlotProps: thumbSlotProps,
-    ownerState: _extends({}, ownerState, thumbSlotProps == null ? void 0 : thumbSlotProps.ownerState)
+    ownerState: _extends({}, ownerState, thumbSlotProps == null ? void 0 : thumbSlotProps.ownerState),
+    className: classes.thumb
   });
   const valueLabelProps = useSlotProps({
     elementType: ValueLabelSlot,
@@ -1459,7 +1492,8 @@ const Slider = /*#__PURE__*/reactExports.forwardRef(function Slider(inputProps, 
   const markLabelProps = useSlotProps({
     elementType: MarkLabelSlot,
     externalSlotProps: markLabelSlotProps,
-    ownerState
+    ownerState,
+    className: classes.markLabel
   });
   const inputSliderProps = useSlotProps({
     elementType: InputSlot,
@@ -1500,8 +1534,10 @@ const Slider = /*#__PURE__*/reactExports.forwardRef(function Slider(inputProps, 
       const percent = valueToPercent(value, min, max);
       const style = axisProps[axis].offset(percent);
       const ValueLabelComponent = valueLabelDisplay === 'off' ? Forward : ValueLabelSlot;
-      return /*#__PURE__*/jsxRuntimeExports.jsx(reactExports.Fragment, {
-        children: /*#__PURE__*/jsxRuntimeExports.jsx(ValueLabelComponent, _extends({}, !isHostComponent(ValueLabelComponent) && {
+      return (
+        /*#__PURE__*/
+        /* TODO v6: Change component structure. It will help in avoiding the complicated React.cloneElement API added in SliderValueLabel component. Should be: Thumb -> Input, ValueLabel. Follow Joy UI's Slider structure. */
+        jsxRuntimeExports.jsx(ValueLabelComponent, _extends({}, !isHostComponent(ValueLabelComponent) && {
           valueLabelFormat,
           valueLabelDisplay,
           value: typeof valueLabelFormat === 'function' ? valueLabelFormat(scale(value), index) : valueLabelFormat,
@@ -1510,8 +1546,7 @@ const Slider = /*#__PURE__*/reactExports.forwardRef(function Slider(inputProps, 
           disabled
         }, valueLabelProps, {
           children: /*#__PURE__*/jsxRuntimeExports.jsx(ThumbSlot, _extends({
-            "data-index": index,
-            "data-focusvisible": focusedThumbIndex === index
+            "data-index": index
           }, thumbProps, {
             className: clsx(classes.thumb, thumbProps.className, active === index && classes.active, focusedThumbIndex === index && classes.focusVisible),
             style: _extends({}, style, {
@@ -1526,15 +1561,15 @@ const Slider = /*#__PURE__*/reactExports.forwardRef(function Slider(inputProps, 
               value: values[index]
             }, inputSliderProps))
           }))
-        }))
-      }, index);
+        }), index)
+      );
     })]
   }));
 });
 var Slider$1 = Slider;
 
 const OrganismListItem = ({ css, className, id, label, isChecked, onClick }) => {
-    return (jsxs("div", Object.assign({ css: [organismListItem, css], className: className }, { children: [jsxs("div", Object.assign({ css: listInner }, { children: [jsx("span", Object.assign({ css: labelCol }, { children: label })), jsxs("a", Object.assign({ css: idCol, href: `${PATH_TAXON}${id}`, target: "_blank", rel: "noreferrer" }, { children: ["[tax_id:", id, "]"] }))] })), jsx("span", Object.assign({ css: checkCol }, { children: jsx(Checkbox, { checked: isChecked, onClick: () => onClick({ id, label }) }) }))] })));
+    return (jsxs("div", { css: [organismListItem, css], className: className, children: [jsxs("div", { css: listInner, children: [jsx("span", { css: labelCol, children: label }), jsxs("a", { css: idCol, href: `${PATH_TAXON}${id}`, target: "_blank", rel: "noreferrer", children: ["[tax_id:", id, "]"] })] }), jsx("span", { css: checkCol, children: jsx(Checkbox, { checked: isChecked, onClick: () => onClick({ id, label }) }) })] }));
 };
 const organismListItem = css `
   & + & {
@@ -1671,7 +1706,7 @@ const SHOW_COUNT$1 = 10;
 const FoundOrganismsList = ({ css, className }) => {
     const { data, toggleChecked, isLoading, response } = useOrganismList();
     const { next, prev } = usePaginate();
-    return (jsx("div", Object.assign({ css: [foundOrganismsList, css], className: className }, { children: jsxs("div", { children: [isLoading && (jsx("div", Object.assign({ css: loadingIndicator }, { children: jsx(CircularProgress, { color: "inherit", size: 40 }) }))), jsx("p", Object.assign({ css: infoTextCSS }, { children: getInfoText(response.total, isLoading) })), jsx("div", Object.assign({ css: inner }, { children: data.map((item) => (jsx(OrganismListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id))) })), !!response.total && !isLoading && (jsx(Pagination, { total: response.total, current: response.offset, displayLength: response.limit, onClickNext: () => next(), onClickPrev: () => prev() }))] }) })));
+    return (jsx("div", { css: [foundOrganismsList, css], className: className, children: jsxs("div", { children: [isLoading && (jsx("div", { css: loadingIndicator, children: jsx(CircularProgress, { color: "inherit", size: 40 }) })), jsx("p", { css: infoTextCSS, children: getInfoText(response.total, isLoading) }), jsx("div", { css: inner, children: data.map((item) => (jsx(OrganismListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id))) }), !!response.total && !isLoading && (jsx(Pagination, { total: response.total, current: response.offset, displayLength: response.limit, onClickNext: () => next(), onClickPrev: () => prev() }))] }) }));
 };
 const usePaginate = () => {
     const response = useFoundOrganismsState();
@@ -1776,12 +1811,12 @@ const OrganismTab = ({ css, className }) => {
     const handleChange = (event, newValue) => {
         setOrganismTabFocus(newValue);
     };
-    return (jsx("div", Object.assign({ css: [wrapper$1, css], className: className }, { children: jsx(Tabs, Object.assign({ value: tabFocus, onChange: handleChange }, { children: organismTabNames.map((label) => {
+    return (jsx("div", { css: [wrapper$1, css], className: className, children: jsx(Tabs, { value: tabFocus, onChange: handleChange, children: organismTabNames.map((label) => {
                 if (label === "Selected organisms") {
-                    return (jsx(Tab, { label: jsx(Badge, Object.assign({ badgeContent: selected.length, color: "primary" }, { children: label })), value: label, css: tabCSS }, label));
+                    return (jsx(Tab, { label: jsx(Badge, { badgeContent: selected.length, color: "primary", children: label }), value: label, css: tabCSS }, label));
                 }
                 return jsx(Tab, { label: label, value: label, css: tabCSS }, label);
-            }) })) })));
+            }) }) }));
 };
 const wrapper$1 = css `
   width: 100%;
@@ -1816,16 +1851,16 @@ const SelectedOrganismsList = ({ css, className }) => {
             .filter((item, i) => i < SHOW_COUNT);
         setData(filtered);
     }, [selectedOrganisms, current]);
-    return (jsxs("div", Object.assign({ css: [selectedOrganismsList, css], className: className }, { children: [jsx("div", { children: data.map((item) => (jsx(OrganismListItem, Object.assign({}, item, { isChecked: true, onClick: () => {
+    return (jsxs("div", { css: [selectedOrganismsList, css], className: className, children: [jsx("div", { children: data.map((item) => (jsx(OrganismListItem, Object.assign({}, item, { isChecked: true, onClick: () => {
                         toggleOrganismSelection(item);
-                    } }), item.id))) }), !!selectedOrganisms.length && (jsx(Pagination, { total: selectedOrganisms.length, current: current, displayLength: SHOW_COUNT, onClickNext: next, onClickPrev: prev }))] })));
+                    } }), item.id))) }), !!selectedOrganisms.length && (jsx(Pagination, { total: selectedOrganisms.length, current: current, displayLength: SHOW_COUNT, onClickNext: next, onClickPrev: prev }))] }));
 };
 const selectedOrganismsList = css ``;
 
 const OrganismPane = ({ css, className }) => {
     useMediaLoadFromOrganismSelection();
     const { tabFocus } = useTabFocus();
-    return (jsxs("div", Object.assign({ css: [wrapper, css], className: className }, { children: [jsx(OrganismTab, {}), jsxs("div", Object.assign({ css: contents }, { children: [tabFocus === "Found organisms" && jsx(FoundOrganismsList, {}), tabFocus === "Selected organisms" && jsx(SelectedOrganismsList, {})] }))] })));
+    return (jsxs("div", { css: [wrapper, css], className: className, children: [jsx(OrganismTab, {}), jsxs("div", { css: contents, children: [tabFocus === "Found organisms" && jsx(FoundOrganismsList, {}), tabFocus === "Selected organisms" && jsx(SelectedOrganismsList, {})] })] }));
 };
 const useTabFocus = () => {
     const tabFocus = useOrganismTabFocusState();
@@ -1901,7 +1936,7 @@ const RangeSlider = ({ css, className, min, max, label, marks, queryKey, handleV
             handleEnabledChange(queryKey, false);
         }
     }, [enabled]);
-    return (jsxs("div", Object.assign({ css: [rangeSlider, css], className: className }, { children: [jsx("div", { children: jsx("span", { children: jsx(FormControlLabel$1, { label: label, control: jsx(Checkbox, { onChange: handleCheckChange, css: checkBoxStyle$1 }) }) }) }), jsx(Slider$1, { value: value, onChange: handleSliderChange, onChangeCommitted: handleChangeCommitted, valueLabelDisplay: "auto", getAriaValueText: valuetext, min: min, max: max, marks: marks, step: 0.1, disabled: enabled ? undefined : true })] })));
+    return (jsxs("div", { css: [rangeSlider, css], className: className, children: [jsx("div", { children: jsx("span", { children: jsx(FormControlLabel$1, { label: label, control: jsx(Checkbox, { onChange: handleCheckChange, css: checkBoxStyle$1 }) }) }) }), jsx(Slider$1, { value: value, onChange: handleSliderChange, onChangeCommitted: handleChangeCommitted, valueLabelDisplay: "auto", getAriaValueText: valuetext, min: min, max: max, marks: marks, step: 0.1, disabled: enabled ? undefined : true })] }));
 };
 const rangeSlider = css ``;
 const checkBoxStyle$1 = css `
@@ -1932,7 +1967,7 @@ const SelectBox = ({ css, className, label, items, queryKey, handleEnabledChange
             handleEnabledChange(queryKey, false);
         }
     }, [value, enabled]);
-    return (jsxs("div", Object.assign({ css: [selectBox, css], className: className }, { children: [jsx(Checkbox, { css: checkBoxStyle, onChange: handleCheckChange }), jsx(FormControl, Object.assign({ sx: { m: 1, minWidth: 200 } }, { children: jsx(Autocomplete, { filterSelectedOptions: true, onChange: handleSelectChange, disablePortal: true, disableClearable: true, options: items, disabled: enabled ? undefined : true, getOptionLabel: (item) => item[1], renderInput: (params) => (jsx(TextField, Object.assign({}, params, { label: label, InputProps: Object.assign(Object.assign({}, params.InputProps), { endAdornment: jsx(Fragment, { children: params.InputProps.endAdornment }) }) }))), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined" }, getTagProps({ index }), { label: option[1], key: option[0] })))) }) }))] })));
+    return (jsxs("div", { css: [selectBox, css], className: className, children: [jsx(Checkbox, { css: checkBoxStyle, onChange: handleCheckChange }), jsx(FormControl, { sx: { m: 1, minWidth: 200 }, children: jsx(Autocomplete, { filterSelectedOptions: true, onChange: handleSelectChange, disablePortal: true, disableClearable: true, options: items, disabled: enabled ? undefined : true, getOptionLabel: (item) => item[1], renderInput: (params) => (jsx(TextField, Object.assign({}, params, { label: label, InputProps: Object.assign(Object.assign({}, params.InputProps), { endAdornment: jsx(Fragment, { children: params.InputProps.endAdornment }) }) }))), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined" }, getTagProps({ index }), { label: option[1], key: option[0] })))) }) })] }));
 };
 const selectBox = css `
   background-color: ${COLOR_WHITE};
@@ -1945,7 +1980,7 @@ const checkBoxStyle = css `
 
 const PhenotypeSearchArea = ({ css, className }) => {
     const { handleEnabledChange, handleValueChange } = usePhenotypeQuery();
-    return (jsxs("div", Object.assign({ css: [phenotypeSearchArea, css], className: className }, { children: [jsx(RangeSlider, { css: sliderStyle, min: 0, max: 110, label: "Growth temperature", marks: [
+    return (jsxs("div", { css: [phenotypeSearchArea, css], className: className, children: [jsx(RangeSlider, { css: sliderStyle, min: 0, max: 110, label: "Growth temperature", marks: [
                     { value: 0, label: "0°C" },
                     { value: 37, label: "37°C" },
                     { value: 55, label: "55°C" },
@@ -2002,7 +2037,7 @@ const PhenotypeSearchArea = ({ css, className }) => {
                 ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }), jsx(SelectBox, { label: "Salinity", queryKey: "MPO_03006", items: [
                     ["MPO_03007", "Halophile"],
                     ["MPO_03008", "Halotolerant"],
-                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange })] })));
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange })] }));
 };
 const phenotypeSearchArea = css `
   background-color: ${COLOR_WHITE};
@@ -2047,7 +2082,7 @@ const usePhenotypeQuery = () => {
 };
 
 const PhenotypeSection = ({ css, className }) => {
-    return (jsx("div", Object.assign({ css: [phenotypeSection, css], className: className }, { children: jsx(PhenotypeSearchArea, {}) })));
+    return (jsx("div", { css: [phenotypeSection, css], className: className, children: jsx(PhenotypeSearchArea, {}) }));
 };
 const phenotypeSection = css `
   background-color: ${COLOR_WHITE};
@@ -2057,7 +2092,7 @@ const phenotypeSection = css `
 
 const AppContainer = ({ dispatchEvent }) => {
     const { next, prev } = useMediaPagination();
-    return (jsxs("div", Object.assign({ css: wrapper$2 }, { children: [jsx("div", Object.assign({ css: queryPane }, { children: jsx(PhenotypeSection, {}) })), jsx("div", Object.assign({ css: subPane }, { children: jsx(OrganismPane, {}) })), jsx("div", Object.assign({ css: subPane }, { children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) }))] })));
+    return (jsxs("div", { css: wrapper$2, children: [jsx("div", { css: queryPane, children: jsx(PhenotypeSection, {}) }), jsx("div", { css: subPane, children: jsx(OrganismPane, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) })] }));
 };
 const useMediaPagination = () => {
     const selectedOrganisms = useSelectedOrganismsState();

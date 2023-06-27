@@ -1,11 +1,12 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-33129828.js';
-import { d as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, L as COLOR_GRAY400, F as Fragment, O as Recoil_index_7, y as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-5a1c35e0.js';
-import { c as css, r as reactExports, R as React, l as dist, g as getData } from './getData-0fc4e1b9.js';
-import { c as copy } from './index.es-918fddc1.js';
-import { l as lineageRanks } from './types-3f4e9278.js';
-import { m as Tooltip, J as API_MEDIA_STRAINS_ALIGNMENT } from './paths-d1e79f8a.js';
-import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-e923d624.js';
-import './variables-fde23d74.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
+import { d as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, K as COLOR_GRAY400, F as Fragment, O as Recoil_index_7, x as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { c as css, r as reactExports, R as React, l as dist, g as getData } from './getData-e69d262f.js';
+import { c as copy } from './index-1640bb89.js';
+import { l as lineageRanks } from './types-8994330c.js';
+import { n as Tooltip, L as API_MEDIA_STRAINS_ALIGNMENT } from './paths-ee59fa78.js';
+import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-878ee74c.js';
+import './emotion-styled.browser.esm-90764b6a.js';
+import './variables-42acbc42.js';
 
 let nanoid = (size = 21) =>
   crypto.getRandomValues(new Uint8Array(size)).reduce((id, byte) => {
@@ -186,7 +187,7 @@ const useToolTipEnabled = () => {
 };
 const MediaCell = ({ label, id, size, css, className }) => {
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
-    return (jsxs("div", Object.assign({ css: [mediaCell, css], className: className, style: { height: `${makeCellHeight(size)}px` } }, { children: [jsx("a", Object.assign({ href: `/medium/${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ ref: labelRef, className: "label" }, { children: label })) })) }))] })));
+    return (jsxs("div", { css: [mediaCell, css], className: className, style: { height: `${makeCellHeight(size)}px` }, children: [jsx("a", { href: `/medium/${id}`, children: id }), jsx("div", { className: "label-wrapper", children: jsx(Tooltip, { title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled, children: jsx("span", { ref: labelRef, className: "label", children: label }) }) })] }));
 };
 const mediaCell = css `
   width: 200px;
@@ -215,7 +216,7 @@ const mediaCell = css `
 `;
 
 const MediaCol = ({ mediaList, css, className }) => {
-    return (jsxs("div", Object.assign({ css: [mediaCol, css], className: className }, { children: [jsx("div", { css: emptyCell }), mediaList.map((info, index) => (jsx(MediaCell, Object.assign({}, info), index)))] })));
+    return (jsxs("div", { css: [mediaCol, css], className: className, children: [jsx("div", { css: emptyCell }), mediaList.map((info, index) => (jsx(MediaCell, Object.assign({}, info), index)))] }));
 };
 const mediaCol = css `
   display: flex;
@@ -229,7 +230,7 @@ const emptyCell = css `
 `;
 
 const FilterIcon = ({ css, className }) => {
-    return (jsx("svg", Object.assign({ css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" }, { children: jsx("path", { d: "M324.4 64C339.6 64 352 76.37 352 91.63C352 98.32 349.6 104.8 345.2 109.8L240 230V423.6C240 437.1 229.1 448 215.6 448C210.3 448 205.2 446.3 200.9 443.1L124.7 385.6C116.7 379.5 112 370.1 112 360V230L6.836 109.8C2.429 104.8 0 98.32 0 91.63C0 76.37 12.37 64 27.63 64H324.4zM144 224V360L208 408.3V223.1C208 220.1 209.4 216.4 211.1 213.5L314.7 95.1H37.26L140 213.5C142.6 216.4 143.1 220.1 143.1 223.1L144 224zM496 400C504.8 400 512 407.2 512 416C512 424.8 504.8 432 496 432H336C327.2 432 320 424.8 320 416C320 407.2 327.2 400 336 400H496zM320 256C320 247.2 327.2 240 336 240H496C504.8 240 512 247.2 512 256C512 264.8 504.8 272 496 272H336C327.2 272 320 264.8 320 256zM496 80C504.8 80 512 87.16 512 96C512 104.8 504.8 112 496 112H400C391.2 112 384 104.8 384 96C384 87.16 391.2 80 400 80H496z" }) })));
+    return (jsx("svg", { css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", children: jsx("path", { d: "M324.4 64C339.6 64 352 76.37 352 91.63C352 98.32 349.6 104.8 345.2 109.8L240 230V423.6C240 437.1 229.1 448 215.6 448C210.3 448 205.2 446.3 200.9 443.1L124.7 385.6C116.7 379.5 112 370.1 112 360V230L6.836 109.8C2.429 104.8 0 98.32 0 91.63C0 76.37 12.37 64 27.63 64H324.4zM144 224V360L208 408.3V223.1C208 220.1 209.4 216.4 211.1 213.5L314.7 95.1H37.26L140 213.5C142.6 216.4 143.1 220.1 143.1 223.1L144 224zM496 400C504.8 400 512 407.2 512 416C512 424.8 504.8 432 496 432H336C327.2 432 320 424.8 320 416C320 407.2 327.2 400 336 400H496zM320 256C320 247.2 327.2 240 336 240H496C504.8 240 512 247.2 512 256C512 264.8 504.8 272 496 272H336C327.2 272 320 264.8 320 256zM496 80C504.8 80 512 87.16 512 96C512 104.8 504.8 112 496 112H400C391.2 112 384 104.8 384 96C384 87.16 391.2 80 400 80H496z" }) }));
 };
 
 const filterTaxon = Recoil_index_6({ key: "filterId", default: "" });
@@ -260,7 +261,7 @@ const ToMemoize = ({ wrapperRef, label, id, rank, css, className }) => {
         setFilterTaxon(id);
     };
     const { labelRef, toolTipEnabled } = useToolTipEnabled();
-    return (jsxs("div", Object.assign({ css: [taxonCell, css], className: className, ref: wrapperRef }, { children: [!!label && (jsxs(Fragment, { children: [jsx("a", Object.assign({ href: `${pathRoot}${id}` }, { children: id })), jsx("div", Object.assign({ className: "label-wrapper" }, { children: jsx(Tooltip, Object.assign({ title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled }, { children: jsx("span", Object.assign({ className: "label", ref: labelRef }, { children: makeLabel(label, rank) })) })) })), jsx("span", Object.assign({ css: filterIcon, onClick: onClickFilter }, { children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) }))] })), !label && jsx(Fragment, { children: "" })] })));
+    return (jsxs("div", { css: [taxonCell, css], className: className, ref: wrapperRef, children: [!!label && (jsxs(Fragment, { children: [jsx("a", { href: `${pathRoot}${id}`, children: id }), jsx("div", { className: "label-wrapper", children: jsx(Tooltip, { title: makeLabel(label, rank), placement: "top", PopperProps: { disablePortal: true }, arrow: true, disableHoverListener: !toolTipEnabled, children: jsx("span", { className: "label", ref: labelRef, children: makeLabel(label, rank) }) }) }), jsx("span", { css: filterIcon, onClick: onClickFilter, children: jsx(FilterIcon, { css: [id === filterId ? filterIconColorActive : filterIconColorInactive] }) })] })), !label && jsx(Fragment, { children: "" })] }));
 };
 const makeLabel = (label, rank) => {
     switch (rank) {
@@ -391,7 +392,7 @@ const TaxonCol = ({ css, className, rank, taxonList }) => {
             wrapperRef.current.style.display = !isFolded ? "flex" : "none";
         }, 16);
     }, [isFolded]);
-    return (jsxs("div", Object.assign({ css: [taxonCol, isFolded ? foldedStyle : null, css], className: className }, { children: [!isFolded && (jsx("div", Object.assign({ css: rankCell, onClick: onClickRank }, { children: capitalizeFirstLetter(rank) }))), jsx("div", Object.assign({ css: allTaxonWrapper, ref: wrapperRef }, { children: taxonList.map((list, index) => (jsx("div", Object.assign({ css: mediumTaxonWrapper }, { children: list.map((info, index) => (jsx(TaxonCell, Object.assign({}, info, { rank: rank, isFolded: isFolded }), index))) }), index))) })), isFolded && (jsx("div", Object.assign({ css: foldedCover, onClick: onClickRank }, { children: jsx("span", { children: capitalizeFirstLetter(rank) }) })))] })));
+    return (jsxs("div", { css: [taxonCol, isFolded ? foldedStyle : null, css], className: className, children: [!isFolded && (jsx("div", { css: rankCell, onClick: onClickRank, children: capitalizeFirstLetter(rank) })), jsx("div", { css: allTaxonWrapper, ref: wrapperRef, children: taxonList.map((list, index) => (jsx("div", { css: mediumTaxonWrapper, children: list.map((info, index) => (jsx(TaxonCell, Object.assign({}, info, { rank: rank, isFolded: isFolded }), index))) }, index))) }), isFolded && (jsx("div", { css: foldedCover, onClick: onClickRank, children: jsx("span", { children: capitalizeFirstLetter(rank) }) }))] }));
 };
 const taxonCol = css `
   width: 200px;
@@ -453,10 +454,10 @@ const AppContainer = ({ data, hideMedia = false }) => {
     const filterTaxon = useFilterTaxonState();
     const filterRank = useFilterRankState();
     const displayData = reactExports.useMemo(() => processDisplayData(data, filterTaxon, filterRank), [data, filterTaxon, filterRank]);
-    return displayData.media.length ? (jsxs("div", Object.assign({ css: appContainer }, { children: [!hideMedia && jsx(MediaCol, { mediaList: displayData.media }), jsx("div", Object.assign({ css: taxonContainer }, { children: lineageRanks
+    return displayData.media.length ? (jsxs("div", { css: appContainer, children: [!hideMedia && jsx(MediaCol, { mediaList: displayData.media }), jsx("div", { css: taxonContainer, children: lineageRanks
                     .concat()
                     .reverse()
-                    .map((rank, index) => (jsx(TaxonCol, { rank: rank, taxonList: displayData.taxon[rank] }, index))) }))] }))) : (jsx("p", { children: "NO RESULT FOUND" }));
+                    .map((rank, index) => (jsx(TaxonCol, { rank: rank, taxonList: displayData.taxon[rank] }, index))) })] })) : (jsx("p", { children: "NO RESULT FOUND" }));
 };
 const appContainer = css `
   display: flex;
@@ -482,7 +483,7 @@ const App = ({ gmIds, stanzaElement, hideMedia = false }) => {
             setData(response.body);
         }))();
     }, [gmIds]);
-    return data ? (jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(AppContainer, Object.assign({}, { data, hideMedia })) }))) : (jsx(Fragment, { children: "Loading..." }));
+    return data ? (jsx("div", { css: wrapper, children: data && jsx(AppContainer, { data, hideMedia }) })) : (jsx(Fragment, { children: "Loading..." }));
 };
 const wrapper = css `
   min-height: 100px;
@@ -497,7 +498,7 @@ class ReactStanza extends TogoMediumReactStanza {
     makeApp() {
         const gmIds = stringToArray(this.params.gm_ids);
         const hideMedia = this.params.hide_media === "true";
-        return jsx(App, Object.assign({}, { hideMedia, gmIds, stanzaElement: this.root }));
+        return jsx(App, { hideMedia, gmIds, stanzaElement: this.root });
     }
 }
 

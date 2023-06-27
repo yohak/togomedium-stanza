@@ -1,14 +1,15 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-33129828.js';
-import { d as COLOR_WHITE, y as COLOR_GRAY_LINE, C as COLOR_PRIMARY, b as COLOR_GRAY300, B as COLOR_GRAY700, L as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-5a1c35e0.js';
-import { c as css, g as getData, l as dist, r as reactExports } from './getData-0fc4e1b9.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-e0da18ab.js';
-import { m as Tooltip, F as API_TAXONOMY_CHILDREN, E as API_MEDIA_BY_TAXON } from './paths-d1e79f8a.js';
-import { f as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-7499d61c.js';
-import './consts-d8934727.js';
-import './variables-fde23d74.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
+import { d as COLOR_WHITE, x as COLOR_GRAY_LINE, C as COLOR_PRIMARY, b as COLOR_GRAY300, A as COLOR_GRAY700, K as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { c as css, g as getData, l as dist, r as reactExports } from './getData-e69d262f.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-af742fc0.js';
+import { n as Tooltip, I as API_TAXONOMY_CHILDREN, H as API_MEDIA_BY_TAXON } from './paths-ee59fa78.js';
+import { f as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-f235d087.js';
+import './emotion-styled.browser.esm-90764b6a.js';
+import './consts-c8281bfe.js';
+import './variables-42acbc42.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
-    return (jsxs("li", Object.assign({ css: [wrapper, css], className: className }, { children: [jsxs("div", Object.assign({ css: inner }, { children: [jsxs("div", Object.assign({ css: left }, { children: [jsx("span", Object.assign({ onClick: () => onToggleChildren(id) }, { children: jsx(ToggleIcon, Object.assign({}, { hasChildren, isOpen, isLoading })) })), jsx(Tooltip, Object.assign({ title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start" }, { children: jsx("span", { children: label }) })), tag && jsx("span", Object.assign({ css: tagTip }, { children: tag })), linkString && linkURL && (jsxs("a", Object.assign({ href: linkURL, target: "_blank", rel: "noreferrer" }, { children: ["[", linkString, "]"] })))] })), jsx(Checkbox, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) })] })), isOpen && !!children && jsx("ul", Object.assign({ css: childrenWrapper }, { children: children }))] })));
+    return (jsxs("li", { css: [wrapper, css], className: className, children: [jsxs("div", { css: inner, children: [jsxs("div", { css: left, children: [jsx("span", { onClick: () => onToggleChildren(id), children: jsx(ToggleIcon, { hasChildren, isOpen, isLoading }) }), jsx(Tooltip, { title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start", children: jsx("span", { children: label }) }), tag && jsx("span", { css: tagTip, children: tag }), linkString && linkURL && (jsxs("a", { href: linkURL, target: "_blank", rel: "noreferrer", children: ["[", linkString, "]"] }))] }), jsx(Checkbox, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) })] }), isOpen && !!children && jsx("ul", { css: childrenWrapper, children: children })] }));
 };
 const ToggleIcon = ({ hasChildren, isOpen, isLoading, }) => {
     if (isLoading)
@@ -251,9 +252,9 @@ const TaxonomicTreeBranch = ({ id, css, className }) => {
     const onToggleChildren = () => {
         setIsOpen((prev) => !prev);
     };
-    return (jsx(TreeBranchView, Object.assign({ css: css, className: className, label: label, id: id, tag: rank, linkString: linkString, linkURL: linkURL, toolTipLabel: ascendantsLabel, check: check, hasChildren: !!branchChildren.length, isOpen: isOpen, isLoading: isLoading, onClickCheck: () => onClickCheck(), onToggleChildren: onToggleChildren }, { children: isOpen &&
+    return (jsx(TreeBranchView, { css: css, className: className, label: label, id: id, tag: rank, linkString: linkString, linkURL: linkURL, toolTipLabel: ascendantsLabel, check: check, hasChildren: !!branchChildren.length, isOpen: isOpen, isLoading: isLoading, onClickCheck: () => onClickCheck(), onToggleChildren: onToggleChildren, children: isOpen &&
             branchChildren.length &&
-            branchChildren.map((childId) => jsx(TaxonomicTreeBranch, { id: childId }, childId)) })));
+            branchChildren.map((childId) => jsx(TaxonomicTreeBranch, { id: childId }, childId)) }));
 };
 const useLinkString = (id, rank) => {
     const [linkString, setLinkString] = reactExports.useState("");
@@ -373,7 +374,7 @@ const superkingdoms = [
 const TaxonomicTreeSection = () => {
     useInitTaxonTree();
     useMediaLoadFromTaxon();
-    return (jsx("div", Object.assign({ css: [taxonomicTreeSection] }, { children: jsxs("div", { children: [jsx(TaxonomicTreeBranch, { id: "2157" }), jsx(TaxonomicTreeBranch, { id: "2" }), jsx(TaxonomicTreeBranch, { id: "2759" })] }) })));
+    return (jsx("div", { css: [taxonomicTreeSection], children: jsxs("div", { children: [jsx(TaxonomicTreeBranch, { id: "2157" }), jsx(TaxonomicTreeBranch, { id: "2" }), jsx(TaxonomicTreeBranch, { id: "2759" })] }) }));
 };
 const taxonomicTreeSection = css `
   //overflow: scroll;
@@ -406,7 +407,7 @@ const useMediaLoadFromTaxon = () => {
 
 const AppContainer = ({ dispatchEvent }) => {
     const { next, prev } = useMediaPagination();
-    return (jsxs("div", Object.assign({ css: wrapper$1 }, { children: [jsx("div", Object.assign({ css: queryPane }, { children: jsx(TaxonomicTreeSection, {}) })), jsx("div", Object.assign({ css: subPane }, { children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) }))] })));
+    return (jsxs("div", { css: wrapper$1, children: [jsx("div", { css: queryPane, children: jsx(TaxonomicTreeSection, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) })] }));
 };
 const useMediaPagination = () => {
     const selectedTaxon = useSelectedTaxonState();
