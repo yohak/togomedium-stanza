@@ -67,6 +67,7 @@
     "jest-extended": "^2.0.0",
     "msw-storybook-addon": "^1.5.0",
     "prettier": "^2.2.1",
+    "react-docgen-typescript-plugin": "^1.0.5",
     "storybook-addon-paddings": "^4.2.1",
     "ts-jest": "^29.1.0",
     "tsc-watch": "^4.2.9",

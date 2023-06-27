@@ -9,4 +9,7 @@ module.exports = {
     ...options,
     presets: [...options.presets, "@emotion/babel-preset-css-prop"],
   }),
+  typescript: {
+    reactDocgen: "react-docgen-typescript-plugin",
+  },
 };
