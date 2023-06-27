@@ -44,7 +44,7 @@ export const SubHeading = styled.h3`
 
 export const ColorButton = styled.a`
   background-color: ${COLOR_PRIMARY};
-  color: ${COLOR_WHITE};
+  color: ${COLOR_WHITE} !important;
   padding: 4px 8px 2px;
   border-radius: 3px;
   text-decoration: none;
