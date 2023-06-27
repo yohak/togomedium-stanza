@@ -93,6 +93,8 @@ const StanzaView = ({ css, className, id, originalId, srcUrl, srcLabel, name, ph
                         }
                     })] })), extraComponents.map((item, i) => {
                 return (jsx("div", { children: item.components.map((component, index) => {
+                        if (!component)
+                            return jsx(Fragment, {});
                         if ("comment" in component) {
                             return jsx(RecipeComment, Object.assign({}, component), index);
                         }

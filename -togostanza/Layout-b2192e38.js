@@ -25184,6 +25184,7 @@ var devDependencies = {
 	"jest-extended": "^2.0.0",
 	"msw-storybook-addon": "^1.5.0",
 	prettier: "^2.2.1",
+	"react-docgen-typescript-plugin": "^1.0.5",
 	"storybook-addon-paddings": "^4.2.1",
 	"ts-jest": "^29.1.0",
 	"tsc-watch": "^4.2.9",
@@ -25266,4 +25267,4 @@ script.render = render;
 script.__file = "node_modules/togostanza/src/components/Layout.vue";
 
 export { unref as A, normalizeStyle as B, Fragment as F, createElementBlock as a, renderList as b, createBlock as c, defineComponent as d, createBaseVNode as e, createCommentVNode as f, createApp as g, ref as h, octicons as i, createTextVNode as j, computed as k, watch as l, mergeProps as m, normalizeProps as n, openBlock as o, guardReactiveProps as p, resolveDynamicComponent as q, resolveComponent as r, script as s, toDisplayString as t, createVNode as u, pushScopeId as v, withCtx as w, popScopeId as x, n as y, normalizeClass as z };
-//# sourceMappingURL=Layout-6d860089.js.map
+//# sourceMappingURL=Layout-b2192e38.js.map
