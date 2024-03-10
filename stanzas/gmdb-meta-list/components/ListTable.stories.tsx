@@ -23,7 +23,11 @@ const defaultArgs: ComponentProps<typeof ListTable> = {
   data: data1,
   showColumnNames: true,
   columnSizes: [15, 15, 70],
+  limit: 20,
 };
 
 export const Primary = Template.bind({});
 Primary.args = { ...defaultArgs };
+
+export const EmptyRows = Template.bind({});
+EmptyRows.args = { ...defaultArgs, limit: 25 };

@@ -22,11 +22,13 @@ const useTableData = (apiUrl: string, initialLimit: number) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchData(apiUrl, offset, limit).then((response) => {
-      setData(response);
-      console.log(response?.body);
-      setIsLoading(false);
-    });
+    const handler = window.setTimeout(() => {
+      fetchData(apiUrl, offset, limit).then((response) => {
+        setData(response);
+        setIsLoading(false);
+      });
+    }, 100);
+    return () => window.clearTimeout(handler);
   }, [apiUrl, limit, offset]);
   return { offset, setOffset, limit, setLimit, isLoading, data };
 };

@@ -1,8 +1,11 @@
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { Controller } from "./Controller";
+import { BottomController } from "./BottomController";
 import { ListTable } from "./ListTable";
+import { TopInfo } from "./TopInfo";
+import { StanzaWrapper } from "../../../shared/components/StanzaWrapper";
 import { stanzaWrapper } from "../../../shared/styles/common";
 import { ListApiBody } from "../types";
 import { getPagination } from "../utils/getPagination";
@@ -37,16 +40,26 @@ export const StanzaView: FC<Props> = ({
   return (
     <div css={[stanzaView, css]} className={className}>
       {title && (
-        <header>
+        <Header>
           <h2>{title}</h2>
-        </header>
+        </Header>
       )}
-      <div css={stanzaWrapper}>
-        <ListTable {...{ data, showColumnNames, columnSizes }} />
-        <Controller {...{ total: data.total, offset, limit, setOffset, setLimit }} />
-      </div>
+      <StanzaWrapper>
+        <TopInfo {...{ total: data.total, limit, setLimit, setOffset }} />
+        <ListTable {...{ data, showColumnNames, columnSizes, limit }} />
+        <BottomController {...{ total: data.total, offset, limit, setOffset }} />
+      </StanzaWrapper>
     </div>
   );
 };
 
 const stanzaView = css``;
+const Header = styled.header`
+  h2 {
+    -webkit-font-smoothing: antialiased;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-left: 8px;
+  }
+`;
