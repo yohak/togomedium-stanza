@@ -1,6 +1,5 @@
-import { __TEST__ } from "./index";
-
-const { separateURL, filterQuery, makeFormBody } = __TEST__;
+import { __TEST__ } from "./api";
+const { separateURL, filterQuery } = __TEST__;
 
 describe("separateURL", () => {
   test("it should work", () => {
@@ -33,17 +32,5 @@ describe("filterQuery", () => {
   test("it return empty text if query is null", () => {
     const result = filterQuery(null);
     expect(result).toBe("");
-  });
-});
-
-describe("makeFormBody", () => {
-  test("it should make form body from object", () => {
-    const param: any = {
-      limit: 10,
-      offset: 5,
-      keyword: "培地",
-    };
-    const result = makeFormBody(param);
-    expect(result).toBe("limit=10&offset=5&keyword=%E5%9F%B9%E5%9C%B0");
   });
 });

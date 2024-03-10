@@ -2,8 +2,8 @@
   "@context": {
     "stanza": "http://togostanza.org/resource/stanza#"
   },
-  "@id": "gmdb-meta-list",
-  "stanza:label": "GMDB meta list",
+  "@id": "_gmdb-meta-list",
+  "stanza:label": "_GMDB meta list",
   "stanza:definition": "",
   "stanza:type": "Stanza",
   "stanza:display": "Table",
@@ -13,7 +13,7 @@
   "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2021-02-19",
-  "stanza:updated": "2024-03-09",
+  "stanza:updated": "2021-02-19",
   "stanza:parameter": [
     {
       "stanza:key": "api_url",

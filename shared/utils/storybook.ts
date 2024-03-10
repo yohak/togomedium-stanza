@@ -4,6 +4,7 @@ import { RestHandler } from "msw";
 type StanzaNames =
   | "ComponentByGmoid"
   | "TaxonByTaxid"
+  | "MediaByGMID"
   | "StrainByStrainId"
   | "MediaFinder"
   | "MediaAlignmentTable"
@@ -12,6 +13,7 @@ type StanzaNames =
   | "FindMediaByOrganismPhenotype"
   | "MediaStrainAlignment"
   | "SimilarMediaNode"
+  | "MetaList"
   | "icons";
 export const makeComponentStoryTitle = (name: string, stanza: StanzaNames): string =>
   `Components/${stanza}/${name}`;

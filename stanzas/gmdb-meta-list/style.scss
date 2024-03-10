@@ -2,62 +2,32 @@
 @use '../../styles/mixins' as m;
 @use '../../styles/variables' as v;
 
-@include m.wrapper(var(--web-font), var(--link-color));
+@include m.wrapper();
 
-.wrapper[data-is-loading]:after {
-  content: "loading...";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.8);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
+.name {
+  @include m.title();
 }
 
-table {
-  border: v.$border-thin;;
-  width: 100%;
-  font-size: 16px;
-  border-collapse: collapse;
+h3 {
+  @include m.heading();
+}
 
-  td, th {
-    padding: 6px 8px;
-    border-bottom: v.$border-thin;
-    text-align: left;
-    line-height: 1.2;
+a.link-btn{
+  @include m.color-btn();
+}
+
+.id-list {
+  line-height: 1.2;
+  margin-top: 8px;
+  li{
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
   }
-
-  .no-wrap {
-    white-space: nowrap;
-  }
-
-  tr:nth-child(2n) {
-    background-color: #f6f6f6;
+  span:first-child{
+    margin-right: 10px;
   }
 }
 
-//a {
-//  color: var(--link-color);
-//}
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-}
 
-footer .info {
-  font-size: 14px;
-  padding-right: 8px;
-}
-
-.error {
-  background-color: #FFFFFF;
-  padding: 16px;
-  border-radius: 5px;
-  color: #990000;
-}

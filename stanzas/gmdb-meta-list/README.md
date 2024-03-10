@@ -1,3 +1,3 @@
-# Gmdb meta list
+# Gmdb component by gmoid
 
-Stanza description goes here. Edit `stanzas/gmdb-meta-list/README.md` to update.
+Stanza description goes here. Edit `stanzas/gmdb-component-by-gmoid/README.md` to update.
