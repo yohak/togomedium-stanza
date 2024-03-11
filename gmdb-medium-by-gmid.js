@@ -84,7 +84,7 @@ const tableStyle = css `
 `;
 
 const StanzaView = ({ css, className, id, originalId, srcUrl, srcLabel, name, ph, components, extraComponents, }) => {
-    return (jsxs("div", { css: [stanzaView, css, stanzaWrapper], className: className, children: [jsxs(InfoId, { children: [jsx("span", { children: "Growth Medium ID:\u00A0" }), jsx("span", { children: id })] }), srcUrl && (jsxs(InfoId, { children: [jsx("span", { children: "Information source:\u00A0" }), jsx("a", { href: srcUrl, target: "_blank", rel: "noreferrer", children: originalId || srcLabel || id })] })), jsxs(InfoTitle, { children: [name && decodeHTMLEntities(name), ph && jsxs("small", { children: ["(pH", ph, ")"] })] }), components.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Components" }), components.map((component, index) => {
+    return (jsxs("div", { css: [stanzaView, css, stanzaWrapper], className: className, children: [jsxs(InfoId, { children: [jsx("span", { children: "Growth Medium ID:\u00A0" }), jsx("span", { children: id })] }), srcUrl && (jsxs(InfoId, { children: [jsx("span", { children: "Information source:\u00A0" }), jsx("a", { href: srcUrl, target: "_blank", rel: "noreferrer", children: originalId || srcLabel || id })] })), jsxs(InfoTitle, { children: ["[", id, "] ", name && name !== "(Unnamed medium)" && decodeHTMLEntities(name), ph && jsxs("small", { children: ["(pH", ph, ")"] })] }), components.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Components" }), components.map((component, index) => {
                         if ("comment" in component) {
                             return jsx(RecipeComment, Object.assign({}, component), index);
                         }
