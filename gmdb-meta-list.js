@@ -3734,12 +3734,12 @@ const topInfo = css `
   gap: 8px;
   padding-bottom: 4px;
   padding-right: 8px;
-  //align-items: center;
+  align-items: baseline;
 `;
 const Total = newStyled.p `
   //margin-inline-end: 16px;
-  position: relative;
-  top: 1px;
+  display: flex;
+  align-items: center;
 `;
 const NumInput = newStyled.input `
   width: 48px;
