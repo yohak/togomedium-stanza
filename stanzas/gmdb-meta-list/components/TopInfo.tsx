@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 
 type Props = {
@@ -25,6 +25,9 @@ export const TopInfo: FC<Props> = ({ css, className, total, limit, setLimit, set
     setTempLimit(newLimit);
     setOffset(0);
   };
+  useEffect(() => {
+    setTempLimit(limit);
+  }, [limit]);
 
   return (
     <div css={[topInfo, css]} className={className}>
@@ -47,7 +50,7 @@ export const TopInfo: FC<Props> = ({ css, className, total, limit, setLimit, set
             }
           }}
         />
-        <span>per page</span>
+        <span>items per page</span>
       </p>
     </div>
   );

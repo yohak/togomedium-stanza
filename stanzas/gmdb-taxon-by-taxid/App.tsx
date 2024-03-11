@@ -18,7 +18,8 @@ const App: FC<Props> = ({ tax_id }) => {
       if (!result) return;
       setProps(result);
       //
-      const wikipediaData = await fetchWikipediaData(result.scientificName);
+      const wikipediaLink = `https://en.wikipedia.org/wiki/${result.scientificName}`;
+      const wikipediaData = await fetchWikipediaData(wikipediaLink);
       setProps({ ...result, wikipediaData });
     })();
   }, [tax_id]);

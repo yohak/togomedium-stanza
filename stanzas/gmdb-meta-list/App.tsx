@@ -38,6 +38,12 @@ const useTableData = (apiUrl: string, initialLimit: number) => {
     }, 100);
     return () => window.clearTimeout(handler);
   }, [apiUrl, limit, offset]);
+  useEffect(() => {
+    if (!data) return;
+    if (data.total < limit) {
+      setLimit(data.total);
+    }
+  }, [limit, setLimit, data]);
   return { offset, setOffset, limit, setLimit, isLoading, data, errorMessage };
 };
 

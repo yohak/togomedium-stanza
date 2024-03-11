@@ -36,3 +36,12 @@ Components.args = {
   columnSizes: [15, 15, 70],
   webFont: "Fira Sans Condensed",
 };
+export const ChildItems = Template.bind({});
+ChildItems.args = {
+  apiUrl: "http://togomedium.org/sparqlist/api/gmdb_organism_under_rank_by_taxid?tax_id=293088",
+  initialLimit: 10,
+  title: "List Media",
+  showColumnNames: true,
+  columnSizes: [],
+  webFont: "Fira Sans Condensed",
+};
