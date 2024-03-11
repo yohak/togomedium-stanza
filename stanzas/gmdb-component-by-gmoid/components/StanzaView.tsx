@@ -63,7 +63,9 @@ export const StanzaView: FC<Props> = ({
           <div>
             {!!properties.length && (
               <>
-                <SubHeading>Component types</SubHeading>
+                <SubHeading>
+                  {properties.length === 1 ? "Component type" : "Component types"}
+                </SubHeading>
                 <StandardParagraph>
                   {properties.map((item, i, arr) => (
                     <span key={i}>{`${item.label_en}${addLastComma(i, arr)}`}</span>
@@ -73,7 +75,7 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!roles.length && (
               <>
-                <SubHeading>Roles</SubHeading>
+                <SubHeading>{roles.length === 1 ? "Role" : "Roles"}</SubHeading>
                 <ul>
                   {roles.map((item, i) => (
                     <li key={i}>{item.label_en}</li>
@@ -83,7 +85,9 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!superClasses.length && (
               <>
-                <SubHeading>Super classes</SubHeading>
+                <SubHeading>
+                  {superClasses.length === 1 ? "Super class" : "Super classes"}
+                </SubHeading>
                 <LinkList>
                   {superClasses.map((item, i) => (
                     <li key={i}>
@@ -96,7 +100,7 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!subClasses.length && (
               <>
-                <SubHeading>Sub classes</SubHeading>
+                <SubHeading>{subClasses.length === 1 ? "Sub class" : "Sub classes"}</SubHeading>
                 <LinkList>
                   {subClasses.map((item, i) => (
                     <li key={i}>
@@ -109,7 +113,9 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!links.length && (
               <>
-                <SubHeading>Cross references</SubHeading>
+                <SubHeading>
+                  {links.length === 1 ? "Cross reference" : "Cross references"}
+                </SubHeading>
                 <TagList>
                   {links.map((item, i) => (
                     <ColorButton key={i} href={item.uri} target="_blank" rel="noreferrer">
