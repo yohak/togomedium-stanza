@@ -21,6 +21,7 @@ const defaultArgs: ComponentProps<typeof StanzaView> = {
   limit: 20,
   setLimit: () => {},
   isLoading: false,
+  errorMessage: "",
 };
 
 export const Primary = Template.bind({});

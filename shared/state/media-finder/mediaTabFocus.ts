@@ -1,7 +1,7 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 
 export const mediaTabNames = ["Found media", "Selected media"] as const;
-export type MediaTabName = typeof mediaTabNames[number];
+export type MediaTabName = (typeof mediaTabNames)[number];
 const mediaTabFocus = atom<MediaTabName>({ key: "mediaTabFocus", default: "Found media" });
 
 export const useMediaTabFocusState = () => {
