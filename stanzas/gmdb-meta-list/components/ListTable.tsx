@@ -20,9 +20,6 @@ export const ListTable: FC<Props> = ({
   showColumnNames,
   limit,
 }) => {
-  useEffect(() => {
-    console.log("data updated", data);
-  }, [data]);
   const extraRows = Array(Math.max(0, limit - data.contents.length))
     .fill(null)
     .map(() => nanoid());
@@ -33,8 +30,9 @@ export const ListTable: FC<Props> = ({
           <tr>
             {data.columns.map((column, index) => {
               const size = columnSizes[index];
+              const isSizeEnabled = !!size && data.columns.length === columnSizes.length;
               return (
-                <th style={size ? { width: `${size}%` } : {}} key={column.key}>
+                <th style={isSizeEnabled ? { width: `${size}%` } : {}} key={column.key}>
                   {column.label}
                 </th>
               );

@@ -18,36 +18,41 @@ const useTableData = (apiUrl: string, initialLimit: number) => {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(initialLimit);
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<ApiResponse<ListApiBody>>();
+  const [data, setData] = useState<ListApiBody>();
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
+    setErrorMessage("");
     const handler = window.setTimeout(() => {
       fetchData(apiUrl, offset, limit).then((response) => {
-        setData(response);
+        if (response.body) {
+          setData(response.body);
+        } else {
+          if (response.message) {
+            setErrorMessage(response.message);
+          }
+        }
         setIsLoading(false);
       });
     }, 100);
     return () => window.clearTimeout(handler);
   }, [apiUrl, limit, offset]);
-  return { offset, setOffset, limit, setLimit, isLoading, data };
+  return { offset, setOffset, limit, setLimit, isLoading, data, errorMessage };
 };
 
 const App: FC<Props> = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFont }) => {
-  const { offset, setOffset, limit, setLimit, isLoading, data } = useTableData(
+  const { offset, setOffset, limit, setLimit, isLoading, data, errorMessage } = useTableData(
     apiUrl,
     initialLimit
   );
   if (!data) {
-    return <></>;
-  }
-  if (data.status !== 200 || !data.body) {
-    return <div>Error: {data.message}</div>;
+    return <>{errorMessage}</>;
   }
   return (
     <StanzaView
       {...{
-        data: data.body,
+        data,
         title,
         showColumnNames,
         columnSizes,
@@ -56,6 +61,7 @@ const App: FC<Props> = ({ apiUrl, initialLimit, title, showColumnNames, columnSi
         limit,
         setLimit,
         isLoading,
+        errorMessage,
       }}
     />
   );

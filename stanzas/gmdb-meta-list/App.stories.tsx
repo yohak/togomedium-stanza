@@ -10,7 +10,7 @@ const Template: ComponentStory<typeof App> = (args) => <App {...args} />;
 
 export const Result1 = Template.bind({});
 Result1.args = {
-  apiUrl: "http://togomedium.org/sparqlist/api/list_media",
+  apiUrl: "http://togomedium.org/sparqlist/api/list_strains",
   initialLimit: 20,
   title: "GMDB",
   showColumnNames: true,
