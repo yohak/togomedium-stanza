@@ -76,7 +76,8 @@ const App = ({ tax_id }) => {
             if (!result)
                 return;
             setProps(result);
-            const wikipediaData = yield fetchWikipediaData(result.scientificName);
+            const wikipediaLink = `https://en.wikipedia.org/wiki/${result.scientificName}`;
+            const wikipediaData = yield fetchWikipediaData(wikipediaLink);
             setProps(Object.assign(Object.assign({}, result), { wikipediaData }));
         }))();
     }, [tax_id]);

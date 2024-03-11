@@ -245,6 +245,9 @@ const TopInfo = ({ css, className, total, limit, setLimit, setOffset }) => {
         setTempLimit(newLimit);
         setOffset(0);
     };
+    reactExports.useEffect(() => {
+        setTempLimit(limit);
+    }, [limit]);
     return (jsxs("div", { css: [topInfo, css], className: className, children: [jsxs(Total, { children: ["Total: ", total, " items"] }), jsx("span", { children: "/" }), jsxs("p", { children: [jsx("span", { children: "Show" }), jsx(NumInput, { type: "number", value: tempLimit, onChange: (e) => {
                             setTempLimit(parseInt(e.target.value));
                         }, onBlur: () => {
@@ -253,7 +256,7 @@ const TopInfo = ({ css, className, total, limit, setLimit, setOffset }) => {
                             if (e.key === "Enter") {
                                 onCommitLimit(tempLimit);
                             }
-                        } }), jsx("span", { children: "per page" })] })] }));
+                        } }), jsx("span", { children: "items per page" })] })] }));
 };
 const topInfo = css `
   display: flex;
@@ -398,6 +401,13 @@ const useTableData = (apiUrl, initialLimit) => {
         }, 100);
         return () => window.clearTimeout(handler);
     }, [apiUrl, limit, offset]);
+    reactExports.useEffect(() => {
+        if (!data)
+            return;
+        if (data.total < limit) {
+            setLimit(data.total);
+        }
+    }, [limit, setLimit, data]);
     return { offset, setOffset, limit, setLimit, isLoading, data, errorMessage };
 };
 const App = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFont }) => {
