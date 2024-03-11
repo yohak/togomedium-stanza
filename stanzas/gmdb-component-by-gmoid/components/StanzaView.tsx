@@ -53,7 +53,7 @@ export const StanzaView: FC<Props> = ({
           <InfoTitle>{decodeHTMLEntities(prefLabel)}</InfoTitle>
           {!!altLabels.length && (
             <StandardParagraph>
-              Alternative labels:
+              {altLabels.length === 1 ? "Alternative label" : "Alternative labels"}:
               <br />
               {altLabels.map((str, i, arr) => (
                 <span key={str}>{`${decodeHTMLEntities(str)}${addLastComma(i, arr)}`}</span>
