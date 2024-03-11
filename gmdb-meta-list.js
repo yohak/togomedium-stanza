@@ -1,145 +1,308 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { n as makeFormBody } from './getData-e69d262f.js';
-import { a as convertHTMLEntity } from './string-878ee74c.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
+import { j as jsx, P as COLOR_GRAY500, C as COLOR_PRIMARY, d as COLOR_WHITE, a as jsxs, c as COLOR_PRIMARY_DARK, e as COLOR_TEXT, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
+import { c as css, r as reactExports, n as makeFormBody } from './getData-e69d262f.js';
+import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
+import { S as Slider } from './Slider-bc45a1fe.js';
+import { n as nanoid } from './index.browser-18dc4f2c.js';
+import { C as CircularProgress } from './CircularProgress-88c2b271.js';
+import './useSlotProps-06654923.js';
 
-const importWebFontForTogoMedium = (stanza, name = "Fira Sans Condensed") => {
-    name = name.replace(/ /gi, "+");
-    stanza.importWebFontCSS(`https://fonts.googleapis.com/css2?family=${name}:wght@400;500;700`);
+const AngleLeftIcon = ({ css, className }) => {
+    return (jsx("svg", { css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" }) }));
 };
 
-class GmdbMetaList extends Stanza {
-    render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const params = this.params;
-            if (!params.api_url) {
-                return;
-            }
-            const offset = 0;
-            const data = yield fetchData(params.api_url, offset, parseInt(params.limit, 10));
-            const templateParams = processData(data, offset, params);
-            render(this, templateParams, params);
-        });
+const AngleRightIcon = ({ css, className }) => {
+    return (jsx("svg", { css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", children: jsx("path", { d: "M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" }) }));
+};
+
+const DoubleAngleLeftIcon = ({ css, className }) => {
+    return (jsx("svg", { css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z" }) }));
+};
+
+const DoubleAngleRightIcon = ({ css, className }) => {
+    return (jsx("svg", { css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", children: jsx("path", { d: "M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" }) }));
+};
+
+const getPagination = (props) => {
+    const { totalPages, currentPage } = props;
+    const start = Math.max(1, currentPage - 2);
+    const end = Math.min(start + 4, totalPages);
+    const result = [];
+    for (let i = start; i <= end; i++) {
+        result.push(i);
     }
-}
-const render = (stanza, parameters, stanzaParams) => {
-    var _a, _b;
-    const limit = parseInt(stanzaParams.limit, 10);
-    stanza.renderTemplate({
-        template: "stanza.html.hbs",
-        parameters,
-    });
-    importWebFontForTogoMedium(stanza, stanzaParams.web_font);
-    (_a = stanza.root.querySelector("#btnPrev")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
-        yield movePage(stanza, parameters, stanzaParams, limit, DIRECTION.PREV);
-    }));
-    (_b = stanza.root.querySelector("#btnNext")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
-        yield movePage(stanza, parameters, stanzaParams, limit, DIRECTION.NEXT);
-    }));
-};
-const movePage = (stanza, templateParams, stanzaParams, limit, direction) => __awaiter(void 0, void 0, void 0, function* () {
-    render(stanza, Object.assign(Object.assign({}, templateParams), { isLoading: true }), stanzaParams);
-    const offset = templateParams.offset + limit * direction;
-    const data = yield fetchData(stanzaParams.api_url, offset, limit);
-    const params = processData(data, offset, stanzaParams);
-    render(stanza, params, stanzaParams);
-});
-const processData = (response, offset, stanzaParams) => {
-    switch (response.status) {
-        case 200:
-            return makeSuccessData(response, offset, stanzaParams);
-        default:
-            return makeFailParams(response, stanzaParams);
+    let startNum = result[0] - 1;
+    while (result.length < 5 && startNum > 1) {
+        result.unshift(startNum);
+        startNum -= 1;
     }
+    return result;
 };
-const makeSuccessData = (response, offset, stanzaParams) => {
-    var _a;
-    if (response.body.contents.length === 0) {
-        return makeNotFoundParams(stanzaParams);
+
+const BottomController = ({ css, className, total, offset, limit, setOffset, }) => {
+    const totalPages = reactExports.useMemo(() => Math.ceil(total / limit), [total, limit]);
+    const currentPage = reactExports.useMemo(() => Math.ceil(offset / limit) + 1, [offset, limit]);
+    const isFirst = currentPage === 1;
+    const isLast = currentPage === totalPages;
+    const [pagination, setPagination] = reactExports.useState([]);
+    const [tempCurrentPage, setTempCurrentPage] = reactExports.useState(currentPage);
+    const changePage = (page) => {
+        setOffset((page - 1) * limit);
+    };
+    const commitPageInput = (val) => {
+        if (val <= 0 || isNaN(val)) {
+            changePage(1);
+        }
+        else if (val >= totalPages) {
+            changePage(totalPages);
+        }
+        else {
+            changePage(val);
+        }
+    };
+    reactExports.useEffect(() => {
+        setPagination(getPagination({ totalPages, currentPage: tempCurrentPage }));
+    }, [totalPages, tempCurrentPage]);
+    reactExports.useEffect(() => {
+        setPagination(getPagination({ totalPages, currentPage }));
+    }, [totalPages, currentPage]);
+    reactExports.useEffect(() => {
+        setTempCurrentPage(currentPage);
+    }, [currentPage]);
+    if (totalPages <= 1)
+        return null;
+    return (jsxs("div", { css: [controller, css], className: className, children: [jsxs(Pagination, { children: [!isFirst ? (jsx(IconWrapper, { onClick: () => changePage(1), children: jsx(DoubleAngleLeftIcon, {}) })) : (jsx(IconDummy, {})), !isFirst ? (jsx(IconWrapper, { onClick: () => changePage(currentPage - 1), children: jsx(AngleLeftIcon, {}) })) : (jsx(IconDummy, {})), jsx(PageNums, { children: pagination.map((p) => (jsx("li", { onClick: () => {
+                                changePage(p);
+                            }, className: p === tempCurrentPage ? "active" : "", children: p }, p))) }), !isLast ? (jsx(IconWrapper, { onClick: () => changePage(currentPage + 1), children: jsx(AngleRightIcon, {}) })) : (jsx(IconDummy, {})), !isLast ? (jsx(IconWrapper, { onClick: () => changePage(totalPages), children: jsx(DoubleAngleRightIcon, {}) })) : (jsx(IconDummy, {}))] }), jsxs(Right, { children: [totalPages > 5 && (jsx(SliderWrapper, { children: jsx(Slider, { value: tempCurrentPage, min: 1, max: totalPages, "aria-label": "Default", valueLabelDisplay: "auto", onChange: (e, v) => {
+                                setTempCurrentPage(v);
+                            }, onChangeCommitted: (e, v) => {
+                                changePage(v);
+                            } }) })), jsxs(Info, { children: [jsx("span", { children: "Page" }), jsx(CurrentPageInput, { type: "number", value: tempCurrentPage, onChange: (e) => {
+                                    setTempCurrentPage(parseInt(e.target.value));
+                                }, onBlur: () => {
+                                    commitPageInput(tempCurrentPage);
+                                }, onKeyUp: (e) => {
+                                    if (e.key === "Enter") {
+                                        commitPageInput(tempCurrentPage);
+                                    }
+                                } }), jsxs("span", { children: ["of ", totalPages] })] })] })] }));
+};
+const controller = css `
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+`;
+const CurrentPageInput = newStyled.input `
+  width: 64px;
+  display: inline-block;
+  margin-inline: 8px;
+  padding-inline: 4px;
+`;
+const Right = newStyled.div `
+  display: flex;
+  gap: 20px;
+`;
+const Info = newStyled.div `
+  font-size: 14px;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const SliderWrapper = newStyled.div `
+  width: 240px;
+`;
+const Pagination = newStyled.div `
+  display: flex;
+  height: 26px;
+`;
+const IconWrapper = newStyled.div `
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  svg {
+    fill: ${COLOR_GRAY500};
+    height: 18px;
+    width: auto;
+  }
+`;
+const IconDummy = newStyled.div `
+  height: 24px;
+  width: 24px;
+`;
+const PageNums = newStyled.ul `
+  background-color: ${COLOR_PRIMARY};
+  width: fit-content;
+  display: flex;
+  padding: 1px;
+  gap: 1px;
+  li {
+    background-color: ${COLOR_WHITE};
+    font-size: 14px;
+    min-width: 28px;
+    height: 24px;
+    padding-inline: 2px;
+    box-sizing: border-box;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    &.active {
+      background-color: ${COLOR_PRIMARY};
+      color: ${COLOR_WHITE};
+      font-weight: bold;
     }
-    const column_sizes = (_a = stanzaParams.column_sizes) === null || _a === void 0 ? void 0 : _a.split(",").map((str) => parseInt(str));
-    const columns = response.body.columns.map((item, i) => ({
-        label: item.label,
-        size: column_sizes ? column_sizes[i] : undefined,
-    }));
-    const keys = response.body.columns.map((item) => item.key);
-    const noWraps = {};
-    response.body.columns.forEach((item) => (noWraps[item.key] = item.nowrap));
-    const data = response.body.contents.map((item) => {
-        const result = [];
-        keys.forEach((key) => {
-            let value;
-            if (typeof item[key] === "string" || typeof item[key] === "number") {
-                value = { label: item[key].toString() };
-            }
-            else {
-                value = item[key];
-            }
-            if (noWraps[key]) {
-                value.nowrap = true;
-            }
-            result.push(value);
-            if (value.label) {
-                value.label = convertHTMLEntity(value.label.toString());
-            }
-        });
-        return result;
-    });
-    const total = response.body.total;
-    const _end = parseInt(stanzaParams.limit, 10) + offset;
-    const end = _end <= total ? _end : total;
-    const hasPrev = offset !== 0;
-    const hasNext = end < total;
-    const title = stanzaParams.title;
-    const info = hasNext || hasPrev
-        ? `showing ${offset + 1} to ${end} of total ${total} items`
-        : `total ${total} items`;
-    const _columns = stanzaParams.column_names;
-    const showColumnNames = _columns.toLocaleLowerCase() === "false" ? false : Boolean(stanzaParams.column_names);
-    const isFixedTable = !!columns.find((item) => !!item.size);
-    return {
-        title,
-        offset,
-        columns,
-        data,
-        hasNext,
-        hasPrev,
-        info,
-        showColumnNames,
-        isFixedTable,
-        status: 200,
-        statusText: "",
-    };
+  }
+`;
+
+const ListTable = ({ css, className, data, columnSizes, showColumnNames, limit, }) => {
+    const extraRows = Array(Math.max(0, limit - data.contents.length))
+        .fill(null)
+        .map(() => nanoid());
+    return (jsxs("table", { css: [listTable, css], className: className, children: [showColumnNames && (jsx("thead", { children: jsx("tr", { children: data.columns.map((column, index) => {
+                        const size = columnSizes[index];
+                        const isSizeEnabled = !!size && data.columns.length === columnSizes.length;
+                        return (jsx("th", { style: isSizeEnabled ? { width: `${size}%` } : {}, children: column.label }, column.key));
+                    }) }) })), jsxs("tbody", { children: [data.contents.map((row, i) => (jsx("tr", { children: data.columns.map((column) => {
+                            const key = column.key;
+                            const item = row[key];
+                            const noWrap = !!column.nowrap;
+                            return (jsx("td", { style: noWrap ? { whiteSpace: "nowrap" } : {}, children: typeof item === "string" ? (item) : (jsx("a", { href: item.href, target: "_blank", rel: "noreferrer", children: item.label })) }, key));
+                        }) }, i))), extraRows.map((rowId) => (jsx("tr", { children: data.columns.map((column) => {
+                            const key = column.key;
+                            return jsx("td", { children: "-" }, key);
+                        }) }, rowId)))] })] }));
 };
-const makeNotFoundParams = (stanzaParams) => {
-    return {
-        title: stanzaParams.title,
-        offset: 0,
-        columns: undefined,
-        data: undefined,
-        hasNext: false,
-        hasPrev: false,
-        info: undefined,
-        showColumnNames: false,
-        isFixedTable: false,
-        status: undefined,
-        statusText: "NO RESULT FOUND",
-    };
+const listTable = css `
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 16px;
+  border-collapse: collapse;
+
+  td,
+  th {
+    padding: 6px 8px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  tr:nth-of-type(2n) {
+    background-color: #f6f6f6;
+  }
+
+  a {
+    color: ${COLOR_PRIMARY_DARK};
+    text-decoration: none;
+  }
+`;
+
+const LoadingCover = ({ css, className, isLoading, errorMessage }) => {
+    const isShow = isLoading || errorMessage !== "";
+    return (jsxs(Wrapper, { css: [css], className: `${className} ${isShow && "active"}`, children: [isLoading && jsx(CircularProgress, {}), !!errorMessage && errorMessage] }));
 };
-const makeFailParams = (response, stanzaParams) => {
-    return {
-        title: stanzaParams.title,
-        offset: 0,
-        columns: undefined,
-        data: undefined,
-        hasNext: false,
-        hasPrev: false,
-        info: undefined,
-        showColumnNames: false,
-        isFixedTable: false,
-        status: response.status,
-        statusText: response.status ? response.message : "UNKNOWN ERROR",
+const Wrapper = newStyled.div `
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${COLOR_WHITE};
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 0.1s;
+  transition-property: opacity;
+  transition-timing-function: linear;
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+`;
+
+const TopInfo = ({ css, className, total, limit, setLimit, setOffset }) => {
+    const [tempLimit, setTempLimit] = reactExports.useState(limit);
+    const onCommitLimit = (val) => {
+        let newLimit = val;
+        if (val < 1 || isNaN(val)) {
+            newLimit = 1;
+        }
+        else if (val >= 100) {
+            newLimit = 100;
+        }
+        else if (val > total) {
+            newLimit = total;
+        }
+        setLimit(newLimit);
+        setTempLimit(newLimit);
+        setOffset(0);
     };
+    return (jsxs("div", { css: [topInfo, css], className: className, children: [jsxs(Total, { children: ["Total: ", total, " items"] }), jsx("span", { children: "/" }), jsxs("p", { children: [jsx("span", { children: "Show" }), jsx(NumInput, { type: "number", value: tempLimit, onChange: (e) => {
+                            setTempLimit(parseInt(e.target.value));
+                        }, onBlur: () => {
+                            onCommitLimit(tempLimit);
+                        }, onKeyUp: (e) => {
+                            if (e.key === "Enter") {
+                                onCommitLimit(tempLimit);
+                            }
+                        } }), jsx("span", { children: "per page" })] })] }));
 };
+const topInfo = css `
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
+  gap: 8px;
+  padding-bottom: 4px;
+  padding-right: 8px;
+  //align-items: center;
+`;
+const Total = newStyled.p `
+  //margin-inline-end: 16px;
+  position: relative;
+  top: 1px;
+`;
+const NumInput = newStyled.input `
+  width: 48px;
+  display: inline-block;
+  margin-inline: 8px;
+  padding-inline: 4px;
+`;
+
+const StanzaWrapper = newStyled.div `
+  position: relative;
+  font-size: 16px;
+  //font-family: $web-font, sans-serif;
+  padding: 16px;
+  background-color: ${COLOR_WHITE};
+  border-radius: 5px;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: ${COLOR_TEXT};
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+`;
+
+const StanzaView = ({ css, className, data, title, showColumnNames, columnSizes, offset, setOffset, limit, setLimit, isLoading, errorMessage, }) => {
+    return (jsxs("div", { css: [stanzaView, css], className: className, children: [title && (jsx(Header, { children: jsx("h2", { children: title }) })), jsxs(StanzaWrapper, { children: [jsx(TopInfo, { total: data.total, limit, setLimit, setOffset }), jsxs("div", { style: { position: "relative" }, children: [jsx(ListTable, { data, showColumnNames, columnSizes, limit }), jsx(LoadingCover, { isLoading, errorMessage })] }), jsx(BottomController, { total: data.total, offset, limit, setOffset })] })] }));
+};
+const stanzaView = css ``;
+const Header = newStyled.header `
+  h2 {
+    -webkit-font-smoothing: antialiased;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-left: 8px;
+  }
+`;
+
 const fetchData = (url, offset, limit) => __awaiter(void 0, void 0, void 0, function* () {
     return fetchLive(url, offset, limit);
 });
@@ -159,6 +322,19 @@ const fetchLive = (url, offset, limit) => __awaiter(void 0, void 0, void 0, func
         body,
     };
 });
+const separateURL = (url) => {
+    const separated = /(.*)\?(.*)/.exec(url);
+    let uri, query;
+    if (separated) {
+        uri = separated[1];
+        query = separated[2];
+    }
+    else {
+        uri = url;
+        query = "";
+    }
+    return [uri, query];
+};
 const makeOptions = (params, query) => {
     const body = `${filterQuery(query)}&${makeFormBody(params)}`;
     return {
@@ -196,30 +372,67 @@ const filterQuery = (query) => {
     }
     return result;
 };
-const separateURL = (url) => {
-    const separated = /(.*)\?(.*)/.exec(url);
-    let uri, query;
-    if (separated) {
-        uri = separated[1];
-        query = separated[2];
-    }
-    else {
-        uri = url;
-        query = "";
-    }
-    return [uri, query];
+
+const useTableData = (apiUrl, initialLimit) => {
+    const [offset, setOffset] = reactExports.useState(0);
+    const [limit, setLimit] = reactExports.useState(initialLimit);
+    const [isLoading, setIsLoading] = reactExports.useState(false);
+    const [data, setData] = reactExports.useState();
+    const [errorMessage, setErrorMessage] = reactExports.useState("");
+    reactExports.useEffect(() => {
+        setIsLoading(true);
+        setErrorMessage("");
+        const handler = window.setTimeout(() => {
+            fetchData(apiUrl, offset, limit).then((response) => {
+                if (response.body) {
+                    setData(response.body);
+                }
+                else {
+                    if (response.message) {
+                        setErrorMessage(response.message);
+                    }
+                }
+                setIsLoading(false);
+            });
+        }, 100);
+        return () => window.clearTimeout(handler);
+    }, [apiUrl, limit, offset]);
+    return { offset, setOffset, limit, setLimit, isLoading, data, errorMessage };
 };
-const __TEST__ = { separateURL, filterQuery, makeFormBody };
-var DIRECTION;
-(function (DIRECTION) {
-    DIRECTION[DIRECTION["NEXT"] = 1] = "NEXT";
-    DIRECTION[DIRECTION["PREV"] = -1] = "PREV";
-})(DIRECTION || (DIRECTION = {}));
+const App = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFont }) => {
+    const { offset, setOffset, limit, setLimit, isLoading, data, errorMessage } = useTableData(apiUrl, initialLimit);
+    if (!data) {
+        return jsx(Fragment, { children: errorMessage });
+    }
+    return (jsx(StanzaView, { data,
+        title,
+        showColumnNames,
+        columnSizes,
+        offset,
+        setOffset,
+        limit,
+        setLimit,
+        isLoading,
+        errorMessage }));
+};
+
+class ReactStanza extends TogoMediumReactStanza {
+    makeApp() {
+        var _a, _b, _c, _d;
+        const params = this.params;
+        const apiUrl = params.api_url;
+        const limit = parseInt((_a = params.limit) !== null && _a !== void 0 ? _a : "20");
+        const title = (_b = params.title) !== null && _b !== void 0 ? _b : "";
+        const columNames = params.column_names === "true";
+        const columnSizes = ((_c = params.column_sizes) !== null && _c !== void 0 ? _c : "").split(",").map((s) => parseInt(s));
+        const webFont = (_d = params.web_font) !== null && _d !== void 0 ? _d : "Fira Sans Condensed";
+        return (jsx(App, { stanzaElement: this.root, apiUrl: apiUrl, initialLimit: limit, title: title, showColumnNames: columNames, columnSizes: columnSizes, webFont: webFont }));
+    }
+}
 
 var stanzaModule = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  'default': GmdbMetaList,
-  __TEST__: __TEST__
+  'default': ReactStanza
 });
 
 var metadata = {
@@ -238,11 +451,11 @@ var metadata = {
 	"stanza:contributor": [
 ],
 	"stanza:created": "2021-02-19",
-	"stanza:updated": "2021-02-19",
+	"stanza:updated": "2024-03-09",
 	"stanza:parameter": [
 	{
 		"stanza:key": "api_url",
-		"stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=MEDIUM",
+		"stanza:example": "http://togomedium.org/sparqlist/api/list_media",
 		"stanza:description": "URL of the SPARQList API with queries",
 		"stanza:required": true
 	},
@@ -266,7 +479,7 @@ var metadata = {
 	},
 	{
 		"stanza:key": "column_sizes",
-		"stanza:example": "15,70,15",
+		"stanza:example": "15,15,70",
 		"stanza:description": "column sizes from left. should be separated with comma",
 		"stanza:required": false
 	},
@@ -295,7 +508,7 @@ var metadata = {
 };
 
 var templates = [
-  ["stanza.html.hbs", {"1":function(container,depth0,helpers,partials,data) {
+  ["stanza.html.hbs", {"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -303,171 +516,9 @@ var templates = [
         return undefined
     };
 
-  return "  <header>\n    <h2>"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"title","hash":{},"data":data,"loc":{"start":{"line":3,"column":8},"end":{"line":3,"column":17}}}) : helper)))
-    + "</h2>\n  </header>\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "  <div class=\"wrapper\" "
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"isLoading") : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":7,"column":23},"end":{"line":7,"column":63}}})) != null ? stack1 : "")
-    + ">\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"data") : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":8,"column":4},"end":{"line":48,"column":11}}})) != null ? stack1 : "")
-    + "  </div>\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    return " data-is-loading";
-},"6":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "      <table "
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"isFixedTable") : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":9,"column":13},"end":{"line":9,"column":70}}})) != null ? stack1 : "")
-    + ">\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"showColumnNames") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":10,"column":8},"end":{"line":16,"column":15}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"data") : depth0),{"name":"each","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":17,"column":8},"end":{"line":35,"column":17}}})) != null ? stack1 : "")
-    + "      </table>\n      <footer>\n        <div>\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"hasPrev") : depth0),{"name":"if","hash":{},"fn":container.program(23, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":39,"column":10},"end":{"line":41,"column":17}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"hasNext") : depth0),{"name":"if","hash":{},"fn":container.program(25, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":42,"column":10},"end":{"line":44,"column":17}}})) != null ? stack1 : "")
-    + "        </div>\n        <p class=\"info\">"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"info") || (depth0 != null ? lookupProperty(depth0,"info") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"info","hash":{},"data":data,"loc":{"start":{"line":46,"column":24},"end":{"line":46,"column":32}}}) : helper)))
-    + "</p>\n      </footer>\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    return " style=\"table-layout: fixed;\" ";
-},"9":function(container,depth0,helpers,partials,data) {
-    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "          <tr>\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"columns") : depth0),{"name":"each","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":12,"column":12},"end":{"line":14,"column":21}}})) != null ? stack1 : "")
-    + "          </tr>\n";
-},"10":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "              <th "
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"size") : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":13,"column":18},"end":{"line":13,"column":62}}})) != null ? stack1 : "")
-    + " >"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"label") || (depth0 != null ? lookupProperty(depth0,"label") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"label","hash":{},"data":data,"loc":{"start":{"line":13,"column":64},"end":{"line":13,"column":73}}}) : helper)))
-    + "</th>\n";
-},"11":function(container,depth0,helpers,partials,data) {
-    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return " style=\"width:"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"size") || (depth0 != null ? lookupProperty(depth0,"size") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"size","hash":{},"data":data,"loc":{"start":{"line":13,"column":44},"end":{"line":13,"column":52}}}) : helper)))
-    + "%\" ";
-},"13":function(container,depth0,helpers,partials,data) {
-    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "          <tr>\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":19,"column":12},"end":{"line":33,"column":21}}})) != null ? stack1 : "")
-    + "          </tr>\n";
-},"14":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"nowrap") : depth0),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":20,"column":14},"end":{"line":22,"column":21}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"nowrap") : depth0),{"name":"unless","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":23,"column":14},"end":{"line":25,"column":25}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"href") : depth0),{"name":"if","hash":{},"fn":container.program(19, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":26,"column":14},"end":{"line":28,"column":21}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"href") : depth0),{"name":"unless","hash":{},"fn":container.program(21, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":29,"column":14},"end":{"line":31,"column":25}}})) != null ? stack1 : "")
-    + "            </td>\n";
-},"15":function(container,depth0,helpers,partials,data) {
-    return "              <td class=\"no-wrap\">\n";
-},"17":function(container,depth0,helpers,partials,data) {
-    return "              <td>\n";
-},"19":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "                <a href=\""
-    + alias2(alias1((depth0 != null ? lookupProperty(depth0,"href") : depth0), depth0))
-    + "\">"
-    + alias2(alias1((depth0 != null ? lookupProperty(depth0,"label") : depth0), depth0))
-    + "</a>\n";
-},"21":function(container,depth0,helpers,partials,data) {
-    var lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "                "
-    + container.escapeExpression(container.lambda((depth0 != null ? lookupProperty(depth0,"label") : depth0), depth0))
-    + "\n";
-},"23":function(container,depth0,helpers,partials,data) {
-    return "            <button id=\"btnPrev\">PREV</button>\n";
-},"25":function(container,depth0,helpers,partials,data) {
-    return "            <button id=\"btnNext\">NEXT</button>\n";
-},"27":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "  <div class=\"error\">\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"status") : depth0),{"name":"if","hash":{},"fn":container.program(28, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":53,"column":4},"end":{"line":55,"column":11}}})) != null ? stack1 : "")
-    + "    "
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"statusText") || (depth0 != null ? lookupProperty(depth0,"statusText") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"statusText","hash":{},"data":data,"loc":{"start":{"line":56,"column":4},"end":{"line":56,"column":18}}}) : helper)))
-    + "\n  </div>\n";
-},"28":function(container,depth0,helpers,partials,data) {
-    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "      ERROR "
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"status") || (depth0 != null ? lookupProperty(depth0,"status") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"status","hash":{},"data":data,"loc":{"start":{"line":54,"column":12},"end":{"line":54,"column":22}}}) : helper)))
-    + "<br>\n";
-},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"title") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":1,"column":0},"end":{"line":5,"column":7}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"info") : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":6,"column":0},"end":{"line":50,"column":7}}})) != null ? stack1 : "")
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"info") : depth0),{"name":"unless","hash":{},"fn":container.program(27, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":51,"column":0},"end":{"line":58,"column":11}}})) != null ? stack1 : "");
+  return "<p class=\"greeting\">"
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"greeting") || (depth0 != null ? lookupProperty(depth0,"greeting") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"greeting","hash":{},"data":data,"loc":{"start":{"line":1,"column":20},"end":{"line":1,"column":32}}}) : helper)))
+    + "!!!</p>\n";
 },"useData":true}]
 ];
 

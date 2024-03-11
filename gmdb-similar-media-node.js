@@ -1,8 +1,8 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { P as COLOR_ACCENT, d as COLOR_WHITE, C as COLOR_PRIMARY, j as jsx, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { Q as COLOR_ACCENT, d as COLOR_WHITE, C as COLOR_PRIMARY, j as jsx, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { c as css, r as reactExports, g as getData } from './getData-e69d262f.js';
 import { s as select, c as creator, d as dispatch, t as timer } from './transform-f2aa5726.js';
-import { s as stanzaWrapper } from './common-1d90404b.js';
+import { s as stanzaWrapper } from './common-cd178d45.js';
 import { c as clone } from './clone-1fb93465.js';
 import { U as URL_API } from './variables-42acbc42.js';
 import { g as getMedia } from './api-66a29d3d.js';

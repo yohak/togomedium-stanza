@@ -1,6 +1,6 @@
 import { r as reactExports, _ as _extends } from './getData-e69d262f.js';
-import { o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses } from './paths-ee59fa78.js';
-import { i as capitalize, _ as _objectWithoutPropertiesLoose, m as jsxRuntimeExports } from './StanzaReactProvider-13f58d86.js';
+import { o as ownerDocument, g as generateUtilityClass, b as generateUtilityClasses, e as styled, f as useThemeProps, l as clsx, d as composeClasses } from './useSlotProps-06654923.js';
+import { k as capitalize, _ as _objectWithoutPropertiesLoose, h as jsxRuntimeExports } from './StanzaReactProvider-87464745.js';
 
 /**
  * Safe chained function.
@@ -172,4 +172,4 @@ const PATH_TAXON = `/taxon/`;
 const PATH_COMPONENT = `/component/`;
 
 export { PATH_MEDIUM as P, createChainedFunction as a, PATH_TAXON as b, createSvgIcon as c, debounce as d, PATH_COMPONENT as e, isMuiElement as i, ownerWindow as o };
-//# sourceMappingURL=consts-c8281bfe.js.map
+//# sourceMappingURL=consts-57be2ed0.js.map

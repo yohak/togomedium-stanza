@@ -1,13 +1,15 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { j as jsx, a as jsxs, F as Fragment, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { j as jsx, a as jsxs, F as Fragment, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { r as reactExports, j as jsx$1, g as getData } from './getData-e69d262f.js';
-import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-ee59fa78.js';
-import { d as decodeHTMLEntities } from './string-878ee74c.js';
-import { T as TextField, C as Chip, A as Autocomplete } from './TextField-65e31080.js';
-import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-f235d087.js';
+import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-93d2d7f9.js';
+import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
+import { T as TextField, C as Chip, A as Autocomplete } from './TextField-364db4f2.js';
+import { C as CircularProgress } from './CircularProgress-88c2b271.js';
+import { u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-838ec5a9.js';
+import './useSlotProps-06654923.js';
 import './emotion-styled.browser.esm-90764b6a.js';
 import './variables-42acbc42.js';
-import './consts-c8281bfe.js';
+import './consts-57be2ed0.js';
 
 const ComponentSelect = ({ onChangeSelection }) => {
     const [loading, setLoading] = reactExports.useState(false);

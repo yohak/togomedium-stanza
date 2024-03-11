@@ -1,7 +1,7 @@
-import { x as COLOR_GRAY_LINE, C as COLOR_PRIMARY, j as jsx, a as jsxs } from './StanzaReactProvider-13f58d86.js';
+import { s as COLOR_GRAY_LINE, C as COLOR_PRIMARY, j as jsx, a as jsxs } from './StanzaReactProvider-87464745.js';
 import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
 import { l as lineageRanks } from './types-8994330c.js';
-import { c as capitalizeFirstLetter, m as makeSpeciesName } from './string-878ee74c.js';
+import { c as capitalizeFirstLetter, m as makeSpeciesName } from './string-4de5f4fa.js';
 
 const LineageList = ({ lineage }) => {
     return (jsx(LineageListWrapper, { children: lineageRanks
@@ -46,4 +46,4 @@ const parseLineage = (lineage) => lineage.reduce((accum, current) => {
 }, {});
 
 export { LineageList as L, parseLineage as p };
-//# sourceMappingURL=LineageList-8a4c9fdc.js.map
+//# sourceMappingURL=LineageList-8226be1b.js.map

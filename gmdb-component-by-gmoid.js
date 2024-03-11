@@ -1,11 +1,11 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { c as css, g as getData, r as reactExports } from './getData-e69d262f.js';
 import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
-import { I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './styles-d9cd01f8.js';
-import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-8af0efb7.js';
-import { s as stanzaWrapper } from './common-1d90404b.js';
-import { d as decodeHTMLEntities } from './string-878ee74c.js';
+import { I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './styles-5c02f157.js';
+import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-55ee1bbb.js';
+import { s as stanzaWrapper } from './common-cd178d45.js';
+import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
 import { U as URL_API } from './variables-42acbc42.js';
 
 const StanzaView = ({ css, className, prefLabel, gmoId, altLabels, properties, roles, superClasses, subClasses, links, wikipediaData, }) => {

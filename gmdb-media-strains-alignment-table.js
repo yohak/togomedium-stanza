@@ -1,27 +1,14 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { d as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, K as COLOR_GRAY400, F as Fragment, O as Recoil_index_7, x as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { d as COLOR_WHITE, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, K as COLOR_GRAY400, F as Fragment, O as Recoil_index_7, s as COLOR_GRAY_LINE, S as SIZE1, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { c as css, r as reactExports, R as React, l as dist, g as getData } from './getData-e69d262f.js';
 import { c as copy } from './index-1640bb89.js';
+import { n as nanoid } from './index.browser-18dc4f2c.js';
 import { l as lineageRanks } from './types-8994330c.js';
-import { n as Tooltip, L as API_MEDIA_STRAINS_ALIGNMENT } from './paths-ee59fa78.js';
-import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-878ee74c.js';
+import { b as Tooltip, k as API_MEDIA_STRAINS_ALIGNMENT } from './paths-93d2d7f9.js';
+import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-4de5f4fa.js';
+import './useSlotProps-06654923.js';
 import './emotion-styled.browser.esm-90764b6a.js';
 import './variables-42acbc42.js';
-
-let nanoid = (size = 21) =>
-  crypto.getRandomValues(new Uint8Array(size)).reduce((id, byte) => {
-    byte &= 63;
-    if (byte < 36) {
-      id += byte.toString(36);
-    } else if (byte < 62) {
-      id += (byte - 26).toString(36).toUpperCase();
-    } else if (byte > 62) {
-      id += '-';
-    } else {
-      id += '_';
-    }
-    return id
-  }, '');
 
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;

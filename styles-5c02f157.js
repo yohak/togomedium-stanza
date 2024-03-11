@@ -1,5 +1,5 @@
 import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
-import { c as COLOR_PRIMARY_DARK, C as COLOR_PRIMARY, d as COLOR_WHITE } from './StanzaReactProvider-13f58d86.js';
+import { c as COLOR_PRIMARY_DARK, C as COLOR_PRIMARY, d as COLOR_WHITE } from './StanzaReactProvider-87464745.js';
 
 const ColWrapper = newStyled.div `
   display: flex;
@@ -61,4 +61,4 @@ const StandardParagraph = newStyled.p `
 `;
 
 export { ColorButton as C, InfoId as I, StandardParagraph as S, TagList as T, InfoTitle as a, SubHeading as b, ColWrapper as c };
-//# sourceMappingURL=styles-d9cd01f8.js.map
+//# sourceMappingURL=styles-5c02f157.js.map

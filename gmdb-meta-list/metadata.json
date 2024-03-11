@@ -13,11 +13,11 @@
   "stanza:address": "satoshionoda@yohak.design",
   "stanza:contributor": [],
   "stanza:created": "2021-02-19",
-  "stanza:updated": "2021-02-19",
+  "stanza:updated": "2024-03-09",
   "stanza:parameter": [
     {
       "stanza:key": "api_url",
-      "stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=MEDIUM",
+      "stanza:example": "http://togomedium.org/sparqlist/api/list_media",
       "stanza:description": "URL of the SPARQList API with queries",
       "stanza:required": true
     },
@@ -41,7 +41,7 @@
     },
     {
       "stanza:key": "column_sizes",
-      "stanza:example": "15,70,15",
+      "stanza:example": "15,15,70",
       "stanza:description": "column sizes from left. should be separated with comma",
       "stanza:required": false
     },

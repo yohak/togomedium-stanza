@@ -1,5 +1,5 @@
 import { _ as __awaiter } from './stanza-be82c2ee.js';
-import { b as COLOR_GRAY300, C as COLOR_PRIMARY, a as jsxs, j as jsx } from './StanzaReactProvider-13f58d86.js';
+import { b as COLOR_GRAY300, C as COLOR_PRIMARY, a as jsxs, j as jsx } from './StanzaReactProvider-87464745.js';
 import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
 
 const fetchWikipediaData = (link) => __awaiter(void 0, void 0, void 0, function* () {
@@ -32,4 +32,4 @@ const WikipediaInfo = newStyled.div `
 `;
 
 export { WikipediaView as W, fetchWikipediaData as f };
-//# sourceMappingURL=WikipediaView-8af0efb7.js.map
+//# sourceMappingURL=WikipediaView-55ee1bbb.js.map

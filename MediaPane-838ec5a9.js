@@ -1,7 +1,9 @@
 import { r as reactExports, _ as _extends, R as React, k as keyframes, c as css, l as dist } from './getData-e69d262f.js';
-import { _ as _objectWithoutPropertiesLoose, m as jsxRuntimeExports, i as capitalize, o as alpha, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, p as COLOR_GRAY_BG, S as SIZE1, q as ROUNDED_CORNER, d as COLOR_WHITE, t as SIZE2, v as SIZE05, w as FONT_WEIGHT_MEDIUM, a as jsxs, j as jsx, x as COLOR_GRAY_LINE, C as COLOR_PRIMARY, y as FONT_WEIGHT_BOLD, z as SIZE3, A as COLOR_GRAY700, B as SIZE4 } from './StanzaReactProvider-13f58d86.js';
-import { _ as _inheritsLoose, T as TransitionGroupContext, c as clsx, g as generateUtilityClasses, s as styled, u as useThemeProps, b as generateUtilityClass, d as useForkRef, e as useIsFocusVisible, f as useEventCallback, h as composeClasses, i as useSlotProps, r as rootShouldForwardProp, j as resolveProps, k as useControlled, l as useEnhancedEffect, m as useTheme, o as ownerDocument, n as Tooltip } from './paths-ee59fa78.js';
-import { c as createSvgIcon, o as ownerWindow, d as debounce, P as PATH_MEDIUM } from './consts-c8281bfe.js';
+import { _ as _objectWithoutPropertiesLoose, h as jsxRuntimeExports, k as capitalize, l as alpha, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, m as COLOR_GRAY_BG, S as SIZE1, n as ROUNDED_CORNER, d as COLOR_WHITE, o as SIZE2, p as SIZE05, q as FONT_WEIGHT_MEDIUM, a as jsxs, j as jsx, s as COLOR_GRAY_LINE, C as COLOR_PRIMARY, t as FONT_WEIGHT_BOLD, v as SIZE3, w as COLOR_GRAY700, x as SIZE4 } from './StanzaReactProvider-87464745.js';
+import { l as clsx, b as generateUtilityClasses, e as styled, f as useThemeProps, g as generateUtilityClass, u as useForkRef, k as useIsFocusVisible, j as useEventCallback, d as composeClasses, c as useSlotProps, r as rootShouldForwardProp, n as resolveProps, i as useControlled, a as useEnhancedEffect, h as useTheme, o as ownerDocument } from './useSlotProps-06654923.js';
+import { _ as _inheritsLoose, T as TransitionGroupContext, b as Tooltip } from './paths-93d2d7f9.js';
+import { c as createSvgIcon, o as ownerWindow, d as debounce, P as PATH_MEDIUM } from './consts-57be2ed0.js';
+import { C as CircularProgress } from './CircularProgress-88c2b271.js';
 
 var reactIsExports = {};
 var reactIs = {
@@ -468,15 +470,15 @@ function Ripple(props) {
 const touchRippleClasses = generateUtilityClasses('MuiTouchRipple', ['root', 'ripple', 'rippleVisible', 'ripplePulsate', 'child', 'childLeaving', 'childPulsate']);
 var touchRippleClasses$1 = touchRippleClasses;
 
-const _excluded$a = ["center", "classes", "className"];
-let _$1 = t => t,
-  _t$1,
-  _t2$1,
-  _t3$1,
-  _t4$1;
+const _excluded$9 = ["center", "classes", "className"];
+let _ = t => t,
+  _t,
+  _t2,
+  _t3,
+  _t4;
 const DURATION = 550;
 const DELAY_RIPPLE = 80;
-const enterKeyframe = keyframes(_t$1 || (_t$1 = _$1`
+const enterKeyframe = keyframes(_t || (_t = _`
   0% {
     transform: scale(0);
     opacity: 0.1;
@@ -487,7 +489,7 @@ const enterKeyframe = keyframes(_t$1 || (_t$1 = _$1`
     opacity: 0.3;
   }
 `));
-const exitKeyframe = keyframes(_t2$1 || (_t2$1 = _$1`
+const exitKeyframe = keyframes(_t2 || (_t2 = _`
   0% {
     opacity: 1;
   }
@@ -496,7 +498,7 @@ const exitKeyframe = keyframes(_t2$1 || (_t2$1 = _$1`
     opacity: 0;
   }
 `));
-const pulsateKeyframe = keyframes(_t3$1 || (_t3$1 = _$1`
+const pulsateKeyframe = keyframes(_t3 || (_t3 = _`
   0% {
     transform: scale(1);
   }
@@ -529,7 +531,7 @@ const TouchRippleRoot = styled('span', {
 const TouchRippleRipple = styled(Ripple, {
   name: 'MuiTouchRipple',
   slot: 'Ripple'
-})(_t4$1 || (_t4$1 = _$1`
+})(_t4 || (_t4 = _`
   opacity: 0;
   position: absolute;
 
@@ -597,7 +599,7 @@ const TouchRipple = /*#__PURE__*/reactExports.forwardRef(function TouchRipple(in
       classes = {},
       className
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$a);
+    other = _objectWithoutPropertiesLoose(props, _excluded$9);
   const [ripples, setRipples] = reactExports.useState([]);
   const nextKey = reactExports.useRef(0);
   const rippleCallback = reactExports.useRef(null);
@@ -784,8 +786,8 @@ function getButtonBaseUtilityClass(slot) {
 const buttonBaseClasses = generateUtilityClasses('MuiButtonBase', ['root', 'disabled', 'focusVisible']);
 var buttonBaseClasses$1 = buttonBaseClasses;
 
-const _excluded$9 = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
-const useUtilityClasses$8 = ownerState => {
+const _excluded$8 = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
+const useUtilityClasses$7 = ownerState => {
   const {
     disabled,
     focusVisible,
@@ -886,7 +888,7 @@ const ButtonBase = /*#__PURE__*/reactExports.forwardRef(function ButtonBase(inPr
       touchRippleRef,
       type
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$9);
+    other = _objectWithoutPropertiesLoose(props, _excluded$8);
   const buttonRef = reactExports.useRef(null);
   const rippleRef = reactExports.useRef(null);
   const handleRippleRef = useForkRef(rippleRef, touchRippleRef);
@@ -1045,7 +1047,7 @@ const ButtonBase = /*#__PURE__*/reactExports.forwardRef(function ButtonBase(inPr
     tabIndex,
     focusVisible
   });
-  const classes = useUtilityClasses$8(ownerState);
+  const classes = useUtilityClasses$7(ownerState);
   return /*#__PURE__*/jsxRuntimeExports.jsxs(ButtonBaseRoot, _extends({
     as: ComponentProp,
     className: clsx(classes.root, className),
@@ -1096,10 +1098,10 @@ const badgeClasses = generateUtilityClasses('MuiBadge', ['root', 'badge', 'dot',
 'anchorOriginTopLeftCircular', 'anchorOriginTopLeftRectangular', 'anchorOriginTopRightCircular', 'anchorOriginTopRightRectangular', 'anchorOriginBottomLeftCircular', 'anchorOriginBottomLeftRectangular', 'anchorOriginBottomRightCircular', 'anchorOriginBottomRightRectangular']);
 var badgeClasses$1 = badgeClasses;
 
-const _excluded$8 = ["anchorOrigin", "className", "classes", "component", "components", "componentsProps", "children", "overlap", "color", "invisible", "max", "badgeContent", "slots", "slotProps", "showZero", "variant"];
+const _excluded$7 = ["anchorOrigin", "className", "classes", "component", "components", "componentsProps", "children", "overlap", "color", "invisible", "max", "badgeContent", "slots", "slotProps", "showZero", "variant"];
 const RADIUS_STANDARD = 10;
 const RADIUS_DOT = 4;
-const useUtilityClasses$7 = ownerState => {
+const useUtilityClasses$6 = ownerState => {
   const {
     color,
     anchorOrigin,
@@ -1264,7 +1266,7 @@ const Badge = /*#__PURE__*/reactExports.forwardRef(function Badge(inProps, ref) 
       showZero = false,
       variant: variantProp = 'standard'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$8);
+    other = _objectWithoutPropertiesLoose(props, _excluded$7);
   const {
     badgeContent,
     invisible: invisibleFromHook,
@@ -1302,7 +1304,7 @@ const Badge = /*#__PURE__*/reactExports.forwardRef(function Badge(inProps, ref) 
     overlap,
     variant
   });
-  const classes = useUtilityClasses$7(ownerState);
+  const classes = useUtilityClasses$6(ownerState);
 
   // support both `slots` and `components` for backward compatibility
   const RootSlot = (_ref = (_slots$root = slots == null ? void 0 : slots.root) != null ? _slots$root : components.Root) != null ? _ref : BadgeRoot;
@@ -1346,8 +1348,8 @@ var buttonClasses$1 = buttonClasses;
 const ButtonGroupContext = /*#__PURE__*/reactExports.createContext({});
 var ButtonGroupContext$1 = ButtonGroupContext;
 
-const _excluded$7 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
-const useUtilityClasses$6 = ownerState => {
+const _excluded$6 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
+const useUtilityClasses$5 = ownerState => {
   const {
     color,
     disableElevation,
@@ -1572,7 +1574,7 @@ const Button = /*#__PURE__*/reactExports.forwardRef(function Button(inProps, ref
       type,
       variant = 'text'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$7);
+    other = _objectWithoutPropertiesLoose(props, _excluded$6);
   const ownerState = _extends({}, props, {
     color,
     component,
@@ -1584,7 +1586,7 @@ const Button = /*#__PURE__*/reactExports.forwardRef(function Button(inProps, ref
     type,
     variant
   });
-  const classes = useUtilityClasses$6(ownerState);
+  const classes = useUtilityClasses$5(ownerState);
   const startIcon = startIconProp && /*#__PURE__*/jsxRuntimeExports.jsx(ButtonStartIcon, {
     className: classes.startIcon,
     ownerState: ownerState,
@@ -1616,8 +1618,8 @@ function getSwitchBaseUtilityClass(slot) {
 }
 generateUtilityClasses('PrivateSwitchBase', ['root', 'checked', 'disabled', 'input', 'edgeStart', 'edgeEnd']);
 
-const _excluded$6 = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
-const useUtilityClasses$5 = ownerState => {
+const _excluded$5 = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
+const useUtilityClasses$4 = ownerState => {
   const {
     classes,
     checked,
@@ -1680,7 +1682,7 @@ const SwitchBase = /*#__PURE__*/reactExports.forwardRef(function SwitchBase(prop
       type,
       value
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$6);
+    other = _objectWithoutPropertiesLoose(props, _excluded$5);
   const [checked, setCheckedState] = useControlled({
     controlled: checkedProp,
     default: Boolean(defaultChecked),
@@ -1729,7 +1731,7 @@ const SwitchBase = /*#__PURE__*/reactExports.forwardRef(function SwitchBase(prop
     disableFocusRipple,
     edge
   });
-  const classes = useUtilityClasses$5(ownerState);
+  const classes = useUtilityClasses$4(ownerState);
   return /*#__PURE__*/jsxRuntimeExports.jsxs(SwitchBaseRoot, _extends({
     component: "span",
     className: clsx(classes.root, className),
@@ -1783,8 +1785,8 @@ function getCheckboxUtilityClass(slot) {
 const checkboxClasses = generateUtilityClasses('MuiCheckbox', ['root', 'checked', 'disabled', 'indeterminate', 'colorPrimary', 'colorSecondary']);
 var checkboxClasses$1 = checkboxClasses;
 
-const _excluded$5 = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size", "className"];
-const useUtilityClasses$4 = ownerState => {
+const _excluded$4 = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size", "className"];
+const useUtilityClasses$3 = ownerState => {
   const {
     classes,
     indeterminate,
@@ -1846,7 +1848,7 @@ const Checkbox = /*#__PURE__*/reactExports.forwardRef(function Checkbox(inProps,
       size = 'medium',
       className
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$5);
+    other = _objectWithoutPropertiesLoose(props, _excluded$4);
   const icon = indeterminate ? indeterminateIconProp : iconProp;
   const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon;
   const ownerState = _extends({}, props, {
@@ -1854,7 +1856,7 @@ const Checkbox = /*#__PURE__*/reactExports.forwardRef(function Checkbox(inProps,
     indeterminate,
     size
   });
-  const classes = useUtilityClasses$4(ownerState);
+  const classes = useUtilityClasses$3(ownerState);
   return /*#__PURE__*/jsxRuntimeExports.jsx(CheckboxRoot, _extends({
     type: "checkbox",
     inputProps: _extends({
@@ -1874,185 +1876,6 @@ const Checkbox = /*#__PURE__*/reactExports.forwardRef(function Checkbox(inProps,
   }));
 });
 var Checkbox$1 = Checkbox;
-
-function getCircularProgressUtilityClass(slot) {
-  return generateUtilityClass('MuiCircularProgress', slot);
-}
-generateUtilityClasses('MuiCircularProgress', ['root', 'determinate', 'indeterminate', 'colorPrimary', 'colorSecondary', 'svg', 'circle', 'circleDeterminate', 'circleIndeterminate', 'circleDisableShrink']);
-
-const _excluded$4 = ["className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"];
-let _ = t => t,
-  _t,
-  _t2,
-  _t3,
-  _t4;
-const SIZE = 44;
-const circularRotateKeyframe = keyframes(_t || (_t = _`
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-`));
-const circularDashKeyframe = keyframes(_t2 || (_t2 = _`
-  0% {
-    stroke-dasharray: 1px, 200px;
-    stroke-dashoffset: 0;
-  }
-
-  50% {
-    stroke-dasharray: 100px, 200px;
-    stroke-dashoffset: -15px;
-  }
-
-  100% {
-    stroke-dasharray: 100px, 200px;
-    stroke-dashoffset: -125px;
-  }
-`));
-const useUtilityClasses$3 = ownerState => {
-  const {
-    classes,
-    variant,
-    color,
-    disableShrink
-  } = ownerState;
-  const slots = {
-    root: ['root', variant, `color${capitalize(color)}`],
-    svg: ['svg'],
-    circle: ['circle', `circle${capitalize(variant)}`, disableShrink && 'circleDisableShrink']
-  };
-  return composeClasses(slots, getCircularProgressUtilityClass, classes);
-};
-const CircularProgressRoot = styled('span', {
-  name: 'MuiCircularProgress',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, styles[ownerState.variant], styles[`color${capitalize(ownerState.color)}`]];
-  }
-})(({
-  ownerState,
-  theme
-}) => _extends({
-  display: 'inline-block'
-}, ownerState.variant === 'determinate' && {
-  transition: theme.transitions.create('transform')
-}, ownerState.color !== 'inherit' && {
-  color: (theme.vars || theme).palette[ownerState.color].main
-}), ({
-  ownerState
-}) => ownerState.variant === 'indeterminate' && css(_t3 || (_t3 = _`
-      animation: ${0} 1.4s linear infinite;
-    `), circularRotateKeyframe));
-const CircularProgressSVG = styled('svg', {
-  name: 'MuiCircularProgress',
-  slot: 'Svg',
-  overridesResolver: (props, styles) => styles.svg
-})({
-  display: 'block' // Keeps the progress centered
-});
-
-const CircularProgressCircle = styled('circle', {
-  name: 'MuiCircularProgress',
-  slot: 'Circle',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.circle, styles[`circle${capitalize(ownerState.variant)}`], ownerState.disableShrink && styles.circleDisableShrink];
-  }
-})(({
-  ownerState,
-  theme
-}) => _extends({
-  stroke: 'currentColor'
-}, ownerState.variant === 'determinate' && {
-  transition: theme.transitions.create('stroke-dashoffset')
-}, ownerState.variant === 'indeterminate' && {
-  // Some default value that looks fine waiting for the animation to kicks in.
-  strokeDasharray: '80px, 200px',
-  strokeDashoffset: 0 // Add the unit to fix a Edge 16 and below bug.
-}), ({
-  ownerState
-}) => ownerState.variant === 'indeterminate' && !ownerState.disableShrink && css(_t4 || (_t4 = _`
-      animation: ${0} 1.4s ease-in-out infinite;
-    `), circularDashKeyframe));
-
-/**
- * ## ARIA
- *
- * If the progress bar is describing the loading progress of a particular region of a page,
- * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
- * attribute to `true` on that region until it has finished loading.
- */
-const CircularProgress = /*#__PURE__*/reactExports.forwardRef(function CircularProgress(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiCircularProgress'
-  });
-  const {
-      className,
-      color = 'primary',
-      disableShrink = false,
-      size = 40,
-      style,
-      thickness = 3.6,
-      value = 0,
-      variant = 'indeterminate'
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$4);
-  const ownerState = _extends({}, props, {
-    color,
-    disableShrink,
-    size,
-    thickness,
-    value,
-    variant
-  });
-  const classes = useUtilityClasses$3(ownerState);
-  const circleStyle = {};
-  const rootStyle = {};
-  const rootProps = {};
-  if (variant === 'determinate') {
-    const circumference = 2 * Math.PI * ((SIZE - thickness) / 2);
-    circleStyle.strokeDasharray = circumference.toFixed(3);
-    rootProps['aria-valuenow'] = Math.round(value);
-    circleStyle.strokeDashoffset = `${((100 - value) / 100 * circumference).toFixed(3)}px`;
-    rootStyle.transform = 'rotate(-90deg)';
-  }
-  return /*#__PURE__*/jsxRuntimeExports.jsx(CircularProgressRoot, _extends({
-    className: clsx(classes.root, className),
-    style: _extends({
-      width: size,
-      height: size
-    }, rootStyle, style),
-    ownerState: ownerState,
-    ref: ref,
-    role: "progressbar"
-  }, rootProps, other, {
-    children: /*#__PURE__*/jsxRuntimeExports.jsx(CircularProgressSVG, {
-      className: classes.svg,
-      ownerState: ownerState,
-      viewBox: `${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`,
-      children: /*#__PURE__*/jsxRuntimeExports.jsx(CircularProgressCircle, {
-        className: classes.circle,
-        style: circleStyle,
-        ownerState: ownerState,
-        cx: SIZE,
-        cy: SIZE,
-        r: (SIZE - thickness) / 2,
-        fill: "none",
-        strokeWidth: thickness
-      })
-    })
-  }));
-});
-var CircularProgress$1 = CircularProgress;
 
 function getTabUtilityClass(slot) {
   return generateUtilityClass('MuiTab', slot);
@@ -3302,7 +3125,7 @@ const wrapper$3 = css `
 
 const FoundMediaList = ({ next, prev, css, className }) => {
     const { data, toggleChecked, isLoading, response } = useFoundMedia();
-    return (jsxs("div", { css: [wrapper$2, css], className: className, children: [jsx(QueryInfo, {}), jsx("p", { css: infoTextCSS, children: getInfoText(response.total, isLoading) }), jsxs("div", { css: listWrapper, children: [isLoading && (jsx("div", { css: loadingIndicator, children: jsx(CircularProgress$1, { color: "inherit", size: 40 }) })), jsx("div", { children: data.map((item) => (jsx(MediaListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id))) }), !!response.total && !isLoading && (jsx(Pagination, { total: response.total, current: response.offset, displayLength: response.limit, onClickNext: () => next(), onClickPrev: () => prev() }))] })] }));
+    return (jsxs("div", { css: [wrapper$2, css], className: className, children: [jsx(QueryInfo, {}), jsx("p", { css: infoTextCSS, children: getInfoText(response.total, isLoading) }), jsxs("div", { css: listWrapper, children: [isLoading && (jsx("div", { css: loadingIndicator, children: jsx(CircularProgress, { color: "inherit", size: 40 }) })), jsx("div", { children: data.map((item) => (jsx(MediaListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id))) }), !!response.total && !isLoading && (jsx(Pagination, { total: response.total, current: response.offset, displayLength: response.limit, onClickNext: () => next(), onClickPrev: () => prev() }))] })] }));
 };
 const useFoundMedia = () => {
     const [data, setData] = reactExports.useState([]);
@@ -3466,5 +3289,5 @@ const contents = css `
   overflow-y: auto;
 `;
 
-export { ButtonBase$1 as B, CircularProgress$1 as C, FormControlContext$1 as F, MediaPane as M, Pagination as P, Tabs$1 as T, useQueryDataMutators as a, useMediaLoadAbortMutators as b, useFoundMediaState as c, usePreviousProps$1 as d, useFormControl as e, Checkbox$1 as f, filterOutInfo as g, hasInfo as h, hasIdOfLabel as i, Tab$1 as j, Badge$1 as k, extractLabelIds as l, nullResponse as n, queryPane as q, subPane as s, useFoundMediaMutators as u, wrapper$6 as w };
-//# sourceMappingURL=MediaPane-f235d087.js.map
+export { ButtonBase$1 as B, Checkbox$1 as C, FormControlContext$1 as F, MediaPane as M, Pagination as P, Tabs$1 as T, useQueryDataMutators as a, useMediaLoadAbortMutators as b, useFoundMediaState as c, usePreviousProps$1 as d, useFormControl as e, filterOutInfo as f, hasIdOfLabel as g, hasInfo as h, Tab$1 as i, Badge$1 as j, extractLabelIds as k, nullResponse as n, queryPane as q, subPane as s, useFoundMediaMutators as u, wrapper$6 as w };
+//# sourceMappingURL=MediaPane-838ec5a9.js.map

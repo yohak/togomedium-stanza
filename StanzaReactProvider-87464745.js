@@ -67,6 +67,7 @@ const COLOR_PRIMARY_DARK = "#6FA80C";
 const COLOR_GRAY = "#CCCCCC";
 const COLOR_GRAY_BG = "#f4f3f2";
 const COLOR_GRAY700 = "#374151";
+const COLOR_GRAY500 = "#6B7280";
 const COLOR_GRAY400 = "#9ca3af";
 const COLOR_GRAY300 = "#d1d5db";
 const COLOR_GRAY_LINE = "#E5E7EB";
@@ -10459,5 +10460,5 @@ class TogoMediumReactStanza extends Stanza {
     }
 }
 
-export { COLOR_GRAY700 as A, SIZE4 as B, COLOR_PRIMARY as C, formatMuiErrorMessage as D, deepmerge as E, Fragment as F, defaultSxConfig$1 as G, isPlainObject as H, lighten as I, darken as J, COLOR_GRAY400 as K, requireJsxRuntime as L, COLOR_GRAY as M, FONT_EN as N, Recoil_index_7 as O, COLOR_ACCENT as P, Recoil_index_6 as R, SIZE1 as S, TogoMediumReactStanza as T, _objectWithoutPropertiesLoose as _, jsxs as a, COLOR_GRAY300 as b, COLOR_PRIMARY_DARK as c, COLOR_WHITE as d, COLOR_TEXT as e, Recoil_index_18 as f, Recoil_index_22 as g, createTheme$1 as h, capitalize as i, jsx as j, createTheme as k, THEME_ID as l, jsxRuntimeExports as m, ReactDOM as n, alpha as o, COLOR_GRAY_BG as p, ROUNDED_CORNER as q, reactDomExports as r, styleFunctionSx$1 as s, SIZE2 as t, useTheme$1 as u, SIZE05 as v, FONT_WEIGHT_MEDIUM as w, COLOR_GRAY_LINE as x, FONT_WEIGHT_BOLD as y, SIZE3 as z };
-//# sourceMappingURL=StanzaReactProvider-13f58d86.js.map
+export { deepmerge as A, createTheme$1 as B, COLOR_PRIMARY as C, styleFunctionSx$1 as D, createTheme as E, Fragment as F, defaultSxConfig$1 as G, isPlainObject as H, lighten as I, darken as J, COLOR_GRAY400 as K, requireJsxRuntime as L, COLOR_GRAY as M, FONT_EN as N, Recoil_index_7 as O, COLOR_GRAY500 as P, COLOR_ACCENT as Q, Recoil_index_6 as R, SIZE1 as S, TogoMediumReactStanza as T, _objectWithoutPropertiesLoose as _, jsxs as a, COLOR_GRAY300 as b, COLOR_PRIMARY_DARK as c, COLOR_WHITE as d, COLOR_TEXT as e, Recoil_index_18 as f, Recoil_index_22 as g, jsxRuntimeExports as h, ReactDOM as i, jsx as j, capitalize as k, alpha as l, COLOR_GRAY_BG as m, ROUNDED_CORNER as n, SIZE2 as o, SIZE05 as p, FONT_WEIGHT_MEDIUM as q, reactDomExports as r, COLOR_GRAY_LINE as s, FONT_WEIGHT_BOLD as t, useTheme$1 as u, SIZE3 as v, COLOR_GRAY700 as w, SIZE4 as x, THEME_ID as y, formatMuiErrorMessage as z };
+//# sourceMappingURL=StanzaReactProvider-87464745.js.map

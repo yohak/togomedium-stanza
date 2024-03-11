@@ -1,8 +1,9 @@
 import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
 import { b as getAugmentedNamespace } from './stanza-be82c2ee.js';
-import { a as createChainedFunction, c as createSvgIcon$1, d as debounce, i as isMuiElement, o as ownerWindow } from './consts-c8281bfe.js';
-import { J as ClassNameGenerator, o as ownerDocument, v as setRef, l as useEnhancedEffect, t as useId, k as useControlled, f as useEventCallback, d as useForkRef, e as useIsFocusVisible } from './paths-ee59fa78.js';
-import { i as capitalize, L as requireJsxRuntime } from './StanzaReactProvider-13f58d86.js';
+import { a as createChainedFunction, c as createSvgIcon$1, d as debounce, i as isMuiElement, o as ownerWindow } from './consts-57be2ed0.js';
+import { C as ClassNameGenerator, o as ownerDocument, s as setRef, a as useEnhancedEffect, i as useControlled, j as useEventCallback, u as useForkRef, k as useIsFocusVisible } from './useSlotProps-06654923.js';
+import { k as capitalize, L as requireJsxRuntime } from './StanzaReactProvider-87464745.js';
+import { c as useId } from './paths-93d2d7f9.js';
 
 function deprecatedPropType(validator, reason) {
   {
@@ -143,4 +144,4 @@ const IconBlank = newStyled.span({
 });
 
 export { IconBlank as I, IconNoChildren as a, IconCompact as b, IconExpand as c };
-//# sourceMappingURL=icons-af742fc0.js.map
+//# sourceMappingURL=icons-f440582b.js.map

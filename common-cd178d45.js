@@ -1,5 +1,5 @@
 import { c as css } from './getData-e69d262f.js';
-import { d as COLOR_WHITE, e as COLOR_TEXT } from './StanzaReactProvider-13f58d86.js';
+import { d as COLOR_WHITE, e as COLOR_TEXT } from './StanzaReactProvider-87464745.js';
 
 const stanzaWrapper = css `
   position: relative;
@@ -16,4 +16,4 @@ const stanzaWrapper = css `
 `;
 
 export { stanzaWrapper as s };
-//# sourceMappingURL=common-1d90404b.js.map
+//# sourceMappingURL=common-cd178d45.js.map
