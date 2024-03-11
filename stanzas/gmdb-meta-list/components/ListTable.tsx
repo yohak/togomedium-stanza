@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
+import parse from "html-react-parser";
 import { nanoid } from "nanoid";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_PRIMARY_DARK } from "../../../shared/styles/variables";
 import { ListApiBody } from "../types";
@@ -50,10 +51,10 @@ export const ListTable: FC<Props> = ({
               return (
                 <td key={key} style={noWrap ? { whiteSpace: "nowrap" } : {}}>
                   {typeof item === "string" ? (
-                    item
+                    parse(item)
                   ) : (
                     <a href={item.href} target={"_blank"} rel="noreferrer">
-                      {item.label}
+                      {parse(item.label)}
                     </a>
                   )}
                 </td>
