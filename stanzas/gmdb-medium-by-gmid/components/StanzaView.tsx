@@ -50,7 +50,7 @@ export const StanzaView: FC<Props> = ({
         </InfoId>
       )}
       <InfoTitle>
-        {name && decodeHTMLEntities(name)}
+        [{id}] {name && name !== "(Unnamed medium)" && decodeHTMLEntities(name)}
         {ph && <small>(pH{ph})</small>}
       </InfoTitle>
       {components.length && (
