@@ -113,9 +113,7 @@ export const StanzaView: FC<Props> = ({
             )}
             {!!links.length && (
               <>
-                <SubHeading>
-                  {links.length === 1 ? "Cross reference" : "Cross references"}
-                </SubHeading>
+                <SubHeading>{links.length === 1 ? "External link" : "External links"}</SubHeading>
                 <TagList>
                   {links.map((item, i) => (
                     <ColorButton key={i} href={item.uri} target="_blank" rel="noreferrer">
