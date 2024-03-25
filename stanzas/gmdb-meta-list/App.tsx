@@ -16,7 +16,7 @@ type Props = {
 
 const useTableData = (apiUrl: string, initialLimit: number) => {
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(initialLimit);
+  const [limit, setLimit] = useState<string | number>(initialLimit);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<ListApiBody>();
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,8 +26,7 @@ const useTableData = (apiUrl: string, initialLimit: number) => {
     setIsLoading(true);
     setErrorMessage("");
     const handler = window.setTimeout(() => {
-      console.log("fetching data", apiUrl, offset, limit);
-      fetchData(apiUrl, offset, limit).then((response) => {
+      fetchData(apiUrl, offset, typeof limit === "number" ? limit : 100).then((response) => {
         if (response.body) {
           setData(response.body);
         } else {
@@ -42,7 +41,7 @@ const useTableData = (apiUrl: string, initialLimit: number) => {
   }, [apiUrl, limit, offset]);
   useEffect(() => {
     if (!data) return;
-    if (data.total < limit) {
+    if (data.total < (typeof limit === "number" ? limit : 1000)) {
       setLimit(data.total);
     }
   }, [limit, setLimit, data]);
@@ -66,7 +65,7 @@ const App: FC<Props> = ({ apiUrl, initialLimit, title, showColumnNames, columnSi
         columnSizes,
         offset,
         setOffset,
-        limit,
+        limit: typeof limit === "number" ? limit : data.total,
         setLimit,
         isLoading,
         errorMessage,
