@@ -45,3 +45,13 @@ ChildItems.args = {
   columnSizes: [],
   webFont: "Fira Sans Condensed",
 };
+
+export const SimilarMedia = Template.bind({});
+SimilarMedia.args = {
+  apiUrl: "http://togomedium.org/sparqlist/api/gmdb_list_similar_media_by_gmid?gm_id=M1",
+  initialLimit: 10,
+  title: "List similar media",
+  showColumnNames: true,
+  columnSizes: [],
+  webFont: "Fira Sans Condensed",
+};

@@ -24,6 +24,7 @@ export const ListTable: FC<Props> = ({
   const extraRows = Array(Math.max(0, limit - data.contents.length))
     .fill(null)
     .map(() => nanoid());
+  console.log(data);
   return (
     <table css={[listTable, css]} className={className}>
       {showColumnNames && (
@@ -50,13 +51,7 @@ export const ListTable: FC<Props> = ({
               const noWrap: boolean = !!column.nowrap;
               return (
                 <td key={key} style={noWrap ? { whiteSpace: "nowrap" } : {}}>
-                  {typeof item === "string" ? (
-                    decodeHTMLEntities(item)
-                  ) : (
-                    <a href={item.href} target={"_blank"} rel="noreferrer">
-                      {decodeHTMLEntities(item.label)}
-                    </a>
-                  )}
+                  <CellContent item={item} />
                 </td>
               );
             })}
@@ -72,6 +67,21 @@ export const ListTable: FC<Props> = ({
         ))}
       </tbody>
     </table>
+  );
+};
+
+type CellContentProps = { item: ListApiBody["contents"][0][0] };
+const CellContent: FC<CellContentProps> = ({ item }) => {
+  if (typeof item === "string") {
+    return <>{decodeHTMLEntities(item)}</>;
+  }
+  if (typeof item === "number") {
+    return <>{item}</>;
+  }
+  return (
+    <a href={item.href} target={"_blank"} rel="noreferrer">
+      {decodeHTMLEntities(item.label)}
+    </a>
   );
 };
 

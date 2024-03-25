@@ -6,7 +6,7 @@ type ApiBody = {
   columns: Column[];
 };
 
-type Content = Record<string, LinkItem | string>;
+type Content = Record<string, LinkItem | string | number>;
 
 type LinkItem = {
   href: string;
