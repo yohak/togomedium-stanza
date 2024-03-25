@@ -45,7 +45,7 @@ export const StanzaView: FC<Props> = ({
             <span>{strainId}</span>
           </InfoId>
           <InfoTitle>{strainName}</InfoTitle>
-          <SubHeading>Source strains</SubHeading>
+          <SubHeading>{infoSources.length === 1 ? "Source strain" : "Source strains"}</SubHeading>
           <TagList>
             {infoSources.map((source, index) => (
               <ColorButton key={index} href={source.url} target={"_blank"} rel="noreferrer">

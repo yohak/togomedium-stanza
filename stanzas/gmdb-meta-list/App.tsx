@@ -22,9 +22,11 @@ const useTableData = (apiUrl: string, initialLimit: number) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    if (!apiUrl) return;
     setIsLoading(true);
     setErrorMessage("");
     const handler = window.setTimeout(() => {
+      console.log("fetching data", apiUrl, offset, limit);
       fetchData(apiUrl, offset, limit).then((response) => {
         if (response.body) {
           setData(response.body);

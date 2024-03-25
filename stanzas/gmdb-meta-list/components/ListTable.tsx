@@ -24,7 +24,6 @@ export const ListTable: FC<Props> = ({
   const extraRows = Array(Math.max(0, limit - data.contents.length))
     .fill(null)
     .map(() => nanoid());
-  console.log(data);
   return (
     <table css={[listTable, css]} className={className}>
       {showColumnNames && (
