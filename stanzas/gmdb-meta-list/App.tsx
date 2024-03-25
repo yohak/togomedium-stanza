@@ -69,7 +69,7 @@ const App: FC<Props> = ({ apiUrl, initialLimit, title, showColumnNames, columnSi
         columnSizes,
         offset: typeof offset === "number" ? offset : 0,
         setOffset,
-        limit: typeof limit === "number" ? limit : data.total,
+        limit: typeof limit === "number" && !isNaN(limit) ? limit : data.total,
         setLimit,
         isLoading,
         errorMessage,
