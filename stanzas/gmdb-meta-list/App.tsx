@@ -15,7 +15,7 @@ type Props = {
 };
 
 const useTableData = (apiUrl: string, initialLimit: number) => {
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState<string | number>(0);
   const [limit, setLimit] = useState<string | number>(initialLimit);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<ListApiBody>();
@@ -26,7 +26,11 @@ const useTableData = (apiUrl: string, initialLimit: number) => {
     setIsLoading(true);
     setErrorMessage("");
     const handler = window.setTimeout(() => {
-      fetchData(apiUrl, offset, typeof limit === "number" ? limit : 100).then((response) => {
+      fetchData(
+        apiUrl,
+        typeof offset === "number" ? offset : 0,
+        typeof limit === "number" ? limit : 100
+      ).then((response) => {
         if (response.body) {
           setData(response.body);
         } else {
@@ -63,7 +67,7 @@ const App: FC<Props> = ({ apiUrl, initialLimit, title, showColumnNames, columnSi
         title,
         showColumnNames,
         columnSizes,
-        offset,
+        offset: typeof offset === "number" ? offset : 0,
         setOffset,
         limit: typeof limit === "number" ? limit : data.total,
         setLimit,
