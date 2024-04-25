@@ -10,7 +10,7 @@
 APIの参照先をコントロールするために dotenv を使用しています。  
 `.env` ファイルを作成し、以下のように記述してください。
 ```
-URL_API=http://togomedium.org/sparqlist/api/
+URL_API=https://togomedium.org/sparqlist/api/
 ```
 また、github actions でビルドを行うために同様の Repository Secretsを設定する必要があります。
 
