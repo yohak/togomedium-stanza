@@ -10,7 +10,7 @@ const Template: ComponentStory<typeof App> = (args) => <App {...args} />;
 
 export const Media = Template.bind({});
 Media.args = {
-  apiUrl: "http://togomedium.org/sparqlist/api/list_media",
+  apiUrl: "https://togomedium.org/sparqlist/api/list_media",
   initialLimit: 20,
   title: "List Media",
   showColumnNames: true,
@@ -20,7 +20,7 @@ Media.args = {
 
 export const Strains = Template.bind({});
 Strains.args = {
-  apiUrl: "http://togomedium.org/sparqlist/api/list_strains",
+  apiUrl: "https://togomedium.org/sparqlist/api/list_strains",
   initialLimit: 20,
   title: "List Media",
   showColumnNames: true,
@@ -29,7 +29,7 @@ Strains.args = {
 };
 export const Components = Template.bind({});
 Components.args = {
-  apiUrl: "http://togomedium.org/sparqlist/api/list_components",
+  apiUrl: "https://togomedium.org/sparqlist/api/list_components",
   initialLimit: 100,
   title: "List Media",
   showColumnNames: true,
@@ -38,7 +38,7 @@ Components.args = {
 };
 export const ChildItems = Template.bind({});
 ChildItems.args = {
-  apiUrl: "http://togomedium.org/sparqlist/api/gmdb_organism_under_rank_by_taxid?tax_id=293088",
+  apiUrl: "https://togomedium.org/sparqlist/api/gmdb_organism_under_rank_by_taxid?tax_id=293088",
   initialLimit: 10,
   title: "List Media",
   showColumnNames: true,
@@ -48,7 +48,7 @@ ChildItems.args = {
 
 export const SimilarMedia = Template.bind({});
 SimilarMedia.args = {
-  apiUrl: "http://togomedium.org/sparqlist/api/gmdb_list_similar_media_by_gmid?gm_id=M1",
+  apiUrl: "https://togomedium.org/sparqlist/api/gmdb_list_similar_media_by_gmid?gm_id=M1",
   initialLimit: 10,
   title: "List similar media",
   showColumnNames: true,
