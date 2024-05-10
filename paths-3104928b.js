@@ -2,7 +2,7 @@ import { h as jsxRuntimeExports, r as reactDomExports, _ as _objectWithoutProper
 import { r as reactExports, f as React, _ as _extends, R as React$1 } from './getData-e69d262f.js';
 import { u as useForkRef, a as useEnhancedEffect, s as setRef, g as generateUtilityClass, b as generateUtilityClasses, o as ownerDocument, c as useSlotProps, d as composeClasses, e as styled, f as useThemeProps, h as useTheme$1, i as useControlled, j as useEventCallback, k as useIsFocusVisible, l as clsx, m as appendOwnerState } from './useSlotProps-06654923.js';
 import { e as createPopper } from './stanza-be82c2ee.js';
-import { U as URL_API } from './variables-42acbc42.js';
+import { U as URL_API } from './variables-58f3d1be.js';
 
 let globalId = 0;
 function useGlobalId(idOverride) {
@@ -1618,4 +1618,4 @@ const API_COMPONENTS_WITH_COMPONENTS = `${URL_API}gmdb_components_with_component
 const API_MEDIA_STRAINS_ALIGNMENT = `${URL_API}gmdb_media_strains_alignment_by_gm_ids`;
 
 export { API_COMPONENTS_WITH_COMPONENTS as A, Grow$1 as G, Portal$1 as P, TransitionGroupContext as T, _inheritsLoose as _, API_MEDIA_BY_ATTRIBUTES as a, Tooltip$1 as b, useId as c, Popper$1 as d, Transition$1 as e, API_ORGANISMS_BY_PHENOTYPES as f, getTransitionProps as g, API_MEDIA_BY_TAXON as h, API_TAXONOMY_CHILDREN as i, API_MEDIA_ALIGNMENT as j, API_MEDIA_STRAINS_ALIGNMENT as k, reflow as r, useClassNamesOverride as u };
-//# sourceMappingURL=paths-93d2d7f9.js.map
+//# sourceMappingURL=paths-3104928b.js.map

@@ -1,7 +1,7 @@
 import { _ as __awaiter, f as __asyncValues } from './stanza-be82c2ee.js';
 import { c as copy } from './index-1640bb89.js';
 import { g as getData } from './getData-e69d262f.js';
-import { U as URL_API } from './variables-42acbc42.js';
+import { U as URL_API } from './variables-58f3d1be.js';
 
 const getMedia = (gm_id) => __awaiter(void 0, void 0, void 0, function* () {
     const apiName = "gmdb_medium_by_gmid";
@@ -119,4 +119,4 @@ const getSrcLabel = (str) => {
 };
 
 export { getMedia as g };
-//# sourceMappingURL=api-66a29d3d.js.map
+//# sourceMappingURL=api-06d33a38.js.map

@@ -3,7 +3,7 @@ import { b as getAugmentedNamespace } from './stanza-be82c2ee.js';
 import { a as createChainedFunction, c as createSvgIcon$1, d as debounce, i as isMuiElement, o as ownerWindow } from './consts-57be2ed0.js';
 import { C as ClassNameGenerator, o as ownerDocument, s as setRef, a as useEnhancedEffect, i as useControlled, j as useEventCallback, u as useForkRef, k as useIsFocusVisible } from './useSlotProps-06654923.js';
 import { k as capitalize, L as requireJsxRuntime } from './StanzaReactProvider-87464745.js';
-import { c as useId } from './paths-93d2d7f9.js';
+import { c as useId } from './paths-3104928b.js';
 
 function deprecatedPropType(validator, reason) {
   {
@@ -144,4 +144,4 @@ const IconBlank = newStyled.span({
 });
 
 export { IconBlank as I, IconNoChildren as a, IconCompact as b, IconExpand as c };
-//# sourceMappingURL=icons-f440582b.js.map
+//# sourceMappingURL=icons-48314cd0.js.map

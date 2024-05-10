@@ -1,13 +1,13 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
 import { d as COLOR_WHITE, s as COLOR_GRAY_LINE, C as COLOR_PRIMARY, b as COLOR_GRAY300, w as COLOR_GRAY700, K as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { c as css, g as getData, l as dist, r as reactExports } from './getData-e69d262f.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-f440582b.js';
-import { b as Tooltip, i as API_TAXONOMY_CHILDREN, h as API_MEDIA_BY_TAXON } from './paths-93d2d7f9.js';
-import { C as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-838ec5a9.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-48314cd0.js';
+import { b as Tooltip, i as API_TAXONOMY_CHILDREN, h as API_MEDIA_BY_TAXON } from './paths-3104928b.js';
+import { C as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d46a6b88.js';
 import './emotion-styled.browser.esm-90764b6a.js';
 import './consts-57be2ed0.js';
 import './useSlotProps-06654923.js';
-import './variables-42acbc42.js';
+import './variables-58f3d1be.js';
 import './CircularProgress-88c2b271.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {

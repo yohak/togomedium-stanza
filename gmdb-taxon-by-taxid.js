@@ -7,7 +7,7 @@ import { I as InfoId, C as ColorButton, a as InfoTitle, S as StandardParagraph, 
 import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-55ee1bbb.js';
 import { s as stanzaWrapper } from './common-cd178d45.js';
 import { u as unescapeJsonString } from './string-4de5f4fa.js';
-import { U as URL_API } from './variables-42acbc42.js';
+import { U as URL_API } from './variables-58f3d1be.js';
 import './types-8994330c.js';
 
 const CapsuleList = ({ labels }) => (jsx(CapsuleListWrapper, { children: labels.map((label, index) => (jsx("li", { children: label }, index))) }));

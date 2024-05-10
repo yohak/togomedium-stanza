@@ -2,14 +2,14 @@ import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
 import { _ as _objectWithoutPropertiesLoose, G as defaultSxConfig, H as isPlainObject, k as capitalize, h as jsxRuntimeExports, d as COLOR_WHITE, s as COLOR_GRAY_LINE, S as SIZE1, o as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, t as FONT_WEIGHT_BOLD, w as COLOR_GRAY700, x as SIZE4, n as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-e69d262f.js';
 import { b as PATH_TAXON } from './consts-57be2ed0.js';
-import { e as useFormControl, C as Checkbox, h as hasInfo, f as filterOutInfo, P as Pagination, g as hasIdOfLabel, T as Tabs, i as Tab, j as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, k as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-838ec5a9.js';
-import { f as API_ORGANISMS_BY_PHENOTYPES, h as API_MEDIA_BY_TAXON } from './paths-93d2d7f9.js';
+import { e as useFormControl, C as Checkbox, h as hasInfo, f as filterOutInfo, P as Pagination, g as hasIdOfLabel, T as Tabs, i as Tab, j as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, k as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d46a6b88.js';
+import { f as API_ORGANISMS_BY_PHENOTYPES, h as API_MEDIA_BY_TAXON } from './paths-3104928b.js';
 import { c as clone } from './clone-1fb93465.js';
 import { C as CircularProgress } from './CircularProgress-88c2b271.js';
 import { g as generateUtilityClass, b as generateUtilityClasses, e as styled, f as useThemeProps, l as clsx, d as composeClasses } from './useSlotProps-06654923.js';
-import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-364db4f2.js';
+import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-e9d77612.js';
 import { S as Slider } from './Slider-bc45a1fe.js';
-import './variables-42acbc42.js';
+import './variables-58f3d1be.js';
 import './emotion-styled.browser.esm-90764b6a.js';
 
 const _excluded$2 = ["sx"];
@@ -788,7 +788,7 @@ const PhenotypeSearchArea = ({ css, className }) => {
                 ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }), jsx(SelectBox, { label: "Salinity", queryKey: "MPO_03006", items: [
                     ["MPO_03007", "Halophile"],
                     ["MPO_03008", "Halotolerant"],
-                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange })] }));
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }), jsx(SelectBox, { label: "Energy metabolism", queryKey: "MPO_04053", items: [["MPO_04153", "Carbon fixation"]], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange })] }));
 };
 const phenotypeSearchArea = css `
   background-color: ${COLOR_WHITE};

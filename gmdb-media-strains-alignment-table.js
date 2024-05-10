@@ -4,11 +4,11 @@ import { c as css, r as reactExports, R as React, l as dist, g as getData } from
 import { c as copy } from './index-1640bb89.js';
 import { n as nanoid } from './index.browser-18dc4f2c.js';
 import { l as lineageRanks } from './types-8994330c.js';
-import { b as Tooltip, k as API_MEDIA_STRAINS_ALIGNMENT } from './paths-93d2d7f9.js';
+import { b as Tooltip, k as API_MEDIA_STRAINS_ALIGNMENT } from './paths-3104928b.js';
 import { m as makeSpeciesName, c as capitalizeFirstLetter, s as stringToArray } from './string-4de5f4fa.js';
 import './useSlotProps-06654923.js';
 import './emotion-styled.browser.esm-90764b6a.js';
-import './variables-42acbc42.js';
+import './variables-58f3d1be.js';
 
 const makeCellHeight = (size) => {
     return 48 * size + size - 1;

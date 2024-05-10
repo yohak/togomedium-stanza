@@ -4,10 +4,10 @@ import { c as css, r as reactExports } from './getData-e69d262f.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
 import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-5c02f157.js';
 import { s as stanzaWrapper } from './common-cd178d45.js';
-import { g as getMedia } from './api-66a29d3d.js';
+import { g as getMedia } from './api-06d33a38.js';
 import './emotion-styled.browser.esm-90764b6a.js';
 import './index-1640bb89.js';
-import './variables-42acbc42.js';
+import './variables-58f3d1be.js';
 
 const RecipeComment = ({ css, className, comment }) => {
     return (jsx("div", { css: [recipeComments, css], className: className, children: parseText(comment) }));
