@@ -165,6 +165,13 @@ export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
         handleEnabledChange={handleEnabledChange}
         handleValueChange={handleValueChange}
       />
+      <SelectBox
+        label={"Energy metabolism"}
+        queryKey={"MPO_04053"}
+        items={[["MPO_04153", "Carbon fixation"]]}
+        handleEnabledChange={handleEnabledChange}
+        handleValueChange={handleValueChange}
+      />
     </div>
   );
 };
