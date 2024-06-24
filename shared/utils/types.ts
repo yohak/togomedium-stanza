@@ -2,7 +2,7 @@ import { SerializedStyles } from "@emotion/serialize";
 import { Optional } from "yohak-tools";
 
 export type AcceptsEmotion = {
-  css?: SerializedStyles;
+  css?: any;
   className?: string;
 };
 
