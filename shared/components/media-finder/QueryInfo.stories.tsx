@@ -14,7 +14,7 @@ const Wrapper: FC<WrapperProps> = (args) => {
   }, [args.queryData]);
   return (
     <div css={wrapper}>
-      <QueryInfo {...args} />
+      <QueryInfo />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { Tooltip } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import React, { FC } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import {
   IconCompact,
@@ -33,7 +33,8 @@ type Props = {
   linkURL?: string;
   onClickCheck: (id: string) => void;
   onToggleChildren: (id: string) => void;
-} & AcceptsEmotion;
+} & AcceptsEmotion &
+  PropsWithChildren;
 
 export const TreeBranchView: FC<Props> = ({
   label,

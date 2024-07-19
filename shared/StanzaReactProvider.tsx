@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@mui/material/styles";
 import React, { StrictMode, FC, ReactElement } from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import Stanza from "togostanza/stanza";
 import { EmotionCacheProvider } from "./components/EmotionCacheProvider";
@@ -35,6 +36,7 @@ export abstract class TogoMediumReactStanza<T> extends Stanza {
   _render() {
     const main = this.root.querySelector("main");
     const children = this.makeApp();
-    ReactDOM.render(<StanzaReactProvider>{children}</StanzaReactProvider>, main);
+    const root = createRoot(main as HTMLElement);
+    root.render(<StanzaReactProvider>{children}</StanzaReactProvider>);
   }
 }

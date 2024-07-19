@@ -303,11 +303,9 @@ const fitSubTableHeight = (main: HTMLElement, sub: HTMLElement) => {
   const header2Height = main
     .querySelector("thead tr:nth-child(2) th")!
     .getBoundingClientRect().height;
-  sub.querySelector<HTMLTableHeaderCellElement>(
-    "thead tr:nth-child(2) th"
-  )!.style.height = `${header2Height}px`;
+  sub.querySelector<HTMLElement>("thead tr:nth-child(2) th")!.style.height = `${header2Height}px`;
   const footerHeight = main.querySelector("tfoot td")!.getBoundingClientRect().height;
-  sub.querySelector<HTMLTableDataCellElement>("tfoot td")!.style.height = `${footerHeight}px`;
+  sub.querySelector<HTMLElement>("tfoot td")!.style.height = `${footerHeight}px`;
   const mainBodyRows = main.querySelectorAll<HTMLTableRowElement>("tbody tr");
   const subBodyRows = sub.querySelectorAll<HTMLTableRowElement>("tbody tr");
   mainBodyRows.forEach((elm, i) => {

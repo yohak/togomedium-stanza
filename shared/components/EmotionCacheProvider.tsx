@@ -1,11 +1,11 @@
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { Global, css } from "@emotion/react";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { EmotionGlobalStyles } from "./EmotionGlobalStyles";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type EmotionCacheProviderProps = {};
+export type EmotionCacheProviderProps = {} & PropsWithChildren;
 
 export const EmotionCacheProvider: FC<EmotionCacheProviderProps> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);

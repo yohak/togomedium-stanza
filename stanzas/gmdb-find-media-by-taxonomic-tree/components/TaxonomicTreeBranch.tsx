@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { AcceptsEmotion, Optional } from "yohak-tools";
 import { isArray } from "yohak-tools/";
 import { CheckStatus, TreeBranchView } from "./TreeBranchView";
@@ -7,7 +7,7 @@ import { findAscendants, findDescendants, retrieveTaxonInfo } from "../functions
 import { useSelectedTaxonMutators, useSelectedTaxonState } from "../states/selectedTaxon";
 import { TaxonInfo, useTaxonListMutators, useTaxonListState } from "../states/taxonList";
 
-type Props = { id: string } & AcceptsEmotion;
+type Props = { id: string } & AcceptsEmotion & PropsWithChildren;
 
 export const TaxonomicTreeBranch: FC<Props> = ({ id, css, className }) => {
   const taxonList = useTaxonListState();
