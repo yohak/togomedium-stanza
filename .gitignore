@@ -12,3 +12,5 @@ utils/**/*.js
 utils/**/*.js.map
 sparqlist/**/*.js
 sparqlist/**/*.js.map
+
+*storybook.log
