@@ -66,5 +66,6 @@ module.exports = {
         },
       },
     ],
+    "storybook/default-exports": "off",
   },
 };
