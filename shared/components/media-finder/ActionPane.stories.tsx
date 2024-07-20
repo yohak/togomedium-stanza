@@ -13,7 +13,7 @@ const meta: Meta<WithCustomArgs> = {
       const { setSelectedMedia } = useSelectedMediaMutators();
       useEffect(() => {
         setSelectedMedia(selectedMedia);
-      }, [selectedMedia]);
+      }, [selectedMedia, setSelectedMedia]);
       return <StoryItem />;
     },
   ],

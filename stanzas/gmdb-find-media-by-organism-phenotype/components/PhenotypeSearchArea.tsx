@@ -187,7 +187,7 @@ const sliderStyle = css`
     margin-top: 10px;
   }
 `;
-
+//TODO switch to react-query
 const usePhenotypeQuery = () => {
   const phenotypeQuery = usePhenotypeQueryState();
   const { setFoundOrganisms } = useFoundOrganismsMutators();

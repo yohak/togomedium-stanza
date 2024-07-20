@@ -1,6 +1,5 @@
 import { ThemeProvider } from "@mui/material/styles";
 import React, { StrictMode, FC, ReactElement } from "react";
-import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import Stanza from "togostanza/stanza";

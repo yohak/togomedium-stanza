@@ -7,9 +7,7 @@ import { ListTable } from "./ListTable";
 import { LoadingCover } from "./LoadingCover";
 import { TopInfo } from "./TopInfo";
 import { StanzaWrapper } from "../../../shared/components/StanzaWrapper";
-import { stanzaWrapper } from "../../../shared/styles/common";
 import { ListApiBody } from "../types";
-import { getPagination } from "../utils/getPagination";
 
 type Props = {
   data: ListApiBody;

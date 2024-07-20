@@ -12,7 +12,7 @@ const meta: Meta<WithCustomArgs> = {
       const { setFilterTaxon } = useFilterTaxonMutators();
       useEffect(() => {
         setFilterTaxon(filterId);
-      }, [filterId]);
+      }, [filterId, setFilterTaxon]);
       return <StoryItem />;
     },
   ],

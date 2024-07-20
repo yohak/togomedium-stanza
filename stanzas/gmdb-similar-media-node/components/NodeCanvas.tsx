@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
-import * as d3 from "d3";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_WHITE } from "../../../shared/styles/variables";
 import { drawGraph } from "../utils/drawGraph";

@@ -4,7 +4,7 @@ import { organismsByAttributesResponse2 } from "./response2";
 import { organismsByAttributesResponse3 } from "./response3";
 import { organismsByAttributesResponse4 } from "./response4";
 import { OrganismsByPhenotypesResponse } from "./types";
-import { API_MEDIA_BY_TAXON, API_ORGANISMS_BY_PHENOTYPES } from "../paths";
+import { API_ORGANISMS_BY_PHENOTYPES } from "../paths";
 
 const post = rest.post<string, OrganismsByPhenotypesResponse, never>(
   API_ORGANISMS_BY_PHENOTYPES,

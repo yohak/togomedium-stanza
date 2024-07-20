@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MediaListItem } from "./MediaListItem";
-import { makeComponentStoryTitle } from "../../utils/storybook";
 
 const meta: Meta<typeof MediaListItem> = {
   component: MediaListItem,

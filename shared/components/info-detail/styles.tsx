@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import React from "react";
 import { COLOR_PRIMARY, COLOR_PRIMARY_DARK, COLOR_WHITE } from "../../styles/variables";
 
 export const ColWrapper = styled.div`

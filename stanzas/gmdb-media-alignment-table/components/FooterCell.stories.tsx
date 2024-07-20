@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { FooterCell } from "./FooterCell";
-import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 const meta: Meta<typeof FooterCell> = {
   component: FooterCell,

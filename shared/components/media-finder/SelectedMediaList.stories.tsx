@@ -18,7 +18,7 @@ const meta: Meta<WithCustomArgs> = {
       const { setSelectedMedia } = useSelectedMediaMutators();
       useEffect(() => {
         setSelectedMedia(media);
-      }, [media]);
+      }, [media, setSelectedMedia]);
       return (
         <div css={wrapper}>
           <StoryItem />

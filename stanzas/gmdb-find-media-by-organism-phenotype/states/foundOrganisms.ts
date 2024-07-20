@@ -1,6 +1,4 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { OrganismsByPhenotypesResponse } from "../../../api/organisms_by_phenotypes/types";
-import { LabelInfo } from "../../../shared/utils/labelInfo";
 import { MediaFinderListApiBody } from "../../../shared/utils/types";
 
 export type FoundOrganisms = MediaFinderListApiBody<"tax_id" | "name">;

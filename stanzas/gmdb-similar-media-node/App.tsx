@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
-import { Optional } from "yohak-tools";
+import React, { FC } from "react";
 import { StanzaView } from "./components/StanzaView";
 
 type Props = {

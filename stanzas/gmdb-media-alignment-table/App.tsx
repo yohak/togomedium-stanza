@@ -12,6 +12,7 @@ export type AppProps = {
   stanzaElement?: ShadowRoot;
 };
 
+//TODO: switch to use react-query
 const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }: AppProps) => {
   const [data, setData] = useState<MediaAlignmentTableResponse>();
   const [isLoading, setIsLoading] = useState<boolean>(true);

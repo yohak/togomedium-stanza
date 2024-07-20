@@ -1,4 +1,4 @@
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 
 const isMediaExpanded = atom<boolean>({ key: "isMediaExpanded", default: false });
 

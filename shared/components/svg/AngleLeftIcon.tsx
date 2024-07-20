@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 

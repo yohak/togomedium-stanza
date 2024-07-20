@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ComponentProps } from "react";
 import { StanzaView } from "./StanzaView";
-import { makeComponentStoryTitle } from "../../../shared/utils/storybook";
 
 const meta: Meta<typeof StanzaView> = {
   component: StanzaView,

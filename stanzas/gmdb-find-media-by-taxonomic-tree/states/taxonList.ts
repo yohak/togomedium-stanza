@@ -1,5 +1,4 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
-import { Nullable } from "yohak-tools";
 
 export type TaxonInfo = {
   id: string;

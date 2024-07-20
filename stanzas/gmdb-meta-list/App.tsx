@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from "react";
 import { StanzaView } from "./components/StanzaView";
 import { ListApiBody } from "./types";
 import { fetchData } from "./utils/api";
-import { ApiResponse } from "../../shared/utils/types";
 
 type Props = {
   stanzaElement?: ShadowRoot;
