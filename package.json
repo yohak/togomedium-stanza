@@ -28,8 +28,7 @@
     "yohak-tools": "0.1.18"
   },
   "scripts": {
-    "test": "jest --runInBand",
-    "test watch": "jest --watch",
+    "test": "vitest",
     "stanza:server": "togostanza s",
     "stanza:build": "togostanza build",
     "stanza:generate": "togostanza g stanza",
@@ -56,7 +55,6 @@
     "@storybook/react-vite": "^8.2.4",
     "@storybook/test": "^8.2.4",
     "@types/d3": "^7.4.0",
-    "@types/jest": "^27.4.0",
     "@types/pluralize": "0.0.29",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -70,16 +68,15 @@
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-storybook": "^0.8.0",
-    "jest": "^29.7.0",
-    "jest-extended": "^4.0.2",
+    "happy-dom": "^14.12.3",
     "msw-storybook-addon": "^1.5.0",
     "prettier": "^3.3.3",
     "react-docgen-typescript-plugin": "^1.0.8",
     "storybook": "^8.2.4",
-    "ts-jest": "^29.1.5",
     "tsc-watch": "^4.2.9",
     "tslib": "^2.6.3",
-    "typescript": "^5.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^2.0.3",
     "yohak-cli": "0.0.8"
   },
   "msw": {

@@ -1,8 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "jsx": "react",
-    "types": ["jest", "node"],
+    "jsx": "react-jsx",
+    "lib": ["dom", "ES2022"],
+    "types": ["vitest/globals"],
     "isolatedModules": true
   },
   "include": ["**/*.spec.ts"]

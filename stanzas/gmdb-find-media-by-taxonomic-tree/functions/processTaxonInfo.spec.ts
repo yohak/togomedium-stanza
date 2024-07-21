@@ -1,6 +1,18 @@
 import { findAscendants, findDescendants, makeNewSelection } from "./proessTaxonInfo";
 import { TaxonInfo } from "../states/taxonList";
 
+expect.extend({
+  toIncludeSameMembers(received: any[], expected: any[]) {
+    const { isNot } = this;
+    const pass =
+      received.length === expected.length && received.every((item: any) => expected.includes(item));
+    return {
+      pass,
+      message: () => `${received} is${isNot ? " not" : ""} equal to ${expected}`,
+    };
+  },
+});
+
 describe("findAscendants", () => {
   it("should work", () => {
     const result = findAscendants(list, "C");

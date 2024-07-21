@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "jsx": "react-jsx",
-    "lib": ["ESNext", "dom"],
+    "lib": ["dom", "ES2022"],
     "jsxImportSource": "@emotion/react",
     "declaration": false,
     "declarationMap": false,
