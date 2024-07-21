@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { FC, useEffect, useState } from "react";
 import { StanzaView } from "./components/StanzaView";
 import { ListApiBody } from "./types";
@@ -13,41 +14,35 @@ type Props = {
   webFont: string;
 };
 
-const useTableData = (apiUrl: string, initialLimit: number) => {
-  const [offset, setOffset] = useState<string | number>(0);
-  const [limit, setLimit] = useState<string | number>(initialLimit);
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<ListApiBody>();
-  const [errorMessage, setErrorMessage] = useState("");
+const useTableData = (apiUrl: string, initialLimit: number = 100) => {
+  const [offset, setOffset] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(initialLimit);
+  const [data, setData] = useState<ListApiBody | null>(null);
+  const {
+    data: result,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: [{ offset }, { limit }],
+    queryFn: async () => {
+      const response = await fetchData(apiUrl, offset, limit);
+      return response.body;
+    },
+    staleTime: Infinity,
+  });
+  useEffect(() => {
+    if (result) {
+      setData(result);
+    }
+  }, [result]);
+  const errorMessage = error?.message || "";
 
   useEffect(() => {
-    if (!apiUrl) return;
-    setIsLoading(true);
-    setErrorMessage("");
-    const handler = window.setTimeout(() => {
-      fetchData(
-        apiUrl,
-        typeof offset === "number" ? offset : 0,
-        typeof limit === "number" ? limit : 100
-      ).then((response) => {
-        if (response.body) {
-          setData(response.body);
-        } else {
-          if (response.message) {
-            setErrorMessage(response.message);
-          }
-        }
-        setIsLoading(false);
-      });
-    }, 100);
-    return () => window.clearTimeout(handler);
-  }, [apiUrl, limit, offset]);
-  useEffect(() => {
     if (!data) return;
-    if (data.total < (typeof limit === "number" ? limit : 1000)) {
+    if (data.total < limit) {
       setLimit(data.total);
     }
-  }, [limit, setLimit, data]);
+  }, [limit, data]);
   return { offset, setOffset, limit, setLimit, isLoading, data, errorMessage };
 };
 
@@ -66,9 +61,9 @@ const App: FC<Props> = ({ apiUrl, initialLimit, title, showColumnNames, columnSi
         title,
         showColumnNames,
         columnSizes,
-        offset: typeof offset === "number" ? offset : 0,
+        offset,
         setOffset,
-        limit: typeof limit === "number" && !isNaN(limit) ? limit : data.total,
+        limit: !isNaN(limit) ? limit : data.total,
         setLimit,
         isLoading,
         errorMessage,

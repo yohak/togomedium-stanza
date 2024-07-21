@@ -60,12 +60,11 @@ const parseData = (body: ApiBody): ViewProps => {
   };
 };
 
-export const getStrainData = async (strain_id: string): Promise<Optional<ViewProps>> => {
+export const getStrainData = async (strain_id: string): Promise<ViewProps> => {
   const apiName = "gmdb_strain_by_strainid";
   const result = await getData<ApiBody>(`${URL_API}${apiName}`, { strain_id });
-  if (result.body?.strain) {
-    return parseData(result.body);
-  } else {
-    return undefined;
+  if (!result.body?.strain) {
+    throw new Error("No strain data found");
   }
+  return parseData(result.body);
 };
