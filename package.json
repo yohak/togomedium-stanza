@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.16.4",
     "@mui/material": "^5.16.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@tanstack/react-query": "^5.51.11",
     "@types/d3-drag": "^3.0.7",
     "colord": "^2.9.3",
     "copy-anything": "^3.0.3",

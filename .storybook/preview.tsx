@@ -4,7 +4,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { muiTheme } from "../shared/components/muiTheme";
 import { EmotionGlobalStyles } from "../shared/components/EmotionGlobalStyles";
 import React from "react";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 const preview: Preview = {
   parameters: {
     controls: {
@@ -29,12 +30,14 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <RecoilRoot>
-        <ThemeProvider theme={muiTheme}>
-          <EmotionGlobalStyles />
-          <Story />
-        </ThemeProvider>
-      </RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <ThemeProvider theme={muiTheme}>
+            <EmotionGlobalStyles />
+            <Story />
+          </ThemeProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
     ),
   ],
 };

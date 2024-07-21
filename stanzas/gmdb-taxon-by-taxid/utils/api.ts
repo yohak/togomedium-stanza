@@ -1,5 +1,4 @@
 import { ComponentProps } from "react";
-import { Optional } from "yohak-tools";
 import { ApiLineage, parseLineage } from "../../../shared/components/info-detail/LineageList";
 import { getData } from "../../../shared/utils/getData";
 import { unescapeJsonString } from "../../../shared/utils/string";
@@ -7,7 +6,7 @@ import { URL_API } from "../../../shared/utils/variables";
 import { StanzaView } from "../components/StanzaView";
 
 export type ViewProps = ComponentProps<typeof StanzaView>;
-type ApiBody = {
+export type ApiBody = {
   scientific_name: string;
   taxid: number | string;
   rank: string;
@@ -22,7 +21,7 @@ type OtherMaterialParameter = {
   labels: string[];
 };
 
-const parseData = (body: ApiBody): ViewProps => {
+export const parseData = (body: ApiBody): ViewProps => {
   const taxid = body.taxid.toString();
   const scientificName = body.scientific_name;
   const authorityName = unescapeJsonString(body.authority_name);
@@ -47,12 +46,11 @@ const parseOtherTypeMaterial = (data: ApiBody["other_type_material"]): OtherMate
     }));
 };
 
-export const getTaxonData = async (tax_id: string): Promise<Optional<ViewProps>> => {
+export const getTaxonData = async (tax_id: string) => {
   const apiName = "gmdb_organism_by_taxid";
   const result = await getData<ApiBody>(`${URL_API}${apiName}`, { tax_id });
-  if (result.body?.taxid) {
-    return parseData(result.body);
-  } else {
-    return undefined;
+  if (!result.body) {
+    throw new Error("No data found");
   }
+  return parseData(result.body);
 };

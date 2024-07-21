@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@mui/material/styles";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React, { StrictMode, FC, ReactElement } from "react";
 import { createRoot } from "react-dom/client";
 import { RecoilRoot } from "recoil";
@@ -6,14 +7,17 @@ import Stanza from "togostanza/stanza";
 import { EmotionCacheProvider } from "./components/EmotionCacheProvider";
 import { muiTheme } from "./components/muiTheme";
 
+const queryClient = new QueryClient();
 const StanzaReactProvider: FC<{ children: ReactElement }> = ({ children }) => {
   return (
     <StrictMode>
-      <RecoilRoot>
-        <ThemeProvider theme={muiTheme}>
-          <EmotionCacheProvider>{children}</EmotionCacheProvider>
-        </ThemeProvider>
-      </RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <ThemeProvider theme={muiTheme}>
+            <EmotionCacheProvider>{children}</EmotionCacheProvider>
+          </ThemeProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
     </StrictMode>
   );
 };
