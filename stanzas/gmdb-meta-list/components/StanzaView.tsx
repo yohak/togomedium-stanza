@@ -18,7 +18,7 @@ type Props = {
   setOffset: (offset: number) => void;
   limit: number;
   setLimit: (limit: number) => void;
-  isLoading: boolean;
+  showLoading: boolean;
   errorMessage: string;
 } & AcceptsEmotion;
 
@@ -35,7 +35,7 @@ export const StanzaView: FC<Props> = ({
   setOffset,
   limit,
   setLimit,
-  isLoading,
+  showLoading,
   errorMessage,
 }) => {
   return (
@@ -49,7 +49,7 @@ export const StanzaView: FC<Props> = ({
         <TopInfo {...{ total: data.total, limit, setLimit, setOffset }} />
         <div style={{ position: "relative" }}>
           <ListTable {...{ data, showColumnNames, columnSizes, limit }} />
-          <LoadingCover {...{ isLoading, errorMessage }} />
+          <LoadingCover {...{ showLoading, errorMessage }} />
         </div>
         <BottomController {...{ total: data.total, offset, limit, setOffset }} />
       </StanzaWrapper>

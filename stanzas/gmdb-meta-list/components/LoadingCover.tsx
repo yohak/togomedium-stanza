@@ -4,13 +4,13 @@ import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { COLOR_WHITE } from "../../../shared/styles/variables";
 
-type Props = { isLoading: boolean; errorMessage: string } & AcceptsEmotion;
+type Props = { showLoading: boolean; errorMessage: string } & AcceptsEmotion;
 
-export const LoadingCover: FC<Props> = ({ css, className, isLoading, errorMessage }) => {
-  const isShow = isLoading || errorMessage !== "";
+export const LoadingCover: FC<Props> = ({ css, className, showLoading, errorMessage }) => {
+  const isShow = showLoading || errorMessage !== "";
   return (
     <Wrapper css={[css]} className={`${className} ${isShow && "active"}`}>
-      {isLoading && <CircularProgress />}
+      {showLoading && <CircularProgress />}
       {!!errorMessage && errorMessage}
     </Wrapper>
   );

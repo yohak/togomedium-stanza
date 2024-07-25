@@ -12,7 +12,7 @@ type Props = {
 
 const useTaxonDataQuery = (tax_id: string) => {
   const { data, isLoading } = useQuery({
-    queryKey: ["taxon", tax_id],
+    queryKey: [{ tax_id }],
     queryFn: async () => getTaxonData(tax_id),
     staleTime: Infinity,
   });

@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { FC } from "react";
 import { StanzaView } from "./components/StanzaView";
 import { getComponentData, ViewProps } from "./utils/api";
 import { fetchWikipediaData } from "../../shared/components/info-detail/WikipediaView";
@@ -7,22 +8,30 @@ type Props = {
   stanzaElement?: ShadowRoot;
   gmo_id: string;
 };
+const useComponentDataQuery = (gmo_id: string) => {
+  const { data, isLoading } = useQuery({
+    queryKey: [{ gmo_id }],
+    queryFn: () => getComponentData(gmo_id),
+    staleTime: Infinity,
+  });
+  return { componentData: data, isLoading };
+};
+const useWikipediaQuery = (component: ViewProps | undefined) => {
+  const wikipediaLink = component?.links.find((item) => item.label === "Wikipedia");
+  const { data } = useQuery({
+    queryKey: [{ wikipedia: wikipediaLink?.uri }],
+    queryFn: async () => await fetchWikipediaData(wikipediaLink?.uri ?? ""),
+    staleTime: Infinity,
+    enabled: wikipediaLink !== undefined,
+  });
+  return data;
+};
 
 const App: FC<Props> = ({ gmo_id }) => {
-  const [props, setProps] = useState<ViewProps | null>(null);
-  useEffect(() => {
-    (async () => {
-      const result = await getComponentData(gmo_id);
-      if (!result) return;
-      setProps(result);
-      const wikipediaLink = result.links.find((item) => item.label === "Wikipedia");
-      if (wikipediaLink) {
-        const wikipediaData = await fetchWikipediaData(wikipediaLink.uri);
-        setProps({ ...result, wikipediaData });
-      }
-    })();
-  }, [gmo_id]);
-  return props ? <StanzaView {...props} /> : <>Loading...</>;
+  const { componentData, isLoading } = useComponentDataQuery(gmo_id);
+  const wikipediaData = useWikipediaQuery(componentData);
+  if (isLoading || !componentData) return <>Loading...</>;
+  return <StanzaView {...componentData} wikipediaData={wikipediaData} />;
 };
 
 export default App;

@@ -18,7 +18,7 @@ export const Primary: Story = {
     setOffset: () => {},
     limit: 20,
     setLimit: () => {},
-    isLoading: false,
+    showLoading: false,
     errorMessage: "",
   },
 };

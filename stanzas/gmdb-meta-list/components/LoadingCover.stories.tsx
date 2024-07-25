@@ -21,7 +21,7 @@ export default meta;
 
 type Story = StoryObj<typeof LoadingCover>;
 const defaultArgs: Story["args"] = {
-  isLoading: true,
+  showLoading: true,
   errorMessage: "",
 };
 export const Primary: Story = {
@@ -38,6 +38,6 @@ export const ErrorMessage: Story = {
 export const Hidden: Story = {
   args: {
     ...defaultArgs,
-    isLoading: false,
+    showLoading: false,
   },
 };

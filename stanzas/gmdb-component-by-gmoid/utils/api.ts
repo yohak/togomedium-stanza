@@ -64,12 +64,11 @@ const parseData = (body: ApiBody): ViewProps => {
   };
 };
 
-export const getComponentData = async (gmo_id: string): Promise<Optional<ViewProps>> => {
+export const getComponentData = async (gmo_id: string): Promise<ViewProps> => {
   const apiName = "gmdb_component_by_gmoid";
   const result = await getData<ApiBody>(`${URL_API}${apiName}`, { gmo_id });
-  if (result.body?.id) {
-    return parseData(result.body);
-  } else {
-    return undefined;
+  if (!result.body) {
+    throw new Error("No data found");
   }
+  return parseData(result.body);
 };

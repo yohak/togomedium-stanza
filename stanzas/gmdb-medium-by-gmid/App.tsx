@@ -1,19 +1,24 @@
-import React, { FC, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC } from "react";
 import { StanzaView } from "./components/StanzaView";
-import { getMedia, ViewProps } from "./utils/api";
+import { getMedia } from "./utils/api";
+
 type Props = {
   gm_id: string;
 };
 
+const useMediaDataQuery = (gm_id: string) => {
+  const { data, isLoading } = useQuery({
+    queryKey: [{ gm_id }],
+    queryFn: async () => getMedia(gm_id),
+    staleTime: Infinity,
+    enabled: gm_id !== undefined,
+  });
+  return { mediaData: data, isLoading };
+};
+
 export const App: FC<Props> = ({ gm_id }) => {
-  const [props, setProps] = useState<ViewProps | null>(null);
-  useEffect(() => {
-    (async () => {
-      setProps(null);
-      const result = await getMedia(gm_id);
-      if (!result) return;
-      setProps(result);
-    })();
-  }, [gm_id]);
-  return props ? <StanzaView {...props} /> : <>Loading...</>;
+  const { mediaData, isLoading } = useMediaDataQuery(gm_id);
+  if (isLoading || !mediaData) return <>Loading...</>;
+  return <StanzaView {...mediaData} />;
 };

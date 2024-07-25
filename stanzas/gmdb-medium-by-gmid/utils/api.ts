@@ -13,13 +13,9 @@ export type ViewProps = ComponentProps<typeof StanzaView>;
 export const getMedia = async (gm_id: string) => {
   const apiName = "gmdb_medium_by_gmid";
   const result = await getData<ApiBody>(`${URL_API}${apiName}`, { gm_id });
-  if (result.body) {
-    const extra = await getExternalReferences(result.body, gm_id);
-
-    return processData(result.body, extra);
-  } else {
-    return undefined;
-  }
+  if (!result.body) throw new Error("No data found");
+  const extra = await getExternalReferences(result.body, gm_id);
+  return processData(result.body, extra);
 };
 
 export const getExternalReferences = async (

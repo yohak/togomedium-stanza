@@ -18,8 +18,3 @@ export const Secondary: Story = {
     gm_id: "M439",
   },
 };
-export const Tertiary: Story = {
-  args: {
-    gm_id: "GMO_001113",
-  },
-};
