@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useQuery } from "@tanstack/react-query";
 import React, { ComponentProps, FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { OrganismListItem } from "./OrganismListItem";
@@ -12,8 +13,8 @@ import { Pagination } from "../../../shared/components/media-finder/Pagination";
 import { COLOR_GRAY700, FONT_WEIGHT_BOLD, SIZE1 } from "../../../shared/styles/variables";
 import { getData } from "../../../shared/utils/getData";
 import { hasIdOfLabel, LabelInfo } from "../../../shared/utils/labelInfo";
-import { useFoundOrganismsMutators, useFoundOrganismsState } from "../states/foundOrganisms";
-import { useIsOrganismLoading, useOrganismLoadAbortMutators } from "../states/organismLoadAbort";
+import { FoundOrganisms } from "../states/foundOrganisms";
+import { useOrganismTabFocusMutators } from "../states/organismTabFocus";
 import { usePhenotypeQueryState } from "../states/phenotypeQuery";
 import {
   useSelectedOrganismsMutators,
@@ -25,30 +26,32 @@ type OrganismListInfo = Omit<ComponentProps<typeof OrganismListItem>, "onClick">
 
 const SHOW_COUNT = 10;
 export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
-  const { data, toggleChecked, isLoading, response } = useOrganismList();
-  const { next, prev } = usePaginate();
+  const { query, setPage } = useOrganismQuery();
+  const { data, isLoading, isPlaceholderData } = query;
+  const { list } = useOrganismList(data);
+  const { toggleChecked } = useToggleSelection();
 
   return (
     <div css={[foundOrganismsList, css]} className={className}>
       <div>
-        {isLoading && (
+        {(isLoading || isPlaceholderData) && (
           <div css={loadingIndicator}>
             <CircularProgress color="inherit" size={40} />
           </div>
         )}
-        <p css={infoTextCSS}>{getInfoText(response.total, isLoading)}</p>
+        <p css={infoTextCSS}>{getInfoText(data?.total, isLoading)}</p>
         <div css={inner}>
-          {data.map((item) => (
+          {(list ?? []).map((item) => (
             <OrganismListItem key={item.id} {...item} onClick={toggleChecked} />
           ))}
         </div>
-        {!!response.total && !isLoading && (
+        {!!data?.total && !isLoading && (
           <Pagination
-            total={response.total}
-            current={response.offset}
-            displayLength={response.limit}
-            onClickNext={() => next()}
-            onClickPrev={() => prev()}
+            total={data.total}
+            current={data.offset}
+            displayLength={data.limit}
+            onClickNext={() => setPage((prev) => prev + 1)}
+            onClickPrev={() => setPage((prev) => prev - 1)}
           />
         )}
       </div>
@@ -56,70 +59,64 @@ export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
   );
 };
 
-const usePaginate = () => {
-  const response = useFoundOrganismsState();
-  const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
-  const phenotypeQuery = usePhenotypeQueryState();
-  const { setFoundOrganisms } = useFoundOrganismsMutators();
-  const next = () => {
-    paginate(response.offset + SHOW_COUNT);
+const useOrganismQuery = () => {
+  const [page, setPage] = useState(1);
+  const { setOrganismTabFocus } = useOrganismTabFocusMutators();
+  const phenotypeQueryParams = usePhenotypeQueryState();
+  const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
+  useEffect(() => {
+    setPage(1);
+    // setOrganismTabFocus("Found organisms");
+  }, [phenotypeQueryParams]);
+  return {
+    setPage,
+    query: useQuery({
+      queryKey: [phenotypeQueryParams, { page }],
+      queryFn: async () => {
+        if (Object.entries(phenotypeQueryParams).length === 0) return nullResponse;
+        //
+        const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(
+          API_ORGANISMS_BY_PHENOTYPES,
+          { ...phenotypeQueryParams, limit: SHOW_COUNT, offset: (page - 1) * SHOW_COUNT }
+        );
+        if (!response.body) throw new Error("No data");
+        return response.body;
+      },
+      staleTime: Infinity,
+      placeholderData: (previousData) => previousData,
+    }),
   };
-  const prev = () => {
-    paginate(response.offset - SHOW_COUNT);
-  };
-  const paginate = async (offset: number) => {
-    const abort: AbortController = new AbortController();
-    setNextOrganismLoadAbort(abort);
-    const params: OrganismsByPhenotypeParams = {
-      ...phenotypeQuery,
-      limit: SHOW_COUNT,
-      offset,
-    };
-    const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(
-      API_ORGANISMS_BY_PHENOTYPES,
-      params,
-      abort
-    );
-    setNextOrganismLoadAbort(null);
-    if (response.body) {
-      setFoundOrganisms(response.body);
-    }
-  };
-
-  return { next, prev };
 };
 
-const useOrganismList = () => {
-  const [data, setData] = useState<OrganismListInfo[]>([]);
-  const response = useFoundOrganismsState();
+const useOrganismList = (response?: FoundOrganisms) => {
+  const [list, setList] = useState<OrganismListInfo[]>([]);
   const selectedOrganisms = useSelectedOrganismsState();
-  const isLoading = useIsOrganismLoading();
-
-  const { toggleOrganismSelection } = useSelectedOrganismsMutators();
-
-  const toggleChecked = (info: LabelInfo) => {
-    toggleOrganismSelection(info);
-  };
-
   useEffect(() => {
-    const result: OrganismListInfo[] = response.contents.map((organism) => {
+    const result: OrganismListInfo[] = (response?.contents ?? []).map((organism) => {
       return {
         id: organism.tax_id,
         label: organism.name,
         isChecked: hasIdOfLabel(selectedOrganisms, organism.tax_id),
       };
     });
-    setData(result);
+    setList(result);
   }, [response, selectedOrganisms]);
-
-  return { data, toggleChecked, isLoading, response };
+  return { list };
 };
 
-const getInfoText = (organismLength: number, isLoading: boolean): string => {
+const useToggleSelection = () => {
+  const { toggleOrganismSelection } = useSelectedOrganismsMutators();
+  const toggleChecked = (info: LabelInfo) => {
+    toggleOrganismSelection(info);
+  };
+  return { toggleChecked };
+};
+
+const getInfoText = (organismLength: number | undefined, isLoading: boolean): string => {
   if (isLoading) {
     return "Loading...";
   }
-  if (organismLength === 0) {
+  if (!organismLength) {
     return "No organisms found";
   } else if (organismLength === 1) {
     return "1 organism found";

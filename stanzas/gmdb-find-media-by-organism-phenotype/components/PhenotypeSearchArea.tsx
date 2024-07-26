@@ -1,23 +1,21 @@
 import { css } from "@emotion/react";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { AcceptsEmotion } from "yohak-tools";
 import { RangeSlider } from "./RangeSlider";
 import { SelectBox } from "./SelectBox";
-import {
-  OrganismsByPhenotypeParams,
-  OrganismsByPhenotypesResponse,
-} from "../../../api/organisms_by_phenotypes/types";
-import { API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
 import { COLOR_WHITE } from "../../../shared/styles/variables";
-import { getData } from "../../../shared/utils/getData";
-import { nullResponse, useFoundOrganismsMutators } from "../states/foundOrganisms";
-import { useOrganismLoadAbortMutators } from "../states/organismLoadAbort";
-import { usePhenotypeQueryMutators, usePhenotypeQueryState } from "../states/phenotypeQuery";
+import { usePhenotypeQueryMutators } from "../states/phenotypeQuery";
 
 type Props = {} & AcceptsEmotion;
 
 export const PhenotypeSearchArea: FC<Props> = ({ css, className }) => {
-  const { handleEnabledChange, handleValueChange } = usePhenotypeQuery();
+  const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
+  const handleEnabledChange = (key: string, enabled: boolean) => {
+    !enabled && removePhenotypeQuery(key);
+  };
+  const handleValueChange = (key: string, value: string) => {
+    updatePhenotypeQuery(key, value);
+  };
 
   return (
     <div css={[phenotypeSearchArea, css]} className={className}>
@@ -187,40 +185,3 @@ const sliderStyle = css`
     margin-top: 10px;
   }
 `;
-//TODO switch to react-query
-const usePhenotypeQuery = () => {
-  const phenotypeQuery = usePhenotypeQueryState();
-  const { setFoundOrganisms } = useFoundOrganismsMutators();
-  const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
-  const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
-  const handleEnabledChange = (key: string, enabled: boolean) => {
-    if (!enabled) {
-      removePhenotypeQuery(key);
-    }
-  };
-  const handleValueChange = (key: string, value: string) => {
-    updatePhenotypeQuery(key, value);
-  };
-  useEffect(() => {
-    if (Object.entries(phenotypeQuery).length === 0) {
-      setFoundOrganisms(nullResponse);
-      setNextOrganismLoadAbort(null);
-      return;
-    }
-    (async () => {
-      const abort: AbortController = new AbortController();
-      setNextOrganismLoadAbort(abort);
-      const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(
-        API_ORGANISMS_BY_PHENOTYPES,
-        { ...phenotypeQuery, limit: 10, offset: 0 },
-        abort
-      );
-      setNextOrganismLoadAbort(null);
-      if (response.body) {
-        setFoundOrganisms(response.body);
-      }
-    })();
-  }, [phenotypeQuery]);
-
-  return { handleEnabledChange, handleValueChange };
-};

@@ -5,6 +5,7 @@ import { muiTheme } from "../shared/components/muiTheme";
 import { EmotionGlobalStyles } from "../shared/components/EmotionGlobalStyles";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const queryClient = new QueryClient();
 const preview: Preview = {
   parameters: {
@@ -31,6 +32,7 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <RecoilRoot>
           <ThemeProvider theme={muiTheme}>
             <EmotionGlobalStyles />

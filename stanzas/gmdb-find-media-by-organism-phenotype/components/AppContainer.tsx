@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { OrganismPane } from "./OrganismPane";
 import { PhenotypeSection } from "./PhenotypeSection";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
@@ -7,10 +7,12 @@ import { subPane, queryPane, wrapper } from "../../../shared/components/media-fi
 import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
 import {
   FoundMedia,
+  nullResponse,
   useFoundMediaMutators,
   useFoundMediaState,
 } from "../../../shared/state/media-finder/foundMedia";
 import { useMediaLoadAbortMutators } from "../../../shared/state/media-finder/mediaLoadAbort";
+import { useQueryDataMutators } from "../../../shared/state/media-finder/queryData";
 import { getData } from "../../../shared/utils/getData";
 import { extractLabelIds } from "../../../shared/utils/labelInfo";
 import { useSelectedOrganismsState } from "../states/selectedOrganisms";
@@ -21,6 +23,7 @@ type Props = {
 
 export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
   const { next, prev } = useMediaPagination();
+  useMediaLoadFromOrganismSelection();
   return (
     <div css={wrapper}>
       <div css={queryPane}>
@@ -34,6 +37,39 @@ export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
       </div>
     </div>
   );
+};
+
+const useMediaLoadFromOrganismSelection = () => {
+  const selectedOrganisms = useSelectedOrganismsState();
+  const { setQueryData } = useQueryDataMutators();
+  const { setFoundMedia } = useFoundMediaMutators();
+  const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+  //
+  const exec = async () => {
+    const tax_ids = extractLabelIds(selectedOrganisms);
+    const params: MediaByTaxonParams = { tax_ids, limit: 10, offset: 0 };
+    setQueryData({ tax_ids });
+    const abort: AbortController = new AbortController();
+    setNextMediaLoadAbort(abort);
+    const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
+      API_MEDIA_BY_TAXON,
+      params,
+      abort
+    );
+    setNextMediaLoadAbort(null);
+    if (response.body) {
+      setFoundMedia(response.body);
+    }
+  };
+  useEffect(() => {
+    if (selectedOrganisms.length === 0) {
+      setQueryData({});
+      setFoundMedia(nullResponse);
+      setNextMediaLoadAbort(null);
+      return;
+    }
+    exec();
+  }, [selectedOrganisms]);
 };
 
 const useMediaPagination = () => {
