@@ -5,13 +5,21 @@ import { FoundOrganismsList } from "./FoundOrganismsList";
 import { OrganismTab } from "./OrganismTab";
 import { SelectedOrganismsList } from "./SelectedOrganismsList";
 import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../../shared/styles/variables";
-import { useFoundOrganismsState } from "../states/foundOrganisms";
+import { useOrganismPaginationMutators } from "../states/organismPagination";
 import { useOrganismTabFocusMutators, useOrganismTabFocusState } from "../states/organismTabFocus";
+import { usePhenotypeQueryState } from "../states/phenotypeQuery";
 
 type Props = {} & AcceptsEmotion;
 
 export const OrganismPane: FC<Props> = ({ css, className }) => {
   const tabFocus = useOrganismTabFocusState();
+  const { reset } = useOrganismPaginationMutators();
+  const { setOrganismTabFocus } = useOrganismTabFocusMutators();
+  const phenotypeQueryParams = usePhenotypeQueryState();
+  useEffect(() => {
+    reset();
+    setOrganismTabFocus("Found organisms");
+  }, [phenotypeQueryParams]);
   return (
     <div css={[wrapper, css]} className={className}>
       <OrganismTab />
@@ -21,17 +29,6 @@ export const OrganismPane: FC<Props> = ({ css, className }) => {
       </div>
     </div>
   );
-};
-
-const useTabFocus = () => {
-  const tabFocus = useOrganismTabFocusState();
-  const { setOrganismTabFocus } = useOrganismTabFocusMutators();
-  const foundOrganisms = useFoundOrganismsState();
-  useEffect(() => {
-    setOrganismTabFocus("Found organisms");
-  }, [foundOrganisms]);
-
-  return { tabFocus };
 };
 
 const wrapper = css`

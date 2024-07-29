@@ -12,9 +12,12 @@ import { API_ORGANISMS_BY_PHENOTYPES } from "../../../api/paths";
 import { Pagination } from "../../../shared/components/media-finder/Pagination";
 import { COLOR_GRAY700, FONT_WEIGHT_BOLD, SIZE1 } from "../../../shared/styles/variables";
 import { getData } from "../../../shared/utils/getData";
-import { hasIdOfLabel, LabelInfo } from "../../../shared/utils/labelInfo";
-import { FoundOrganisms } from "../states/foundOrganisms";
-import { useOrganismTabFocusMutators } from "../states/organismTabFocus";
+import { hasIdOfLabel } from "../../../shared/utils/labelInfo";
+import { MediaFinderListApiBody } from "../../../shared/utils/types";
+import {
+  useOrganismPaginationMutators,
+  useOrganismPaginationState,
+} from "../states/organismPagination";
 import { usePhenotypeQueryState } from "../states/phenotypeQuery";
 import {
   useSelectedOrganismsMutators,
@@ -23,13 +26,13 @@ import {
 
 type Props = {} & AcceptsEmotion;
 type OrganismListInfo = Omit<ComponentProps<typeof OrganismListItem>, "onClick">;
+type FoundOrganisms = MediaFinderListApiBody<"tax_id" | "name">;
 
 const SHOW_COUNT = 10;
 export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
-  const { query, setPage } = useOrganismQuery();
-  const { data, isLoading, isPlaceholderData } = query;
-  const { list } = useOrganismList(data);
-  const { toggleChecked } = useToggleSelection();
+  const { data, isLoading, isPlaceholderData } = useOrganismQuery();
+  const { next, prev } = useOrganismPaginationMutators();
+  const { list, toggleOrganismSelection } = useOrganismList(data);
 
   return (
     <div css={[foundOrganismsList, css]} className={className}>
@@ -42,7 +45,7 @@ export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
         <p css={infoTextCSS}>{getInfoText(data?.total, isLoading)}</p>
         <div css={inner}>
           {(list ?? []).map((item) => (
-            <OrganismListItem key={item.id} {...item} onClick={toggleChecked} />
+            <OrganismListItem key={item.id} {...item} onClick={toggleOrganismSelection} />
           ))}
         </div>
         {!!data?.total && !isLoading && (
@@ -50,8 +53,8 @@ export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
             total={data.total}
             current={data.offset}
             displayLength={data.limit}
-            onClickNext={() => setPage((prev) => prev + 1)}
-            onClickPrev={() => setPage((prev) => prev - 1)}
+            onClickNext={next}
+            onClickPrev={prev}
           />
         )}
       </div>
@@ -60,37 +63,30 @@ export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
 };
 
 const useOrganismQuery = () => {
-  const [page, setPage] = useState(1);
-  const { setOrganismTabFocus } = useOrganismTabFocusMutators();
+  const page = useOrganismPaginationState();
   const phenotypeQueryParams = usePhenotypeQueryState();
   const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
-  useEffect(() => {
-    setPage(1);
-    // setOrganismTabFocus("Found organisms");
-  }, [phenotypeQueryParams]);
-  return {
-    setPage,
-    query: useQuery({
-      queryKey: [phenotypeQueryParams, { page }],
-      queryFn: async () => {
-        if (Object.entries(phenotypeQueryParams).length === 0) return nullResponse;
-        //
-        const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(
-          API_ORGANISMS_BY_PHENOTYPES,
-          { ...phenotypeQueryParams, limit: SHOW_COUNT, offset: (page - 1) * SHOW_COUNT }
-        );
-        if (!response.body) throw new Error("No data");
-        return response.body;
-      },
-      staleTime: Infinity,
-      placeholderData: (previousData) => previousData,
-    }),
-  };
+  return useQuery({
+    queryKey: [phenotypeQueryParams, { page }],
+    queryFn: async () => {
+      if (Object.entries(phenotypeQueryParams).length === 0) return nullResponse;
+      //
+      const response = await getData<OrganismsByPhenotypesResponse, OrganismsByPhenotypeParams>(
+        API_ORGANISMS_BY_PHENOTYPES,
+        { ...phenotypeQueryParams, limit: SHOW_COUNT, offset: (page - 1) * SHOW_COUNT }
+      );
+      if (!response.body) throw new Error("No data");
+      return response.body;
+    },
+    staleTime: Infinity,
+    placeholderData: (previousData) => previousData,
+  });
 };
 
 const useOrganismList = (response?: FoundOrganisms) => {
   const [list, setList] = useState<OrganismListInfo[]>([]);
   const selectedOrganisms = useSelectedOrganismsState();
+  const { toggleOrganismSelection } = useSelectedOrganismsMutators();
   useEffect(() => {
     const result: OrganismListInfo[] = (response?.contents ?? []).map((organism) => {
       return {
@@ -101,15 +97,7 @@ const useOrganismList = (response?: FoundOrganisms) => {
     });
     setList(result);
   }, [response, selectedOrganisms]);
-  return { list };
-};
-
-const useToggleSelection = () => {
-  const { toggleOrganismSelection } = useSelectedOrganismsMutators();
-  const toggleChecked = (info: LabelInfo) => {
-    toggleOrganismSelection(info);
-  };
-  return { toggleChecked };
+  return { list, toggleOrganismSelection };
 };
 
 const getInfoText = (organismLength: number | undefined, isLoading: boolean): string => {
