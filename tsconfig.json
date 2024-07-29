@@ -23,7 +23,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "strict": true,
-    "types": ["@emotion/react", "jest", "jest-extended", "d3-drag"],
+    "types": ["@emotion/react", "d3-drag"],
     "skipLibCheck": true
   },
   "compileOnSave": false,

@@ -10,7 +10,5 @@ type Story = StoryObj<typeof MediaPane>;
 export const Primary: Story = {
   args: {
     dispatchEvent: () => {},
-    next: () => {},
-    prev: () => {},
   },
 };

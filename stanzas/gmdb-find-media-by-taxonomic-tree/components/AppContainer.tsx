@@ -1,15 +1,17 @@
-import React, { FC } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { FC, useEffect } from "react";
 import { TaxonomicTreeSection } from "./TaxonomicTreeSection";
 import { MediaByTaxonParams, MediaByTaxonResponse } from "../../../api/media_by_taxon/types";
 import { API_MEDIA_BY_TAXON } from "../../../api/paths";
-import { subPane, queryPane, wrapper } from "../../../shared/components/media-finder/appStyles";
+import { queryPane, subPane, wrapper } from "../../../shared/components/media-finder/appStyles";
 import { MediaPane } from "../../../shared/components/media-finder/MediaPane";
+import { useFoundMediaMutators } from "../../../shared/state/media-finder/foundMedia";
+import { useIsMediaLoadingMutators } from "../../../shared/state/media-finder/isMediaLoading";
 import {
-  FoundMedia,
-  useFoundMediaMutators,
-  useFoundMediaState,
-} from "../../../shared/state/media-finder/foundMedia";
-import { useMediaLoadAbortMutators } from "../../../shared/state/media-finder/mediaLoadAbort";
+  useMediaPaginationMutators,
+  useMediaPaginationState,
+} from "../../../shared/state/media-finder/mediaPagination";
+import { useQueryDataMutators } from "../../../shared/state/media-finder/queryData";
 import { getData } from "../../../shared/utils/getData";
 import { useSelectedTaxonState } from "../states/selectedTaxon";
 
@@ -18,61 +20,52 @@ type Props = {
 };
 
 export const AppContainer: FC<Props> = ({ dispatchEvent }) => {
-  const { next, prev } = useMediaPagination();
+  useMediaLoadFromTaxon();
   return (
     <div css={wrapper}>
       <div css={queryPane}>
         <TaxonomicTreeSection />
       </div>
       <div css={subPane}>
-        <MediaPane dispatchEvent={dispatchEvent} next={next} prev={prev} />
+        <MediaPane dispatchEvent={dispatchEvent} />
       </div>
     </div>
   );
 };
-
-const useMediaPagination = () => {
-  const selectedTaxon: string[] = useSelectedTaxonState();
-  const response = useFoundMediaState();
-  const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+const SHOW_COUNT = 10;
+const useMediaLoadFromTaxon = () => {
+  const page = useMediaPaginationState();
+  const selectedTaxon = useSelectedTaxonState();
+  const { setQueryData } = useQueryDataMutators();
   const { setFoundMedia } = useFoundMediaMutators();
-  const next = () => {
-    paginate({
-      offset: response.offset + 10,
-      tax_ids: selectedTaxon,
-      abortLoader: setNextMediaLoadAbort,
-      setFoundMedia,
-    });
-  };
-  const prev = () => {
-    paginate({
-      offset: response.offset - 10,
-      tax_ids: selectedTaxon,
-      abortLoader: setNextMediaLoadAbort,
-      setFoundMedia,
-    });
-  };
-
-  return { next, prev };
-};
-
-type PaginateParams = {
-  offset: number;
-  abortLoader: (abort: AbortController | null) => void;
-  tax_ids: string[];
-  setFoundMedia: (media: FoundMedia) => void;
-};
-const paginate = async ({ offset, abortLoader, tax_ids, setFoundMedia }: PaginateParams) => {
-  const params: MediaByTaxonParams = { tax_ids, offset, limit: 10 };
-  const abort: AbortController = new AbortController();
-  abortLoader(abort);
-  const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(
-    API_MEDIA_BY_TAXON,
-    params,
-    abort
-  );
-  abortLoader(null);
-  if (response.body) {
-    setFoundMedia(response.body);
-  }
+  const { setIsMediaLoading } = useIsMediaLoadingMutators();
+  const { reset } = useMediaPaginationMutators();
+  const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
+  const query = useQuery({
+    queryKey: [selectedTaxon, { page }],
+    queryFn: async () => {
+      const tax_ids = selectedTaxon;
+      if (tax_ids.length === 0) return nullResponse;
+      //
+      setQueryData({ tax_ids });
+      const response = await getData<MediaByTaxonResponse, MediaByTaxonParams>(API_MEDIA_BY_TAXON, {
+        tax_ids,
+        limit: SHOW_COUNT,
+        offset: (page - 1) * SHOW_COUNT,
+      });
+      if (!response.body) throw new Error("No data");
+      return response.body;
+    },
+    staleTime: Infinity,
+    placeholderData: (previousData) => previousData,
+  });
+  useEffect(() => {
+    query.data && setFoundMedia(query.data);
+  }, [query.data, setFoundMedia]);
+  useEffect(() => {
+    setIsMediaLoading(query.isLoading || query.isPlaceholderData);
+  }, [query.isLoading, query.isPlaceholderData, setIsMediaLoading]);
+  useEffect(() => {
+    reset();
+  }, [selectedTaxon, reset]);
 };

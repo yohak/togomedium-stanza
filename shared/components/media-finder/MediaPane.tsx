@@ -14,18 +14,16 @@ import { COLOR_WHITE, ROUNDED_CORNER, SIZE1, SIZE2 } from "../../styles/variable
 
 type Props = {
   dispatchEvent: (gmIds: string[]) => void;
-  next: () => void;
-  prev: () => void;
 } & AcceptsEmotion;
 
-export const MediaPane: FC<Props> = ({ css, className, dispatchEvent, next, prev }) => {
+export const MediaPane: FC<Props> = ({ css, className, dispatchEvent }) => {
   const { tabFocus } = useTabFocus();
   return (
     <div css={wrapper}>
       <div css={[media, css]} className={className}>
         <MediaTab />
         <div css={contents}>
-          {tabFocus === "Found media" && <FoundMediaList next={next} prev={prev} />}
+          {tabFocus === "Found media" && <FoundMediaList />}
           {tabFocus === "Selected media" && <SelectedMediaList />}
         </div>
       </div>

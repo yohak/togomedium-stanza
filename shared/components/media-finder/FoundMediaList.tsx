@@ -2,11 +2,12 @@ import { css } from "@emotion/react";
 import CircularProgress from "@mui/material/CircularProgress";
 import React, { FC, useEffect, useState } from "react";
 import { AcceptsEmotion } from "yohak-tools";
-import { MediaListItemInfo, MediaListItem } from "./MediaListItem";
+import { MediaListItem, MediaListItemInfo } from "./MediaListItem";
 import { Pagination } from "./Pagination";
 import { QueryInfo } from "./QueryInfo";
 import { useFoundMediaState } from "../../state/media-finder/foundMedia";
-import { useIsMediaLoading } from "../../state/media-finder/mediaLoadAbort";
+import { useIsMediaLoadingState } from "../../state/media-finder/isMediaLoading";
+import { useMediaPaginationMutators } from "../../state/media-finder/mediaPagination";
 import {
   useSelectedMediaMutators,
   useSelectedMediaState,
@@ -20,12 +21,10 @@ import {
 } from "../../styles/variables";
 import { hasIdOfLabel, LabelInfo } from "../../utils/labelInfo";
 
-type Props = {
-  next: () => void;
-  prev: () => void;
-} & AcceptsEmotion;
+type Props = {} & AcceptsEmotion;
 
-export const FoundMediaList: FC<Props> = ({ next, prev, css, className }) => {
+export const FoundMediaList: FC<Props> = ({ css, className }) => {
+  const { next, prev } = useMediaPaginationMutators();
   const { data, toggleChecked, isLoading, response } = useFoundMedia();
   return (
     <div css={[wrapper, css]} className={className}>
@@ -47,8 +46,8 @@ export const FoundMediaList: FC<Props> = ({ next, prev, css, className }) => {
             total={response.total}
             current={response.offset}
             displayLength={response.limit}
-            onClickNext={() => next()}
-            onClickPrev={() => prev()}
+            onClickNext={next}
+            onClickPrev={prev}
           />
         )}
       </div>
@@ -59,7 +58,7 @@ export const FoundMediaList: FC<Props> = ({ next, prev, css, className }) => {
 const useFoundMedia = () => {
   const [data, setData] = useState<MediaListItemInfo[]>([]);
   const response = useFoundMediaState();
-  const isLoading = useIsMediaLoading();
+  const isLoading = useIsMediaLoadingState();
   const selectedMedia = useSelectedMediaState();
   const { toggleMediumSelection } = useSelectedMediaMutators();
   const toggleChecked = (info: LabelInfo) => {

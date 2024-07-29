@@ -28,7 +28,6 @@ type Props = {} & AcceptsEmotion;
 type OrganismListInfo = Omit<ComponentProps<typeof OrganismListItem>, "onClick">;
 type FoundOrganisms = MediaFinderListApiBody<"tax_id" | "name">;
 
-const SHOW_COUNT = 10;
 export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
   const { data, isLoading, isPlaceholderData } = useOrganismQuery();
   const { next, prev } = useOrganismPaginationMutators();
@@ -62,6 +61,7 @@ export const FoundOrganismsList: FC<Props> = ({ css, className }) => {
   );
 };
 
+const SHOW_COUNT = 10;
 const useOrganismQuery = () => {
   const page = useOrganismPaginationState();
   const phenotypeQueryParams = usePhenotypeQueryState();

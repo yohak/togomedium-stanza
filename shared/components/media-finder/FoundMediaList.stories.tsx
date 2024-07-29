@@ -8,8 +8,5 @@ export default meta;
 
 type Story = StoryObj<typeof FoundMediaList>;
 export const Primary: Story = {
-  args: {
-    next: () => {},
-    prev: () => {},
-  },
+  args: {},
 };
