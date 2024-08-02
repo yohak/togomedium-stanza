@@ -37,9 +37,26 @@ export abstract class TogoMediumReactStanza<T> extends Stanza {
     this._render();
   }
   _render() {
-    const main = this.root.querySelector("main");
+    const main = this.root.querySelector("main")!;
     const children = this.makeApp();
     const root = createRoot(main as HTMLElement);
     root.render(<StanzaReactProvider>{children}</StanzaReactProvider>);
+    setTimeout(() => {
+      try {
+        main.style.flexGrow = "1";
+        main.style.display = "flex";
+        main.style.flexDirection = "column";
+        const wrapper = main.parentNode as HTMLElement;
+        wrapper.style.display = "flex";
+        wrapper.style.flexDirection = "column";
+        wrapper.style.flexGrow = "1";
+        const childWrapper = main.children[0] as HTMLElement;
+        childWrapper.style.display = "flex";
+        childWrapper.style.flexGrow = "1";
+        childWrapper.style.flexDirection = "column";
+      } catch (e) {
+        console.log(e);
+      }
+    }, 100);
   }
 }

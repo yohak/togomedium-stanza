@@ -5,22 +5,15 @@ export const wrapper = css`
   position: relative;
   background-color: ${COLOR_GRAY_BG};
   padding: ${SIZE1};
-  min-height: 640px;
-  height: 1px;
+  height: 100%;
   display: flex;
+  flex-grow: 1;
+  align-items: stretch;
   gap: ${SIZE1};
-  & > * {
-    flex-grow: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: ${SIZE1};
-  }
 `;
 
 export const queryPane = css`
   flex-grow: 1;
-  height: 100%;
   overflow-y: auto;
   ${ROUNDED_CORNER};
   padding: ${SIZE1};
