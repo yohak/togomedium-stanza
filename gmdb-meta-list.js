@@ -1,12 +1,12 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { j as jsx, P as COLOR_GRAY500, C as COLOR_PRIMARY, d as COLOR_WHITE, a as jsxs, c as COLOR_PRIMARY_DARK, F as Fragment, e as COLOR_TEXT, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { c as css, r as reactExports, n as makeFormBody } from './getData-e69d262f.js';
-import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
-import { S as Slider } from './Slider-bc45a1fe.js';
-import { n as nanoid } from './index.browser-18dc4f2c.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { j as jsx, ag as COLOR_GRAY500, C as COLOR_PRIMARY, l as COLOR_WHITE, a as jsxs, k as COLOR_PRIMARY_DARK, F as Fragment, m as COLOR_TEXT, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { n as newStyled, u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { c as css, r as reactExports, n as makeFormBody } from './getData-1a784a8c.js';
+import { S as Slider } from './Slider-169f4ed4.js';
+import { n as nanoid } from './index.browser-4ca8a21b.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
-import { C as CircularProgress } from './CircularProgress-88c2b271.js';
-import './useSlotProps-06654923.js';
+import { C as CircularProgress } from './CircularProgress-0433714e.js';
+import './DefaultPropsProvider-4e645303.js';
 
 const AngleLeftIcon = ({ css, className }) => {
     return (jsx("svg", { css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" }) }));
@@ -212,9 +212,9 @@ const listTable = css `
   }
 `;
 
-const LoadingCover = ({ css, className, isLoading, errorMessage }) => {
-    const isShow = isLoading || errorMessage !== "";
-    return (jsxs(Wrapper, { css: [css], className: `${className} ${isShow && "active"}`, children: [isLoading && jsx(CircularProgress, {}), !!errorMessage && errorMessage] }));
+const LoadingCover = ({ css, className, showLoading, errorMessage }) => {
+    const isShow = showLoading || errorMessage !== "";
+    return (jsxs(Wrapper, { css: [css], className: `${className} ${isShow && "active"}`, children: [showLoading && jsx(CircularProgress, {}), !!errorMessage && errorMessage] }));
 };
 const Wrapper = newStyled.div `
   position: absolute;
@@ -302,8 +302,8 @@ const StanzaWrapper = newStyled.div `
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 `;
 
-const StanzaView = ({ css, className, data, title, showColumnNames, columnSizes, offset, setOffset, limit, setLimit, isLoading, errorMessage, }) => {
-    return (jsxs("div", { css: [stanzaView, css], className: className, children: [title && (jsx(Header, { children: jsx("h2", { children: title }) })), jsxs(StanzaWrapper, { children: [jsx(TopInfo, { total: data.total, limit, setLimit, setOffset }), jsxs("div", { style: { position: "relative" }, children: [jsx(ListTable, { data, showColumnNames, columnSizes, limit }), jsx(LoadingCover, { isLoading, errorMessage })] }), jsx(BottomController, { total: data.total, offset, limit, setOffset })] })] }));
+const StanzaView = ({ css, className, data, title, showColumnNames, columnSizes, offset, setOffset, limit, setLimit, showLoading, errorMessage, }) => {
+    return (jsxs("div", { css: [stanzaView, css], className: className, children: [title && (jsx(Header, { children: jsx("h2", { children: title }) })), jsxs(StanzaWrapper, { children: [jsx(TopInfo, { total: data.total, limit, setLimit, setOffset }), jsxs("div", { style: { position: "relative" }, children: [jsx(ListTable, { data, showColumnNames, columnSizes, limit }), jsx(LoadingCover, { showLoading, errorMessage })] }), jsx(BottomController, { total: data.total, offset, limit, setOffset })] })] }));
 };
 const stanzaView = css ``;
 const Header = newStyled.header `
@@ -386,43 +386,30 @@ const filterQuery = (query) => {
     return result;
 };
 
-const useTableData = (apiUrl, initialLimit) => {
+const useTableData = (apiUrl, initialLimit = 100) => {
     const [offset, setOffset] = reactExports.useState(0);
     const [limit, setLimit] = reactExports.useState(initialLimit);
-    const [isLoading, setIsLoading] = reactExports.useState(false);
-    const [data, setData] = reactExports.useState();
-    const [errorMessage, setErrorMessage] = reactExports.useState("");
+    const { data, isLoading, error, isPlaceholderData } = useQuery({
+        queryKey: [{ offset }, { limit }, { apiUrl }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () {
+            const response = yield fetchData(apiUrl, offset, limit);
+            return response.body;
+        }),
+        placeholderData: (previousData) => previousData,
+        staleTime: Infinity,
+    });
+    const errorMessage = (error === null || error === void 0 ? void 0 : error.message) || "";
+    const updateLimit = () => {
+        data && data.total < limit ? setLimit(data.total) : "";
+    };
     reactExports.useEffect(() => {
-        if (!apiUrl)
-            return;
-        setIsLoading(true);
-        setErrorMessage("");
-        const handler = window.setTimeout(() => {
-            fetchData(apiUrl, typeof offset === "number" ? offset : 0, typeof limit === "number" ? limit : 100).then((response) => {
-                if (response.body) {
-                    setData(response.body);
-                }
-                else {
-                    if (response.message) {
-                        setErrorMessage(response.message);
-                    }
-                }
-                setIsLoading(false);
-            });
-        }, 100);
-        return () => window.clearTimeout(handler);
-    }, [apiUrl, limit, offset]);
-    reactExports.useEffect(() => {
-        if (!data)
-            return;
-        if (data.total < (typeof limit === "number" ? limit : 1000)) {
-            setLimit(data.total);
-        }
-    }, [limit, setLimit, data]);
-    return { offset, setOffset, limit, setLimit, isLoading, data, errorMessage };
+        updateLimit();
+    }, [data]);
+    const showLoading = isLoading || isPlaceholderData;
+    return { offset, setOffset, limit, setLimit, showLoading, data, errorMessage };
 };
 const App = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFont }) => {
-    const { offset, setOffset, limit, setLimit, isLoading, data, errorMessage } = useTableData(apiUrl, initialLimit);
+    const { offset, setOffset, limit, setLimit, showLoading, data, errorMessage } = useTableData(apiUrl, initialLimit);
     if (!data) {
         return jsx(Fragment, { children: errorMessage });
     }
@@ -430,11 +417,11 @@ const App = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFon
         title,
         showColumnNames,
         columnSizes,
-        offset: typeof offset === "number" ? offset : 0,
+        offset,
         setOffset,
-        limit: typeof limit === "number" && !isNaN(limit) ? limit : data.total,
+        limit: !isNaN(limit) ? limit : data.total,
         setLimit,
-        isLoading,
+        showLoading,
         errorMessage }));
 };
 

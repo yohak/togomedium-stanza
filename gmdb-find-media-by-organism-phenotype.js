@@ -1,60 +1,415 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { _ as _objectWithoutPropertiesLoose, G as defaultSxConfig, H as isPlainObject, k as capitalize, h as jsxRuntimeExports, d as COLOR_WHITE, s as COLOR_GRAY_LINE, S as SIZE1, o as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, t as FONT_WEIGHT_BOLD, w as COLOR_GRAY700, x as SIZE4, n as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-e69d262f.js';
-import { b as PATH_TAXON } from './consts-57be2ed0.js';
-import { e as useFormControl, C as Checkbox, h as hasInfo, f as filterOutInfo, P as Pagination, g as hasIdOfLabel, T as Tabs, i as Tab, j as Badge, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse$1, k as extractLabelIds, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d46a6b88.js';
-import { f as API_ORGANISMS_BY_PHENOTYPES, h as API_MEDIA_BY_TAXON } from './paths-3104928b.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { _ as _objectWithoutPropertiesLoose, q as createTheme, $ as styleFunctionSx, W as isPlainObject, E as resolveProps, a4 as handleBreakpoints, a5 as resolveBreakpointValues, a6 as createUnarySpacing, V as deepmerge, a7 as mergeBreakpointsInOrder, y as jsxRuntimeExports, a8 as getValue, A as capitalize, l as COLOR_WHITE, M as COLOR_GRAY_LINE, H as SIZE1, J as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_8, p as Recoil_index_24, o as Recoil_index_20, N as FONT_WEIGHT_BOLD, P as COLOR_GRAY700, Q as SIZE4, I as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-1a784a8c.js';
+import { b as PATH_TAXON } from './consts-55c53200.js';
+import { f as useFormControl, C as Checkbox, h as hasInfo, g as filterOutInfo, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, l as extractLabelIds } from './MediaPane-fd91d6f4.js';
+import { c as useTheme, h as API_ORGANISMS_BY_PHENOTYPES, i as API_MEDIA_BY_TAXON } from './paths-0bbd78cc.js';
 import { c as clone } from './clone-1fb93465.js';
-import { C as CircularProgress } from './CircularProgress-88c2b271.js';
-import { g as generateUtilityClass, b as generateUtilityClasses, e as styled, f as useThemeProps, l as clsx, d as composeClasses } from './useSlotProps-06654923.js';
-import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-e9d77612.js';
-import { S as Slider } from './Slider-bc45a1fe.js';
+import { C as CircularProgress } from './CircularProgress-0433714e.js';
+import { w as internal_processStyles, x as styled$1, y as extendSxProp, m as clsx, e as composeClasses, g as generateUtilityClass, b as generateUtilityClasses, f as styled$2, h as useDefaultProps } from './DefaultPropsProvider-4e645303.js';
+import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-ee94f511.js';
+import { S as Slider } from './Slider-169f4ed4.js';
 import './variables-58f3d1be.js';
-import './emotion-styled.browser.esm-90764b6a.js';
 
-const _excluded$2 = ["sx"];
-const splitProps = props => {
-  var _props$theme$unstable, _props$theme;
-  const result = {
-    systemProps: {},
-    otherProps: {}
-  };
-  const config = (_props$theme$unstable = props == null ? void 0 : (_props$theme = props.theme) == null ? void 0 : _props$theme.unstable_sxConfig) != null ? _props$theme$unstable : defaultSxConfig;
-  Object.keys(props).forEach(prop => {
-    if (config[prop]) {
-      result.systemProps[prop] = props[prop];
-    } else {
-      result.otherProps[prop] = props[prop];
-    }
-  });
-  return result;
-};
-function extendSxProp(props) {
-  const {
-      sx: inSx
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$2);
-  const {
-    systemProps,
-    otherProps
-  } = splitProps(other);
-  let finalSx;
-  if (Array.isArray(inSx)) {
-    finalSx = [systemProps, ...inSx];
-  } else if (typeof inSx === 'function') {
-    finalSx = (...args) => {
-      const result = inSx(...args);
-      if (!isPlainObject(result)) {
-        return systemProps;
-      }
-      return _extends({}, systemProps, result);
-    };
-  } else {
-    finalSx = _extends({}, systemProps, inSx);
+const _excluded$3 = ["ownerState"],
+  _excluded2 = ["variants"],
+  _excluded3 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+// https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
+function isStringTag(tag) {
+  return typeof tag === 'string' &&
+  // 96 is one less than the char code
+  // for "a" so this is checking that
+  // it's a lowercase character
+  tag.charCodeAt(0) > 96;
+}
+
+// Update /system/styled/#api in case if this changes
+function shouldForwardProp(prop) {
+  return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
+}
+const systemDefaultTheme = createTheme();
+const lowercaseFirstLetter = string => {
+  if (!string) {
+    return string;
   }
-  return _extends({}, otherProps, {
-    sx: finalSx
+  return string.charAt(0).toLowerCase() + string.slice(1);
+};
+function resolveTheme({
+  defaultTheme,
+  theme,
+  themeId
+}) {
+  return isEmpty(theme) ? defaultTheme : theme[themeId] || theme;
+}
+function defaultOverridesResolver(slot) {
+  if (!slot) {
+    return null;
+  }
+  return (props, styles) => styles[slot];
+}
+function processStyleArg(callableStyle, _ref) {
+  let {
+      ownerState
+    } = _ref,
+    props = _objectWithoutPropertiesLoose(_ref, _excluded$3);
+  const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle(_extends({
+    ownerState
+  }, props)) : callableStyle;
+  if (Array.isArray(resolvedStylesArg)) {
+    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg(resolvedStyle, _extends({
+      ownerState
+    }, props)));
+  }
+  if (!!resolvedStylesArg && typeof resolvedStylesArg === 'object' && Array.isArray(resolvedStylesArg.variants)) {
+    const {
+        variants = []
+      } = resolvedStylesArg,
+      otherStyles = _objectWithoutPropertiesLoose(resolvedStylesArg, _excluded2);
+    let result = otherStyles;
+    variants.forEach(variant => {
+      let isMatch = true;
+      if (typeof variant.props === 'function') {
+        isMatch = variant.props(_extends({
+          ownerState
+        }, props, ownerState));
+      } else {
+        Object.keys(variant.props).forEach(key => {
+          if ((ownerState == null ? void 0 : ownerState[key]) !== variant.props[key] && props[key] !== variant.props[key]) {
+            isMatch = false;
+          }
+        });
+      }
+      if (isMatch) {
+        if (!Array.isArray(result)) {
+          result = [result];
+        }
+        result.push(typeof variant.style === 'function' ? variant.style(_extends({
+          ownerState
+        }, props, ownerState)) : variant.style);
+      }
+    });
+    return result;
+  }
+  return resolvedStylesArg;
+}
+function createStyled(input = {}) {
+  const {
+    themeId,
+    defaultTheme = systemDefaultTheme,
+    rootShouldForwardProp = shouldForwardProp,
+    slotShouldForwardProp = shouldForwardProp
+  } = input;
+  const systemSx = props => {
+    return styleFunctionSx(_extends({}, props, {
+      theme: resolveTheme(_extends({}, props, {
+        defaultTheme,
+        themeId
+      }))
+    }));
+  };
+  systemSx.__mui_systemSx = true;
+  return (tag, inputOptions = {}) => {
+    // Filter out the `sx` style function from the previous styled component to prevent unnecessary styles generated by the composite components.
+    internal_processStyles(tag, styles => styles.filter(style => !(style != null && style.__mui_systemSx)));
+    const {
+        name: componentName,
+        slot: componentSlot,
+        skipVariantsResolver: inputSkipVariantsResolver,
+        skipSx: inputSkipSx,
+        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
+        // For more details: https://github.com/mui/material-ui/pull/37908
+        overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
+      } = inputOptions,
+      options = _objectWithoutPropertiesLoose(inputOptions, _excluded3);
+
+    // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
+    const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
+    // TODO v6: remove `Root` in the next major release
+    // For more details: https://github.com/mui/material-ui/pull/37908
+    componentSlot && componentSlot !== 'Root' && componentSlot !== 'root' || false;
+    const skipSx = inputSkipSx || false;
+    let label;
+    let shouldForwardPropOption = shouldForwardProp;
+
+    // TODO v6: remove `Root` in the next major release
+    // For more details: https://github.com/mui/material-ui/pull/37908
+    if (componentSlot === 'Root' || componentSlot === 'root') {
+      shouldForwardPropOption = rootShouldForwardProp;
+    } else if (componentSlot) {
+      // any other slot specified
+      shouldForwardPropOption = slotShouldForwardProp;
+    } else if (isStringTag(tag)) {
+      // for string (html) tag, preserve the behavior in emotion & styled-components.
+      shouldForwardPropOption = undefined;
+    }
+    const defaultStyledResolver = styled$1(tag, _extends({
+      shouldForwardProp: shouldForwardPropOption,
+      label
+    }, options));
+    const transformStyleArg = stylesArg => {
+      // On the server Emotion doesn't use React.forwardRef for creating components, so the created
+      // component stays as a function. This condition makes sure that we do not interpolate functions
+      // which are basically components used as a selectors.
+      if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || isPlainObject(stylesArg)) {
+        return props => processStyleArg(stylesArg, _extends({}, props, {
+          theme: resolveTheme({
+            theme: props.theme,
+            defaultTheme,
+            themeId
+          })
+        }));
+      }
+      return stylesArg;
+    };
+    const muiStyledResolver = (styleArg, ...expressions) => {
+      let transformedStyleArg = transformStyleArg(styleArg);
+      const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
+      if (componentName && overridesResolver) {
+        expressionsWithDefaultTheme.push(props => {
+          const theme = resolveTheme(_extends({}, props, {
+            defaultTheme,
+            themeId
+          }));
+          if (!theme.components || !theme.components[componentName] || !theme.components[componentName].styleOverrides) {
+            return null;
+          }
+          const styleOverrides = theme.components[componentName].styleOverrides;
+          const resolvedStyleOverrides = {};
+          // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
+          Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
+            resolvedStyleOverrides[slotKey] = processStyleArg(slotStyle, _extends({}, props, {
+              theme
+            }));
+          });
+          return overridesResolver(props, resolvedStyleOverrides);
+        });
+      }
+      if (componentName && !skipVariantsResolver) {
+        expressionsWithDefaultTheme.push(props => {
+          var _theme$components;
+          const theme = resolveTheme(_extends({}, props, {
+            defaultTheme,
+            themeId
+          }));
+          const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
+          return processStyleArg({
+            variants: themeVariants
+          }, _extends({}, props, {
+            theme
+          }));
+        });
+      }
+      if (!skipSx) {
+        expressionsWithDefaultTheme.push(systemSx);
+      }
+      const numOfCustomFnsApplied = expressionsWithDefaultTheme.length - expressions.length;
+      if (Array.isArray(styleArg) && numOfCustomFnsApplied > 0) {
+        const placeholders = new Array(numOfCustomFnsApplied).fill('');
+        // If the type is array, than we need to add placeholders in the template for the overrides, variants and the sx styles.
+        transformedStyleArg = [...styleArg, ...placeholders];
+        transformedStyleArg.raw = [...styleArg.raw, ...placeholders];
+      }
+      const Component = defaultStyledResolver(transformedStyleArg, ...expressionsWithDefaultTheme);
+      if (tag.muiName) {
+        Component.muiName = tag.muiName;
+      }
+      return Component;
+    };
+    if (defaultStyledResolver.withConfig) {
+      muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
+    }
+    return muiStyledResolver;
+  };
+}
+
+const styled = createStyled();
+var systemStyled = styled;
+
+function getThemeProps(params) {
+  const {
+    theme,
+    name,
+    props
+  } = params;
+  if (!theme || !theme.components || !theme.components[name] || !theme.components[name].defaultProps) {
+    return props;
+  }
+  return resolveProps(theme.components[name].defaultProps, props);
+}
+
+function useThemeProps({
+  props,
+  name,
+  defaultTheme,
+  themeId
+}) {
+  let theme = useTheme(defaultTheme);
+  if (themeId) {
+    theme = theme[themeId] || theme;
+  }
+  const mergedProps = getThemeProps({
+    theme,
+    name,
+    props
   });
+  return mergedProps;
+}
+
+const _excluded$2 = ["component", "direction", "spacing", "divider", "children", "className", "useFlexGap"];
+const defaultTheme = createTheme();
+// widening Theme to any so that the consumer can own the theme structure.
+const defaultCreateStyledComponent = systemStyled('div', {
+  name: 'MuiStack',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+});
+function useThemePropsDefault(props) {
+  return useThemeProps({
+    props,
+    name: 'MuiStack',
+    defaultTheme
+  });
+}
+
+/**
+ * Return an array with the separator React element interspersed between
+ * each React node of the input children.
+ *
+ * > joinChildren([1,2,3], 0)
+ * [1,0,2,0,3]
+ */
+function joinChildren(children, separator) {
+  const childrenArray = reactExports.Children.toArray(children).filter(Boolean);
+  return childrenArray.reduce((output, child, index) => {
+    output.push(child);
+    if (index < childrenArray.length - 1) {
+      output.push( /*#__PURE__*/reactExports.cloneElement(separator, {
+        key: `separator-${index}`
+      }));
+    }
+    return output;
+  }, []);
+}
+const getSideFromDirection = direction => {
+  return {
+    row: 'Left',
+    'row-reverse': 'Right',
+    column: 'Top',
+    'column-reverse': 'Bottom'
+  }[direction];
+};
+const style = ({
+  ownerState,
+  theme
+}) => {
+  let styles = _extends({
+    display: 'flex',
+    flexDirection: 'column'
+  }, handleBreakpoints({
+    theme
+  }, resolveBreakpointValues({
+    values: ownerState.direction,
+    breakpoints: theme.breakpoints.values
+  }), propValue => ({
+    flexDirection: propValue
+  })));
+  if (ownerState.spacing) {
+    const transformer = createUnarySpacing(theme);
+    const base = Object.keys(theme.breakpoints.values).reduce((acc, breakpoint) => {
+      if (typeof ownerState.spacing === 'object' && ownerState.spacing[breakpoint] != null || typeof ownerState.direction === 'object' && ownerState.direction[breakpoint] != null) {
+        acc[breakpoint] = true;
+      }
+      return acc;
+    }, {});
+    const directionValues = resolveBreakpointValues({
+      values: ownerState.direction,
+      base
+    });
+    const spacingValues = resolveBreakpointValues({
+      values: ownerState.spacing,
+      base
+    });
+    if (typeof directionValues === 'object') {
+      Object.keys(directionValues).forEach((breakpoint, index, breakpoints) => {
+        const directionValue = directionValues[breakpoint];
+        if (!directionValue) {
+          const previousDirectionValue = index > 0 ? directionValues[breakpoints[index - 1]] : 'column';
+          directionValues[breakpoint] = previousDirectionValue;
+        }
+      });
+    }
+    const styleFromPropValue = (propValue, breakpoint) => {
+      if (ownerState.useFlexGap) {
+        return {
+          gap: getValue(transformer, propValue)
+        };
+      }
+      return {
+        // The useFlexGap={false} implement relies on each child to give up control of the margin.
+        // We need to reset the margin to avoid double spacing.
+        '& > :not(style):not(style)': {
+          margin: 0
+        },
+        '& > :not(style) ~ :not(style)': {
+          [`margin${getSideFromDirection(breakpoint ? directionValues[breakpoint] : ownerState.direction)}`]: getValue(transformer, propValue)
+        }
+      };
+    };
+    styles = deepmerge(styles, handleBreakpoints({
+      theme
+    }, spacingValues, styleFromPropValue));
+  }
+  styles = mergeBreakpointsInOrder(theme.breakpoints, styles);
+  return styles;
+};
+function createStack(options = {}) {
+  const {
+    // This will allow adding custom styled fn (for example for custom sx style function)
+    createStyledComponent = defaultCreateStyledComponent,
+    useThemeProps = useThemePropsDefault,
+    componentName = 'MuiStack'
+  } = options;
+  const useUtilityClasses = () => {
+    const slots = {
+      root: ['root']
+    };
+    return composeClasses(slots, slot => generateUtilityClass(componentName, slot), {});
+  };
+  const StackRoot = createStyledComponent(style);
+  const Stack = /*#__PURE__*/reactExports.forwardRef(function Grid(inProps, ref) {
+    const themeProps = useThemeProps(inProps);
+    const props = extendSxProp(themeProps); // `color` type conflicts with html color attribute.
+    const {
+        component = 'div',
+        direction = 'column',
+        spacing = 0,
+        divider,
+        children,
+        className,
+        useFlexGap = false
+      } = props,
+      other = _objectWithoutPropertiesLoose(props, _excluded$2);
+    const ownerState = {
+      direction,
+      spacing,
+      useFlexGap
+    };
+    const classes = useUtilityClasses();
+    return /*#__PURE__*/jsxRuntimeExports.jsx(StackRoot, _extends({
+      as: component,
+      ownerState: ownerState,
+      ref: ref,
+      className: clsx(classes.root, className)
+    }, other, {
+      children: divider ? joinChildren(children, divider) : children
+    }));
+  });
+  return Stack;
 }
 
 function getTypographyUtilityClass(slot) {
@@ -77,7 +432,7 @@ const useUtilityClasses$1 = ownerState => {
   };
   return composeClasses(slots, getTypographyUtilityClass, classes);
 };
-const TypographyRoot = styled('span', {
+const TypographyRoot = styled$2('span', {
   name: 'MuiTypography',
   slot: 'Root',
   overridesResolver: (props, styles) => {
@@ -91,7 +446,10 @@ const TypographyRoot = styled('span', {
   ownerState
 }) => _extends({
   margin: 0
-}, ownerState.variant && theme.typography[ownerState.variant], ownerState.align !== 'inherit' && {
+}, ownerState.variant === 'inherit' && {
+  // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
+  font: 'inherit'
+}, ownerState.variant !== 'inherit' && theme.typography[ownerState.variant], ownerState.align !== 'inherit' && {
   textAlign: ownerState.align
 }, ownerState.noWrap && {
   overflow: 'hidden',
@@ -128,7 +486,7 @@ const transformDeprecatedColors = color => {
   return colorTransformations[color] || color;
 };
 const Typography = /*#__PURE__*/reactExports.forwardRef(function Typography(inProps, ref) {
-  const themeProps = useThemeProps({
+  const themeProps = useDefaultProps({
     props: inProps,
     name: 'MuiTypography'
   });
@@ -169,6 +527,19 @@ const Typography = /*#__PURE__*/reactExports.forwardRef(function Typography(inPr
 });
 var Typography$1 = Typography;
 
+const Stack = createStack({
+  createStyledComponent: styled$2('div', {
+    name: 'MuiStack',
+    slot: 'Root',
+    overridesResolver: (props, styles) => styles.root
+  }),
+  useThemeProps: inProps => useDefaultProps({
+    props: inProps,
+    name: 'MuiStack'
+  })
+});
+var Stack$1 = Stack;
+
 function getFormControlLabelUtilityClasses(slot) {
   return generateUtilityClass('MuiFormControlLabel', slot);
 }
@@ -191,7 +562,7 @@ const useUtilityClasses = ownerState => {
   };
   return composeClasses(slots, getFormControlLabelUtilityClasses, classes);
 };
-const FormControlLabelRoot = styled('label', {
+const FormControlLabelRoot = styled$2('label', {
   name: 'MuiFormControlLabel',
   slot: 'Root',
   overridesResolver: (props, styles) => {
@@ -236,7 +607,7 @@ const FormControlLabelRoot = styled('label', {
     }
   }
 }));
-const AsteriskComponent = styled('span', {
+const AsteriskComponent = styled$2('span', {
   name: 'MuiFormControlLabel',
   slot: 'Asterisk',
   overridesResolver: (props, styles) => styles.asterisk
@@ -254,7 +625,7 @@ const AsteriskComponent = styled('span', {
  */
 const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormControlLabel(inProps, ref) {
   var _ref, _slotProps$typography;
-  const props = useThemeProps({
+  const props = useDefaultProps({
     props: inProps,
     name: 'MuiFormControlLabel'
   });
@@ -309,12 +680,15 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
     ownerState: ownerState,
     ref: ref
   }, other, {
-    children: [/*#__PURE__*/reactExports.cloneElement(control, controlProps), label, required && /*#__PURE__*/jsxRuntimeExports.jsxs(AsteriskComponent, {
-      ownerState: ownerState,
-      "aria-hidden": true,
-      className: classes.asterisk,
-      children: ["\u2009", '*']
-    })]
+    children: [/*#__PURE__*/reactExports.cloneElement(control, controlProps), required ? /*#__PURE__*/jsxRuntimeExports.jsxs(Stack$1, {
+      display: "block",
+      children: [label, /*#__PURE__*/jsxRuntimeExports.jsxs(AsteriskComponent, {
+        ownerState: ownerState,
+        "aria-hidden": true,
+        className: classes.asterisk,
+        children: ["\u2009", '*']
+      })]
+    }) : label]
   }));
 });
 var FormControlLabel$1 = FormControlLabel;
@@ -359,61 +733,27 @@ const checkCol = css `
   flex-grow: 0;
 `;
 
-const nullResponse = {
-    total: 0,
-    limit: 10,
-    contents: [],
-    offset: 0,
-};
-const foundOrganisms = Recoil_index_6({
-    key: "foundOrganisms",
-    default: nullResponse,
+const organismPagination = Recoil_index_8({
+    key: "organismPagination",
+    default: 1,
 });
-const useFoundOrganismsState = () => {
-    return Recoil_index_18(foundOrganisms);
+const useOrganismPaginationState = () => {
+    return Recoil_index_20(organismPagination);
 };
-const useFoundOrganismsMutators = () => {
-    const setFoundOrganisms = Recoil_index_22(foundOrganisms);
-    return { setFoundOrganisms };
+const useOrganismPaginationMutators = () => {
+    const setOrganismPagination = Recoil_index_24(organismPagination);
+    const next = () => setOrganismPagination((prev) => prev + 1);
+    const prev = () => setOrganismPagination((prev) => prev - 1);
+    const reset = () => setOrganismPagination(1);
+    return { next, prev, reset };
 };
 
-const organismLoadAbort = Recoil_index_6({
-    key: "organismLoadAbort",
-    default: null,
-});
-const useIsOrganismLoading = () => {
-    return !!Recoil_index_18(organismLoadAbort);
-};
-const useOrganismLoadAbortMutators = () => {
-    const setOrganismLoadAbort = Recoil_index_22(organismLoadAbort);
-    const abortCurrentLoading = () => {
-        let result = false;
-        setOrganismLoadAbort((prev) => {
-            if (prev) {
-                prev.abort();
-                result = true;
-            }
-            return null;
-        });
-        return result;
-    };
-    const setNextOrganismLoadAbort = (abort) => {
-        setOrganismLoadAbort((prev) => {
-            if (prev) {
-                prev.abort();
-            }
-            return abort;
-        });
-    };
-    return { abortCurrentLoading, setNextOrganismLoadAbort };
-};
-
-const phenotypeQuery = Recoil_index_6({ key: "phenotypeQuery", default: {} });
+const phenotypeQuery = Recoil_index_8({ key: "phenotypeQuery", default: {} });
 const usePhenotypeQueryState = () => {
-    return Recoil_index_18(phenotypeQuery);
+    return Recoil_index_20(phenotypeQuery);
 };
 const usePhenotypeQueryMutators = () => {
-    const setPhenotypeQuery = Recoil_index_22(phenotypeQuery);
+    const setPhenotypeQuery = Recoil_index_24(phenotypeQuery);
     const updatePhenotypeQuery = (key, value) => {
         setPhenotypeQuery((prev) => {
             const cloned = clone(prev);
@@ -436,12 +776,12 @@ const usePhenotypeQueryMutators = () => {
     return { updatePhenotypeQuery, removePhenotypeQuery, clearPhenotypeQuery };
 };
 
-const selectedOrganisms = Recoil_index_6({ key: "selectedOrganisms", default: [] });
+const selectedOrganisms = Recoil_index_8({ key: "selectedOrganisms", default: [] });
 const useSelectedOrganismsState = () => {
-    return Recoil_index_18(selectedOrganisms);
+    return Recoil_index_20(selectedOrganisms);
 };
 const useSelectedOrganismsMutators = () => {
-    const setSelectedOrganisms = Recoil_index_22(selectedOrganisms);
+    const setSelectedOrganisms = Recoil_index_24(selectedOrganisms);
     const toggleOrganismSelection = (info) => {
         setSelectedOrganisms((prev) => {
             return hasInfo(prev, info) ? filterOutInfo(prev, info) : [...prev, info];
@@ -453,61 +793,53 @@ const useSelectedOrganismsMutators = () => {
     return { setSelectedOrganisms, toggleOrganismSelection, clearSelectedOrganisms };
 };
 
-const SHOW_COUNT$1 = 10;
 const FoundOrganismsList = ({ css, className }) => {
-    const { data, toggleChecked, isLoading, response } = useOrganismList();
-    const { next, prev } = usePaginate();
-    return (jsx("div", { css: [foundOrganismsList, css], className: className, children: jsxs("div", { children: [isLoading && (jsx("div", { css: loadingIndicator, children: jsx(CircularProgress, { color: "inherit", size: 40 }) })), jsx("p", { css: infoTextCSS, children: getInfoText(response.total, isLoading) }), jsx("div", { css: inner, children: data.map((item) => (jsx(OrganismListItem, Object.assign({}, item, { onClick: toggleChecked }), item.id))) }), !!response.total && !isLoading && (jsx(Pagination, { total: response.total, current: response.offset, displayLength: response.limit, onClickNext: () => next(), onClickPrev: () => prev() }))] }) }));
+    const { data, isLoading, isPlaceholderData } = useOrganismQuery();
+    const { next, prev } = useOrganismPaginationMutators();
+    const { list, toggleOrganismSelection } = useOrganismList(data);
+    return (jsx("div", { css: [foundOrganismsList, css], className: className, children: jsxs("div", { children: [(isLoading || isPlaceholderData) && (jsx("div", { css: loadingIndicator, children: jsx(CircularProgress, { color: "inherit", size: 40 }) })), jsx("p", { css: infoTextCSS, children: getInfoText(data === null || data === void 0 ? void 0 : data.total, isLoading) }), jsx("div", { css: inner, children: (list !== null && list !== void 0 ? list : []).map((item) => (jsx(OrganismListItem, Object.assign({}, item, { onClick: toggleOrganismSelection }), item.id))) }), !!(data === null || data === void 0 ? void 0 : data.total) && !isLoading && (jsx(Pagination, { total: data.total, current: data.offset, displayLength: data.limit, onClickNext: next, onClickPrev: prev }))] }) }));
 };
-const usePaginate = () => {
-    const response = useFoundOrganismsState();
-    const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
-    const phenotypeQuery = usePhenotypeQueryState();
-    const { setFoundOrganisms } = useFoundOrganismsMutators();
-    const next = () => {
-        paginate(response.offset + SHOW_COUNT$1);
-    };
-    const prev = () => {
-        paginate(response.offset - SHOW_COUNT$1);
-    };
-    const paginate = (offset) => __awaiter(void 0, void 0, void 0, function* () {
-        const abort = new AbortController();
-        setNextOrganismLoadAbort(abort);
-        const params = Object.assign(Object.assign({}, phenotypeQuery), { limit: SHOW_COUNT$1, offset });
-        const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, params, abort);
-        setNextOrganismLoadAbort(null);
-        if (response.body) {
-            setFoundOrganisms(response.body);
-        }
+const SHOW_COUNT$2 = 10;
+const useOrganismQuery = () => {
+    const page = useOrganismPaginationState();
+    const phenotypeQueryParams = usePhenotypeQueryState();
+    const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
+    return useQuery({
+        queryKey: [phenotypeQueryParams, { page }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () {
+            if (Object.entries(phenotypeQueryParams).length === 0)
+                return nullResponse;
+            const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, Object.assign(Object.assign({}, phenotypeQueryParams), { limit: SHOW_COUNT$2, offset: (page - 1) * SHOW_COUNT$2 }));
+            if (!response.body)
+                throw new Error("No data");
+            return response.body;
+        }),
+        staleTime: Infinity,
+        placeholderData: (previousData) => previousData,
     });
-    return { next, prev };
 };
-const useOrganismList = () => {
-    const [data, setData] = reactExports.useState([]);
-    const response = useFoundOrganismsState();
+const useOrganismList = (response) => {
+    const [list, setList] = reactExports.useState([]);
     const selectedOrganisms = useSelectedOrganismsState();
-    const isLoading = useIsOrganismLoading();
     const { toggleOrganismSelection } = useSelectedOrganismsMutators();
-    const toggleChecked = (info) => {
-        toggleOrganismSelection(info);
-    };
     reactExports.useEffect(() => {
-        const result = response.contents.map((organism) => {
+        var _a;
+        const result = ((_a = response === null || response === void 0 ? void 0 : response.contents) !== null && _a !== void 0 ? _a : []).map((organism) => {
             return {
                 id: organism.tax_id,
                 label: organism.name,
                 isChecked: hasIdOfLabel(selectedOrganisms, organism.tax_id),
             };
         });
-        setData(result);
+        setList(result);
     }, [response, selectedOrganisms]);
-    return { data, toggleChecked, isLoading, response };
+    return { list, toggleOrganismSelection };
 };
 const getInfoText = (organismLength, isLoading) => {
     if (isLoading) {
         return "Loading...";
     }
-    if (organismLength === 0) {
+    if (!organismLength) {
         return "No organisms found";
     }
     else if (organismLength === 1) {
@@ -543,15 +875,15 @@ const loadingIndicator = css `
 `;
 
 const organismTabNames = ["Found organisms", "Selected organisms"];
-const organismTabFocus = Recoil_index_6({
+const organismTabFocus = Recoil_index_8({
     key: "organismTabFocus",
     default: "Found organisms",
 });
 const useOrganismTabFocusState = () => {
-    return Recoil_index_18(organismTabFocus);
+    return Recoil_index_20(organismTabFocus);
 };
 const useOrganismTabFocusMutators = () => {
-    const setOrganismTabFocus = Recoil_index_22(organismTabFocus);
+    const setOrganismTabFocus = Recoil_index_24(organismTabFocus);
     return { setOrganismTabFocus };
 };
 
@@ -584,70 +916,40 @@ const tabCSS = css `
   //width: 200px;
 `;
 
-const SHOW_COUNT = 10;
+const SHOW_COUNT$1 = 10;
 const SelectedOrganismsList = ({ css, className }) => {
     const selectedOrganisms = useSelectedOrganismsState();
     const { toggleOrganismSelection } = useSelectedOrganismsMutators();
     const [data, setData] = reactExports.useState([]);
     const [current, setCurrent] = reactExports.useState(0);
     const next = () => {
-        setCurrent(current + SHOW_COUNT);
+        setCurrent(current + SHOW_COUNT$1);
     };
     const prev = () => {
-        setCurrent(current - SHOW_COUNT);
+        setCurrent(current - SHOW_COUNT$1);
     };
     reactExports.useEffect(() => {
         const filtered = selectedOrganisms
             .filter((item, i) => i >= current)
-            .filter((item, i) => i < SHOW_COUNT);
+            .filter((item, i) => i < SHOW_COUNT$1);
         setData(filtered);
     }, [selectedOrganisms, current]);
     return (jsxs("div", { css: [selectedOrganismsList, css], className: className, children: [jsx("div", { children: data.map((item) => (jsx(OrganismListItem, Object.assign({}, item, { isChecked: true, onClick: () => {
                         toggleOrganismSelection(item);
-                    } }), item.id))) }), !!selectedOrganisms.length && (jsx(Pagination, { total: selectedOrganisms.length, current: current, displayLength: SHOW_COUNT, onClickNext: next, onClickPrev: prev }))] }));
+                    } }), item.id))) }), !!selectedOrganisms.length && (jsx(Pagination, { total: selectedOrganisms.length, current: current, displayLength: SHOW_COUNT$1, onClickNext: next, onClickPrev: prev }))] }));
 };
 const selectedOrganismsList = css ``;
 
 const OrganismPane = ({ css, className }) => {
-    useMediaLoadFromOrganismSelection();
-    const { tabFocus } = useTabFocus();
-    return (jsxs("div", { css: [wrapper, css], className: className, children: [jsx(OrganismTab, {}), jsxs("div", { css: contents, children: [tabFocus === "Found organisms" && jsx(FoundOrganismsList, {}), tabFocus === "Selected organisms" && jsx(SelectedOrganismsList, {})] })] }));
-};
-const useTabFocus = () => {
     const tabFocus = useOrganismTabFocusState();
+    const { reset } = useOrganismPaginationMutators();
     const { setOrganismTabFocus } = useOrganismTabFocusMutators();
-    const foundOrganisms = useFoundOrganismsState();
+    const phenotypeQueryParams = usePhenotypeQueryState();
     reactExports.useEffect(() => {
+        reset();
         setOrganismTabFocus("Found organisms");
-    }, [foundOrganisms]);
-    return { tabFocus };
-};
-const useMediaLoadFromOrganismSelection = () => {
-    const selectedOrganisms = useSelectedOrganismsState();
-    const { setQueryData } = useQueryDataMutators();
-    const { setFoundMedia } = useFoundMediaMutators();
-    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
-    const exec = () => __awaiter(void 0, void 0, void 0, function* () {
-        const tax_ids = extractLabelIds(selectedOrganisms);
-        const params = { tax_ids, limit: 10, offset: 0 };
-        setQueryData({ tax_ids });
-        const abort = new AbortController();
-        setNextMediaLoadAbort(abort);
-        const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
-        setNextMediaLoadAbort(null);
-        if (response.body) {
-            setFoundMedia(response.body);
-        }
-    });
-    reactExports.useEffect(() => {
-        if (selectedOrganisms.length === 0) {
-            setQueryData({});
-            setFoundMedia(nullResponse$1);
-            setNextMediaLoadAbort(null);
-            return;
-        }
-        exec();
-    }, [selectedOrganisms]);
+    }, [phenotypeQueryParams]);
+    return (jsxs("div", { css: [wrapper, css], className: className, children: [jsx(OrganismTab, {}), jsxs("div", { css: contents, children: [tabFocus === "Found organisms" && jsx(FoundOrganismsList, {}), tabFocus === "Selected organisms" && jsx(SelectedOrganismsList, {})] })] }));
 };
 const wrapper = css `
   flex-grow: 1;
@@ -730,7 +1032,13 @@ const checkBoxStyle = css `
 `;
 
 const PhenotypeSearchArea = ({ css, className }) => {
-    const { handleEnabledChange, handleValueChange } = usePhenotypeQuery();
+    const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
+    const handleEnabledChange = (key, enabled) => {
+        !enabled && removePhenotypeQuery(key);
+    };
+    const handleValueChange = (key, value) => {
+        updatePhenotypeQuery(key, value);
+    };
     return (jsxs("div", { css: [phenotypeSearchArea, css], className: className, children: [jsx(RangeSlider, { css: sliderStyle, min: 0, max: 110, label: "Growth temperature", marks: [
                     { value: 0, label: "0°C" },
                     { value: 37, label: "37°C" },
@@ -800,37 +1108,6 @@ const sliderStyle = css `
     margin-top: 10px;
   }
 `;
-const usePhenotypeQuery = () => {
-    const phenotypeQuery = usePhenotypeQueryState();
-    const { setFoundOrganisms } = useFoundOrganismsMutators();
-    const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
-    const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
-    const handleEnabledChange = (key, enabled) => {
-        if (!enabled) {
-            removePhenotypeQuery(key);
-        }
-    };
-    const handleValueChange = (key, value) => {
-        updatePhenotypeQuery(key, value);
-    };
-    reactExports.useEffect(() => {
-        if (Object.entries(phenotypeQuery).length === 0) {
-            setFoundOrganisms(nullResponse);
-            setNextOrganismLoadAbort(null);
-            return;
-        }
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            const abort = new AbortController();
-            setNextOrganismLoadAbort(abort);
-            const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, Object.assign(Object.assign({}, phenotypeQuery), { limit: 10, offset: 0 }), abort);
-            setNextOrganismLoadAbort(null);
-            if (response.body) {
-                setFoundOrganisms(response.body);
-            }
-        }))();
-    }, [phenotypeQuery]);
-    return { handleEnabledChange, handleValueChange };
-};
 
 const PhenotypeSection = ({ css, className }) => {
     return (jsx("div", { css: [phenotypeSection, css], className: className, children: jsx(PhenotypeSearchArea, {}) }));
@@ -842,42 +1119,47 @@ const phenotypeSection = css `
 `;
 
 const AppContainer = ({ dispatchEvent }) => {
-    const { next, prev } = useMediaPagination();
-    return (jsxs("div", { css: wrapper$2, children: [jsx("div", { css: queryPane, children: jsx(PhenotypeSection, {}) }), jsx("div", { css: subPane, children: jsx(OrganismPane, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) })] }));
+    useMediaLoadFromOrganismSelection();
+    return (jsxs("div", { css: wrapper$2, children: [jsx("div", { css: queryPane, children: jsx(PhenotypeSection, {}) }), jsx("div", { css: subPane, children: jsx(OrganismPane, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent }) })] }));
 };
-const useMediaPagination = () => {
+const SHOW_COUNT = 10;
+const useMediaLoadFromOrganismSelection = () => {
+    const page = useMediaPaginationState();
     const selectedOrganisms = useSelectedOrganismsState();
-    const response = useFoundMediaState();
-    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+    const { setQueryData } = useQueryDataMutators();
     const { setFoundMedia } = useFoundMediaMutators();
-    const next = () => {
-        paginate({
-            offset: response.offset + 10,
-            tax_ids: extractLabelIds(selectedOrganisms),
-            abortLoader: setNextMediaLoadAbort,
-            setFoundMedia,
-        });
-    };
-    const prev = () => {
-        paginate({
-            offset: response.offset - 10,
-            tax_ids: extractLabelIds(selectedOrganisms),
-            abortLoader: setNextMediaLoadAbort,
-            setFoundMedia,
-        });
-    };
-    return { next, prev };
+    const { setIsMediaLoading } = useIsMediaLoadingMutators();
+    const { reset } = useMediaPaginationMutators();
+    const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
+    const query = useQuery({
+        queryKey: [selectedOrganisms, { page }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () {
+            if (selectedOrganisms.length === 0)
+                return nullResponse;
+            const tax_ids = extractLabelIds(selectedOrganisms);
+            setQueryData({ tax_ids });
+            const response = yield getData(API_MEDIA_BY_TAXON, {
+                tax_ids,
+                limit: SHOW_COUNT,
+                offset: (page - 1) * SHOW_COUNT,
+            });
+            if (!response.body)
+                throw new Error("No data");
+            return response.body;
+        }),
+        staleTime: Infinity,
+        placeholderData: (previousData) => previousData,
+    });
+    reactExports.useEffect(() => {
+        query.data && setFoundMedia(query.data);
+    }, [query.data]);
+    reactExports.useEffect(() => {
+        setIsMediaLoading(query.isLoading || query.isPlaceholderData);
+    }, [query.isLoading, query.isPlaceholderData]);
+    reactExports.useEffect(() => {
+        reset();
+    }, [selectedOrganisms]);
 };
-const paginate = ({ offset, abortLoader, tax_ids, setFoundMedia }) => __awaiter(void 0, void 0, void 0, function* () {
-    const params = { tax_ids, offset, limit: 10 };
-    const abort = new AbortController();
-    abortLoader(abort);
-    const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
-    abortLoader(null);
-    if (response.body) {
-        setFoundMedia(response.body);
-    }
-});
 
 const App = ({ stanzaElement }) => {
     const dispatchEvent = (gmIds) => {

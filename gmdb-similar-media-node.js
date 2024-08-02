@@ -1,12 +1,12 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { Q as COLOR_ACCENT, d as COLOR_WHITE, C as COLOR_PRIMARY, j as jsx, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { c as css, r as reactExports, g as getData } from './getData-e69d262f.js';
-import { s as select, c as creator, d as dispatch, t as timer } from './transform-f2aa5726.js';
-import { s as stanzaWrapper } from './common-cd178d45.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { ah as COLOR_ACCENT, l as COLOR_WHITE, C as COLOR_PRIMARY, j as jsx, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { c as css, r as reactExports, g as getData } from './getData-1a784a8c.js';
+import { s as select, c as creator, d as dispatch, t as timer } from './transform-0f12b63b.js';
+import { s as stanzaWrapper } from './common-6ed9df56.js';
 import { c as clone } from './clone-1fb93465.js';
 import { U as URL_API } from './variables-58f3d1be.js';
-import { g as getMedia } from './api-06d33a38.js';
-import './index-1640bb89.js';
+import { g as getMedia } from './api-33f54179.js';
+import './index-eb2c9901.js';
 
 function create(name) {
   return select(creator(name).call(document.documentElement));

@@ -1,14 +1,14 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { d as COLOR_WHITE, s as COLOR_GRAY_LINE, C as COLOR_PRIMARY, b as COLOR_GRAY300, w as COLOR_GRAY700, K as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { c as css, g as getData, l as dist, r as reactExports } from './getData-e69d262f.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-48314cd0.js';
-import { b as Tooltip, i as API_TAXONOMY_CHILDREN, h as API_MEDIA_BY_TAXON } from './paths-3104928b.js';
-import { C as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d46a6b88.js';
-import './emotion-styled.browser.esm-90764b6a.js';
-import './consts-57be2ed0.js';
-import './useSlotProps-06654923.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { l as COLOR_WHITE, M as COLOR_GRAY_LINE, C as COLOR_PRIMARY, h as COLOR_GRAY300, P as COLOR_GRAY700, ac as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_8, o as Recoil_index_20, p as Recoil_index_24, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { c as css, g as getData, l as dist, r as reactExports } from './getData-1a784a8c.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-d6da8e88.js';
+import { b as Tooltip, j as API_TAXONOMY_CHILDREN, i as API_MEDIA_BY_TAXON } from './paths-0bbd78cc.js';
+import { C as Checkbox, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators } from './MediaPane-fd91d6f4.js';
+import './consts-55c53200.js';
+import './DefaultPropsProvider-4e645303.js';
 import './variables-58f3d1be.js';
-import './CircularProgress-88c2b271.js';
+import './CircularProgress-0433714e.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
     return (jsxs("li", { css: [wrapper, css], className: className, children: [jsxs("div", { css: inner, children: [jsxs("div", { css: left, children: [jsx("span", { onClick: () => onToggleChildren(id), children: jsx(ToggleIcon, { hasChildren, isOpen, isLoading }) }), jsx(Tooltip, { title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start", children: jsx("span", { children: label }) }), tag && jsx("span", { css: tagTip, children: tag }), linkString && linkURL && (jsxs("a", { href: linkURL, target: "_blank", rel: "noreferrer", children: ["[", linkString, "]"] }))] }), jsx(Checkbox, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) })] }), isOpen && !!children && jsx("ul", { css: childrenWrapper, children: children })] }));
@@ -186,12 +186,12 @@ const findSiblings = (list, id) => {
     }
 };
 
-const selectedTaxon = Recoil_index_6({ key: "selectedTaxon", default: [] });
+const selectedTaxon = Recoil_index_8({ key: "selectedTaxon", default: [] });
 const useSelectedTaxonState = () => {
-    return Recoil_index_18(selectedTaxon);
+    return Recoil_index_20(selectedTaxon);
 };
 const useSelectedTaxonMutators = () => {
-    const setSelectedTaxon = Recoil_index_22(selectedTaxon);
+    const setSelectedTaxon = Recoil_index_24(selectedTaxon);
     const clearTaxonSelect = () => {
         setSelectedTaxon([]);
     };
@@ -205,12 +205,12 @@ const useSelectedTaxonMutators = () => {
     };
 };
 
-const taxonList = Recoil_index_6({ key: "taxonList", default: [] });
+const taxonList = Recoil_index_8({ key: "taxonList", default: [] });
 const useTaxonListState = () => {
-    return Recoil_index_18(taxonList);
+    return Recoil_index_20(taxonList);
 };
 const useTaxonListMutators = () => {
-    const setTaxonList = Recoil_index_22(taxonList);
+    const setTaxonList = Recoil_index_24(taxonList);
     const addTaxonToList = (taxon) => {
         setTaxonList((prev) => [...prev.filter((item) => item.id !== taxon.id), taxon]);
     };
@@ -343,14 +343,11 @@ css ``;
 
 const useInitTaxonTree = () => {
     const { addTaxonToList } = useTaxonListMutators();
-    const process = () => {
+    reactExports.useEffect(() => {
         superkingdoms.forEach((info) => {
             addTaxonToList(info);
         });
-    };
-    reactExports.useEffect(() => {
-        process();
-    }, []);
+    }, [addTaxonToList]);
 };
 const superkingdoms = [
     {
@@ -375,75 +372,54 @@ const superkingdoms = [
 
 const TaxonomicTreeSection = () => {
     useInitTaxonTree();
-    useMediaLoadFromTaxon();
     return (jsx("div", { css: [taxonomicTreeSection], children: jsxs("div", { children: [jsx(TaxonomicTreeBranch, { id: "2157" }), jsx(TaxonomicTreeBranch, { id: "2" }), jsx(TaxonomicTreeBranch, { id: "2759" })] }) }));
 };
 const taxonomicTreeSection = css `
   //overflow: scroll;
 `;
+
+const AppContainer = ({ dispatchEvent }) => {
+    useMediaLoadFromTaxon();
+    return (jsxs("div", { css: wrapper$1, children: [jsx("div", { css: queryPane, children: jsx(TaxonomicTreeSection, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent }) })] }));
+};
+const SHOW_COUNT = 10;
 const useMediaLoadFromTaxon = () => {
+    const page = useMediaPaginationState();
     const selectedTaxon = useSelectedTaxonState();
     const { setQueryData } = useQueryDataMutators();
     const { setFoundMedia } = useFoundMediaMutators();
-    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+    const { setIsMediaLoading } = useIsMediaLoadingMutators();
+    const { reset } = useMediaPaginationMutators();
+    const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
+    const query = useQuery({
+        queryKey: [selectedTaxon, { page }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () {
+            const tax_ids = selectedTaxon;
+            if (tax_ids.length === 0)
+                return nullResponse;
+            setQueryData({ tax_ids });
+            const response = yield getData(API_MEDIA_BY_TAXON, {
+                tax_ids,
+                limit: SHOW_COUNT,
+                offset: (page - 1) * SHOW_COUNT,
+            });
+            if (!response.body)
+                throw new Error("No data");
+            return response.body;
+        }),
+        staleTime: Infinity,
+        placeholderData: (previousData) => previousData,
+    });
     reactExports.useEffect(() => {
-        if (selectedTaxon.length === 0) {
-            setQueryData({});
-            setFoundMedia(nullResponse);
-            setNextMediaLoadAbort(null);
-            return;
-        }
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            const params = { tax_ids: selectedTaxon, limit: 10, offset: 0 };
-            setQueryData({ tax_ids: selectedTaxon });
-            const abort = new AbortController();
-            setNextMediaLoadAbort(abort);
-            const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
-            setNextMediaLoadAbort(null);
-            if (response.body) {
-                setFoundMedia(Object.assign({}, response.body));
-            }
-        }))();
-    }, [selectedTaxon]);
+        query.data && setFoundMedia(query.data);
+    }, [query.data, setFoundMedia]);
+    reactExports.useEffect(() => {
+        setIsMediaLoading(query.isLoading || query.isPlaceholderData);
+    }, [query.isLoading, query.isPlaceholderData, setIsMediaLoading]);
+    reactExports.useEffect(() => {
+        reset();
+    }, [selectedTaxon, reset]);
 };
-
-const AppContainer = ({ dispatchEvent }) => {
-    const { next, prev } = useMediaPagination();
-    return (jsxs("div", { css: wrapper$1, children: [jsx("div", { css: queryPane, children: jsx(TaxonomicTreeSection, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) })] }));
-};
-const useMediaPagination = () => {
-    const selectedTaxon = useSelectedTaxonState();
-    const response = useFoundMediaState();
-    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
-    const { setFoundMedia } = useFoundMediaMutators();
-    const next = () => {
-        paginate({
-            offset: response.offset + 10,
-            tax_ids: selectedTaxon,
-            abortLoader: setNextMediaLoadAbort,
-            setFoundMedia,
-        });
-    };
-    const prev = () => {
-        paginate({
-            offset: response.offset - 10,
-            tax_ids: selectedTaxon,
-            abortLoader: setNextMediaLoadAbort,
-            setFoundMedia,
-        });
-    };
-    return { next, prev };
-};
-const paginate = ({ offset, abortLoader, tax_ids, setFoundMedia }) => __awaiter(void 0, void 0, void 0, function* () {
-    const params = { tax_ids, offset, limit: 10 };
-    const abort = new AbortController();
-    abortLoader(abort);
-    const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
-    abortLoader(null);
-    if (response.body) {
-        setFoundMedia(response.body);
-    }
-});
 
 const App = ({ stanzaElement }) => {
     const dispatchEvent = (gmIds) => {

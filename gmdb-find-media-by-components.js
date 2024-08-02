@@ -1,20 +1,20 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { j as jsx, a as jsxs, F as Fragment, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { r as reactExports, j as jsx$1, g as getData } from './getData-e69d262f.js';
-import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-3104928b.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { j as jsx, a as jsxs, F as Fragment, R as Recoil_index_8, o as Recoil_index_20, p as Recoil_index_24, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { r as reactExports, j as jsx$1, g as getData } from './getData-1a784a8c.js';
+import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-0bbd78cc.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
-import { T as TextField, C as Chip, A as Autocomplete } from './TextField-e9d77612.js';
-import { C as CircularProgress } from './CircularProgress-88c2b271.js';
-import { u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d46a6b88.js';
-import './useSlotProps-06654923.js';
-import './emotion-styled.browser.esm-90764b6a.js';
+import { T as TextField, C as Chip, A as Autocomplete } from './TextField-ee94f511.js';
+import { C as CircularProgress } from './CircularProgress-0433714e.js';
+import { w as wrapper, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, a as useFoundMediaMutators, b as useQueryDataMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators } from './MediaPane-fd91d6f4.js';
+import './DefaultPropsProvider-4e645303.js';
 import './variables-58f3d1be.js';
-import './consts-57be2ed0.js';
+import './consts-55c53200.js';
 
 const ComponentSelect = ({ onChangeSelection }) => {
     const [loading, setLoading] = reactExports.useState(false);
     const [components, setComponents] = reactExports.useState([]);
-    const loadComponents = (ids = []) => __awaiter(void 0, void 0, void 0, function* () {
+    const loadComponents = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (ids = []) {
         const response = yield getData(API_COMPONENTS_WITH_COMPONENTS, {
             gmo_ids: ids.join(","),
         });
@@ -49,87 +49,68 @@ const ComponentSelect = ({ onChangeSelection }) => {
         }, onChange: onChange, onOpen: onOpen, disablePortal: true, options: components, loading: loading, getOptionLabel: (option) => option.label, renderInput: (params) => (jsx(TextField, Object.assign({}, params, { label: "Components", InputProps: Object.assign(Object.assign({}, params.InputProps), { endAdornment: (jsxs(Fragment, { children: [loading ? jsx(CircularProgress, { color: "inherit", size: 20 }) : null, params.InputProps.endAdornment] })) }) }))), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined" }, getTagProps({ index }), { label: option.label, key: option.id })))) }));
 };
 
-const selectedAttributes = Recoil_index_6({
+const selectedAttributes = Recoil_index_8({
     key: "selectedAttributes",
     default: { gmo_ids: [] },
 });
 const useSelectedAttributesState = () => {
-    return Recoil_index_18(selectedAttributes);
+    return Recoil_index_20(selectedAttributes);
 };
 const useSelectedAttributesMutators = () => {
-    const setSelectedAttributes = Recoil_index_22(selectedAttributes);
+    const setSelectedAttributes = Recoil_index_24(selectedAttributes);
     return { setSelectedAttributes };
 };
 
 const AttributesSection = () => {
-    const selectedAttributes = useSelectedAttributesState();
-    const { setFoundMedia } = useFoundMediaMutators();
-    const { setQueryData } = useQueryDataMutators();
-    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
     const { setSelectedAttributes } = useSelectedAttributesMutators();
     const onChangeSelection = (ids) => {
         setSelectedAttributes({ gmo_ids: ids });
     };
-    reactExports.useEffect(() => {
-        const gmo_ids = selectedAttributes.gmo_ids;
-        if (gmo_ids.length === 0) {
-            setQueryData({});
-            setFoundMedia(nullResponse);
-            setNextMediaLoadAbort(null);
-            return;
-        }
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            const params = { gmo_ids, limit: 10, offset: 0 };
-            setQueryData({ gmo_ids });
-            const abort = new AbortController();
-            setNextMediaLoadAbort(abort);
-            const response = yield getData(API_MEDIA_BY_ATTRIBUTES, params, abort);
-            setNextMediaLoadAbort(null);
-            if (response.body) {
-                setFoundMedia(response.body);
-            }
-        }))();
-    }, [selectedAttributes]);
     return (jsx("div", { children: jsx(ComponentSelect, { onChangeSelection: onChangeSelection }) }));
 };
 
 const AppContainer = ({ dispatchEvent }) => {
-    const { next, prev } = useMediaPagination();
-    return (jsxs("div", { css: wrapper, children: [jsx("div", { css: queryPane, children: jsx(AttributesSection, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) })] }));
+    useMediaLoadFromComponents();
+    return (jsxs("div", { css: wrapper, children: [jsx("div", { css: queryPane, children: jsx(AttributesSection, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent }) })] }));
 };
-const useMediaPagination = () => {
+const SHOW_COUNT = 10;
+const useMediaLoadFromComponents = () => {
+    const page = useMediaPaginationState();
     const selectedAttributes = useSelectedAttributesState();
-    const response = useFoundMediaState();
-    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
     const { setFoundMedia } = useFoundMediaMutators();
-    const next = () => {
-        paginate({
-            offset: response.offset + 10,
-            gmo_ids: selectedAttributes.gmo_ids,
-            abortLoader: setNextMediaLoadAbort,
-            setFoundMedia,
-        });
-    };
-    const prev = () => {
-        paginate({
-            offset: response.offset - 10,
-            gmo_ids: selectedAttributes.gmo_ids,
-            abortLoader: setNextMediaLoadAbort,
-            setFoundMedia,
-        });
-    };
-    return { next, prev };
+    const { setQueryData } = useQueryDataMutators();
+    const { setIsMediaLoading } = useIsMediaLoadingMutators();
+    const { reset } = useMediaPaginationMutators();
+    const nullResponse = { total: 0, contents: [], offset: 0, limit: 0 };
+    const query = useQuery({
+        queryKey: [selectedAttributes, { page }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () {
+            const gmo_ids = selectedAttributes.gmo_ids;
+            if (gmo_ids.length === 0)
+                return nullResponse;
+            setQueryData({ gmo_ids });
+            const response = yield getData(API_MEDIA_BY_ATTRIBUTES, {
+                gmo_ids,
+                limit: SHOW_COUNT,
+                offset: (page - 1) * SHOW_COUNT,
+            });
+            if (!response.body)
+                throw new Error("No data");
+            return response.body;
+        }),
+        staleTime: Infinity,
+        placeholderData: (previousData) => previousData,
+    });
+    reactExports.useEffect(() => {
+        query.data && setFoundMedia(query.data);
+    }, [query.data]);
+    reactExports.useEffect(() => {
+        setIsMediaLoading(query.isLoading || query.isPlaceholderData);
+    }, [query.isLoading, query.isPlaceholderData]);
+    reactExports.useEffect(() => {
+        reset();
+    }, [selectedAttributes]);
 };
-const paginate = ({ offset, abortLoader, gmo_ids, setFoundMedia }) => __awaiter(void 0, void 0, void 0, function* () {
-    const params = { gmo_ids, offset, limit: 10 };
-    const abort = new AbortController();
-    abortLoader(abort);
-    const response = yield getData(API_MEDIA_BY_ATTRIBUTES, params, abort);
-    abortLoader(null);
-    if (response.body) {
-        setFoundMedia(response.body);
-    }
-});
 
 const App = ({ stanzaElement }) => {
     const dispatchEvent = (gmIds) => {

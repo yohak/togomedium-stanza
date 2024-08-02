@@ -1,11 +1,11 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { c as css, g as getData, r as reactExports } from './getData-e69d262f.js';
-import { L as LineageList } from './LineageList-8226be1b.js';
-import { c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './styles-5c02f157.js';
-import { s as stanzaWrapper } from './common-cd178d45.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { c as css, g as getData } from './getData-1a784a8c.js';
+import { L as LineageList } from './LineageList-fbb41795.js';
+import { c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './styles-d38511ab.js';
+import { s as stanzaWrapper } from './common-6ed9df56.js';
 import { U as URL_API } from './variables-58f3d1be.js';
-import './emotion-styled.browser.esm-90764b6a.js';
 import './types-8994330c.js';
 import './string-4de5f4fa.js';
 
@@ -46,25 +46,27 @@ const getStrainData = (strain_id) => __awaiter(void 0, void 0, void 0, function*
     var _a;
     const apiName = "gmdb_strain_by_strainid";
     const result = yield getData(`${URL_API}${apiName}`, { strain_id });
-    if ((_a = result.body) === null || _a === void 0 ? void 0 : _a.strain) {
-        return parseData(result.body);
+    if (!((_a = result.body) === null || _a === void 0 ? void 0 : _a.strain)) {
+        throw new Error("No strain data found");
     }
-    else {
-        return undefined;
-    }
+    return parseData(result.body);
 });
 
+const useStrainDataQuery = (strain_id) => {
+    const { data, isLoading } = useQuery({
+        queryKey: ["strain", strain_id],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () { return getStrainData(strain_id); }),
+        staleTime: Infinity,
+    });
+    return { strainData: data, isLoading };
+};
 const App = ({ strain_id }) => {
-    const [props, setProps] = reactExports.useState(undefined);
-    reactExports.useEffect(() => {
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            const result = yield getStrainData(strain_id);
-            if (!result)
-                return;
-            setProps(result);
-        }))();
-    }, [strain_id]);
-    return props ? jsx(StanzaView, Object.assign({}, props)) : jsx(Fragment, {});
+    const { strainData, isLoading } = useStrainDataQuery(strain_id);
+    if (isLoading)
+        return jsx(Fragment, { children: "Loading..." });
+    if (!strainData)
+        return jsx(Fragment, { children: "No data found" });
+    return jsx(StanzaView, Object.assign({}, strainData));
 };
 
 class ReactStanza extends TogoMediumReactStanza {

@@ -1,10 +1,10 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { c as css, g as getData, r as reactExports } from './getData-e69d262f.js';
-import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
-import { I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './styles-5c02f157.js';
-import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-55ee1bbb.js';
-import { s as stanzaWrapper } from './common-cd178d45.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { n as newStyled, u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { c as css, g as getData } from './getData-1a784a8c.js';
+import { I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './styles-d38511ab.js';
+import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-44529b85.js';
+import { s as stanzaWrapper } from './common-6ed9df56.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
 import { U as URL_API } from './variables-58f3d1be.js';
 
@@ -58,33 +58,38 @@ const parseData = (body) => {
     };
 };
 const getComponentData = (gmo_id) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     const apiName = "gmdb_component_by_gmoid";
     const result = yield getData(`${URL_API}${apiName}`, { gmo_id });
-    if ((_a = result.body) === null || _a === void 0 ? void 0 : _a.id) {
-        return parseData(result.body);
+    if (!result.body) {
+        throw new Error("No data found");
     }
-    else {
-        return undefined;
-    }
+    return parseData(result.body);
 });
 
+const useComponentDataQuery = (gmo_id) => {
+    const { data, isLoading } = useQuery({
+        queryKey: [{ gmo_id }],
+        queryFn: () => getComponentData(gmo_id),
+        staleTime: Infinity,
+    });
+    return { componentData: data, isLoading };
+};
+const useWikipediaQuery = (component) => {
+    const wikipediaLink = component === null || component === void 0 ? void 0 : component.links.find((item) => item.label === "Wikipedia");
+    const { data } = useQuery({
+        queryKey: [{ wikipedia: wikipediaLink === null || wikipediaLink === void 0 ? void 0 : wikipediaLink.uri }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () { var _a; return yield fetchWikipediaData((_a = wikipediaLink === null || wikipediaLink === void 0 ? void 0 : wikipediaLink.uri) !== null && _a !== void 0 ? _a : ""); }),
+        staleTime: Infinity,
+        enabled: wikipediaLink !== undefined,
+    });
+    return data;
+};
 const App = ({ gmo_id }) => {
-    const [props, setProps] = reactExports.useState(null);
-    reactExports.useEffect(() => {
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            const result = yield getComponentData(gmo_id);
-            if (!result)
-                return;
-            setProps(result);
-            const wikipediaLink = result.links.find((item) => item.label === "Wikipedia");
-            if (wikipediaLink) {
-                const wikipediaData = yield fetchWikipediaData(wikipediaLink.uri);
-                setProps(Object.assign(Object.assign({}, result), { wikipediaData }));
-            }
-        }))();
-    }, [gmo_id]);
-    return props ? jsx(StanzaView, Object.assign({}, props)) : jsx(Fragment, { children: "Loading..." });
+    const { componentData, isLoading } = useComponentDataQuery(gmo_id);
+    const wikipediaData = useWikipediaQuery(componentData);
+    if (isLoading || !componentData)
+        return jsx(Fragment, { children: "Loading..." });
+    return jsx(StanzaView, Object.assign({}, componentData, { wikipediaData: wikipediaData }));
 };
 
 class ReactStanza extends TogoMediumReactStanza {

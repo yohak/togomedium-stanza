@@ -1,4 +1,4 @@
-import { d as defineComponent, h as ref, i as octicons, a as createElementBlock, F as Fragment, e as createBaseVNode, j as createTextVNode, m as mergeProps, o as openBlock, k as computed, l as watch, r as resolveComponent, c as createBlock, n as normalizeProps, p as guardReactiveProps, q as resolveDynamicComponent, u as createVNode, t as toDisplayString, b as renderList, v as pushScopeId, x as popScopeId, y as n, f as createCommentVNode, z as normalizeClass, A as unref, B as normalizeStyle, s as script$8, w as withCtx, g as createApp } from './Layout-b2192e38.js';
+import { d as defineComponent, h as ref, i as octicons, a as createElementBlock, F as Fragment, e as createBaseVNode, j as createTextVNode, m as mergeProps, o as openBlock, k as computed, l as watch, c as createBlock, n as normalizeProps, p as guardReactiveProps, q as resolveDynamicComponent, u as createVNode, t as toDisplayString, r as resolveComponent, b as renderList, v as pushScopeId, x as popScopeId, y as n, f as createCommentVNode, z as normalizeClass, A as unref, B as normalizeStyle, s as script$8, C as onMounted, w as withCtx, g as createApp } from './Layout-7def18b0.js';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -21,8 +21,8 @@ var data = {
 };
 
 /*!
-  * Bootstrap data.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap data.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -104,8 +104,8 @@ var util = {
 };
 
 /*!
-  * Bootstrap index.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap index.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -271,7 +271,6 @@ function requireUtil () {
 		  const reflow = element => {
 		    element.offsetHeight; // eslint-disable-line no-unused-expressions
 		  };
-
 		  const getjQuery = () => {
 		    if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
 		      return window.jQuery;
@@ -394,8 +393,8 @@ function requireUtil () {
 }
 
 /*!
-  * Bootstrap event-handler.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap event-handler.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -651,8 +650,8 @@ var manipulator = {
 };
 
 /*!
-  * Bootstrap manipulator.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap manipulator.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -731,8 +730,8 @@ function requireManipulator () {
 }
 
 /*!
-  * Bootstrap config.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap config.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -807,8 +806,8 @@ function requireConfig () {
 }
 
 /*!
-  * Bootstrap base-component.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap base-component.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -833,7 +832,7 @@ function requireBaseComponent () {
 		   * Constants
 		   */
 
-		  const VERSION = '5.3.0';
+		  const VERSION = '5.3.3';
 
 		  /**
 		   * Class definition
@@ -905,8 +904,8 @@ var selectorEngine = {
 };
 
 /*!
-  * Bootstrap selector-engine.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap selector-engine.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -945,7 +944,7 @@ function requireSelectorEngine () {
 		      }
 		      selector = hrefAttribute && hrefAttribute !== '#' ? hrefAttribute.trim() : null;
 		    }
-		    return index_js.parseSelector(selector);
+		    return selector ? selector.split(',').map(sel => index_js.parseSelector(sel)).join(',') : null;
 		  };
 		  const SelectorEngine = {
 		    find(selector, element = document.documentElement) {
@@ -1017,8 +1016,8 @@ function requireSelectorEngine () {
 }
 
 /*!
-  * Bootstrap tab.js v5.3.0 (https://getbootstrap.com/)
-  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap tab.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -1052,13 +1051,15 @@ function requireSelectorEngine () {
 	  const ARROW_RIGHT_KEY = 'ArrowRight';
 	  const ARROW_UP_KEY = 'ArrowUp';
 	  const ARROW_DOWN_KEY = 'ArrowDown';
+	  const HOME_KEY = 'Home';
+	  const END_KEY = 'End';
 	  const CLASS_NAME_ACTIVE = 'active';
 	  const CLASS_NAME_FADE = 'fade';
 	  const CLASS_NAME_SHOW = 'show';
 	  const CLASS_DROPDOWN = 'dropdown';
 	  const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
 	  const SELECTOR_DROPDOWN_MENU = '.dropdown-menu';
-	  const NOT_SELECTOR_DROPDOWN_TOGGLE = ':not(.dropdown-toggle)';
+	  const NOT_SELECTOR_DROPDOWN_TOGGLE = `:not(${SELECTOR_DROPDOWN_TOGGLE})`;
 	  const SELECTOR_TAB_PANEL = '.list-group, .nav, [role="tablist"]';
 	  const SELECTOR_OUTER = '.nav-item, .list-group-item';
 	  const SELECTOR_INNER = `.nav-link${NOT_SELECTOR_DROPDOWN_TOGGLE}, .list-group-item${NOT_SELECTOR_DROPDOWN_TOGGLE}, [role="tab"]${NOT_SELECTOR_DROPDOWN_TOGGLE}`;
@@ -1158,13 +1159,19 @@ function requireSelectorEngine () {
 	      this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE));
 	    }
 	    _keydown(event) {
-	      if (![ARROW_LEFT_KEY, ARROW_RIGHT_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY].includes(event.key)) {
+	      if (![ARROW_LEFT_KEY, ARROW_RIGHT_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY, HOME_KEY, END_KEY].includes(event.key)) {
 	        return;
 	      }
 	      event.stopPropagation(); // stopPropagation/preventDefault both added to support up/down keys without scrolling the page
 	      event.preventDefault();
-	      const isNext = [ARROW_RIGHT_KEY, ARROW_DOWN_KEY].includes(event.key);
-	      const nextActiveElement = index_js.getNextActiveElement(this._getChildren().filter(element => !index_js.isDisabled(element)), event.target, isNext, true);
+	      const children = this._getChildren().filter(element => !index_js.isDisabled(element));
+	      let nextActiveElement;
+	      if ([HOME_KEY, END_KEY].includes(event.key)) {
+	        nextActiveElement = children[event.key === HOME_KEY ? 0 : children.length - 1];
+	      } else {
+	        const isNext = [ARROW_RIGHT_KEY, ARROW_DOWN_KEY].includes(event.key);
+	        nextActiveElement = index_js.getNextActiveElement(children, event.target, isNext, true);
+	      }
 	      if (nextActiveElement) {
 	        nextActiveElement.focus({
 	          preventScroll: true
@@ -1718,7 +1725,7 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
 }
 
 script$7.render = render$3;
-script$7.__file = "node_modules/togostanza/src/components/CopyButton.vue";
+script$7.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/CopyButton.vue";
 
 var handlebars_runtimeExports = {};
 var handlebars_runtime = {
@@ -2042,9 +2049,9 @@ var each = {
 	            execIteration(i, i, i === context.length - 1);
 	          }
 	        }
-	      } else if (commonjsGlobal.Symbol && context[commonjsGlobal.Symbol.iterator]) {
+	      } else if (typeof Symbol === 'function' && context[Symbol.iterator]) {
 	        var newContext = [];
-	        var iterator = context[commonjsGlobal.Symbol.iterator]();
+	        var iterator = context[Symbol.iterator]();
 	        for (var it = iterator.next(); !it.done; it = iterator.next()) {
 	          newContext.push(it.value);
 	        }
@@ -2286,35 +2293,35 @@ helpers.registerDefaultHelpers = registerDefaultHelpers;
 helpers.moveHelperToHooks = moveHelperToHooks;
 // istanbul ignore next
 
-function _interopRequireDefault$3(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault$4(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _helpersBlockHelperMissing = blockHelperMissingExports;
 
-var _helpersBlockHelperMissing2 = _interopRequireDefault$3(_helpersBlockHelperMissing);
+var _helpersBlockHelperMissing2 = _interopRequireDefault$4(_helpersBlockHelperMissing);
 
 var _helpersEach = eachExports;
 
-var _helpersEach2 = _interopRequireDefault$3(_helpersEach);
+var _helpersEach2 = _interopRequireDefault$4(_helpersEach);
 
 var _helpersHelperMissing = helperMissingExports;
 
-var _helpersHelperMissing2 = _interopRequireDefault$3(_helpersHelperMissing);
+var _helpersHelperMissing2 = _interopRequireDefault$4(_helpersHelperMissing);
 
 var _helpersIf = _ifExports;
 
-var _helpersIf2 = _interopRequireDefault$3(_helpersIf);
+var _helpersIf2 = _interopRequireDefault$4(_helpersIf);
 
 var _helpersLog = logExports;
 
-var _helpersLog2 = _interopRequireDefault$3(_helpersLog);
+var _helpersLog2 = _interopRequireDefault$4(_helpersLog);
 
 var _helpersLookup = lookupExports;
 
-var _helpersLookup2 = _interopRequireDefault$3(_helpersLookup);
+var _helpersLookup2 = _interopRequireDefault$4(_helpersLookup);
 
 var _helpersWith = _withExports;
 
-var _helpersWith2 = _interopRequireDefault$3(_helpersWith);
+var _helpersWith2 = _interopRequireDefault$4(_helpersWith);
 
 function registerDefaultHelpers(instance) {
   _helpersBlockHelperMissing2['default'](instance);
@@ -2378,18 +2385,18 @@ decorators.__esModule = true;
 decorators.registerDefaultDecorators = registerDefaultDecorators;
 // istanbul ignore next
 
-function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault$3(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _decoratorsInline = inlineExports;
 
-var _decoratorsInline2 = _interopRequireDefault$2(_decoratorsInline);
+var _decoratorsInline2 = _interopRequireDefault$3(_decoratorsInline);
 
 function registerDefaultDecorators(instance) {
   _decoratorsInline2['default'](instance);
 }
 
 var loggerExports = {};
-var logger$1 = {
+var logger = {
   get exports(){ return loggerExports; },
   set exports(v){ loggerExports = v; },
 };
@@ -2441,7 +2448,7 @@ var logger$1 = {
 	exports['default'] = logger;
 	module.exports = exports['default'];
 	
-} (logger$1, loggerExports));
+} (logger, loggerExports));
 
 var protoAccess = {};
 
@@ -2473,13 +2480,13 @@ protoAccess.resultIsAllowed = resultIsAllowed;
 protoAccess.resetLoggedProperties = resetLoggedProperties;
 // istanbul ignore next
 
-function _interopRequireWildcard$1(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _createNewLookupObject = createNewLookupObject$1;
 
 var _logger$1 = loggerExports;
 
-var logger = _interopRequireWildcard$1(_logger$1);
+var _logger2$1 = _interopRequireDefault$2(_logger$1);
 
 var loggedProperties = Object.create(null);
 
@@ -2528,7 +2535,7 @@ function checkWhiteList(protoAccessControlForType, propertyName) {
 function logUnexpecedPropertyAccessOnce(propertyName) {
   if (loggedProperties[propertyName] !== true) {
     loggedProperties[propertyName] = true;
-    logger.log('error', 'Handlebars: Access has been denied to resolve the property "' + propertyName + '" because it is not an "own property" of its parent.\n' + 'You can add a runtime option to disable the check or this warning:\n' + 'See https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details');
+    _logger2$1['default'].log('error', 'Handlebars: Access has been denied to resolve the property "' + propertyName + '" because it is not an "own property" of its parent.\n' + 'You can add a runtime option to disable the check or this warning:\n' + 'See https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details');
   }
 }
 
@@ -2560,7 +2567,7 @@ var _logger2 = _interopRequireDefault$1(_logger);
 
 var _internalProtoAccess$1 = protoAccess;
 
-var VERSION = '4.7.7';
+var VERSION = '4.7.8';
 base.VERSION = VERSION;
 var COMPILER_REVISION = 8;
 base.COMPILER_REVISION = COMPILER_REVISION;
@@ -3071,18 +3078,30 @@ var noConflict = {
   set exports(v){ noConflictExports = v; },
 };
 
+/* global globalThis */
+
 (function (module, exports) {
 
 	exports.__esModule = true;
 
 	exports['default'] = function (Handlebars) {
 	  /* istanbul ignore next */
-	  var root = typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : window,
-	      $Handlebars = root.Handlebars;
+	  // https://mathiasbynens.be/notes/globalthis
+	  (function () {
+	    if (typeof globalThis === 'object') return;
+	    Object.prototype.__defineGetter__('__magic__', function () {
+	      return this;
+	    });
+	    __magic__.globalThis = __magic__; // eslint-disable-line no-undef
+	    delete Object.prototype.__magic__;
+	  })();
+
+	  var $Handlebars = globalThis.Handlebars;
+
 	  /* istanbul ignore next */
 	  Handlebars.noConflict = function () {
-	    if (root.Handlebars === Handlebars) {
-	      root.Handlebars = $Handlebars;
+	    if (globalThis.Handlebars === Handlebars) {
+	      globalThis.Handlebars = $Handlebars;
 	    }
 	    return Handlebars;
 	  };
@@ -3414,9 +3433,9 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
 }
 
 script$6.render = render$2;
-script$6.__file = "node_modules/togostanza/src/components/StanzaPreviewer.vue";
+script$6.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/StanzaPreviewer.vue";
 
-const _withScopeId = n => (pushScopeId("data-v-43688ce6"),n=n(),popScopeId(),n);
+const _withScopeId = n => (pushScopeId("data-v-4734398c"),n=n(),popScopeId(),n);
 const _hoisted_1$5 = { class: "table table-borderless border mb-1" };
 const _hoisted_2$5 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("th", null, "Author", -1 /* HOISTED */));
 const _hoisted_3$5 = { class: "mb-0" };
@@ -3502,11 +3521,11 @@ return (_ctx, _cache) => {
 
 };
 
-var css = "\nth[data-v-43688ce6] {\n  background-color: var(--bs-light);\n  text-align: center;\n  white-space: nowrap;\n  width: 1%;\n}\nth[data-v-43688ce6],\ntd[data-v-43688ce6] {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n";
+var css = "\nth[data-v-4734398c] {\n  background-color: var(--bs-light);\n  text-align: center;\n  white-space: nowrap;\n  width: 1%;\n}\nth[data-v-4734398c],\ntd[data-v-4734398c] {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n";
 n(css,{});
 
-script$5.__scopeId = "data-v-43688ce6";
-script$5.__file = "node_modules/togostanza/src/components/HelpAboutPane.vue";
+script$5.__scopeId = "data-v-4734398c";
+script$5.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/HelpAboutPane.vue";
 
 function removePrefix(str, prefix) {
   if (prefix === str) {
@@ -3589,7 +3608,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                 key: choice
               }, toDisplayString(choice), 9 /* TEXT, PROPS */, _hoisted_9$1))
             }), 128 /* KEYED_FRAGMENT */))
-          ], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_8$2))
+          ], 40 /* PROPS, NEED_HYDRATION */, _hoisted_8$2))
         : (_ctx.formType === 'boolean')
           ? (openBlock(), createElementBlock(Fragment, { key: 1 }, [
               createBaseVNode("div", _hoisted_10$1, [
@@ -3599,7 +3618,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                   checked: _ctx.input.valueParsed.value,
                   onChange: _cache[1] || (_cache[1] = $event => (_ctx.input.setValueStr($event.target.checked.toString()))),
                   id: _ctx.name
-                }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_11$1)
+                }, null, 40 /* PROPS, NEED_HYDRATION */, _hoisted_11$1)
               ]),
               createBaseVNode("label", {
                 class: "input-group-text flex-fill bg-body",
@@ -3612,7 +3631,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
               value: _ctx.input.valueStr.value,
               onInput: _cache[2] || (_cache[2] = $event => (_ctx.input.setValueStr($event.target.value))),
               class: normalizeClass(["form-control mw-100", { 'form-control-color': _ctx.formType === 'color' }])
-            }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_13)),
+            }, null, 42 /* CLASS, PROPS, NEED_HYDRATION */, _hoisted_13)),
       (_ctx.input.hasDefault)
         ? (openBlock(), createElementBlock("button", {
             key: 3,
@@ -3628,7 +3647,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
 }
 
 script$4.render = render$1;
-script$4.__file = "node_modules/togostanza/src/components/FormField.vue";
+script$4.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/FormField.vue";
 
 const _hoisted_1$3 = { class: "d-flex align-items-start" };
 const _hoisted_2$3 = {
@@ -3656,8 +3675,6 @@ var script$3 = {
   setup(__props) {
 
 const { paramFieldGroups } = __props;
-
-
 
 // paramFieldGroups:
 //   [['data', [ParamField, ParamField, ...]], ['axis', undefined], ...]
@@ -3728,7 +3745,7 @@ return (_ctx, _cache) => {
 
 };
 
-script$3.__file = "node_modules/togostanza/src/components/HelpParametersPane.vue";
+script$3.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/HelpParametersPane.vue";
 
 const _hoisted_1$2 = {
   key: 0,
@@ -3763,8 +3780,6 @@ var script$2 = {
   setup(__props) {
 
 const { styleFieldGroups } = __props;
-
-
 const first = styleFieldGroups.find(
   ([_, styleField]) => styleField && styleField.length > 0
 );
@@ -3833,7 +3848,7 @@ return (_ctx, _cache) => {
 
 };
 
-script$2.__file = "node_modules/togostanza/src/components/HelpStylesPane.vue";
+script$2.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/HelpStylesPane.vue";
 
 const _hoisted_1$1 = /*#__PURE__*/createBaseVNode("h2", { class: "my-3" }, "Outgoing Events", -1 /* HOISTED */);
 const _hoisted_2$1 = { class: "row row-cols-2" };
@@ -3862,8 +3877,6 @@ var script$1 = {
   setup(__props) {
 
 const { metadata } = __props;
-
-
 
 const outgoingEvents = (metadata['stanza:outgoingEvent'] || []).map((event) => {
   return {
@@ -3917,7 +3930,7 @@ return (_ctx, _cache) => {
 
 };
 
-script$1.__file = "node_modules/togostanza/src/components/HelpEventsPane.vue";
+script$1.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/HelpEventsPane.vue";
 
 function buildParameterTree(paramFields) {
   const tree = new Map();
@@ -4080,6 +4093,16 @@ var script = defineComponent({
             value: input.valueStr.value,
           };
         });
+    });
+
+    // set initial parameters from query parameters if specified
+    onMounted(() => {
+      const url = new URL(window.location.href);
+      for (const [k, v] of url.searchParams.entries()) {
+        const param = paramFields.find((param) => param.key === k);
+        if (!param) continue;
+        param.input.valueStr.value = v;
+      }
     });
 
     return {
@@ -4263,7 +4286,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 }
 
 script.render = render;
-script.__file = "node_modules/togostanza/src/components/Help.vue";
+script.__file = "node_modules/.pnpm/togostanza@https+++codeload.github.com+togostanza+togostanza+tar.gz+2e5982d25bdebc604574908c6_a5u3ixljh4vjofu32gl2hzipgq/node_modules/togostanza/src/components/Help.vue";
 
 function helpApp({metadata, readme}) {
   return createApp(script, {metadata, readme})

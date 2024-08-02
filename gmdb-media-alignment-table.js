@@ -1,13 +1,13 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, d as COLOR_WHITE, S as SIZE1, x as SIZE4, v as SIZE3, j as jsx, a as jsxs, w as COLOR_GRAY700, C as COLOR_PRIMARY, M as COLOR_GRAY, N as FONT_EN, F as Fragment, s as COLOR_GRAY_LINE, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { c as css, j as jsx$1, r as reactExports, g as getData } from './getData-e69d262f.js';
-import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-48314cd0.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { R as Recoil_index_8, o as Recoil_index_20, p as Recoil_index_24, l as COLOR_WHITE, H as SIZE1, Q as SIZE4, O as SIZE3, j as jsx, a as jsxs, P as COLOR_GRAY700, C as COLOR_PRIMARY, ad as COLOR_GRAY, ae as FONT_EN, F as Fragment, M as COLOR_GRAY_LINE, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { c as css, j as jsx$1, r as reactExports, g as getData } from './getData-1a784a8c.js';
+import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-d6da8e88.js';
 import { d as decodeHTMLEntities, s as stringToArray } from './string-4de5f4fa.js';
 import { c as clone } from './clone-1fb93465.js';
-import { e as PATH_COMPONENT, P as PATH_MEDIUM, b as PATH_TAXON } from './consts-57be2ed0.js';
-import { b as Tooltip, j as API_MEDIA_ALIGNMENT } from './paths-3104928b.js';
-import './emotion-styled.browser.esm-90764b6a.js';
-import './useSlotProps-06654923.js';
+import { e as PATH_COMPONENT, P as PATH_MEDIUM, b as PATH_TAXON } from './consts-55c53200.js';
+import { b as Tooltip, k as API_MEDIA_ALIGNMENT } from './paths-0bbd78cc.js';
+import './DefaultPropsProvider-4e645303.js';
 import './variables-58f3d1be.js';
 
 const WIDTH_EXPANDED = "200px";
@@ -47,12 +47,12 @@ const toggleFooterComponent = (id, data) => {
     }
 };
 
-const componentTree = Recoil_index_6({ key: "componentTree", default: [] });
+const componentTree = Recoil_index_8({ key: "componentTree", default: [] });
 const useComponentTreeState = () => {
-    return Recoil_index_18(componentTree);
+    return Recoil_index_20(componentTree);
 };
 const useComponentTreeMutators = () => {
-    const setComponentTree = Recoil_index_22(componentTree);
+    const setComponentTree = Recoil_index_24(componentTree);
     const toggleComponent = (id) => {
         setComponentTree((prev) => {
             const result = toggleFooterComponent(id, prev);
@@ -104,21 +104,21 @@ const icon$1 = css `
   cursor: pointer;
 `;
 
-const isMediaExpanded = Recoil_index_6({ key: "isMediaExpanded", default: false });
+const isMediaExpanded = Recoil_index_8({ key: "isMediaExpanded", default: false });
 const useIsMediaExpendedState = () => {
-    return Recoil_index_18(isMediaExpanded);
+    return Recoil_index_20(isMediaExpanded);
 };
 const useIsMediaExpandedMutators = () => {
-    const setIsMediaExpanded = Recoil_index_22(isMediaExpanded);
+    const setIsMediaExpanded = Recoil_index_24(isMediaExpanded);
     return { setIsMediaExpanded };
 };
 
-const isOrganismsExpanded = Recoil_index_6({ key: "isOrganismsExpanded", default: false });
+const isOrganismsExpanded = Recoil_index_8({ key: "isOrganismsExpanded", default: false });
 const useIsOrganismsExpendedState = () => {
-    return Recoil_index_18(isOrganismsExpanded);
+    return Recoil_index_20(isOrganismsExpanded);
 };
 const useIsOrganismsExpandedMutators = () => {
-    const setIsOrganismsExpanded = Recoil_index_22(isOrganismsExpanded);
+    const setIsOrganismsExpanded = Recoil_index_24(isOrganismsExpanded);
     return { setIsOrganismsExpanded };
 };
 
@@ -535,31 +535,32 @@ const infoColumns = css `
   left: 0;
 `;
 
-const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }) => {
-    const [data, setData] = reactExports.useState();
-    const [isLoading, setIsLoading] = reactExports.useState(true);
-    const dispatchLoadData = (detail) => {
-        if (!stanzaElement)
-            return;
-        stanzaElement.dispatchEvent(new CustomEvent("STANZA_ON_LOAD_DATA", { bubbles: true, composed: true, detail }));
-    };
-    const dispatchOnQueryData = (detail) => {
-        if (!stanzaElement)
-            return;
-        stanzaElement.dispatchEvent(new CustomEvent("STANZA_ON_QUERY_DATA", { bubbles: true, composed: true, detail }));
-    };
-    reactExports.useEffect(() => {
-        setData(undefined);
-        setIsLoading(true);
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            dispatchOnQueryData(gm_ids);
+const useDataQuery = (gm_ids, stanzaDispatch) => {
+    return useQuery({
+        queryKey: ["media-alignment", { gm_ids }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () {
+            stanzaDispatch("STANZA_ON_QUERY_DATA", gm_ids);
             const response = yield getData(API_MEDIA_ALIGNMENT, { gm_ids });
-            setIsLoading(false);
-            setData(response.body);
-            dispatchLoadData(response.body);
-        }))();
-    }, [gm_ids]);
-    return (jsx("div", { css: wrapper, children: data && jsx(ScrollableTable, { data: data, prioritizedOrganism: prioritizedOrganism }) }));
+            if (!response.body)
+                throw new Error("No data");
+            stanzaDispatch("STANZA_ON_LOAD_DATA", response.body);
+            return response.body;
+        }),
+        enabled: gm_ids.length > 0,
+        staleTime: Infinity,
+    });
+};
+const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }) => {
+    const dispatchStanzaEvent = reactExports.useCallback((eventName, detail) => {
+        if (!stanzaElement)
+            return;
+        const e = new CustomEvent(eventName, { bubbles: true, composed: true, detail });
+        stanzaElement.dispatchEvent(e);
+    }, [stanzaElement]);
+    const dataQuery = useDataQuery(gm_ids, dispatchStanzaEvent);
+    if (!dataQuery.data)
+        return jsx("div", { css: wrapper, children: "Loading..." });
+    return (jsx("div", { css: wrapper, children: jsx(ScrollableTable, { data: dataQuery.data, prioritizedOrganism: prioritizedOrganism }) }));
 };
 const wrapper = css `
   min-height: 100px;

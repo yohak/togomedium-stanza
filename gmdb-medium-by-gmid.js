@@ -1,12 +1,12 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { j as jsx, c as COLOR_PRIMARY_DARK, s as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
-import { c as css, r as reactExports } from './getData-e69d262f.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
+import { j as jsx, k as COLOR_PRIMARY_DARK, M as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
+import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
+import { c as css } from './getData-1a784a8c.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
-import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-5c02f157.js';
-import { s as stanzaWrapper } from './common-cd178d45.js';
-import { g as getMedia } from './api-06d33a38.js';
-import './emotion-styled.browser.esm-90764b6a.js';
-import './index-1640bb89.js';
+import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-d38511ab.js';
+import { s as stanzaWrapper } from './common-6ed9df56.js';
+import { g as getMedia } from './api-33f54179.js';
+import './index-eb2c9901.js';
 import './variables-58f3d1be.js';
 
 const RecipeComment = ({ css, className, comment }) => {
@@ -106,18 +106,20 @@ const StanzaView = ({ css, className, id, originalId, srcUrl, srcLabel, name, ph
 };
 const stanzaView = css ``;
 
+const useMediaDataQuery = (gm_id) => {
+    const { data, isLoading } = useQuery({
+        queryKey: [{ gm_id }],
+        queryFn: () => __awaiter(void 0, void 0, void 0, function* () { return getMedia(gm_id); }),
+        staleTime: Infinity,
+        enabled: gm_id !== undefined,
+    });
+    return { mediaData: data, isLoading };
+};
 const App = ({ gm_id }) => {
-    const [props, setProps] = reactExports.useState(null);
-    reactExports.useEffect(() => {
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            setProps(null);
-            const result = yield getMedia(gm_id);
-            if (!result)
-                return;
-            setProps(result);
-        }))();
-    }, [gm_id]);
-    return props ? jsx(StanzaView, Object.assign({}, props)) : jsx(Fragment, { children: "Loading..." });
+    const { mediaData, isLoading } = useMediaDataQuery(gm_id);
+    if (isLoading || !mediaData)
+        return jsx(Fragment, { children: "Loading..." });
+    return jsx(StanzaView, Object.assign({}, mediaData));
 };
 
 class ReactStanza extends TogoMediumReactStanza {
