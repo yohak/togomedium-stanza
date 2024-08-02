@@ -19,14 +19,11 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
 
-      - name: Workaround for npm v7 bug. Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - run: npm ci
-      - run: npx togostanza build
+      - uses: pnpm/action-setup@v2.2.2
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm run stanza:build
 
       - uses: peaceiris/actions-gh-pages@v3
         with:
