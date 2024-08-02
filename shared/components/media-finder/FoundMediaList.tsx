@@ -84,6 +84,7 @@ const wrapper = css`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  flex-grow: 1;
 `;
 
 const listWrapper = css`

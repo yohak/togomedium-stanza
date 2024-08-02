@@ -62,7 +62,8 @@ const media = css`
 
 const contents = css`
   padding: ${SIZE2} ${SIZE1};
-  //background-color: #007bff;
   flex-grow: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 `;
