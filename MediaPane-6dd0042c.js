@@ -3198,6 +3198,7 @@ const wrapper$2 = css `
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  flex-grow: 1;
 `;
 const listWrapper = css `
   max-height: 100%;
@@ -3329,10 +3330,11 @@ const media = css `
 `;
 const contents = css `
   padding: ${SIZE2} ${SIZE1};
-  //background-color: #007bff;
   flex-grow: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 export { ButtonBase$1 as B, Checkbox$1 as C, FormControlContext$1 as F, MediaPane as M, Pagination as P, Tabs$1 as T, useFoundMediaMutators as a, useQueryDataMutators as b, useIsMediaLoadingMutators as c, useMediaPaginationMutators as d, usePreviousProps$1 as e, useFormControl as f, filterOutInfo as g, hasInfo as h, hasIdOfLabel as i, Tab$1 as j, Badge$1 as k, extractLabelIds as l, queryPane as q, subPane as s, useMediaPaginationState as u, wrapper$6 as w };
-//# sourceMappingURL=MediaPane-fd91d6f4.js.map
+//# sourceMappingURL=MediaPane-6dd0042c.js.map
