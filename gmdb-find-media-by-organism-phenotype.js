@@ -3,12 +3,12 @@ import { _ as _objectWithoutPropertiesLoose, q as createTheme, $ as styleFunctio
 import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
 import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-1a784a8c.js';
 import { b as PATH_TAXON } from './consts-55c53200.js';
-import { f as useFormControl, C as Checkbox, h as hasInfo, g as filterOutInfo, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, l as extractLabelIds } from './MediaPane-6dd0042c.js';
+import { f as useFormControl, C as Checkbox, h as hasInfo, g as filterOutInfo, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, l as extractLabelIds } from './MediaPane-de4888ee.js';
 import { c as useTheme, h as API_ORGANISMS_BY_PHENOTYPES, i as API_MEDIA_BY_TAXON } from './paths-0bbd78cc.js';
 import { c as clone } from './clone-1fb93465.js';
 import { C as CircularProgress } from './CircularProgress-0433714e.js';
 import { w as internal_processStyles, x as styled$1, y as extendSxProp, m as clsx, e as composeClasses, g as generateUtilityClass, b as generateUtilityClasses, f as styled$2, h as useDefaultProps } from './DefaultPropsProvider-4e645303.js';
-import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-05737b42.js';
+import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-c0db7478.js';
 import { S as Slider } from './Slider-169f4ed4.js';
 import './variables-58f3d1be.js';
 
