@@ -89,7 +89,6 @@ const wrapper = css`
 
 const listWrapper = css`
   max-height: 100%;
-  overflow-y: auto;
   position: relative;
 `;
 
