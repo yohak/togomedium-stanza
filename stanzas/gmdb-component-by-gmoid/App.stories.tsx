@@ -22,3 +22,8 @@ export const Result3: Story = {
     gmo_id: "GMO_001113",
   },
 };
+export const Result4: Story = {
+  args: {
+    gmo_id: "GMO_001010",
+  },
+};

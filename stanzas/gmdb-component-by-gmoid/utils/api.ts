@@ -18,7 +18,7 @@ type ApiBody = {
   links: string[];
 };
 
-type LinkLabel = "PubChem" | "Wikipedia" | "NCI Thesaurus" | "ChEBI" | "SNOMED-CT";
+type LinkLabel = "PubChem" | "Wikipedia" | "NCI Thesaurus" | "ChEBI" | "SNOMED-CT" | "DSMZ";
 export type LinkInfo = {
   label: LinkLabel;
   uri: string;
@@ -41,6 +41,8 @@ const getLinkLabel = (link: string): Nullable<LinkLabel> => {
       return "ChEBI";
     case /SNOMEDCT/.test(link):
       return "SNOMED-CT";
+    case /dsmz/.test(link):
+      return "DSMZ";
     default:
       return null;
   }
