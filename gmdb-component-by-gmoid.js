@@ -36,6 +36,8 @@ const getLinkLabel = (link) => {
             return "ChEBI";
         case /SNOMEDCT/.test(link):
             return "SNOMED-CT";
+        case /dsmz/.test(link):
+            return "DSMZ";
         default:
             return null;
     }
