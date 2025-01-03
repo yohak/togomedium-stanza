@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React, { StrictMode, FC, ReactElement } from "react";
+import React, { StrictMode, FC, ReactElement, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import Stanza from "togostanza/stanza";
@@ -41,11 +41,13 @@ export abstract class TogoMediumReactStanza<T> extends Stanza {
     const children = this.makeApp();
     const root = createRoot(main as HTMLElement);
     root.render(<StanzaReactProvider>{children}</StanzaReactProvider>);
+    main.style.visibility = "hidden";
     setTimeout(() => {
       try {
         main.style.flexGrow = "1";
         main.style.display = "flex";
         main.style.flexDirection = "column";
+        main.style.visibility = "visible";
         const wrapper = main.parentNode as HTMLElement;
         wrapper.style.display = "flex";
         wrapper.style.flexDirection = "column";
