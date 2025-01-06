@@ -1,14 +1,14 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
-import { l as COLOR_WHITE, M as COLOR_GRAY_LINE, C as COLOR_PRIMARY, h as COLOR_GRAY300, P as COLOR_GRAY700, ac as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_8, o as Recoil_index_20, p as Recoil_index_24, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
-import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
-import { c as css, g as getData, l as dist, r as reactExports } from './getData-1a784a8c.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-d6da8e88.js';
-import { b as Tooltip, j as API_TAXONOMY_CHILDREN, i as API_MEDIA_BY_TAXON } from './paths-0bbd78cc.js';
-import { C as Checkbox, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators } from './MediaPane-de4888ee.js';
-import './consts-55c53200.js';
-import './DefaultPropsProvider-4e645303.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-97f45b0e.js';
+import { l as COLOR_WHITE, M as COLOR_GRAY_LINE, C as COLOR_PRIMARY, h as COLOR_GRAY300, P as COLOR_GRAY700, a4 as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_8, o as Recoil_index_20, p as Recoil_index_24, T as TogoMediumReactStanza } from './StanzaReactProvider-d614d9ca.js';
+import { u as useQuery } from './emotion-styled.browser.esm-981b7be3.js';
+import { c as css, g as getData, l as dist, r as reactExports } from './getData-8b0d864a.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-2c1a3fa3.js';
+import { e as Tooltip, o as API_TAXONOMY_CHILDREN, n as API_MEDIA_BY_TAXON } from './paths-9c191287.js';
+import { C as Checkbox, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators } from './MediaPane-fa665b62.js';
+import './consts-c38322df.js';
+import './DefaultPropsProvider-0ba0cf40.js';
 import './variables-58f3d1be.js';
-import './CircularProgress-0433714e.js';
+import './CircularProgress-5e108e03.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
     return (jsxs("li", { css: [wrapper, css], className: className, children: [jsxs("div", { css: inner, children: [jsxs("div", { css: left, children: [jsx("span", { onClick: () => onToggleChildren(id), children: jsx(ToggleIcon, { hasChildren, isOpen, isLoading }) }), jsx(Tooltip, { title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start", children: jsx("span", { children: label }) }), tag && jsx("span", { css: tagTip, children: tag }), linkString && linkURL && (jsxs("a", { href: linkURL, target: "_blank", rel: "noreferrer", children: ["[", linkString, "]"] }))] }), jsx(Checkbox, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) })] }), isOpen && !!children && jsx("ul", { css: childrenWrapper, children: children })] }));

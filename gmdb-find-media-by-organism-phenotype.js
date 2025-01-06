@@ -1,423 +1,35 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
-import { _ as _objectWithoutPropertiesLoose, q as createTheme, $ as styleFunctionSx, W as isPlainObject, E as resolveProps, a4 as handleBreakpoints, a5 as resolveBreakpointValues, a6 as createUnarySpacing, V as deepmerge, a7 as mergeBreakpointsInOrder, y as jsxRuntimeExports, a8 as getValue, A as capitalize, l as COLOR_WHITE, M as COLOR_GRAY_LINE, H as SIZE1, J as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_8, p as Recoil_index_24, o as Recoil_index_20, N as FONT_WEIGHT_BOLD, P as COLOR_GRAY700, Q as SIZE4, I as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
-import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
-import { _ as _extends, r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-1a784a8c.js';
-import { b as PATH_TAXON } from './consts-55c53200.js';
-import { f as useFormControl, C as Checkbox, h as hasInfo, g as filterOutInfo, P as Pagination, i as hasIdOfLabel, T as Tabs, j as Tab, k as Badge, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, l as extractLabelIds } from './MediaPane-de4888ee.js';
-import { c as useTheme, h as API_ORGANISMS_BY_PHENOTYPES, i as API_MEDIA_BY_TAXON } from './paths-0bbd78cc.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-97f45b0e.js';
+import { B as capitalize, z as jsxRuntimeExports, l as COLOR_WHITE, M as COLOR_GRAY_LINE, H as SIZE1, J as SIZE2, C as COLOR_PRIMARY, a as jsxs, j as jsx, R as Recoil_index_8, p as Recoil_index_24, o as Recoil_index_20, N as FONT_WEIGHT_BOLD, P as COLOR_GRAY700, Q as SIZE4, I as ROUNDED_CORNER, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-d614d9ca.js';
+import { u as useQuery } from './emotion-styled.browser.esm-981b7be3.js';
+import { r as reactExports, c as css, g as getData, j as jsx$1 } from './getData-8b0d864a.js';
+import { a as PATH_TAXON } from './consts-c38322df.js';
+import { g as useFormControl, C as Checkbox, h as hasInfo, i as filterOutInfo, P as Pagination, j as hasIdOfLabel, T as Tabs, k as Tab, l as Badge, w as wrapper$2, q as queryPane, s as subPane, M as MediaPane, u as useMediaPaginationState, b as useQueryDataMutators, a as useFoundMediaMutators, c as useIsMediaLoadingMutators, d as useMediaPaginationMutators, m as extractLabelIds } from './MediaPane-fa665b62.js';
+import { h as useSlot, m as API_ORGANISMS_BY_PHENOTYPES, n as API_MEDIA_BY_TAXON } from './paths-9c191287.js';
 import { c as clone } from './clone-1fb93465.js';
-import { C as CircularProgress } from './CircularProgress-0433714e.js';
-import { w as internal_processStyles, x as styled$1, y as extendSxProp, m as clsx, e as composeClasses, g as generateUtilityClass, b as generateUtilityClasses, f as styled$2, h as useDefaultProps } from './DefaultPropsProvider-4e645303.js';
-import { f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-c0db7478.js';
-import { S as Slider } from './Slider-169f4ed4.js';
+import { c as createSimplePaletteValueFilter, C as CircularProgress } from './CircularProgress-5e108e03.js';
+import { g as generateUtilityClass, c as generateUtilityClasses, h as styled, j as memoTheme, i as useDefaultProps, n as clsx, f as composeClasses } from './DefaultPropsProvider-0ba0cf40.js';
+import { i as internal_createExtendSxProp, f as formControlState, A as Autocomplete, T as TextField, C as Chip, F as FormControl } from './TextField-940e7bf7.js';
+import { S as Slider } from './Slider-927d1b36.js';
 import './variables-58f3d1be.js';
-
-const _excluded$3 = ["ownerState"],
-  _excluded2 = ["variants"],
-  _excluded3 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-// https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
-function isStringTag(tag) {
-  return typeof tag === 'string' &&
-  // 96 is one less than the char code
-  // for "a" so this is checking that
-  // it's a lowercase character
-  tag.charCodeAt(0) > 96;
-}
-
-// Update /system/styled/#api in case if this changes
-function shouldForwardProp(prop) {
-  return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
-}
-const systemDefaultTheme = createTheme();
-const lowercaseFirstLetter = string => {
-  if (!string) {
-    return string;
-  }
-  return string.charAt(0).toLowerCase() + string.slice(1);
-};
-function resolveTheme({
-  defaultTheme,
-  theme,
-  themeId
-}) {
-  return isEmpty(theme) ? defaultTheme : theme[themeId] || theme;
-}
-function defaultOverridesResolver(slot) {
-  if (!slot) {
-    return null;
-  }
-  return (props, styles) => styles[slot];
-}
-function processStyleArg(callableStyle, _ref) {
-  let {
-      ownerState
-    } = _ref,
-    props = _objectWithoutPropertiesLoose(_ref, _excluded$3);
-  const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle(_extends({
-    ownerState
-  }, props)) : callableStyle;
-  if (Array.isArray(resolvedStylesArg)) {
-    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg(resolvedStyle, _extends({
-      ownerState
-    }, props)));
-  }
-  if (!!resolvedStylesArg && typeof resolvedStylesArg === 'object' && Array.isArray(resolvedStylesArg.variants)) {
-    const {
-        variants = []
-      } = resolvedStylesArg,
-      otherStyles = _objectWithoutPropertiesLoose(resolvedStylesArg, _excluded2);
-    let result = otherStyles;
-    variants.forEach(variant => {
-      let isMatch = true;
-      if (typeof variant.props === 'function') {
-        isMatch = variant.props(_extends({
-          ownerState
-        }, props, ownerState));
-      } else {
-        Object.keys(variant.props).forEach(key => {
-          if ((ownerState == null ? void 0 : ownerState[key]) !== variant.props[key] && props[key] !== variant.props[key]) {
-            isMatch = false;
-          }
-        });
-      }
-      if (isMatch) {
-        if (!Array.isArray(result)) {
-          result = [result];
-        }
-        result.push(typeof variant.style === 'function' ? variant.style(_extends({
-          ownerState
-        }, props, ownerState)) : variant.style);
-      }
-    });
-    return result;
-  }
-  return resolvedStylesArg;
-}
-function createStyled(input = {}) {
-  const {
-    themeId,
-    defaultTheme = systemDefaultTheme,
-    rootShouldForwardProp = shouldForwardProp,
-    slotShouldForwardProp = shouldForwardProp
-  } = input;
-  const systemSx = props => {
-    return styleFunctionSx(_extends({}, props, {
-      theme: resolveTheme(_extends({}, props, {
-        defaultTheme,
-        themeId
-      }))
-    }));
-  };
-  systemSx.__mui_systemSx = true;
-  return (tag, inputOptions = {}) => {
-    // Filter out the `sx` style function from the previous styled component to prevent unnecessary styles generated by the composite components.
-    internal_processStyles(tag, styles => styles.filter(style => !(style != null && style.__mui_systemSx)));
-    const {
-        name: componentName,
-        slot: componentSlot,
-        skipVariantsResolver: inputSkipVariantsResolver,
-        skipSx: inputSkipSx,
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
-      } = inputOptions,
-      options = _objectWithoutPropertiesLoose(inputOptions, _excluded3);
-
-    // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
-    const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    componentSlot && componentSlot !== 'Root' && componentSlot !== 'root' || false;
-    const skipSx = inputSkipSx || false;
-    let label;
-    let shouldForwardPropOption = shouldForwardProp;
-
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    if (componentSlot === 'Root' || componentSlot === 'root') {
-      shouldForwardPropOption = rootShouldForwardProp;
-    } else if (componentSlot) {
-      // any other slot specified
-      shouldForwardPropOption = slotShouldForwardProp;
-    } else if (isStringTag(tag)) {
-      // for string (html) tag, preserve the behavior in emotion & styled-components.
-      shouldForwardPropOption = undefined;
-    }
-    const defaultStyledResolver = styled$1(tag, _extends({
-      shouldForwardProp: shouldForwardPropOption,
-      label
-    }, options));
-    const transformStyleArg = stylesArg => {
-      // On the server Emotion doesn't use React.forwardRef for creating components, so the created
-      // component stays as a function. This condition makes sure that we do not interpolate functions
-      // which are basically components used as a selectors.
-      if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || isPlainObject(stylesArg)) {
-        return props => processStyleArg(stylesArg, _extends({}, props, {
-          theme: resolveTheme({
-            theme: props.theme,
-            defaultTheme,
-            themeId
-          })
-        }));
-      }
-      return stylesArg;
-    };
-    const muiStyledResolver = (styleArg, ...expressions) => {
-      let transformedStyleArg = transformStyleArg(styleArg);
-      const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
-      if (componentName && overridesResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          const theme = resolveTheme(_extends({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          if (!theme.components || !theme.components[componentName] || !theme.components[componentName].styleOverrides) {
-            return null;
-          }
-          const styleOverrides = theme.components[componentName].styleOverrides;
-          const resolvedStyleOverrides = {};
-          // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
-          Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
-            resolvedStyleOverrides[slotKey] = processStyleArg(slotStyle, _extends({}, props, {
-              theme
-            }));
-          });
-          return overridesResolver(props, resolvedStyleOverrides);
-        });
-      }
-      if (componentName && !skipVariantsResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          var _theme$components;
-          const theme = resolveTheme(_extends({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
-          return processStyleArg({
-            variants: themeVariants
-          }, _extends({}, props, {
-            theme
-          }));
-        });
-      }
-      if (!skipSx) {
-        expressionsWithDefaultTheme.push(systemSx);
-      }
-      const numOfCustomFnsApplied = expressionsWithDefaultTheme.length - expressions.length;
-      if (Array.isArray(styleArg) && numOfCustomFnsApplied > 0) {
-        const placeholders = new Array(numOfCustomFnsApplied).fill('');
-        // If the type is array, than we need to add placeholders in the template for the overrides, variants and the sx styles.
-        transformedStyleArg = [...styleArg, ...placeholders];
-        transformedStyleArg.raw = [...styleArg.raw, ...placeholders];
-      }
-      const Component = defaultStyledResolver(transformedStyleArg, ...expressionsWithDefaultTheme);
-      if (tag.muiName) {
-        Component.muiName = tag.muiName;
-      }
-      return Component;
-    };
-    if (defaultStyledResolver.withConfig) {
-      muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
-    }
-    return muiStyledResolver;
-  };
-}
-
-const styled = createStyled();
-var systemStyled = styled;
-
-function getThemeProps(params) {
-  const {
-    theme,
-    name,
-    props
-  } = params;
-  if (!theme || !theme.components || !theme.components[name] || !theme.components[name].defaultProps) {
-    return props;
-  }
-  return resolveProps(theme.components[name].defaultProps, props);
-}
-
-function useThemeProps({
-  props,
-  name,
-  defaultTheme,
-  themeId
-}) {
-  let theme = useTheme(defaultTheme);
-  if (themeId) {
-    theme = theme[themeId] || theme;
-  }
-  const mergedProps = getThemeProps({
-    theme,
-    name,
-    props
-  });
-  return mergedProps;
-}
-
-const _excluded$2 = ["component", "direction", "spacing", "divider", "children", "className", "useFlexGap"];
-const defaultTheme = createTheme();
-// widening Theme to any so that the consumer can own the theme structure.
-const defaultCreateStyledComponent = systemStyled('div', {
-  name: 'MuiStack',
-  slot: 'Root',
-  overridesResolver: (props, styles) => styles.root
-});
-function useThemePropsDefault(props) {
-  return useThemeProps({
-    props,
-    name: 'MuiStack',
-    defaultTheme
-  });
-}
-
-/**
- * Return an array with the separator React element interspersed between
- * each React node of the input children.
- *
- * > joinChildren([1,2,3], 0)
- * [1,0,2,0,3]
- */
-function joinChildren(children, separator) {
-  const childrenArray = reactExports.Children.toArray(children).filter(Boolean);
-  return childrenArray.reduce((output, child, index) => {
-    output.push(child);
-    if (index < childrenArray.length - 1) {
-      output.push( /*#__PURE__*/reactExports.cloneElement(separator, {
-        key: `separator-${index}`
-      }));
-    }
-    return output;
-  }, []);
-}
-const getSideFromDirection = direction => {
-  return {
-    row: 'Left',
-    'row-reverse': 'Right',
-    column: 'Top',
-    'column-reverse': 'Bottom'
-  }[direction];
-};
-const style = ({
-  ownerState,
-  theme
-}) => {
-  let styles = _extends({
-    display: 'flex',
-    flexDirection: 'column'
-  }, handleBreakpoints({
-    theme
-  }, resolveBreakpointValues({
-    values: ownerState.direction,
-    breakpoints: theme.breakpoints.values
-  }), propValue => ({
-    flexDirection: propValue
-  })));
-  if (ownerState.spacing) {
-    const transformer = createUnarySpacing(theme);
-    const base = Object.keys(theme.breakpoints.values).reduce((acc, breakpoint) => {
-      if (typeof ownerState.spacing === 'object' && ownerState.spacing[breakpoint] != null || typeof ownerState.direction === 'object' && ownerState.direction[breakpoint] != null) {
-        acc[breakpoint] = true;
-      }
-      return acc;
-    }, {});
-    const directionValues = resolveBreakpointValues({
-      values: ownerState.direction,
-      base
-    });
-    const spacingValues = resolveBreakpointValues({
-      values: ownerState.spacing,
-      base
-    });
-    if (typeof directionValues === 'object') {
-      Object.keys(directionValues).forEach((breakpoint, index, breakpoints) => {
-        const directionValue = directionValues[breakpoint];
-        if (!directionValue) {
-          const previousDirectionValue = index > 0 ? directionValues[breakpoints[index - 1]] : 'column';
-          directionValues[breakpoint] = previousDirectionValue;
-        }
-      });
-    }
-    const styleFromPropValue = (propValue, breakpoint) => {
-      if (ownerState.useFlexGap) {
-        return {
-          gap: getValue(transformer, propValue)
-        };
-      }
-      return {
-        // The useFlexGap={false} implement relies on each child to give up control of the margin.
-        // We need to reset the margin to avoid double spacing.
-        '& > :not(style):not(style)': {
-          margin: 0
-        },
-        '& > :not(style) ~ :not(style)': {
-          [`margin${getSideFromDirection(breakpoint ? directionValues[breakpoint] : ownerState.direction)}`]: getValue(transformer, propValue)
-        }
-      };
-    };
-    styles = deepmerge(styles, handleBreakpoints({
-      theme
-    }, spacingValues, styleFromPropValue));
-  }
-  styles = mergeBreakpointsInOrder(theme.breakpoints, styles);
-  return styles;
-};
-function createStack(options = {}) {
-  const {
-    // This will allow adding custom styled fn (for example for custom sx style function)
-    createStyledComponent = defaultCreateStyledComponent,
-    useThemeProps = useThemePropsDefault,
-    componentName = 'MuiStack'
-  } = options;
-  const useUtilityClasses = () => {
-    const slots = {
-      root: ['root']
-    };
-    return composeClasses(slots, slot => generateUtilityClass(componentName, slot), {});
-  };
-  const StackRoot = createStyledComponent(style);
-  const Stack = /*#__PURE__*/reactExports.forwardRef(function Grid(inProps, ref) {
-    const themeProps = useThemeProps(inProps);
-    const props = extendSxProp(themeProps); // `color` type conflicts with html color attribute.
-    const {
-        component = 'div',
-        direction = 'column',
-        spacing = 0,
-        divider,
-        children,
-        className,
-        useFlexGap = false
-      } = props,
-      other = _objectWithoutPropertiesLoose(props, _excluded$2);
-    const ownerState = {
-      direction,
-      spacing,
-      useFlexGap
-    };
-    const classes = useUtilityClasses();
-    return /*#__PURE__*/jsxRuntimeExports.jsx(StackRoot, _extends({
-      as: component,
-      ownerState: ownerState,
-      ref: ref,
-      className: clsx(classes.root, className)
-    }, other, {
-      children: divider ? joinChildren(children, divider) : children
-    }));
-  });
-  return Stack;
-}
+import './isHostComponent-a8cd4d85.js';
 
 function getTypographyUtilityClass(slot) {
   return generateUtilityClass('MuiTypography', slot);
 }
 generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
 
-const _excluded$1 = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
+const v6Colors = {
+  primary: true,
+  secondary: true,
+  error: true,
+  info: true,
+  success: true,
+  warning: true,
+  textPrimary: true,
+  textSecondary: true,
+  textDisabled: true
+};
+const extendSxProp = internal_createExtendSxProp();
 const useUtilityClasses$1 = ownerState => {
   const {
     align,
@@ -432,7 +44,7 @@ const useUtilityClasses$1 = ownerState => {
   };
   return composeClasses(slots, getTypographyUtilityClass, classes);
 };
-const TypographyRoot = styled$2('span', {
+const TypographyRoot = styled('span', {
   name: 'MuiTypography',
   slot: 'Root',
   overridesResolver: (props, styles) => {
@@ -441,25 +53,71 @@ const TypographyRoot = styled$2('span', {
     } = props;
     return [styles.root, ownerState.variant && styles[ownerState.variant], ownerState.align !== 'inherit' && styles[`align${capitalize(ownerState.align)}`], ownerState.noWrap && styles.noWrap, ownerState.gutterBottom && styles.gutterBottom, ownerState.paragraph && styles.paragraph];
   }
-})(({
-  theme,
-  ownerState
-}) => _extends({
-  margin: 0
-}, ownerState.variant === 'inherit' && {
-  // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
-  font: 'inherit'
-}, ownerState.variant !== 'inherit' && theme.typography[ownerState.variant], ownerState.align !== 'inherit' && {
-  textAlign: ownerState.align
-}, ownerState.noWrap && {
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap'
-}, ownerState.gutterBottom && {
-  marginBottom: '0.35em'
-}, ownerState.paragraph && {
-  marginBottom: 16
-}));
+})(memoTheme(({
+  theme
+}) => ({
+  margin: 0,
+  variants: [{
+    props: {
+      variant: 'inherit'
+    },
+    style: {
+      // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
+      font: 'inherit',
+      lineHeight: 'inherit',
+      letterSpacing: 'inherit'
+    }
+  }, ...Object.entries(theme.typography).filter(([variant, value]) => variant !== 'inherit' && value && typeof value === 'object').map(([variant, value]) => ({
+    props: {
+      variant
+    },
+    style: value
+  })), ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color
+    },
+    style: {
+      color: (theme.vars || theme).palette[color].main
+    }
+  })), ...Object.entries(theme.palette?.text || {}).filter(([, value]) => typeof value === 'string').map(([color]) => ({
+    props: {
+      color: `text${capitalize(color)}`
+    },
+    style: {
+      color: (theme.vars || theme).palette.text[color]
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.align !== 'inherit',
+    style: {
+      textAlign: 'var(--Typography-textAlign)'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.noWrap,
+    style: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.gutterBottom,
+    style: {
+      marginBottom: '0.35em'
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.paragraph,
+    style: {
+      marginBottom: 16
+    }
+  }]
+})));
 const defaultVariantMapping = {
   h1: 'h1',
   h2: 'h2',
@@ -473,39 +131,35 @@ const defaultVariantMapping = {
   body2: 'p',
   inherit: 'p'
 };
-
-// TODO v6: deprecate these color values in v5.x and remove the transformation in v6
-const colorTransformations = {
-  primary: 'primary.main',
-  textPrimary: 'text.primary',
-  secondary: 'secondary.main',
-  textSecondary: 'text.secondary',
-  error: 'error.main'
-};
-const transformDeprecatedColors = color => {
-  return colorTransformations[color] || color;
-};
 const Typography = /*#__PURE__*/reactExports.forwardRef(function Typography(inProps, ref) {
-  const themeProps = useDefaultProps({
+  const {
+    color,
+    ...themeProps
+  } = useDefaultProps({
     props: inProps,
     name: 'MuiTypography'
   });
-  const color = transformDeprecatedColors(themeProps.color);
-  const props = extendSxProp(_extends({}, themeProps, {
-    color
-  }));
+  const isSxColor = !v6Colors[color];
+  // TODO: Remove `extendSxProp` in v7
+  const props = extendSxProp({
+    ...themeProps,
+    ...(isSxColor && {
+      color
+    })
+  });
   const {
-      align = 'inherit',
-      className,
-      component,
-      gutterBottom = false,
-      noWrap = false,
-      paragraph = false,
-      variant = 'body1',
-      variantMapping = defaultVariantMapping
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$1);
-  const ownerState = _extends({}, props, {
+    align = 'inherit',
+    className,
+    component,
+    gutterBottom = false,
+    noWrap = false,
+    paragraph = false,
+    variant = 'body1',
+    variantMapping = defaultVariantMapping,
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
     align,
     color,
     className,
@@ -515,30 +169,24 @@ const Typography = /*#__PURE__*/reactExports.forwardRef(function Typography(inPr
     paragraph,
     variant,
     variantMapping
-  });
+  };
   const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
   const classes = useUtilityClasses$1(ownerState);
-  return /*#__PURE__*/jsxRuntimeExports.jsx(TypographyRoot, _extends({
+  return /*#__PURE__*/jsxRuntimeExports.jsx(TypographyRoot, {
     as: Component,
     ref: ref,
+    className: clsx(classes.root, className),
+    ...other,
     ownerState: ownerState,
-    className: clsx(classes.root, className)
-  }, other));
+    style: {
+      ...(align !== 'inherit' && {
+        '--Typography-textAlign': align
+      }),
+      ...other.style
+    }
+  });
 });
 var Typography$1 = Typography;
-
-const Stack = createStack({
-  createStyledComponent: styled$2('div', {
-    name: 'MuiStack',
-    slot: 'Root',
-    overridesResolver: (props, styles) => styles.root
-  }),
-  useThemeProps: inProps => useDefaultProps({
-    props: inProps,
-    name: 'MuiStack'
-  })
-});
-var Stack$1 = Stack;
 
 function getFormControlLabelUtilityClasses(slot) {
   return generateUtilityClass('MuiFormControlLabel', slot);
@@ -546,7 +194,6 @@ function getFormControlLabelUtilityClasses(slot) {
 const formControlLabelClasses = generateUtilityClasses('MuiFormControlLabel', ['root', 'labelPlacementStart', 'labelPlacementTop', 'labelPlacementBottom', 'disabled', 'label', 'error', 'required', 'asterisk']);
 var formControlLabelClasses$1 = formControlLabelClasses;
 
-const _excluded = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "required", "slotProps", "value"];
 const useUtilityClasses = ownerState => {
   const {
     classes,
@@ -562,7 +209,7 @@ const useUtilityClasses = ownerState => {
   };
   return composeClasses(slots, getFormControlLabelUtilityClasses, classes);
 };
-const FormControlLabelRoot = styled$2('label', {
+const FormControlLabelRoot = styled('label', {
   name: 'MuiFormControlLabel',
   slot: 'Root',
   overridesResolver: (props, styles) => {
@@ -573,10 +220,9 @@ const FormControlLabelRoot = styled$2('label', {
       [`& .${formControlLabelClasses$1.label}`]: styles.label
     }, styles.root, styles[`labelPlacement${capitalize(ownerState.labelPlacement)}`]];
   }
-})(({
-  theme,
-  ownerState
-}) => _extends({
+})(memoTheme(({
+  theme
+}) => ({
   display: 'inline-flex',
   alignItems: 'center',
   cursor: 'pointer',
@@ -588,62 +234,85 @@ const FormControlLabelRoot = styled$2('label', {
   // used for row presentation of radio/checkbox
   [`&.${formControlLabelClasses$1.disabled}`]: {
     cursor: 'default'
-  }
-}, ownerState.labelPlacement === 'start' && {
-  flexDirection: 'row-reverse',
-  marginLeft: 16,
-  // used for row presentation of radio/checkbox
-  marginRight: -11
-}, ownerState.labelPlacement === 'top' && {
-  flexDirection: 'column-reverse',
-  marginLeft: 16
-}, ownerState.labelPlacement === 'bottom' && {
-  flexDirection: 'column',
-  marginLeft: 16
-}, {
+  },
   [`& .${formControlLabelClasses$1.label}`]: {
     [`&.${formControlLabelClasses$1.disabled}`]: {
       color: (theme.vars || theme).palette.text.disabled
     }
-  }
-}));
-const AsteriskComponent = styled$2('span', {
+  },
+  variants: [{
+    props: {
+      labelPlacement: 'start'
+    },
+    style: {
+      flexDirection: 'row-reverse',
+      marginRight: -11
+    }
+  }, {
+    props: {
+      labelPlacement: 'top'
+    },
+    style: {
+      flexDirection: 'column-reverse'
+    }
+  }, {
+    props: {
+      labelPlacement: 'bottom'
+    },
+    style: {
+      flexDirection: 'column'
+    }
+  }, {
+    props: ({
+      labelPlacement
+    }) => labelPlacement === 'start' || labelPlacement === 'top' || labelPlacement === 'bottom',
+    style: {
+      marginLeft: 16 // used for row presentation of radio/checkbox
+    }
+  }]
+})));
+const AsteriskComponent = styled('span', {
   name: 'MuiFormControlLabel',
   slot: 'Asterisk',
   overridesResolver: (props, styles) => styles.asterisk
-})(({
+})(memoTheme(({
   theme
 }) => ({
   [`&.${formControlLabelClasses$1.error}`]: {
     color: (theme.vars || theme).palette.error.main
   }
-}));
+})));
 
 /**
  * Drop-in replacement of the `Radio`, `Switch` and `Checkbox` component.
  * Use this component if you want to display an extra label.
  */
 const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormControlLabel(inProps, ref) {
-  var _ref, _slotProps$typography;
   const props = useDefaultProps({
     props: inProps,
     name: 'MuiFormControlLabel'
   });
   const {
-      className,
-      componentsProps = {},
-      control,
-      disabled: disabledProp,
-      disableTypography,
-      label: labelProp,
-      labelPlacement = 'end',
-      required: requiredProp,
-      slotProps = {}
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded);
+    checked,
+    className,
+    componentsProps = {},
+    control,
+    disabled: disabledProp,
+    disableTypography,
+    inputRef,
+    label: labelProp,
+    labelPlacement = 'end',
+    name,
+    onChange,
+    required: requiredProp,
+    slots = {},
+    slotProps = {},
+    value,
+    ...other
+  } = props;
   const muiFormControl = useFormControl();
-  const disabled = (_ref = disabledProp != null ? disabledProp : control.props.disabled) != null ? _ref : muiFormControl == null ? void 0 : muiFormControl.disabled;
-  const required = requiredProp != null ? requiredProp : control.props.required;
+  const disabled = disabledProp ?? control.props.disabled ?? muiFormControl?.disabled;
+  const required = requiredProp ?? control.props.required;
   const controlProps = {
     disabled,
     required
@@ -658,30 +327,41 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
     muiFormControl,
     states: ['error']
   });
-  const ownerState = _extends({}, props, {
+  const ownerState = {
+    ...props,
     disabled,
     labelPlacement,
     required,
     error: fcs.error
-  });
+  };
   const classes = useUtilityClasses(ownerState);
-  const typographySlotProps = (_slotProps$typography = slotProps.typography) != null ? _slotProps$typography : componentsProps.typography;
+  const externalForwardedProps = {
+    slots,
+    slotProps: {
+      ...componentsProps,
+      ...slotProps
+    }
+  };
+  const [TypographySlot, typographySlotProps] = useSlot('typography', {
+    elementType: Typography$1,
+    externalForwardedProps,
+    ownerState
+  });
   let label = labelProp;
   if (label != null && label.type !== Typography$1 && !disableTypography) {
-    label = /*#__PURE__*/jsxRuntimeExports.jsx(Typography$1, _extends({
-      component: "span"
-    }, typographySlotProps, {
-      className: clsx(classes.label, typographySlotProps == null ? void 0 : typographySlotProps.className),
+    label = /*#__PURE__*/jsxRuntimeExports.jsx(TypographySlot, {
+      component: "span",
+      ...typographySlotProps,
+      className: clsx(classes.label, typographySlotProps?.className),
       children: label
-    }));
+    });
   }
-  return /*#__PURE__*/jsxRuntimeExports.jsxs(FormControlLabelRoot, _extends({
+  return /*#__PURE__*/jsxRuntimeExports.jsxs(FormControlLabelRoot, {
     className: clsx(classes.root, className),
     ownerState: ownerState,
-    ref: ref
-  }, other, {
-    children: [/*#__PURE__*/reactExports.cloneElement(control, controlProps), required ? /*#__PURE__*/jsxRuntimeExports.jsxs(Stack$1, {
-      display: "block",
+    ref: ref,
+    ...other,
+    children: [/*#__PURE__*/reactExports.cloneElement(control, controlProps), required ? /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
       children: [label, /*#__PURE__*/jsxRuntimeExports.jsxs(AsteriskComponent, {
         ownerState: ownerState,
         "aria-hidden": true,
@@ -689,7 +369,7 @@ const FormControlLabel = /*#__PURE__*/reactExports.forwardRef(function FormContr
         children: ["\u2009", '*']
       })]
     }) : label]
-  }));
+  });
 });
 var FormControlLabel$1 = FormControlLabel;
 

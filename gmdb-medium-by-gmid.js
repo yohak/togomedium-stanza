@@ -1,11 +1,11 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
-import { j as jsx, k as COLOR_PRIMARY_DARK, M as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
-import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
-import { c as css } from './getData-1a784a8c.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-97f45b0e.js';
+import { j as jsx, k as COLOR_PRIMARY_DARK, M as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-d614d9ca.js';
+import { u as useQuery } from './emotion-styled.browser.esm-981b7be3.js';
+import { c as css } from './getData-8b0d864a.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
-import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-d38511ab.js';
-import { s as stanzaWrapper } from './common-6ed9df56.js';
-import { g as getMedia } from './api-33f54179.js';
+import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-0f293aa8.js';
+import { s as stanzaWrapper } from './common-124e7b0b.js';
+import { g as getMedia } from './api-74483ac8.js';
 import './index-eb2c9901.js';
 import './variables-58f3d1be.js';
 

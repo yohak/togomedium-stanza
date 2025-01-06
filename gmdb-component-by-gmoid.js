@@ -1,10 +1,10 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
-import { C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
-import { n as newStyled, u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
-import { c as css, g as getData } from './getData-1a784a8c.js';
-import { I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './styles-d38511ab.js';
-import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-44529b85.js';
-import { s as stanzaWrapper } from './common-6ed9df56.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-97f45b0e.js';
+import { C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-d614d9ca.js';
+import { n as newStyled, u as useQuery } from './emotion-styled.browser.esm-981b7be3.js';
+import { c as css, g as getData } from './getData-8b0d864a.js';
+import { I as InfoId, a as InfoTitle, S as StandardParagraph, b as SubHeading, T as TagList, C as ColorButton, c as ColWrapper } from './styles-0f293aa8.js';
+import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-9925efad.js';
+import { s as stanzaWrapper } from './common-124e7b0b.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
 import { U as URL_API } from './variables-58f3d1be.js';
 
@@ -37,7 +37,7 @@ const getLinkLabel = (link) => {
         case /SNOMEDCT/.test(link):
             return "SNOMED-CT";
         case /dsmz/.test(link):
-            return "DSMZ";
+            return "MediaDive";
         default:
             return null;
     }

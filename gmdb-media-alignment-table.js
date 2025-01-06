@@ -1,13 +1,13 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
-import { R as Recoil_index_8, o as Recoil_index_20, p as Recoil_index_24, l as COLOR_WHITE, H as SIZE1, Q as SIZE4, O as SIZE3, j as jsx, a as jsxs, P as COLOR_GRAY700, C as COLOR_PRIMARY, ad as COLOR_GRAY, ae as FONT_EN, F as Fragment, M as COLOR_GRAY_LINE, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
-import { c as css, j as jsx$1, r as reactExports, g as getData } from './getData-1a784a8c.js';
-import { u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
-import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-d6da8e88.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-97f45b0e.js';
+import { R as Recoil_index_8, o as Recoil_index_20, p as Recoil_index_24, l as COLOR_WHITE, H as SIZE1, Q as SIZE4, O as SIZE3, j as jsx, a as jsxs, P as COLOR_GRAY700, C as COLOR_PRIMARY, a5 as COLOR_GRAY, a6 as FONT_EN, F as Fragment, M as COLOR_GRAY_LINE, T as TogoMediumReactStanza } from './StanzaReactProvider-d614d9ca.js';
+import { c as css, j as jsx$1, r as reactExports, g as getData } from './getData-8b0d864a.js';
+import { u as useQuery } from './emotion-styled.browser.esm-981b7be3.js';
+import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-2c1a3fa3.js';
 import { d as decodeHTMLEntities, s as stringToArray } from './string-4de5f4fa.js';
 import { c as clone } from './clone-1fb93465.js';
-import { e as PATH_COMPONENT, P as PATH_MEDIUM, b as PATH_TAXON } from './consts-55c53200.js';
-import { b as Tooltip, k as API_MEDIA_ALIGNMENT } from './paths-0bbd78cc.js';
-import './DefaultPropsProvider-4e645303.js';
+import { b as PATH_COMPONENT, P as PATH_MEDIUM, a as PATH_TAXON } from './consts-c38322df.js';
+import { e as Tooltip, p as API_MEDIA_ALIGNMENT } from './paths-9c191287.js';
+import './DefaultPropsProvider-0ba0cf40.js';
 import './variables-58f3d1be.js';
 
 const WIDTH_EXPANDED = "200px";

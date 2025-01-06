@@ -1,12 +1,13 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-a84d7c1e.js';
-import { j as jsx, ag as COLOR_GRAY500, C as COLOR_PRIMARY, l as COLOR_WHITE, a as jsxs, k as COLOR_PRIMARY_DARK, F as Fragment, m as COLOR_TEXT, T as TogoMediumReactStanza } from './StanzaReactProvider-36ae7cf4.js';
-import { n as newStyled, u as useQuery } from './emotion-styled.browser.esm-798c6504.js';
-import { c as css, r as reactExports, n as makeFormBody } from './getData-1a784a8c.js';
-import { S as Slider } from './Slider-169f4ed4.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-97f45b0e.js';
+import { j as jsx, a8 as COLOR_GRAY500, C as COLOR_PRIMARY, l as COLOR_WHITE, a as jsxs, k as COLOR_PRIMARY_DARK, F as Fragment, m as COLOR_TEXT, T as TogoMediumReactStanza } from './StanzaReactProvider-d614d9ca.js';
+import { n as newStyled, u as useQuery } from './emotion-styled.browser.esm-981b7be3.js';
+import { c as css, r as reactExports, n as makeFormBody } from './getData-8b0d864a.js';
+import { S as Slider } from './Slider-927d1b36.js';
 import { n as nanoid } from './index.browser-4ca8a21b.js';
 import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
-import { C as CircularProgress } from './CircularProgress-0433714e.js';
-import './DefaultPropsProvider-4e645303.js';
+import { C as CircularProgress } from './CircularProgress-5e108e03.js';
+import './DefaultPropsProvider-0ba0cf40.js';
+import './isHostComponent-a8cd4d85.js';
 
 const AngleLeftIcon = ({ css, className }) => {
     return (jsx("svg", { css: css, className: className, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", children: jsx("path", { d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" }) }));
