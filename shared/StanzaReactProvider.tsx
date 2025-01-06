@@ -27,6 +27,10 @@ const importWebFontForTogoMedium = (stanza: Stanza, name: string = "Fira Sans Co
 };
 
 export abstract class TogoMediumReactStanza<T> extends Stanza {
+  reactElm = this.root.querySelector("main")!;
+  reactRoot = createRoot(this.reactElm as HTMLElement);
+  //
+
   abstract makeApp(): React.ReactElement;
   async render() {
     this._render();
@@ -37,10 +41,9 @@ export abstract class TogoMediumReactStanza<T> extends Stanza {
     this._render();
   }
   _render() {
-    const main = this.root.querySelector("main")!;
     const children = this.makeApp();
-    const root = createRoot(main as HTMLElement);
-    root.render(<StanzaReactProvider>{children}</StanzaReactProvider>);
+    const main = this.reactElm;
+    this.reactRoot.render(<StanzaReactProvider>{children}</StanzaReactProvider>);
     main.style.visibility = "hidden";
     setTimeout(() => {
       try {
